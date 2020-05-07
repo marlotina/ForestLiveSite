@@ -9,21 +9,21 @@
                 </div>
                 <!-- Contact Form Area -->
                 <div class="contact-form-area mb-100">
-                    <form action="#" method="post">
+                    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
                         <div class="row">
                             <div class="col-12 col-md-6">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" id="signupname" placeholder="User Name">
+                                <div class="form-group"  [ngClass]="{ 'has-error': submitted && f.username.errors }">
+                                    <input type="text" class="form-control" formControlName="username" placeholder="User Name">
                                 </div>
                             </div>
                             <div class="col-12 col-md-6">
-                                <div class="form-group">
-                                    <input type="email" class="form-control" id="signupemail" placeholder="Your Email">
+                                <div class="form-group"  [ngClass]="{ 'has-error': submitted && f.email.errors }">
+                                    <input type="email" class="form-control" formControlName="email" placeholder="Your Email">
                                 </div>
                             </div>
                             <div class="col-12">
-                                <div class="form-group">
-                                    <input type="password" class="form-control" id="signuppassword" placeholder="Password">
+                                <div class="form-group"  [ngClass]="{ 'has-error': submitted && f.password.errors }">
+                                    <input type="password" class="form-control" formControlName="password" placeholder="Password">
                                 </div>
                             </div>
                             <div class="col-12">
