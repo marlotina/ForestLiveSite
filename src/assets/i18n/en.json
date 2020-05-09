@@ -2,6 +2,18 @@
     "account": {
         "username": "User name",
         "email": "email",
-        "password": "Password1"
+        "password": "Password",
+        "conflictNameMessage": "User name is kepp",
+        "conflictEmailMessage": "Email is keep",
+        "errorResponseMessage": "Something was wrong, try later",
+        "signUp": "Sign up",
+        "signUpText": "Register in our web site and share your photos",
+        "login": "Login",
+        "loginText": "Login and enjoy",
+        "errorConfirmEmalText": "Something was wrong",
+        "successConfimationEmail": "Confirmation email was successfull"
+    },
+    "general": {
+        "home": "Home"
     }
 }

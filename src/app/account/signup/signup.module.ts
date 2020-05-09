@@ -8,8 +8,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { SharedModule } from 'src/app/shared/shared.module';
 
 
-
-
 @NgModule({
   declarations: [SignupComponent],
   imports: [

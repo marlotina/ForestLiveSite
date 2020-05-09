@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, NgForm } from '@angular/forms';
-import { Router } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router, ActivatedRoute } from '@angular/router';
 import { AccountService } from 'src/app/services/account/account.service';
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-signup',
@@ -13,11 +14,11 @@ export class SignupComponent implements OnInit {
   submitted = false;
   conflictUser = false;
   conflictEmail = false;
-  errorRequest = false;
-  conflictMessage: string;
+  errorResponse = false;
 
   constructor(private formBuilder: FormBuilder,
         private router: Router,
+        private route: ActivatedRoute,
         private accountService: AccountService) { 
         }
 
@@ -36,23 +37,26 @@ export class SignupComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true;
-    
+    this.conflictUser = false;
+    this.conflictEmail = false;
+    this.errorResponse = false;
+
     if (this.registerForm.invalid) {
         return;
     }
 
-    this.accountService.SignUp(this.registerForm.value).subscribe(
-      data => {
-        this.router.navigate(['/home']);
-      },
-      error => {
-          if(error.status == "409"){
-            this.conflictUser = true;
-            this.conflictMessage = error.error == "CONFLICT_USERNAME" ? "User name is kepp" : "Email is keep";
-          } else {
-            this.errorRequest = true;
-            this.conflictMessage = "Something was wrong, try later";
-          }
-      });
+    this.accountService.SignUp(this.registerForm.value)
+      .pipe(first())  
+      .subscribe(
+        data => {
+          this.router.navigate(['../login'], { relativeTo: this.route });
+        },
+        error => {
+            if(error.status == "409"){
+              error.error == "CONFLICT_USERNAME" ? this.conflictUser = true : this.conflictEmail = true;
+            } else {
+              this.errorResponse = true;
+            }
+        });
   }
 }

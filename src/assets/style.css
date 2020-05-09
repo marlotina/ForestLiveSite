@@ -2639,8 +2639,12 @@ img {
   .portfolio-details-meta:last-child {
     margin-bottom: 0; }
   
-  .has-error {
+  .is-invalid {
     border-color: red !important;
+  }
+
+  .error-text {
+    color: red;
   }
 /* ======= The End ======= */
 

@@ -2,6 +2,8 @@
     "account": {
         "username": "Nombre de usuario DE",
         "email": "email DE",
-        "password": "Contraseña DE"
+        "password": "Contraseña DE",
+        "signUp": "Sign up",
+        "signUpText": "Register in our web site and share your photos"
     }
 }
