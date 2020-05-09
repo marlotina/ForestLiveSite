@@ -2638,7 +2638,10 @@ img {
     margin-bottom: 0; }
   .portfolio-details-meta:last-child {
     margin-bottom: 0; }
-
+  
+  .has-error {
+    border-color: red !important;
+  }
 /* ======= The End ======= */
 
 /*# sourceMappingURL=style.css.map */

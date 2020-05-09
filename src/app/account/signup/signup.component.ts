@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AccountService } from 'src/app/services/account/account.service';
-
+import { TranslateService } from  '@ngx-translate/core';
 
 @Component({
   selector: 'app-signup',
@@ -12,17 +12,26 @@ export class SignupComponent implements OnInit {
 
   registerForm: FormGroup;
   submitted = false;
+  conflictUser = false;
+  conflictEmail = false;
+  errorRequest = false;
+  conflictMessage: string;
 
   constructor(private formBuilder: FormBuilder,
         private router: Router,
-        private accountService: AccountService,) { }
+        private accountService: AccountService,
+        translate:  TranslateService) { 
+          translate.setDefaultLang('en');
+          translate.use('en');
+        }
 
   ngOnInit(): void {
     this.registerForm = this.formBuilder.group({
         username: ['', Validators.required],
-        email: ['', Validators.required],
-        password: ['', [Validators.required, Validators.minLength(6)]],
-        language: ['', Validators.required]
+        email: ['', [
+          Validators.required,
+          Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]],
+        password: ['', [Validators.required, Validators.minLength(6)]]
     });
   }
 
@@ -31,12 +40,23 @@ export class SignupComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true;
-    // stop here if form is invalid
+    
     if (this.registerForm.invalid) {
         return;
     }
 
-    var response = this.accountService.SignUp(this.registerForm.value);
+    this.accountService.SignUp(this.registerForm.value).subscribe(
+      data => {
+        this.router.navigate(['/home']);
+      },
+      error => {
+          if(error.status == "409"){
+            this.conflictUser = true;
+            this.conflictMessage = error.error == "CONFLICT_USERNAME" ? "User name is kepp" : "Email is keep";
+          } else {
+            this.errorRequest = true;
+            this.conflictMessage = "Something was wrong, try later";
+          }
+      });
   }
-
 }

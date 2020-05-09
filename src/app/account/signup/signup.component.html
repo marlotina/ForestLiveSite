@@ -8,22 +8,35 @@
                     <p>Register in our web site and share your photos</p>
                 </div>
                 <!-- Contact Form Area -->
-                <div class="contact-form-area mb-100">
+                <div class="contact-form-area mb-100">   
+                    <div *ngIf="conflictUser || conflictEmail" class="has-error">{{conflictMessage}}</div>               
                     <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
                         <div class="row">
                             <div class="col-12 col-md-6">
-                                <div class="form-group"  [ngClass]="{ 'has-error': submitted && f.username.errors }">
-                                    <input type="text" class="form-control" formControlName="username" placeholder="User Name">
+                                <div class="form-group">
+                                    <label for="username">{{ 'account.username' | translate }}*</label>
+                                    <input type="text" 
+                                        class="form-control"
+                                        [ngClass]="{ 'has-error': submitted && f.username.errors || conflictUser }"
+                                        formControlName="username">
                                 </div>
                             </div>
                             <div class="col-12 col-md-6">
-                                <div class="form-group"  [ngClass]="{ 'has-error': submitted && f.email.errors }">
-                                    <input type="email" class="form-control" formControlName="email" placeholder="Your Email">
+                                <div class="form-group">
+                                    <label for="username">{{ 'account.email' | translate }}*</label>
+                                    <input type="email" 
+                                        class="form-control"
+                                        [ngClass]="{ 'has-error': submitted && f.email.errors || conflictEmail }" 
+                                        formControlName="email">
                                 </div>
                             </div>
                             <div class="col-12">
-                                <div class="form-group"  [ngClass]="{ 'has-error': submitted && f.password.errors }">
-                                    <input type="password" class="form-control" formControlName="password" placeholder="Password">
+                                <div class="form-group">
+                                    <label for="username">{{ 'account.password' | translate }}*</label>
+                                    <input type="password" 
+                                        class="form-control" 
+                                        [ngClass]="{ 'has-error': submitted && f.password.errors }"
+                                        formControlName="password">
                                 </div>
                             </div>
                             <div class="col-12">
