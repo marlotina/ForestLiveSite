@@ -12,7 +12,9 @@
         "loginText": "Login and enjoy",
         "errorConfirmEmalText": "Something was wrong",
         "successConfimationEmail": "Confirmation email was successfull",
-        "confirmemail": "Confirm account"
+        "confirmemail": "Confirm account",
+        "invalidEmailPasswordMessage": "The email or password was not correct",
+        "loginActivatedAccountMessage": "You have to activated your account, please review your email."
     },
     "general": {
         "home": "Home"

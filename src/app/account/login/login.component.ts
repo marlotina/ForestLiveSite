@@ -14,6 +14,8 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   submitted = false;
   errorResponse = false;
+  notActivatedAccount = false;
+  emailPassWrong = false;
 
 
   constructor(private formBuilder: FormBuilder,
@@ -36,19 +38,31 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true;
+    this.errorResponse = false;
+    this.notActivatedAccount = false;
+    this.emailPassWrong = false;
 
     if (this.loginForm.invalid) {
         return;
     }
 
-    this.accountService.SignUp(this.loginForm.value)
+    this.accountService.Login(this.loginForm.value)
       .pipe(first())  
       .subscribe(
         data => {
-          this.router.navigate(['../login'], { relativeTo: this.route });
+          localStorage.setItem('user', JSON.stringify(data));
+          this.router.navigate(['/'], { relativeTo: this.route });
         },
         error => {
-          this.errorResponse = true;
+          if(error.status == "409") {
+            this.notActivatedAccount = true;
+          } else {
+            if(error.error == "EMAIL_PASS"){
+              this.emailPassWrong = true;
+            } else {
+              this.errorResponse = true;
+            }
+          }
         });
   }
 }
