@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AccountService } from 'src/app/services/account/account.service';
-import { TranslateService } from  '@ngx-translate/core';
 
 @Component({
   selector: 'app-signup',
@@ -19,10 +18,7 @@ export class SignupComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
         private router: Router,
-        private accountService: AccountService,
-        translate:  TranslateService) { 
-          translate.setDefaultLang('en');
-          translate.use('en');
+        private accountService: AccountService) { 
         }
 
   ngOnInit(): void {
