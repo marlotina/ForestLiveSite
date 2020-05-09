@@ -4,10 +4,11 @@ import { AccountService } from 'src/app/services/account/account.service';
 import { ConfirmEmailRequest } from 'src/app/model/Account';
 
 @Component({
-  selector: 'app-confirmaccount',
-  templateUrl: './confirmaccount.component.html'
+  selector: 'app-confirmemail',
+  templateUrl: './confirmemail.component.html',
+  styleUrls: ['./confirmemail.component.css']
 })
-export class ConfirmaccountComponent implements OnInit {
+export class ConfirmemailComponent implements OnInit {
 
   constructor(
     private activatedRoute: ActivatedRoute,

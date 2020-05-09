@@ -4,6 +4,10 @@
         "email": "email DE",
         "password": "Contraseña DE",
         "signUp": "Sign up",
-        "signUpText": "Register in our web site and share your photos"
+        "signUpText": "Register in our web site and share your photos",
+        "login": "Login",
+        "loginText": "Login and enjoy",
+        "errorConfirmEmalText": "Something was wrong",
+        "successConfimationEmail": "Confirmation email was successfull"
     }
 }

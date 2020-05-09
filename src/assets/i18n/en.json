@@ -11,7 +11,8 @@
         "login": "Login",
         "loginText": "Login and enjoy",
         "errorConfirmEmalText": "Something was wrong",
-        "successConfimationEmail": "Confirmation email was successfull"
+        "successConfimationEmail": "Confirmation email was successfull",
+        "confirmemail": "Confirm account"
     },
     "general": {
         "home": "Home"

@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ConfirmaccountComponent } from './confirmaccount.component';
+import { ConfirmemailComponent } from './confirmemail.component';
 
-describe('ConfirmaccountComponent', () => {
-  let component: ConfirmaccountComponent;
-  let fixture: ComponentFixture<ConfirmaccountComponent>;
+describe('ConfirmemailComponent', () => {
+  let component: ConfirmemailComponent;
+  let fixture: ComponentFixture<ConfirmemailComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ConfirmaccountComponent ]
+      declarations: [ ConfirmemailComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ConfirmaccountComponent);
+    fixture = TestBed.createComponent(ConfirmemailComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,0 +1,54 @@
+<!-- ##### Breadcrumb Area Start ##### -->
+<div class="breadcrumb-area">
+    <!-- Top Breadcrumb Area -->
+    <div class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center" style="background-image: url(assets/img/bg-img/24.jpg);">
+        <h2>{{ 'account.confirmemail' | translate }}</h2>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/"><i class="fa fa-home"></i> {{ 'general.home' | translate }}</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">{{ 'account.confirmemail' | translate }}</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ##### Breadcrumb Area End ##### -->
+<section class="contact-area">
+    <div class="container">
+        <div class="row align-items-center justify-content-center">
+            <div class="col-12 col-lg-5">
+               
+                <div class="section-heading">
+                    <h2>{{ 'account.confirmemail' | translate }}</h2>
+                </div>
+              
+                <div class="contact-form-area mb-100">                 
+                        
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-group">
+                                <div *ngIf="activateAccount">
+                                    <label>{{ 'account.successConfimationEmail' | translate }}</label>
+                                    <a href="/">{{ 'general.home' | translate }}</a>
+                                </div>
+                                
+                                <div *ngIf="!activateAccount">
+                                    <label>{{ 'account.errorConfirmEmalText' | translate }}</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+  
