@@ -13,3 +13,13 @@ export class ConfirmEmailRequest {
 export class ForgotRequest {
     Email: string;
 }
+
+export class User {
+    id: string;
+    username: string;
+    email: string;
+    password: string;
+    firstName: string;
+    lastName: string;
+    token: string;
+}

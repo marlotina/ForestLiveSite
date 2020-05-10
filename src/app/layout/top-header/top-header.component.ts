@@ -1,14 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { User } from 'src/app/model/Account';
 
 @Component({
   selector: 'app-top-header',
   templateUrl: './top-header.component.html'
 })
 export class TopHeaderComponent implements OnInit {
+  
+  user: User;
 
-  constructor(  
-    public translate: TranslateService) {  
+  constructor(private translate: TranslateService) {  
+
     translate.addLangs(['en', 'es', 'de']);  
 
     if (localStorage.getItem('locale')) {  
@@ -24,6 +27,7 @@ export class TopHeaderComponent implements OnInit {
     localStorage.setItem('locale', language);  
     this.translate.use(language);  
   }  
+
   ngOnInit(): void {
   }
 

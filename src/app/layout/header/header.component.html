@@ -59,6 +59,22 @@
                                 <li><a href="about">About</a></li>
                                 <li><a href="contact.html">Contact</a></li>
                             </ul>
+                            <ul *ngIf="!user">
+                                <li><a href="signup">{{ 'account.signUp' | translate }}</a></li>
+                                <li><a href="login">{{ 'account.login' | translate }}</a>
+                            </ul>
+                            <ul *ngIf="user">
+                                <li><a href="#">Name</a>
+                                    <ul class="dropdown">
+                                        <li><a href="profile">Profile</a></li>
+                                        <li><a (click)="logout()">Log out</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+
+                            <div id="searchIcon">
+                                <i class="fa fa-search" aria-hidden="true"></i>
+                            </div>
                         </div>
                         <!-- Navbar End -->
                     </div>

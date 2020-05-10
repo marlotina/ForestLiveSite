@@ -22,6 +22,7 @@ export class LoginComponent implements OnInit {
         private router: Router,
         private route: ActivatedRoute,
         private accountService: AccountService) { 
+          
   }
 
   ngOnInit(): void {
@@ -50,7 +51,6 @@ export class LoginComponent implements OnInit {
       .pipe(first())  
       .subscribe(
         data => {
-          localStorage.setItem('user', JSON.stringify(data));
           this.router.navigate(['/'], { relativeTo: this.route });
         },
         error => {

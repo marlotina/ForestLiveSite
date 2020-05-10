@@ -5,8 +5,7 @@ import { ConfirmEmailRequest } from 'src/app/model/Account';
 
 @Component({
   selector: 'app-confirmemail',
-  templateUrl: './confirmemail.component.html',
-  styleUrls: ['./confirmemail.component.css']
+  templateUrl: './confirmemail.component.html'
 })
 export class ConfirmemailComponent implements OnInit {
 
