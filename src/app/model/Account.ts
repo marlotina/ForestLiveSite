@@ -9,3 +9,7 @@ export class ConfirmEmailRequest {
     Code: string;
     UserId: string;
 }
+
+export class ForgotRequest {
+    Email: string;
+}

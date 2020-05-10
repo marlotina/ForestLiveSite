@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { environment } from '../../../environments/environment';
-import {ConfirmEmailRequest} from '../../model/Account'
+import {ConfirmEmailRequest, ForgotRequest} from '../../model/Account'
 
 @Injectable({
   providedIn: 'root'
@@ -22,5 +22,9 @@ export class AccountService {
 
   ConfirmEmail(request: ConfirmEmailRequest) {
     return this.httpClient.post(`${environment.apiUrl}api/v1/Account/ConfirmEmail`, request);
+  }
+
+  ForgotPassword(request: ForgotRequest) {
+    return this.httpClient.post(`${environment.apiUrl}api/v1/Account/ForgotPassword`, request);
   }
 }

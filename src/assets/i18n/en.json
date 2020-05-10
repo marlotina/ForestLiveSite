@@ -14,7 +14,10 @@
         "successConfimationEmail": "Confirmation email was successfull",
         "confirmemail": "Confirm account",
         "invalidEmailPasswordMessage": "The email or password was not correct",
-        "loginActivatedAccountMessage": "You have to activated your account, please review your email."
+        "loginActivatedAccountMessage": "You have to activated your account, please review your email.",
+        "send": "Send",
+        "forgotPassword": "Forgot password",
+        "forgotPasswordText": "You will receive an email to reset you password."
     },
     "general": {
         "home": "Home"
