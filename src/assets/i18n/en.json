@@ -19,7 +19,23 @@
         "forgotPassword": "Forgot password",
         "forgotPasswordText": "You will receive an email to reset you password."
     },
+    "user": {
+        "userId":"User id",
+        "email":"Email",
+        "username":"User name",
+        "name":"Name",
+        "surname":"Surname",
+        "urlWebSite":"Url of your site",
+        "lastModification":"Last activity",
+        "isCompany":"Are you a company or organization?",
+        "registrationDate":"You registered in:",
+        "languageId":"Your language preference",
+        "description":"A description about you",
+        "location":"Location",
+        "photo":"Photo"
+    },
     "general": {
-        "home": "Home"
+        "home": "Home",
+        "update": "update"
     }
 }

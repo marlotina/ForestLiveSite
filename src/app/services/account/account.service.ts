@@ -26,11 +26,11 @@ export class AccountService {
   }
 
   SignUp(request) {
-    return this.httpClient.post(`${environment.apiUrl}api/v1/account/register`, request);
+    return this.httpClient.post(`${environment.userApiUrl}api/v1/account/register`, request);
   }
 
   Login(request) {
-    return this.httpClient.post<User>(`${environment.apiUrl}api/v1/account/login`, request)
+    return this.httpClient.post<User>(`${environment.userApiUrl}api/v1/account/login`, request)
       .pipe(map(user => {
         localStorage.setItem('user', JSON.stringify(user));
         this.userSubject.next(user);
@@ -44,11 +44,11 @@ export class AccountService {
   }
 
   ConfirmEmail(request: ConfirmEmailRequest) {
-    return this.httpClient.post(`${environment.apiUrl}api/v1/Account/ConfirmEmail`, request);
+    return this.httpClient.post(`${environment.userApiUrl}api/v1/Account/ConfirmEmail`, request);
   }
 
   ForgotPassword(request: ForgotRequest) {
-    return this.httpClient.post(`${environment.apiUrl}api/v1/Account/ForgotPassword`, request);
+    return this.httpClient.post(`${environment.userApiUrl}api/v1/Account/ForgotPassword`, request);
   }
   
 }
