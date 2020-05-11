@@ -9,6 +9,7 @@ const routes: Routes = [
   { path: 'signup', loadChildren: () => import('./account/signup/signup.module').then(m => m.SignupModule) },
   { path: 'confirmemail', loadChildren: () => import('./account/confirmemail/confirmemail.module').then(m => m.ConfirmemailModule) },
   { path: '', loadChildren: () => import('./home/home.module').then(m => m.HomeModule) },
+  { path: 'userProfile', loadChildren: () => import('./user/user-profile/user-profile.module').then(m => m.UserProfileModule) },
 ]
 
 @NgModule({
