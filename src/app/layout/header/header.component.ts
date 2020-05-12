@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/model/Account';
-import { TranslateService } from '@ngx-translate/core';
 import { AccountService } from 'src/app/services/account/account.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -10,10 +10,10 @@ import { AccountService } from 'src/app/services/account/account.service';
 
 export class HeaderComponent implements OnInit {
 
-
   user: User;
 
-  constructor(private translate: TranslateService,
+  constructor(private router: Router,
+    private route: ActivatedRoute,
     private accountService: AccountService) {  
 
     if(this.accountService.user){
@@ -23,6 +23,7 @@ export class HeaderComponent implements OnInit {
 
   logout() {
     this.accountService.logout();
+    this.router.navigate([''], { relativeTo: this.route });
   }
 
   ngOnInit(): void {

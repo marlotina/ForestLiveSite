@@ -14,6 +14,7 @@ export class UserProfileComponent implements OnInit {
 
   userProfileForm: FormGroup;
   submitted = false;
+  userImage: string;
 
   constructor(private formBuilder: FormBuilder,
     private userService: UserService,
@@ -56,6 +57,13 @@ export class UserProfileComponent implements OnInit {
           'lastModification': data.lastModification,
           'registrationDate': data.registrationDate
           });
+
+          if(data.photo !== ''){
+            this.userImage = `https://treelive.blob.core.windows.net/${data.photo}`
+          } else {
+            this.userImage ="../../../assets/img/bg-img/13.jpg";
+          }
+
         },
         error => {
           let errorw = error;
@@ -64,9 +72,6 @@ export class UserProfileComponent implements OnInit {
   }
 
   get f() { return this.userProfileForm.controls; }
-
-
-  
 
   onSubmit() {
     this.submitted = true; 
@@ -91,6 +96,42 @@ export class UserProfileComponent implements OnInit {
             });
 
     //this.alertService.success('user save data coreectly');
+  }
+
+  uploadFile (files) {
+    if (files.length === 0) {
+      return;
+    }
+ 
+    let fileToUpload = <File>files[0];
+    const formData = new FormData();
+    formData.append('file', fileToUpload, fileToUpload.name);
+
+    this.userService.UploadImage(formData, this.accountService.userValue.id)
+        .pipe(first())
+        .subscribe(
+            data => {
+              let dataq = data;
+                //this.alertService.success('Upload images successful', true);
+                //this.loading = false;
+            },
+            error => {
+                let errorw = error;
+                //this.alertService.error(error);
+                //this.loading = false;
+            });
+  }
+
+  deleteImage() {
+    this.userService.DeleteImage(this.accountService.userValue.id).subscribe(
+      data => {
+          //this.alertService.success('Delete images successful', true);
+          //this.loading = false;
+      },
+      error => {
+          //this.alertService.error(error);
+          //this.loading = false;
+      });;
   }
  
 }

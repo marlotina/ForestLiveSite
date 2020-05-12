@@ -17,7 +17,8 @@
         "loginActivatedAccountMessage": "You have to activated your account, please review your email.",
         "send": "Send",
         "forgotPassword": "Forgot password",
-        "forgotPasswordText": "You will receive an email to reset you password."
+        "forgotPasswordText": "You will receive an email to reset you password.",
+        "logOut": "Log out"
     },
     "user": {
         "userId":"User id",
@@ -32,10 +33,13 @@
         "languageId":"Your language preference",
         "description":"A description about you",
         "location":"Location",
-        "photo":"Photo"
+        "photo":"Photo",
+        "profileTitle": "Your profile",
+        "profileText": "Edit your profile",
+        "update": "Update",
+        "profileMenu": "Your profile"
     },
     "general": {
-        "home": "Home",
-        "update": "update"
+        "home": "Home"
     }
 }

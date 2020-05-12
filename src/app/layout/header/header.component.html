@@ -66,8 +66,8 @@
                             <ul *ngIf="user">
                                 <li><a href="#">Name</a>
                                     <ul class="dropdown">
-                                        <li><a href="userProfile">Profile</a>
-                                        <li><a (click)="logout()">Log out</a></li>
+                                        <li><a href="userProfile">{{ 'user.profileMenu' | translate }}</a>
+                                        <li><a (click)="logout()">{{ 'account.logOut' | translate }}</a></li>
                                     </ul>
                                 </li>
                             </ul>
