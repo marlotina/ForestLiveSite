@@ -34,7 +34,7 @@
     <div class="container">
         <div class="row">
             <div class="col-12  mb-100">
-
+                <button mat-raised-button id="logout-button" (click)="openModal()">Logout</button>
                 <form [formGroup]="userProfileForm" (ngSubmit)="onSubmit()">
                     <input class="hidden" formControlName="id">
                     <input type="text" class="hidden" formControlName="photo">

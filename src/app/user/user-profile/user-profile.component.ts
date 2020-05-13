@@ -6,6 +6,9 @@ import { first } from 'rxjs/operators';
 import { UserService } from 'src/app/services/user/user.service';
 import { UserResponse } from 'src/app/model/user';
 
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { ModalProfileComponent } from '../modal-profile/modal-profile.component';
+
 @Component({
   selector: 'app-user-profile',
   templateUrl: './user-profile.component.html'
@@ -18,7 +21,8 @@ export class UserProfileComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
     private userService: UserService,
-    private accountService: AccountService) { }
+    private accountService: AccountService,
+    public matDialog: MatDialog) { }
 
   ngOnInit(): void {
     this.userProfileForm = this.formBuilder.group({
@@ -134,6 +138,16 @@ export class UserProfileComponent implements OnInit {
       });;
   }
  
+  openModal() {
+    const dialogConfig = new MatDialogConfig();
+    // The user can't close the dialog by clicking outside its body
+    dialogConfig.disableClose = true;
+    dialogConfig.id = "modal-component";
+    dialogConfig.height = "350px";
+    dialogConfig.width = "600px";
+    // https://material.angular.io/components/dialog/overview
+    const modalDialog = this.matDialog.open(ModalProfileComponent, dialogConfig);
+  }
 }
 
 

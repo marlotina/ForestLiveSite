@@ -6,10 +6,14 @@ import { UserProfileComponent } from './user-profile.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { ModalProfileComponent } from '../modal-profile/modal-profile.component';
+
 
 
 @NgModule({
-  declarations: [UserProfileComponent],
+  declarations: [
+    UserProfileComponent,
+    ModalProfileComponent],
   imports: [
     CommonModule,
     UserProfileRoutingModule,
@@ -17,7 +21,8 @@ import { SharedModule } from 'src/app/shared/shared.module';
     FormsModule,
     ReactiveFormsModule,
     SharedModule
-  ]
+  ],
+  entryComponents: [ModalProfileComponent]
 })
 export class UserProfileModule { }
 
