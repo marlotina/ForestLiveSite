@@ -7,11 +7,10 @@ import { LayoutModule } from './layout/layout.module';
 import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TranslateModule, TranslateLoader, TranslateService } from  '@ngx-translate/core';
 import { TranslateHttpLoader } from  '@ngx-translate/http-loader';
-import { JwtInterceptor, JwtHelperService } from '@auth0/angular-jwt';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
-
+import { JwtModule } from "@auth0/angular-jwt";
 
 
 export  function  HttpLoaderFactory(http:  HttpClient) {
@@ -36,7 +35,16 @@ export  function  HttpLoaderFactory(http:  HttpClient) {
     }),
     BrowserAnimationsModule,
     MatButtonModule,
-    MatDialogModule
+    MatDialogModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: () => {
+          return localStorage.getItem("access_token");
+        },
+        whitelistedDomains: ["localhost:44374"],
+        blacklistedRoutes: ["example.com/examplebadroute/"]
+      }
+    })
   ],
   exports: [TranslateModule],
   providers: [TranslateService],

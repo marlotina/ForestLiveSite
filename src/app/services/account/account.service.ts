@@ -33,6 +33,7 @@ export class AccountService {
     return this.httpClient.post<User>(`${environment.userApiUrl}api/v1/account/login`, request)
       .pipe(map(user => {
         localStorage.setItem('user', JSON.stringify(user));
+        localStorage.setItem('access_token', user.token);
         this.userSubject.next(user);
         return user;
     }));
@@ -40,6 +41,7 @@ export class AccountService {
 
   logout() {
     localStorage.removeItem('user');
+    localStorage.removeItem('access_token');
     this.userSubject.next(null);
   }
 

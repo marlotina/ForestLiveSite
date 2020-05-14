@@ -23,3 +23,13 @@ export class User {
     lastName: string;
     token: string;
 }
+
+export class UserStorage {
+    id: string;
+    username: string;
+    email: string;
+    password: string;
+    firstName: string;
+    lastName: string;
+    token: string;
+}
