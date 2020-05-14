@@ -1,42 +1,49 @@
 <div id="modal-content-wrapper">
     <header id="modal-header">
-        <h1 id="modal-title">Are you sure you want to logout?</h1>
+        <h1 id="modal-title">{{ 'user.imageProfileText' | translate }}</h1>
     </header>
     <section id="modal-body">
 
-        <label for="uploadImage" class="btn alazea-btn mr-30" >Upload</label>
+        <label for="uploadImage" class="btn alazea-btn mr-30" >{{ 'user.upload' | translate }}</label>
         <input type="file" #file id="uploadImage" (change)="fileChangeEvent($event)" />
-        
-        <button (click)="resetImage()" class="btn image-btn active">Reset image</button>
-        <label>Zoom:</label>
-        <button (click)="zoomOut()" class="btn zoom-btn active"> - </button> 
-        <button (click)="zoomIn()" class="btn zoom-btn active"> + </button>
+        <button (click)="deleteImage()" class="btn alazea-btn mr-30 active">{{ 'user.deleteImage' | translate }}</button>
+        <div *ngIf="this.nameFile">
+            <button (click)="resetImage()" class="btn image-btn active">{{ 'user.resetImage' | translate }}</button>
+            <label>{{ 'user.zoom' | translate }}:</label>
+            <button (click)="zoomOut()" class="btn zoom-btn active"> - </button> 
+            <button (click)="zoomIn()" class="btn zoom-btn active"> + </button>
+        </div>
     
-    
-    <image-cropper
-        [imageChangedEvent]="imageChangedEvent"
-        [maintainAspectRatio]="true"
-        [aspectRatio]="1 / 1"
-        [resizeToWidth]="300"
-        [resizeToHeight]="25"
-        [cropperMinWidth]="300"
-        [cropperMinHeight]="300"
-        [onlyScaleDown]="true"
-        [roundCropper]="false"
-        [canvasRotation]="canvasRotation"
-        [transform]="transform"
-        [alignImage]="'left'"
-        [style.display]="showCropper ? null : 'none'"
-        format="png"
-        (imageCropped)="imageCropped($event)"
-        (imageLoaded)="imageLoaded()"
-        (cropperReady)="cropperReady($event)"
-        (loadImageFailed)="loadImageFailed()"
-    ></image-cropper>
+        <image-cropper
+            [imageChangedEvent]="imageChangedEvent"
+            [maintainAspectRatio]="true"
+            [aspectRatio]="1 / 1"
+            [resizeToWidth]="300"
+            [resizeToHeight]="25"
+            [cropperMinWidth]="300"
+            [cropperMinHeight]="300"
+            [onlyScaleDown]="true"
+            [roundCropper]="false"
+            [canvasRotation]="canvasRotation"
+            [transform]="transform"
+            [alignImage]="'left'"
+            [style.display]="showCropper ? null : 'none'"
+            format="png"
+            (imageCropped)="imageCropped($event)"
+            (imageLoaded)="imageLoaded()"
+            (cropperReady)="cropperReady($event)"
+            (loadImageFailed)="loadImageFailed()">
+        </image-cropper>
+
     </section>
+    
     <footer id="modal-footer">
-        <button mat-raised-button id="modal-action-button" (click)="actionFunction()">Logout</button>
-        <button mat-raised-button id="modal-cancel-button" (click)="closeModal()">Go back</button>
+
+        <div class="welcome-btn-group">
+            <button mat-raised-button class="btn alazea-btn mr-30" (click)="updateImage()">{{ 'user.save' | translate }}</button>
+            <button mat-raised-button class="btn alazea-btn active" (click)="closeModal()">{{ 'user.back' | translate }}</button>
+        </div>
+        
     </footer>
 </div>
 

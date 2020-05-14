@@ -37,7 +37,15 @@
         "profileTitle": "Your profile",
         "profileText": "Edit your profile",
         "update": "Update",
-        "profileMenu": "Your profile"
+        "profileMenu": "Your profile",
+        "imageProfile": "Manage your image",
+        "back": "Go back",
+        "save": "Save",
+        "zomm": "zoom",
+        "resetImage": "Reset image",
+        "upload": "upload",
+        "imageProfileText": "Hera you can manage your profile image",
+        "deleteImage": "Delete your image"
     },
     "general": {
         "home": "Home"

@@ -34,7 +34,7 @@
     <div class="container">
         <div class="row">
             <div class="col-12  mb-100">
-                <button mat-raised-button id="logout-button" (click)="openModal()">Logout</button>
+                <button class="alazea-btn active" (click)="openModal()">{{'user.imageProfile' | translate}}</button>
                 <form [formGroup]="userProfileForm" (ngSubmit)="onSubmit()">
                     <input class="hidden" formControlName="id">
                     <input type="text" class="hidden" formControlName="photo">
@@ -50,7 +50,7 @@
                                     <div class="form-group">
                                         <label for="email">{{ 'user.email' | translate }}*</label>
                                         <input type="email" 
-                                            class="form-control"
+                                            class="form-control blockInput"
                                             [ngClass]="{ 'is-invalid': submitted && f.email.errors }"
                                             formControlName="email">
                                     </div>

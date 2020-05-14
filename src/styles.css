@@ -4,35 +4,4 @@ html, body {
 }
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }z
-
-
-/* Overwrite the styles of the mat-dialog-container element globally, but only for those
-that have an id of `modal-component` */
-/* https://stackoverflow.com/a/48689004/9263761 */
-mat-dialog-container#modal-component {
-    border: 3px solid #262626;
-    border-radius: 11px;
-    background-color: #1a1a1a;
-}
-
-#logout-button {
-    color: white;
-    background-color: #4b4b4b;
-    border: 1px solid black;
-}
-
-image-cropper {
-    height: 50vh;
-  }
-
-    .addImage:hover {
-        background:linear-gradient(to bottom, #72b352 5%, #28a745 100%);
-        background-color:#72b352;
-      }
-      .addImage:active {
-        position:relative;
-        top:1px;
-      }     
-    
-    
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

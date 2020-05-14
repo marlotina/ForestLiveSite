@@ -26,7 +26,7 @@ export class ModalProfileComponent implements OnInit {
   containWithinAspectRatio = false;
   transform: ImageTransform = {};
   nameFile: string;
-
+  extensionFile: string;
   constructor(public dialogRef: MatDialogRef<ModalProfileComponent>,
     private userService: UserService,
     private accountService: AccountService) { }
@@ -37,6 +37,7 @@ export class ModalProfileComponent implements OnInit {
     fileChangeEvent(event: any): void {
         this.imageChangedEvent = event;
         this.nameFile = event.currentTarget.files[0].name;
+        this.extensionFile = event.currentTarget.files[0].type.split('/')[1];
     }
 
     imageCropped(event: ImageCroppedEvent) {
@@ -80,48 +81,54 @@ export class ModalProfileComponent implements OnInit {
         };
     }
 
-  // When the user clicks the action button a.k.a. the logout button in the\
-  // modal, show an alert and followed by the closing of the modal
-  actionFunction() {
-    this.uploadFile();
-    this.dialogRef.close();
-  }
-
-  // If the user clicks the cancel button a.k.a. the go back button, then\
-  // just close the modal
-  closeModal() {
-    this.dialogRef.close();
-  }
-
-  uploadFile () {
-    if (!this.croppedImage) {
-      return;
+    deleteImage() {
+      this.deleteFile();
+      this.dialogRef.close();
     }
-    let userId = this.accountService.userValue.id;
-    //const formData = new FormData();
-    //formData.append('file', this.croppedImage, this.nameFile);
 
-    let imageProfileRequest: ImageProfileRequest = {
-      userId: this.accountService.userValue.id,
-      imageBase64: this.croppedImage,
-      imageName: this.nameFile
-    };
+    closeModal() {
+      this.dialogRef.close();
+    }
 
-    
+    updateImage () {
+      if (!this.croppedImage) {
+        return;
+      }
 
-    this.userService.UploadImage(imageProfileRequest)
-        .pipe(first())
-        .subscribe(
-            data => {
-              let dataq = data;
-                //this.alertService.success('Upload images successful', true);
-                //this.loading = false;
-            },
-            error => {
-                let errorw = error;
-                //this.alertService.error(error);
-                //this.loading = false;
-            });
-  }
+      let imageProfileRequest: ImageProfileRequest = {
+        userId: this.accountService.userValue.id,
+        imageBase64: this.croppedImage,
+        imageName: this.nameFile
+      };
 
+      this.userService.UploadImage(imageProfileRequest)
+          .pipe(first())
+          .subscribe(
+              data => {
+                  //this.alertService.success('Upload images successful', true);
+                  //this.loading = false;
+                  this.dialogRef.close(`${imageProfileRequest.userId}.${this.extensionFile}`);
+              },
+              error => {
+                  let errorw = error;
+                  //this.alertService.error(error);
+                  //this.loading = false;
+              });
+    }
+
+    deleteFile(){
+      this.userService.DeleteImage(this.accountService.userValue.id)
+          .pipe(first())
+          .subscribe(
+              data => {
+                let dataq = data;
+                  //this.alertService.success('Upload images successful', true);
+                  //this.loading = false;
+              },
+              error => {
+                  let errorw = error;
+                  //this.alertService.error(error);
+                  //this.loading = false;
+      });
+    }
 }

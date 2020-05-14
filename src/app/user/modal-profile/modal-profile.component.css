@@ -16,11 +16,11 @@
 
 #modal-action-button {
     margin-right: 30px;
-    background-color:#3b3b3b;
+    background-color:#70c745;
 }
 
 #modal-cancel-button {
-    background-color: #4e4e4e;
+    border: 2px solid #70c745;
 }
 
 #uploadImage {
@@ -39,6 +39,7 @@
     background-color: transparent;
     box-shadow: none;
 }
+
 .image-btn {
     -webkit-transition-duration: 400ms;
     transition-duration: 400ms;
@@ -65,6 +66,7 @@
     background-color: transparent;
     box-shadow: none;
 }
+
 .zoom-btn {
     -webkit-transition-duration: 400ms;
     transition-duration: 400ms;
@@ -84,3 +86,24 @@
     font-weight: 600;
 }
  
+/* Overwrite the styles of the mat-dialog-container element globally, but only for those
+that have an id of `modal-component` */
+/* https://stackoverflow.com/a/48689004/9263761 */
+mat-dialog-container#modal-component {
+    border: 3px solid #262626;
+    border-radius: 11px;
+    background-color: #1a1a1a;
+}
+
+image-cropper {
+    height: 50vh;
+}
+
+.addImage:hover {
+    background:linear-gradient(to bottom, #72b352 5%, #28a745 100%);
+    background-color:#72b352;
+}
+.addImage:active {
+    position:relative;
+    top:1px;
+}     

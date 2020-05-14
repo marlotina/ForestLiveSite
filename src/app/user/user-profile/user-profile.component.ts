@@ -118,11 +118,17 @@ export class UserProfileComponent implements OnInit {
  
   openModal() {
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = false;
+    dialogConfig.disableClose = true;
     dialogConfig.id = "modal-component";
     dialogConfig.height = "600px";
     dialogConfig.width = "900px";
-    this.matDialog.open(ModalProfileComponent, dialogConfig);
+    const dialogRef = this.matDialog.open(ModalProfileComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result){
+        this.userImage = `https://treelive.blob.core.windows.net/profiles/${result}`;
+      }
+    });
   }
 }
 
