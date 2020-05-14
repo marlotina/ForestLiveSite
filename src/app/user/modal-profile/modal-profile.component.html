@@ -3,10 +3,44 @@
         <h1 id="modal-title">Are you sure you want to logout?</h1>
     </header>
     <section id="modal-body">
-        <p>If you logout bad things might happen, but don't mind me, I'm just the description in a modal...</p>
+
+        <label for="uploadImage" class="btn alazea-btn mr-30" >Upload</label>
+        <input type="file" #file id="uploadImage" (change)="fileChangeEvent($event)" />
+        
+        <button (click)="resetImage()" class="btn image-btn active">Reset image</button>
+        <label>Zoom:</label>
+        <button (click)="zoomOut()" class="btn zoom-btn active"> - </button> 
+        <button (click)="zoomIn()" class="btn zoom-btn active"> + </button>
+    
+    
+    <image-cropper
+        [imageChangedEvent]="imageChangedEvent"
+        [maintainAspectRatio]="true"
+        [aspectRatio]="1 / 1"
+        [resizeToWidth]="300"
+        [resizeToHeight]="25"
+        [cropperMinWidth]="300"
+        [cropperMinHeight]="300"
+        [onlyScaleDown]="true"
+        [roundCropper]="false"
+        [canvasRotation]="canvasRotation"
+        [transform]="transform"
+        [alignImage]="'left'"
+        [style.display]="showCropper ? null : 'none'"
+        format="png"
+        (imageCropped)="imageCropped($event)"
+        (imageLoaded)="imageLoaded()"
+        (cropperReady)="cropperReady($event)"
+        (loadImageFailed)="loadImageFailed()"
+    ></image-cropper>
     </section>
     <footer id="modal-footer">
         <button mat-raised-button id="modal-action-button" (click)="actionFunction()">Logout</button>
         <button mat-raised-button id="modal-cancel-button" (click)="closeModal()">Go back</button>
     </footer>
 </div>
+
+
+
+
+

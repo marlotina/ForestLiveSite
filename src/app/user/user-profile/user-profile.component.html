@@ -44,27 +44,6 @@
                                 <div class="testimonial-thumb">
                                     <img [src]="userImage" alt="" class="img-responsive">
                                 </div>
-
-                                <div class="row form-group">
-                                    <label style="padding-left: 18px;" class="control-label templatemo-block">File Input</label> 
-                                    <div class="col-lg-4">
-                                      <input type="file" 
-                                            accept="image/jpg" 
-                                            (change)="uploadFile(file.files)" 
-                                            #file
-                                            name="fileToUpload" 
-                                            id="fileToUpload" 
-                                            class="filestyle" 
-                                            data-buttonName="btn-primary" 
-                                            data-buttonBefore="true" 
-                                            data-icon="false">              
-                                    </div>
-                                    <div class="col-lg-4">
-                                        <span class="group-span-filestyle input-group-btn" tabindex="0">
-                                          <label (click)="deleteImage()" class="btn btn-primary ">Delete</label>
-                                        </span>            
-                                    </div>
-                                </div>
                             </div>
                             <div class="col-12 col-md-6">
                                 <div class="col-12">

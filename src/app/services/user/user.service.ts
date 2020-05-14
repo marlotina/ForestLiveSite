@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { ForgotRequest } from 'src/app/model/Account';
-import { UserRequest, UserResponse } from 'src/app/model/user';
+import { UserRequest, UserResponse, ImageProfileRequest } from 'src/app/model/user';
 import { map } from 'rxjs/operators';
 
 @Injectable({
@@ -29,8 +29,8 @@ export class UserService {
       return this.httpClient.put(`${environment.userApiUrl}api/v1/User/`, request);
   }
 
-  UploadImage(request: FormData, id: string) {
-      return this.httpClient.post(`${environment.userApiUrl}api/v1/UserImage/UploadFiles?userId=${id}`, request);
+  UploadImage(request: ImageProfileRequest) {
+      return this.httpClient.post(`${environment.userApiUrl}api/v1/UserImage/UploadFiles`, request);
   }
 
   DeleteImage(id: string) {

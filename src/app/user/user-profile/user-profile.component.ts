@@ -47,23 +47,23 @@ export class UserProfileComponent implements OnInit {
     this.userService.getById(this.accountService.userValue.id).subscribe(
       data => {
           this.userProfileForm.patchValue({
-          'name': data.name,
-          'surname': data.surname,
-          'urlWebSite': data.urlWebSite,
-          'isCompany': data.isCompany, 
-          'languageId': data.languageId,
-          'description': data.description,
-          'photo': data.photo,
-          'location': data.location,
-          'email': data.email,
-          'userName':data.userName,
-          'id':data.id,
-          'lastModification': data.lastModification,
-          'registrationDate': data.registrationDate
-          });
+            'name': data.name,
+            'surname': data.surname,
+            'urlWebSite': data.urlWebSite,
+            'isCompany': data.isCompany, 
+            'languageId': data.languageId,
+            'description': data.description,
+            'photo': data.photo,
+            'location': data.location,
+            'email': data.email,
+            'userName':data.userName,
+            'id':data.id,
+            'lastModification': data.lastModification,
+            'registrationDate': data.registrationDate
+            });
 
           if(data.photo !== ''){
-            this.userImage = `https://treelive.blob.core.windows.net/${data.photo}`
+            this.userImage = `https://treelive.blob.core.windows.net/profiles/${data.photo}`
           } else {
             this.userImage ="../../../assets/img/bg-img/13.jpg";
           }
@@ -102,29 +102,7 @@ export class UserProfileComponent implements OnInit {
     //this.alertService.success('user save data coreectly');
   }
 
-  uploadFile (files) {
-    if (files.length === 0) {
-      return;
-    }
- 
-    let fileToUpload = <File>files[0];
-    const formData = new FormData();
-    formData.append('file', fileToUpload, fileToUpload.name);
-
-    this.userService.UploadImage(formData, this.accountService.userValue.id)
-        .pipe(first())
-        .subscribe(
-            data => {
-              let dataq = data;
-                //this.alertService.success('Upload images successful', true);
-                //this.loading = false;
-            },
-            error => {
-                let errorw = error;
-                //this.alertService.error(error);
-                //this.loading = false;
-            });
-  }
+  
 
   deleteImage() {
     this.userService.DeleteImage(this.accountService.userValue.id).subscribe(
@@ -140,13 +118,11 @@ export class UserProfileComponent implements OnInit {
  
   openModal() {
     const dialogConfig = new MatDialogConfig();
-    // The user can't close the dialog by clicking outside its body
-    dialogConfig.disableClose = true;
+    dialogConfig.disableClose = false;
     dialogConfig.id = "modal-component";
-    dialogConfig.height = "350px";
-    dialogConfig.width = "600px";
-    // https://material.angular.io/components/dialog/overview
-    const modalDialog = this.matDialog.open(ModalProfileComponent, dialogConfig);
+    dialogConfig.height = "600px";
+    dialogConfig.width = "900px";
+    this.matDialog.open(ModalProfileComponent, dialogConfig);
   }
 }
 

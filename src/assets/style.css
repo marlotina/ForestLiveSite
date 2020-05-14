@@ -2674,14 +2674,20 @@ img {
     text-decoration:none;
     text-shadow:0px 1px 0px #5b8a3c;
   }
-  .addImage:hover {
-    background:linear-gradient(to bottom, #72b352 5%, #28a745 100%);
-    background-color:#72b352;
-  }
-  .addImage:active {
-    position:relative;
-    top:1px;
-  }     
+
+  .zoom-button {
+    color: #707070;
+    width: 46x;
+    height: 30px;
+    text-align: center;
+    font-size: 18px;
+    line-height: 44px;
+    padding: 0;
+    margin: 0 10px; }
+    .zoom-button:focus {
+      border-color: #70c745;
+      background-color: #70c745;
+      color: #ffffff; }
   
 /* ======= The End ======= */
 

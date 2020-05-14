@@ -31,3 +31,9 @@ export class UserResponse {
 export class ForgotRequest {
     Email: string;
 }
+
+export class ImageProfileRequest {
+    imageBase64: string;
+    imageName: string;
+    userId: string
+}
