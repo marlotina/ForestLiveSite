@@ -45,7 +45,8 @@
         "resetImage": "Reset image",
         "upload": "upload",
         "imageProfileText": "Hera you can manage your profile image",
-        "deleteImage": "Delete your image"
+        "deleteImage": "Delete your image",
+        "resetPassword": "Reset your password"
     },
     "general": {
         "home": "Home"

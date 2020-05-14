@@ -64,10 +64,10 @@
                                 <li><a href="login">{{ 'account.login' | translate }}</a>
                             </ul>
                             <ul *ngIf="user">
-                                <li><a href="#">Name</a>
+                                <li><a href="#">{{ user.username}}</a>
                                     <ul class="dropdown">
                                         <li><a href="userProfile">{{ 'user.profileMenu' | translate }}</a>
-                                        <li><a (click)="logout()">{{ 'account.logOut' | translate }}</a></li>
+                                        <li><a href="#" (click)="logout()">{{ 'account.logOut' | translate }}</a></li>
                                     </ul>
                                 </li>
                             </ul>

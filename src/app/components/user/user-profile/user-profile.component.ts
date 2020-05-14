@@ -8,6 +8,7 @@ import { UserResponse } from 'src/app/model/user';
 
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ModalProfileComponent } from '../modal-profile/modal-profile.component';
+import { ForgotRequest } from 'src/app/model/Account';
 
 @Component({
   selector: 'app-user-profile',
@@ -129,6 +130,22 @@ export class UserProfileComponent implements OnInit {
         this.userImage = `https://treelive.blob.core.windows.net/profiles/${result}`;
       }
     });
+  }
+
+  recoverPassword() {
+    let recoverRequest = new ForgotRequest();
+    recoverRequest.Email = this.accountService.userValue.email;
+    this.userService.forgotPassword(recoverRequest).subscribe(
+      data => {
+        let datas = data;
+          //this.alertService.success('Delete images successful', true);
+          //this.loading = false;
+      },
+      error => {
+          let errors = error;
+          //this.alertService.error(error);
+          //this.loading = false;
+      });
   }
 }
 

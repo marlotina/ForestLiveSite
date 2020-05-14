@@ -34,16 +34,20 @@
     <div class="container">
         <div class="row">
             <div class="col-12  mb-100">
-                <button class="alazea-btn active" (click)="openModal()">{{'user.imageProfile' | translate}}</button>
+                <div class="col-12 col-md-6">
+                    <button class="buttonTwo" (click)="openModal()">{{'user.imageProfile' | translate}}</button>
+                </div>
                 <form [formGroup]="userProfileForm" (ngSubmit)="onSubmit()">
                     <input class="hidden" formControlName="id">
                     <input type="text" class="hidden" formControlName="photo">
                     <div class="single-testimonial-slide">
                         <div class="row align-items-center">
                             <div class="col-12 col-md-6">
+                                
                                 <div class="testimonial-thumb">
                                     <img [src]="userImage" alt="" class="img-responsive">
                                 </div>
+                                
                             </div>
                             <div class="col-12 col-md-6">
                                 <div class="col-12">
@@ -117,6 +121,13 @@
                                         <div class="custom-control custom-checkbox d-flex align-items-center mb-2">
                                             <input type="checkbox" class="custom-control-input" formControlName="isCompany" id="isCompany" checked>
                                             <label for="isCompany" class="custom-control-label">{{ 'user.isCompany' | translate }}?</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-group widget-desc">  
+                                        <div class="shipping-address">
+                                            <button class="buttonTwo" (click)="recoverPassword()">{{ 'user.resetPassword' | translate }}</button>
                                         </div>
                                     </div>
                                 </div>
