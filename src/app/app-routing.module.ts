@@ -4,13 +4,14 @@ import { AuthGuard } from './helper/auth.guard';
 
 
 const routes: Routes = [
-  { path: 'about', loadChildren: () => import('./about/about.module').then(m => m.AboutModule) },
-  { path: 'login', loadChildren: () => import('./account/login/login.module').then(m => m.LoginModule) },
-  { path: 'forgotpassword', loadChildren: () => import('./account/forgotpassword/forgotpassword.module').then(m => m.ForgotpasswordModule) },
-  { path: 'signup', loadChildren: () => import('./account/signup/signup.module').then(m => m.SignupModule) },
-  { path: 'confirmemail', loadChildren: () => import('./account/confirmemail/confirmemail.module').then(m => m.ConfirmemailModule) },{ path: 'userProfile', loadChildren: () => import('./user/user-profile/user-profile.module').then(m => m.UserProfileModule), 
+  { path: 'about', loadChildren: () => import('./components/about/about.module').then(m => m.AboutModule) },
+  { path: 'login', loadChildren: () => import('./components/account/login/login.module').then(m => m.LoginModule) },
+  { path: 'forgotpassword', loadChildren: () => import('./components/account/forgotpassword/forgotpassword.module').then(m => m.ForgotpasswordModule) },
+  { path: 'signup', loadChildren: () => import('./components/account/signup/signup.module').then(m => m.SignupModule) },
+  { path: 'confirmemail', loadChildren: () => import('./components/account/confirmemail/confirmemail.module').then(m => m.ConfirmemailModule) },
+  { path: 'userProfile', loadChildren: () => import('./components/user/user-profile/user-profile.module').then(m => m.UserProfileModule), 
       canActivate: [AuthGuard]  },
-  { path: '**', loadChildren: () => import('./home/home.module').then(m => m.HomeModule) },
+  { path: '**', loadChildren: () => import('./components/home/home.module').then(m => m.HomeModule) },
   
 ]
 

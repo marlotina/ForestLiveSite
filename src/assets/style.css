@@ -372,9 +372,7 @@ img {
           .header-area .top-header-area .top-header-content .top-header-meta .language-dropdown .dropdown-menu .dropdown-item:focus,
           .header-area .top-header-area .top-header-content .top-header-meta .language-dropdown .dropdown-menu .dropdown-item:hover {
             color: #ffffff;
-            background-color: #111111; 
-            cursor: pointer;
-          }
+            background-color: #111111; }
       .header-area .top-header-area .top-header-content .top-header-meta .cart {
         position: relative;
         z-index: 1; }
@@ -2640,55 +2638,23 @@ img {
     margin-bottom: 0; }
   .portfolio-details-meta:last-child {
     margin-bottom: 0; }
-  
-  .is-invalid {
-    border-color: red !important;
-  }
 
-  .error-text {
-    color: red;
-  }
-
-  .hidden {
-    display: none !important;
-    visibility: hidden;
-  }
-
-  .blockInput {
-    pointer-events: none;
-  }
-
-  .addImage {
-    box-shadow: 0px 10px 14px -7px #3e7327;
-    background:linear-gradient(to bottom, #28a745 5%, #72b352 100%);
-    background-color:#28a745;
-    border-radius:4px;
-    border:1px solid #4b8f29;
-    display:inline-block;
-    cursor:pointer;
-    color:#ffffff;
-    font-family:Arial;
-    font-size:13px;
-    font-weight:bold;
-    padding:6px 12px;
-    text-decoration:none;
-    text-shadow:0px 1px 0px #5b8a3c;
-  }
-
-  .zoom-button {
-    color: #707070;
-    width: 46x;
-    height: 30px;
-    text-align: center;
-    font-size: 18px;
-    line-height: 44px;
-    padding: 0;
-    margin: 0 10px; }
-    .zoom-button:focus {
-      border-color: #70c745;
-      background-color: #70c745;
-      color: #ffffff; }
-  
 /* ======= The End ======= */
 
 /*# sourceMappingURL=style.css.map */
+.is-invalid {
+  border-color: red !important;
+}
+
+.error-text {
+  color: red;
+}
+
+.hidden {
+  display: none !important;
+  visibility: hidden;
+}
+
+.blockInput {
+  pointer-events: none;
+}
