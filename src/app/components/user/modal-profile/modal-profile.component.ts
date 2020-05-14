@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { ImageCroppedEvent } from 'ngx-image-cropper';
 
-import { Dimensions } from '../utils/Dimensions';
-import { ImageTransform } from '../utils/ImageTransform';
-import {base64ToFile} from '../utils/blob.utils';
+import { Dimensions } from '../cropper/Dimensions';
+import { ImageTransform } from '../cropper/ImageTransform';
+import {base64ToFile} from '../cropper/blob.utils';
 import { UserService } from 'src/app/services/user/user.service';
 import { first } from 'rxjs/operators';
 import { AccountService } from 'src/app/services/account/account.service';
