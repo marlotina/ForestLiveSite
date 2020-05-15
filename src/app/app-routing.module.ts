@@ -11,6 +11,7 @@ const routes: Routes = [
   { path: 'confirmemail', loadChildren: () => import('./components/account/confirmemail/confirmemail.module').then(m => m.ConfirmemailModule) },
   { path: 'userProfile', loadChildren: () => import('./components/user/user-profile/user-profile.module').then(m => m.UserProfileModule), 
       canActivate: [AuthGuard]  },
+  { path: ':username', loadChildren: () => import('./components/userpage/userpage.module').then(m => m.UserpageModule) },
   { path: '**', loadChildren: () => import('./components/home/home.module').then(m => m.HomeModule) },
   
 ]
