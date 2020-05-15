@@ -10,31 +10,31 @@
                     </div>
                   
                     <div class="contact-form-area mb-100">
-                        
                        
                             <div class="row">
-                                <div class="col-12 col-lg-5">
+                                <div class="col-12 col-lg-6">
                                     <div class="form-group">
                                         <label for="uploadImage" class="buttonTwo" style="text-align: center; padding-top: 5px;">{{ 'user.upload' | translate }}</label>
                                         <input type="file" #file id="uploadImage" (change)="fileChangeEvent($event)" />
                                     </div>
                                 </div>
-                                <div class="col-12 col-lg-5">
+                                <div class="col-12 col-lg-6">
                                     <div class="form-group">
                                         <button (click)="deleteImage()" class="buttonTwo">{{ 'user.deleteImage' | translate }}</button>
                                     </div>
                                 </div>
-                                <div class="col-12 col-lg-5">
+                                <div class="col-12 col-lg-6">
                                     <div *ngIf="this.nameFile">
                                         <button (click)="zoomOut()" class="buttonTwo" style="width: 50%;"> - </button> 
                                         <button (click)="zoomIn()" class="buttonTwo" style="width: 50%;"> + </button>
                                     </div>
                                 </div>
-                                <div class="col-12 col-lg-5">
+                                <div class="col-12 col-lg-6">
                                     <div *ngIf="this.nameFile">
                                         <button (click)="resetImage()" class="buttonTwo">{{ 'user.resetImage' | translate }}</button>
                                     </div>
                                 </div>
+                                
                                 <div class="col-12">
                                     <image-cropper
                                         [imageChangedEvent]="imageChangedEvent"
