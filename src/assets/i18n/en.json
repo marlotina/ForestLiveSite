@@ -48,6 +48,8 @@
         "resetPassword": "Reset your password"
     },
     "general": {
-        "home": "Home"
+        "home": "Home",
+        "about": "about us",
+        "myPage": "My page"
     }
 }
