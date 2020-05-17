@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AccountService } from 'src/app/services/account/account.service';
-import { ConfirmEmailRequest } from 'src/app/model/Account';
+import { ConfirmEmailRequest } from 'src/app/model/account';
 
 @Component({
   selector: 'app-confirmemail',

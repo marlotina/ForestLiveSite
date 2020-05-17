@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
-import { ForgotRequest } from 'src/app/model/Account';
+import { ForgotRequest } from 'src/app/model/account';
 import { UserRequest, UserResponse, ImageProfileRequest } from 'src/app/model/user';
 import { map } from 'rxjs/operators';
 

@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 
 import { environment } from '../../../environments/environment';
-import { ConfirmEmailRequest, ForgotRequest, User } from '../../model/Account'
+import { ConfirmEmailRequest, ForgotRequest, User } from '../../model/account'
 import { map } from 'rxjs/operators';
 import { BehaviorSubject, Observable } from 'rxjs';
 

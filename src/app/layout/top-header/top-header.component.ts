@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { User } from 'src/app/model/Account';
+import { User } from 'src/app/model/account';
 
 @Component({
   selector: 'app-top-header',

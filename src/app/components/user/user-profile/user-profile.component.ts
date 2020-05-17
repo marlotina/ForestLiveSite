@@ -8,7 +8,7 @@ import { UserResponse } from 'src/app/model/user';
 
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ModalProfileComponent } from '../modal-profile/modal-profile.component';
-import { ForgotRequest } from 'src/app/model/Account';
+import { ForgotRequest } from 'src/app/model/account';
 
 @Component({
   selector: 'app-user-profile',
@@ -41,7 +41,11 @@ export class UserProfileComponent implements OnInit {
       languageId: [''],
       description: [''],
       photo: [''],
-      location: ['']
+      location: [''],
+      twitterUrl: [''],
+      instagramUrl: [''],
+      linkedlinUrl: [''],
+      facebookUrl: ['']
     });
 
     //TODO
@@ -60,7 +64,11 @@ export class UserProfileComponent implements OnInit {
             'userName':data.userName,
             'id':data.id,
             'lastModification': data.lastModification,
-            'registrationDate': data.registrationDate
+            'registrationDate': data.registrationDate,
+            'twitterUrl': data.twitterUrl,
+            'instagramUrl': data.instagramUrl,
+            'linkedlinUrl': data.linkedlinUrl,
+            'facebookUrl': data.facebookUrl
             });
 
           if(data.photo !== ''){

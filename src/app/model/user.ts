@@ -26,6 +26,10 @@ export class UserResponse {
     description: string;
     photo: string;
     location: string;
+    twitterUrl: string;
+    instagramUrl: string;
+    linkedlinUrl: string;
+    facebookUrl: string;
 }
 
 export class ForgotRequest {

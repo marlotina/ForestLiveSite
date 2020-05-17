@@ -104,8 +104,23 @@
                                         <label for="urlWebSite">{{ 'user.urlWebSite' | translate }}*</label>
                                         <input type="text" 
                                             class="form-control"
-                                            [ngClass]="{ 'is-invalid': submitted && f.urlWebSite.errors }"
                                             formControlName="urlWebSite">
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label for="twitterUrl">{{ 'user.twitterUrl' | translate }}*</label>
+                                        <input type="text" 
+                                            class="form-control"
+                                            formControlName="twitterUrl">
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label for="facebookUrl">{{ 'user.facebookUrl' | translate }}*</label>
+                                        <input type="text" 
+                                            class="form-control"
+                                            formControlName="facebookUrl">
                                     </div>
                                 </div>
                                 <div class="col-12">
@@ -136,12 +151,18 @@
                             <div class="col-12 col-md-6">
                                 <div class="col-12">
                                     <div class="form-group">
-                                        <label for="languageId">{{ 'user.language' | translate }}*</label>
-                                        <select class="form-control" formControlName="languageId">
-                                            <option value="1d134297-b070-4149-a2e0-c2643de48f95">English</option>
-                                            <option value="c7bc511d-562b-4a59-a434-2d754fe40f5c">Catalan</option>  
-                                            <option value="17368404-4355-49c8-b289-08f357a92b9f">Spanish</option>                   
-                                        </select>
+                                        <label for="instagramUrl">{{ 'user.instagramUrl' | translate }}*</label>
+                                        <input type="text" 
+                                            class="form-control"
+                                            formControlName="instagramUrl">
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label for="linkedlinUrl">{{ 'user.linkedlinUrl' | translate }}*</label>
+                                        <input type="text" 
+                                            class="form-control"
+                                            formControlName="linkedlinUrl">
                                     </div>
                                 </div>
                                 <div class="col-12">
@@ -150,6 +171,16 @@
                                         <input type="text" 
                                             class="form-control"
                                             formControlName="location">
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label for="languageId">{{ 'user.language' | translate }}*</label>
+                                        <select class="form-control" formControlName="languageId">
+                                            <option value="1d134297-b070-4149-a2e0-c2643de48f95">English</option>
+                                            <option value="c7bc511d-562b-4a59-a434-2d754fe40f5c">Catalan</option>  
+                                            <option value="17368404-4355-49c8-b289-08f357a92b9f">Spanish</option>                   
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="col-12">
