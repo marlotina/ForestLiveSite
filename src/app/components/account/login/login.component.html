@@ -40,21 +40,27 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="form-group">
-                                    <label for="username">{{ 'account.email' | translate }}*</label>
+                                    <label for="emialLogin">{{ 'account.email' | translate }}*</label>
                                     <input type="email" 
-                                    class="form-control"
-                                    [ngClass]="{ 'is-invalid': submitted && f.email.errors }"
-                                    formControlName="email">
+                                        id="emialLogin"
+                                        class="form-control"
+                                        [ngClass]="{ 'is-invalid': submitted && f.email.errors }"
+                                        formControlName="email">
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="form-group">
-                                    <label for="username">{{ 'account.password' | translate }}*</label>
+                                    <label for="passwordLogin">{{ 'account.password' | translate }}*</label>
                                     <input type="password" 
+                                        id="passwordLogin"
                                         class="form-control" 
                                         [ngClass]="{ 'is-invalid': submitted && f.password.errors }"
                                         formControlName="password">
                                 </div>
+                                <div>
+                                    <label for="emialLogin">{{ 'account.forgetPasswordLink' | translate }}</label>&nbsp;<a href="forgotpassword">{{ 'account.forgotPassword' | translate }}</a>
+                                </div>
+                                
                             </div>
                             <div class="col-12">
                                 <button type="submit" class="btn alazea-btn mt-15">{{ 'account.login' | translate }}</button>

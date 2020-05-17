@@ -35,8 +35,9 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="form-group">
-                                    <label for="username">{{ 'account.username' | translate }}*</label>
+                                    <label for="usernameSignup">{{ 'account.username' | translate }}*</label>
                                     <input type="text" 
+                                        id="usernameSignup"
                                         class="form-control"
                                         [ngClass]="{ 'is-invalid': submitted && (f.username.errors || conflictUser) }"
                                         formControlName="username">
@@ -45,8 +46,9 @@
                             </div>
                             <div class="col-12">
                                 <div class="form-group">
-                                    <label for="username">{{ 'account.email' | translate }}*</label>
+                                    <label for="emailSignup">{{ 'account.email' | translate }}*</label>
                                     <input type="email" 
+                                        id="emailSignup"
                                         class="form-control"
                                         [ngClass]="{ 'is-invalid': submitted && (f.email.errors || conflictEmail) }" 
                                         formControlName="email">
@@ -55,8 +57,9 @@
                             </div>
                             <div class="col-12">
                                 <div class="form-group">
-                                    <label for="username">{{ 'account.password' | translate }}*</label>
+                                    <label for="passwordSignup">{{ 'account.password' | translate }}*</label>
                                     <input type="password" 
+                                        id="passwordSignup"
                                         class="form-control" 
                                         [ngClass]="{ 'is-invalid': submitted && f.password.errors }"
                                         formControlName="password">

@@ -18,7 +18,8 @@
         "send": "Send",
         "forgotPassword": "Forgot password",
         "forgotPasswordText": "You will receive an email to reset you password.",
-        "logOut": "Log out"
+        "logOut": "Log out",
+        "forgetPasswordLink": "Are you forgot your password?"
     },
     "user": {
         "userId":"User id",
