@@ -9,8 +9,6 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ModalProfileComponent } from '../modal-profile/modal-profile.component';
 import { ForgotRequest } from 'src/app/model/account';
 import { CommonDialogComponent } from '../../shared/common-dialog/common-dialog.component';
-import { TranslateService } from '@ngx-translate/core';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-profile',
@@ -25,9 +23,7 @@ export class UserProfileComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
     private userService: UserService,
     private accountService: AccountService,
-    private matDialog: MatDialog,
-    private translate: TranslateService,
-    private router: Router) { }
+    private matDialog: MatDialog) { }
 
   ngOnInit(): void {
     this.userProfileForm = this.formBuilder.group({
@@ -82,9 +78,7 @@ export class UserProfileComponent implements OnInit {
 
         },
         error => {
-          this.translate.get('user.errorRetrieveInfo').subscribe((text: string) => {
-            this.openCommonModal(text);
-          });
+          this.openCommonModal('user.errorRetrieveInfo');
         });
   }
 
@@ -101,14 +95,10 @@ export class UserProfileComponent implements OnInit {
         .pipe(first())
         .subscribe(
             data => {    
-              this.translate.get('user.successSaveUserData').subscribe((text: string) => {
-                this.openCommonModal(text);
-              });
+              this.openCommonModal('user.successSaveUserData');
             },
             error => {    
-              this.translate.get('user.failUserAction').subscribe((text: string) => {
-                this.openCommonModal(text);
-              });
+              this.openCommonModal('user.failUserAction');
             });
   }
  
@@ -136,14 +126,10 @@ export class UserProfileComponent implements OnInit {
     recoverRequest.email = this.accountService.userValue.email;
     this.userService.ForgotPassword(recoverRequest).subscribe(
       data => {
-        this.translate.get('user.resetPasswordOk').subscribe((text: string) => {
-          this.openCommonModal(text);
-        });
+        this.openCommonModal('user.resetPasswordOk');
       },
       error => { 
-        this.translate.get('user.failUserAction').subscribe((text: string) => {
-          this.openCommonModal(text);
-        });
+        this.openCommonModal('user.failUserAction');
         //this.loading = false;
       });
   }
@@ -156,9 +142,9 @@ export class UserProfileComponent implements OnInit {
     dialogConfig.height = "200px";
     dialogConfig.width = "600px";
     dialogConfig.data = {
-      title: "Save user data",
+      title: "user.userTitleModal",
       description: message,
-      acceptButtonText: "Ok",
+      acceptButtonText: "general.ok",
       hideAcceptButton: false,
       hideCancelButton: true
     }
@@ -167,11 +153,7 @@ export class UserProfileComponent implements OnInit {
   }
 
   deleteUser(){
-    let result: string = "";
-    this.translate.get('user.deleteProfile').subscribe((text: string) => {
-      result = text;
-    });    
-    this.deleteCommonModal(result);
+    this.deleteCommonModal('user.deleteProfile');
   }
 
   deleteCommonModal(message:string) {
@@ -182,10 +164,10 @@ export class UserProfileComponent implements OnInit {
     dialogConfig.height = "200px";
     dialogConfig.width = "600px";
     dialogConfig.data = {
-      title: "Save user data",
+      title: "user.titleDeleteModal",
       description: message,
-      cancelButtonText: "Cancel",
-      acceptButtonText: "Delete",
+      cancelButtonText: "general.cancel",
+      acceptButtonText: "general.delete",
       hideAcceptButton: false,
       hideCancelButton: false
     }
@@ -196,15 +178,11 @@ export class UserProfileComponent implements OnInit {
       if(result == "ACCEPT"){
         this.userService.DeleteUser(this.accountService.userValue.id).subscribe(
           data => {
-            this.translate.get('user.userDeleted').subscribe((text: string) => {
-              this.openCommonModal(text);
-              this.accountService.Logout();
-            });
+            this.openCommonModal('user.userDeleted');
+            this.accountService.Logout();
           },
           error => { 
-            this.translate.get('user.failUserAction').subscribe((text: string) => {
-              this.openCommonModal(text);
-            });
+            this.openCommonModal('user.failUserAction');
           });;
       }
     });

@@ -1,17 +1,17 @@
 <div id="modal-content-wrapper">
     <header id="modal-header">
-        <h1 id="modal-title">{{ modalData.title }}</h1>
+        <h1 id="modal-title"> {{ modalData.title | translate }}</h1>
     </header>
     <section id="modal-body">
-        <p>{{ modalData.description }}</p>
+        <p>{{ modalData.description | translate }}</p>
     </section>
     <footer id="modal-footer">
         <button  [hidden]="modalData.hideAcceptButton" mat-raised-button class="btn alazea-btn" (click)="acceptModal()">
-            {{ modalData.acceptButtonText }}
+            {{ modalData.acceptButtonText | translate }}
         </button>
         &nbsp;&nbsp;
         <button [hidden]="modalData.hideCancelButton" mat-raised-button class="btn alazea-btn" (click)="cancelModal()">
-            {{ modalData.cancelButtonText }}
+            {{ modalData.cancelButtonText | translate }}
         </button>
         
     </footer>

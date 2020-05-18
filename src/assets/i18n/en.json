@@ -67,11 +67,16 @@
         "resetPasswordOk": "You are going to received an email with a link to change your password",
         "deleteProfile": "Are you sure to delete your profile?",
         "deleteUser": "delete user",
-        "userDeleted": "Your account has been deleted, If you want retrieve it contact with support"
+        "userDeleted": "Your account has been deleted, If you want retrieve it contact with support",
+        "titleDeleteModal": "Delete user",
+        "userTitleModal": "User save data"
     },
     "general": {
         "home": "Home",
         "about": "about us",
-        "myPage": "My page"
+        "myPage": "My page",
+        "cancel": "Cancel",
+        "delete": "Delete",
+        "ok": "Ok"
     }
 }
