@@ -19,7 +19,11 @@
         "forgotPassword": "Forgot password",
         "forgotPasswordText": "You will receive an email to reset you password.",
         "logOut": "Log out",
-        "forgetPasswordLink": "Are you forgot your password?"
+        "forgetPasswordLink": "Are you forgot your password?",
+        "resetPassword": "Reset your passowrd",
+        "resetPasswordText": "You can reset your password",
+        "repeatPassword": "repeatPassword",
+        "reset": "Reset"
     },
     "user": {
         "userId":"User id",

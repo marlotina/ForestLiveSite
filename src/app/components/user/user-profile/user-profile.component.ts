@@ -124,7 +124,7 @@ export class UserProfileComponent implements OnInit {
 
   recoverPassword() {
     let recoverRequest = new ForgotRequest();
-    recoverRequest.Email = this.accountService.userValue.email;
+    recoverRequest.email = this.accountService.userValue.email;
     this.userService.forgotPassword(recoverRequest).subscribe(
       data => {
         this.openLogoutModal("You are going to received an email with a link to change your password");

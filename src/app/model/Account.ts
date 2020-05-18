@@ -1,17 +1,17 @@
 export class SignUp {
-    Email: string;
-    Password: string;
-    UserName: string;
-    LanguageId: string;
+    email: string;
+    password: string;
+    userName: string;
+    languageId: string;
 }
 
 export class ConfirmEmailRequest {
-    Code: string;
-    UserId: string;
+    code: string;
+    userId: string;
 }
 
 export class ForgotRequest {
-    Email: string;
+    email: string;
 }
 
 export class User {
@@ -32,4 +32,10 @@ export class UserStorage {
     firstName: string;
     lastName: string;
     token: string;
+}
+
+export class ResetPasswordRequest {
+    userId: string;
+    newPassword: string;
+    code: string;
 }

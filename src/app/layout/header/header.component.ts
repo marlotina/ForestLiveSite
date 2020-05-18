@@ -22,7 +22,7 @@ export class HeaderComponent implements OnInit {
   }  
 
   logout() {
-    this.accountService.logout();
+    this.accountService.Logout();
     this.router.navigate([''], { relativeTo: this.route });
   }
 

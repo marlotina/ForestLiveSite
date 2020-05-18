@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 
 import { environment } from '../../../environments/environment';
-import { ConfirmEmailRequest, ForgotRequest, User } from '../../model/account'
+import { ConfirmEmailRequest, ForgotRequest, User, ResetPasswordRequest } from '../../model/account'
 import { map } from 'rxjs/operators';
 import { BehaviorSubject, Observable } from 'rxjs';
 
@@ -39,7 +39,7 @@ export class AccountService {
     }));
   }
 
-  logout() {
+  Logout() {
     localStorage.removeItem('user');
     localStorage.removeItem('access_token');
     this.userSubject.next(null);
@@ -53,4 +53,7 @@ export class AccountService {
     return this.httpClient.post(`${environment.userApiUrl}api/v1/Account/ForgotPassword`, request);
   }
   
+  ResetPassword(request: ResetPasswordRequest) {
+    return this.httpClient.post(`${environment.userApiUrl}api/v1/Account/ResetPassword`, request);
+  }
 }

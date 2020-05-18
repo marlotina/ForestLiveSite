@@ -18,8 +18,8 @@ export class ConfirmemailComponent implements OnInit {
   ngOnInit() {
       this.activatedRoute.queryParams.subscribe(params => {            
         const request: ConfirmEmailRequest = {
-          Code: params.code,
-          UserId: params.userId
+          code: params.code,
+          userId: params.userId
         };
         
         this.accountService.ConfirmEmail(request).subscribe( 

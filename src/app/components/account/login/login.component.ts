@@ -33,8 +33,7 @@ export class LoginComponent implements OnInit {
         password: ['', [Validators.required, Validators.minLength(6)]]
     });
   }
-
-  // convenience getter for easy access to form fields
+  
   get f() { return this.loginForm.controls; }
 
   onSubmit() {
