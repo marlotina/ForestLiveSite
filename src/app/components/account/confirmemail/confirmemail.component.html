@@ -23,27 +23,25 @@
     <div class="container">
         <div class="row align-items-center justify-content-center">
             <div class="col-12 col-lg-5">
-               
-                <div class="section-heading">
-                    <h2>{{ 'account.confirmemail' | translate }}</h2>
-                </div>
               
-                <div class="contact-form-area mb-100">                 
-                        
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="form-group">
-                                <div *ngIf="activateAccount">
-                                    <label>{{ 'account.successConfimationEmail' | translate }}</label>
-                                    <p><a href="/">{{ 'general.home' | translate }}</a></p>
-                                </div>
-                                
-                                <div *ngIf="!activateAccount">
-                                    <label>{{ 'account.errorConfirmEmalText' | translate }}</label>
-                                </div>
-                            </div>
+                <div class="contact-form-area mb-100">       
+                    <div *ngIf="activateAccount" class="col-12 col-sm-12">
+                        <div class="single-benefits-area">
+                            <img src="../../../../assets/img/core-img/b1.png" alt="">
+                            <h2>{{ 'account.successConfimationEmail' | translate }}</h2>
+                            <p>{{ 'account.successConfimationEmailText' | translate }}</p>
+                            <p><a href="/">{{ 'general.home' | translate }}</a></p>
                         </div>
                     </div>
+            
+                    <div *ngIf="!activateAccount" class="col-12 col-sm-12">
+                        <div class="single-benefits-area">
+                            <img src="../../../../assets/img/core-img/b1.png" alt="">
+                            <h2>{{ 'account.errorConfirmEmail' | translate }}</h2>
+                            <p>{{ 'account.errorConfirmEmalText' | translate }}</p>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
