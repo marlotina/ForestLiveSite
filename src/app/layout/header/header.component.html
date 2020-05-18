@@ -37,7 +37,7 @@
                                 <li><a href="login">{{ 'account.login' | translate }}</a>
                             </ul>
                             <ul [hidden]="!user">
-                                <li><a href="#">{{ username}}</a>
+                                <li><a href="#">{{ user.username }}</a>
                                     <ul class="dropdown">
                                         <li><a href="userProfile">{{ 'user.profileMenu' | translate }}</a>
                                         <li><a href="#" (click)="logout()">{{ 'account.logOut' | translate }}</a></li>

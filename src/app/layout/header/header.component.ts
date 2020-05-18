@@ -11,7 +11,6 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class HeaderComponent implements OnInit {
 
   user: User;
-  username: string;
 
   constructor(private router: Router,
     private route: ActivatedRoute,
@@ -28,6 +27,5 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.username = this.user != null ? this.user.username : 'user';
   }
 }
