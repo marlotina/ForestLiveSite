@@ -35,7 +35,7 @@
         <div class="row">
             <div class="col-12  mb-100">
                 <div class="col-12 col-md-6">
-                    <button class="buttonTwo" (click)="openModal()">{{'user.imageProfile' | translate}}</button>
+                    <button class="buttonTwo" (click)="openImageProfile()">{{'user.imageProfile' | translate}}</button>
                 </div>
                 <form [formGroup]="userProfileForm" (ngSubmit)="onSubmit()">
                     <input class="hidden" formControlName="id">
@@ -64,7 +64,7 @@
                                         <label for="username">{{ 'user.username' | translate }}*</label>
                                         <input type="text" 
                                             class="form-control" 
-                                            [ngClass]="{ 'is-invalid': submitted && f.username.errors }"
+                                            [ngClass]="{ 'is-invalid': submitted && f.userName.errors }"
                                             formControlName="userName">
                                     </div>
                                 </div>

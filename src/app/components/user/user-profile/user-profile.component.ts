@@ -9,6 +9,7 @@ import { UserResponse } from 'src/app/model/user';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ModalProfileComponent } from '../modal-profile/modal-profile.component';
 import { ForgotRequest } from 'src/app/model/account';
+import { CommonDialogComponent } from '../../shared/common-dialog/common-dialog.component';
 
 @Component({
   selector: 'app-user-profile',
@@ -79,8 +80,7 @@ export class UserProfileComponent implements OnInit {
 
         },
         error => {
-          let errorw = error;
-          //this.alertService.error(error);
+          this.openLogoutModal("Something was wrong we can retrieve your information");
         });
   }
 
@@ -88,7 +88,7 @@ export class UserProfileComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true; 
-    // stop here if form is invalid
+    
     if (this.userProfileForm.invalid) {
         return;
     }
@@ -98,34 +98,16 @@ export class UserProfileComponent implements OnInit {
         .pipe(first())
         .subscribe(
             data => {
-                //this.alertService.success('Registration successful', true);
                 //this.loading = false;
-                let wop = data;
+                this.openLogoutModal("The data was save correctly");
             },
             error => {
-                //this.alertService.error(error);
+              this.openLogoutModal("Something was wrong and the changes was not save");
                 //this.loading = false;
-                let wop = error;
             });
-
-    //this.alertService.success('user save data coreectly');
-  }
-
-  
-
-  deleteImage() {
-    this.userService.DeleteImage(this.accountService.userValue.id).subscribe(
-      data => {
-          //this.alertService.success('Delete images successful', true);
-          //this.loading = false;
-      },
-      error => {
-          //this.alertService.error(error);
-          //this.loading = false;
-      });;
   }
  
-  openModal() {
+  openImageProfile() {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.id = "modal-component";
@@ -145,15 +127,28 @@ export class UserProfileComponent implements OnInit {
     recoverRequest.Email = this.accountService.userValue.email;
     this.userService.forgotPassword(recoverRequest).subscribe(
       data => {
-        let datas = data;
-          //this.alertService.success('Delete images successful', true);
-          //this.loading = false;
+        this.openLogoutModal("You are going to received an email with a link to change your password");
       },
       error => {
-          let errors = error;
-          //this.alertService.error(error);
+          this.openLogoutModal("Something was a wrong and you can't reset your password");
           //this.loading = false;
       });
+  }
+
+  openLogoutModal(message:string) {
+    const dialogConfig = new MatDialogConfig();
+    
+    dialogConfig.disableClose = true;
+    dialogConfig.id = "modal-component";
+    dialogConfig.height = "200px";
+    dialogConfig.width = "600px";
+    dialogConfig.data = {
+      title: "Save user data",
+      description: message,
+      actionButtonText: "Ok"
+    }
+    // https://material.angular.io/components/dialog/overview
+    const modalDialog = this.matDialog.open(CommonDialogComponent, dialogConfig);
   }
 }
 

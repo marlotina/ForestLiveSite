@@ -8,12 +8,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { ModalProfileComponent } from '../modal-profile/modal-profile.component';
 import { ImageCropperModule } from 'ngx-image-cropper';
+import { CommonDialogComponent } from '../../shared/common-dialog/common-dialog.component';
 
 
 @NgModule({
   declarations: [
     UserProfileComponent,
-    ModalProfileComponent],
+    ModalProfileComponent,
+    CommonDialogComponent],
   imports: [
     CommonModule,
     UserProfileRoutingModule,
