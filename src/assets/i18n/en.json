@@ -23,7 +23,11 @@
         "resetPassword": "Reset your passowrd",
         "resetPasswordText": "You can reset your password",
         "repeatPassword": "repeatPassword",
-        "reset": "Reset"
+        "notSamePassword": "The passwords must be equals",
+        "reset": "Reset",
+        "changePasswordOK": "Your password was change correctly",
+        "forgotPasswordOk": "You will receive an email in your account to reset the password",
+        "userNotFound": "Email doesn't exists."
     },
     "user": {
         "userId":"User id",

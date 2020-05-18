@@ -119,7 +119,7 @@ export class ModalProfileComponent implements OnInit {
           .pipe(first())
           .subscribe(
               data => {
-                this.dialogRef.close("../../../assets/img/bg-img/13.jpg");
+                this.dialogRef.close(null);
                   //this.loading = false;
               },
               error => {

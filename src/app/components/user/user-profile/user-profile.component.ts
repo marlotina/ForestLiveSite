@@ -4,7 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { AccountService } from 'src/app/services/account/account.service';
 import { first } from 'rxjs/operators';
 import { UserService } from 'src/app/services/user/user.service';
-import { UserResponse } from 'src/app/model/user';
+import { environment } from '../../../../environments/environment';
 
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ModalProfileComponent } from '../modal-profile/modal-profile.component';
@@ -73,7 +73,7 @@ export class UserProfileComponent implements OnInit {
             });
 
           if(data.photo !== ''){
-            this.userImage = `https://treelive.blob.core.windows.net/profiles/${data.photo}`
+            this.userImage = `${environment.imagesProfileUrl}${data.photo}`
           } else {
             this.userImage ="../../../assets/img/bg-img/13.jpg";
           }
@@ -117,7 +117,9 @@ export class UserProfileComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if(result){
-        this.userImage = `https://treelive.blob.core.windows.net/profiles/${result}`;
+        this.userImage = `${environment.imagesProfileUrl}${result}`;
+      }else{
+        this.userImage = "../../../../assets/img/bg-img/profile.png";
       }
     });
   }
@@ -147,7 +149,7 @@ export class UserProfileComponent implements OnInit {
       description: message,
       actionButtonText: "Ok"
     }
-    // https://material.angular.io/components/dialog/overview
+    
     const modalDialog = this.matDialog.open(CommonDialogComponent, dialogConfig);
   }
 }

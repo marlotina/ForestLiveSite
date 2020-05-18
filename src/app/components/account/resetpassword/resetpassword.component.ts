@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { ResetPasswordRequest } from 'src/app/model/account';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AccountService } from 'src/app/services/account/account.service';
@@ -15,11 +15,11 @@ export class ResetpasswordComponent implements OnInit {
   submitted = false;
   errorResponse = false;
   notSamePassword = false;
+  resetPasswordOk = false;
 
   constructor(private activatedRoute: ActivatedRoute,
     private formBuilder: FormBuilder,
-    private accountService: AccountService,
-    private router: Router) { 
+    private accountService: AccountService) { 
         
       this.resetPasswordForm = this.formBuilder.group({
         password: ['', [Validators.required, Validators.minLength(6)]],
@@ -59,7 +59,7 @@ export class ResetpasswordComponent implements OnInit {
       .pipe(first())  
       .subscribe(
         data => {
-          this.router.navigate([''], { relativeTo: this.activatedRoute });
+          this.resetPasswordOk = true;
         },
         error => {
           this.errorResponse = true;
