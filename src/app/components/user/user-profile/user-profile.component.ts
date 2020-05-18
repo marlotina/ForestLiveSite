@@ -24,7 +24,7 @@ export class UserProfileComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
     private userService: UserService,
     private accountService: AccountService,
-    public matDialog: MatDialog) { }
+    private matDialog: MatDialog) { }
 
   ngOnInit(): void {
     this.userProfileForm = this.formBuilder.group({
@@ -138,7 +138,7 @@ export class UserProfileComponent implements OnInit {
   openLogoutModal(message:string) {
     const dialogConfig = new MatDialogConfig();
     
-    dialogConfig.disableClose = true;
+    dialogConfig.disableClose = false;
     dialogConfig.id = "modal-component";
     dialogConfig.height = "200px";
     dialogConfig.width = "600px";

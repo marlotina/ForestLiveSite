@@ -37,7 +37,7 @@ export class ModalProfileComponent implements OnInit {
     fileChangeEvent(event: any): void {
         this.imageChangedEvent = event;
         this.nameFile = event.currentTarget.files[0].name;
-        this.extensionFile = event.currentTarget.files[0].type.split('/')[1];
+        this.extensionFile = this.nameFile.split('.')[1];
     }
 
     imageCropped(event: ImageCroppedEvent) {
@@ -105,13 +105,11 @@ export class ModalProfileComponent implements OnInit {
           .pipe(first())
           .subscribe(
               data => {
-                  //this.alertService.success('Upload images successful', true);
                   //this.loading = false;
                   this.dialogRef.close(`${imageProfileRequest.userId}.${this.extensionFile}`);
               },
               error => {
                   let errorw = error;
-                  //this.alertService.error(error);
                   //this.loading = false;
               });
     }
@@ -121,8 +119,7 @@ export class ModalProfileComponent implements OnInit {
           .pipe(first())
           .subscribe(
               data => {
-                let dataq = data;
-                  //this.alertService.success('Upload images successful', true);
+                this.dialogRef.close("../../../assets/img/bg-img/13.jpg");
                   //this.loading = false;
               },
               error => {
