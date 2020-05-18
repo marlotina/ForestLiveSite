@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router, ActivatedRoute } from '@angular/router';
 import { AccountService } from 'src/app/services/account/account.service';
 import { first } from 'rxjs/operators';
 import { UserService } from 'src/app/services/user/user.service';
@@ -77,7 +76,7 @@ export class UserProfileComponent implements OnInit {
           if(data.photo !== ''){
             this.userImage = `${environment.imagesProfileUrl}${data.photo}`
           } else {
-            this.userImage ="../../../assets/img/bg-img/13.jpg";
+            this.userImage ="../../../../assets/img/bg-img/profile.png";
           }
 
         },
@@ -124,10 +123,12 @@ export class UserProfileComponent implements OnInit {
     const dialogRef = this.matDialog.open(ModalProfileComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(result => {
-      if(result){
-        this.userImage = `${environment.imagesProfileUrl}${result}`;
-      }else{
+      if(result == "REMOVE_IMAGE"){
         this.userImage = "../../../../assets/img/bg-img/profile.png";
+      } else {
+        if(result){
+          this.userImage = `${environment.imagesProfileUrl}${result}`;
+        }
       }
     });
   }
@@ -145,7 +146,7 @@ export class UserProfileComponent implements OnInit {
         this.translate.get('user.failUserAction').subscribe((res: string) => {
           this.openLogoutModal(res);
         });
-          //this.loading = false;
+        //this.loading = false;
       });
   }
 
@@ -162,7 +163,7 @@ export class UserProfileComponent implements OnInit {
       actionButtonText: "Ok"
     }
     
-    const modalDialog = this.matDialog.open(CommonDialogComponent, dialogConfig);
+    this.matDialog.open(CommonDialogComponent, dialogConfig);
   }
 }
 

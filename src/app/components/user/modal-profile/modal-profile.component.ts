@@ -105,12 +105,12 @@ export class ModalProfileComponent implements OnInit {
           .pipe(first())
           .subscribe(
               data => {
-                  //this.loading = false;
-                  this.dialogRef.close(`${imageProfileRequest.userId}.${this.extensionFile}`);
+                //this.loading = false;
+                this.dialogRef.close(`${imageProfileRequest.userId}.${this.extensionFile}`);
               },
               error => {
-                  let errorw = error;
-                  //this.loading = false;
+                this.dialogRef.close();
+                //this.loading = false;
               });
     }
 
@@ -119,13 +119,12 @@ export class ModalProfileComponent implements OnInit {
           .pipe(first())
           .subscribe(
               data => {
-                this.dialogRef.close(null);
-                  //this.loading = false;
+                this.dialogRef.close("REMOVE_IMAGE");
+                //this.loading = false;
               },
               error => {
-                  let errorw = error;
-                  //this.alertService.error(error);
-                  //this.loading = false;
+                this.dialogRef.close();
+                //this.loading = false;
       });
     }
 }
