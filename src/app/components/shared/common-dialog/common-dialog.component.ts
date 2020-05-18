@@ -17,7 +17,11 @@ export class CommonDialogComponent implements OnInit {
 
   ngOnInit() { }
   
-  closeModal() {
-    this.dialogRef.close();
+  cancelModal() {
+    this.dialogRef.close('CANCEL');
+  }
+
+  acceptModal() {
+    this.dialogRef.close('ACCEPT');
   }
 }

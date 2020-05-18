@@ -64,7 +64,10 @@
         "errorRetrieveInfo": "Something was wrong we can retrieve your information",
         "successSaveUserData": "The data was save correctly",
         "failUserAction": "Something was wrong and the action not finish",
-        "resetPasswordOk": "You are going to received an email with a link to change your password"
+        "resetPasswordOk": "You are going to received an email with a link to change your password",
+        "deleteProfile": "Are you sure to delete your profile?",
+        "deleteUser": "delete user",
+        "userDeleted": "Your account has been deleted, If you want retrieve it contact with support"
     },
     "general": {
         "home": "Home",

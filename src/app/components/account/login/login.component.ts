@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { AccountService } from 'src/app/services/account/account.service';
 import { first } from 'rxjs/operators';
 
@@ -20,7 +20,6 @@ export class LoginComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
         private router: Router,
-        private route: ActivatedRoute,
         public accountService: AccountService) { 
           
   }
@@ -62,6 +61,7 @@ export class LoginComponent implements OnInit {
               this.errorResponse = true;
             }
           }
-        });
+        }
+      );
   }
 }

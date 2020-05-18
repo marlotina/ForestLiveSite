@@ -10,6 +10,7 @@ import { ModalProfileComponent } from '../modal-profile/modal-profile.component'
 import { ForgotRequest } from 'src/app/model/account';
 import { CommonDialogComponent } from '../../shared/common-dialog/common-dialog.component';
 import { TranslateService } from '@ngx-translate/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-profile',
@@ -25,7 +26,8 @@ export class UserProfileComponent implements OnInit {
     private userService: UserService,
     private accountService: AccountService,
     private matDialog: MatDialog,
-    private translate: TranslateService) { }
+    private translate: TranslateService,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.userProfileForm = this.formBuilder.group({
@@ -50,8 +52,7 @@ export class UserProfileComponent implements OnInit {
       facebookUrl: ['']
     });
 
-    //TODO
-    this.userService.getById(this.accountService.userValue.id).subscribe(
+    this.userService.GetById(this.accountService.userValue.id).subscribe(
       data => {
           this.userProfileForm.patchValue({
             'name': data.name,
@@ -73,16 +74,16 @@ export class UserProfileComponent implements OnInit {
             'facebookUrl': data.facebookUrl
             });
 
-          if(data.photo !== ''){
-            this.userImage = `${environment.imagesProfileUrl}${data.photo}`
+          if(data.photo == '' || data.photo == null){
+            this.userImage = "../../../../assets/img/bg-img/profile.png";
           } else {
-            this.userImage ="../../../../assets/img/bg-img/profile.png";
+            this.userImage = `${environment.imagesProfileUrl}${data.photo}`;
           }
 
         },
         error => {
-          this.translate.get('user.errorRetrieveInfo').subscribe((res: string) => {
-            this.openLogoutModal(res);
+          this.translate.get('user.errorRetrieveInfo').subscribe((text: string) => {
+            this.openCommonModal(text);
           });
         });
   }
@@ -95,22 +96,19 @@ export class UserProfileComponent implements OnInit {
     if (this.userProfileForm.invalid) {
         return;
     }
-
-    //this.loading = true;
+    
     this.userService.UpdateUser(this.userProfileForm.value)
         .pipe(first())
         .subscribe(
             data => {    
-              this.translate.get('user.successSaveUserData').subscribe((res: string) => {
-                this.openLogoutModal(res);
+              this.translate.get('user.successSaveUserData').subscribe((text: string) => {
+                this.openCommonModal(text);
               });
-                //this.loading = false;
             },
             error => {    
-              this.translate.get('user.failUserAction').subscribe((res: string) => {
-                this.openLogoutModal(res);
+              this.translate.get('user.failUserAction').subscribe((text: string) => {
+                this.openCommonModal(text);
               });
-                //this.loading = false;
             });
   }
  
@@ -136,21 +134,21 @@ export class UserProfileComponent implements OnInit {
   recoverPassword() {
     let recoverRequest = new ForgotRequest();
     recoverRequest.email = this.accountService.userValue.email;
-    this.userService.forgotPassword(recoverRequest).subscribe(
+    this.userService.ForgotPassword(recoverRequest).subscribe(
       data => {
-        this.translate.get('user.resetPasswordOk').subscribe((res: string) => {
-          this.openLogoutModal(res);
+        this.translate.get('user.resetPasswordOk').subscribe((text: string) => {
+          this.openCommonModal(text);
         });
       },
       error => { 
-        this.translate.get('user.failUserAction').subscribe((res: string) => {
-          this.openLogoutModal(res);
+        this.translate.get('user.failUserAction').subscribe((text: string) => {
+          this.openCommonModal(text);
         });
         //this.loading = false;
       });
   }
 
-  openLogoutModal(message:string) {
+  openCommonModal(message:string) {
     const dialogConfig = new MatDialogConfig();
     
     dialogConfig.disableClose = false;
@@ -160,10 +158,58 @@ export class UserProfileComponent implements OnInit {
     dialogConfig.data = {
       title: "Save user data",
       description: message,
-      actionButtonText: "Ok"
+      acceptButtonText: "Ok",
+      hideAcceptButton: false,
+      hideCancelButton: true
     }
     
     this.matDialog.open(CommonDialogComponent, dialogConfig);
+  }
+
+  deleteUser(){
+    let result: string = "";
+    this.translate.get('user.deleteProfile').subscribe((text: string) => {
+      result = text;
+    });    
+    this.deleteCommonModal(result);
+  }
+
+  deleteCommonModal(message:string) {
+    const dialogConfig = new MatDialogConfig();
+    let results: string;
+    dialogConfig.disableClose = false;
+    dialogConfig.id = "modal-component";
+    dialogConfig.height = "200px";
+    dialogConfig.width = "600px";
+    dialogConfig.data = {
+      title: "Save user data",
+      description: message,
+      cancelButtonText: "Cancel",
+      acceptButtonText: "Delete",
+      hideAcceptButton: false,
+      hideCancelButton: false
+    }
+    
+    const dialogRef = this.matDialog.open(CommonDialogComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result == "ACCEPT"){
+        this.userService.DeleteUser(this.accountService.userValue.id).subscribe(
+          data => {
+            this.translate.get('user.userDeleted').subscribe((text: string) => {
+              this.openCommonModal(text);
+              this.accountService.Logout();
+            });
+          },
+          error => { 
+            this.translate.get('user.failUserAction').subscribe((text: string) => {
+              this.openCommonModal(text);
+            });
+          });;
+      }
+    });
+
+    return results;
   }
 }
 

@@ -6,8 +6,13 @@
         <p>{{ modalData.description }}</p>
     </section>
     <footer id="modal-footer">
-        <button mat-raised-button class="btn alazea-btn" (click)="closeModal()">
-            {{ modalData.actionButtonText }}
+        <button  [hidden]="modalData.hideAcceptButton" mat-raised-button class="btn alazea-btn" (click)="acceptModal()">
+            {{ modalData.acceptButtonText }}
         </button>
+        &nbsp;&nbsp;
+        <button [hidden]="modalData.hideCancelButton" mat-raised-button class="btn alazea-btn" (click)="cancelModal()">
+            {{ modalData.cancelButtonText }}
+        </button>
+        
     </footer>
 </div>

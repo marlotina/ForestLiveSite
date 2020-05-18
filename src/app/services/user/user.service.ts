@@ -14,14 +14,14 @@ export class UserService {
   constructor(private httpClient: HttpClient) { 
   }
   
-  getById(id: string) {
+  GetById(id: string) {
     return this.httpClient.get<UserResponse>(`${environment.userApiUrl}api/v1/user/UserGetById?id=${id}`)
       .pipe(map(user => {
         return user;
       }));
   }
 
-  forgotPassword(request: ForgotRequest) {
+  ForgotPassword(request: ForgotRequest) {
       return this.httpClient.post(`${environment.userApiUrl}api/v1/Account/ForgotPassword`, request);
   }
 
@@ -35,5 +35,9 @@ export class UserService {
 
   DeleteImage(id: string) {
       return this.httpClient.delete(`${environment.userApiUrl}api/v1/UserImage/DeleteImage?userId=${id}`);
+  }
+
+  DeleteUser(id: string) {
+    return this.httpClient.delete(`${environment.userApiUrl}api/v1/user/?userId=${id}`);
   }
 }
