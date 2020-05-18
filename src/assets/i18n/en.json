@@ -60,7 +60,11 @@
         "twitterUrl": "Your twitter",
         "instagramUrl": "Your instagram",
         "linkedlinUrl": "Your linkedlin",
-        "facebookUrl": "Your facebook"
+        "facebookUrl": "Your facebook",
+        "errorRetrieveInfo": "Something was wrong we can retrieve your information",
+        "successSaveUserData": "The data was save correctly",
+        "failUserAction": "Something was wrong and the action not finish",
+        "resetPasswordOk": "You are going to received an email with a link to change your password"
     },
     "general": {
         "home": "Home",

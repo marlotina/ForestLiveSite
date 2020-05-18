@@ -10,6 +10,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ModalProfileComponent } from '../modal-profile/modal-profile.component';
 import { ForgotRequest } from 'src/app/model/account';
 import { CommonDialogComponent } from '../../shared/common-dialog/common-dialog.component';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-user-profile',
@@ -24,7 +25,8 @@ export class UserProfileComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
     private userService: UserService,
     private accountService: AccountService,
-    private matDialog: MatDialog) { }
+    private matDialog: MatDialog,
+    private translate: TranslateService) { }
 
   ngOnInit(): void {
     this.userProfileForm = this.formBuilder.group({
@@ -80,7 +82,9 @@ export class UserProfileComponent implements OnInit {
 
         },
         error => {
-          this.openLogoutModal("Something was wrong we can retrieve your information");
+          this.translate.get('user.errorRetrieveInfo').subscribe((res: string) => {
+            this.openLogoutModal(res);
+          });
         });
   }
 
@@ -97,12 +101,16 @@ export class UserProfileComponent implements OnInit {
     this.userService.UpdateUser(this.userProfileForm.value)
         .pipe(first())
         .subscribe(
-            data => {
+            data => {    
+              this.translate.get('user.successSaveUserData').subscribe((res: string) => {
+                this.openLogoutModal(res);
+              });
                 //this.loading = false;
-                this.openLogoutModal("The data was save correctly");
             },
-            error => {
-              this.openLogoutModal("Something was wrong and the changes was not save");
+            error => {    
+              this.translate.get('user.failUserAction').subscribe((res: string) => {
+                this.openLogoutModal(res);
+              });
                 //this.loading = false;
             });
   }
@@ -129,10 +137,14 @@ export class UserProfileComponent implements OnInit {
     recoverRequest.email = this.accountService.userValue.email;
     this.userService.forgotPassword(recoverRequest).subscribe(
       data => {
-        this.openLogoutModal("You are going to received an email with a link to change your password");
+        this.translate.get('user.resetPasswordOk').subscribe((res: string) => {
+          this.openLogoutModal(res);
+        });
       },
-      error => {
-          this.openLogoutModal("Something was a wrong and you can't reset your password");
+      error => { 
+        this.translate.get('user.failUserAction').subscribe((res: string) => {
+          this.openLogoutModal(res);
+        });
           //this.loading = false;
       });
   }
