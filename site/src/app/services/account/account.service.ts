@@ -15,9 +15,16 @@ export class AccountService {
   private userSubject: BehaviorSubject<User>;
   public user: Observable<User>;
 
+  private loggedSubject: BehaviorSubject<boolean>;
+  public isLogged: Observable<boolean>;
+
   constructor(private httpClient: HttpClient) { 
     this.userSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('user')));
     this.user = this.userSubject.asObservable();
+
+     
+    this.loggedSubject = new BehaviorSubject<boolean>(localStorage.getItem('user') != null);
+    this.isLogged = this.loggedSubject.asObservable();
   }
   
   public get userValue(): User {

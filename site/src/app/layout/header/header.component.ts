@@ -10,7 +10,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 export class HeaderComponent implements OnInit {
 
-  user: User;
+  user: User = null;
+  isLogged = false;
 
   constructor(private router: Router,
     private route: ActivatedRoute,
@@ -18,6 +19,7 @@ export class HeaderComponent implements OnInit {
 
     if(this.accountService.user){
       this.accountService.user.subscribe(x => this.user = x);
+      this.accountService.isLogged.subscribe(x => this.isLogged = x);
     }
   }  
 

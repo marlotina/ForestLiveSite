@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  userApiUrl: 'https://localhost:44374/',
+  userApiUrl: 'https://fluserqa.azurewebsites.net/',
   imagesProfileUrl: 'https://treelive.blob.core.windows.net/profiles/'
 };
 
