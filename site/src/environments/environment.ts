@@ -3,10 +3,10 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false,
-  userApiUrl: 'https://localhost:44374/',
+  production: true,
+  userApiUrl: 'https://fluserqa.azurewebsites.net/',
   imagesProfileUrl: 'https://treelive.blob.core.windows.net/profiles/',
-  whiteListDomains:  ["localhost:44374"],
+  whiteListDomains:  ["fluserqa.azurewebsites.net"],
   blacklistedRoutes: []
 }
 /*
