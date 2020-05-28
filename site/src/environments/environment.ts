@@ -5,9 +5,10 @@
 export const environment = {
   production: false,
   userApiUrl: 'https://fluserqa.azurewebsites.net/',
-  imagesProfileUrl: 'https://treelive.blob.core.windows.net/profiles/'
-};
-
+  imagesProfileUrl: 'https://treelive.blob.core.windows.net/profiles/',
+  whiteListDomains:  ["localhost:44374"],
+  blacklistedRoutes: []
+}
 /*
  * For easier debugging in development mode, you can import the following file
  * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.

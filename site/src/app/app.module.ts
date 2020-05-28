@@ -11,6 +11,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { JwtModule } from "@auth0/angular-jwt";
+import { environment } from 'src/environments/environment';
 
 
 export  function  HttpLoaderFactory(http:  HttpClient) {
@@ -41,8 +42,8 @@ export  function  HttpLoaderFactory(http:  HttpClient) {
         tokenGetter: () => {
           return localStorage.getItem("access_token");
         },
-        whitelistedDomains: ["localhost:44374"],
-        blacklistedRoutes: ["example.com/examplebadroute/"]
+        whitelistedDomains: environment.whiteListDomains,
+        blacklistedRoutes: environment.blacklistedRoutes
       }
     })
   ],
