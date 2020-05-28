@@ -41,6 +41,7 @@ export class AccountService {
         localStorage.setItem('user', JSON.stringify(user));
         localStorage.setItem('access_token', user.token);
         this.userSubject.next(user);
+        this.loggedSubject.next(true);
         return user;
     }));
   }
@@ -49,6 +50,7 @@ export class AccountService {
     localStorage.removeItem('user');
     localStorage.removeItem('access_token');
     this.userSubject.next(null);
+    this.loggedSubject.next(false);
   }
 
   ConfirmEmail(request: ConfirmEmailRequest) {

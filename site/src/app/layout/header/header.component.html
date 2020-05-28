@@ -32,11 +32,11 @@
                                 <li *ngIf="isLogged"><a href="about">{{ 'general.myPage' | translate }}</a></li>
                                 <li><a href="about">{{ 'general.about' | translate }}</a></li>
                             </ul>
-                            <ul *ngIf="!isLogged">
+                            <ul [hidden]="isLogged">
                                 <li><a href="signup">{{ 'account.signUp' | translate }}</a></li>
                                 <li><a href="login">{{ 'account.login' | translate }}</a>
                             </ul>
-                            <ul *ngIf="isLogged">
+                            <ul [hidden]="!isLogged">
                                 <li><a href="#">{{ user.username }}</a>
                                     <ul class="dropdown">
                                         <li><a href="userProfile">{{ 'user.profileMenu' | translate }}</a>
