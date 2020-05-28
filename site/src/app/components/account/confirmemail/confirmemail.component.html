@@ -34,7 +34,7 @@
                         </div>
                     </div>
             
-                    <div *ngIf="!activateAccount" class="col-12 col-sm-12">
+                    <div *ngIf="activateAccountError" class="col-12 col-sm-12">
                         <div class="single-benefits-area">
                             <img src="../../../../assets/img/core-img/b1.png" alt="">
                             <h2>{{ 'account.errorConfirmEmail' | translate }}</h2>

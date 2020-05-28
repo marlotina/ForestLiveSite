@@ -34,7 +34,7 @@ export class UserProfileComponent implements OnInit {
       userName: ['', [Validators.required]],
       name: [''],
       surname: [''],
-      urlWebSite: ['', [Validators.required]],
+      urlWebSite: [''],
       lastModification: [''],
       isCompany: ['', [Validators.required]],
       registrationDate: [''],
@@ -97,8 +97,13 @@ export class UserProfileComponent implements OnInit {
             data => {    
               this.openCommonModal('user.successSaveUserData');
             },
-            error => {    
-              this.openCommonModal('user.failUserAction');
+            error => {   
+              if(error.status == "409"){
+                this.openCommonModal('account.conflictNameMessage');
+                this.userProfileForm.controls.userName.setErrors({'incorrect': true});
+              } else {
+                this.openCommonModal('user.failUserAction');
+              } 
             });
   }
  

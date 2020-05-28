@@ -14,7 +14,7 @@ export class ConfirmemailComponent implements OnInit {
     private accountService: AccountService) { }
 
     activateAccount: boolean = false;
-
+    activateAccountError: boolean = false;
   ngOnInit() {
       this.activatedRoute.queryParams.subscribe(params => {            
         const request: ConfirmEmailRequest = {
@@ -24,10 +24,12 @@ export class ConfirmemailComponent implements OnInit {
         
         this.accountService.ConfirmEmail(request).subscribe( 
           data => {
-          this.activateAccount = true;  
+            this.activateAccount = true;  
+            this.activateAccountError = false;
           },
           error => {
               this.activateAccount = false;
+              this.activateAccountError = true;
           });
     });
   }
