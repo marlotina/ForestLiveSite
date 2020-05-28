@@ -97,6 +97,9 @@
           "configurations": {
             "production": {
               "browserTarget": "fl-site:build:production"
+            },
+            "qa": {
+              "browserTarget": "fl-site:build:qa"
             }
           }
         },
@@ -146,6 +149,9 @@
           "configurations": {
             "production": {
               "devServerTarget": "fl-site:serve:production"
+            },
+            "qa": {
+              "devServerTarget": "fl-site:serve:qa"
             }
           }
         }
