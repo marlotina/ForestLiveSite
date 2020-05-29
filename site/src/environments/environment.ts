@@ -4,9 +4,9 @@
 
 export const environment = {
   production: true,
-  userApiUrl: 'https://fluserqa.azurewebsites.net/',
+  userApiUrl: 'https://localhost:44374/',
   imagesProfileUrl: 'https://treelive.blob.core.windows.net/profiles/',
-  whiteListDomains:  ["fluserqa.azurewebsites.net"],
+  whiteListDomains:  ["localhost:44374"],
   blacklistedRoutes: []
 }
 /*
