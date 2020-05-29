@@ -28,7 +28,8 @@ export class SignupComponent implements OnInit {
         email: ['', [
           Validators.required,
           Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]],
-        password: ['', [Validators.required, Validators.minLength(6)]]
+        password: ['', [Validators.required, Validators.minLength(6)]],
+        languageCode: ['']
     });
   }
 
@@ -43,6 +44,8 @@ export class SignupComponent implements OnInit {
     if (this.registerForm.invalid) {
         return;
     }
+
+    this.registerForm.controls.languageCode.setValue(localStorage.getItem('locale'));
 
     this.accountService.SignUp(this.registerForm.value)
       .pipe(first())  
