@@ -2679,3 +2679,7 @@ img {
   color: #ffffff;
   border-color: #70c745;
 }
+
+a:hover {
+  cursor:pointer;
+ }

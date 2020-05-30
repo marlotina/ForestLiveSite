@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { ConfirmemailRoutingModule } from './confirmemail-routing.module';
 import { ConfirmemailComponent } from './confirmemail.component';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
@@ -11,7 +12,8 @@ import { SharedModule } from 'src/app/shared/shared.module';
   imports: [
     CommonModule,
     ConfirmemailRoutingModule,
-    SharedModule
+    SharedModule,
+    RouterModule
   ]
 })
 export class ConfirmemailModule { }

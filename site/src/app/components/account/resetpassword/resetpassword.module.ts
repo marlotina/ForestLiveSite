@@ -5,6 +5,7 @@ import { ResetpasswordRoutingModule } from './resetpassword-routing.module';
 import { ResetpasswordComponent } from './resetpassword.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ResetpasswordRoutingModule,
     SharedModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    RouterModule
   ]
 })
 export class ResetpasswordModule { }

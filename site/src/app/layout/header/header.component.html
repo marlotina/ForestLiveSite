@@ -10,7 +10,7 @@
                 <nav class="classy-navbar justify-content-between" id="alazeaNav">
 
                     <!-- Nav Brand -->
-                    <a href="index.html" class="nav-brand"><img src="assets/img/core-img/logo.png" alt=""></a>
+                    <a routerLink="index.html" class="nav-brand"><img src="assets/img/core-img/logo.png" alt=""></a>
 
                     <!-- Navbar Toggler -->
                     <div class="classy-navbar-toggler">
@@ -28,19 +28,19 @@
                         <!-- Navbar Start -->
                         <div class="classynav">
                             <ul>
-                                <li><a href="index">{{ 'general.home' | translate }}</a></li>
-                                <li *ngIf="isLogged"><a href="about">{{ 'general.myPage' | translate }}</a></li>
-                                <li><a href="about">{{ 'general.about' | translate }}</a></li>
+                                <li><a routerLink="index" routerLinkActive="active">{{ 'general.home' | translate }}</a></li>
+                                <li *ngIf="isLogged"><a routerLink="about">{{ 'general.myPage' | translate }}</a></li>
+                                <li><a routerLink="about">{{ 'general.about' | translate }}</a></li>
                             </ul>
                             <ul [hidden]="isLogged">
-                                <li><a href="signup">{{ 'account.signUp' | translate }}</a></li>
-                                <li><a href="login">{{ 'account.login' | translate }}</a>
+                                <li><a routerLink="signup" routerLinkActive="active">{{ 'account.signUp' | translate }}</a></li>
+                                <li><a routerLink="login">{{ 'account.login' | translate }}</a>
                             </ul>
                             <ul [hidden]="!isLogged">
                                 <li><a href="#">{{ user.username }}</a>
                                     <ul class="dropdown">
-                                        <li><a href="userProfile">{{ 'user.profileMenu' | translate }}</a>
-                                        <li><a href="#" (click)="logout()">{{ 'account.logOut' | translate }}</a></li>
+                                        <li><a routerLink="userProfile" routerLinkActive="active">{{ 'user.profileMenu' | translate }}</a>
+                                        <li><a routerLink="#" routerLinkActive="active" (click)="logout()">{{ 'account.logOut' | translate }}</a></li>
                                     </ul>
                                 </li>
                             </ul>

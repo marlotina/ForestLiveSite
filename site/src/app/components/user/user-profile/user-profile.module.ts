@@ -9,6 +9,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { ModalProfileComponent } from '../modal-profile/modal-profile.component';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { CommonDialogComponent } from '../../shared/common-dialog/common-dialog.component';
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { CommonDialogComponent } from '../../shared/common-dialog/common-dialog.
     FormsModule,
     ReactiveFormsModule,
     SharedModule,
-    ImageCropperModule
+    ImageCropperModule,
+    RouterModule
   ],
   entryComponents: [ModalProfileComponent]
 })
