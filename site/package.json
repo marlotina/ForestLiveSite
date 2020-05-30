@@ -8,7 +8,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "qa-build": "ng build --qa --configuration=qa --build-optimizer",
+    "qa-build": "ng build --prod --configuration=qa --build-optimizer",
     "prod-build": "ng build --prod --configuration=prod --build-optimizer"
   },
   "private": true,
