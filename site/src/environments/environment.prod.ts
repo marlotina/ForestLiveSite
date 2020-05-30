@@ -1,7 +1,7 @@
 export const environment = {
   production: true,
-  userApiUrl: '',
-  imagesProfileUrl: '',
-  whiteListDomains:  [],
+  userApiUrl: 'https://fluserqa.azurewebsites.net/',
+  imagesProfileUrl: 'https://treelive.blob.core.windows.net/profiles/',
+  whiteListDomains:  ["fluserqa.azurewebsites.net"],
   blacklistedRoutes: []
 };
