@@ -5,8 +5,9 @@
 export const environment = {
   production: true,
   userApiUrl: 'https://localhost:44374/',
-  imagesProfileUrl: 'https://treelive.blob.core.windows.net/profiles/',
-  whiteListDomains:  ["localhost:44374"],
+  imagesProfileUrl: 'https://wachingbirdsqa.blob.core.windows.net/profiles/',
+  postApiUrl: 'https://localhost:44304/',
+  whiteListDomains:  ["localhost:44374", "https://localhost:44304"],
   blacklistedRoutes: []
 }
 /*

@@ -12,7 +12,7 @@ const routes: Routes = [
   { path: 'resetpassword', loadChildren: () => import('./components/account/resetpassword/resetpassword.module').then(m => m.ResetpasswordModule) },
   { path: 'userProfile', loadChildren: () => import('./components/user/user-profile/user-profile.module').then(m => m.UserProfileModule), 
       canActivate: [AuthGuard]  },
-  { path: ':username', loadChildren: () => import('./components/userpage/userpage.module').then(m => m.UserpageModule) },
+  { path: 'userpage', loadChildren: () => import('./components/userpage/landing-page/landing-page.module').then(m => m.LandingPageModule) },
   { path: '**', loadChildren: () => import('./components/home/home.module').then(m => m.HomeModule) },
   
 ]

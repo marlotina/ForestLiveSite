@@ -29,7 +29,7 @@
                         <div class="classynav">
                             <ul>
                                 <li><a routerLink="index" routerLinkActive="active">{{ 'general.home' | translate }}</a></li>
-                                <li *ngIf="isLogged"><a routerLink="about">{{ 'general.myPage' | translate }}</a></li>
+                                <li *ngIf="isLogged"><a routerLink="userpage">{{ 'general.myPage' | translate }}</a></li>
                                 <li><a routerLink="about">{{ 'general.about' | translate }}</a></li>
                             </ul>
                             <ul [hidden]="isLogged">
