@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { LayoutModule } from './layout/layout.module';
-import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS, HttpClientJsonpModule } from '@angular/common/http';
 import { TranslateModule, TranslateLoader, TranslateService } from  '@ngx-translate/core';
 import { TranslateHttpLoader } from  '@ngx-translate/http-loader';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -16,6 +16,8 @@ import { AppComponent } from './app.component';
 export function jwtTokenGetter() {
   return localStorage.getItem("access_token");
 }
+
+
 export  function  HttpLoaderFactory(http:  HttpClient) {
   return  new  TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
@@ -29,6 +31,7 @@ export  function  HttpLoaderFactory(http:  HttpClient) {
     AppRoutingModule,
     LayoutModule,
     HttpClientModule,
+    HttpClientJsonpModule,
     TranslateModule.forRoot({
       loader: {
         provide:  TranslateLoader,

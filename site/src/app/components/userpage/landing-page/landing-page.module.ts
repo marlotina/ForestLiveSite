@@ -3,10 +3,11 @@ import { CommonModule } from '@angular/common';
 
 import { LandingPageRoutingModule } from './landing-page-routing.module';
 import { LandingPageComponent } from './landing-page.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientJsonpModule, HttpClientModule } from '@angular/common/http';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ModalPostComponent } from '../modal-post/modal-post.component';
+import { GoogleMapsModule } from '@angular/google-maps';
 
 
 @NgModule({
@@ -16,8 +17,10 @@ import { ModalPostComponent } from '../modal-post/modal-post.component';
   ],
   imports: [
     CommonModule,
+    GoogleMapsModule,
     LandingPageRoutingModule,
     HttpClientModule,
+    HttpClientJsonpModule,
     SharedModule,
     FormsModule,
     ReactiveFormsModule
