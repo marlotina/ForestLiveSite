@@ -12,6 +12,8 @@ import { GoogleMapsModule } from '@angular/google-maps';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
@@ -21,7 +23,10 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
 const materialModules = [
   MatDatepickerModule,
   MatNativeDateModule,
+  MatFormFieldModule,
   MatButtonModule,
+  MatInputModule,
+  ReactiveFormsModule,
   MatChipsModule,
   MatIconModule,
   MatSelectModule,
