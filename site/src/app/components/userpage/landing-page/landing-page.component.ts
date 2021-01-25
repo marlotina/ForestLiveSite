@@ -1,18 +1,26 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ModalPostComponent } from '../modal-post/modal-post.component';
 import { environment } from '../../../../environments/environment';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { PostService } from 'src/app/services/post/post.service';
 import { Observable, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { catchError, map } from 'rxjs/operators';
+import { catchError, first, map } from 'rxjs/operators';
 import { LocationService } from 'src/app/services/location/location.service';
+import { CommonDialogComponent } from '../../shared/common-dialog/common-dialog.component';
+import { AccountService } from 'src/app/services/account/account.service';
+
+import { COMMA, ENTER } from '@angular/cdk/keycodes';
+import { MatAutocompleteSelectedEvent, MatAutocomplete } from '@angular/material/autocomplete';
+import { MatChipInputEvent } from '@angular/material/chips';
+import { startWith } from 'rxjs/operators';
 
 @Component({
   selector: 'app-landing-page',
   templateUrl: './landing-page.component.html'
 })
+
 export class LandingPageComponent implements OnInit {
 
   apiLoaded: Observable<boolean>
@@ -20,20 +28,36 @@ export class LandingPageComponent implements OnInit {
   postForm: FormGroup;
   submitted = false;
   
-  center;
+  center: any;
   zoom = 15;
   markerOptions: google.maps.MarkerOptions = {draggable: false};
   markerPositions: google.maps.LatLngLiteral[] = [];
+  display: any;
 
-  display;
+  labelCtrl = new FormControl();
+  visible = true;
+  selectable = true;
+  removable = true;
+  separatorKeysCodes: number[] = [ENTER, COMMA];
+  filteredLabel: Observable<string[]>;
+  labels: string[] = [];
+  allLabels: string[] = ['nature', 'birds', 'free', 'winter', 'river'];
+
+  @ViewChild('labelInput') labelInput: ElementRef<HTMLInputElement>;
+  @ViewChild('auto') matAutocomplete: MatAutocomplete;
 
   constructor(private httpClient: HttpClient,
     private formBuilder: FormBuilder,
     private postService: PostService, 
     private matDialog: MatDialog,
-    private locationService: LocationService) { 
+    private locationService: LocationService,
+    private accountService: AccountService) { 
       
-      this.setMapMarker();   
+      this.setMapMarker();  
+      
+      this.filteredLabel = this.labelCtrl.valueChanges.pipe(
+        //startWith(null),
+        map((label: string | null) => label ? this._filter(label) : this.allLabels.slice()));
   }
 
   loadMap(){
@@ -52,13 +76,20 @@ export class LandingPageComponent implements OnInit {
       longitude: [''],
       specieName: [''],
       specieId: [''],
-      labels: ['', [Validators.required]],
-      userId: [''],
-      userName: [''],
+      labels: [null],
+      userId: ['', [Validators.required]],
+      userName: ['', [Validators.required]],
       imageData: [''],
       altImage: [''],
-      imageName: ['']
+      imageName: [''],
+      observationDate: ['']
     });
+
+    this.postForm.patchValue({
+      'userId': this.accountService.userValue.id,
+      'userName': this.accountService.userValue.id,
+      'specieId': "336bfd7f-d88c-4d78-5b3e-08d8096731fb"
+      });
   }
 
   setMapMarker() {
@@ -69,9 +100,8 @@ export class LandingPageComponent implements OnInit {
       };
       this.addMarkerCommon(latLng);
       this.center = latLng;
-      this.display = latLng;
       
-      this.loadMap();
+      //this.loadMap();
     });
   }
 
@@ -102,9 +132,35 @@ export class LandingPageComponent implements OnInit {
     this.center = latLng;
   }
 
-  onSubmit() {}
+  onSubmit() {
+    this.submitted = true; 
+    
+    if (this.postForm.invalid) {
+        return;
+    }
 
-  get f() { return this.postForm.controls; }
+    //this.postForm.controls.labels. = this.labels;
+    this.postForm.patchValue({
+      'labels': this.labels
+    });
+    this.postService.AddPost(this.postForm.value)
+        .pipe(first())
+        .subscribe(
+            data => {    
+              this.openCommonModal('user.successSaveUserData');
+            },
+            error => {   
+              if(error.status == "409"){
+                this.openCommonModal('account.conflictNameMessage');
+                this.postForm.controls.userName.setErrors({'incorrect': true});
+              } else {
+                this.openCommonModal('user.failUserAction');
+              } 
+            });
+
+  }
+
+  //get f() { return this.postForm.controls; }
 
   openPostForm() {
     const dialogConfig = new MatDialogConfig();
@@ -117,5 +173,61 @@ export class LandingPageComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       var wop = result;
     });
+  }
+
+  openCommonModal(message:string) {
+    const dialogConfig = new MatDialogConfig();
+    
+    dialogConfig.disableClose = false;
+    dialogConfig.id = "modal-component";
+    dialogConfig.height = "200px";
+    dialogConfig.width = "600px";
+    dialogConfig.data = {
+      title: "user.userTitleModal",
+      description: message,
+      acceptButtonText: "general.ok",
+      hideAcceptButton: false,
+      hideCancelButton: true
+    }
+    
+    this.matDialog.open(CommonDialogComponent, dialogConfig);
+  }
+
+  /*labels*/
+  add(event: MatChipInputEvent): void {
+    const input = event.input;
+    const value = event.value;
+
+    // Add our fruit
+    if ((value || '').trim()) {
+      this.labels.push(value.trim());
+    }
+
+    // Reset the input value
+    if (input) {
+      input.value = '';
+    }
+
+    this.labelCtrl.setValue(null);
+  }
+
+  remove(label: string): void {
+    const index = this.labels.indexOf(label);
+
+    if (index >= 0) {
+      this.labels.splice(index, 1);
+    }
+  }
+
+  selected(event: MatAutocompleteSelectedEvent): void {
+    this.labels.push(event.option.viewValue);
+    this.labelInput.nativeElement.value = '';
+    this.labelCtrl.setValue(null);
+  }
+
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+
+    return this.allLabels.filter(fruit => fruit.toLowerCase().indexOf(filterValue) === 0);
   }
 }

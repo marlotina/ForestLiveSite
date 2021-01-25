@@ -8,6 +8,7 @@ import { TranslateModule, TranslateLoader, TranslateService } from  '@ngx-transl
 import { TranslateHttpLoader } from  '@ngx-translate/http-loader';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
+import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatDialogModule } from '@angular/material/dialog';
 import { JwtModule } from "@auth0/angular-jwt";
 import { environment } from 'src/environments/environment';
@@ -32,6 +33,7 @@ export  function  HttpLoaderFactory(http:  HttpClient) {
     LayoutModule,
     HttpClientModule,
     HttpClientJsonpModule,
+    MatDatepickerModule,
     TranslateModule.forRoot({
       loader: {
         provide:  TranslateLoader,

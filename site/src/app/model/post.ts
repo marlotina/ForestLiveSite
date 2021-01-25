@@ -11,6 +11,7 @@ export class PostRequest {
     SpecieName: string;
     SpecieId: string;
     Labels: string[];
+    ObservationDate: Date;
 }
 
 export class PostResponse {
@@ -31,5 +32,5 @@ export class PostResponse {
     CreationDate: Date;
     LikesCount: number;
     CommentsCount: number;
-
+    ObservationDate: Date;
 }

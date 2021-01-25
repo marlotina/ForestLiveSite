@@ -9,6 +9,25 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ModalPostComponent } from '../modal-post/modal-post.component';
 import { GoogleMapsModule } from '@angular/google-maps';
 
+import { MatDatepickerModule } from '@angular/material/datepicker';
+
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatIconModule } from '@angular/material/icon';
+import {MatSelectModule} from '@angular/material/select';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+
+const materialModules = [
+  MatDatepickerModule,
+  MatNativeDateModule,
+  MatButtonModule,
+  MatChipsModule,
+  MatIconModule,
+  MatSelectModule,
+  MatAutocompleteModule
+];
+
 
 @NgModule({
   declarations: [
@@ -23,8 +42,11 @@ import { GoogleMapsModule } from '@angular/google-maps';
     HttpClientJsonpModule,
     SharedModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatDatepickerModule,
+    materialModules
   ],
+  exports:[materialModules],
   entryComponents: [ModalPostComponent]
 })
 export class LandingPageModule { }

@@ -8,7 +8,7 @@ export const environment = {
   imagesProfileUrl: 'https://wachingbirdsqa.blob.core.windows.net/profiles/',
   postApiUrl: 'https://localhost:44304/',
   googleApiKey: 'AIzaSyAjqE9XcDEwD2SmV9mmf757kYOdwTbJvwQ',
-  whiteListDomains:  ["localhost:44374", "https://localhost:44304"],
+  whiteListDomains:  ["localhost:44374", "localhost:44304"],
   blacklistedRoutes: []
 }
 /*
