@@ -8,7 +8,6 @@ import { Observable, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { catchError, map } from 'rxjs/operators';
 import { LocationService } from 'src/app/services/location/location.service';
-import { MapMarker } from '@angular/google-maps';
 
 @Component({
   selector: 'app-landing-page',
@@ -28,38 +27,19 @@ export class LandingPageComponent implements OnInit {
 
   display;
 
-
-  addMarker1(latLng) {
-    this.markerPositions.push(latLng);;
-  }
-
   constructor(private httpClient: HttpClient,
     private formBuilder: FormBuilder,
     private postService: PostService, 
     private matDialog: MatDialog,
     private locationService: LocationService) { 
 
-      
-      locationService.getPosition().then(pos => {
-        let latLng =
-        {
-          lat: pos.lat,
-          lng: pos.lng,
-          
-        }
-        this.center = latLng;
-        
-        this.display = latLng;
-        this.addMarker1(latLng);
-      });
-         
-      this.apiLoaded = httpClient.jsonp('https://maps.googleapis.com/maps/api/js?key=' + environment.googleApiKey, 'callback')
+      this.setMapMarker();   
+      this.apiLoaded = this.httpClient.jsonp('https://maps.googleapis.com/maps/api/js?key=' + environment.googleApiKey, 'callback')
       .pipe(
         map(() => true),
         catchError((e) => of(false)),
       );
-
-    }
+  }
 
   ngOnInit(): void {
     this.postForm = this.formBuilder.group({
@@ -78,15 +58,28 @@ export class LandingPageComponent implements OnInit {
     });
   }
 
+  setMapMarker(){
+    this.locationService.getPosition().then(pos => {
+      let latLng = {
+        lat: pos.lat,
+        lng: pos.lng
+      };
+      
+      this.addMarkerCommon(latLng);
+      this.center = latLng;
+      this.display = latLng;
+    });
+  }
+
   addMarker(event: google.maps.MapMouseEvent) {
     this.display = event.latLng.toJSON();
-    this.addmarkercommon(event.latLng.toJSON())
+    this.addMarkerCommon(event.latLng.toJSON())
 
     //this.postForm.controls.latitude.value(event.latLng.lat);
     //this.postForm.controls.longitude.value(event.latLng.lng);
   }
 
-  addmarkercommon(latLng){
+  addMarkerCommon(latLng){
     if(this.markerPositions.length > 0){
       this.markerPositions[0] = latLng;
     }else{
@@ -94,14 +87,14 @@ export class LandingPageComponent implements OnInit {
     }
   }
 
-  onChangeEvent(event: any){
+  onChangeEvent(){
     let latLng =
       {
         lat: Number(this.postForm.controls.latitude.value),
         lng: Number(this.postForm.controls.longitude.value)
       };
 
-    this.addmarkercommon(latLng);
+    this.addMarkerCommon(latLng);
     this.center = latLng;
   }
 

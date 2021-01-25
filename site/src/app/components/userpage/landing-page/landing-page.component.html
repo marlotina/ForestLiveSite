@@ -75,8 +75,8 @@
                             <map-marker *ngFor="let markerPosition of markerPositions" [position]="markerPosition"
                             [options]="markerOptions"></map-marker>
                     </google-map>
-                    <input type="text" formControlName="latitude" (change)="onChangeEvent($event)" value="{{display?.lat}}" />
-                    <input type="text" formControlName="longitude" (change)="onChangeEvent($event)" value="{{display?.lng}}" />
+                    <input type="text" formControlName="latitude" (change)="onChangeEvent()" value="{{display?.lat}}" />
+                    <input type="text" formControlName="longitude" (change)="onChangeEvent()" value="{{display?.lng}}" />
                 </div>
             </div>
         </div>
