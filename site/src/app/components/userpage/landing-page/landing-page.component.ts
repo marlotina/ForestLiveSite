@@ -20,7 +20,7 @@ export class LandingPageComponent implements OnInit {
   postForm: FormGroup;
   submitted = false;
   
-  center: google.maps.LatLngLiteral = {lat: 24, lng: 12};
+  center;
   zoom = 15;
   markerOptions: google.maps.MarkerOptions = {draggable: false};
   markerPositions: google.maps.LatLngLiteral[] = [];
@@ -32,13 +32,16 @@ export class LandingPageComponent implements OnInit {
     private postService: PostService, 
     private matDialog: MatDialog,
     private locationService: LocationService) { 
-
+      
       this.setMapMarker();   
-      this.apiLoaded = this.httpClient.jsonp('https://maps.googleapis.com/maps/api/js?key=' + environment.googleApiKey, 'callback')
-      .pipe(
-        map(() => true),
-        catchError((e) => of(false)),
-      );
+  }
+
+  loadMap(){
+    this.apiLoaded = this.httpClient.jsonp('https://maps.googleapis.com/maps/api/js?key=' + environment.googleApiKey, 'callback')
+    .pipe(
+      map(() => true),
+      catchError((e) => of(false)),
+    );
   }
 
   ngOnInit(): void {
@@ -58,16 +61,17 @@ export class LandingPageComponent implements OnInit {
     });
   }
 
-  setMapMarker(){
+  setMapMarker() {
     this.locationService.getPosition().then(pos => {
       let latLng = {
         lat: pos.lat,
         lng: pos.lng
       };
-      
       this.addMarkerCommon(latLng);
       this.center = latLng;
       this.display = latLng;
+      
+      this.loadMap();
     });
   }
 
