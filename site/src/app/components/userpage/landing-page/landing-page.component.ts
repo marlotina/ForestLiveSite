@@ -20,16 +20,18 @@ export class LandingPageComponent implements OnInit {
 
   postForm: FormGroup;
   submitted = false;
-
-  options: google.maps.MapOptions = {
-    center: {lat: 44.732119004185634, lng: 3.2467500409585837}, 
-    zoom: 4
-  };
-
-  zoom = 4;
+  
+  center: google.maps.LatLngLiteral = {lat: 24, lng: 12};
+  zoom = 15;
   markerOptions: google.maps.MarkerOptions = {draggable: false};
   markerPositions: google.maps.LatLngLiteral[] = [];
+
   display;
+
+
+  addMarker1(latLng) {
+    this.markerPositions.push(latLng);;
+  }
 
   constructor(private httpClient: HttpClient,
     private formBuilder: FormBuilder,
@@ -37,12 +39,26 @@ export class LandingPageComponent implements OnInit {
     private matDialog: MatDialog,
     private locationService: LocationService) { 
 
+      
+      locationService.getPosition().then(pos => {
+        let latLng =
+        {
+          lat: pos.lat,
+          lng: pos.lng,
+          
+        }
+        this.center = latLng;
+        
+        this.display = latLng;
+        this.addMarker1(latLng);
+      });
          
       this.apiLoaded = httpClient.jsonp('https://maps.googleapis.com/maps/api/js?key=' + environment.googleApiKey, 'callback')
       .pipe(
         map(() => true),
         catchError((e) => of(false)),
       );
+
     }
 
   ngOnInit(): void {
@@ -64,25 +80,29 @@ export class LandingPageComponent implements OnInit {
 
   addMarker(event: google.maps.MapMouseEvent) {
     this.display = event.latLng.toJSON();
+    this.addmarkercommon(event.latLng.toJSON())
 
+    //this.postForm.controls.latitude.value(event.latLng.lat);
+    //this.postForm.controls.longitude.value(event.latLng.lng);
+  }
+
+  addmarkercommon(latLng){
     if(this.markerPositions.length > 0){
-      this.markerPositions[0] = event.latLng.toJSON();
+      this.markerPositions[0] = latLng;
     }else{
-      this.markerPositions.push(event.latLng.toJSON());
+      this.markerPositions.push(latLng);
     }
-    this.postForm.controls.latitude.value(event.latLng.lat);
-    this.postForm.controls.longitude.value(event.latLng.lng);
-    
   }
 
   onChangeEvent(event: any){
-    if(this.markerPositions.length > 0){
-      this.markerPositions[0].lat = this.postForm.controls.latitude.value();
-      this.markerPositions[0].lng = this.postForm.controls.longitude.value();
-    }else{
-      this.markerPositions.push(new google.maps.LatLngLiteral() { lat = this.postForm.controls.latitude.value(), lng = this.postForm.controls.longitude.value()});
-    }
-    console.log(event.target.value);
+    let latLng =
+      {
+        lat: Number(this.postForm.controls.latitude.value),
+        lng: Number(this.postForm.controls.longitude.value)
+      };
+
+    this.addmarkercommon(latLng);
+    this.center = latLng;
   }
 
   onSubmit() {}
@@ -101,7 +121,4 @@ export class LandingPageComponent implements OnInit {
       var wop = result;
     });
   }
-
-  
-
 }
