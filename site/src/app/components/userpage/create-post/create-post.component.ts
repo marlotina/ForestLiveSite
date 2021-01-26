@@ -49,9 +49,9 @@ export class CreatePostComponent implements OnInit {
   selectedFile: ImageSnippet;
 
   url: any;
-  file: any;
   msg = "";
-  
+  imageName="";
+
   @ViewChild('labelInput') labelInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto') matAutocomplete: MatAutocomplete;
 
@@ -105,7 +105,8 @@ onSubmit() {
 
   this.postForm.patchValue({
     'labels': this.labels,
-    'imageData': this.file
+    'imageData': this.url,
+    'imageName': this.imageName
   });
 
   this.postService.AddPost(this.postForm.value)
@@ -132,18 +133,19 @@ onSubmit() {
     }
     
     var mimeType = event.target.files[0].type;
-    
+    this.imageName = event.target.files[0].name;
+
     if (mimeType.match(/image\/*/) == null) {
       this.msg = "Only images are supported";
       return;
     }
-    this.file = event.target.files[0];
+
     var reader = new FileReader();
     reader.readAsDataURL(event.target.files[0]);
-    
     reader.onload = (_event) => {
       this.msg = "";
       this.url = reader.result; 
+       
     }
   }
 

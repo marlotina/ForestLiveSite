@@ -8,15 +8,13 @@ import { HttpClientJsonpModule, HttpClientModule } from '@angular/common/http';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { ModalProfileComponent } from '../modal-profile/modal-profile.component';
 import { ImageCropperModule } from 'ngx-image-cropper';
-import { CommonDialogComponent } from '../../shared/common-dialog/common-dialog.component';
 import { RouterModule } from '@angular/router';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 
 @NgModule({
   declarations: [
     UserProfileComponent,
-    ModalProfileComponent,
-    CommonDialogComponent],
+    ModalProfileComponent],
   imports: [
     CommonModule,
     UserProfileRoutingModule,

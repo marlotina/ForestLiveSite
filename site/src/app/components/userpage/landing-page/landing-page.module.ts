@@ -6,7 +6,6 @@ import { LandingPageComponent } from './landing-page.component';
 import { HttpClientJsonpModule, HttpClientModule } from '@angular/common/http';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ModalPostComponent } from '../modal-post/modal-post.component';
 import { GoogleMapsModule } from '@angular/google-maps';
 
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -37,7 +36,7 @@ const materialModules = [
 @NgModule({
   declarations: [
     LandingPageComponent,
-    CreatePostComponent
+    CreatePostComponent,
   ],
   imports: [
     CommonModule,

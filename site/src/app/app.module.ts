@@ -12,6 +12,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { JwtModule } from "@auth0/angular-jwt";
 import { environment } from 'src/environments/environment';
 import { AppComponent } from './app.component';
+import { CommonDialogComponent } from './components/shared/common-dialog/common-dialog.component';
 
 export function jwtTokenGetter() {
   return localStorage.getItem("access_token");
@@ -24,7 +25,8 @@ export  function  HttpLoaderFactory(http:  HttpClient) {
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    CommonDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -51,6 +53,7 @@ export  function  HttpLoaderFactory(http:  HttpClient) {
       })
   ],
   exports: [TranslateModule],
+  entryComponents: [CommonDialogComponent],
   providers: [TranslateService],
   bootstrap: [AppComponent]
 
