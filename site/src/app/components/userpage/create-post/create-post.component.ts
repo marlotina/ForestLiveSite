@@ -62,14 +62,12 @@ export class CreatePostComponent implements OnInit {
     private locationService: LocationService,
     private accountService: AccountService) { 
       
-      this.setMapMarker();  
+      //this.setMapMarker();  
       
       this.filteredLabel = this.labelCtrl.valueChanges.pipe(
         //startWith(null),
         map((label: string | null) => label ? this._filter(label) : this.allLabels.slice()));
-  }
-
-  
+  }  
 
   ngOnInit(): void {
     this.postForm = this.formBuilder.group({
@@ -94,35 +92,34 @@ export class CreatePostComponent implements OnInit {
       'specieId': "336bfd7f-d88c-4d78-5b3e-08d8096731fb"
       });
   }
-   
 
-onSubmit() {
-  this.submitted = true; 
-  
-  if (this.postForm.invalid) {
-      return;
-  }
+  onSubmit() {
+    this.submitted = true; 
+    
+    if (this.postForm.invalid) {
+        return;
+    }
 
-  this.postForm.patchValue({
-    'labels': this.labels,
-    'imageData': this.url,
-    'imageName': this.imageName
-  });
+    this.postForm.patchValue({
+      'labels': this.labels,
+      'imageData': this.url,
+      'imageName': this.imageName
+    });
 
-  this.postService.AddPost(this.postForm.value)
-      .pipe(first())
-      .subscribe(
-          data => {    
-            this.openCommonModal('user.successSaveUserData');
-          },
-          error => {   
-            if(error.status == "409"){
-              this.openCommonModal('account.conflictNameMessage');
-              this.postForm.controls.userName.setErrors({'incorrect': true});
-            } else {
-              this.openCommonModal('user.failUserAction');
-            } 
-          });
+    this.postService.AddPost(this.postForm.value)
+        .pipe(first())
+        .subscribe(
+            data => {    
+              this.openCommonModal('user.successSaveUserData');
+            },
+            error => {   
+              if(error.status == "409"){
+                this.openCommonModal('account.conflictNameMessage');
+                this.postForm.controls.userName.setErrors({'incorrect': true});
+              } else {
+                this.openCommonModal('user.failUserAction');
+              } 
+            });
   }
 
   /*Image*/

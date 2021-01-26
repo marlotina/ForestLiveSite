@@ -8,6 +8,9 @@ import { Component, OnInit } from '@angular/core';
 
 export class LandingPageComponent implements OnInit {
   submitted = false;
+  
+  buttonTitle:string = "AddPost"; 
+  visible:boolean = false; 
 
   constructor() { 
   }
@@ -15,4 +18,8 @@ export class LandingPageComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  showhideutility(){ 
+    this.visible = this.visible?false:true; 
+    this.buttonTitle = this.visible?"Cancel":"AddPost"; 
+  } 
 }
