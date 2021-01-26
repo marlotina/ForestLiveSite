@@ -26,7 +26,6 @@ const materialModules = [
   MatFormFieldModule,
   MatButtonModule,
   MatInputModule,
-  ReactiveFormsModule,
   MatChipsModule,
   MatIconModule,
   MatSelectModule,
@@ -48,7 +47,6 @@ const materialModules = [
     SharedModule,
     FormsModule,
     ReactiveFormsModule,
-    MatDatepickerModule,
     materialModules
   ],
   exports:[materialModules],
