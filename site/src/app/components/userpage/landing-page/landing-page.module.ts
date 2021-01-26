@@ -19,6 +19,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
 import {MatSelectModule} from '@angular/material/select';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { CreatePostComponent } from '../create-post/create-post.component';
 
 const materialModules = [
   MatDatepickerModule,
@@ -36,7 +37,7 @@ const materialModules = [
 @NgModule({
   declarations: [
     LandingPageComponent,
-    ModalPostComponent
+    CreatePostComponent
   ],
   imports: [
     CommonModule,
@@ -49,6 +50,6 @@ const materialModules = [
     ReactiveFormsModule,
     materialModules
   ],
-  entryComponents: [ModalPostComponent]
+  entryComponents: [CreatePostComponent]
 })
 export class LandingPageModule { }
