@@ -16,6 +16,10 @@ import { MatAutocompleteSelectedEvent, MatAutocomplete } from '@angular/material
 import { MatChipInputEvent } from '@angular/material/chips';
 import { startWith } from 'rxjs/operators';
 
+class ImageSnippet {
+  constructor(public src: string, public file: File) {}
+}
+
 @Component({
   selector: 'app-landing-page',
   templateUrl: './landing-page.component.html'
@@ -42,7 +46,12 @@ export class LandingPageComponent implements OnInit {
   filteredLabel: Observable<string[]>;
   labels: string[] = [];
   allLabels: string[] = ['nature', 'birds', 'free', 'winter', 'river'];
+  
+  selectedFile: ImageSnippet;
 
+  url;
+  msg = "";
+  
   @ViewChild('labelInput') labelInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto') matAutocomplete: MatAutocomplete;
 
@@ -92,6 +101,28 @@ export class LandingPageComponent implements OnInit {
       });
   }
 
+  selectFile(event) {
+		if(!event.target.files[0] || event.target.files[0].length == 0) {
+			this.msg = 'You must select an image';
+			return;
+		}
+		
+		var mimeType = event.target.files[0].type;
+		
+		if (mimeType.match(/image\/*/) == null) {
+			this.msg = "Only images are supported";
+			return;
+		}
+		
+		var reader = new FileReader();
+		reader.readAsDataURL(event.target.files[0]);
+		
+		reader.onload = (_event) => {
+			this.msg = "";
+			this.url = reader.result; 
+		}
+  }
+
   setMapMarker() {
     this.locationService.getPosition().then(pos => {
       let latLng = {
@@ -101,16 +132,13 @@ export class LandingPageComponent implements OnInit {
       this.addMarkerCommon(latLng);
       this.center = latLng;
       
-      //this.loadMap();
+      this.loadMap();
     });
   }
 
   addMarker(event: google.maps.MapMouseEvent) {
     this.display = event.latLng.toJSON();
     this.addMarkerCommon(event.latLng.toJSON())
-
-    //this.postForm.controls.latitude.value(event.latLng.lat);
-    //this.postForm.controls.longitude.value(event.latLng.lng);
   }
 
   addMarkerCommon(latLng){
