@@ -49,7 +49,6 @@ const materialModules = [
     ReactiveFormsModule,
     materialModules
   ],
-  exports:[materialModules],
   entryComponents: [ModalPostComponent]
 })
 export class LandingPageModule { }
