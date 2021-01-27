@@ -7,7 +7,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientJsonpModule, HttpClientModule } from '@angular/common/http';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { ModalProfileComponent } from '../modal-profile/modal-profile.component';
-import { ImageCropperModule } from 'ngx-image-cropper';
 import { RouterModule } from '@angular/router';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 
@@ -22,7 +21,6 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     FormsModule,
     ReactiveFormsModule,
     SharedModule,
-    ImageCropperModule,
     RouterModule,
     HttpClientJsonpModule,
     MatDatepickerModule
