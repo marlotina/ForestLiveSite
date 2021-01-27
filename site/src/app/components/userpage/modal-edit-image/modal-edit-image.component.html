@@ -1,0 +1,49 @@
+<div id="modal-content-wrapper">
+  
+    <section class="contact-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-lg-6">
+                    <button (click)="zoomOut()" class="buttonTwo" style="width: 50%;"> - </button> 
+                    <button (click)="zoomIn()" class="buttonTwo" style="width: 50%;"> + </button>
+                </div>
+                <div class="col-12 col-lg-6">
+                    <button (click)="resetImage()" class="buttonTwo">{{ 'user.resetImage' | translate }}</button>
+                </div>
+                
+                <div class="col-12">
+                    <image-cropper
+                        [imageChangedEvent]="imageChangedEvent"
+                        [maintainAspectRatio]="true"
+                        [aspectRatio]="1 / 1"
+                        [resizeToWidth]="300"
+                        [resizeToHeight]="25"
+                        [cropperMinWidth]="300"
+                        [cropperMinHeight]="300"
+                        [onlyScaleDown]="true"
+                        [roundCropper]="false"
+                        [canvasRotation]="canvasRotation"
+                        [transform]="transform"
+                        [alignImage]="'left'"
+                        [style.display]="showCropper ? null : 'none'"
+                        format="png"
+                        (imageCropped)="imageCropped($event)"
+                        (cropperReady)="cropperReady($event)"
+                        (loadImageFailed)="loadImageFailed()">
+                    </image-cropper>
+                </div>
+            </div>
+        </div>
+        <label>Alt imagen</label>
+        <input type="text" #altImageInput placeholder="Descripcion imagen"/>
+
+        <label>Alt imagen</label>
+        <input type="text" #imageNameInput placeholder="Descripcion imagen"/>
+        
+    </section>
+<footer id="modal-footer">
+    <div class="welcome-btn-group" style="margin-bottom: 30px;">
+        <button mat-raised-button class="btn alazea-btn mr-30" (click)="saveImage()">{{ 'user.save' | translate }}</button>
+        <button mat-raised-button class="btn alazea-btn active" (click)="closeModal()">{{ 'user.back' | translate }}</button>
+    </div>
+</footer>

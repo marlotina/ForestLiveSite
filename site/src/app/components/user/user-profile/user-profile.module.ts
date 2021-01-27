@@ -9,6 +9,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { ModalProfileComponent } from '../modal-profile/modal-profile.component';
 import { RouterModule } from '@angular/router';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { ImageCropperModule } from 'ngx-image-cropper';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     SharedModule,
     RouterModule,
     HttpClientJsonpModule,
-    MatDatepickerModule
+    MatDatepickerModule,
+    ImageCropperModule
   ],
   entryComponents: [ModalProfileComponent]
 })

@@ -14,6 +14,7 @@ import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { MatAutocompleteSelectedEvent, MatAutocomplete } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { startWith } from 'rxjs/operators';
+import { ModalEditImageComponent } from '../modal-edit-image/modal-edit-image.component';
 
 class ImageSnippet {
   constructor(public src: string, public file: File) {}
@@ -24,6 +25,7 @@ class ImageSnippet {
   templateUrl: './create-post.component.html',
   styleUrls: ['./create-post.component.css']
 })
+
 export class CreatePostComponent implements OnInit {
 
   apiLoaded: Observable<boolean>
@@ -51,6 +53,8 @@ export class CreatePostComponent implements OnInit {
   url: any;
   msg = "";
   imageName="";
+  file: any;
+  altImage = "";
 
   @ViewChild('labelInput') labelInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto') matAutocomplete: MatAutocomplete;
@@ -62,7 +66,7 @@ export class CreatePostComponent implements OnInit {
     private locationService: LocationService,
     private accountService: AccountService) { 
       
-      //this.setMapMarker();  
+      this.setMapMarker();  
       
       this.filteredLabel = this.labelCtrl.valueChanges.pipe(
         //startWith(null),
@@ -103,7 +107,10 @@ export class CreatePostComponent implements OnInit {
     this.postForm.patchValue({
       'labels': this.labels,
       'imageData': this.url,
-      'imageName': this.imageName
+      'imageName': this.imageName,
+      'altImage': this.altImage,
+      'latitude': this.markerPositions[0].lat.toString(),
+      'longitude': this.markerPositions[0].lng.toString()
     });
 
     this.postService.AddPost(this.postForm.value)
@@ -136,14 +143,39 @@ export class CreatePostComponent implements OnInit {
       this.msg = "Only images are supported";
       return;
     }
-
+    
     var reader = new FileReader();
     reader.readAsDataURL(event.target.files[0]);
     reader.onload = (_event) => {
       this.msg = "";
       this.url = reader.result; 
-       
     }
+
+    this.file = event;
+  }
+
+  openEditProfile() {
+    const dialogConfig = new MatDialogConfig();
+    let results: string;
+    dialogConfig.disableClose = false;
+    dialogConfig.id = "modal-component";
+    dialogConfig.height = "200px";
+    dialogConfig.width = "600px";
+    dialogConfig.data = {
+      image: this.file    
+    }
+    
+    const dialogRef = this.matDialog.open(ModalEditImageComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.url = result.imageBase64;
+      this.altImage = result.altImage;
+      if(result.imageName != null && result.imageName != "") {
+        this.imageName = result.imageName;
+      }
+    });
+
+    return results;
   }
 
   /*Map*/

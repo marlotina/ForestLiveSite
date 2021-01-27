@@ -34,3 +34,10 @@ export class PostResponse {
     CommentsCount: number;
     ObservationDate: Date;
 }
+
+export class ImagePostRequest {
+    imageBase64: string;
+    imageName: string;
+    altImage: string;
+}
+

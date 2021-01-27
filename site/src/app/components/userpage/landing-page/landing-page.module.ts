@@ -19,6 +19,8 @@ import { MatIconModule } from '@angular/material/icon';
 import {MatSelectModule} from '@angular/material/select';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { CreatePostComponent } from '../create-post/create-post.component';
+import { ModalEditImageComponent } from '../modal-edit-image/modal-edit-image.component';
+import { ImageCropperModule } from 'ngx-image-cropper';
 
 const materialModules = [
   MatDatepickerModule,
@@ -37,6 +39,7 @@ const materialModules = [
   declarations: [
     LandingPageComponent,
     CreatePostComponent,
+    ModalEditImageComponent
   ],
   imports: [
     CommonModule,
@@ -47,8 +50,9 @@ const materialModules = [
     SharedModule,
     FormsModule,
     ReactiveFormsModule,
+    ImageCropperModule,
     materialModules
   ],
-  entryComponents: [CreatePostComponent]
+  entryComponents: [CreatePostComponent, ModalEditImageComponent]
 })
 export class LandingPageModule { }

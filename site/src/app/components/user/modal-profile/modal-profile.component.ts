@@ -36,50 +36,50 @@ export class ModalProfileComponent implements OnInit {
   }
 
     fileChangeEvent(event: any): void {
-        this.imageChangedEvent = event;
-        this.nameFile = event.currentTarget.files[0].name;
-        this.extensionFile = this.nameFile.split('.')[1];
+      this.imageChangedEvent = event;
+      this.nameFile = event.currentTarget.files[0].name;
+      this.extensionFile = this.nameFile.split('.')[1];
     }
 
     imageCropped(event: ImageCroppedEvent) {
-        this.croppedImage = event.base64;
-        console.log(event, base64ToFile(event.base64));
+      this.croppedImage = event.base64;
+      console.log(event, base64ToFile(event.base64));
     }
 
     imageLoaded() {
-        this.showCropper = true;
-        console.log('Image loaded');
+      this.showCropper = true;
+      console.log('Image loaded');
     }
 
     cropperReady(sourceImageDimensions: Dimensions) {
-        console.log('Cropper ready', sourceImageDimensions);
+      console.log('Cropper ready', sourceImageDimensions);
     }
 
     loadImageFailed() {
-        console.log('Load failed');
+      console.log('Load failed');
     }
 
     resetImage() {
-        this.scale = 1;
-        this.rotation = 0;
-        this.canvasRotation = 0;
-        this.transform = {};
+      this.scale = 1;
+      this.rotation = 0;
+      this.canvasRotation = 0;
+      this.transform = {};
     }
 
     zoomOut() {
-        this.scale -= .1;
-        this.transform = {
-            ...this.transform,
-            scale: this.scale
-        };
+      this.scale -= .1;
+      this.transform = {
+          ...this.transform,
+          scale: this.scale
+      };
     }
 
     zoomIn() {
-        this.scale += .1;
-        this.transform = {
-            ...this.transform,
-            scale: this.scale
-        };
+      this.scale += .1;
+      this.transform = {
+          ...this.transform,
+          scale: this.scale
+      };
     }
 
     deleteImage() {
