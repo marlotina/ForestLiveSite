@@ -12,6 +12,6 @@ export class PostService {
   }
 
   AddPost(request: PostRequest) {
-    return this.httpClient.post(`${environment.postApiUrl}api/v1/BirdPost/addpost/`, request);
+    return this.httpClient.post(`${environment.postApiUrl}api/v1/Item/AddItem/`, request);
   }
 }
