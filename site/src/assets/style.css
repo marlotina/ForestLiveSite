@@ -2680,6 +2680,31 @@ img {
   border-color: #70c745;
 }
 
+.buttonThree {
+  -webkit-transition-duration: 500ms;
+  transition-duration: 500ms;
+  height: 30px;
+  min-width: 150px;
+  border: 1px solid #ebebeb;
+  background-color: #cccccc;
+  color: #303030;
+  font-size: 14px;
+  text-transform: uppercase;
+  cursor: pointer;
+  font-weight: 500;
+  margin-bottom: 0;
+}
+
+.buttonThree:hover {
+  background-color: #70c745;
+  color: #ffffff;
+  border-color: #70c745;
+}
+
 a:hover {
   cursor:pointer;
+ }
+
+ .map-container{
+    width: 100% !important;
  }

@@ -23,18 +23,18 @@
 
 <!-- ##### Blog Content Area Start ##### -->
 <section class="blog-content-area section-padding-0-100">
-    <div class="container"  *ngIf="visible">
-        <app-create-post></app-create-post>
-    </div>
-    <div class="container">
-        <button type="button" class="btn alazea-btn mt-15" (click)="showhideutility()">{{buttonTitle}}</button> 
-    </div>
+    
     <div class="container">
         <div class="row justify-content-center">
             <!-- Blog Posts Area -->
             <div class="col-12 col-md-8">
                 <div class="blog-posts-area">
-
+                    <div *ngIf="visible">
+                        <app-create-post></app-create-post>
+                    </div>
+                    <div>
+                        <button type="button" class="btn alazea-btn mt-15" (click)="showhideutility()">{{buttonTitle}}</button> 
+                    </div>   
                     <!-- Post Details Area -->
                     <div class="single-post-details-area">
                         <div class="post-content">

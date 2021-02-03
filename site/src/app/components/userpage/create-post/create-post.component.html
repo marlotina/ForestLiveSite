@@ -1,31 +1,31 @@
-<form [formGroup]="postForm" (ngSubmit)="onSubmit()">
-    <div class="row align-items-center justify-content-between">
+<div class="leave-comment-area clearfix">
+    <div class="comment-form">
+        <h4 class="headline">Leave A Comment</h4>
+        <div class="contact-form-area">
+            <form [formGroup]="postForm" (ngSubmit)="onSubmit()" class="ng-untouched ng-pristine ng-valid">
 
-        <div class="col-12">
-            <div class="form-group">
-                <label class="image-upload-container btn btn-bwm">
-                    <button type="submit" class="btn alazea-btn mt-15" (click)="openEditProfile()">editimage</button>
-
-                    <div [innerHtml]='msg' *ngIf="msg" style="color: red;"></div>
-                    <div><img [src]="url" *ngIf="url"></div>
-                    <p>
-                        <input type="file" (change)="selectFile($event)">
-                    </p>
-                </label>
-            </div>
-        </div>
-
-        <div class="col-12 col-lg-5">
-            <!-- Section Heading -->
-            <div class="section-heading">
-                <h2>Create new post</h2>
-                <p>Select a photo of bird and put some text</p>
-            </div>
-            <!-- Contact Form Area -->
-            <div class="contact-form-area mb-100">
                 <input type="hidden" id="userIdPost" formControlName="userId" >
                 <input type="hidden" id="userNamePost" formControlName="userName" >
+
                 <div class="row">
+                    
+                    <div class="col-12">
+                        <div class="form-group">
+                            <div [innerHtml]='msg' *ngIf="msg" style="color: red;"></div>
+                            <div><img [src]="url" *ngIf="url"></div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-md-6">
+                        <label for="uploadImage" class="buttonThree" style="text-align: center; padding-top: 5px;">{{ 'user.upload' | translate }}</label>
+                        <input type="file" #file id="uploadImage" (change)="selectFile($event)" />                        
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <div class="form-group">
+                            <button type="submit" class="buttonThree" (click)="openEditProfile()">editimage</button>
+                        </div>
+                    </div>
+
                     <div class="col-12 col-md-6">
                         <div class="form-group">
                             <input type="text" class="form-control" formControlName="specieName" id="specieNamePost" placeholder="bird specie">
@@ -33,13 +33,21 @@
                         </div>
                     </div>
                     <div class="col-12 col-md-6">
-                        
+                        <div class="form-group">
+                            <mat-form-field>
+                                <input matInput [matDatepicker]="picker" placeholder="Choose a date" id="observationDatePost" formControlName="observationDate">
+                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                <mat-datepicker #picker></mat-datepicker>
+                            </mat-form-field>
+                        </div>
                     </div>
+
                     <div class="col-12">
                         <div class="form-group">
                             <input type="text" class="form-control" id="titlePost" placeholder="Title" formControlName="title" >
                         </div>
                     </div>
+
                     <div class="col-12">
                         <div class="form-group">
                             <textarea class="form-control" 
@@ -51,82 +59,93 @@
                                 formControlName="text" ></textarea>
                         </div>
                     </div>
+
                     <div class="col-12">
+                        <mat-form-field class="example-chip-list LabelsSelect">
+                            <mat-label>Description labels</mat-label>
+                            <mat-chip-list #chipList aria-label="Label selection">
+                            <mat-chip
+                                *ngFor="let label of labels"
+                                [selectable]="selectable"
+                                [removable]="removable"
+                                (removed)="remove(label)">
+                                {{label}}
+                                <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                            </mat-chip>
+                            <input
+                                id="labelsPost" 
+                                placeholder="Description labels" 
+                                #labelInput
+                                [formControl]="labelCtrl"
+                                [matAutocomplete]="auto"
+                                [matChipInputFor]="chipList"
+                                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                                (matChipInputTokenEnd)="add($event)">
+                            </mat-chip-list>
+                            <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                            <mat-option *ngFor="let label of filteredLabel | async" [value]="label">
+                                {{label}}
+                            </mat-option>
+                            </mat-autocomplete>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-12 col-md-6">
                         <div class="form-group">
-                            <mat-form-field class="example-chip-list LabelsSelect">
-                                <mat-label>Description labels</mat-label>
-                                <mat-chip-list #chipList aria-label="Label selection">
-                                <mat-chip
-                                    *ngFor="let label of labels"
-                                    [selectable]="selectable"
-                                    [removable]="removable"
-                                    (removed)="remove(label)">
-                                    {{label}}
-                                    <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
-                                </mat-chip>
-                                <input
-                                    id="labelsPost" 
-                                    placeholder="Description labels" 
-                                    #labelInput
-                                    [formControl]="labelCtrl"
-                                    [matAutocomplete]="auto"
-                                    [matChipInputFor]="chipList"
-                                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                                    (matChipInputTokenEnd)="add($event)">
-                                </mat-chip-list>
-                                <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
-                                <mat-option *ngFor="let label of filteredLabel | async" [value]="label">
-                                    {{label}}
-                                </mat-option>
-                                </mat-autocomplete>
-                            </mat-form-field>
+                            <input type="text"  
+                                class="form-control" 
+                                id="latitudePost" 
+                                placeholder="Latitude" 
+                                formControlName="latitude" 
+                                (change)="onChangeEvent()" 
+                                value="{{display?.lat}}" />
                         </div>
                     </div>
                     <div class="col-12 col-md-6">
-                        <input type="text"  
-                            class="form-control" 
-                            id="latitudePost" 
-                            placeholder="Latitude" 
-                            formControlName="latitude" 
-                            (change)="onChangeEvent()" 
-                            value="{{display?.lat}}" />
+                        <div class="form-group">
+                            <input type="text" 
+                                class="form-control" 
+                                id="latitudePost" 
+                                placeholder="Longitude" 
+                                id="longitudePost"
+                                formControlName="longitude" 
+                                (change)="onChangeEvent()" 
+                                value="{{display?.lng}}" />
+                        </div>
                     </div>
-                    <div class="col-12 col-md-6">
-                        <input type="text" 
-                            class="form-control" 
-                            id="latitudePost" 
-                            placeholder="Longitude" 
-                            id="longitudePost"
-                            formControlName="longitude" 
-                            (change)="onChangeEvent()" 
-                            value="{{display?.lng}}" />
-                    </div>
+
                     <div class="col-12">
-                        <mat-form-field>
-                            <input matInput [matDatepicker]="picker" placeholder="Choose a date" id="observationDatePost" formControlName="observationDate">
-                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                            <mat-datepicker #picker></mat-datepicker>
-                        </mat-form-field>
+                        <div *ngIf="apiLoaded | async">
+                            <google-map
+                                [center]="center"
+                                [zoom]="zoom"
+                                (mapClick)="addMarker($event)">
+                                    <map-marker *ngFor="let markerPosition of markerPositions" [position]="markerPosition"
+                                        [options]="markerOptions"></map-marker>
+                            </google-map>
+                        </div>
                     </div>
+
                     <div class="col-12">
                         <button type="submit" class="btn alazea-btn mt-15">Create post</button>
                     </div>
-                </div>
-            </div>
-        </div>
 
-        <div class="col-12 col-lg-6">
-            <!-- Google Maps -->
-            <div *ngIf="apiLoaded | async">
-                <google-map
-                    [center]="center"
-                    [zoom]="zoom"
-                    (mapClick)="addMarker($event)">
-                        <map-marker *ngFor="let markerPosition of markerPositions" [position]="markerPosition"
-                            [options]="markerOptions"></map-marker>
-                </google-map>
-            </div>
+                </div>
+            </form>
         </div>
     </div>
-</form>
-    
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
