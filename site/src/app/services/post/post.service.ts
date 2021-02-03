@@ -16,19 +16,19 @@ export class PostService {
     return this.httpClient.post(`${environment.postApiUrl}api/v1/Item/AddItem/`, request);
   }
 
-  GetPost(id: string){
-    return this.httpClient.get<PostResponse>(`${environment.postApiUrl}api/v1/Item/GetItem/?id=${id}`)
+  GetPost(itemId: string){
+    return this.httpClient.get<PostResponse>(`${environment.postApiUrl}api/v1/Item/GetItem/?itemId=${itemId}`)
       .pipe(map(data => {
         return data;
       }));
   }
 
   AddComment(request: CommentRequest){
-    return this.httpClient.post(`${environment.postApiUrl}api/v1/Item/AddItem/`, request);
+    return this.httpClient.post(`${environment.postApiUrl}api/v1/Comment/AddComment/`, request);
   }
 
-  GetCommentsByPost(id: string){
-    return this.httpClient.get<CommentResponse[]>(`${environment.postApiUrl}api/v1/Item/GetItem/?id=${id}`)
+  GetCommentsByPost(itemId: string){
+    return this.httpClient.get<CommentResponse[]>(`${environment.postApiUrl}api/v1/Comment/GetComment/?itemId=${itemId}`)
       .pipe(map(data => {
         return data;
       }));

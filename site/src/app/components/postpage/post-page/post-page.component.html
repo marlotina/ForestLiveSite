@@ -36,16 +36,20 @@
 
                             <div class="single_product_desc">
                                 <div class="cart--area d-flex flex-wrap align-items-center">
-                                    <div class="quantity">
-                                        <input type="number" class="qty-text" id="qty" step="1" min="1" max="12" name="quantity" value="1">
-                                        <span class="qty-plus" onclick="var effect = document.getElementById('qty'); var qty = effect.value; if( !isNaN( qty )) effect.value++;return false;"><i class="fa fa-plus" aria-hidden="true"></i></span>
+                                    <!-- Add to Cart Form -->
+                                    <div class="cart clearfix d-flex align-items-center" method="post">
+                                        <div class="quantity">
+                                            <input type="number" class="qty-text" id="qty" step="1" min="1" max="12" name="quantity" value="1">
+                                        </div>
                                     </div>
+                                    <!-- Wishlist & Compare -->
                                     <div class="wishlist-compare d-flex flex-wrap align-items-center">
                                         <a href="#" class="wishlist-btn ml-15"><i class="icon_heart_alt"></i></a>
                                         <a href="#" class="compare-btn ml-15"><i class="arrow_left-right_alt"></i></a>
                                     </div>
                                 </div>
                             </div>
+                            
 
                             <div class="post-meta mb-30">
                                 <a href="#"><i class="fa fa-clock-o" aria-hidden="true"></i> {{post.observationDate}}</a>
@@ -63,8 +67,9 @@
                     <!-- Post Tags & Share -->
                     <div class="post-tags-share d-flex justify-content-between align-items-center">
                         <!-- Tags -->
+                        Labels
                         <ol *ngFor="let label of post.labels" class="popular-tags d-flex align-items-center flex-wrap">
-                            <li><span>Tag:</span></li>
+                            
                             <li><a href="#">{{label}}</a></li>
                         </ol>
                         <!-- Share -->

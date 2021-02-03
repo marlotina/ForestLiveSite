@@ -8,7 +8,7 @@ import { PostService } from 'src/app/services/post/post.service';
   templateUrl: './post-page.component.html'
 })
 export class PostPageComponent implements OnInit {
-
+ 
   post: PostResponse;
   comments: CommentResponse[];
 
