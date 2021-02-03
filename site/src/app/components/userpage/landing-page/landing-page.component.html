@@ -31,10 +31,9 @@
                 <div class="blog-posts-area">
                     <div *ngIf="visible">
                         <app-create-post></app-create-post>
-                    </div>
-                    <div>
-                        <button type="button" class="btn alazea-btn mt-15" (click)="showhideutility()">{{buttonTitle}}</button> 
-                    </div>   
+                    </div>  
+                    
+                    
                     <!-- Post Details Area -->
                     <div class="single-post-details-area">
                         <div class="post-content">
@@ -187,6 +186,11 @@
             <!-- Blog Sidebar Area -->
             <div class="col-12 col-sm-9 col-md-4">
                 <div class="post-sidebar-area">
+                    <div class="single-widget-area">
+                        <div>
+                            <button type="button" class="buttonTwo" (click)="showhideutility()">{{buttonTitle}}</button> 
+                        </div>
+                    </div>
 
                     <!-- ##### Single Widget Area ##### -->
                     <div class="single-widget-area">
