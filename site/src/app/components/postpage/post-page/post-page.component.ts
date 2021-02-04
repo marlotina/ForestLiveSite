@@ -1,8 +1,15 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
-import { CommentResponse, PostResponse } from 'src/app/model/post';
+import { first } from 'rxjs/operators';
+import { CommentResponse } from 'src/app/model/Comment';
+import { PostResponse } from 'src/app/model/post';
+import { AccountService } from 'src/app/services/account/account.service';
+import { CommentService } from 'src/app/services/comment/comment.service';
 import { PostService } from 'src/app/services/post/post.service';
 import { environment } from 'src/environments/environment';
+import { CommonDialogComponent } from '../../shared/common-dialog/common-dialog.component';
 
 @Component({
   selector: 'app-post-page',
@@ -10,27 +17,81 @@ import { environment } from 'src/environments/environment';
 })
 export class PostPageComponent implements OnInit {
  
+  commentForm: FormGroup;
+
+  itemId: string;
   post: PostResponse;
   comments: CommentResponse[];
   imagesPostUrl = environment.imagesPostUrl;
   imagesProfileUrl = environment.imagesProfileUrl;
 
   constructor(private route: ActivatedRoute,
-    private postService: PostService) { }
+    private postService: PostService,
+    private commentService: CommentService,
+    private formBuilder: FormBuilder,
+    private accountService: AccountService,
+    private matDialog: MatDialog) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
-      let postId = params.get("id");
-      this.postService.GetPost(postId).subscribe(
+      this.itemId = params.get("id");
+      this.postService.GetPost(this.itemId).subscribe(
         data =>{ this.post = data; } 
       );
-      this.postService.GetCommentsByPost(postId).subscribe(
+      this.commentService.GetCommentsByPost(this.itemId).subscribe(
         data => { this.comments = data }
       );
     });
+
+    this.commentForm = this.formBuilder.group({
+      text: ['', [Validators.required]],
+      userId: ['', [Validators.required]],
+      itemId: ['', [Validators.required]]
+    });
+
+    this.commentForm.patchValue({
+      'userId': this.accountService.userValue.userName,
+      'itemId': this.itemId
+      });
   }
 
-  AddComment() {
+  onSubmit() {
+    if (this.commentForm.invalid) {
+        return;
+    }
 
+    this.commentService.AddComment(this.commentForm.value)
+        .pipe(first())
+        .subscribe(
+            data => {    
+              this.openCommonModal('user.successSaveUserData');
+            },
+            error => {   
+              if(error.status == "409"){
+                this.openCommonModal('account.conflictNameMessage');
+                this.commentForm.controls.userName.setErrors({'incorrect': true});
+              } else {
+                this.openCommonModal('user.failUserAction');
+              } 
+            });
   }
+
+  openCommonModal(message:string) {
+    const dialogConfig = new MatDialogConfig();
+    
+    dialogConfig.disableClose = false;
+    dialogConfig.id = "modal-component";
+    dialogConfig.height = "200px";
+    dialogConfig.width = "600px";
+    dialogConfig.data = {
+      title: "user.userTitleModal",
+      description: message,
+      acceptButtonText: "general.ok",
+      hideAcceptButton: false,
+      hideCancelButton: true
+    }
+    
+    this.matDialog.open(CommonDialogComponent, dialogConfig);
+  }
+  
 }

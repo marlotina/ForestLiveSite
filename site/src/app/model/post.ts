@@ -36,21 +36,7 @@ export class PostResponse {
     specieConfirmed:boolean;
 }
 
-export class CommentRequest {
-    postId: string;
-    text: string;
-    userId: string;
-    userName: string;
-}
 
-export class CommentResponse {
-    id: string;
-    text: string;
-    creationDate: string;
-    userId: string;
-    userName: string;
-    userImage: string;
-}
 
 export class ImagePostRequest {
     imageBase64: string;

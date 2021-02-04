@@ -78,11 +78,10 @@
                                     <!-- Comment Content -->
                                     <div class="comment-content">
                                         <div class="d-flex align-items-center justify-content-between">
-                                            <a href="{{comment.userId}}"><h5>{{comment.userName}}</h5></a>
-                                            <span class="comment-date">{{comment.creationDate}}</span>
+                                            <a href="{{comment.userId}}"><h5>{{comment.userId}}</h5></a>
+                                            <span class="comment-date">{{comment.createDate}}</span>
                                         </div>
                                         <p>{{comment.text}}</p>
-                                        <a class="active" href="#">Reply</a>
                                     </div>
                                 </div>
                             </li>
@@ -96,21 +95,16 @@
 
                             <div class="contact-form-area">
                                 <!-- Comment Form -->
-                                <form action="#" method="post">
+                                <form [formGroup]="commentForm" (ngSubmit)="onSubmit()">
                                     <div class="row">
                                         <div class="col-12 col-md-6">
                                             <div class="form-group">
-                                                <input type="text" class="form-control" id="contact-name" placeholder="Name">
-                                            </div>
-                                        </div>
-                                        <div class="col-12 col-md-6">
-                                            <div class="form-group">
-                                                <input type="email" class="form-control" id="contact-email" placeholder="Email">
+                                                <input type="text" formControlName="userId" class="form-control" id="contact-name" placeholder="Name" disabled>
                                             </div>
                                         </div>
                                         <div class="col-12">
                                             <div class="form-group">
-                                                <textarea class="form-control" name="message" id="message" cols="30" rows="10" placeholder="Comment"></textarea>
+                                                <textarea class="form-control" formControlName="text" name="text" id="text" cols="30" rows="10" placeholder="Comment"></textarea>
                                             </div>
                                         </div>
                                         <div class="col-12">
