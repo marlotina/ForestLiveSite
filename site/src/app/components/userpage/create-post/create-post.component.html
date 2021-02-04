@@ -17,12 +17,14 @@
                     </div>
 
                     <div class="col-12 col-md-6">
-                        <label for="uploadImage" class="buttonThree" style="text-align: center; padding-top: 5px;">{{ 'user.upload' | translate }}</label>
-                        <input type="file" #file id="uploadImage" (change)="selectFile($event)" />                        
+                        <div class="form-group">
+                            <label for="uploadImage" class="buttonThree" style="text-align: center; padding-top: 5px;">{{ 'user.upload' | translate }}</label>
+                            <input type="file" #file id="uploadImage" (change)="selectFile($event)" />                        
+                        </div>
                     </div>
                     <div class="col-12 col-md-6">
                         <div class="form-group">
-                            <button type="submit" class="buttonThree" (click)="openEditProfile()">editimage</button>
+                            <button type="button" class="buttonThree" *ngIf="visibleEditImage" (click)="openEditProfile()">editimage</button>
                         </div>
                     </div>
 

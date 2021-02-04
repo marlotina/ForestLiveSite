@@ -21,8 +21,6 @@ export class ModalEditImageComponent implements OnInit {
   transform: ImageTransform = {};
 
   @ViewChild('altImageInput') altImageInput: ElementRef<HTMLInputElement>;
-  @ViewChild('imageNameInput') imageNameInput: ElementRef<HTMLInputElement>;
-
   
   constructor(public dialogRef: MatDialogRef<ModalEditImageComponent>,
     @Inject(MAT_DIALOG_DATA) public modalData: any) { 
@@ -86,7 +84,6 @@ export class ModalEditImageComponent implements OnInit {
   saveImage () {
     let imagePost: ImagePostRequest = {
       imageBase64: this.croppedImage,
-      imageName: this.imageNameInput.nativeElement.value,
       altImage: this.altImageInput.nativeElement.value
     };
 

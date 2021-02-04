@@ -53,6 +53,5 @@ export class CommentResponse {
 
 export class ImagePostRequest {
     imageBase64: string;
-    imageName: string;
     altImage: string;
 }

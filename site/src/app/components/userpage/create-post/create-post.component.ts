@@ -15,6 +15,7 @@ import { MatAutocompleteSelectedEvent, MatAutocomplete } from '@angular/material
 import { MatChipInputEvent } from '@angular/material/chips';
 import { startWith } from 'rxjs/operators';
 import { ModalEditImageComponent } from '../modal-edit-image/modal-edit-image.component';
+import { ShowChildFormService } from '../services/show-child-form.service';
 
 class ImageSnippet {
   constructor(public src: string, public file: File) {}
@@ -55,6 +56,7 @@ export class CreatePostComponent implements OnInit {
   imageName="";
   file: any;
   altImage = "";
+  visibleEditImage = false;
 
   @ViewChild('labelInput') labelInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto') matAutocomplete: MatAutocomplete;
@@ -64,7 +66,8 @@ export class CreatePostComponent implements OnInit {
     private postService: PostService, 
     private matDialog: MatDialog,
     private locationService: LocationService,
-    private accountService: AccountService) { 
+    private accountService: AccountService,
+    private showChildFormService: ShowChildFormService) { 
       
       this.setMapMarker();  
       
@@ -92,7 +95,7 @@ export class CreatePostComponent implements OnInit {
 
     this.postForm.patchValue({
       'userId': this.accountService.userValue.id,
-      'userName': this.accountService.userValue.id,
+      'userName': this.accountService.userValue.userName,
       'specieId': "336bfd7f-d88c-4d78-5b3e-08d8096731fb"
       });
   }
@@ -118,6 +121,7 @@ export class CreatePostComponent implements OnInit {
         .subscribe(
             data => {    
               this.openCommonModal('user.successSaveUserData');
+              this.showChildFormService.ShowForm(false);
             },
             error => {   
               if(error.status == "409"){
@@ -150,7 +154,7 @@ export class CreatePostComponent implements OnInit {
       this.msg = "";
       this.url = reader.result; 
     }
-
+    this.visibleEditImage =true;
     this.file = event;
   }
 
@@ -159,8 +163,8 @@ export class CreatePostComponent implements OnInit {
     let results: string;
     dialogConfig.disableClose = false;
     dialogConfig.id = "modal-component";
-    dialogConfig.height = "200px";
-    dialogConfig.width = "600px";
+    dialogConfig.height = "600px";
+    dialogConfig.width = "900px";
     dialogConfig.data = {
       image: this.file    
     }

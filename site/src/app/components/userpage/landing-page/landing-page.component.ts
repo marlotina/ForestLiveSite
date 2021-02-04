@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { ShowChildFormService } from '../services/show-child-form.service';
 
 
 @Component({
@@ -11,8 +13,14 @@ export class LandingPageComponent implements OnInit {
   
   buttonTitle:string = "AddPost"; 
   visible:boolean = false; 
+  subscription: Subscription;
 
-  constructor() { 
+  constructor(private showChildFormService: ShowChildFormService) { 
+
+    this.subscription = this.showChildFormService.visibleFormCreatedPost$.subscribe(
+      value => {
+        this.showhideutility();
+    });
   }
 
   ngOnInit(): void {
@@ -22,4 +30,6 @@ export class LandingPageComponent implements OnInit {
     this.visible = this.visible?false:true; 
     this.buttonTitle = this.visible?"Cancel":"AddPost"; 
   } 
+
+  
 }

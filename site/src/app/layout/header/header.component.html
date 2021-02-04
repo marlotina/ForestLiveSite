@@ -37,7 +37,7 @@
                                 <li><a routerLink="login">{{ 'account.login' | translate }}</a>
                             </ul>
                             <ul [hidden]="!isLogged">
-                                <li><a href="#">{{ user.username }}</a>
+                                <li><a href="#">{{ user.userName }}</a>
                                     <ul class="dropdown">
                                         <li><a routerLink="userProfile" routerLinkActive="active">{{ 'user.profileMenu' | translate }}</a>
                                         <li><a routerLink="#" routerLinkActive="active" (click)="logout()">{{ 'account.logOut' | translate }}</a></li>
