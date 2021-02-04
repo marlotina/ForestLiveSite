@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { PostResponse } from 'src/app/model/post';
 import { AccountService } from 'src/app/services/account/account.service';
 import { PostService } from 'src/app/services/post/post.service';
+import { environment } from 'src/environments/environment';
 import { ShowChildFormService } from '../services/show-child-form.service';
 
 
@@ -22,6 +23,7 @@ export class LandingPageComponent implements OnInit {
   userItems: PostResponse[];
   showAddPostButton = false;
   userId: string;
+  imagesPostUrl = environment.imagesPostUrl;
 
   constructor(private showChildFormService: ShowChildFormService,
     private postService: PostService,
@@ -40,7 +42,7 @@ export class LandingPageComponent implements OnInit {
       );
     });
 
-    this.showAddPostButton = this.userId == this.accountService.userValue.id;
+    this.showAddPostButton = this.userId == this.accountService.userValue.userName;
   }
 
   ngOnInit(): void {
@@ -50,6 +52,4 @@ export class LandingPageComponent implements OnInit {
     this.visible = this.visible?false:true; 
     this.buttonTitle = this.visible?"Cancel":"AddPost"; 
   } 
-
-  
 }

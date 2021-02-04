@@ -21,6 +21,7 @@ export class PostResponse {
     title: string;
     text: string;
     imageUrl: string;
+    altImage: string;
     userId: string;
     likesCount: number;
     commentsCount: number;

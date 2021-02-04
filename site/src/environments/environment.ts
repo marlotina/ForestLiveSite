@@ -6,6 +6,7 @@ export const environment = {
   production: true,
   userApiUrl: 'https://localhost:44374/',
   imagesProfileUrl: 'https://wachingbirdsqa.blob.core.windows.net/profiles/',
+  imagesPostUrl: 'https://birdpostsqa.blob.core.windows.net/posts/',
   postApiUrl: 'https://localhost:44304/',
   googleApiKey: 'AIzaSyAjqE9XcDEwD2SmV9mmf757kYOdwTbJvwQ',
   whiteListDomains:  ["localhost:44374", "localhost:44304"],

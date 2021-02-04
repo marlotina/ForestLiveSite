@@ -34,29 +34,12 @@
                         <div class="post-content">
                             <h4 class="post-title">{{post.title}}</h4>
 
-                            <div class="single_product_desc">
-                                <div class="cart--area d-flex flex-wrap align-items-center">
-                                    <!-- Add to Cart Form -->
-                                    <div class="cart clearfix d-flex align-items-center" method="post">
-                                        <div class="quantity">
-                                            <input type="number" class="qty-text" id="qty" step="1" min="1" max="12" name="quantity" value="1">
-                                        </div>
-                                    </div>
-                                    <!-- Wishlist & Compare -->
-                                    <div class="wishlist-compare d-flex flex-wrap align-items-center">
-                                        <a href="#" class="wishlist-btn ml-15"><i class="icon_heart_alt"></i></a>
-                                        <a href="#" class="compare-btn ml-15"><i class="arrow_left-right_alt"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                            
-
                             <div class="post-meta mb-30">
                                 <a href="#"><i class="fa fa-clock-o" aria-hidden="true"></i> {{post.observationDate}}</a>
-                                <a href="#"><i class="fa fa-user" aria-hidden="true"></i> {{post.userName}}</a>
+                                <a href="/userpage/{{post.userId}}"><i class="fa fa-user" aria-hidden="true"></i> {{post.userId}}</a>
                             </div>
                             <div class="post-thumbnail mb-30">
-                                <img src="{{post.imageUrl}}" alt="">
+                                <img src="{{imagesPostUrl}}{{post.imageUrl}}" alt="{{post.altImage}}">
                             </div>
                             <p>
                                 {{post.text}}
@@ -67,10 +50,9 @@
                     <!-- Post Tags & Share -->
                     <div class="post-tags-share d-flex justify-content-between align-items-center">
                         <!-- Tags -->
-                        Labels
-                        <ol *ngFor="let label of post.labels" class="popular-tags d-flex align-items-center flex-wrap">
-                            
-                            <li><a href="#">{{label}}</a></li>
+                        <ol  class="popular-tags d-flex align-items-center flex-wrap">
+                            <li><span>Tag:</span></li>
+                            <li *ngFor="let label of post.labels"><a href="#">{{label}}</a></li>
                         </ol>
                         <!-- Share -->
                         <div class="post-share">
@@ -91,7 +73,7 @@
                                 <div class="comment-wrapper d-flex">
                                     <!-- Comment Meta -->
                                     <div class="comment-author">
-                                        <img src="{{comment.userImage}}" alt="">
+                                        <img src="{{imagesProfileUrl}}{{comment.userImage}}" alt="">
                                     </div>
                                     <!-- Comment Content -->
                                     <div class="comment-content">
