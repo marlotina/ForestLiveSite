@@ -33,4 +33,11 @@ export class PostService {
         return data;
       }));
   }
+
+  GetCommentsByUser(userId: string){
+    return this.httpClient.get<PostResponse[]>(`${environment.postApiUrl}api/v1/User/GetPosts/?userId=${userId}`)
+      .pipe(map(data => {
+        return data;
+      }));
+  }
 }

@@ -86,7 +86,6 @@ export class CreatePostComponent implements OnInit {
       specieId: [''],
       labels: [null],
       userId: ['', [Validators.required]],
-      userName: ['', [Validators.required]],
       imageData: [''],
       altImage: [''],
       imageName: [''],
@@ -94,8 +93,7 @@ export class CreatePostComponent implements OnInit {
     });
 
     this.postForm.patchValue({
-      'userId': this.accountService.userValue.id,
-      'userName': this.accountService.userValue.userName,
+      'userId': this.accountService.userValue.userName,
       'specieId': "336bfd7f-d88c-4d78-5b3e-08d8096731fb"
       });
   }
