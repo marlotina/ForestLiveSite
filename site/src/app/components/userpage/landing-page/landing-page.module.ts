@@ -21,6 +21,7 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { CreatePostComponent } from '../create-post/create-post.component';
 import { ModalEditImageComponent } from '../modal-edit-image/modal-edit-image.component';
 import { ImageCropperModule } from 'ngx-image-cropper';
+import { AuthorDetailsComponent } from '../author-details/author-details.component';
 
 const materialModules = [
   MatDatepickerModule,
@@ -39,7 +40,8 @@ const materialModules = [
   declarations: [
     LandingPageComponent,
     CreatePostComponent,
-    ModalEditImageComponent
+    ModalEditImageComponent,
+    AuthorDetailsComponent
   ],
   imports: [
     CommonModule,

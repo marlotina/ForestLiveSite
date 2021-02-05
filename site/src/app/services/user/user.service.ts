@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { ForgotRequest } from 'src/app/model/account';
-import { UserRequest, UserResponse, ImageProfileRequest } from 'src/app/model/user';
+import { UserRequest, UserResponse, ImageProfileRequest, UserInfoResponse } from 'src/app/model/user';
 import { map } from 'rxjs/operators';
 
 @Injectable({
@@ -16,6 +16,13 @@ export class UserService {
   
   GetById(id: string) {
     return this.httpClient.get<UserResponse>(`${environment.userApiUrl}api/v1/user/UserGetById?id=${id}`)
+      .pipe(map(user => {
+        return user;
+      }));
+  }
+
+  GetByUserName(userName: string) {
+    return this.httpClient.get<UserInfoResponse>(`${environment.userApiUrl}api/v1/user/UserGetByUserName?userName=${userName}`)
       .pipe(map(user => {
         return user;
       }));

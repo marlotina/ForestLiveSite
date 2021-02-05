@@ -1,0 +1,22 @@
+<!-- ##### Single Widget Area ##### -->
+<div class="single-widget-area">
+    <!-- Author Widget -->
+    <div class="author-widget">
+        <div class="author-thumb-name d-flex align-items-center">
+            <div class="author-thumb">
+                <img src="{{imagesProfileUrl}}{{userInfo.photo}}" alt="image of {{userInfo.userName}}">
+            </div>
+            <div class="author-name">
+                <h5>{{userInfo.userName}}</h5>
+                <p>Register from: {{userInfo.registrationDate}}</p>
+            </div>
+        </div>
+        <p>{{userInfo.description}}</p>
+        <div class="social-info">
+            <a href="https://{{userInfo.facebookUrl}}" *ngIf="showFacebook"  target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+            <a href="https://{{userInfo.twitterUrl}}" *ngIf="showTwitter"  target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+            <a href="https://{{userInfo.instagramUrl}}" *ngIf="showInstagram"  target="_blank"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+            <a href="https://{{userInfo.urlWebSite}}" *ngIf="showWebUrl"  target="_blank"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
+        </div>
+    </div>
+</div>
