@@ -24,6 +24,7 @@ export class LandingPageComponent implements OnInit {
   showAddPostButton = false;
   userId: string;
   imagesPostUrl = environment.imagesPostUrl;
+  hasNotPosts: boolean;
 
   constructor(private showChildFormService: ShowChildFormService,
     private postService: PostService,
@@ -38,10 +39,12 @@ export class LandingPageComponent implements OnInit {
     this.route.paramMap.subscribe(params => {
       this.userId = params.get("id");
       this.postService.GetCommentsByUser(this.userId).subscribe(
-        data =>{ this.userItems = data; } 
+        data =>{ 
+          this.userItems = data;
+          this.hasNotPosts = this.userItems.length == 0; 
+        } 
       );
     });
-
     this.showAddPostButton = this.userId == this.accountService.userValue.userName;
   }
 

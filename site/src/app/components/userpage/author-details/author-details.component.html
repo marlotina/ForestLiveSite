@@ -4,7 +4,7 @@
     <div class="author-widget">
         <div class="author-thumb-name d-flex align-items-center">
             <div class="author-thumb">
-                <img src="{{imagesProfileUrl}}{{userInfo.photo}}" alt="image of {{userInfo.userName}}">
+                <img [src]="userImage" alt="image of {{userInfo.userName}}">
             </div>
             <div class="author-name">
                 <p>{{userInfo.userName}}</p>
@@ -13,10 +13,10 @@
         </div>
         <p>{{userInfo.description}}</p>
         <div class="social-info">
-            <a href="https://{{userInfo.facebookUrl}}" *ngIf="showFacebook"  target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-            <a href="https://{{userInfo.twitterUrl}}" *ngIf="showTwitter"  target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-            <a href="https://{{userInfo.instagramUrl}}" *ngIf="showInstagram"  target="_blank"><i class="fa fa-instagram" aria-hidden="true"></i></a>
-            <a href="https://{{userInfo.urlWebSite}}" *ngIf="showWebUrl"  target="_blank"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
+            <a href="https://{{userInfo.facebookUrl}}" *ngIf="userInfo.facebookUrl != '' && userInfo.facebookUrl != null"  target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+            <a href="https://{{userInfo.twitterUrl}}" *ngIf="userInfo.twitterUrl != '' && userInfo.twitterUrl != null"  target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+            <a href="https://{{userInfo.instagramUrl}}" *ngIf="userInfo.instagramUrl != '' && userInfo.instagramUrl != null"  target="_blank"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+            <a href="https://{{userInfo.urlWebSite}}" *ngIf="userInfo.urlWebSite != '' && userInfo.urlWebSite != null"  target="_blank"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
         </div>
     </div>
 </div>

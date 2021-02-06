@@ -10,12 +10,9 @@ import { environment } from 'src/environments/environment';
 })
 export class AuthorDetailsComponent implements OnInit {
 
-  userInfo: UserInfoResponse;
+  userInfo = new UserInfoResponse();
   imagesProfileUrl = environment.imagesProfileUrl;
-  showFacebook = false;
-  showTwitter= false;
-  showWebUrl = false;
-  showInstagram = false;
+  userImage: string;
 
   constructor(
     private userService: UserService,
@@ -28,11 +25,12 @@ export class AuthorDetailsComponent implements OnInit {
       this.userService.GetByUserName(userId).subscribe(
         data => { 
           this.userInfo = data; 
-          this.showFacebook = data.facebookUrl != "" && data.facebookUrl != null;
-          this.showInstagram = data.instagramUrl != "" && data.instagramUrl != null;
-          this.showTwitter = data.twitterUrl != "" && data.twitterUrl != null;
-          this.showWebUrl = data.urlWebSite != "" && data.urlWebSite != null;
         
+          if(data.photo == '' || data.photo == null){
+            this.userImage = "../../../../assets/img/bg-img/profile.png";
+          } else {
+            this.userImage = `${environment.imagesProfileUrl}${data.photo}`;
+          }
         }
       );
     });

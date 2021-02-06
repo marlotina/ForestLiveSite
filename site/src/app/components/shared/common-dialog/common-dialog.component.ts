@@ -11,8 +11,6 @@ export class CommonDialogComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<CommonDialogComponent>,
       @Inject(MAT_DIALOG_DATA) public modalData: any) {
-
-    console.log(this.modalData);
   }
 
   ngOnInit() { }

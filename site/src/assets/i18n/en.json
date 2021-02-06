@@ -71,6 +71,25 @@
         "titleDeleteModal": "Delete user",
         "userTitleModal": "User save data"
     },
+    "createPost": { 
+        "createPost": "Create a new post",
+        "upload": "upload",
+        "editImage": "Edit your image",
+        "birdSpecie": "bird Specie",
+        "chooseDate": "Choose a date",
+        "title": "Title",
+        "text": "Text",
+        "descriptionLabel": "Descriptions labels",
+        "latitude": "Latitude",
+        "longitude": "Longitude",
+        "createPostBtn": "createPost"
+    },
+    "userPage": {
+        "userWithoutPost": "The user has not birds.",
+        "userPage": "The page user",
+        "addPost": "add post",
+        "cancel": "Cancel"
+    },
     "general": {
         "home": "Home",
         "about": "about us",

@@ -13,24 +13,24 @@ export class PostService {
   }
 
   AddPost(request: PostRequest) {
-    return this.httpClient.post(`${environment.postApiUrl}api/v1/Item/AddItem/`, request);
+    return this.httpClient.post(`${environment.postApiUrl}api/v1/BirdPost/AddPost/`, request);
   }
 
-  GetPost(itemId: string){
-    return this.httpClient.get<PostResponse>(`${environment.postApiUrl}api/v1/Item/GetItem/?itemId=${itemId}`)
+  GetPost(postId: string){
+    return this.httpClient.get<PostResponse>(`${environment.postApiUrl}api/v1/BirdPost/GetItem/?postId=${postId}`)
       .pipe(map(data => {
         return data;
       }));
   }
 
   GetCommentsByUser(userId: string){
-    return this.httpClient.get<PostResponse[]>(`${environment.postApiUrl}api/v1/User/GetPosts/?userId=${userId}`)
+    return this.httpClient.get<PostResponse[]>(`${environment.postApiUrl}api/v1/BirdUser/GetPosts/?userId=${userId}`)
       .pipe(map(data => {
         return data;
       }));
   }
 
-  DeletePost(itemId: string){
-    return this.httpClient.delete(`${environment.postApiUrl}api/v1/Item/DeleteItem/?itemId=${itemId}`);
+  DeletePost(postId: string){
+    return this.httpClient.delete(`${environment.postApiUrl}api/v1/BirdPost/DeletePost/?postId=${postId}`);
   }
 }

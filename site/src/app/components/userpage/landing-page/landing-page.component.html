@@ -2,7 +2,7 @@
 <div class="breadcrumb-area">
     <!-- Top Breadcrumb Area -->
     <div class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center" style="background-image: url(../../../../../assets/img/bg-img/24.jpg);">
-        <h2>SINGLE BLOG POST</h2>
+        <h2>{{ 'userPage.userPage' | translate }}</h2>
     </div>
 
     <div class="container">
@@ -52,6 +52,18 @@
                             </div>
                         </div>
                     </div>
+
+                    
+                    <!-- Post Details Area -->
+                    <div class="single-post-details-area" *ngIf="hasNotPosts">
+                        <div class="leave-comment-area clearfix">
+                            <div class="post-content">
+                                <p>
+                                    {{ 'userPage.userWithoutPost' | translate }}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -60,7 +72,8 @@
                 <div class="post-sidebar-area">
                     <div class="single-widget-area">
                         <div>
-                            <button type="button" class="buttonTwo" *ngIf="showAddPostButton" (click)="showhideutility()">{{buttonTitle}}</button> 
+                            <button type="button" class="buttonTwo" *ngIf="showAddPostButton && !visible" (click)="showhideutility()">{{ 'userPage.addPost' | translate }}</button> 
+                            <button type="button" class="buttonTwo" *ngIf="showAddPostButton && visible" (click)="showhideutility()">{{ 'userPage.cancel' | translate }}</button> 
                         </div>
                     </div>
 

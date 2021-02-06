@@ -12,11 +12,11 @@ export class CommentService {
   constructor(private httpClient: HttpClient) { }  
 
   AddComment(request: CommentRequest){
-    return this.httpClient.post(`${environment.postApiUrl}api/v1/Comment/AddComment/`, request);
+    return this.httpClient.post(`${environment.postApiUrl}api/v1/BirdComment/AddComment/`, request);
   }
 
-  GetCommentsByPost(itemId: string){
-    return this.httpClient.get<CommentResponse[]>(`${environment.postApiUrl}api/v1/Comment/GetComment/?itemId=${itemId}`)
+  GetCommentsByPost(postId: string){
+    return this.httpClient.get<CommentResponse[]>(`${environment.postApiUrl}api/v1/BirdComment/GetComment/?postId=${postId}`)
       .pipe(map(data => {
         return data;
       }));
