@@ -82,13 +82,29 @@
         "descriptionLabel": "Descriptions labels",
         "latitude": "Latitude",
         "longitude": "Longitude",
-        "createPostBtn": "createPost"
+        "createPostBtn": "createPost",
+        "cancel": "Cancel",
+        "saveChanges": "Save changes",
+        "back": "Back",
+        "descriptionImage": "Description of the image",
+        "altImage": "alt image",
+        "resetImage": "Reset image"
     },
     "userPage": {
         "userWithoutPost": "The user has not birds.",
         "userPage": "The page user",
         "addPost": "add post",
         "cancel": "Cancel"
+    },
+    "postPage": {
+        "delete": "Delete",
+        "tags": "Tags",
+        "comments": "comments",
+        "leaveComment": "Leave A Comment",
+        "postComment": "Post Comment",
+        "comment": "Comment",
+        "name": "Name",
+        "userImage": "User profile image"
     },
     "general": {
         "home": "Home",

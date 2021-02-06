@@ -1,7 +1,7 @@
 export class CommentRequest {
     text: string;
     userId: string;
-    itemId: string;
+    postId: string;
 }
 
 export class CommentResponse {
@@ -9,6 +9,6 @@ export class CommentResponse {
     text: string;
     creationDate: string;
     userId: string;
-    itemId: string;
+    postId: string;
     userImage: string;
 }

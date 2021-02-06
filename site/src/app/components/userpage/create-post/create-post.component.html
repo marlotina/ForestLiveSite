@@ -71,7 +71,7 @@
                                 [removable]="removable"
                                 (removed)="remove(label)">
                                 {{label}}
-                                <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                                <mat-icon matChipRemove *ngIf="removable">{{ 'createPost.cancel' | translate }}</mat-icon>
                             </mat-chip>
                             <input
                                 id="labelsPost" 

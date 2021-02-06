@@ -19,13 +19,13 @@ export class PostPageComponent implements OnInit {
  
   commentForm: FormGroup;
 
-  itemId: string;
-  post: PostResponse;
+  postId: string;
+  post = new PostResponse();
   comments: CommentResponse[];
   imagesPostUrl = environment.imagesPostUrl;
   imagesProfileUrl = environment.imagesProfileUrl;
   showOwnerOptions = false;
-  itemLabels: string[];
+  postLabels: string[];
 
   constructor(private route: ActivatedRoute,
     private postService: PostService,
@@ -36,15 +36,15 @@ export class PostPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
-      this.itemId = params.get("id");
-      this.postService.GetPost(this.itemId).subscribe(
+      this.postId = params.get("id");
+      this.postService.GetPost(this.postId).subscribe(
         data => { 
           this.post = data;  
-          this.itemLabels = data.labels;
+          this.postLabels = data.labels;
           this.showOwnerOptions = this.post.userId == this.accountService.userValue.userName;
         } 
       );
-      this.commentService.GetCommentsByPost(this.itemId).subscribe(
+      this.commentService.GetCommentsByPost(this.postId).subscribe(
         data => { this.comments = data }
       );
     });
@@ -52,12 +52,12 @@ export class PostPageComponent implements OnInit {
     this.commentForm = this.formBuilder.group({
       text: ['', [Validators.required]],
       userId: ['', [Validators.required]],
-      itemId: ['', [Validators.required]]
+      postId: ['', [Validators.required]]
     });
 
     this.commentForm.patchValue({
       'userId': this.accountService.userValue.userName,
-      'itemId': this.itemId
+      'postId': this.postId
       });
   }
 
@@ -83,7 +83,7 @@ export class PostPageComponent implements OnInit {
   }
 
   deleteItem(){
-    this.postService.DeletePost(this.post.itemId).subscribe(
+    this.postService.DeletePost(this.post.postId).subscribe(
       data => {
         this.openCommonModal('postdeleted');
         this.accountService.Logout();

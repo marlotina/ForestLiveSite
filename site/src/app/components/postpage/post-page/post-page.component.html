@@ -46,7 +46,7 @@
                                     <mat-menu #menu="matMenu" >
                                         <button mat-menu-item type="button" (click)="deleteItem()">
                                             <mat-icon>delete</mat-icon>
-                                            <span>delete</span>
+                                            <span>{{ 'postPage.delete' | translate }}</span>
                                         </button>
                                     </mat-menu>
                                 </div>
@@ -71,8 +71,8 @@
                     <div class="post-tags-share d-flex justify-content-between align-items-center">
                         <!-- Tags -->
                         <ol  class="popular-tags d-flex align-items-center flex-wrap">
-                            <li><span>Tag:</span></li>
-                            <li *ngFor="let label of itemLabels"><a href="#">{{label}}</a></li>
+                            <li><span>{{ 'postPage.tags' | translate }}:</span></li>
+                            <li *ngFor="let label of postLabels"><a href="#">{{label}}</a></li>
                         </ol>
                         <!-- Share -->
                         <div class="post-share">
@@ -85,7 +85,7 @@
 
                     <!-- Comment Area Start -->
                     <div class="comment_area clearfix">
-                        <h4 class="headline">{{post.commentsCount}} Comments</h4>
+                        <h4 class="headline">{{post.commentsCount}} {{ 'postPage.comments' | translate }}</h4>
 
                         <ol *ngFor="let comment of comments">
                             <!-- Single Comment Area -->
@@ -93,7 +93,7 @@
                                 <div class="comment-wrapper d-flex">
                                     <!-- Comment Meta -->
                                     <div class="comment-author">
-                                        <img src="{{imagesProfileUrl}}{{comment.userImage}}" alt="">
+                                        <img src="{{imagesProfileUrl}}{{comment.userImage}}" alt="{{ 'postPage.userImage' | translate }}">
                                     </div>
                                     <!-- Comment Content -->
                                     <div class="comment-content">
@@ -111,7 +111,7 @@
                     <!-- Leave A Comment -->
                     <div class="leave-comment-area clearfix">
                         <div class="comment-form">
-                            <h4 class="headline">Leave A Comment</h4>
+                            <h4 class="headline">{{ 'postPage.leaveComment' | translate }}</h4>
 
                             <div class="contact-form-area">
                                 <!-- Comment Form -->
@@ -119,16 +119,16 @@
                                     <div class="row">
                                         <div class="col-12 col-md-6">
                                             <div class="form-group">
-                                                <input type="text" formControlName="userId" class="form-control" id="contact-name" placeholder="Name" disabled>
+                                                <input type="text" formControlName="userId" class="form-control" id="contact-name" placeholder="{{ 'postPage.name' | translate }}" disabled>
                                             </div>
                                         </div>
                                         <div class="col-12">
                                             <div class="form-group">
-                                                <textarea class="form-control" formControlName="text" name="text" id="text" cols="30" rows="10" placeholder="Comment"></textarea>
+                                                <textarea class="form-control" formControlName="text" name="text" id="text" cols="30" rows="10" placeholder="{{ 'postPage.comment' | translate }}"></textarea>
                                             </div>
                                         </div>
                                         <div class="col-12">
-                                            <button type="submit" class="btn alazea-btn">Post Comment</button>
+                                            <button type="submit" class="btn alazea-btn">{{ 'postPage.postComment' | translate }}</button>
                                         </div>
                                     </div>
                                 </form>

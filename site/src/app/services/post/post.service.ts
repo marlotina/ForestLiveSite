@@ -17,7 +17,7 @@ export class PostService {
   }
 
   GetPost(postId: string){
-    return this.httpClient.get<PostResponse>(`${environment.postApiUrl}api/v1/BirdPost/GetItem/?postId=${postId}`)
+    return this.httpClient.get<PostResponse>(`${environment.postApiUrl}api/v1/BirdPost/GetPost/?postId=${postId}`)
       .pipe(map(data => {
         return data;
       }));

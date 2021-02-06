@@ -16,6 +16,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatChipsModule } from '@angular/material/chips';
 import {MatSelectModule} from '@angular/material/select';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 const materialModules = [
   MatMenuModule, 
@@ -38,6 +39,7 @@ const materialModules = [
     PostPageRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    SharedModule,
     materialModules
   ]
 })

@@ -18,7 +18,7 @@ export class PostRequest {
 
 export class PostResponse {
     id:string;
-    itemId: string;
+    postId: string;
     title: string;
     text: string;
     imageUrl: string;
@@ -33,7 +33,7 @@ export class PostResponse {
     birdSpecie: string;
     specieId: string;
     userUrl: string;
-    observationDate: Date;
+    observationDate: string;
     specieConfirmed:boolean;
 }
 
