@@ -26,7 +26,7 @@ export class ModalProfileComponent implements OnInit {
   containWithinAspectRatio = false;
   transform: ImageTransform = {};
   nameFile: string;
-  extensionFile: string;
+  showErrorExtensionImage: boolean;
 
   constructor(public dialogRef: MatDialogRef<ModalProfileComponent>,
     private userService: UserService,
@@ -36,9 +36,14 @@ export class ModalProfileComponent implements OnInit {
   }
 
     fileChangeEvent(event: any): void {
-      this.imageChangedEvent = event;
-      this.nameFile = event.currentTarget.files[0].name;
-      this.extensionFile = this.nameFile.split('.')[1];
+      let extensionFile = event.currentTarget.files[0].type;
+      if (extensionFile == "image/jpg" || extensionFile == "image/jpeg" || extensionFile == "image/png") {
+        this.showErrorExtensionImage = false;
+        this.imageChangedEvent = event;
+        this.nameFile = event.currentTarget.files[0].name;  
+      } else {
+        this.showErrorExtensionImage = true;
+      }
     }
 
     imageCropped(event: ImageCroppedEvent) {
@@ -99,7 +104,8 @@ export class ModalProfileComponent implements OnInit {
       let imageProfileRequest: ImageProfileRequest = {
         userId: this.accountService.userValue.id,
         imageBase64: this.croppedImage,
-        imageName: this.nameFile
+        imageName: this.nameFile,
+        userName: this.accountService.userValue.userName
       };
 
       this.userService.UploadImage(imageProfileRequest)
@@ -107,7 +113,7 @@ export class ModalProfileComponent implements OnInit {
           .subscribe(
               data => {
                 //this.loading = false;
-                this.dialogRef.close(`${imageProfileRequest.userId}.${this.extensionFile}`);
+                this.dialogRef.close(`${imageProfileRequest.userName}.jpg`);
               },
               error => {
                 this.dialogRef.close();

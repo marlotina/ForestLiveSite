@@ -93,12 +93,12 @@
                                 <div class="comment-wrapper d-flex">
                                     <!-- Comment Meta -->
                                     <div class="comment-author">
-                                        <img src="{{imagesProfileUrl}}{{comment.userImage}}" alt="{{ 'postPage.userImage' | translate }}">
+                                        <a href="{{comment.userId}}"><img src="{{imagesProfileUrl}}{{comment.userImage}}" alt="{{ 'postPage.userImage' | translate }}"></a>
                                     </div>
                                     <!-- Comment Content -->
                                     <div class="comment-content">
                                         <div class="d-flex align-items-center justify-content-between">
-                                            <a href="{{comment.userId}}"><h5>{{comment.userId}}</h5></a>
+                                            <h5>{{comment.userId}}</h5>
                                             <span class="comment-date">{{comment.createDate}}</span>
                                         </div>
                                         <p>{{comment.text}}</p>

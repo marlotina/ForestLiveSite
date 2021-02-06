@@ -56,5 +56,6 @@ export class ForgotRequest {
 export class ImageProfileRequest {
     imageBase64: string;
     imageName: string;
-    userId: string
+    userId: string;
+    userName: string;
 }

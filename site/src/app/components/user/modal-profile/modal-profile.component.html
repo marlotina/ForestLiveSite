@@ -11,10 +11,16 @@
                   
                     <div class="contact-form-area mb-100">
                         <div class="row">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label class="text-danger" *ngIf="showErrorExtensionImage" >{{ 'user.acceptExtensionFormats' | translate }}</label>                                        
+                                </div>
+                            </div>
+
                             <div class="col-12 col-lg-6">
                                 <div class="form-group">
                                     <label for="uploadImage" class="buttonTwo" style="text-align: center; padding-top: 5px;">{{ 'user.upload' | translate }}</label>
-                                    <input type="file" #file id="uploadImage" (change)="fileChangeEvent($event)" />
+                                    <input type="file" #file id="uploadImage" accept="image/x-png,image/jpeg" (change)="fileChangeEvent($event)" />
                                 </div>
                             </div>
                             <div class="col-12 col-lg-6">
@@ -49,7 +55,7 @@
                                     [transform]="transform"
                                     [alignImage]="'left'"
                                     [style.display]="showCropper ? null : 'none'"
-                                    format="png"
+                                    format="png,jpg"
                                     (imageCropped)="imageCropped($event)"
                                     (imageLoaded)="imageLoaded()"
                                     (cropperReady)="cropperReady($event)"
