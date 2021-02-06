@@ -188,7 +188,7 @@ export class UserProfileComponent implements OnInit {
           },
           error => { 
             this.openCommonModal('user.failUserAction');
-          });;
+          });
       }
     });
 

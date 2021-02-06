@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
-import { PostRequest, PostResponse } from 'src/app/model/post';
+import { DeletePost, PostRequest, PostResponse } from 'src/app/model/post';
 import { map } from 'rxjs/operators';
 
 @Injectable({
@@ -28,5 +28,9 @@ export class PostService {
       .pipe(map(data => {
         return data;
       }));
+  }
+
+  DeletePost(itemId: string){
+    return this.httpClient.delete(`${environment.postApiUrl}api/v1/Item/DeleteItem/?itemId=${itemId}`);
   }
 }

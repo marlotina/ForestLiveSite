@@ -17,7 +17,8 @@ export class PostRequest {
 }
 
 export class PostResponse {
-    id: string;
+    id:string;
+    itemId: string;
     title: string;
     text: string;
     imageUrl: string;
@@ -36,6 +37,11 @@ export class PostResponse {
     specieConfirmed:boolean;
 }
 
+export class DeletePost {
+    itemId: string;
+    userId: string;
+    image: string;
+}
 
 
 export class ImagePostRequest {

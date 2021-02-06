@@ -26,13 +26,33 @@
     
     <div class="container">
         <div class="row justify-content-center">
+            
+              
             <!-- Blog Posts Area -->
             <div class="col-12 col-md-8">
+                
                 <div class="blog-posts-area">
                     <!-- Post Details Area -->
                     <div class="single-post-details-area">
                         <div class="post-content">
-                            <h4 class="post-title">{{post.title}}</h4>
+                            <div class="row">
+                                <div class="col-6 col-md-6">
+                                    <h4 class="post-title">{{post.title}}</h4>
+                                </div>
+                                <div class="col-6 col-md-6 text-right">
+                                    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu" *ngIf="showOwnerOptions">
+                                        <mat-icon>more_vert</mat-icon>
+                                    </button>
+                                    <mat-menu #menu="matMenu" >
+                                        <button mat-menu-item type="button" (click)="deleteItem()">
+                                            <mat-icon>delete</mat-icon>
+                                            <span>delete</span>
+                                        </button>
+                                    </mat-menu>
+                                </div>
+                            </div>
+                            
+                            
 
                             <div class="post-meta mb-30">
                                 <a href="#"><i class="fa fa-clock-o" aria-hidden="true"></i> {{post.observationDate}}</a>
@@ -52,7 +72,7 @@
                         <!-- Tags -->
                         <ol  class="popular-tags d-flex align-items-center flex-wrap">
                             <li><span>Tag:</span></li>
-                            <li *ngFor="let label of post.labels"><a href="#">{{label}}</a></li>
+                            <li *ngFor="let label of itemLabels"><a href="#">{{label}}</a></li>
                         </ol>
                         <!-- Share -->
                         <div class="post-share">
