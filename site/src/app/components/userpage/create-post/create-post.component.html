@@ -14,13 +14,13 @@
                             <div><img [src]="url" *ngIf="url"></div>
                         </div>
                     </div>
-
                     <div class="col-12 col-md-6">
                         <div class="form-group">
                             <label for="uploadImage" class="buttonThree" style="text-align: center; padding-top: 5px;">{{ 'createPost.upload' | translate }}</label>
                             <input type="file" #file id="uploadImage" (change)="selectFile($event)" />                        
                         </div>
                     </div>
+
                     <div class="col-12 col-md-6">
                         <div class="form-group">
                             <button type="button" class="buttonThree" *ngIf="visibleEditImage" (click)="openEditProfile()">{{ 'createPost.editImage' | translate }}</button>
@@ -33,6 +33,7 @@
                             <input type="hidden" id="specieIdPost" formControlName="specieId" >
                         </div>
                     </div>
+
                     <div class="col-12 col-md-6">
                         <div class="form-group">
                             <mat-form-field>
@@ -45,7 +46,10 @@
 
                     <div class="col-12">
                         <div class="form-group">
-                            <input type="text" class="form-control" id="titlePost" placeholder="{{ 'createPost.title' | translate }}" formControlName="title" >
+                            <input type="text" class="form-control" id="titlePost" 
+                                [ngClass]="{ 'is-invalid': submitted && f.title.errors }"
+                                placeholder="{{ 'createPost.title' | translate }}" 
+                                formControlName="title" >
                         </div>
                     </div>
 
@@ -56,6 +60,7 @@
                                 id="textPost" 
                                 cols="30" 
                                 rows="10" 
+                                [ngClass]="{ 'is-invalid': submitted && f.text.errors }"
                                 placeholder="{{ 'createPost.text' | translate }}"
                                 formControlName="text" ></textarea>
                         </div>
@@ -91,7 +96,13 @@
                         </mat-form-field>
                     </div>
 
-                    <div class="col-12 col-md-6">
+                    <div class="col-12">
+                        <div class="form-group">
+                            <button type="button" class="buttonTwo" (click)="showMap()">{{ buttonMapText | translate }}</button> 
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-md-6" *ngIf="visibleMap">
                         <div class="form-group">
                             <input type="text"  
                                 class="form-control" 
@@ -102,11 +113,10 @@
                                 value="{{display?.lat}}" />
                         </div>
                     </div>
-                    <div class="col-12 col-md-6">
+                    <div class="col-12 col-md-6" *ngIf="visibleMap">
                         <div class="form-group">
                             <input type="text" 
                                 class="form-control" 
-                                id="latitudePost" 
                                 placeholder="{{ 'createPost.longitude' | translate }}" 
                                 id="longitudePost"
                                 formControlName="longitude" 
@@ -116,15 +126,18 @@
                     </div>
 
                     <div class="col-12">
-                        <div *ngIf="apiLoaded | async">
-                            <google-map
-                                [center]="center"
-                                [zoom]="zoom"
-                                (mapClick)="addMarker($event)">
-                                    <map-marker *ngFor="let markerPosition of markerPositions" [position]="markerPosition"
-                                        [options]="markerOptions"></map-marker>
-                            </google-map>
+                        <div *ngIf="visibleMap">
+                            <div *ngIf="apiLoaded | async">
+                                <google-map
+                                    [center]="center"
+                                    [options]="mapOptions"
+                                    (mapClick)="addMarker($event)">
+                                        <map-marker *ngFor="let markerPosition of markerPositions" [position]="markerPosition"
+                                            [options]="markerOptions"></map-marker>
+                                </google-map>
+                            </div>
                         </div>
+                        
                     </div>
 
                     <div class="col-12">

@@ -88,7 +88,10 @@
         "back": "Back",
         "descriptionImage": "Description of the image",
         "altImage": "alt image",
-        "resetImage": "Reset image"
+        "resetImage": "Reset image",
+        "showMap": "Show map",
+        "hideMap": "Hide map",
+        "removeMap": "Remove map point"
     },
     "userPage": {
         "userWithoutPost": "The user has not birds.",

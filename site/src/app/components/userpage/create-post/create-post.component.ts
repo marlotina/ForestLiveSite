@@ -35,10 +35,15 @@ export class CreatePostComponent implements OnInit {
   submitted = false;
   
   center: any;
-  zoom = 15;
   markerOptions: google.maps.MarkerOptions = {draggable: false};
   markerPositions: google.maps.LatLngLiteral[] = [];
   display: any;
+  mapOptions: google.maps.MapOptions = {
+    zoom:15,
+    streetViewControl: false,
+    fullscreenControl: false,
+    clickableIcons: false
+ };
 
   labelCtrl = new FormControl();
   visible = true;
@@ -57,6 +62,8 @@ export class CreatePostComponent implements OnInit {
   file: any;
   altImage = "";
   visibleEditImage = false;
+  visibleMap = false;
+  buttonMapText = "createPost.showMap";
 
   @ViewChild('labelInput') labelInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto') matAutocomplete: MatAutocomplete;
@@ -68,9 +75,7 @@ export class CreatePostComponent implements OnInit {
     private locationService: LocationService,
     private accountService: AccountService,
     private showChildFormService: ShowChildFormService) { 
-      
-      this.setMapMarker();  
-      
+            
       this.filteredLabel = this.labelCtrl.valueChanges.pipe(
         //startWith(null),
         map((label: string | null) => label ? this._filter(label) : this.allLabels.slice()));
@@ -110,8 +115,8 @@ export class CreatePostComponent implements OnInit {
       'imageData': this.url,
       'imageName': this.imageName,
       'altImage': this.altImage,
-      'latitude': this.markerPositions[0].lat.toString(),
-      'longitude': this.markerPositions[0].lng.toString()
+      'latitude': this.visibleMap ? this.markerPositions[0].lat.toString() : '',
+      'longitude': this.visibleMap ? this.markerPositions[0].lng.toString() : ''
     });
 
     this.postService.AddPost(this.postForm.value)
@@ -130,6 +135,9 @@ export class CreatePostComponent implements OnInit {
               } 
             });
   }
+
+  get f() { return this.postForm.controls; }
+
 
   /*Image*/
   selectFile(event) {
@@ -156,37 +164,23 @@ export class CreatePostComponent implements OnInit {
     this.file = event;
   }
 
-  openEditProfile() {
-    const dialogConfig = new MatDialogConfig();
-    let results: string;
-    dialogConfig.disableClose = false;
-    dialogConfig.id = "modal-component";
-    dialogConfig.height = "600px";
-    dialogConfig.width = "900px";
-    dialogConfig.data = {
-      image: this.file    
+  /*Map*/
+  showMap(){
+    this.visibleMap = this.visibleMap?false:true; 
+    this.buttonMapText = this.visibleMap ? "createPost.hideMap" : "createPost.removeMap"; 
+    if(this.visibleMap){
+      this.setMapMarker(); 
     }
-    
-    const dialogRef = this.matDialog.open(ModalEditImageComponent, dialogConfig);
-
-    dialogRef.afterClosed().subscribe(result => {
-      this.url = result.imageBase64;
-      this.altImage = result.altImage;
-      if(result.imageName != null && result.imageName != "") {
-        this.imageName = result.imageName;
-      }
-    });
-
-    return results;
   }
 
-  /*Map*/
   loadMap(){
-    this.apiLoaded = this.httpClient.jsonp('https://maps.googleapis.com/maps/api/js?key=' + environment.googleApiKey, 'callback')
-    .pipe(
-      map(() => true),
-      catchError((e) => of(false)),
-    );
+    if(this.apiLoaded == null){
+      this.apiLoaded = this.httpClient.jsonp('https://maps.googleapis.com/maps/api/js?key=' + environment.googleApiKey, 'callback')
+      .pipe(
+        map(() => true),
+        catchError((e) => of(false)),
+      );
+    }
   }
 
   setMapMarker() {
@@ -263,6 +257,30 @@ export class CreatePostComponent implements OnInit {
   }
 
   /*Modal form*/
+  openEditProfile() {
+    const dialogConfig = new MatDialogConfig();
+    let results: string;
+    dialogConfig.disableClose = false;
+    dialogConfig.id = "modal-component";
+    dialogConfig.height = "600px";
+    dialogConfig.width = "900px";
+    dialogConfig.data = {
+      image: this.file    
+    }
+    
+    const dialogRef = this.matDialog.open(ModalEditImageComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.url = result.imageBase64;
+      this.altImage = result.altImage;
+      if(result.imageName != null && result.imageName != "") {
+        this.imageName = result.imageName;
+      }
+    });
+
+    return results;
+  }
+
   openCommonModal(message:string) {
     const dialogConfig = new MatDialogConfig();
     
