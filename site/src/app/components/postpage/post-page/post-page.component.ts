@@ -22,10 +22,10 @@ export class PostPageComponent implements OnInit {
   postId: string;
   post = new PostResponse();
   comments: CommentResponse[];
-  imagesPostUrl = environment.imagesPostUrl;
   imagesProfileUrl = environment.imagesProfileUrl;
   showOwnerOptions = false;
   postLabels: string[];
+  imagePost: string;
 
   constructor(private route: ActivatedRoute,
     private postService: PostService,
@@ -41,11 +41,14 @@ export class PostPageComponent implements OnInit {
         data => { 
           this.post = data;  
           this.postLabels = data.labels;
+          this.imagePost = environment.imagesPostUrl + data.imageUrl;
           this.showOwnerOptions = this.post.userId == this.accountService.userValue.userName;
         } 
       );
       this.commentService.GetCommentsByPost(this.postId).subscribe(
-        data => { this.comments = data }
+        data => { 
+          this.comments = data 
+        }
       );
     });
 
