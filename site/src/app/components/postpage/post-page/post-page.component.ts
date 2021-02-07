@@ -77,6 +77,7 @@ export class PostPageComponent implements OnInit {
         .subscribe(
             data => {    
               this.openCommonModal('user.successSaveUserData');
+              this.comments.push(data);
             },
             error => {   
               if(error.status == "409"){
