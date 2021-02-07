@@ -33,7 +33,7 @@ export class LandingPageComponent implements OnInit {
 
     this.subscription = this.showChildFormService.visibleFormCreatedPost$.subscribe(
       value => {
-        this.showhideutility();
+        this.showhideUtility();
     });
 
     this.route.paramMap.subscribe(params => {
@@ -51,7 +51,7 @@ export class LandingPageComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  showhideutility(){ 
+  showhideUtility(){ 
     this.visible = this.visible ? false : true; 
     this.buttonTitle = this.visible ? "Cancel" : "AddPost"; 
   } 
