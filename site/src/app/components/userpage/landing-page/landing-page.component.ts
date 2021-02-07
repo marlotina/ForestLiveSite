@@ -45,14 +45,14 @@ export class LandingPageComponent implements OnInit {
         } 
       );
     });
-    this.showAddPostButton = this.userId == this.accountService.userValue.userName;
+    this.showAddPostButton = this.accountService.userValue != null && this.userId == this.accountService.userValue.userName;
   }
 
   ngOnInit(): void {
   }
 
   showhideutility(){ 
-    this.visible = this.visible?false:true; 
-    this.buttonTitle = this.visible?"Cancel":"AddPost"; 
+    this.visible = this.visible ? false : true; 
+    this.buttonTitle = this.visible ? "Cancel" : "AddPost"; 
   } 
 }

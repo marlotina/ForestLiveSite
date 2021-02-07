@@ -12,6 +12,7 @@ export class HeaderComponent implements OnInit {
 
   user: User = null;
   isLogged = false;
+  userNameMenu: string;
 
   constructor(private router: Router,
     private route: ActivatedRoute,
@@ -20,6 +21,7 @@ export class HeaderComponent implements OnInit {
     if(this.accountService.user){
       this.accountService.user.subscribe(x => this.user = x);
       this.accountService.isLogged.subscribe(x => this.isLogged = x);
+      this.userNameMenu = this.user != null ? this.user.userName : '';
     }
   }  
 

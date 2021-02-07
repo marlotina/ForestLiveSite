@@ -42,7 +42,7 @@ export class PostPageComponent implements OnInit {
           this.post = data;  
           this.postLabels = data.labels;
           this.imagePost = environment.imagesPostUrl + data.imageUrl;
-          this.showOwnerOptions = this.post.userId == this.accountService.userValue.userName;
+          this.showOwnerOptions = this.accountService.userValue != null && this.post.userId == this.accountService.userValue.userName;
         } 
       );
       this.commentService.GetCommentsByPost(this.postId).subscribe(
@@ -59,7 +59,7 @@ export class PostPageComponent implements OnInit {
     });
 
     this.commentForm.patchValue({
-      'userId': this.accountService.userValue.userName,
+      'userId': this.accountService.userValue != null ? this.accountService.userValue.userName : '',
       'postId': this.postId
       });
   }
