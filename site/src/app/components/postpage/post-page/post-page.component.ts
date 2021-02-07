@@ -26,6 +26,7 @@ export class PostPageComponent implements OnInit {
   showOwnerOptions = false;
   postLabels: string[];
   imagePost: string;
+  isLogged: boolean;
 
   constructor(private route: ActivatedRoute,
     private postService: PostService,
@@ -35,6 +36,8 @@ export class PostPageComponent implements OnInit {
     private matDialog: MatDialog) { }
 
   ngOnInit(): void {
+    let userLoggedInfo = this.accountService.userValue;
+    this.isLogged = userLoggedInfo != null;
     this.route.paramMap.subscribe(params => {
       this.postId = params.get("id");
       this.postService.GetPost(this.postId).subscribe(
@@ -42,7 +45,7 @@ export class PostPageComponent implements OnInit {
           this.post = data;  
           this.postLabels = data.labels;
           this.imagePost = environment.imagesPostUrl + data.imageUrl;
-          this.showOwnerOptions = this.accountService.userValue != null && this.post.userId == this.accountService.userValue.userName;
+          this.showOwnerOptions = userLoggedInfo != null && this.post.userId == userLoggedInfo.userName;
         } 
       );
       this.commentService.GetCommentsByPost(this.postId).subscribe(

@@ -109,7 +109,7 @@
                     </div>
 
                     <!-- Leave A Comment -->
-                    <div class="leave-comment-area clearfix">
+                    <div class="leave-comment-area clearfix" *ngIf="isLogged">
                         <div class="comment-form">
                             <h4 class="headline">{{ 'postPage.leaveComment' | translate }}</h4>
 
