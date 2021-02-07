@@ -3,9 +3,6 @@
         <h4 class="headline">{{ 'createPost.createPost' | translate }}</h4>
         <div class="contact-form-area">
             <form [formGroup]="postForm" (ngSubmit)="onSubmit()" class="ng-untouched ng-pristine ng-valid">
-
-                <input type="hidden" id="userIdPost" formControlName="userId" >
-
                 <div class="row">
                     
                     <div class="col-12">
@@ -76,7 +73,7 @@
                                 [removable]="removable"
                                 (removed)="remove(label)">
                                 {{label}}
-                                <mat-icon matChipRemove *ngIf="removable">{{ 'createPost.cancel' | translate }}</mat-icon>
+                                <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
                             </mat-chip>
                             <input
                                 id="labelsPost" 

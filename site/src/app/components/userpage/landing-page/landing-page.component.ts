@@ -15,12 +15,13 @@ import { ShowChildFormService } from '../services/show-child-form.service';
 })
 
 export class LandingPageComponent implements OnInit {
+  
   submitted = false;
   
-  buttonTitle:string = "AddPost"; 
+  buttonTitle:string = "userPage.addPost"; 
   visible:boolean = false; 
   subscription: Subscription;
-  userItems: PostResponse[];
+  userPosts: PostResponse[];
   showAddPostButton = false;
   userId: string;
   imagesPostUrl = environment.imagesPostUrl;
@@ -31,17 +32,18 @@ export class LandingPageComponent implements OnInit {
     private route: ActivatedRoute,
     private accountService: AccountService) { 
 
-    this.subscription = this.showChildFormService.visibleFormCreatedPost$.subscribe(
-      value => {
-        this.showhideUtility();
+    this.subscription = this.showChildFormService.createdPost$.subscribe(
+      data => {
+        this.userPosts = [data].concat(this.userPosts)
+        this.showHideFormPost();
     });
 
     this.route.paramMap.subscribe(params => {
       this.userId = params.get("id");
       this.postService.GetCommentsByUser(this.userId).subscribe(
         data =>{ 
-          this.userItems = data;
-          this.hasNotPosts = this.userItems.length == 0; 
+          this.userPosts = data;
+          this.hasNotPosts = this.userPosts.length == 0; 
         } 
       );
     });
@@ -51,8 +53,8 @@ export class LandingPageComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  showhideUtility(){ 
+  showHideFormPost(){ 
     this.visible = this.visible ? false : true; 
-    this.buttonTitle = this.visible ? "Cancel" : "AddPost"; 
+    this.buttonTitle = this.visible ? "userPage.cancel" : "userPage.addPost"; 
   } 
 }

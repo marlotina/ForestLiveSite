@@ -124,7 +124,7 @@ export class CreatePostComponent implements OnInit {
         .subscribe(
             data => {    
               this.openCommonModal('user.successSaveUserData');
-              this.showChildFormService.ShowForm(false);
+              this.showChildFormService.PostCreated(data);
             },
             error => {   
               if(error.status == "409"){
@@ -166,7 +166,7 @@ export class CreatePostComponent implements OnInit {
 
   /*Map*/
   showMap(){
-    this.visibleMap = this.visibleMap?false:true; 
+    this.visibleMap = this.visibleMap ? false : true; 
     this.buttonMapText = this.visibleMap ? "createPost.hideMap" : "createPost.removeMap"; 
     if(this.visibleMap){
       this.setMapMarker(); 

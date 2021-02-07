@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router, Routes } from '@angular/router';
 import { first } from 'rxjs/operators';
 import { CommentResponse } from 'src/app/model/Comment';
-import { DeletePost, PostResponse } from 'src/app/model/post';
+import { PostResponse } from 'src/app/model/post';
 import { AccountService } from 'src/app/services/account/account.service';
 import { CommentService } from 'src/app/services/comment/comment.service';
 import { PostService } from 'src/app/services/post/post.service';
@@ -28,17 +28,18 @@ export class PostPageComponent implements OnInit {
   imagePost: string;
   isLogged: boolean;
 
-  constructor(private route: ActivatedRoute,
+  constructor(private activateRoute: ActivatedRoute,
     private postService: PostService,
     private commentService: CommentService,
     private formBuilder: FormBuilder,
     private accountService: AccountService,
-    private matDialog: MatDialog) { }
+    private matDialog: MatDialog,
+    private route: Router) { }
 
   ngOnInit(): void {
     let userLoggedInfo = this.accountService.userValue;
     this.isLogged = userLoggedInfo != null;
-    this.route.paramMap.subscribe(params => {
+    this.activateRoute.paramMap.subscribe(params => {
       this.postId = params.get("id");
       this.postService.GetPost(this.postId).subscribe(
         data => { 
@@ -93,7 +94,7 @@ export class PostPageComponent implements OnInit {
     this.postService.DeletePost(this.post.postId).subscribe(
       data => {
         this.openCommonModal('postdeleted');
-        this.accountService.Logout();
+        this.route.navigate(['/userpage/' + this.post.userId]);
       },
       error => { 
         this.openCommonModal('failpostdelete');

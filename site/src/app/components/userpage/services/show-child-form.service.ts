@@ -1,20 +1,21 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
+import { PostResponse } from 'src/app/model/post';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ShowChildFormService {
   // Observable string streams
-  private visibleFormCreatedPost = new Subject<boolean>();
+  private createdPost = new Subject<PostResponse>();
   
   constructor() { }
   
   // Observable string sources
-  visibleFormCreatedPost$ = this.visibleFormCreatedPost.asObservable();
+  createdPost$ = this.createdPost.asObservable();
 
   // Service message commands
-  ShowForm(show: boolean) {
-    this.visibleFormCreatedPost.next(show);
+  PostCreated(postResponse: PostResponse) {
+    this.createdPost.next(postResponse);
   }
 }

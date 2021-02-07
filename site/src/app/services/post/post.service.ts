@@ -13,7 +13,10 @@ export class PostService {
   }
 
   AddPost(request: PostRequest) {
-    return this.httpClient.post(`${environment.postApiUrl}api/v1/BirdPost/AddPost/`, request);
+    return this.httpClient.post<PostResponse>(`${environment.postApiUrl}api/v1/BirdPost/AddPost/`, request)
+      .pipe(map(data => {
+        return data;
+      }));
   }
 
   GetPost(postId: string){

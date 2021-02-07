@@ -33,7 +33,7 @@
                         <app-create-post></app-create-post>
                     </div>  
                     
-                    <div *ngFor="let post of userItems">
+                    <div *ngFor="let post of userPosts">
                         <!-- Post Details Area -->
                         <div class="single-post-details-area">
                             <div class="post-content">
@@ -72,8 +72,7 @@
                 <div class="post-sidebar-area">
                     <div class="single-widget-area">
                         <div>
-                            <button type="button" class="buttonTwo" *ngIf="showAddPostButton && !visible" (click)="showhideUtility()">{{ 'userPage.addPost' | translate }}</button> 
-                            <button type="button" class="buttonTwo" *ngIf="showAddPostButton && visible" (click)="showhideUtility()">{{ 'userPage.cancel' | translate }}</button> 
+                            <button type="button" class="buttonTwo" *ngIf="showAddPostButton" (click)="showHideFormPost()">{{ buttonTitle | translate }}</button> 
                         </div>
                     </div>
 
