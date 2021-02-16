@@ -25,116 +25,23 @@
             <div class="col-12 col-md-8">
                 <div class="row">
 
-                    <!-- Single Blog Post Area -->
-                    <div class="col-12 col-lg-6">
-                        <div class="single-blog-post mb-50">
-                            <div class="post-thumbnail mb-30">
-                                <a href="single-post.html"><img src="assets/img/bg-img/6.jpg" alt=""></a>
-                            </div>
-                            <div class="post-content">
-                                <a href="single-post.html" class="post-title">
-                                    <h5>Garden designers across the country forecast ideas shaping the gardening world in 2018</h5>
-                                </a>
-                                <div class="post-meta">
-                                    <a href="#"><i class="fa fa-clock-o" aria-hidden="true"></i> 20 Jun 2018</a>
-                                    <a href="#"><i class="fa fa-user" aria-hidden="true"></i> Alan Jackson</a>
+                    <div *ngFor="let post of pendingPosts">
+                        <!-- Single Blog Post Area -->
+                        <div class="col-12 col-lg-6">
+                            <div class="single-blog-post mb-50">
+                                <div class="post-thumbnail mb-30">
+                                    <a href="/post/{{post.postId}}"><img src="{{imagesPostUrl}}{{post.imageUrl}}" alt="{{post.altImage}}"></a>
                                 </div>
-                                <p class="post-excerpt">Integer luctus diam ac scerisque consectetur. Vimus ottawas nec lacus sit amet. Aenean interdus mid vitae.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Single Blog Post Area -->
-                    <div class="col-12 col-lg-6">
-                        <div class="single-blog-post mb-50">
-                            <div class="post-thumbnail mb-30">
-                                <a href="single-post.html"><img src="assets/img/bg-img/7.jpg" alt=""></a>
-                            </div>
-                            <div class="post-content">
-                                <a href="single-post.html" class="post-title">
-                                    <h5>2018 Midwest Tree and Shrub Conference: Resilient Plants for a Lasting Landscape</h5>
-                                </a>
-                                <div class="post-meta">
-                                    <a href="#"><i class="fa fa-clock-o" aria-hidden="true"></i> 20 Jun 2018</a>
-                                    <a href="#"><i class="fa fa-user" aria-hidden="true"></i> Christina Aguilera</a>
+                                <div class="post-content">
+                                    <a href="/post/{{post.postId}}" class="post-title">
+                                        <h5>{{post.title}}</h5>
+                                    </a>
+                                    <div class="post-meta">
+                                        <a href="#"><i class="fa fa-clock-o" aria-hidden="true"></i> {{post.observationDate}}</a>
+                                        <a href="/userpage/{{post.userId}}"><i class="fa fa-user" aria-hidden="true"></i> {{post.userId}}</a>
+                                    </div>
+                                    <p class="post-excerpt">{{post.birdSpecie}}</p>
                                 </div>
-                                <p class="post-excerpt">Integer luctus diam ac scerisque consectetur. Vimus ottawas nec lacus sit amet. Aenean interdus mid vitae.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Single Blog Post Area -->
-                    <div class="col-12 col-lg-6">
-                        <div class="single-blog-post mb-50">
-                            <div class="post-thumbnail mb-30">
-                                <a href="single-post.html"><img src="assets/img/bg-img/8.jpg" alt=""></a>
-                            </div>
-                            <div class="post-content">
-                                <a href="single-post.html" class="post-title">
-                                    <h5>The summer coming up, it’s time for both us and the flowers to soak up the sunshine</h5>
-                                </a>
-                                <div class="post-meta">
-                                    <a href="#"><i class="fa fa-clock-o" aria-hidden="true"></i> 19 Jun 2018</a>
-                                    <a href="#"><i class="fa fa-user" aria-hidden="true"></i> Mason Jenkins</a>
-                                </div>
-                                <p class="post-excerpt">Integer luctus diam ac scerisque consectetur. Vimus ottawas nec lacus sit amet. Aenean interdus mid vitae.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Single Blog Post Area -->
-                    <div class="col-12 col-lg-6">
-                        <div class="single-blog-post mb-50">
-                            <div class="post-thumbnail mb-30">
-                                <a href="single-post.html"><img src="assets/img/bg-img/6.jpg" alt=""></a>
-                            </div>
-                            <div class="post-content">
-                                <a href="single-post.html" class="post-title">
-                                    <h5>Garden designers across the country forecast ideas shaping the gardening world in 2018</h5>
-                                </a>
-                                <div class="post-meta">
-                                    <a href="#"><i class="fa fa-clock-o" aria-hidden="true"></i> 20 Jun 2018</a>
-                                    <a href="#"><i class="fa fa-user" aria-hidden="true"></i> Alan Jackson</a>
-                                </div>
-                                <p class="post-excerpt">Integer luctus diam ac scerisque consectetur. Vimus ottawas nec lacus sit amet. Aenean interdus mid vitae.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Single Blog Post Area -->
-                    <div class="col-12 col-lg-6">
-                        <div class="single-blog-post mb-50">
-                            <div class="post-thumbnail mb-30">
-                                <a href="single-post.html"><img src="assets/img/bg-img/7.jpg" alt=""></a>
-                            </div>
-                            <div class="post-content">
-                                <a href="single-post.html" class="post-title">
-                                    <h5>2018 Midwest Tree and Shrub Conference: Resilient Plants for a Lasting Landscape</h5>
-                                </a>
-                                <div class="post-meta">
-                                    <a href="#"><i class="fa fa-clock-o" aria-hidden="true"></i> 20 Jun 2018</a>
-                                    <a href="#"><i class="fa fa-user" aria-hidden="true"></i> Christina Aguilera</a>
-                                </div>
-                                <p class="post-excerpt">Integer luctus diam ac scerisque consectetur. Vimus ottawas nec lacus sit amet. Aenean interdus mid vitae.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Single Blog Post Area -->
-                    <div class="col-12 col-lg-6">
-                        <div class="single-blog-post mb-50">
-                            <div class="post-thumbnail mb-30">
-                                <a href="single-post.html"><img src="assets/img/bg-img/8.jpg" alt=""></a>
-                            </div>
-                            <div class="post-content">
-                                <a href="single-post.html" class="post-title">
-                                    <h5>The summer coming up, it’s time for both us and the flowers to soak up the sunshine</h5>
-                                </a>
-                                <div class="post-meta">
-                                    <a href="#"><i class="fa fa-clock-o" aria-hidden="true"></i> 19 Jun 2018</a>
-                                    <a href="#"><i class="fa fa-user" aria-hidden="true"></i> Mason Jenkins</a>
-                                </div>
-                                <p class="post-excerpt">Integer luctus diam ac scerisque consectetur. Vimus ottawas nec lacus sit amet. Aenean interdus mid vitae.</p>
                             </div>
                         </div>
                     </div>
