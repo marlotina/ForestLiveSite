@@ -14,8 +14,8 @@ const routes: Routes = [
       canActivate: [AuthGuard]  },
   { path: 'userpage/:id', loadChildren: () => import('./components/userpage/landing-page/landing-page.module').then(m => m.LandingPageModule) },
   { path: 'post/:id', loadChildren: () => import('./components/postpage/post-page/post-page.module').then(m => m.PostPageModule) },
-  { path: 'withoutspecie', loadChildren: () => import('./component/pendings/without-specie-page/without-specie-page.module').then(m => m.WithoutSpeciePageModule) },
-  { path: 'confirmspecie', loadChildren: () => import('./component/pendings/confirm-page/confirm-page.module').then(m => m.ConfirmPageModule) },
+  { path: 'withoutspecie', loadChildren: () => import('./components/pendings/without-specie-page/without-specie-page.module').then(m => m.WithoutSpeciePageModule) },
+  { path: 'confirmspecie', loadChildren: () => import('./components/pendings/confirm-page/confirm-page.module').then(m => m.ConfirmPageModule) },
   { path: '**', loadChildren: () => import('./components/home/home.module').then(m => m.HomeModule) },
   
 ]
