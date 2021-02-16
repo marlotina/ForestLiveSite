@@ -8,7 +8,7 @@ export const environment = {
   imagesProfileUrl: 'https://birdpostsqa.blob.core.windows.net/profiles/',
   imagesPostUrl: 'https://birdpostsqa.blob.core.windows.net/posts/',
   postApiUrl: 'https://localhost:44304/',
-  pendingApiURl: 'https://localhost:44383/',
+  pendingApiURl: 'https://localhost:44360/',
   googleApiKey: 'AIzaSyAjqE9XcDEwD2SmV9mmf757kYOdwTbJvwQ',
   whiteListDomains:  ["localhost:44374", "localhost:44304"],
   blacklistedRoutes: []
