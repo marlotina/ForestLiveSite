@@ -48,3 +48,19 @@ export class ImagePostRequest {
     imageBase64: string;
     altImage: string;
 }
+
+export class PostPendingResponse {
+    id:string;
+    postId: string;
+    title: string;
+    imageUrl: string;
+    altImage: string;
+    userId: string;
+    commentsCount: number;
+    userName: string;
+    birdSpecie: string;
+    specieId: string;
+    userUrl: string;
+    observationDate: string;
+    creationDate: Date;
+}
