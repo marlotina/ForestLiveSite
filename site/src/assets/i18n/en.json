@@ -116,6 +116,8 @@
         "myPage": "My page",
         "cancel": "Cancel",
         "delete": "Delete",
-        "ok": "Ok"
+        "ok": "Ok",
+        "toConfirm":"Confirm species",
+        "pendingSpecie":"Help with the specie"
     }
 }
