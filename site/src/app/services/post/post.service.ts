@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
-import { DeletePost, PostRequest, PostResponse } from 'src/app/model/post';
+import { PostRequest, PostResponse } from 'src/app/model/post';
 import { map } from 'rxjs/operators';
 
 @Injectable({
@@ -26,8 +26,8 @@ export class PostService {
       }));
   }
 
-  GetCommentsByUser(userId: string){
-    return this.httpClient.get<PostResponse[]>(`${environment.postApiUrl}api/v1/BirdUser/GetPosts/?userId=${userId}`)
+  GetPostsByUser(userId: string){
+    return this.httpClient.get<PostResponse[]>(`${environment.userPostApiUrl}api/v1/BirdUser/GetPosts/?userId=${userId}`)
       .pipe(map(data => {
         return data;
       }));

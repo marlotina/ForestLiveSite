@@ -15,7 +15,7 @@ export class WithoutSpeciePageComponent implements OnInit {
   constructor(private pendingService: PendingService) { }
 
   ngOnInit(): void {
-    this.pendingService.GetToConfirm().subscribe(
+    this.pendingService.GetWithiutSpecie().subscribe(
       data =>{ 
         this.pendingPosts = data;
       } 

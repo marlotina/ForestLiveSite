@@ -40,7 +40,7 @@ export class LandingPageComponent implements OnInit {
 
     this.route.paramMap.subscribe(params => {
       this.userId = params.get("id");
-      this.postService.GetCommentsByUser(this.userId).subscribe(
+      this.postService.GetPostsByUser(this.userId).subscribe(
         data =>{ 
           this.userPosts = data;
           this.hasNotPosts = this.userPosts.length == 0; 

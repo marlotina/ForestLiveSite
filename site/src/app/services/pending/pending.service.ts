@@ -13,14 +13,14 @@ export class PendingService {
   }
 
   GetToConfirm(){
-    return this.httpClient.get<PostPendingResponse[]>(`${environment.pendingApiURl}api/v1/PendingBirds/GetToConfirm/`)
+    return this.httpClient.get<PostPendingResponse[]>(`${environment.pendingApiUrl}api/v1/PendingBirds/GetToConfirm/`)
       .pipe(map(data => {
         return data;
       }));
   }
 
   GetWithiutSpecie(){
-    return this.httpClient.get<PostPendingResponse[]>(`${environment.pendingApiURl}api/v1/PendingBirds/GetWithiutSpecie/`)
+    return this.httpClient.get<PostPendingResponse[]>(`${environment.pendingApiUrl}api/v1/PendingBirds/GetWithiutSpecie/`)
       .pipe(map(data => {
         return data;
       }));
