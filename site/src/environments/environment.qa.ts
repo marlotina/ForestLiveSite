@@ -1,8 +1,12 @@
 export const environment = {
   production: true,
-  userApiUrl: 'https://wbuserapiqa.azurewebsites.net/',
-  imagesProfileUrl: 'https://wachingbirdsqa.blob.core.windows.net/profiles/',
+  userApiUrl: 'https://userapiqa.azurewebsites.net/',
+  imagesProfileUrl: 'https://birdpostsqa.blob.core.windows.net/profiles/',
+  imagesPostUrl: 'https://birdpostsqa.blob.core.windows.net/posts/',
+  postApiUrl: 'https://postapiqa.azurewebsites.net/',
+  userPostApiUrl: 'https://userpostapiqa.azurewebsites.net/',
+  pendingApiUrl: 'https://pendingapiqa.azurewebsites.net/',
   googleApiKey: 'AIzaSyAjqE9XcDEwD2SmV9mmf757kYOdwTbJvwQ',
-  whiteListDomains:  ["wbuserapiqa.azurewebsites.net"],
+  whiteListDomains:  ["localhost:44374", "localhost:44304"],
   blacklistedRoutes: []
-};
+}
