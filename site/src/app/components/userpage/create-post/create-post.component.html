@@ -92,16 +92,17 @@
                                 placeholder="{{ 'createPost.descriptionLabel' | translate }}" 
                                 #labelInput
                                 [formControl]="labelCtrl"
-                                [matAutocomplete]="auto"
                                 [matChipInputFor]="chipList"
                                 [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                                 (matChipInputTokenEnd)="add($event)">
                             </mat-chip-list>
-                            <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                            <!--
+                                [matAutocomplete]="auto"
+                                <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
                             <mat-option *ngFor="let label of filteredLabel | async" [value]="label">
                                 {{label}}
                             </mat-option>
-                            </mat-autocomplete>
+                            </mat-autocomplete>-->
                         </mat-form-field>
                     </div>
                     

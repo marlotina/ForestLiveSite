@@ -52,7 +52,7 @@ export class CreatePostComponent implements OnInit {
   selectable = true;
   removable = true;
   separatorKeysCodes: number[] = [ENTER, COMMA];
-  filteredLabel: Observable<string[]>;
+  //filteredLabel: Observable<string[]>;
   labels: string[] = [];
   allLabels: string[] = ['nature', 'birds', 'free', 'winter', 'river'];
   
@@ -83,9 +83,9 @@ export class CreatePostComponent implements OnInit {
     private showChildFormService: ShowChildFormService,
     private autocompleteService: AutocompleteService) { 
             
-      this.filteredLabel = this.labelCtrl.valueChanges.pipe(
-        //startWith(null),
-        map((label: string | null) => label ? this._filter(label) : this.allLabels.slice()));
+      //this.filteredLabel = this.labelCtrl.valueChanges.pipe(
+      //  //startWith(null),
+      //  map((label: string | null) => label ? this._filter(label) : this.allLabels.slice()));
   }  
 
   ngOnInit(): void {
@@ -107,7 +107,6 @@ export class CreatePostComponent implements OnInit {
     this.postForm.patchValue({
       'userId': this.accountService.userValue.userName
       });
-
 
       this.filteredSpecies = this.autocompleteControl.valueChanges.pipe(
         startWith(''),
@@ -132,11 +131,7 @@ export class CreatePostComponent implements OnInit {
   getSpecies(value: string): Observable<AutocompleteResponse[]> {
     if(value != '') {
       return this.autocompleteService.GetSpeciesByKeys(value.toLowerCase())
-        .pipe(
-          map(
-            results => results
-            ),
-          // catch errors
+        .pipe(map(results => results),
           catchError(_ => {
             return of(null);
           }
@@ -145,7 +140,7 @@ export class CreatePostComponent implements OnInit {
     }
 
     return null;
-}
+  }
 
   onSubmit() {
     this.submitted = true; 
