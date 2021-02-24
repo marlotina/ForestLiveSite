@@ -116,10 +116,8 @@ export class CreatePostComponent implements OnInit {
         // use switch map so as to cancel previous subscribed events, before creating new once
         switchMap(value => {
           if (value !== '') {
-            // lookup from github
             return this.getSpecies(value);
           } else {
-            // if no value is present, return null
             return of(null);
           }
         })
@@ -132,19 +130,20 @@ export class CreatePostComponent implements OnInit {
   }
 
   getSpecies(value: string): Observable<AutocompleteResponse[]> {
-    if(value != ''){
-      return this.autocompleteService.GetSpeciesByKeys(value.toLowerCase()).pipe(
-        // map the item property of the github results as our return object
-        map(
-          results => results
-          ),
-        // catch errors
-        catchError(_ => {
-          return of(null);
-        })
+    if(value != '') {
+      return this.autocompleteService.GetSpeciesByKeys(value.toLowerCase())
+        .pipe(
+          map(
+            results => results
+            ),
+          // catch errors
+          catchError(_ => {
+            return of(null);
+          }
+        )
       );
     }
-    
+
     return null;
 }
 
