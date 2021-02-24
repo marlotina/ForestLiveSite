@@ -31,7 +31,6 @@
                                     <input type="text" aria-label="Number" matInput  [matAutocomplete]="autoBird"
                                         [formControl]="autocompleteControl"  formControlName="specieName"   
                                         id="specieNamePost" placeholder="{{ 'createPost.birdSpecie' | translate }}">
-                                    
                                     <mat-autocomplete #autoBird="matAutocomplete" (optionSelected)='selectSpecie($event.option.value)'>
                                         <mat-option *ngFor="let option of filteredSpecies | async" [value]="option">
                                             {{option.nameComplete}}

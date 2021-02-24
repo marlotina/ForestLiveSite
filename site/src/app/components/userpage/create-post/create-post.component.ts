@@ -132,16 +132,20 @@ export class CreatePostComponent implements OnInit {
   }
 
   getSpecies(value: string): Observable<AutocompleteResponse[]> {
-    return this.autocompleteService.GetSpeciesByKeys(value.toLowerCase()).pipe(
-      // map the item property of the github results as our return object
-      map(
-        results => results
-        ),
-      // catch errors
-      catchError(_ => {
-        return of(null);
-      })
-    );
+    if(value != ''){
+      return this.autocompleteService.GetSpeciesByKeys(value.toLowerCase()).pipe(
+        // map the item property of the github results as our return object
+        map(
+          results => results
+          ),
+        // catch errors
+        catchError(_ => {
+          return of(null);
+        })
+      );
+    }
+    
+    return null;
 }
 
   onSubmit() {
