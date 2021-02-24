@@ -9,6 +9,7 @@ export const environment = {
   imagesPostUrl: 'https://birdpostsqa.blob.core.windows.net/posts/',
   postApiUrl: 'https://localhost:44304/',
   birdApiUrl: 'https://localhost:44383/',
+  //birdApiUrl: 'https://birdsapiqa.azurewebsites.net/',
   userPostApiUrl: 'https://localhost:44352/',
   pendingApiUrl: 'https://localhost:44360/',
   googleApiKey: 'AIzaSyAjqE9XcDEwD2SmV9mmf757kYOdwTbJvwQ',

@@ -32,7 +32,7 @@
                                         [formControl]="autocompleteControl"  formControlName="specieName"   
                                         id="specieNamePost" placeholder="{{ 'createPost.birdSpecie' | translate }}">
                                     <mat-autocomplete #autoBird="matAutocomplete" (optionSelected)='selectSpecie($event.option.value)'>
-                                        <mat-option *ngFor="let option of filteredSpecies | async" [value]="option">
+                                        <mat-option *ngFor="let option of filteredSpecies | async" [value]="option" (change)="toggleSelection(option)" (click)="$event.stopPropagation()">
                                             {{option.nameComplete}}
                                         </mat-option>
                                     </mat-autocomplete>

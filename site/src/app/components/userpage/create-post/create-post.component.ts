@@ -69,7 +69,6 @@ export class CreatePostComponent implements OnInit {
 
   filteredSpecies: Observable<AutocompleteResponse[]>;
   autocompleteControl = new FormControl();
-
   @ViewChild('labelInput') labelInput: ElementRef<HTMLInputElement>;
   @ViewChild('specieNamePost') specieNamePost: ElementRef<HTMLInputElement>;
   @ViewChild('auto') matAutocomplete: MatAutocomplete;
@@ -114,23 +113,33 @@ export class CreatePostComponent implements OnInit {
         debounceTime(300),
         // use switch map so as to cancel previous subscribed events, before creating new once
         switchMap(value => {
-          if (value !== '') {
+          if (value !== '' && value.nameComplete == null) {
             return this.getSpecies(value);
           } else {
-            return of(null);
+            return of([]);
           }
         })
       );
   }
 
   selectSpecie(item: AutocompleteResponse){
-    this.postForm.controls['specieName'].setValue(item.nameComplete)
-    this.postForm.controls['specieId'].setValue(item.specieId)
+    this.postForm.controls['specieName'].setValue(item.nameComplete);
+    this.postForm.controls['specieId'].setValue(item.specieId);
   }
 
-  getSpecies(value: string): Observable<AutocompleteResponse[]> {
+  optionClicked(event: Event, specie: AutocompleteResponse) {
+    event.stopPropagation();
+    //this.toggleSelection(specie);
+  }
+
+  toggleSelection(user: AutocompleteResponse) {
+    var wop = user;
+    
+  }
+
+  getSpecies(value: any): Observable<AutocompleteResponse[]> {
     if(value != '') {
-      return this.autocompleteService.GetSpeciesByKeys(value.toLowerCase())
+      return this.autocompleteService.GetSpeciesByKeys(value.toLowerCase(), localStorage.getItem('locale'))
         .pipe(map(results => results),
           catchError(_ => {
             return of(null);
