@@ -22,11 +22,24 @@
                         <div class="form-group">
                             <button type="button" class="buttonThree" *ngIf="visibleEditImage" (click)="openEditProfile()">{{ 'createPost.editImage' | translate }}</button>
                         </div>
-                    </div>
+                    </div>                    
 
                     <div class="col-12 col-md-6">
                         <div class="form-group">
-                            <input type="text" class="form-control" formControlName="specieName" id="specieNamePost" placeholder="{{ 'createPost.birdSpecie' | translate }}">
+                            <div class="autocomplete-form">
+                                <mat-form-field class="autocomplete-full-width">
+                                    <input type="text" aria-label="Number" matInput  [matAutocomplete]="autoBird"
+                                        [formControl]="autocompleteControl"  formControlName="specieName"   
+                                        id="specieNamePost" placeholder="{{ 'createPost.birdSpecie' | translate }}">
+                                    
+                                    <mat-autocomplete #autoBird="matAutocomplete" (optionSelected)='selectSpecie($event.option.value)'>
+                                        <mat-option *ngFor="let option of filteredSpecies | async" [value]="option">
+                                            {{option.nameComplete}}
+                                        </mat-option>
+                                    </mat-autocomplete>
+                                  </mat-form-field>
+                            </div>
+
                             <input type="hidden" id="specieIdPost" formControlName="specieId" >
                         </div>
                     </div>
@@ -92,7 +105,7 @@
                             </mat-autocomplete>
                         </mat-form-field>
                     </div>
-
+                    
                     <div class="col-12">
                         <div class="form-group">
                             <button type="button" class="buttonTwo" (click)="showMap()">{{ buttonMapText | translate }}</button> 
@@ -136,7 +149,6 @@
                         </div>
                         
                     </div>
-
                     <div class="col-12">
                         <button type="submit" class="btn alazea-btn mt-15">{{ 'createPost.createPostBtn' | translate }}</button>
                     </div>

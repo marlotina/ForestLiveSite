@@ -5,7 +5,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { PostService } from 'src/app/services/post/post.service';
 import { Observable, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { catchError, first, map } from 'rxjs/operators';
+import { catchError, debounceTime, first, map, switchMap } from 'rxjs/operators';
 import { LocationService } from 'src/app/services/location/location.service';
 import { CommonDialogComponent } from '../../shared/common-dialog/common-dialog.component';
 import { AccountService } from 'src/app/services/account/account.service';
@@ -16,6 +16,8 @@ import { MatChipInputEvent } from '@angular/material/chips';
 import { startWith } from 'rxjs/operators';
 import { ModalEditImageComponent } from '../modal-edit-image/modal-edit-image.component';
 import { ShowChildFormService } from '../services/show-child-form.service';
+import { AutocompleteService } from 'src/app/services/autocomplete/autocomplete.service';
+import { AutocompleteResponse } from 'src/app/model/specie';
 
 class ImageSnippet {
   constructor(public src: string, public file: File) {}
@@ -65,7 +67,11 @@ export class CreatePostComponent implements OnInit {
   visibleMap = false;
   buttonMapText = "createPost.showMap";
 
+  filteredSpecies: Observable<AutocompleteResponse[]>;
+  autocompleteControl = new FormControl();
+
   @ViewChild('labelInput') labelInput: ElementRef<HTMLInputElement>;
+  @ViewChild('specieNamePost') specieNamePost: ElementRef<HTMLInputElement>;
   @ViewChild('auto') matAutocomplete: MatAutocomplete;
 
   constructor(private httpClient: HttpClient,
@@ -74,7 +80,8 @@ export class CreatePostComponent implements OnInit {
     private matDialog: MatDialog,
     private locationService: LocationService,
     private accountService: AccountService,
-    private showChildFormService: ShowChildFormService) { 
+    private showChildFormService: ShowChildFormService,
+    private autocompleteService: AutocompleteService) { 
             
       this.filteredLabel = this.labelCtrl.valueChanges.pipe(
         //startWith(null),
@@ -98,10 +105,44 @@ export class CreatePostComponent implements OnInit {
     });
 
     this.postForm.patchValue({
-      'userId': this.accountService.userValue.userName,
-      'specieId': "336bfd7f-d88c-4d78-5b3e-08d8096731fb"
+      'userId': this.accountService.userValue.userName
       });
+
+
+      this.filteredSpecies = this.autocompleteControl.valueChanges.pipe(
+        startWith(''),
+        // delay emits
+        debounceTime(300),
+        // use switch map so as to cancel previous subscribed events, before creating new once
+        switchMap(value => {
+          if (value !== '') {
+            // lookup from github
+            return this.getSpecies(value);
+          } else {
+            // if no value is present, return null
+            return of(null);
+          }
+        })
+      );
   }
+
+  selectSpecie(item: AutocompleteResponse){
+    this.postForm.controls['specieName'].setValue(item.nameComplete)
+    this.postForm.controls['specieId'].setValue(item.specieId)
+  }
+
+  getSpecies(value: string): Observable<AutocompleteResponse[]> {
+    return this.autocompleteService.GetSpeciesByKeys(value.toLowerCase()).pipe(
+      // map the item property of the github results as our return object
+      map(
+        results => results
+        ),
+      // catch errors
+      catchError(_ => {
+        return of(null);
+      })
+    );
+}
 
   onSubmit() {
     this.submitted = true; 
