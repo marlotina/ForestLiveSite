@@ -18,8 +18,6 @@ export class LandingPageComponent implements OnInit {
   
   submitted = false;
   
-  buttonTitle:string = "userPage.addPost"; 
-  visible:boolean = false; 
   subscription: Subscription;
   userPosts: PostResponse[];
   showAddPostButton = false;
@@ -35,7 +33,6 @@ export class LandingPageComponent implements OnInit {
     this.subscription = this.showChildFormService.createdPost$.subscribe(
       data => {
         this.userPosts = [data].concat(this.userPosts)
-        this.showHideFormPost();
     });
 
     this.route.paramMap.subscribe(params => {
@@ -52,9 +49,4 @@ export class LandingPageComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
-  showHideFormPost(){ 
-    this.visible = this.visible ? false : true; 
-    this.buttonTitle = this.visible ? "userPage.cancel" : "userPage.addPost"; 
-  } 
 }
