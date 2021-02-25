@@ -21,7 +21,7 @@ export class AuthorDetailsComponent implements OnInit {
   ngOnInit(): void {
 
     this.route.paramMap.subscribe(params => {
-      let userId = params.get("id");
+      let userId = params.get("userId");
       this.userService.GetByUserName(userId).subscribe(
         data => { 
           this.userInfo = data; 

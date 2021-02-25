@@ -36,7 +36,7 @@ export class LandingPageComponent implements OnInit {
     });
 
     this.route.paramMap.subscribe(params => {
-      this.userId = params.get("id");
+      this.userId = params.get("userId");
       this.postService.GetPostsByUser(this.userId).subscribe(
         data =>{ 
           this.userPosts = data;
