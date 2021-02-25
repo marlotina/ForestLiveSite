@@ -18,7 +18,6 @@ import { ModalEditImageComponent } from '../modal-edit-image/modal-edit-image.co
 import { ShowChildFormService } from '../services/show-child-form.service';
 import { AutocompleteService } from 'src/app/services/autocomplete/autocomplete.service';
 import { AutocompleteResponse } from 'src/app/model/specie';
-import { ImageCroppedEvent } from 'ngx-image-cropper';
 
 class ImageSnippet {
   constructor(public src: string, public file: File) {}
@@ -65,8 +64,6 @@ export class CreatePostComponent implements OnInit {
   file: any;
   altImage = "";
   visibleEditImage = false;
-  visibleMap = false;
-  buttonMapText = "createPost.showMap";
 
   filteredSpecies: Observable<AutocompleteResponse[]>;
   autocompleteControl = new FormControl();
@@ -74,6 +71,8 @@ export class CreatePostComponent implements OnInit {
   @ViewChild('specieNamePost') specieNamePost: ElementRef<HTMLInputElement>;
   @ViewChild('auto') matAutocomplete: MatAutocomplete;
 
+  latitudeInput: any;
+  longitudeInput: any;
   
 
   constructor(private httpClient: HttpClient,
@@ -83,8 +82,9 @@ export class CreatePostComponent implements OnInit {
     private locationService: LocationService,
     private accountService: AccountService,
     private showChildFormService: ShowChildFormService,
-    private autocompleteService: AutocompleteService) { 
-            
+    private autocompleteService: AutocompleteService,
+    private el: ElementRef) { 
+      
       //this.filteredLabel = this.labelCtrl.valueChanges.pipe(
       //  //startWith(null),
       //  map((label: string | null) => label ? this._filter(label) : this.allLabels.slice()));
@@ -94,8 +94,8 @@ export class CreatePostComponent implements OnInit {
     this.postForm = this.formBuilder.group({
       title: ['', [Validators.required]],
       text: ['', [Validators.required]],
-      latitude: [''],
-      longitude: [''],
+      latitude: ['', [Validators.required]],
+      longitude: ['', [Validators.required]],
       specieName: [''],
       specieId: [''],
       labels: [null],
@@ -103,9 +103,12 @@ export class CreatePostComponent implements OnInit {
       imageData: [''],
       altImage: [''],
       imageName: [''],
-      observationDate: ['']
+      observationDate: ['', [Validators.required]]
     });
 
+    this.latitudeInput = this.el.nativeElement.querySelector("#latitudePost");
+    this.longitudeInput = this.el.nativeElement.querySelector("#longitudePost");
+    
     this.postForm.patchValue({
       'userId': this.accountService.userValue.userName
       });
@@ -123,6 +126,8 @@ export class CreatePostComponent implements OnInit {
           }
         })
       );
+
+      this.setMapMarker(); 
   }
   selectSpecie(item: AutocompleteResponse){
     this.postForm.controls['specieName'].setValue(item.nameComplete);
@@ -165,8 +170,8 @@ export class CreatePostComponent implements OnInit {
       'imageData': this.url,
       'imageName': this.imageName,
       'altImage': this.altImage,
-      'latitude': this.visibleMap ? this.markerPositions[0].lat.toString() : '',
-      'longitude': this.visibleMap ? this.markerPositions[0].lng.toString() : ''
+      'latitude': this.markerPositions[0].lat.toString(),
+      'longitude': this.markerPositions[0].lng.toString()
     });
 
     this.postService.AddPost(this.postForm.value)
@@ -217,13 +222,6 @@ export class CreatePostComponent implements OnInit {
   }
 
   /*Map*/
-  showMap(){
-    this.visibleMap = this.visibleMap ? false : true; 
-    this.buttonMapText = this.visibleMap ? "createPost.hideMap" : "createPost.removeMap"; 
-    if(this.visibleMap){
-      this.setMapMarker(); 
-    }
-  }
 
   loadMap(){
     if(this.apiLoaded == null){
@@ -256,6 +254,8 @@ export class CreatePostComponent implements OnInit {
   addMarkerCommon(latLng){
     if(this.markerPositions.length > 0){
       this.markerPositions[0] = latLng;
+      this.latitudeInput.classList.remove('is-invalid'); 
+      this.longitudeInput.classList.remove('is-invalid'); 
     }else{
       this.markerPositions.push(latLng);
     }
@@ -267,7 +267,6 @@ export class CreatePostComponent implements OnInit {
         lat: Number(this.postForm.controls.latitude.value),
         lng: Number(this.postForm.controls.longitude.value)
       };
-
     this.addMarkerCommon(latLng);
     this.center = latLng;
   }

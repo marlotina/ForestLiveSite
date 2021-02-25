@@ -31,20 +31,35 @@
                 <div class="blog-posts-area">                
                     <div *ngFor="let post of userPosts">
                         <!-- Post Details Area -->
-                        <div class="single-post-details-area">
+                        <div class="single-post-details-area divPost">
                             <div class="post-content">
-                                <a href="/post/{{post.postId}}" ><h4 class="post-title">{{post.title}}</h4></a>                                
-    
-                                <div class="post-meta mb-30">
-                                    <a href="#"><i class="fa fa-clock-o" aria-hidden="true"></i> {{post.observationDate}}</a>
-                                    <a href="/userpage/{{post.userId}}"><i class="fa fa-user" aria-hidden="true"></i> {{post.userId}}</a>
+
+                                <div class="single-widget-area">
+                             
+                                        <div class="author-thumb-name d-flex align-items-center">
+                                            <div class="author-thumb">
+                                                <img src="https://birdpostsqa.blob.core.windows.net/profiles/{{post.userPhoto}}" alt="image of {{post.userId}}" class="imgProfilePost">
+                                            </div>
+                                            <div class="author-name">
+                                               <p>
+                                                   <b>{{post.title}}</b><br/>
+                                                   <a href="/userpage/{{post.userId}}">{{post.userId}}</a><br/>
+                                                   {{ 'userPage.observationDate' | translate }}: {{post.observationDate}}
+                                                </p>
+                                            </div>
+                                        </div>
                                 </div>
+                                
+                                
                                 <div class="post-thumbnail mb-30">
-                                    <img src="{{imagesPostUrl}}{{post.imageUrl}}" alt="{{post.altImage}}" class="postImage img-fluid">
+                                    <img src="{{imagesPostUrl}}{{post.imageUrl}}" alt="{{post.altImage}}" class="postImage divPostImgContent">
                                 </div>
-                                <p>
-                                    {{post.text}}
-                                </p>
+                                <div style="padding-left: 45px;">
+                                    <div>{{ 'userPage.birdSpecie' | translate }}: <i>{{post.birdSpecie}}</i></div>
+                                    <div class="post-meta mb-30">
+                                        {{post.text}}
+                                    </div>  
+                                </div>
                             </div>
                         </div>
                     </div>

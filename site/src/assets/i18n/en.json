@@ -98,7 +98,9 @@
         "userWithoutPost": "The user has not birds.",
         "userPage": "The page user",
         "addPost": "add post",
-        "cancel": "Cancel"
+        "cancel": "Cancel",
+        "observationDate": "Observation date",
+        "birdSpecie": "Bird specie"
     },
     "postPage": {
         "delete": "Delete",

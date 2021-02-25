@@ -32,7 +32,7 @@ export class PostResponse {
     labels: string[];
     birdSpecie: string;
     specieId: string;
-    userUrl: string;
+    userPhoto: string;
     observationDate: string;
     specieConfirmed:boolean;
 }

@@ -22,13 +22,18 @@
 <!-- ##### Breadcrumb Area End ##### -->
 
 <div class="container">
-    <div class="row justify-content-center">
+    
+    <div class="row justify-content-center mb-100">
         <!-- Blog Posts Area -->
         <div class="col-12 col-md-8">
+            <div class="section-heading">
+                <h2>{{ 'createPost.createPost' | translate }}</h2>
+                <p>Edit your profile</p>
+            <div>
+            
             <div class="blog-posts-area">
                 <div class="leave-comment-area clearfix">
                     <div class="comment-form">
-                        <h4 class="headline">{{ 'createPost.createPost' | translate }}</h4>
                         <div class="contact-form-area">
                             <form [formGroup]="postForm" (ngSubmit)="onSubmit()" class="ng-untouched ng-pristine ng-valid">
                                 <div class="row">
@@ -52,7 +57,7 @@
                                         </div>
                                     </div>                    
                 
-                                    <div class="col-12 col-md-6">
+                                    <div class="col-12 col-md-8">
                                         <div class="form-group">
                                             <div class="autocomplete-form">
                                                 <mat-form-field class="autocomplete-full-width">
@@ -71,7 +76,7 @@
                                         </div>
                                     </div>
                 
-                                    <div class="col-12 col-md-6">
+                                    <div class="col-12 col-md-4">
                                         <div class="form-group">
                                             <mat-form-field>
                                                 <input matInput [matDatepicker]="picker" placeholder="{{ 'createPost.chooseDate' | translate }}" id="observationDatePost" formControlName="observationDate">
@@ -133,47 +138,42 @@
                                             </mat-autocomplete>-->
                                         </mat-form-field>
                                     </div>
-                                    
-                                    <div class="col-12">
-                                        <div class="form-group">
-                                            <button type="button" class="buttonTwo" (click)="showMap()">{{ buttonMapText | translate }}</button> 
-                                        </div>
-                                    </div>
-                
-                                    <div class="col-12 col-md-6" *ngIf="visibleMap">
+
+                                    <div class="col-12 col-md-6">
                                         <div class="form-group">
                                             <input type="text"  
                                                 class="form-control" 
                                                 id="latitudePost" 
                                                 placeholder="{{ 'createPost.latitude' | translate }}" 
+                                                [ngClass]="{ 'is-invalid': submitted && f.latitude.errors}"
                                                 formControlName="latitude" 
                                                 (change)="onChangeEvent()" 
                                                 value="{{display?.lat}}" />
                                         </div>
                                     </div>
-                                    <div class="col-12 col-md-6" *ngIf="visibleMap">
+                                    <div class="col-12 col-md-6">
                                         <div class="form-group">
                                             <input type="text" 
                                                 class="form-control" 
                                                 placeholder="{{ 'createPost.longitude' | translate }}" 
                                                 id="longitudePost"
                                                 formControlName="longitude" 
+                                                [ngClass]="{ 'is-invalid': submitted && f.longitude.errors}"
                                                 (change)="onChangeEvent()" 
                                                 value="{{display?.lng}}" />
                                         </div>
                                     </div>
                 
                                     <div class="col-12">
-                                        <div *ngIf="visibleMap">
-                                            <div *ngIf="apiLoaded | async" class="map-area mb-100">
-                                                <google-map
-                                                    [center]="center"
-                                                    [options]="mapOptions"
-                                                    (mapClick)="addMarker($event)">
-                                                        <map-marker *ngFor="let markerPosition of markerPositions" [position]="markerPosition"
-                                                            [options]="markerOptions"></map-marker>
-                                                </google-map>
-                                            </div>
+                                        <div *ngIf="apiLoaded | async" class="map-area mb-100">
+                                            <google-map
+                                                [center]="center"
+                                                [options]="mapOptions"
+                                                [ngClass]="{ 'is-invalid': submitted && f.title.errors }"
+                                                (mapClick)="addMarker($event)">
+                                                    <map-marker *ngFor="let markerPosition of markerPositions" [position]="markerPosition"
+                                                        [options]="markerOptions"></map-marker>
+                                            </google-map>
                                         </div>
                                         
                                     </div>
