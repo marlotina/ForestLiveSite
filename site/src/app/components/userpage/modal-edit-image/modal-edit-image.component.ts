@@ -11,6 +11,7 @@ import {base64ToFile} from '../../../shared/cropper/blob.utils';
 })
 export class ModalEditImageComponent implements OnInit {
 
+  aspectRatio: number = 4/3;
   imageChangedEvent: any = '';
   croppedImage: any = '';
   canvasRotation = 0;
@@ -28,6 +29,18 @@ export class ModalEditImageComponent implements OnInit {
   
   ngOnInit(): void {
     this.initializeCropped(this.modalData.image);
+  }
+
+  getFormatOne(){
+    this.aspectRatio = 1/1;
+  }
+
+  getFormatTwo(){
+    this.aspectRatio = 4/3;
+  }
+
+  getFormatThree(){
+    this.aspectRatio = 16/9;
   }
 
   initializeCropped(event: any): void {

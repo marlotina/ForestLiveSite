@@ -29,10 +29,9 @@
             <!-- Blog Posts Area -->
             <div class="col-12 col-md-8">
                 <div class="blog-posts-area">
-                    <div *ngIf="visible">
+                    <!--<div *ngIf="visible">
                         <app-create-post></app-create-post>
-                    </div>  
-                    
+                    </div>                      -->
                     <div *ngFor="let post of userPosts">
                         <!-- Post Details Area -->
                         <div class="single-post-details-area">
@@ -44,7 +43,7 @@
                                     <a href="/userpage/{{post.userId}}"><i class="fa fa-user" aria-hidden="true"></i> {{post.userId}}</a>
                                 </div>
                                 <div class="post-thumbnail mb-30">
-                                    <img src="{{imagesPostUrl}}{{post.imageUrl}}" alt="{{post.altImage}}">
+                                    <img src="{{imagesPostUrl}}{{post.imageUrl}}" alt="{{post.altImage}}" class="postImage img-fluid">
                                 </div>
                                 <p>
                                     {{post.text}}
@@ -93,6 +92,7 @@
                         <div class="widget-title">
                             <h4>Recent post</h4>
                         </div>
+
 
                         <!-- Single Latest Posts -->
                         <div class="single-latest-post d-flex align-items-center">

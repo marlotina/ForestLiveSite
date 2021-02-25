@@ -18,6 +18,7 @@ import { ModalEditImageComponent } from '../modal-edit-image/modal-edit-image.co
 import { ShowChildFormService } from '../services/show-child-form.service';
 import { AutocompleteService } from 'src/app/services/autocomplete/autocomplete.service';
 import { AutocompleteResponse } from 'src/app/model/specie';
+import { ImageCroppedEvent } from 'ngx-image-cropper';
 
 class ImageSnippet {
   constructor(public src: string, public file: File) {}
@@ -73,6 +74,8 @@ export class CreatePostComponent implements OnInit {
   @ViewChild('specieNamePost') specieNamePost: ElementRef<HTMLInputElement>;
   @ViewChild('auto') matAutocomplete: MatAutocomplete;
 
+  
+
   constructor(private httpClient: HttpClient,
     private formBuilder: FormBuilder,
     private postService: PostService, 
@@ -121,7 +124,6 @@ export class CreatePostComponent implements OnInit {
         })
       );
   }
-
   selectSpecie(item: AutocompleteResponse){
     this.postForm.controls['specieName'].setValue(item.nameComplete);
     this.postForm.controls['specieId'].setValue(item.specieId);
@@ -310,8 +312,8 @@ export class CreatePostComponent implements OnInit {
     let results: string;
     dialogConfig.disableClose = false;
     dialogConfig.id = "modal-component";
-    dialogConfig.height = "600px";
-    dialogConfig.width = "900px";
+    dialogConfig.height = "650px";
+    dialogConfig.width = "850px";
     dialogConfig.data = {
       image: this.file    
     }
