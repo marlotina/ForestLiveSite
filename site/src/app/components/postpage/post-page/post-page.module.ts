@@ -9,6 +9,7 @@ import { MatIconModule } from '@angular/material/icon';
 
 import { MatButtonModule } from '@angular/material/button';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { AuthorDetailsModule } from '../../shared/author-details/author-details.module';
 
 const materialModules = [
   MatMenuModule, 
@@ -25,6 +26,7 @@ const materialModules = [
     FormsModule,
     ReactiveFormsModule,
     SharedModule,
+    AuthorDetailsModule,
     materialModules
   ]
 })
