@@ -1,41 +1,61 @@
 <div id="modal-content-wrapper">
-  
+    
     <section class="contact-area">
         <div class="container">
             <div class="row">
                 <div class="col-12 col-lg-6">
-                    <button (click)="zoomOut()" class="buttonTwo" style="width: 50%;"> - </button> 
-                    <button (click)="zoomIn()" class="buttonTwo" style="width: 50%;"> + </button>
+                    <div class="form-group">
+                        <button (click)="zoomOut()" class="buttonTwo" style="width: 50%;"> - </button> 
+                        <button (click)="zoomIn()" class="buttonTwo" style="width: 50%;"> + </button>
+                    </div>
                 </div>
                 <div class="col-12 col-lg-6">
-                    <button (click)="resetImage()" class="buttonTwo">{{ 'createPost.resetImage' | translate }}</button>
+                    <div class="form-group">
+                        <button (click)="resetImage()" class="buttonTwo">{{ 'createPost.resetImage' | translate }}</button>
+                    </div>
                 </div>
-                
+
                 <div class="col-12">
-                    <image-cropper
-                        [imageChangedEvent]="imageChangedEvent"
-                        [maintainAspectRatio]="true"
-                        [aspectRatio]="1 / 1"
-                        [resizeToWidth]="300"
-                        [resizeToHeight]="25"
-                        [cropperMinWidth]="300"
-                        [cropperMinHeight]="300"
-                        [onlyScaleDown]="true"
-                        [roundCropper]="false"
-                        [canvasRotation]="canvasRotation"
-                        [transform]="transform"
-                        [alignImage]="'left'"
-                        [style.display]="showCropper ? null : 'none'"
-                        format="png"
-                        (imageCropped)="imageCropped($event)"
-                        (cropperReady)="cropperReady($event)"
-                        (loadImageFailed)="loadImageFailed()">
-                    </image-cropper>
+                    <div class="form-group">
+                        <image-cropper
+                            class="imgClass"
+                            [imageChangedEvent]="imageChangedEvent"
+                            [maintainAspectRatio]="true"
+                            [containWithinAspectRatio]="false"
+                            [aspectRatio]="aspectRatio"
+                            [resizeToWidth]="1200"
+                            [resizeToHeight]="800"
+                            [cropperMinWidth]="1200"
+                            [cropperMinHeight]="800"
+                            [onlyScaleDown]="true"
+                            [roundCropper]="false"
+                            [canvasRotation]="canvasRotation"
+                            [transform]="transform"
+                            [alignImage]="'center'"
+                            [style.display]="showCropper ? null : 'none'"
+                            format="png"
+                            (imageCropped)="imageCropped($event)"
+                            (cropperReady)="cropperReady($event)"
+                            (loadImageFailed)="loadImageFailed()">
+                        </image-cropper>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-6">
+                    <div class="form-group">
+                        <input type="text" class="form-control" #altImageInput placeholder="{{ 'createPost.altImage' | translate }}"/>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-6">
+                    <div class="form-group center">
+                        <button (click)="getFormatOne()" class="buttonTwo" style="width: 50px"> 1 </button>
+                        <button (click)="getFormatTwo()" class="buttonTwo" style="width: 50px"> 2 </button> 
+                        <button (click)="getFormatThree()" class="buttonTwo" style="width: 50px"> 3 </button>
+                    </div>
                 </div>
             </div>
+
         </div>
-        <label>{{ 'createPost.altImage' | translate }}</label>
-        <input type="text" #altImageInput placeholder="{{ 'createPost.descriptionImage' | translate }}"/>
+        
     </section>
 <footer id="modal-footer">
     <div class="welcome-btn-group" style="margin-bottom: 30px;">

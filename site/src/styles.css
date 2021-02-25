@@ -9,5 +9,8 @@ html, body { height: 100%; }
 .LabelsSelect {
     display: inline !important;
 }
-
   
+.postImage{
+    width: 600px;       
+    height: 400px;
+}

@@ -71,7 +71,8 @@
                 <div class="post-sidebar-area">
                     <div class="single-widget-area">
                         <div>
-                            <button type="button" class="buttonTwo" *ngIf="showAddPostButton" (click)="showHideFormPost()">{{ buttonTitle | translate }}</button> 
+                            <!--<button type="button" class="buttonTwo" *ngIf="showAddPostButton" (click)="showHideFormPost()">{{ userPage.addPost | translate }}</button> -->
+                            <a routerLink="createPost" class="buttonTwo">{{ 'userPage.addPost' | translate }}</a>
                         </div>
                     </div>
 

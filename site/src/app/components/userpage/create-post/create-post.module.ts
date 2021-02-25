@@ -1,11 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { LandingPageRoutingModule } from './landing-page-routing.module';
-import { LandingPageComponent } from './landing-page.component';
 import { HttpClientJsonpModule, HttpClientModule } from '@angular/common/http';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { GoogleMapsModule } from '@angular/google-maps';
 
 import { MatDatepickerModule } from '@angular/material/datepicker';
 
@@ -17,8 +16,10 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
 import {MatSelectModule} from '@angular/material/select';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { CreatePostComponent } from '../create-post/create-post.component';
+import { ModalEditImageComponent } from '../modal-edit-image/modal-edit-image.component';
 import { ImageCropperModule } from 'ngx-image-cropper';
-import { AuthorDetailsComponent } from '../author-details/author-details.component';
+import { CreatePostRoutingModule } from './create-post-routing.module';
 
 const materialModules = [
   MatDatepickerModule,
@@ -35,12 +36,14 @@ const materialModules = [
 
 @NgModule({
   declarations: [
-    LandingPageComponent,
-    AuthorDetailsComponent
+    CreatePostComponent,
+    CreatePostComponent,
+    ModalEditImageComponent
   ],
   imports: [
     CommonModule,
-    LandingPageRoutingModule,
+    GoogleMapsModule,
+    CreatePostRoutingModule,
     HttpClientModule,
     HttpClientJsonpModule,
     SharedModule,
@@ -49,6 +52,6 @@ const materialModules = [
     ImageCropperModule,
     materialModules
   ],
-  entryComponents: []
+  entryComponents: [CreatePostComponent, ModalEditImageComponent]
 })
-export class LandingPageModule { }
+export class CreatePostModule { }
