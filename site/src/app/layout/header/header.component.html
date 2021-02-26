@@ -40,6 +40,7 @@
                             <ul [hidden]="!isLogged">
                                 <li><a href="#">{{ userNameMenu }}</a>
                                     <ul class="dropdown">
+                                        <li><a routerLink="createPost" routerLinkActive="active">{{ 'userPage.addPost' | translate }}</a></li>
                                         <li><a routerLink="userProfile" routerLinkActive="active">{{ 'user.profileMenu' | translate }}</a>
                                         <li><a routerLink="#" routerLinkActive="active" (click)="logout()">{{ 'account.logOut' | translate }}</a></li>
                                     </ul>

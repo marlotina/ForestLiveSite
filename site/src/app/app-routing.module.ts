@@ -18,6 +18,7 @@ const routes: Routes = [
   { path: ':userId/post/:id', loadChildren: () => import('./components/postpage/post-page/post-page.module').then(m => m.PostPageModule) },
   { path: 'withoutspecie', loadChildren: () => import('./components/pendings/without-specie-page/without-specie-page.module').then(m => m.WithoutSpeciePageModule) },
   { path: 'confirmspecie', loadChildren: () => import('./components/pendings/confirm-page/confirm-page.module').then(m => m.ConfirmPageModule) },
+  { path: 'searchmap', loadChildren: () => import('./components/searchmappage/search-map-page/search-map-page.module').then(m => m.SearchMapPageModule) },
   { path: '**', loadChildren: () => import('./components/home/home.module').then(m => m.HomeModule) },
   
 ]

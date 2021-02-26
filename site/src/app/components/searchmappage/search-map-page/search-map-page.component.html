@@ -1,0 +1,39 @@
+<!-- ##### Breadcrumb Area Start ##### -->
+<div class="breadcrumb-area">
+    <!-- Top Breadcrumb Area -->
+    <div class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center" style="background-image: url(../../../../../assets/img/bg-img/24.jpg);">
+        <h2>MAPA</h2>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#"><i class="fa fa-home"></i> Home</a></li>
+                        <li class="breadcrumb-item"><a href="#">Blog</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Single Blog Post</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ##### Breadcrumb Area End ##### -->
+
+    <div class="col-12 col-md-8">
+        <div class="form-group">
+            <div class="autocomplete-form">
+                
+            </div>
+        </div>
+    </div>
+
+        <div *ngIf="apiLoaded | async" class="mb-100">
+            <google-map
+                [center]="center"
+                [options]="mapOptions">
+                    <map-marker *ngFor="let markerPosition of markerPositions" [position]="markerPosition"
+                        [options]="markerOptions"></map-marker>
+            </google-map>
+        </div>

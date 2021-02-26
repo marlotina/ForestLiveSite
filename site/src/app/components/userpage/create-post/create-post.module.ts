@@ -37,7 +37,6 @@ const materialModules = [
 @NgModule({
   declarations: [
     CreatePostComponent,
-    CreatePostComponent,
     ModalEditImageComponent
   ],
   imports: [
