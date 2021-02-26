@@ -2,7 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
+import { PostResponse } from 'src/app/model/post';
 import { LocationService } from 'src/app/services/location/location.service';
+import { SearchBirdsService } from 'src/app/services/searchs/search-birds.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -17,18 +19,24 @@ export class SearchMapPageComponent implements OnInit {
   markerPositions: google.maps.LatLngLiteral[] = [];
   display: any;
   mapOptions: google.maps.MapOptions = {
-    zoom:15,
+    zoom:10,
     streetViewControl: false,
     fullscreenControl: false,
     clickableIcons: false
  };
  apiLoaded: Observable<boolean>
+ pendingPosts: PostResponse[];
 
   constructor(private httpClient: HttpClient,
-      private locationService: LocationService) { }
+      private locationService: LocationService,
+      private searchBirdsSerices: SearchBirdsService) { }
 
   ngOnInit(): void {
-    this.setMapMarker();
+    this.searchBirdsSerices.GetToConfirm("").subscribe(
+      data =>{ 
+        this.setMapMarker(data);
+      } 
+    );
   }
 
   loadMap(){
@@ -42,24 +50,23 @@ export class SearchMapPageComponent implements OnInit {
     }
   }
 
-  setMapMarker() {
+  setMapMarker(points: PostResponse[]) {
     this.locationService.getPosition().then(pos => {
       let latLng = {
         lat: pos.lat,
         lng: pos.lng
       };
-      this.addMarkerCommon(latLng);
       this.center = latLng;
+
+      points.forEach(element => {
+        this.markerPositions.push({
+          lat: element.latitude,
+          lng: element.longitude
+        });
+      });
+
       
       this.loadMap();
     });
-  }
-
-  addMarkerCommon(latLng){
-    if(this.markerPositions.length > 0){
-      this.markerPositions[0] = latLng;
-    }else{
-      this.markerPositions.push(latLng);
-    }
   }
 }

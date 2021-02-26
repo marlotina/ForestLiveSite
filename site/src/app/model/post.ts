@@ -27,8 +27,8 @@ export class PostResponse {
     likesCount: number;
     commentsCount: number;
     userName: string;
-    latitude: string;
-    longitude: string;
+    latitude: number;
+    longitude: number;
     labels: string[];
     birdSpecie: string;
     specieId: string;

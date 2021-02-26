@@ -30,6 +30,7 @@
                             <ul>
                                 <li><a routerLink="index" routerLinkActive="active">{{ 'general.home' | translate }}</a></li>
                                 <li *ngIf="isLogged"><a routerLink="userpage/{{ user.userName }}">{{ 'general.myPage' | translate }}</a></li>
+                                <li><a routerLink="searchmap">Map</a></li>
                                 <li><a routerLink="confirmspecie">{{ 'general.toConfirm' | translate }}</a></li>
                                 <li><a routerLink="withoutspecie">{{ 'general.pendingSpecie' | translate }}</a></li>
                             </ul>
