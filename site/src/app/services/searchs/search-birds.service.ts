@@ -12,7 +12,7 @@ export class SearchBirdsService {
   constructor(private httpClient: HttpClient) { 
   }
 
-  GetToConfirm(specieId : string){
+  GetBirdBySpecie(specieId : string){
     return this.httpClient.get<PostResponse[]>(`${environment.userPostApiUrl}api/v1/BirdUser/GetPosts/?userId=marlotina`)
       .pipe(map(data => {
         return data;

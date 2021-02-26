@@ -19,6 +19,7 @@ const routes: Routes = [
   { path: 'withoutspecie', loadChildren: () => import('./components/pendings/without-specie-page/without-specie-page.module').then(m => m.WithoutSpeciePageModule) },
   { path: 'confirmspecie', loadChildren: () => import('./components/pendings/confirm-page/confirm-page.module').then(m => m.ConfirmPageModule) },
   { path: 'searchmap', loadChildren: () => import('./components/searchmappage/search-map-page.module').then(m => m.SearchMapPageModule) },
+  { path: 'birdpage', loadChildren: () => import('./components/birdpage/bird-landing-page/bird-landing-page.module').then(m => m.BirdLandingPageModule) },
   { path: '**', loadChildren: () => import('./components/home/home.module').then(m => m.HomeModule) },
   
 ]

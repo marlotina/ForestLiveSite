@@ -29,9 +29,8 @@
                         <div class="classynav">
                             <ul>
                                 <li><a routerLink="index" routerLinkActive="active">{{ 'general.home' | translate }}</a></li>
-                                <li *ngIf="isLogged"><a routerLink="userpage/{{ user.userName }}">{{ 'general.myPage' | translate }}</a></li>
                                 <li><a routerLink="searchmap">Map</a></li>
-                                <li><a routerLink="confirmspecie">{{ 'general.toConfirm' | translate }}</a></li>
+                                <li><a routerLink="birdpage">Birds species</a></li>
                                 <li><a routerLink="withoutspecie">{{ 'general.pendingSpecie' | translate }}</a></li>
                             </ul>
                             <ul [hidden]="isLogged">
@@ -42,6 +41,7 @@
                                 <li><a href="#">{{ userNameMenu }}</a>
                                     <ul class="dropdown">
                                         <li><a routerLink="createPost" routerLinkActive="active">{{ 'userPage.addPost' | translate }}</a></li>
+                                        <li><a routerLink="userpage/{{ user.userName }}">{{ 'general.myPage' | translate }}</a></li>
                                         <li><a routerLink="userProfile" routerLinkActive="active">{{ 'user.profileMenu' | translate }}</a>
                                         <li><a routerLink="#" routerLinkActive="active" (click)="logout()">{{ 'account.logOut' | translate }}</a></li>
                                     </ul>

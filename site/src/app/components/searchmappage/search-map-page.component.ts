@@ -25,14 +25,13 @@ export class SearchMapPageComponent implements OnInit {
     clickableIcons: false
  };
  apiLoaded: Observable<boolean>
- pendingPosts: PostResponse[];
 
   constructor(private httpClient: HttpClient,
       private locationService: LocationService,
       private searchBirdsSerices: SearchBirdsService) { }
 
   ngOnInit(): void {
-    this.searchBirdsSerices.GetToConfirm("").subscribe(
+    this.searchBirdsSerices.GetBirdBySpecie("").subscribe(
       data =>{ 
         this.setMapMarker(data);
       } 
