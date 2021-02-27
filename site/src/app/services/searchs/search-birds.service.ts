@@ -13,7 +13,7 @@ export class SearchBirdsService {
   }
 
   GetBirdBySpecie(specieId : string){
-    return this.httpClient.get<PostResponse[]>(`${environment.userPostApiUrl}api/v1/BirdUser/GetPosts/?userId=marlotina`)
+    return this.httpClient.get<PostResponse[]>(`${environment.birdApiUrl}api/v1/SpeciesSearch/GetBirds/?birdSpecieId=${specieId}`)
       .pipe(map(data => {
         return data;
       }));
