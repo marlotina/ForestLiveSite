@@ -23,6 +23,19 @@ html, body { height: 100%; }
 }
 
 
+.divAuthor {
+    padding: 20px;
+    background: #f9f9f9;
+    border: 1px solid #ebebeb;
+    margin-bottom: 15px;
+}
+
+.mapAuthor {
+    border: 1px solid #ebebeb;
+    margin-bottom: 15px;
+}
+
+
 .divPostImgContent {
     border-radius: 20px;
     margin-left: auto;

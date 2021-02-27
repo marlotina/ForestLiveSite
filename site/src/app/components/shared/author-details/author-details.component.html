@@ -1,7 +1,7 @@
 <!-- ##### Single Widget Area ##### -->
 <div class="single-widget-area">
     <!-- Author Widget -->
-    <div class="author-widget divPost">
+    <div class="author-widget divAuthor">
         <div class="author-thumb-name d-flex align-items-center">
             <div class="author-thumb">
                 <img [src]="userImage" alt="image of {{userInfo.userName}}">
@@ -19,4 +19,8 @@
             <a href="https://{{userInfo.urlWebSite}}" *ngIf="userInfo.urlWebSite != '' && userInfo.urlWebSite != null"  target="_blank"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
         </div>
     </div>
+
+        <a><img class="mapAuthor" alt="" src="../../../../../assets/img/bg-img/maplink.jpg"></a>
+    
+
 </div>

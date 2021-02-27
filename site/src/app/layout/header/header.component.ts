@@ -11,7 +11,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class HeaderComponent implements OnInit {
 
   user: User = null;
-  isLogged = false;
+  isLogged: boolean = false;
   userNameMenu: string;
 
   constructor(private router: Router,
@@ -19,8 +19,15 @@ export class HeaderComponent implements OnInit {
     private accountService: AccountService) {  
 
     if(this.accountService.user){
-      this.accountService.user.subscribe(x => this.user = x);
-      this.accountService.isLogged.subscribe(x => this.isLogged = x);
+      this.accountService.user.subscribe(
+        x => {
+          this.user = x;
+          this.userNameMenu = this.user.userName;
+        }
+        );
+      this.accountService.isLogged.subscribe(
+        x => this.isLogged = x
+        );
       this.userNameMenu = this.user != null ? this.user.userName : '';
     }
   }  

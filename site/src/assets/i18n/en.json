@@ -92,7 +92,8 @@
         "resetImage": "Reset image",
         "showMap": "Show map",
         "hideMap": "Hide map",
-        "removeMap": "Remove map point"
+        "removeMap": "Remove map point",
+        "save": "Save"
     },
     "userPage": {
         "userWithoutPost": "The user has not birds.",
