@@ -65,7 +65,7 @@
                                                             [formControl]="autocompleteControl"  formControlName="specieName"   
                                                             id="specieNamePost" placeholder="{{ 'createPost.birdSpecie' | translate }}">
                                                         <mat-autocomplete #autoBird="matAutocomplete" (optionSelected)='selectSpecie($event.option.value)'>
-                                                            <mat-option *ngFor="let option of filteredSpecies | async" [value]="option" (change)="toggleSelection(option)" (click)="$event.stopPropagation()">
+                                                            <mat-option *ngFor="let option of filteredSpecies | async" [value]="option" (change)="selectSpecie(option)" (click)="$event.stopPropagation()">
                                                                 {{option.nameComplete}}
                                                             </mat-option>
                                                         </mat-autocomplete>
@@ -147,9 +147,9 @@
                                                     placeholder="{{ 'createPost.latitude' | translate }}" 
                                                     [ngClass]="{ 'is-invalid': submitted && f.latitude.errors}"
                                                     formControlName="latitude" 
-                                                    (change)="onChangeEvent()" 
-                                                    value="{{display?.lat}}" />
+                                                    (change)="onChangeEvent()" />
                                             </div>
+
                                         </div>
                                         <div class="col-12 col-md-6">
                                             <div class="form-group">
@@ -159,8 +159,7 @@
                                                     id="longitudePost"
                                                     formControlName="longitude" 
                                                     [ngClass]="{ 'is-invalid': submitted && f.longitude.errors}"
-                                                    (change)="onChangeEvent()" 
-                                                    value="{{display?.lng}}" />
+                                                    (change)="onChangeEvent()" />
                                             </div>
                                         </div>
                     

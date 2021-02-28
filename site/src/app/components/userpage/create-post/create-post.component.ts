@@ -39,7 +39,6 @@ export class CreatePostComponent implements OnInit {
   center: any;
   markerOptions: google.maps.MarkerOptions = {draggable: false};
   markerPositions: google.maps.LatLngLiteral[] = [];
-  display: any;
   mapOptions: google.maps.MapOptions = {
     zoom:15,
     streetViewControl: false,
@@ -69,11 +68,7 @@ export class CreatePostComponent implements OnInit {
   autocompleteControl = new FormControl();
   @ViewChild('labelInput') labelInput: ElementRef<HTMLInputElement>;
   @ViewChild('specieNamePost') specieNamePost: ElementRef<HTMLInputElement>;
-  @ViewChild('auto') matAutocomplete: MatAutocomplete;
-
-  latitudeInput: any;
-  longitudeInput: any;
-  
+  @ViewChild('auto') matAutocomplete: MatAutocomplete;  
 
   constructor(private httpClient: HttpClient,
     private formBuilder: FormBuilder,
@@ -105,9 +100,6 @@ export class CreatePostComponent implements OnInit {
       imageName: [''],
       observationDate: ['', [Validators.required]]
     });
-
-    this.latitudeInput = this.el.nativeElement.querySelector("#latitudePost");
-    this.longitudeInput = this.el.nativeElement.querySelector("#longitudePost");
     
     this.postForm.patchValue({
       'userId': this.accountService.userValue.userName
@@ -129,6 +121,7 @@ export class CreatePostComponent implements OnInit {
 
       this.setMapMarker(); 
   }
+
   selectSpecie(item: AutocompleteResponse){
     this.postForm.controls['specieName'].setValue(item.nameComplete);
     this.postForm.controls['specieId'].setValue(item.specieId);
@@ -136,12 +129,6 @@ export class CreatePostComponent implements OnInit {
 
   optionClicked(event: Event, specie: AutocompleteResponse) {
     event.stopPropagation();
-    //this.toggleSelection(specie);
-  }
-
-  toggleSelection(user: AutocompleteResponse) {
-    var wop = user;
-    
   }
 
   getSpecies(value: any): Observable<AutocompleteResponse[]> {
@@ -239,7 +226,6 @@ export class CreatePostComponent implements OnInit {
         lat: pos.lat,
         lng: pos.lng
       };
-      this.addMarkerCommon(latLng);
       this.center = latLng;
       
       this.loadMap();
@@ -247,15 +233,16 @@ export class CreatePostComponent implements OnInit {
   }
 
   addMarker(event: google.maps.MapMouseEvent) {
-    this.display = event.latLng.toJSON();
+    let display = event.latLng.toJSON();
+    
+    this.postForm.controls.latitude.setValue(display.lat);
+    this.postForm.controls.longitude.setValue(display.lng);
     this.addMarkerCommon(event.latLng.toJSON())
   }
 
   addMarkerCommon(latLng){
     if(this.markerPositions.length > 0){
       this.markerPositions[0] = latLng;
-      this.latitudeInput.classList.remove('is-invalid'); 
-      this.longitudeInput.classList.remove('is-invalid'); 
     }else{
       this.markerPositions.push(latLng);
     }
