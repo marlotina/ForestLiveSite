@@ -1,18 +1,21 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { PostResponse } from 'src/app/model/post';
 import { LocationService } from 'src/app/services/location/location.service';
+import { PostService } from 'src/app/services/post/post.service';
 import { SearchBirdsService } from 'src/app/services/searchs/search-birds.service';
+import { UserService } from 'src/app/services/user/user.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'app-search-map-page',
-  templateUrl: './search-map-page.component.html',
-  styleUrls: ['./search-map-page.component.css']
+  selector: 'app-user-map-page',
+  templateUrl: './user-map-page.component.html',
+  styleUrls: ['./user-map-page.component.css']
 })
-export class SearchMapPageComponent implements OnInit {
+export class UserMapPageComponent implements OnInit {
 
   center: any;
   markerOptions: google.maps.MarkerOptions = {draggable: false};
@@ -25,20 +28,24 @@ export class SearchMapPageComponent implements OnInit {
     clickableIcons: false
  };
  apiLoaded: Observable<boolean>
-
+ userId: string;
   constructor(private httpClient: HttpClient,
       private locationService: LocationService,
-      private searchBirdsSerices: SearchBirdsService) { }
+      private route: ActivatedRoute,
+      private postService: PostService) { }
 
   ngOnInit(): void {
     
-    this.loadMap();
+    this.route.paramMap.subscribe(params => {
+      this.userId = params.get("userId");
+      this.postService.GetPostsByUser(this.userId).subscribe(
+        data =>{ 
+          this.setMapMarker(data);
+        } 
+      );
+    });
 
-    /*this.searchBirdsSerices.GetBirdBySpecie("").subscribe(
-      data =>{ 
-        this.setMapMarker(data);
-      } 
-    );*/
+    this.loadMap();
   }
 
   loadMap(){
