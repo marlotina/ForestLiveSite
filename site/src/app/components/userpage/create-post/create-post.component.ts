@@ -15,7 +15,6 @@ import { MatAutocompleteSelectedEvent, MatAutocomplete } from '@angular/material
 import { MatChipInputEvent } from '@angular/material/chips';
 import { startWith } from 'rxjs/operators';
 import { ModalEditImageComponent } from '../modal-edit-image/modal-edit-image.component';
-import { ShowChildFormService } from '../services/show-child-form.service';
 import { AutocompleteService } from 'src/app/services/autocomplete/autocomplete.service';
 import { AutocompleteResponse } from 'src/app/model/specie';
 
@@ -77,7 +76,6 @@ export class CreatePostComponent implements OnInit {
     private matDialog: MatDialog,
     private locationService: LocationService,
     private accountService: AccountService,
-    private showChildFormService: ShowChildFormService,
     private autocompleteService: AutocompleteService,
     private el: ElementRef) { 
       
@@ -167,7 +165,7 @@ export class CreatePostComponent implements OnInit {
         .subscribe(
             data => {    
               this.openCommonModal('user.successSaveUserData');
-              this.showChildFormService.PostCreated(data);
+              this.postForm.reset();
             },
             error => {   
               if(error.status == "409"){
