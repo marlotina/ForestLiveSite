@@ -40,19 +40,26 @@
                                         
                                         <div class="col-12">
                                             <div class="form-group">
+                                                
                                                 <div [innerHtml]='msg' *ngIf="msg" style="color: red;"></div>
                                                 <div><img [src]="url" *ngIf="url"></div>
                                             </div>
                                         </div>
-                                        <div class="col-12 col-md-6">
+                                        <div class="col-12">
                                             <div class="form-group">
-                                                <label for="uploadImage" class="buttonThree" style="text-align: center; padding-top: 5px;">{{ 'createPost.upload' | translate }}</label>
-                                                <input type="file" #file id="uploadImage" (change)="selectFile($event)" />                        
+                                                <label for="uploadImage" class="selectImageLabel" *ngIf="!visibleEditImage">
+                                                    <div class="selectImage" for="uploadImage">
+                                                        <img src="../../../../assets/img/core-img/addImage.png" class="selectImageCenter"/>
+                                                        {{ 'createPost.upload' | translate }}
+                                                    </div>
+                                                </label>
+                                                <input type="file" #file id="uploadImage" (change)="selectFile($event)"/>                    
                                             </div>
                                         </div>
                     
                                         <div class="col-12 col-md-6">
                                             <div class="form-group">
+                                                <button type="button" class="buttonThree" *ngIf="visibleEditImage" (click)="deleteImage()">remove</button>
                                                 <button type="button" class="buttonThree" *ngIf="visibleEditImage" (click)="openEditProfile()">{{ 'createPost.editImage' | translate }}</button>                                            
                                             </div>
                                         </div>                    

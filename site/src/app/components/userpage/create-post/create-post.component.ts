@@ -67,6 +67,7 @@ export class CreatePostComponent implements OnInit {
   filteredSpecies: Observable<AutocompleteResponse[]>;
   autocompleteControl = new FormControl();
   @ViewChild('labelInput') labelInput: ElementRef<HTMLInputElement>;
+  @ViewChild('file') fileInput: ElementRef<HTMLInputElement>;
   @ViewChild('specieNamePost') specieNamePost: ElementRef<HTMLInputElement>;
   @ViewChild('auto') matAutocomplete: MatAutocomplete;  
 
@@ -208,6 +209,13 @@ export class CreatePostComponent implements OnInit {
     this.openEditProfile();
   }
 
+  deleteImage(){
+    this.url = '';
+    this.file = null;
+    this.fileInput.nativeElement.value = null;
+    this.visibleEditImage = false;
+
+  }
   /*Map*/
 
   loadMap(){

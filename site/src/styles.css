@@ -54,8 +54,24 @@ html, body { height: 100%; }
     margin-right: 30px; 
 }
 
+.selectImage{
+	background-color: #fff;
+    border: 2px dashed #ebebeb;
+	text-align: center;
+	padding: 20px;
+}
+
+.selectImageLabel{
+	width: 100%;
+	cursor: pointer;	
+}
 
 
+.selectImageCenter {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
 
 .gm-style-iw {
 	width: 350px !important;
