@@ -33,7 +33,15 @@
     <google-map
         [center]="center"
         [options]="mapOptions">
-            <map-marker *ngFor="let markerPosition of markerPositions" [position]="markerPosition"
-                [options]="markerOptions"></map-marker>
+            <map-marker *ngFor="let markerPosition of markerPositions" 
+                [position]="markerPosition.location" 
+                #marker="mapMarker"
+                [options]="markerOptions" 
+                [title]="markerPosition.title"
+                (mapClick)="openInfo(marker, markerPosition)">
+            </map-marker>
+            <map-info-window>
+                <div [innerHTML]="infoContent"></div>
+            </map-info-window>
     </google-map>
 </div>

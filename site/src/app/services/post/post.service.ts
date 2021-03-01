@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { PostRequest, PostResponse } from 'src/app/model/post';
 import { map } from 'rxjs/operators';
+import { MapPoint } from 'src/app/model/Map';
 
 @Injectable({
   providedIn: 'root'
@@ -28,6 +29,13 @@ export class PostService {
 
   GetPostsByUser(userId: string){
     return this.httpClient.get<PostResponse[]>(`${environment.userPostApiUrl}api/v1/BirdUser/GetPosts/?userId=${userId}`)
+      .pipe(map(data => {
+        return data;
+      }));
+  }
+
+  GetMapPointsPostByUser(userId: string){
+    return this.httpClient.get<MapPoint[]>(`${environment.userPostApiUrl}api/v1/BirdUser/GetMapPoints/?userId=${userId}`)
       .pipe(map(data => {
         return data;
       }));
