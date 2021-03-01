@@ -6,8 +6,16 @@ import { LandingPageComponent } from './landing-page.component';
 import { HttpClientJsonpModule, HttpClientModule } from '@angular/common/http';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { AuthorDetailsModule } from '../../shared/author-details/author-details.module';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 
+const materialModules = [
+  MatMenuModule, 
+  MatButtonModule,
+  MatIconModule,
+];
 
 @NgModule({
   declarations: [
@@ -19,7 +27,8 @@ import { AuthorDetailsModule } from '../../shared/author-details/author-details.
     HttpClientModule,
     HttpClientJsonpModule,
     SharedModule,
-    AuthorDetailsModule
+    AuthorDetailsModule,
+    materialModules
   ]
 })
 export class LandingPageModule { }

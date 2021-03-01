@@ -36,15 +36,32 @@
                             <div class="post-content">
 
                                 <div class="single-widget-area"> 
-                                    <div class="single-latest-post d-flex align-items-center">
-                                        <div class="author-thumb">
-                                            <img src="https://birdpostsqa.blob.core.windows.net/profiles/{{post.userPhoto}}" alt="image of {{post.userId}}" class="imgProfilePost">
+                                    <div class="row">
+                                        <div class="col-6 col-md-6">
+                                            <div class="single-latest-post d-flex align-items-center">
+                                                <div class="author-thumb">
+                                                    <img src="https://birdpostsqa.blob.core.windows.net/profiles/{{post.userPhoto}}" alt="image of {{post.userId}}" class="imgProfilePost">
+                                                </div>
+                                                <div class="post-content">
+                                                    <a class="post-title" href="/{{post.userId}}/post/{{post.postId}}"><h6>{{post.title}}</h6></a>
+                                                    <a class="post-date" href="/userpage/{{post.userId}}">{{post.userId}}</a>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="post-content">
-                                            <a class="post-title" href="/{{post.userId}}/post/{{post.postId}}"><h6>{{post.title}}</h6></a>
-                                            <a class="post-date" href="/userpage/{{post.userId}}">{{post.userId}}</a>
+                                        <div class="col-6 col-md-6 text-right">
+                                            <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu" *ngIf="showDeleteOption(post.userId)">
+                                                <mat-icon>more_vert</mat-icon>
+                                            </button>
+                                            <mat-menu #menu="matMenu" >
+                                                <button mat-menu-item type="button" (click)="deleteItem(post)">
+                                                    <mat-icon>delete</mat-icon>
+                                                    <span>{{ 'postPage.delete' | translate }}</span>
+                                                </button>
+                                            </mat-menu>
                                         </div>
                                     </div>
+                                    
+
                                 </div>
                                 
                                 
