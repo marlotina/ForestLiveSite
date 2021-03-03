@@ -39,8 +39,15 @@ export class PostPageComponent implements OnInit {
     private route: Router) { }
 
   ngOnInit(): void {
+
+    this.commentForm = this.formBuilder.group({
+      text: ['', [Validators.required]],
+      userId: ['', [Validators.required]],
+      postId: ['', [Validators.required]]
+    });
     this.userLoggedInfo = this.accountService.userValue;
     this.isLogged = this.userLoggedInfo != null;
+    
     this.activateRoute.paramMap.subscribe(params => {
       this.postId = params.get("id");
       this.postService.GetPost(this.postId).subscribe(
@@ -49,6 +56,11 @@ export class PostPageComponent implements OnInit {
           this.postLabels = data.labels;
           this.imagePost = environment.imagesPostUrl + data.imageUrl;
           this.showOwnerOptions = this.userLoggedInfo != null && this.post.userId == this.userLoggedInfo.userName;
+
+          this.commentForm.patchValue({
+            'userId': this.userLoggedInfo != null ? this.userLoggedInfo.userName : '',
+            'postId': this.post.id,
+            });
         } 
       );
       this.commentService.GetCommentsByPost(this.postId).subscribe(
@@ -57,17 +69,6 @@ export class PostPageComponent implements OnInit {
         }
       );
     });
-
-    this.commentForm = this.formBuilder.group({
-      text: ['', [Validators.required]],
-      userId: ['', [Validators.required]],
-      postId: ['', [Validators.required]]
-    });
-
-    this.commentForm.patchValue({
-      'userId': this.accountService.userValue != null ? this.accountService.userValue.userName : '',
-      'postId': this.postId
-      });
   }
 
   onSubmit() {
