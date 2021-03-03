@@ -29,7 +29,7 @@ export class PostPageComponent implements OnInit {
   imagePost: string;
   isLogged: boolean;
   userLoggedInfo: User;
-
+  hasPost = false;
   constructor(private activateRoute: ActivatedRoute,
     private postService: PostService,
     private commentService: CommentService,
@@ -56,7 +56,7 @@ export class PostPageComponent implements OnInit {
           this.postLabels = data.labels;
           this.imagePost = environment.imagesPostUrl + data.imageUrl;
           this.showOwnerOptions = this.userLoggedInfo != null && this.post.userId == this.userLoggedInfo.userName;
-
+          this.hasPost = true;
           this.commentForm.patchValue({
             'userId': this.userLoggedInfo != null ? this.userLoggedInfo.userName : '',
             'postId': this.post.id,

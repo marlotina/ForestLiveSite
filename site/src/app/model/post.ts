@@ -25,7 +25,7 @@ export class PostResponse {
     altImage: string;
     userId: string;
     likesCount: number;
-    commentsCount: number;
+    commentCount: number;
     userName: string;
     latitude: number;
     longitude: number;
@@ -56,7 +56,7 @@ export class PostPendingResponse {
     imageUrl: string;
     altImage: string;
     userId: string;
-    commentsCount: number;
+    commentCount: number;
     userName: string;
     birdSpecie: string;
     specieId: string;
