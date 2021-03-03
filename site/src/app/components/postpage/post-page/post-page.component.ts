@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ActivatedRoute, Router, Routes } from '@angular/router';
 import { first } from 'rxjs/operators';
+import { User } from 'src/app/model/account';
 import { CommentResponse } from 'src/app/model/Comment';
 import { PostResponse } from 'src/app/model/post';
 import { AccountService } from 'src/app/services/account/account.service';
@@ -27,6 +28,7 @@ export class PostPageComponent implements OnInit {
   postLabels: string[];
   imagePost: string;
   isLogged: boolean;
+  userLoggedInfo: User;
 
   constructor(private activateRoute: ActivatedRoute,
     private postService: PostService,
@@ -37,8 +39,8 @@ export class PostPageComponent implements OnInit {
     private route: Router) { }
 
   ngOnInit(): void {
-    let userLoggedInfo = this.accountService.userValue;
-    this.isLogged = userLoggedInfo != null;
+    this.userLoggedInfo = this.accountService.userValue;
+    this.isLogged = this.userLoggedInfo != null;
     this.activateRoute.paramMap.subscribe(params => {
       this.postId = params.get("id");
       this.postService.GetPost(this.postId).subscribe(
@@ -46,7 +48,7 @@ export class PostPageComponent implements OnInit {
           this.post = data;  
           this.postLabels = data.labels;
           this.imagePost = environment.imagesPostUrl + data.imageUrl;
-          this.showOwnerOptions = userLoggedInfo != null && this.post.userId == userLoggedInfo.userName;
+          this.showOwnerOptions = this.userLoggedInfo != null && this.post.userId == this.userLoggedInfo.userName;
         } 
       );
       this.commentService.GetCommentsByPost(this.postId).subscribe(
@@ -99,6 +101,24 @@ export class PostPageComponent implements OnInit {
       error => { 
         this.openCommonModal('failpostdelete');
       });
+  }
+
+  deleteComment(comment: CommentResponse){
+    this.commentService.DeleteComment(comment.postId, comment.id).subscribe(
+      data => {
+        this.openCommonModal('postdeleted');
+        const index = this.comments.indexOf(comment, 0);
+        if (index > -1) {
+          this.comments.splice(index, 1);
+        }
+      },
+      error => { 
+        this.openCommonModal('failpostdelete');
+      });
+  }
+
+  showOwnerCommentOptions(userId: string){
+    return this.userLoggedInfo != null && userId == this.userLoggedInfo.userName;
   }
 
   openCommonModal(message:string) {

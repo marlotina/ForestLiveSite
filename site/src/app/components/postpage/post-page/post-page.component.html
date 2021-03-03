@@ -77,7 +77,18 @@
                                     <div class="comment-content">
                                         <div class="d-flex align-items-center justify-content-between">
                                             <h5>{{comment.userId}}</h5>
-                                            <span class="comment-date">{{comment.createDate}}</span>
+                                            <span class="comment-date">
+                                                {{comment.createDate}}
+                                                <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu" *ngIf="showOwnerCommentOptions(comment.userId)">
+                                                    <mat-icon>more_vert</mat-icon>
+                                                </button>
+                                                <mat-menu #menu="matMenu" >
+                                                    <button mat-menu-item type="button" (click)="deleteComment(comment)">
+                                                        <mat-icon>delete</mat-icon>
+                                                        <span>{{ 'postPage.delete' | translate }}</span>
+                                                    </button>
+                                                </mat-menu>
+                                            </span>
                                         </div>
                                         <p>{{comment.text}}</p>
                                     </div>

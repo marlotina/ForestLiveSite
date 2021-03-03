@@ -25,4 +25,8 @@ export class CommentService {
       }));
   }
 
+  DeleteComment(postId: string, commentId: string){
+    return this.httpClient.delete(`${environment.postApiUrl}api/v1/BirdComment/DeleteComment/?postId=${postId}&commentId=${commentId}`);
+  }
+
 }
