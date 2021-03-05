@@ -82,6 +82,7 @@ export class PostPageComponent implements OnInit {
             data => {    
               this.openCommonModal('user.successSaveUserData');
               this.comments.push(data);
+              this.post.commentCount++;
             },
             error => {   
               if(error.status == "409"){
@@ -112,6 +113,7 @@ export class PostPageComponent implements OnInit {
         if (index > -1) {
           this.comments.splice(index, 1);
         }
+        this.post.commentCount--;
       },
       error => { 
         this.openCommonModal('failpostdelete');
