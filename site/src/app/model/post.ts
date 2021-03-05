@@ -1,5 +1,3 @@
-import { SignupRoutingModule } from "../components/account/signup/signup-routing.module";
-
 export class PostRequest {
     ImageData: string;
     AltImage: string;
@@ -24,7 +22,7 @@ export class PostResponse {
     imageUrl: string;
     altImage: string;
     userId: string;
-    likesCount: number;
+    voteCount: number;
     commentCount: number;
     userName: string;
     latitude: number;

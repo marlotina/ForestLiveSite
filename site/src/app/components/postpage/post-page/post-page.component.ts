@@ -6,9 +6,11 @@ import { first } from 'rxjs/operators';
 import { User } from 'src/app/model/account';
 import { CommentResponse } from 'src/app/model/Comment';
 import { PostResponse } from 'src/app/model/post';
+import { VoteRequest } from 'src/app/model/vote';
 import { AccountService } from 'src/app/services/account/account.service';
 import { CommentService } from 'src/app/services/comment/comment.service';
 import { PostService } from 'src/app/services/post/post.service';
+import { VoteService } from 'src/app/services/vote/vote.service';
 import { environment } from 'src/environments/environment';
 import { CommonDialogComponent } from '../../shared/common-dialog/common-dialog.component';
 
@@ -36,6 +38,7 @@ export class PostPageComponent implements OnInit {
     private formBuilder: FormBuilder,
     private accountService: AccountService,
     private matDialog: MatDialog,
+    private voteService: VoteService,
     private route: Router) { }
 
   ngOnInit(): void {
@@ -92,6 +95,30 @@ export class PostPageComponent implements OnInit {
                 this.openCommonModal('user.failUserAction');
               } 
             });
+  }
+
+  addVote(post: PostResponse){
+    let request: VoteRequest = {
+      postId: post.postId,
+      title: post.title,
+      userId: this.userLoggedInfo.userName,
+      vote: 1,
+      ownerUserId: post.userId
+    }
+    this.voteService.AddVote(request)
+      .pipe(first())
+          .subscribe(
+              data => {    
+                this.post.voteCount++;
+              },
+              error => {   
+                if(error.status == "409"){
+                  this.openCommonModal('account.conflictNameMessage');
+                  this.commentForm.controls.userName.setErrors({'incorrect': true});
+                } else {
+                  this.openCommonModal('user.failUserAction');
+                } 
+              });
   }
 
   deleteItem(){
