@@ -2,6 +2,7 @@ export class CommentRequest {
     text: string;
     userId: string;
     postId: string;
+    specieId: string;
 }
 
 export class CommentResponse {

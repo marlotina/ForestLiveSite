@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ActivatedRoute, Router, Routes } from '@angular/router';
 import { first } from 'rxjs/operators';
@@ -21,8 +21,6 @@ import { CommonDialogComponent } from '../../shared/common-dialog/common-dialog.
 export class PostPageComponent implements OnInit {
  
   commentForm: FormGroup;
-
-  postId: string;
   post = new PostResponse();
   comments: CommentResponse[];
   imagesProfileUrl = environment.imagesProfileUrl;
@@ -32,6 +30,7 @@ export class PostPageComponent implements OnInit {
   isLogged: boolean;
   userLoggedInfo: User;
   hasPost = false;
+
   constructor(private activateRoute: ActivatedRoute,
     private postService: PostService,
     private commentService: CommentService,
@@ -46,14 +45,15 @@ export class PostPageComponent implements OnInit {
     this.commentForm = this.formBuilder.group({
       text: ['', [Validators.required]],
       userId: ['', [Validators.required]],
-      postId: ['', [Validators.required]]
+      postId: ['', [Validators.required]],
+      specieId: ['', [Validators.required]]
     });
     this.userLoggedInfo = this.accountService.userValue;
     this.isLogged = this.userLoggedInfo != null;
     
     this.activateRoute.paramMap.subscribe(params => {
-      this.postId = params.get("id");
-      this.postService.GetPost(this.postId).subscribe(
+      let postId = params.get("id");
+      this.postService.GetPost(postId).subscribe(
         data => { 
           this.post = data;  
           this.postLabels = data.labels;
@@ -63,10 +63,11 @@ export class PostPageComponent implements OnInit {
           this.commentForm.patchValue({
             'userId': this.userLoggedInfo != null ? this.userLoggedInfo.userName : '',
             'postId': this.post.id,
+            'specieId': this.post.specieId
             });
         } 
       );
-      this.commentService.GetCommentsByPost(this.postId).subscribe(
+      this.commentService.GetCommentsByPost(postId).subscribe(
         data => { 
           this.comments = data 
         }
@@ -83,9 +84,9 @@ export class PostPageComponent implements OnInit {
         .pipe(first())
         .subscribe(
             data => {    
-              this.openCommonModal('user.successSaveUserData');
               this.comments.push(data);
               this.post.commentCount++;
+              this.commentForm.controls.text.setValue('');
             },
             error => {   
               if(error.status == "409"){
@@ -136,7 +137,6 @@ export class PostPageComponent implements OnInit {
   deleteComment(comment: CommentResponse){
     this.commentService.DeleteComment(comment.postId, comment.id).subscribe(
       data => {
-        this.openCommonModal('postdeleted');
         const index = this.comments.indexOf(comment, 0);
         if (index > -1) {
           this.comments.splice(index, 1);

@@ -19,7 +19,7 @@ export class CommentService {
   }
 
   GetCommentsByPost(postId: string){
-    return this.httpClient.get<CommentResponse[]>(`${environment.commentApiUrl}api/v1/Comment/GetComments/?postId=${postId}`)
+    return this.httpClient.get<CommentResponse[]>(`${environment.postApiUrl}api/v1/BirdPost/GetComments/?postId=${postId}`)
       .pipe(map(data => {
         return data;
       }));
