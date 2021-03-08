@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { environment } from '../../../../environments/environment';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
 import { PostService } from 'src/app/services/post/post.service';
 import { Observable, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
@@ -17,6 +17,7 @@ import { startWith } from 'rxjs/operators';
 import { ModalEditImageComponent } from '../modal-edit-image/modal-edit-image.component';
 import { AutocompleteService } from 'src/app/services/autocomplete/autocomplete.service';
 import { AutocompleteResponse } from 'src/app/model/specie';
+import { Router } from '@angular/router';
 
 class ImageSnippet {
   constructor(public src: string, public file: File) {}
@@ -76,8 +77,8 @@ export class CreatePostComponent implements OnInit {
     private matDialog: MatDialog,
     private locationService: LocationService,
     private accountService: AccountService,
-    private autocompleteService: AutocompleteService,
-    private el: ElementRef) { 
+    private router: Router,
+    private autocompleteService: AutocompleteService) { 
       
       //this.filteredLabel = this.labelCtrl.valueChanges.pipe(
       //  //startWith(null),
@@ -164,8 +165,7 @@ export class CreatePostComponent implements OnInit {
         .pipe(first())
         .subscribe(
             data => {    
-              this.openCommonModal('user.successSaveUserData');
-              this.postForm.reset();
+              this.router.navigate([`${data.userId}/post/${data.postId}`]);
             },
             error => {   
               if(error.status == "409"){

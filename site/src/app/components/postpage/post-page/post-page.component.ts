@@ -103,7 +103,8 @@ export class PostPageComponent implements OnInit {
       title: post.title,
       userId: this.userLoggedInfo.userName,
       vote: 1,
-      ownerUserId: post.userId
+      ownerUserId: post.userId,
+      specieId: post.specieId
     }
     this.voteService.AddVote(request)
       .pipe(first())

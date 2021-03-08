@@ -31,15 +31,11 @@ export class ModalEditImageComponent implements OnInit {
     this.initializeCropped(this.modalData.image);
   }
 
-  getFormatOne(){
-    this.aspectRatio = 1/1;
+  getFormat(){
+    this.aspectRatio = 5/4;
   }
 
-  getFormatTwo(){
-    this.aspectRatio = 4/3;
-  }
-
-  getFormatThree(){
+  getFormatPanoramic(){
     this.aspectRatio = 16/9;
   }
 
@@ -71,11 +67,13 @@ export class ModalEditImageComponent implements OnInit {
   }
 
   zoomOut() {
-    this.scale -= .1;
-    this.transform = {
-        ...this.transform,
-        scale: this.scale
-    };
+    if(this.scale > 1) {
+      this.scale -= .1;
+      this.transform = {
+          ...this.transform,
+          scale: this.scale
+      };
+    }
   }
 
   zoomIn() {

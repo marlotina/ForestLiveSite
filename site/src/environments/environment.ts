@@ -10,10 +10,11 @@ export const environment = {
   postApiUrl: 'https://postapiqa.azurewebsites.net/',
   userPostApiUrl: 'https://userpostapiqa.azurewebsites.net/',
   pendingApiUrl: 'https://pendingapiqa.azurewebsites.net/',
+  commentApiUrl: 'https://localhost:44320/',
   birdApiUrl: 'https://birdsapiqa.azurewebsites.net/',
   googleApiKey: 'AIzaSyAjqE9XcDEwD2SmV9mmf757kYOdwTbJvwQ',
   voteApiUrl: 'https://localhost:44338/',
-  whiteListDomains:  ["postapiqa.azurewebsites.net", "userapiqa.azurewebsites.net","birdsapiqa.azurewebsites.net","localhost:44304"],
+  whiteListDomains:  ["postapiqa.azurewebsites.net", "userapiqa.azurewebsites.net","birdsapiqa.azurewebsites.net","localhost:44304","localhost:44320"],
   blacklistedRoutes: []
 }
 /*

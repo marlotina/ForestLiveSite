@@ -4,6 +4,7 @@ export class VoteRequest {
     userId: string;
     vote: number;
     ownerUserId: string;
+    specieId: string;
 }
 
 export class VoteResponse {

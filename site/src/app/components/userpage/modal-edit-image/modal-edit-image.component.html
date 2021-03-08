@@ -3,18 +3,7 @@
     <section class="contact-area">
         <div class="container">
             <div class="row">
-                <div class="col-12 col-lg-6">
-                    <div class="form-group">
-                        <button (click)="zoomOut()" class="buttonTwo" style="width: 50%;"> - </button> 
-                        <button (click)="zoomIn()" class="buttonTwo" style="width: 50%;"> + </button>
-                    </div>
-                </div>
-                <div class="col-12 col-lg-6">
-                    <div class="form-group">
-                        <button (click)="resetImage()" class="buttonTwo">{{ 'createPost.resetImage' | translate }}</button>
-                    </div>
-                </div>
-
+                
                 <div class="col-12">
                     <div class="form-group">
                         <image-cropper
@@ -45,10 +34,21 @@
                         <input type="text" class="form-control" #altImageInput placeholder="{{ 'createPost.altImage' | translate }}"/>
                     </div>
                 </div>
-                <div class="col-12 col-lg-6">
+                <div class="col-12 col-lg-2">
                     <div class="form-group center">
-                        <button (click)="getFormatTwo()" class="buttonTwo" style="width: 50px">[]</button> 
-                        <button (click)="getFormatThree()" class="buttonTwo" style="width: 50px">[ ]</button>
+                        <button (click)="getFormat()" class="buttonTwo" style="width: 50px"><mat-icon>crop_5_4</mat-icon></button> 
+                        <button (click)="getFormatPanoramic()" class="buttonTwo" style="width: 50px"><mat-icon>crop_16_9</mat-icon></button>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-2">
+                    <div class="form-group center">
+                        <button (click)="zoomOut()" class="buttonTwo" style="width: 50%;"><mat-icon>remove</mat-icon></button> 
+                        <button (click)="zoomIn()" class="buttonTwo" style="width: 50%;"><mat-icon>add</mat-icon></button>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-2">
+                    <div class="form-group center">
+                        <button (click)="resetImage()" class="buttonTwo">{{ 'createPost.resetImage' | translate }}</button>
                     </div>
                 </div>
             </div>
