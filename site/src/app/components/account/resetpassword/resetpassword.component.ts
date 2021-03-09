@@ -7,7 +7,8 @@ import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-resetpassword',
-  templateUrl: './resetpassword.component.html'
+  templateUrl: './resetpassword.component.html',
+  styleUrls: ['./resetpassword.component.css']
 })
 export class ResetpasswordComponent implements OnInit {
 
