@@ -74,15 +74,15 @@ export class LandingPageComponent implements OnInit {
       title: post.title,
       userId: this.userLoggedInfo.userName,
       vote: 1,
-      ownerUserId: post.userId,
-      specieId: post.specieId
+      ownerUserId: post.userId
     }
+
     if(hasVote){
-      this.voteService.AddVote(request)
+      this.voteService.DeleteVote(post.voteId, post.postId)
       .pipe(first())
           .subscribe(
               data => {    
-                post.voteCount++;
+                post.voteCount--;
               },
               error => {   
                 if(error.status == "409"){

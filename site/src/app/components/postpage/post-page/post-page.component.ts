@@ -62,8 +62,7 @@ export class PostPageComponent implements OnInit {
           this.hasPost = true;
           this.commentForm.patchValue({
             'userId': this.userLoggedInfo != null ? this.userLoggedInfo.userName : '',
-            'postId': this.post.id,
-            'specieId': this.post.specieId
+            'postId': this.post.id
             });
         } 
       );
@@ -104,8 +103,7 @@ export class PostPageComponent implements OnInit {
       title: post.title,
       userId: this.userLoggedInfo.userName,
       vote: 1,
-      ownerUserId: post.userId,
-      specieId: post.specieId
+      ownerUserId: post.userId
     }
     this.voteService.AddVote(request)
       .pipe(first())

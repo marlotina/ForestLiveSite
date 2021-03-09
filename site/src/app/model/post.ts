@@ -33,6 +33,7 @@ export class PostResponse {
     userPhoto: string;
     observationDate: string;
     hasVote:boolean;
+    voteId: string;
 }
 
 export class DeletePost {
