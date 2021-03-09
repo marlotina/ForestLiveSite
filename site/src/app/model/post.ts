@@ -32,7 +32,7 @@ export class PostResponse {
     specieId: string;
     userPhoto: string;
     observationDate: string;
-    specieConfirmed:boolean;
+    hasVote:boolean;
 }
 
 export class DeletePost {

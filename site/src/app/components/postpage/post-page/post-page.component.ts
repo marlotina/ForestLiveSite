@@ -114,12 +114,7 @@ export class PostPageComponent implements OnInit {
                 this.post.voteCount++;
               },
               error => {   
-                if(error.status == "409"){
-                  this.openCommonModal('account.conflictNameMessage');
-                  this.commentForm.controls.userName.setErrors({'incorrect': true});
-                } else {
-                  this.openCommonModal('user.failUserAction');
-                } 
+                this.openCommonModal('user.failUserAction'); 
               });
   }
 

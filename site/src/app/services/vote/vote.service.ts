@@ -17,4 +17,11 @@ export class VoteService {
         return data;
       }));
   }
+
+  DeleteVote(voteId: string, postId: string, specieId: string){
+    return this.httpClient.delete(`${environment.voteApiUrl}api/v1/VotePost/AddVote/?voteId=${voteId}&postId=${postId}&specieId=${specieId}`)
+      .pipe(map(data => {
+        return data;
+      }));
+  }
 }

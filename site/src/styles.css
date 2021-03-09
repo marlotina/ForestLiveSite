@@ -114,3 +114,40 @@ html, body { height: 100%; }
 	font-weight: 700;
 	padding: 5px 0;
 }
+
+.vote-btn {
+	-webkit-transition-duration: 400ms;
+	transition-duration: 400ms;
+	position: relative;
+	z-index: 1;
+	display: inline-block;
+	height: 46px;
+	line-height: 42px;
+	color: black;
+	background: transparent;
+	font-weight: 600; }
+	.vote-btn.active, .vote-btn:hover, .vote-btn:focus {
+	  font-size: 16px;
+	  color: #70c745;
+	  font-weight: 600;
+	  background-color: transparent;
+	  box-shadow: none; }
+
+.hasVote-btn {
+-webkit-transition-duration: 400ms;
+transition-duration: 400ms;
+position: relative;
+z-index: 1;
+display: inline-block;
+height: 46px;
+line-height: 42px;
+color: #70c745;
+background: transparent;
+font-weight: 600; }
+.hasVote-btn.active, .hasVote-btn:hover, .hasVote-btn:focus {
+	font-size: 16px;
+	color: black;
+	font-weight: 600;
+	background-color: transparent;
+	box-shadow: none; }
+	

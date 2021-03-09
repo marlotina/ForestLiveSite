@@ -16,7 +16,7 @@
                         
                         <div class="single-post-details-area divPost">
                             <div class="post-content">
-
+                                <div>{{post.voteCount}}<button type="button" (click)="addVote(post, post.hasVote)" [ngClass]="{'hasVote-btn' : post.hasVote, 'vote-btn' : !post.hasVote}" class="btn"><mat-icon>thumb_up</mat-icon></button></div>
                                 <div class="single-widget-area"> 
                                     <div class="row">
                                         <div class="col-6 col-md-6">

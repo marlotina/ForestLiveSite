@@ -2,10 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { first } from 'rxjs/operators';
 import { User } from 'src/app/model/account';
 import { PostResponse } from 'src/app/model/post';
+import { VoteRequest } from 'src/app/model/vote';
 import { AccountService } from 'src/app/services/account/account.service';
 import { PostService } from 'src/app/services/post/post.service';
+import { VoteService } from 'src/app/services/vote/vote.service';
 import { environment } from 'src/environments/environment';
 import { CommonDialogComponent } from '../../shared/common-dialog/common-dialog.component';
 
@@ -29,6 +32,7 @@ export class LandingPageComponent implements OnInit {
     private postService: PostService,
     private activateRoute: ActivatedRoute,
     private accountService: AccountService,
+    private voteService: VoteService,
     private matDialog: MatDialog) { 
 
     this.activateRoute.paramMap.subscribe(params => {
@@ -62,6 +66,47 @@ export class LandingPageComponent implements OnInit {
       error => { 
         this.openCommonModal('failpostdelete');
       });
+  }
+
+  addVote(post: PostResponse, hasVote: boolean){
+    let request: VoteRequest = {
+      postId: post.postId,
+      title: post.title,
+      userId: this.userLoggedInfo.userName,
+      vote: 1,
+      ownerUserId: post.userId,
+      specieId: post.specieId
+    }
+    if(hasVote){
+      this.voteService.AddVote(request)
+      .pipe(first())
+          .subscribe(
+              data => {    
+                post.voteCount++;
+              },
+              error => {   
+                if(error.status == "409"){
+                  this.openCommonModal('account.conflictNameMessage');
+                } else {
+                  this.openCommonModal('user.failUserAction');
+                } 
+              });
+    }else{
+      this.voteService.AddVote(request)
+      .pipe(first())
+          .subscribe(
+              data => {    
+                post.voteCount++;
+              },
+              error => {   
+                if(error.status == "409"){
+                  this.openCommonModal('account.conflictNameMessage');
+                } else {
+                  this.openCommonModal('user.failUserAction');
+                } 
+              });
+    }
+    
   }
 
   openCommonModal(message:string) {
