@@ -24,4 +24,11 @@ export class VoteService {
         return data;
       }));
   }
+
+  GetVotesByUser(userId: string){
+    return this.httpClient.get<VoteResponse[]>(`${environment.userPostApiUrl}api/v1/VotePost/GetVoteByUser/?userId=${userId}`)
+      .pipe(map(data => {
+        return data;
+      }));
+  }
 }

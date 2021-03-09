@@ -1,18 +1,22 @@
-<div class="breadcrumb-area">
-    <div class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center" style="background-image: url(../../../../../assets/img/bg-img/24.jpg);">
-        <h2>{{ 'userPage.userPage' | translate }}</h2>
-    </div>
-</div>
+
 
 <div class="container section-padding-0-100">
     
+    <div class="menu-profile">
+        <div >
+            <button class="btn active" routerLink="/createPost">Create post</button>
+            <button class="btn">My votes</button>
+            <button class="btn">My comments</button>
+            <button class="btn" routerLink="/userProfile">My profile</button>
+        </div>
+    </div>
+    
     <div class="row justify-content-center mb-100">
+
+
         <!-- Blog Posts Area -->
         <div class="col-12 col-md-8">
-            <div class="section-heading">
-                <h2>{{ 'createPost.createPost' | translate }}</h2>
-                <p>Edit your profile</p>
-            <div>
+        
             <div class="divPost">
                 <div class="blog-posts-area">
                     <div class="leave-comment-area clearfix">
