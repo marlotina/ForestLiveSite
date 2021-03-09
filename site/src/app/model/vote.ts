@@ -2,7 +2,6 @@ export class VoteRequest {
     postId: string;
     title: string;
     userId: string;
-    vote: number;
     ownerUserId: string;
 }
 

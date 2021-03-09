@@ -16,10 +16,13 @@
                         
                         <div class="single-post-details-area divPost">
                             <div class="post-content">
-                                <div>{{post.voteCount}}<button type="button" (click)="addVote(post, post.hasVote)" [ngClass]="{'hasVote-btn' : post.hasVote, 'vote-btn' : !post.hasVote}" class="btn"><mat-icon>thumb_up</mat-icon></button></div>
                                 <div class="single-widget-area"> 
                                     <div class="row">
-                                        <div class="col-6 col-md-6">
+                                        <div class="col-11 col-md-1 voteDiv">
+                                            {{post.voteCount}}
+                                            <button type="button" (click)="addVote(post, post.hasVote)" [ngClass]="{'hasVote-btn' : post.hasVote, 'vote-btn' : !post.hasVote}" class="votebtn"><mat-icon>thumb_up</mat-icon></button>
+                                        </div>
+                                        <div class="col-6 col-md-10">
                                             <div class="single-latest-post d-flex align-items-center">
                                                 <div class="author-thumb">
                                                     <img src="https://birdpostsqa.blob.core.windows.net/profiles/{{post.userPhoto}}" alt="image of {{post.userId}}" class="imgProfilePost">
@@ -30,7 +33,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-6 col-md-6 text-right">
+                                        <div class="col-6 col-md-1 text-right">
                                             <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu" *ngIf="showDeleteOption(post.userId)">
                                                 <mat-icon>more_vert</mat-icon>
                                             </button>

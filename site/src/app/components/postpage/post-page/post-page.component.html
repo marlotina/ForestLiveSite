@@ -17,8 +17,16 @@
                         <div class="single-post-details-area">
                             <div class="post-content">
                                 <div class="row">
-                                    <div class="col-11 col-md-11">
+                                    <div class="col-11 col-md-1 voteDiv">
+                                        {{post.voteCount}}
+                                        <button type="button" (click)="addVote(post, post.hasVote)" [ngClass]="{'hasVote-btn' : post.hasVote, 'vote-btn' : !post.hasVote}" class="votebtn"><mat-icon>thumb_up</mat-icon></button>
+                                    </div>
+                                    <div class="col-11 col-md-10">
                                         <h4 class="post-title">{{post.title}}</h4>
+                                        <div class="post-meta mb-30">
+                                            <a href="#"><i class="fa fa-clock-o" aria-hidden="true"></i> {{post.observationDate}}</a>
+                                            <a target="blank" href="/userpage/{{post.userId}}"><i class="fa fa-user" aria-hidden="true"></i> {{post.userId}}</a>
+                                        </div>
                                     </div>
                                     <div class="col-1 col-md-1 text-right">
                                         <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu" *ngIf="showOwnerOptions">
@@ -32,18 +40,13 @@
                                         </mat-menu>
                                     </div>
                                 </div>
-                                <div class="post-meta mb-30">
-                                    <a href="#"><i class="fa fa-clock-o" aria-hidden="true"></i> {{post.observationDate}}</a>
-                                    <a target="blank" href="/userpage/{{post.userId}}"><i class="fa fa-user" aria-hidden="true"></i> {{post.userId}}</a>
-                                </div>
+                                
                                 <div>
-                                <div>{{post.voteCount}}<button type="button" (click)="addVote(post)" class="btn vote-btn"><mat-icon>thumb_up</mat-icon></button></div>
-                              
-                                <div class="post-thumbnail mb-30">
-                                    <a href="{{imagePost}}"><img src="{{imagePost}}" alt="{{post.altImage}}" class="postImage divPostImgContent"></a>
-                                    
+                                    <div class="post-thumbnail mb-30">
+                                        <a href="{{imagePost}}"><img src="{{imagePost}}" alt="{{post.altImage}}" class="postImage divPostImgContent"></a>
+                                        
+                                    </div>
                                 </div>
-                            </div>
                                 <p>
                                     {{post.text}}
                                 </p>

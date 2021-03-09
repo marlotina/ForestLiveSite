@@ -97,23 +97,43 @@ export class PostPageComponent implements OnInit {
             });
   }
 
-  addVote(post: PostResponse){
+  addVote(post: PostResponse, hasVote: boolean){
     let request: VoteRequest = {
       postId: post.postId,
       title: post.title,
       userId: this.userLoggedInfo.userName,
-      vote: 1,
       ownerUserId: post.userId
     }
-    this.voteService.AddVote(request)
+
+    if(hasVote){
+      this.voteService.DeleteVote(post.voteId, post.postId)
       .pipe(first())
           .subscribe(
               data => {    
-                this.post.voteCount++;
+                post.voteCount--;
               },
               error => {   
-                this.openCommonModal('user.failUserAction'); 
+                if(error.status == "409"){
+                  this.openCommonModal('account.conflictNameMessage');
+                } else {
+                  this.openCommonModal('user.failUserAction');
+                } 
               });
+    }else{
+      this.voteService.AddVote(request)
+      .pipe(first())
+          .subscribe(
+              data => {    
+                post.voteCount++;
+              },
+              error => {   
+                if(error.status == "409"){
+                  this.openCommonModal('account.conflictNameMessage');
+                } else {
+                  this.openCommonModal('user.failUserAction');
+                } 
+              });
+    }
   }
 
   deleteItem(){
@@ -128,7 +148,7 @@ export class PostPageComponent implements OnInit {
   }
 
   deleteComment(comment: CommentResponse){
-    this.commentService.DeleteComment(comment.postId, comment.id).subscribe(
+    this.commentService.DeleteComment(comment.postId, comment.id, this.post.specieId).subscribe(
       data => {
         const index = this.comments.indexOf(comment, 0);
         if (index > -1) {
