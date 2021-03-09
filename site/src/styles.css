@@ -175,31 +175,6 @@ font-weight: 600; }
 	text-align: center;
 }
 
-.menu-profile 
-{
-	position: relative;
-	z-index: 1;
-	text-align: center;
-	margin-bottom: 30px; 
-}
-.menu-profile .btn 
-{
-	-webkit-transition-duration: 300ms;
-	transition-duration: 300ms;
-	padding: 0;
-	font-size: 20px;
-	color: #707070;
-	font-weight: 500;
-	background-color: transparent;
-	padding: 0 20px; 
-}
-
-.menu-profile .active 
-{
-	color: #70c745;
-	box-shadow: none; 
-}
-
 
 @media only screen and (max-width: 767px) 
 {
@@ -210,14 +185,91 @@ font-weight: 600; }
 	} 
 }
 
-.menu-profile .btn:hover, .menu-profile .btn:focus 
-{
-	color: #70c745;
-	box-shadow: none; 
-}
-
+.is-invalid {
+	border-color: red !important;
+  }
+  
+  .error-text {
+	color: red;
+  }
+  
+  .hidden {
+	display: none !important;
+	visibility: hidden;
+  }
+  
+  .blockInput {
+	pointer-events: none;
+  }
+  
+  .buttonTwo {
+	-webkit-transition-duration: 500ms;
+	transition-duration: 500ms;
+	width: 100%;
+	height: calc(2.25rem + 2px);
+	border: 1px solid #ebebeb;
+	background-color: #cccccc;
+	color: #303030;
+	font-size: 14px;
+	text-transform: uppercase;
+	cursor: pointer;
+	font-weight: 500;
+	margin-bottom: 0;
+  }
+  
+  .buttonTwo:hover {
+	background-color: #70c745;
+	color: #ffffff;
+	border-color: #70c745;
+  }
+  
+  .buttonThree {
+	-webkit-transition-duration: 500ms;
+	transition-duration: 500ms;
+	height: 30px;
+	min-width: 150px;
+	border: 1px solid #ebebeb;
+	background-color: #cccccc;
+	color: #303030;
+	font-size: 14px;
+	text-transform: uppercase;
+	cursor: pointer;
+	font-weight: 500;
+	margin-bottom: 0;
+  }
+  
+  .buttonThree:hover {
+	background-color: #70c745;
+	color: #ffffff;
+	border-color: #70c745;
+  }
+  
+  a:hover {
+	cursor:pointer;
+   }
+  
+  .map-container{
+	  width: 100% !important;
+  }
+  
+  .autocomplete-form {
+	min-width: 150px;
+	max-width: 500px;
+	width: 100%;
+  }
+  
+  .autocomplete-full-width {
+	width: 100%;
+  }
+/*new*/
 body {
 	min-height: 75rem;
 	padding-top: 4.5rem;
   }
+
+.mt-15 {
+	margin-top: 15px !important;
+}
+
   
+
