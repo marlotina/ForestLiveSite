@@ -1,97 +1,97 @@
-<div class="breadcrumb-area">
-    <div class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center" style="background-image: url(../../../../../assets/img/bg-img/24.jpg);">
-        <h2>SINGLE BLOG POST</h2>
-    </div>
-</div>
 
-<section class="blog-content-area section-padding-0-100">
-    
-    <div class="container">
-        <div class="row justify-content-center">
-            
-              
-            <div class="col-12 col-md-8">
+<div class="container mt-15">
+    <div class="row justify-content-center">
+        
+        <div class="col-12 col-md-8">             
+            <div *ngIf="hasPost">
                 
-                <div class="blog-posts-area divPost">
-                    <div *ngIf="hasPost">
-                        <div class="single-post-details-area">
-                            <div class="post-content">
-                                <div class="row">
-                                    <div class="col-11 col-md-1 voteDiv">
-                                        {{post.voteCount}}
-                                        <button type="button" (click)="addVote(post, post.hasVote)" [ngClass]="{'hasVote-btn' : post.hasVote, 'vote-btn' : !post.hasVote}" class="votebtn"><mat-icon>thumb_up</mat-icon></button>
-                                    </div>
-                                    <div class="col-11 col-md-10">
-                                        <h4 class="post-title">{{post.title}}</h4>
-                                        <div class="post-meta mb-30">
-                                            <a href="#"><i class="fa fa-clock-o" aria-hidden="true"></i> {{post.observationDate}}</a>
-                                            <a target="blank" href="/userpage/{{post.userId}}"><i class="fa fa-user" aria-hidden="true"></i> {{post.userId}}</a>
-                                        </div>
-                                    </div>
-                                    <div class="col-1 col-md-1 text-right">
-                                        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu" *ngIf="showOwnerOptions">
-                                            <mat-icon>more_vert</mat-icon>
-                                        </button>
-                                        <mat-menu #menu="matMenu" >
-                                            <button mat-menu-item type="button" (click)="deleteItem()">
-                                                <mat-icon>delete</mat-icon>
-                                                <span>{{ 'postPage.delete' | translate }}</span>
-                                            </button>
-                                        </mat-menu>
-                                    </div>
-                                </div>
-                                
+                <div class="row divPost divPostColor">  
+                    <div class="col-12 col-md-1 div-right-line div-bottom-line">
+                        <div class="divVote">
+                            {{post.voteCount}}
+                            <button type="button" 
+                                (click)="addVote(post, post.hasVote)" 
+                                [ngClass]="{'hasVote-btn' : post.hasVote, 'vote-btn' : !post.hasVote}" 
+                                class="votebtn">
+                                <mat-icon>thumb_up</mat-icon>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-11 div-bottom-line">
+                        <div class="row mb-15 div-bottom-line">
+                            <div class="col-12 col-md-11">
                                 <div>
-                                    <div class="post-thumbnail mb-30">
-                                        <a href="{{imagePost}}"><img src="{{imagePost}}" alt="{{post.altImage}}" class="postImage divPostImgContent"></a>
-                                        
+                                    <a class="text-dark titlePost fs-4 titleBtn" href="/{{post.userId}}/post/{{post.postId}}">{{post.title}}</a>
+                                    <div>
+                                        <a class="text-dark btn fs-6 fw-light titleBtn" href="/userpage/{{post.userId}}">{{post.userId}}</a>
                                     </div>
                                 </div>
-                                <p>
-                                    {{post.text}}
-                                </p>
+                            </div>
+                            <div class="col-12 col-md-1 text-right">
+                                <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu" *ngIf="showOwnerOptions">
+                                    <mat-icon>more_vert</mat-icon>
+                                </button>
+                                <mat-menu #menu="matMenu" >
+                                    <button mat-menu-item type="button" (click)="deleteItem()">
+                                        <mat-icon>delete</mat-icon>
+                                        <span>{{ 'postPage.delete' | translate }}</span>
+                                    </button>
+                                </mat-menu>
                             </div>
                         </div>
-                        <!-- Post Tags & Share -->
-                        <div class="post-tags-share d-flex justify-content-between align-items-center">
-                            <!-- Tags -->
-                            <ol  class="popular-tags d-flex align-items-center flex-wrap">
+                        <div class="row mb-15 div-bottom-line">
+                            <a href="{{imagePost}}"><img src="{{imagePost}}" alt="{{post.altImage}}" class="postImage divPostImgContent img-fluid rounded float-end"></a>
+                        </div>
+                        <div class="row mb-5 div-bottom-line">
+                            <div>
+                                {{post.commentCount}}<mat-icon>comment</mat-icon><span class="aligned-with-icon">comments</span>
+                            </div>
+                        </div>
+                        <div class="row mb-5">
+                            <div>
+                                {{ 'userPage.birdSpecie' | translate }}: {{post.birdSpecie}}
+                            </div>
+                        </div>
+                        <div class="row mb-5">
+                            <div>
+                                {{ 'userPage.observationDate' | translate }}: {{post.observationDate}} 
+                            </div>
+                        </div>
+                        <div class="row mb-15">
+                            <div>
+                                {{post.text}}
+                            </div>
+                        </div>
+                        <div class="row mb-15">
+                            <ul>
                                 <li><span>{{ 'postPage.tags' | translate }}:</span></li>
                                 <li *ngFor="let label of postLabels"><a href="#">{{label}}</a></li>
-                            </ol>
-                            <!-- Share -->
-                            <div class="post-share">
-                                <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-                                <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-                                <a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
-                                <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
-                            </div>
+                            </ul>
+                        </div>
+                        <div class="row mb-15">
+                            <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i>DO</a>
+                            <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i>DO</a>
+                            <a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i>DO</a>
+                            <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i>DO</a>
                         </div>
                     </div>
-                    <div *ngIf="!hasPost">
-                        POst not FoUnD
-                    </div>
                     
-
-                    
-                    
-                    <!-- Comment Area Start -->
-                    <div class="comment_area clearfix">
-                        <h4 class="headline" *ngIf="hasPost">{{post.commentCount}} {{ 'postPage.comments' | translate }}</h4>
-
-                        <ol *ngFor="let comment of comments">
-                            <!-- Single Comment Area -->
-                            <li class="single_comment_area">
-                                <div class="comment-wrapper d-flex">
+                    <div class="col-12 col-md-12">
+                        <div class="comment_area clearfix">
+                            <h4 class="headline" *ngIf="hasPost">{{post.commentCount}} {{ 'postPage.comments' | translate }}</h4>
+    
+                            <ol *ngFor="let comment of comments">
+                                <!-- Single Comment Area -->
+                                <li class="single_comment_area">
                                     <!-- Comment Meta -->
-                                    <div class="comment-author">
-                                        <a href="{{comment.userId}}"><img src="{{imagesProfileUrl}}{{comment.userImage}}" alt="{{ 'postPage.userImage' | translate }}"></a>
+                                    <div>
+                                        <a href="{{comment.userId}}"><img src="{{imagesProfileUrl}}{{comment.userImage}}" alt="{{ 'postPage.userImage' | translate }}" class="imgAuthorPost"></a>
                                     </div>
                                     <!-- Comment Content -->
-                                    <div class="comment-content">
+                                    <div>
                                         <div class="d-flex align-items-center justify-content-between">
                                             <h5>{{comment.userId}}</h5>
-                                            <span class="comment-date">
+                                            <span>
                                                 {{comment.createDate}}
                                                 <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu" *ngIf="showOwnerCommentOptions(comment.userId)">
                                                     <mat-icon>more_vert</mat-icon>
@@ -106,189 +106,52 @@
                                         </div>
                                         <p>{{comment.text}}</p>
                                     </div>
+                                </li>
+                            </ol>
+                        </div>
+    
+                        <div *ngIf="isLogged && hasPost">
+                            <div class="comment-form">
+                                <h4 class="headline">{{ 'postPage.leaveComment' | translate }}</h4>
+    
+                                <div class="contact-form-area">
+                                    <!-- Comment Form -->
+                                    <form [formGroup]="commentForm" (ngSubmit)="onSubmit()">
+                                        <div class="row">
+                                            <div class="col-12 col-md-6">
+                                                <div class="form-group">
+                                                    <input type="text" formControlName="userId" class="form-control" id="contact-name" placeholder="{{ 'postPage.name' | translate }}" disabled>
+                                                </div>
+                                            </div>
+                                            <div class="col-12">
+                                                <div class="form-group">
+                                                    <textarea class="form-control" formControlName="text" name="text" id="text" cols="30" rows="10" placeholder="{{ 'postPage.comment' | translate }}"></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="col-12">
+                                                <button type="submit" class="btn alazea-btn">{{ 'postPage.postComment' | translate }}</button>
+                                            </div>
+                                        </div>
+                                    </form>
                                 </div>
-                            </li>
-                        </ol>
-                    </div>
-
-                    <!-- Leave A Comment -->
-                    <div class="leave-comment-area clearfix" *ngIf="isLogged && hasPost">
-                        <div class="comment-form">
-                            <h4 class="headline">{{ 'postPage.leaveComment' | translate }}</h4>
-
-                            <div class="contact-form-area">
-                                <!-- Comment Form -->
-                                <form [formGroup]="commentForm" (ngSubmit)="onSubmit()">
-                                    <div class="row">
-                                        <div class="col-12 col-md-6">
-                                            <div class="form-group">
-                                                <input type="text" formControlName="userId" class="form-control" id="contact-name" placeholder="{{ 'postPage.name' | translate }}" disabled>
-                                            </div>
-                                        </div>
-                                        <div class="col-12">
-                                            <div class="form-group">
-                                                <textarea class="form-control" formControlName="text" name="text" id="text" cols="30" rows="10" placeholder="{{ 'postPage.comment' | translate }}"></textarea>
-                                            </div>
-                                        </div>
-                                        <div class="col-12">
-                                            <button type="submit" class="btn alazea-btn">{{ 'postPage.postComment' | translate }}</button>
-                                        </div>
-                                    </div>
-                                </form>
                             </div>
                         </div>
                     </div>
-
-                </div>
+                </div>  
             </div>
-
-            <!-- Blog Sidebar Area -->
-            <div class="col-12 col-sm-9 col-md-4">
-                <div class="post-sidebar-area">
-                    <app-author-details></app-author-details>
-                    <!-- ##### Single Widget Area ##### -->
-                    <div class="single-widget-area">
-                        <!-- Title -->
-                        <div class="widget-title">
-                            <h4>Recent post</h4>
-                        </div>
-
-                        <!-- Single Latest Posts -->
-                        <div class="single-latest-post d-flex align-items-center">
-                            <div class="post-thumb">
-                                <img src="../../../../../assets/img/bg-img/30.jpg" alt="">
-                            </div>
-                            <div class="post-content">
-                                <a href="#" class="post-title">
-                                    <h6>New Harris Bugg design for Bridgewater</h6>
-                                </a>
-                                <a href="#" class="post-date">20 Jun 2018</a>
-                            </div>
-                        </div>
-
-                        <!-- Single Latest Posts -->
-                        <div class="single-latest-post d-flex align-items-center">
-                            <div class="post-thumb">
-                                <img src="../../../../../assets/img/bg-img/31.jpg" alt="">
-                            </div>
-                            <div class="post-content">
-                                <a href="#" class="post-title">
-                                    <h6>The designers will create a new kitchen garden</h6>
-                                </a>
-                                <a href="#" class="post-date">20 Jun 2018</a>
-                            </div>
-                        </div>
-
-                        <!-- Single Latest Posts -->
-                        <div class="single-latest-post d-flex align-items-center">
-                            <div class="post-thumb">
-                                <img src="../../../../../assets/img/bg-img/32.jpg" alt="">
-                            </div>
-                            <div class="post-content">
-                                <a href="#" class="post-title">
-                                    <h6>SGD Members win Best of Houzz Design Award</h6>
-                                </a>
-                                <a href="#" class="post-date">20 Jun 2018</a>
-                            </div>
-                        </div>
-
-                        <!-- Single Latest Posts -->
-                        <div class="single-latest-post d-flex align-items-center">
-                            <div class="post-thumb">
-                                <img src="../../../../../assets/img/bg-img/33.jpg" alt="">
-                            </div>
-                            <div class="post-content">
-                                <a href="#" class="post-title">
-                                    <h6>Shepherding Vegetables From Roof to Restaurant</h6>
-                                </a>
-                                <a href="#" class="post-date">20 Jun 2018</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- ##### Single Widget Area ##### -->
-                    <div class="single-widget-area">
-                        <!-- Title -->
-                        <div class="widget-title">
-                            <h4>Tag Cloud</h4>
-                        </div>
-                        <!-- Tags -->
-                        <ol class="popular-tags d-flex flex-wrap">
-                            <li><a href="#">PLANTS</a></li>
-                            <li><a href="#">NEW PRODUCTS</a></li>
-                            <li><a href="#">CACTUS</a></li>
-                            <li><a href="#">DESIGN</a></li>
-                            <li><a href="#">NEWS</a></li>
-                            <li><a href="#">TRENDING</a></li>
-                            <li><a href="#">VIDEO</a></li>
-                            <li><a href="#">GARDEN DESIGN</a></li>
-                        </ol>
-                    </div>
-
-                    <!-- ##### Single Widget Area ##### -->
-                    <div class="single-widget-area">
-                        <!-- Title -->
-                        <div class="widget-title">
-                            <h4>BEST SELLER</h4>
-                        </div>
-
-                        <!-- Single Best Seller Products -->
-                        <div class="single-best-seller-product d-flex align-items-center">
-                            <div class="product-thumbnail">
-                                <a href="shop-details.html"><img src="../../../../../assets/img/bg-img/4.jpg" alt=""></a>
-                            </div>
-                            <div class="product-info">
-                                <a href="shop-details.html">Cactus Flower</a>
-                                <p>$10.99</p>
-                                <div class="ratings">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Single Best Seller Products -->
-                        <div class="single-best-seller-product d-flex align-items-center">
-                            <div class="product-thumbnail">
-                                <a href="shop-details.html"><img src="../../../../../assets/img/bg-img/5.jpg" alt=""></a>
-                            </div>
-                            <div class="product-info">
-                                <a href="shop-details.html">Tulip Flower</a>
-                                <p>$11.99</p>
-                                <div class="ratings">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Single Best Seller Products -->
-                        <div class="single-best-seller-product d-flex align-items-center">
-                            <div class="product-thumbnail">
-                                <a href="shop-details.html"><img src="../../../../../assets/img/bg-img/34.jpg" alt=""></a>
-                            </div>
-                            <div class="product-info">
-                                <a href="shop-details.html">Recuerdos Plant</a>
-                                <p>$9.99</p>
-                                <div class="ratings">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
+            
+            <div *ngIf="!hasPost">
+                POst not FoUnD
             </div>
         </div>
+
+        <div class="col-12 col-sm-9 col-md-4" >
+            <div class="mb-15" [hidden]="!isLogged">
+                <a routerLink="/createPost" class="btn btn-primary" style="width: 100%;">{{ 'userPage.addPost' | translate }}</a>
+            </div>
+
+            <app-author-details></app-author-details>
+        </div>
     </div>
-</section>
+</div>
+

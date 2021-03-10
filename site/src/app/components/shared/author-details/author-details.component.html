@@ -5,11 +5,11 @@
             <img class="imgProfilePost" [src]="userImage" alt="image of {{userInfo.userName}}">
         </div>
         <div>
-            <h5>{{userInfo.userName}}</h5>
-            <p>Register from: {{userInfo.registrationDate}}</p>
+            <strong>{{userInfo.userName}}</strong>
+            <p><small>Register from: {{userInfo.registrationDate}}</small></p>
         </div>
     </div>
-    <p>{{userInfo.description}}</p>
+    <p><em>{{userInfo.description}}</em></p>
     <div  class="d-flex">
         <a href="https://{{userInfo.facebookUrl}}" *ngIf="userInfo.facebookUrl != '' && userInfo.facebookUrl != null"  target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a>
         <a href="https://{{userInfo.twitterUrl}}" *ngIf="userInfo.twitterUrl != '' && userInfo.twitterUrl != null"  target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>

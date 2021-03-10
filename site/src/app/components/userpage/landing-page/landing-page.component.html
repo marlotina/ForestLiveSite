@@ -1,89 +1,89 @@
-    <div class="container mt-15">
-        <div class="row justify-content-center">
-            
-            <div class="col-12 col-md-8">             
-                <div *ngFor="let post of userPosts">
-                    
-                    <div class="row divPost divPostColor">  
-                        <div class="col-12 col-md-1 div-right-line">
-                            <div class="divVote">
-                                {{post.voteCount}}
-                                <button type="button" 
-                                    (click)="addVote(post, post.hasVote)" 
-                                    [ngClass]="{'hasVote-btn' : post.hasVote, 'vote-btn' : !post.hasVote}" 
-                                    class="votebtn">
-                                    <mat-icon>thumb_up</mat-icon>
-                                </button>
-                            </div>
+<div class="container mt-15">
+    <div class="row justify-content-center">
+        
+        <div class="col-12 col-md-8">             
+            <div *ngFor="let post of userPosts">
+                
+                <div class="row divPost divPostColor">  
+                    <div class="col-12 col-md-1 div-right-line">
+                        <div class="divVote">
+                            {{post.voteCount}}
+                            <button type="button" 
+                                (click)="addVote(post, post.hasVote)" 
+                                [ngClass]="{'hasVote-btn' : post.hasVote, 'vote-btn' : !post.hasVote}" 
+                                class="votebtn">
+                                <mat-icon>thumb_up</mat-icon>
+                            </button>
                         </div>
-                        <div class="col-12 col-md-11">
-                            <div class="row mb-15 div-bottom-line">
-                                <div class="col-12 col-md-11">
+                    </div>
+                    <div class="col-12 col-md-11">
+                        <div class="row mb-15 div-bottom-line">
+                            <div class="col-12 col-md-11">
+                                <div>
+                                    <a class="text-dark titlePost fs-4 titleBtn" href="/{{post.userId}}/post/{{post.postId}}">{{post.title}}</a>
                                     <div>
-                                        <a class="text-dark titlePost fs-4 titleBtn" href="/{{post.userId}}/post/{{post.postId}}">{{post.title}}</a>
-                                        <div>
-                                            <img src="https://birdpostsqa.blob.core.windows.net/profiles/{{post.userPhoto}}" alt="image of {{post.userId}}" class="imgAuthorPost">
-                                            <a class="text-dark btn fs-6 fw-light titleBtn" href="/userpage/{{post.userId}}">{{post.userId}}</a>
-                                        </div>
+                                        <img src="https://birdpostsqa.blob.core.windows.net/profiles/{{post.userPhoto}}" alt="image of {{post.userId}}" class="imgAuthorPost">
+                                        <a class="text-dark btn fs-6 fw-light titleBtn" href="/userpage/{{post.userId}}">{{post.userId}}</a>
                                     </div>
                                 </div>
-                                <div class="col-12 col-md-1 text-right">
-                                    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu" *ngIf="showDeleteOption(post.userId)">
-                                        <mat-icon>more_vert</mat-icon>
+                            </div>
+                            <div class="col-12 col-md-1 text-right">
+                                <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu" *ngIf="showDeleteOption(post.userId)">
+                                    <mat-icon>more_vert</mat-icon>
+                                </button>
+                                <mat-menu #menu="matMenu" >
+                                    <button mat-menu-item type="button" (click)="deleteItem(post)">
+                                        <mat-icon>delete</mat-icon>
+                                        <span>{{ 'postPage.delete' | translate }}</span>
                                     </button>
-                                    <mat-menu #menu="matMenu" >
-                                        <button mat-menu-item type="button" (click)="deleteItem(post)">
-                                            <mat-icon>delete</mat-icon>
-                                            <span>{{ 'postPage.delete' | translate }}</span>
-                                        </button>
-                                    </mat-menu>
-                                </div>
-                            </div>
-                            <div class="row mb-15 div-bottom-line">
-                                <img src="{{imagesPostUrl}}{{post.imageUrl}}" alt="{{post.altImage}}" class="postImage divPostImgContent img-fluid rounded float-end">
-                            </div>
-                            <div class="row mb-5 div-bottom-line">
-                                <div>
-                                    {{post.commentCount}}<mat-icon>comment</mat-icon><span class="aligned-with-icon">comments</span>
-                                </div>
-                            </div>
-                            <div class="row mb-5">
-                                <div>
-                                    {{ 'userPage.birdSpecie' | translate }}: {{post.birdSpecie}}
-                                </div>
-                            </div>
-                            <div class="row mb-5">
-                                <div>
-                                    {{ 'userPage.observationDate' | translate }}: {{post.observationDate}} 
-                                </div>
-                            </div>
-                            <div class="row mb-15">
-                                <div>
-                                    {{post.text}}
-                                </div>
+                                </mat-menu>
                             </div>
                         </div>
-                    </div>  
-                </div>
-                
-                <div class="single-post-details-area" *ngIf="hasNotPosts">
-                    <div class="leave-comment-area clearfix">
-                        <div class="post-content">
-                            <p>
-                                {{ 'userPage.userWithoutPost' | translate }}
-                            </p>
+                        <div class="row mb-15 div-bottom-line">
+                            <img src="{{imagesPostUrl}}{{post.imageUrl}}" alt="{{post.altImage}}" class="postImage divPostImgContent img-fluid rounded float-end">
                         </div>
+                        <div class="row mb-5 div-bottom-line">
+                            <div>
+                                {{post.commentCount}}<mat-icon>comment</mat-icon><span class="aligned-with-icon">comments</span>
+                            </div>
+                        </div>
+                        <div class="row mb-5">
+                            <div>
+                                {{ 'userPage.birdSpecie' | translate }}: {{post.birdSpecie}}
+                            </div>
+                        </div>
+                        <div class="row mb-5">
+                            <div>
+                                {{ 'userPage.observationDate' | translate }}: {{post.observationDate}} 
+                            </div>
+                        </div>
+                        <div class="row mb-15">
+                            <div>
+                                {{post.text}}
+                            </div>
+                        </div>
+                    </div>
+                </div>  
+            </div>
+            
+            <div class="single-post-details-area" *ngIf="hasNotPosts">
+                <div class="leave-comment-area clearfix">
+                    <div class="post-content">
+                        <p>
+                            {{ 'userPage.userWithoutPost' | translate }}
+                        </p>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <div class="col-12 col-sm-9 col-md-4" >
-                <div class="mb-15" [hidden]="!isLogged">
-                    <a routerLink="/createPost" class="btn btn-primary" style="width: 100%;">{{ 'userPage.addPost' | translate }}</a>
-                </div>
-
-                <app-author-details></app-author-details>
+        <div class="col-12 col-sm-9 col-md-4" >
+            <div class="mb-15" [hidden]="!isLogged">
+                <a routerLink="/createPost" class="btn btn-primary" style="width: 100%;">{{ 'userPage.addPost' | translate }}</a>
             </div>
+
+            <app-author-details></app-author-details>
         </div>
     </div>
+</div>
 

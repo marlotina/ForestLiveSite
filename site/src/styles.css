@@ -288,6 +288,10 @@ body {
     margin-right: 10px;
 }
 
+.postImage{  
+    height: 400px;
+}
+
 .divPost {
     background: #f9f9f9;
     border: 1px solid #ebebeb;
@@ -306,4 +310,8 @@ body {
 .divVote {
 	text-align: center;
 	padding-top: 10px;
+}
+
+.container {
+    max-width: 960px;
 }
