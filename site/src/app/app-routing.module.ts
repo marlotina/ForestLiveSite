@@ -22,6 +22,8 @@ const routes: Routes = [
   { path: 'usermappage/:userId', loadChildren: () => import('./components/userpage/user-map-page/user-map-page.module').then(m => m.UserMapPageModule) },
   { path: 'usercomments', loadChildren: () => import('./components/user/user-comments/user-comments.module').then(m => m.UserCommentsModule) },
   { path: 'uservotes', loadChildren: () => import('./components/user/user-votes/user-votes.module').then(m => m.UserVotesModule) },
+  { path: 'usercomment', loadChildren: () => import('./components/userpage/comment-user/comment-user.module').then(m => m.CommentUserModule) },
+  { path: 'uservotes', loadChildren: () => import('./components/userpage/votes-user/votes-user.module').then(m => m.VotesUserModule) },
   { path: '**', loadChildren: () => import('./components/home/home.module').then(m => m.HomeModule) },
   
 ]
