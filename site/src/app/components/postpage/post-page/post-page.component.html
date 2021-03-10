@@ -6,7 +6,7 @@
             <div *ngIf="hasPost">
                 
                 <div class="row divPost divPostColor">  
-                    <div class="col-12 col-md-1 div-right-line div-bottom-line">
+                    <div class="col-12 col-md-1 div-right-line div-bottom-line mb-15">
                         <div class="divVote">
                             {{post.voteCount}}
                             <button type="button" 
@@ -17,7 +17,7 @@
                             </button>
                         </div>
                     </div>
-                    <div class="col-12 col-md-11 div-bottom-line">
+                    <div class="col-12 col-md-11 div-bottom-line mb-15">
                         <div class="row mb-15 div-bottom-line">
                             <div class="col-12 col-md-11">
                                 <div>
@@ -27,7 +27,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-12 col-md-1 text-right">
+                            <div class="col-12 col-md-1">
                                 <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu" *ngIf="showOwnerOptions">
                                     <mat-icon>more_vert</mat-icon>
                                 </button>
@@ -41,11 +41,6 @@
                         </div>
                         <div class="row mb-15 div-bottom-line">
                             <a href="{{imagePost}}"><img src="{{imagePost}}" alt="{{post.altImage}}" class="postImage divPostImgContent img-fluid rounded float-end"></a>
-                        </div>
-                        <div class="row mb-5 div-bottom-line">
-                            <div>
-                                {{post.commentCount}}<mat-icon>comment</mat-icon><span class="aligned-with-icon">comments</span>
-                            </div>
                         </div>
                         <div class="row mb-5">
                             <div>
@@ -77,64 +72,61 @@
                     </div>
                     
                     <div class="col-12 col-md-12">
-                        <div class="comment_area clearfix">
-                            <h4 class="headline" *ngIf="hasPost">{{post.commentCount}} {{ 'postPage.comments' | translate }}</h4>
-    
-                            <ol *ngFor="let comment of comments">
-                                <!-- Single Comment Area -->
-                                <li class="single_comment_area">
-                                    <!-- Comment Meta -->
-                                    <div>
-                                        <a href="{{comment.userId}}"><img src="{{imagesProfileUrl}}{{comment.userImage}}" alt="{{ 'postPage.userImage' | translate }}" class="imgAuthorPost"></a>
-                                    </div>
-                                    <!-- Comment Content -->
-                                    <div>
-                                        <div class="d-flex align-items-center justify-content-between">
-                                            <h5>{{comment.userId}}</h5>
-                                            <span>
-                                                {{comment.createDate}}
-                                                <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu" *ngIf="showOwnerCommentOptions(comment.userId)">
-                                                    <mat-icon>more_vert</mat-icon>
-                                                </button>
-                                                <mat-menu #menu="matMenu" >
-                                                    <button mat-menu-item type="button" (click)="deleteComment(comment)">
-                                                        <mat-icon>delete</mat-icon>
-                                                        <span>{{ 'postPage.delete' | translate }}</span>
-                                                    </button>
-                                                </mat-menu>
-                                            </span>
-                                        </div>
-                                        <p>{{comment.text}}</p>
-                                    </div>
-                                </li>
-                            </ol>
-                        </div>
-    
-                        <div *ngIf="isLogged && hasPost">
-                            <div class="comment-form">
-                                <h4 class="headline">{{ 'postPage.leaveComment' | translate }}</h4>
-    
-                                <div class="contact-form-area">
-                                    <!-- Comment Form -->
-                                    <form [formGroup]="commentForm" (ngSubmit)="onSubmit()">
-                                        <div class="row">
-                                            <div class="col-12 col-md-6">
-                                                <div class="form-group">
-                                                    <input type="text" formControlName="userId" class="form-control" id="contact-name" placeholder="{{ 'postPage.name' | translate }}" disabled>
-                                                </div>
-                                            </div>
-                                            <div class="col-12">
-                                                <div class="form-group">
-                                                    <textarea class="form-control" formControlName="text" name="text" id="text" cols="30" rows="10" placeholder="{{ 'postPage.comment' | translate }}"></textarea>
-                                                </div>
-                                            </div>
-                                            <div class="col-12">
-                                                <button type="submit" class="btn alazea-btn">{{ 'postPage.postComment' | translate }}</button>
-                                            </div>
-                                        </div>
-                                    </form>
+                            <div class="row mb-5 div-bottom-line">
+                                <div>
+                                    <mat-icon>comment</mat-icon><span class="aligned-with-icon">&nbsp;{{post.commentCount}}&nbsp;comments</span>
                                 </div>
                             </div>
+                            <div *ngFor="let comment of comments">
+                                
+                                <div class="row">
+                                    <div class="col-12 col-md-1">
+                                        <a href="{{comment.userId}}"><img src="{{imagesProfileUrl}}{{comment.userImage}}" alt="{{ 'postPage.userImage' | translate }}" class="imgAuthorPost"></a>
+                                    </div> 
+                                    <div class="col-12 col-md-7">
+                                        <h5>{{comment.userId}}</h5>
+                                    </div>   
+                                    <div class="col-12 col-md-3 commetDate">
+                                        <small>{{comment.createDate}}</small>
+                                    </div>  
+                                    
+                                    <div class="col-12 col-md-1 commetDate">
+                                        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu" *ngIf="showOwnerCommentOptions(comment.userId)">
+                                            <mat-icon>more_vert</mat-icon>
+                                        </button>
+                                        <mat-menu #menu="matMenu" >
+                                            <button mat-menu-item type="button" (click)="deleteComment(comment)">
+                                                <mat-icon>delete</mat-icon>
+                                                <span>{{ 'postPage.delete' | translate }}</span>
+                                            </button>
+                                        </mat-menu>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <p>{{comment.text}}</p>
+                                </div>
+                            </div>
+    
+                        <div *ngIf="isLogged && hasPost" class="div-top-line">
+                            <h4 class="headline">{{ 'postPage.leaveComment' | translate }}</h4>
+                            
+                            <form [formGroup]="commentForm" (ngSubmit)="onSubmit()">
+                                <div class="row">
+                                    <div class="col-12 col-md-6 mb-15">
+                                        <div class="form-group">
+                                            <input type="text" formControlName="userId" class="form-control" id="contact-name" placeholder="{{ 'postPage.name' | translate }}" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 mb-15">
+                                        <div class="form-group">
+                                            <textarea class="form-control" formControlName="text" name="text" id="text" cols="30" rows="10" placeholder="{{ 'postPage.comment' | translate }}"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 mb-15">
+                                        <button type="submit" class="btn btn-primary">{{ 'postPage.postComment' | translate }}</button>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>  

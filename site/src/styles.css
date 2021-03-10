@@ -307,6 +307,11 @@ body {
     border-bottom: 1px solid #ebebeb;
 }
 
+.div-top-line {
+	padding-top: 10px !important;
+    border-top: 1px solid #ebebeb;
+}
+
 .divVote {
 	text-align: center;
 	padding-top: 10px;
@@ -314,4 +319,8 @@ body {
 
 .container {
     max-width: 960px;
+}
+
+.commetDate {
+	text-align: right;
 }
