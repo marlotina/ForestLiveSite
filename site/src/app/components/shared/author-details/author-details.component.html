@@ -1,24 +1,22 @@
-<!-- ##### Single Widget Area ##### -->
-<div class="single-widget-area">
-    <!-- Author Widget -->
-    <div class="author-widget divAuthor">
-        <div class="author-thumb-name d-flex align-items-center">
-            <div class="author-thumb">
-                <img [src]="userImage" alt="image of {{userInfo.userName}}">
-            </div>
-            <div class="author-name">
-                <p>{{userInfo.userName}}</p>
-                <h5>Register from: {{userInfo.registrationDate}}</h5>
-            </div>
+
+<div class="divAuthor">
+    <div class="d-flex">
+        <div>
+            <img class="imgProfilePost" [src]="userImage" alt="image of {{userInfo.userName}}">
         </div>
-        <p>{{userInfo.description}}</p>
-        <div class="social-info">
-            <a href="https://{{userInfo.facebookUrl}}" *ngIf="userInfo.facebookUrl != '' && userInfo.facebookUrl != null"  target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-            <a href="https://{{userInfo.twitterUrl}}" *ngIf="userInfo.twitterUrl != '' && userInfo.twitterUrl != null"  target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-            <a href="https://{{userInfo.instagramUrl}}" *ngIf="userInfo.instagramUrl != '' && userInfo.instagramUrl != null"  target="_blank"><i class="fa fa-instagram" aria-hidden="true"></i></a>
-            <a href="https://{{userInfo.urlWebSite}}" *ngIf="userInfo.urlWebSite != '' && userInfo.urlWebSite != null"  target="_blank"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
+        <div>
+            <h5>{{userInfo.userName}}</h5>
+            <p>Register from: {{userInfo.registrationDate}}</p>
         </div>
-        <br/>
-        <a href="/usermappage/{{userInfo.userName}}"><img class="mapAuthor" alt="" src="../../../../../assets/img/bg-img/maplink.jpg"></a>
+    </div>
+    <p>{{userInfo.description}}</p>
+    <div  class="d-flex">
+        <a href="https://{{userInfo.facebookUrl}}" *ngIf="userInfo.facebookUrl != '' && userInfo.facebookUrl != null"  target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+        <a href="https://{{userInfo.twitterUrl}}" *ngIf="userInfo.twitterUrl != '' && userInfo.twitterUrl != null"  target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+        <a href="https://{{userInfo.instagramUrl}}" *ngIf="userInfo.instagramUrl != '' && userInfo.instagramUrl != null"  target="_blank"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+        <a href="https://{{userInfo.urlWebSite}}" *ngIf="userInfo.urlWebSite != '' && userInfo.urlWebSite != null"  target="_blank"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
+    </div>
+    <div  class="d-flex">
+        <a href="/usermappage/{{userInfo.userName}}"><img class="mapAuthor img-fluid" alt="" src="../../../../../assets/img/bg-img/maplink.jpg"></a>
     </div>
 </div>

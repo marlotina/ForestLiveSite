@@ -27,6 +27,7 @@ export class LandingPageComponent implements OnInit {
   userId: string;
   imagesPostUrl = environment.imagesPostUrl;
   hasNotPosts: boolean;
+  isLogged: boolean;
 
   constructor(
     private postService: PostService,
@@ -34,6 +35,10 @@ export class LandingPageComponent implements OnInit {
     private accountService: AccountService,
     private voteService: VoteService,
     private matDialog: MatDialog) { 
+
+    this.accountService.isLogged.subscribe(
+      x => this.isLogged = x
+      );
 
     this.activateRoute.paramMap.subscribe(params => {
       this.userId = params.get("userId");

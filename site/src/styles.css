@@ -9,19 +9,6 @@ html, body { height: 100%; }
 .LabelsSelect {
     display: inline !important;
 }
-  
-.postImage{
-    width: 600px;       
-    height: 400px;
-}
-
-
-.divPost {
-    padding: 20px;
-    background: #f9f9f9;
-    border: 1px solid #ebebeb;
-}
-
 
 .divAuthor {
     padding: 20px;
@@ -275,5 +262,48 @@ body {
 	margin-bottom: 15px !important;
 }
 
-  
+.mb-5 {
+	margin-bottom: 5px !important;
+}
 
+.titlePost {
+	font-size: 1.25rem;
+}
+
+.mat-icon {
+	vertical-align: middle;
+  }
+
+
+.titleBtn {
+	text-decoration: none;
+  }
+
+.imgAuthorPost {
+    flex: 0 0 80px;
+    max-width: 80px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.divPost {
+    background: #f9f9f9;
+    border: 1px solid #ebebeb;
+	margin-bottom: 5px;
+}
+
+.div-right-line {
+    border-right: 1px solid #ebebeb;
+}
+
+.div-bottom-line {
+	padding-bottom: 10px !important;
+    border-bottom: 1px solid #ebebeb;
+}
+
+.divVote {
+	text-align: center;
+	padding-top: 10px;
+}
