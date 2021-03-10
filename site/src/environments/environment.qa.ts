@@ -5,7 +5,6 @@ export const environment = {
   imagesPostUrl: 'https://birdpostsqa.blob.core.windows.net/posts/',
   postApiUrl: 'https://postapiqa.azurewebsites.net/',
   userPostApiUrl: 'https://userpostapiqa.azurewebsites.net/',
-  pendingApiUrl: 'https://pendingapiqa.azurewebsites.net/',
   birdApiUrl: 'https://birdsapiqa.azurewebsites.net/',
   voteApiUrl: 'https://localhost:44304/',
   googleApiKey: 'AIzaSyAjqE9XcDEwD2SmV9mmf757kYOdwTbJvwQ',

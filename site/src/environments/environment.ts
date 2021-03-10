@@ -9,7 +9,6 @@ export const environment = {
   imagesPostUrl: 'https://birdpostsqa.blob.core.windows.net/posts/',
   postApiUrl: 'https://postapiqa.azurewebsites.net/',
   userPostApiUrl: 'https://userpostapiqa.azurewebsites.net/',
-  pendingApiUrl: 'https://pendingapiqa.azurewebsites.net/',
   commentApiUrl: 'https://commentsapi.azurewebsites.net/',
   birdApiUrl: 'https://birdsapiqa.azurewebsites.net/',
   googleApiKey: 'AIzaSyAjqE9XcDEwD2SmV9mmf757kYOdwTbJvwQ',
@@ -33,7 +32,6 @@ export const environment = {
   birdApiUrl: 'https://localhost:44383/',
   //birdApiUrl: 'https://birdsapiqa.azurewebsites.net/',
   userPostApiUrl: 'https://localhost:44352/',
-  pendingApiUrl: 'https://localhost:44360/',
   googleApiKey: 'AIzaSyAjqE9XcDEwD2SmV9mmf757kYOdwTbJvwQ',
   whiteListDomains:  ["localhost:44374", "localhost:44304"],
   blacklistedRoutes: []
@@ -45,7 +43,6 @@ export const environment = {
   imagesPostUrl: 'https://birdpostsqa.blob.core.windows.net/posts/',
   postApiUrl: 'https://postapiqa.azurewebsites.net/',
   userPostApiUrl: 'https://userpostapiqa.azurewebsites.net/',
-  pendingApiUrl: 'https://pendingapiqa.azurewebsites.net/',
   birdApiUrl: 'https://birdsapiqa.azurewebsites.net/',
   googleApiKey: 'AIzaSyAjqE9XcDEwD2SmV9mmf757kYOdwTbJvwQ',
   whiteListDomains:  ["postapiqa.azurewebsites.net", "userapiqa.azurewebsites.net","birdsapiqa.azurewebsites.net"],

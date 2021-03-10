@@ -48,10 +48,11 @@ export class ImagePostRequest {
     altImage: string;
 }
 
-export class PostPendingResponse {
+export class BirdSpeciePostResponse {
     id:string;
     postId: string;
     title: string;
+    text: string;
     imageUrl: string;
     altImage: string;
     userId: string;
@@ -61,5 +62,6 @@ export class PostPendingResponse {
     specieId: string;
     userUrl: string;
     observationDate: string;
-    creationDate: Date;
+    createDate: Date;
+    userPhoto: string
 }

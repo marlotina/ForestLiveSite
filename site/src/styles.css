@@ -278,6 +278,7 @@ body {
 
 .removeLinkLine {
 	text-decoration: none;
+	color: inherit; 
   }
 
 .imgAuthorPost {
@@ -330,4 +331,16 @@ body {
 	height: 25px;
 	width: auto;
 	margin-right: 10px;
+}
+
+.cutText {
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+.authorWithoutSpecie {
+	margin-top: 5px;
+	border-bottom: 1px solid #ebebeb;
+	margin-left: 5px;
 }
