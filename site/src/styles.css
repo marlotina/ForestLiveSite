@@ -252,7 +252,7 @@ font-weight: 600; }
 body {
 	min-height: 75rem;
 	padding-top: 4.5rem;
-  }
+}
 
 .mt-15 {
 	margin-top: 15px !important;
@@ -275,7 +275,7 @@ body {
   }
 
 
-.titleBtn {
+.removeLinkLine {
 	text-decoration: none;
   }
 

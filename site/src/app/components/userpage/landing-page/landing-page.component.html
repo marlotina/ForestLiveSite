@@ -20,10 +20,10 @@
                         <div class="row mb-15 div-bottom-line">
                             <div class="col-12 col-md-11">
                                 <div>
-                                    <a class="text-dark titlePost fs-4 titleBtn" href="/{{post.userId}}/post/{{post.postId}}">{{post.title}}</a>
+                                    <a class="text-dark titlePost fs-4 removeLinkLine" href="/{{post.userId}}/post/{{post.postId}}">{{post.title}}</a>
                                     <div>
                                         <img src="https://birdpostsqa.blob.core.windows.net/profiles/{{post.userPhoto}}" alt="image of {{post.userId}}" class="imgAuthorPost">
-                                        <a class="text-dark btn fs-6 fw-light titleBtn" href="/userpage/{{post.userId}}">{{post.userId}}</a>
+                                        <a class="text-dark btn fs-6 fw-light removeLinkLine" href="/userpage/{{post.userId}}">{{post.userId}}</a>
                                     </div>
                                 </div>
                             </div>
@@ -44,7 +44,7 @@
                         </div>
                         <div class="row mb-5 div-bottom-line">
                             <div>
-                                {{post.commentCount}}<mat-icon>comment</mat-icon><span class="aligned-with-icon">comments</span>
+                                <img class="social-image" src="../../../../assets/img/core-img/icons8-topic-48.png" /><span class="aligned-with-icon">&nbsp;0&nbsp;comments</span>
                             </div>
                         </div>
                         <div class="row mb-5">
