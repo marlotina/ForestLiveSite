@@ -1,26 +1,40 @@
-
-
-<div class="col-12 col-md-8">
-    <div class="form-group">
-        <div class="autocomplete-form">
-            
+<div class="mt-15">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-9">             
+            <div *ngIf="apiLoaded | async" class="mb-100">
+                <google-map
+                    [center]="center"
+                    [options]="mapOptions">
+                        <map-marker *ngFor="let markerPosition of markerPositions" 
+                            [position]="markerPosition.location" 
+                            #marker="mapMarker"
+                            [options]="markerOptions" 
+                            [title]="markerPosition.title"
+                            (mapClick)="openInfo(marker, markerPosition)">
+                        </map-marker>
+                        <map-info-window>
+                            <div [innerHTML]="infoContent"></div>
+                        </map-info-window>
+                </google-map>
+            </div>
+        </div>
+        
+        <div class="col-12 col-md-3" >        
+            <app-author-details></app-author-details>
         </div>
     </div>
-</div>
+</div>  
 
-<div *ngIf="apiLoaded | async" class="mb-100">
-    <google-map
-        [center]="center"
-        [options]="mapOptions">
-            <map-marker *ngFor="let markerPosition of markerPositions" 
-                [position]="markerPosition.location" 
-                #marker="mapMarker"
-                [options]="markerOptions" 
-                [title]="markerPosition.title"
-                (mapClick)="openInfo(marker, markerPosition)">
-            </map-marker>
-            <map-info-window>
-                <div [innerHTML]="infoContent"></div>
-            </map-info-window>
-    </google-map>
-</div>
+
+
+
+
+
+
+
+
+
+
+
+
+

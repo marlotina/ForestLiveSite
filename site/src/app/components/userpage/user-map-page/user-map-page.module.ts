@@ -5,6 +5,7 @@ import { UserMapPageRoutingModule } from './user-map-page-routing.module';
 import { UserMapPageComponent } from './user-map-page.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { GoogleMapsModule, MapInfoWindow } from '@angular/google-maps';
+import { AuthorDetailsModule } from '../../shared/author-details/author-details.module';
 
 
 
@@ -15,7 +16,8 @@ import { GoogleMapsModule, MapInfoWindow } from '@angular/google-maps';
     CommonModule,
     UserMapPageRoutingModule,
     SharedModule,
-    GoogleMapsModule
+    GoogleMapsModule,
+    AuthorDetailsModule
   ]
 })
 export class UserMapPageModule { }
