@@ -18,6 +18,7 @@ export class BirdLandingPageComponent implements OnInit {
 
   birdPosts: PostResponse[];
   imagesPostUrl = environment.imagesPostUrl;
+  hasNotPosts = false;
 
   filteredSpecies: Observable<AutocompleteResponse[]>;
   autocompleteControl = new FormControl();
@@ -63,6 +64,9 @@ export class BirdLandingPageComponent implements OnInit {
     this.searchBirdsSerices.GetBirdBySpecie(specieId).subscribe(
       data =>{ 
         this.birdPosts = data;
+        if(data.length > 0){
+          this.hasNotPosts = true;
+        }
       } 
     );
   }
