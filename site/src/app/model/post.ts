@@ -1,17 +1,17 @@
 export class PostRequest {
-    ImageData: string;
-    AltImage: string;
-    ImageName: string;
-    Title: string;
-    Text: string;
-    UserId: string;
-    UserName:boolean;
-    Latitude: string;
-    Longitude: string;
-    SpecieName: string;
-    SpecieId: string;
-    Labels: string[];
-    ObservationDate: Date;
+    imageData: string;
+    altImage: string;
+    imageName: string;
+    title: string;
+    text: string;
+    userId: string;
+    userName:boolean;
+    latitude: string;
+    longitude: string;
+    specieName: string;
+    specieId: string;
+    labels: string[];
+    observationDate: Date;
 }
 
 export class PostResponse {
@@ -62,6 +62,6 @@ export class BirdSpeciePostResponse {
     specieId: string;
     userUrl: string;
     observationDate: string;
-    createDate: Date;
+    creationDate: Date;
     userPhoto: string
 }

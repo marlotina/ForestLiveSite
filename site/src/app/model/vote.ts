@@ -2,7 +2,8 @@ export class VoteRequest {
     postId: string;
     title: string;
     userId: string;
-    ownerUserId: string;
+    authorPostUserId: string;
+    titlePost: string;
 }
 
 export class VoteResponse {
@@ -10,7 +11,8 @@ export class VoteResponse {
     title: string;
     userId: string;
     vote: number;
-    ownerUserId: string;
     postId: string;
-    CreationDate: Date;
+    creationDate: Date;
+    authorPostUserId: string;
+    titlePost: string;
 }

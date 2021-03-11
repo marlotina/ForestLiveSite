@@ -78,7 +78,8 @@ export class LandingPageComponent implements OnInit {
       postId: post.postId,
       title: post.title,
       userId: this.userLoggedInfo.userName,
-      ownerUserId: post.userId
+      authorPostUserId: post.userId,
+      titlePost: post.title
     }
 
     if(hasVote){

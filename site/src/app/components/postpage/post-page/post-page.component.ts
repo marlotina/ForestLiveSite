@@ -46,8 +46,11 @@ export class PostPageComponent implements OnInit {
       text: ['', [Validators.required]],
       userId: ['', [Validators.required]],
       postId: ['', [Validators.required]],
-      specieId: ['', [Validators.required]]
+      specieId: ['', [Validators.required]],
+      AuthorPostUserId: ['', [Validators.required]],
+      titlePost: ['', [Validators.required]]
     });
+
     this.userLoggedInfo = this.accountService.userValue;
     this.isLogged = this.userLoggedInfo != null;
     
@@ -60,12 +63,16 @@ export class PostPageComponent implements OnInit {
           this.imagePost = environment.imagesPostUrl + data.imageUrl;
           this.showOwnerOptions = this.userLoggedInfo != null && this.post.userId == this.userLoggedInfo.userName;
           this.hasPost = true;
+
           this.commentForm.patchValue({
             'userId': this.userLoggedInfo != null ? this.userLoggedInfo.userName : '',
-            'postId': this.post.id
+            'postId': this.post.id,
+            'AuthorPostUserId': this.post.userId,
+            'titlePost': this.post.title
             });
         } 
       );
+
       this.commentService.GetCommentsByPost(postId).subscribe(
         data => { 
           this.comments = data 
@@ -102,7 +109,8 @@ export class PostPageComponent implements OnInit {
       postId: post.postId,
       title: post.title,
       userId: this.userLoggedInfo.userName,
-      ownerUserId: post.userId
+      authorPostUserId: post.userId,
+      titlePost: post.title
     }
 
     if(hasVote){
