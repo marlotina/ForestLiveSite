@@ -76,10 +76,9 @@ export class LandingPageComponent implements OnInit {
   addVote(post: PostResponse, hasVote: boolean){
     let request: VoteRequest = {
       postId: post.postId,
-      title: post.title,
+      titlePost: post.title,
       userId: this.userLoggedInfo.userName,
-      authorPostUserId: post.userId,
-      titlePost: post.title
+      authorPostUserId: post.userId
     }
 
     if(hasVote){
@@ -88,6 +87,7 @@ export class LandingPageComponent implements OnInit {
           .subscribe(
               data => {    
                 post.voteCount--;
+                post.hasVote = false;
               },
               error => {   
                 if(error.status == "409"){
@@ -102,6 +102,7 @@ export class LandingPageComponent implements OnInit {
           .subscribe(
               data => {    
                 post.voteCount++;
+                post.hasVote = true;
               },
               error => {   
                 if(error.status == "409"){

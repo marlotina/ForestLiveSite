@@ -67,6 +67,7 @@ export class PostPageComponent implements OnInit {
           this.commentForm.patchValue({
             'userId': this.userLoggedInfo != null ? this.userLoggedInfo.userName : '',
             'postId': this.post.id,
+            'specieId': this.post.specieId,
             'AuthorPostUserId': this.post.userId,
             'titlePost': this.post.title
             });
@@ -107,10 +108,9 @@ export class PostPageComponent implements OnInit {
   addVote(post: PostResponse, hasVote: boolean){
     let request: VoteRequest = {
       postId: post.postId,
-      title: post.title,
+      titlePost: post.title,
       userId: this.userLoggedInfo.userName,
-      authorPostUserId: post.userId,
-      titlePost: post.title
+      authorPostUserId: post.userId
     }
 
     if(hasVote){

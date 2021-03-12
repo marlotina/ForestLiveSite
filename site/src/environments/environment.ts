@@ -13,7 +13,12 @@ export const environment = {
   birdApiUrl: 'https://birdsapiqa.azurewebsites.net/',
   googleApiKey: 'AIzaSyAjqE9XcDEwD2SmV9mmf757kYOdwTbJvwQ',
   voteApiUrl: 'https://votesapi.azurewebsites.net/',
-  whiteListDomains:  ["postapiqa.azurewebsites.net", "userapiqa.azurewebsites.net","birdsapiqa.azurewebsites.net","commentsapi.azurewebsites.net", "userpostapiqa.azurewebsites.net","votesapi.azurewebsites.net"],
+  whiteListDomains:  ["postapiqa.azurewebsites.net", 
+                      "userapiqa.azurewebsites.net",
+                      "birdsapiqa.azurewebsites.net",
+                      "commentsapi.azurewebsites.net",
+                      "userpostapiqa.azurewebsites.net",
+                      "votesapi.azurewebsites.net"],
   blacklistedRoutes: []
 }
 /*

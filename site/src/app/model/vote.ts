@@ -1,6 +1,5 @@
 export class VoteRequest {
     postId: string;
-    title: string;
     userId: string;
     authorPostUserId: string;
     titlePost: string;
