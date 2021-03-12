@@ -11,7 +11,7 @@ export class VoteResponse {
     userId: string;
     vote: number;
     postId: string;
-    creationDate: Date;
+    creationDate: string;
     authorPostUserId: string;
     titlePost: string;
 }
