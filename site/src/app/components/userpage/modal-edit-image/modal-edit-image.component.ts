@@ -47,6 +47,7 @@ export class ModalEditImageComponent implements OnInit {
   imageCropped(event: ImageCroppedEvent) {
     this.croppedImage = event.base64;
   }
+
   imageLoaded() {
     this.showCropper = true;
   }
@@ -89,11 +90,18 @@ export class ModalEditImageComponent implements OnInit {
   }
 
   closeModal() {
-    this.dialogRef.close();
+    let imagePost: ImagePostRequest = {
+      firstImage: this.modalData.firstImage == true,
+      imageBase64: this.croppedImage,
+      altImage: this.altImageInput.nativeElement.value
+    };
+
+    this.dialogRef.close(imagePost);
   }
 
   saveImage () {
     let imagePost: ImagePostRequest = {
+      firstImage: false,
       imageBase64: this.croppedImage,
       altImage: this.altImageInput.nativeElement.value
     };

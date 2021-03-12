@@ -62,7 +62,6 @@ export class LandingPageComponent implements OnInit {
   deleteItem(post: PostResponse){
     this.postService.DeletePost(post.postId).subscribe(
       data => {
-        this.openCommonModal('postdeleted');
         const index = this.userPosts.indexOf(post, 0);
         if (index > -1) {
           this.userPosts.splice(index, 1);

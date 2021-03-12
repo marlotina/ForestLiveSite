@@ -47,9 +47,6 @@ export class CreatePostComponent implements OnInit {
  };
 
   labelCtrl = new FormControl();
-  visible = true;
-  selectable = true;
-  removable = true;
   separatorKeysCodes: number[] = [ENTER, COMMA];
   //filteredLabel: Observable<string[]>;
   labels: string[] = [];
@@ -63,6 +60,7 @@ export class CreatePostComponent implements OnInit {
   file: any;
   altImage = "";
   visibleEditImage = false;
+  firstImage = true;
 
   filteredSpecies: Observable<AutocompleteResponse[]>;
   autocompleteControl = new FormControl();
@@ -212,6 +210,7 @@ export class CreatePostComponent implements OnInit {
     this.file = null;
     this.fileInput.nativeElement.value = null;
     this.visibleEditImage = false;
+    this.firstImage = true;
 
   }
   /*Map*/
@@ -309,16 +308,22 @@ export class CreatePostComponent implements OnInit {
     dialogConfig.height = "650px";
     dialogConfig.width = "850px";
     dialogConfig.data = {
-      image: this.file    
+      image: this.file,
+      firstImage: this.firstImage
     }
     
     const dialogRef = this.matDialog.open(ModalEditImageComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(result => {
-      this.url = result.imageBase64;
-      this.altImage = result.altImage;
-      if(result.imageName != null && result.imageName != "") {
-        this.imageName = result.imageName;
+      this.firstImage = result.firstImage;
+      if(!this.firstImage){
+        this.url = result.imageBase64;
+        this.altImage = result.altImage;
+        if(result.imageName != null && result.imageName != "") {
+          this.imageName = result.imageName;
+        }
+      }else{
+        this.visibleEditImage = false;
       }
     });
 

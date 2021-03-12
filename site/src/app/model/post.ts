@@ -46,6 +46,7 @@ export class DeletePost {
 export class ImagePostRequest {
     imageBase64: string;
     altImage: string;
+    firstImage: boolean;
 }
 
 export class BirdSpeciePostResponse {

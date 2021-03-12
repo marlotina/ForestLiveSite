@@ -98,11 +98,11 @@
                             <mat-chip-list #chipList aria-label="Label selection">
                             <mat-chip
                                 *ngFor="let label of labels"
-                                [selectable]="selectable"
-                                [removable]="removable"
+                                [selectable]="true"
+                                [removable]="true"
                                 (removed)="remove(label)">
                                 {{label}}
-                                <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                                <mat-icon matChipRemove *ngIf="true">cancel</mat-icon>
                             </mat-chip>
                             <input
                                 id="labelsPost" 

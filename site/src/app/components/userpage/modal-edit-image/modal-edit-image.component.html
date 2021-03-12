@@ -57,8 +57,9 @@
         
     </section>
 <footer id="modal-footer">
-    <div class="welcome-btn-group" style="margin-bottom: 30px;">
-        <button mat-raised-button class="btn alazea-btn mr-30" (click)="saveImage()">{{ 'createPost.save' | translate }}</button>
-        <button mat-raised-button class="btn alazea-btn active" (click)="closeModal()">{{ 'createPost.back' | translate }}</button>
-    </div>
+
+    <div class="btn-group" role="group" aria-label="Basic example">
+        <button class="btn btn-primary" (click)="saveImage()">{{ 'createPost.save' | translate }}</button>
+        <button class="btn btn-primary" (click)="closeModal()">{{ 'createPost.back' | translate }}</button>
+      </div>
 </footer>
