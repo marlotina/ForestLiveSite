@@ -59,17 +59,37 @@ export class LandingPageComponent implements OnInit {
     return this.userLoggedInfo != null && userId == this.userLoggedInfo.userName;
   }
 
-  deleteItem(post: PostResponse){
-    this.postService.DeletePost(post.postId).subscribe(
-      data => {
-        const index = this.userPosts.indexOf(post, 0);
-        if (index > -1) {
-          this.userPosts.splice(index, 1);
-        }
-      },
-      error => { 
-        this.openCommonModal('failpostdelete');
-      });
+  deletePost(post: PostResponse){
+
+    const dialogConfig = new MatDialogConfig();
+    
+    dialogConfig.disableClose = false;
+    dialogConfig.id = "modal-component";
+    dialogConfig.width = "600px";
+    dialogConfig.data = {
+      //title: "user.deleteTitlePostModal",
+      description: "user.deleteTextPostModal",
+      acceptButtonText: "general.delete",
+      cancelButtonText:"general.cancel",
+      hideAcceptButton: false,
+      hideCancelButton: false
+    }
+      
+    const dialogRef = this.matDialog.open(CommonDialogComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe(result => {
+      if(result == 'ACCEPT'){
+        this.postService.DeletePost(post.postId).subscribe(
+          data => {
+            const index = this.userPosts.indexOf(post, 0);
+            if (index > -1) {
+              this.userPosts.splice(index, 1);
+            }
+          },
+          error => { 
+            this.openCommonModal('failpostdelete');
+          });
+      }
+    });
   }
 
   addVote(post: PostResponse, hasVote: boolean){
@@ -119,7 +139,6 @@ export class LandingPageComponent implements OnInit {
     
     dialogConfig.disableClose = false;
     dialogConfig.id = "modal-component";
-    dialogConfig.height = "200px";
     dialogConfig.width = "600px";
     dialogConfig.data = {
       title: "user.userTitleModal",

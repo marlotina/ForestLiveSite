@@ -145,14 +145,34 @@ export class PostPageComponent implements OnInit {
   }
 
   deleteItem(){
-    this.postService.DeletePost(this.post.postId).subscribe(
-      data => {
-        this.openCommonModal('postdeleted');
-        this.route.navigate(['/userpage/' + this.post.userId]);
-      },
-      error => { 
-        this.openCommonModal('failpostdelete');
-      });
+    const dialogConfig = new MatDialogConfig();
+    
+    dialogConfig.disableClose = false;
+    dialogConfig.id = "modal-component";
+    dialogConfig.width = "600px";
+    dialogConfig.data = {
+      //title: "user.deleteTitlePostModal",
+      description: "user.deleteTextPostModal",
+      acceptButtonText: "general.delete",
+      cancelButtonText:"general.cancel",
+      hideAcceptButton: false,
+      hideCancelButton: false
+    }
+      
+    const dialogRef = this.matDialog.open(CommonDialogComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe(result => {
+      if(result == 'ACCEPT'){
+        this.postService.DeletePost(this.post.postId).subscribe(
+          data => {
+            this.route.navigate(['/userpage/' + this.post.userId]);
+          },
+          error => { 
+            this.openCommonModal('failpostdelete');
+          });
+      }
+    });
+
+    
   }
 
   deleteComment(comment: CommentResponse){
