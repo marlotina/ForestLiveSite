@@ -72,7 +72,7 @@ export class BirdLandingPageComponent implements OnInit {
   }
 
   getSpecies(value: any): Observable<PostResponse[]> {
-    if(value != '') {
+    if(value != '' && value.length > 2) {
       return this.autocompleteService.GetSpeciesByKeys(value.toLowerCase(), localStorage.getItem('locale'))
         .pipe(map(results => results),
           catchError(_ => {
