@@ -13,6 +13,7 @@ import { PostService } from 'src/app/services/post/post.service';
 import { VoteService } from 'src/app/services/vote/vote.service';
 import { environment } from 'src/environments/environment';
 import { CommonDialogComponent } from '../../shared/common-dialog/common-dialog.component';
+import { ImageDialogComponent } from '../../shared/image-dialog/image-dialog.component';
 
 @Component({
   selector: 'app-post-page',
@@ -30,6 +31,7 @@ export class PostPageComponent implements OnInit {
   isLogged: boolean;
   userLoggedInfo: User;
   hasPost = false;
+  display = "none";
 
   constructor(private activateRoute: ActivatedRoute,
     private postService: PostService,
@@ -210,5 +212,17 @@ export class PostPageComponent implements OnInit {
     
     this.matDialog.open(CommonDialogComponent, dialogConfig);
   }
-  
+
+  showImage(imageUrl: string) {
+    const dialogConfig = new MatDialogConfig();
+    
+    dialogConfig.disableClose = false;
+    dialogConfig.id = "modal-component";
+    dialogConfig.width = "100%"; 
+    dialogConfig.data = {
+      image: imageUrl
+    }
+    
+    this.matDialog.open(ImageDialogComponent, dialogConfig);
+  }
 }

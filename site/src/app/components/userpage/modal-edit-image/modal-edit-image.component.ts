@@ -11,7 +11,7 @@ import {base64ToFile} from '../../../shared/cropper/blob.utils';
 })
 export class ModalEditImageComponent implements OnInit {
 
-  aspectRatio: number = 4/3;
+  aspectRatio: number = 1/1;
   imageChangedEvent: any = '';
   croppedImage: any = '';
   canvasRotation = 0;

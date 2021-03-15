@@ -40,7 +40,7 @@
                             </div>
                         </div>
                         <div class="row mb-15 div-bottom-line">
-                            <img src="{{imagesPostUrl}}{{post.imageUrl}}" alt="{{post.altImage}}" class="postImage divPostImgContent img-fluid rounded float-end">
+                            <a (click)="showImage(post.imageUrl)"><img src="{{imagesPostUrl}}{{post.imageUrl}}" alt="{{post.altImage}}" class="postImage divPostImgContent img-fluid rounded float-end"></a>
                         </div>
                         <div class="row mb-5 div-bottom-line">
                             <div>
