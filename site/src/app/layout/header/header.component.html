@@ -11,7 +11,7 @@
 
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" routerLink="searchmap">Map</a>
+          <a class="nav-link active" aria-current="page" routerLink="searchpage">Search birds</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" routerLink="birdpage">Birds species</a>
@@ -23,7 +23,8 @@
 
       <div class="btn-group me-2" [hidden]="!isLogged">
           <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
-              {{ userNameMenu }}
+            <img class="imgAuthorPost" src="{{userImage}}" alt="image of marlotina"> 
+            {{ userNameMenu }}
           </button>
           <ul class="dropdown-menu dropdown-menu-lg-end">
               <li><a class="dropdown-item" routerLink="createPost" routerLinkActive="active">{{ 'userPage.addPost' | translate }}</a></li>

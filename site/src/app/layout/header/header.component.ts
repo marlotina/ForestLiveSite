@@ -3,6 +3,7 @@ import { User } from 'src/app/model/account';
 import { AccountService } from 'src/app/services/account/account.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-header',
@@ -14,7 +15,7 @@ export class HeaderComponent implements OnInit {
   user: User = null;
   isLogged: boolean = false;
   userNameMenu: string;
-
+  userImage: string;
   constructor(private router: Router,
     private route: ActivatedRoute,
     private accountService: AccountService,
@@ -39,6 +40,7 @@ export class HeaderComponent implements OnInit {
           {
             this.user = x;
             this.userNameMenu = this.user.userName;
+            this.userImage = `${environment.imagesProfileUrl}${this.user.photo}`;
           }
         }
       );
