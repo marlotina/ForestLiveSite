@@ -1,0 +1,12 @@
+.main {
+    text-align:center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#map {
+    height: 500px; /* like this */
+    padding-top: 10px;
+}

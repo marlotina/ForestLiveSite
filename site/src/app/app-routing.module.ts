@@ -17,11 +17,11 @@ const routes: Routes = [
   { path: 'userpage/:userId', loadChildren: () => import('./components/userpage/landing-page/landing-page.module').then(m => m.LandingPageModule) },
   { path: ':userId/post/:id', loadChildren: () => import('./components/postpage/post-page/post-page.module').then(m => m.PostPageModule) },
   { path: 'withoutspecie', loadChildren: () => import('./components/pendings/without-specie-page/without-specie-page.module').then(m => m.WithoutSpeciePageModule) },
-  { path: 'searchmap', loadChildren: () => import('./components/searchmappage/search-map-page.module').then(m => m.SearchMapPageModule) },
   { path: 'birdpage', loadChildren: () => import('./components/birdpage/bird-landing-page/bird-landing-page.module').then(m => m.BirdLandingPageModule) },
   { path: 'usermappage/:userId', loadChildren: () => import('./components/userpage/user-map-page/user-map-page.module').then(m => m.UserMapPageModule) },
   { path: 'usercomments', loadChildren: () => import('./components/user/user-comments/user-comments.module').then(m => m.UserCommentsModule) },
   { path: 'uservotes', loadChildren: () => import('./components/user/user-votes/user-votes.module').then(m => m.UserVotesModule) },
+  { path: 'searchpage', loadChildren: () => import('./components/search/search-page/search-page.module').then(m => m.SearchPageModule) },
   { path: '**', loadChildren: () => import('./components/home/home.module').then(m => m.HomeModule) },
   
 ]
