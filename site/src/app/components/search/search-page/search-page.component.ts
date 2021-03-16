@@ -58,6 +58,7 @@ export class SearchPageComponent implements OnInit {
     this.initMap();
   }
 
+
   initMap() {
 
     this.locationService.getPosition().then(pos => {
@@ -75,6 +76,37 @@ export class SearchPageComponent implements OnInit {
         clickableIcons: false
       };
       let map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
+
+
+      const input = document.getElementById("pac-input") as HTMLInputElement;
+      const searchBox = new google.maps.places.SearchBox(input);
+      map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+    
+      searchBox.addListener("places_changed", () => {
+        const places = searchBox.getPlaces();
+    
+        if (places.length == 0) {
+          return;
+        }
+    
+        
+        const bounds = new google.maps.LatLngBounds();
+        places.forEach((place) => {
+          if (!place.geometry || !place.geometry.location) {
+            console.log("Returned place contains no geometry");
+            return;
+          }
+          
+          if (place.geometry.viewport) {
+            // Only geocodes have viewport.
+            bounds.union(place.geometry.viewport);
+          } else {
+            bounds.extend(place.geometry.location);
+          }
+        });
+        
+        map.fitBounds(bounds);
+      });
 
       google.maps.event.addListener(map, 'idle', () => { 
         var wop = map.getCenter();
