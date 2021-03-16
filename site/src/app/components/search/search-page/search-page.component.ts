@@ -24,8 +24,14 @@ export class SearchPageComponent implements OnInit {
   markerOptions: google.maps.MarkerOptions = {draggable: false};
   markerPositions: MapPoint[] = [];
   postResponse: PostResponse[];
-
   @ViewChild('mapWrapper') mapElement: ElementRef;
+
+  filteredSpecies: Observable<AutocompleteResponse[]>;
+  autocompleteControl = new FormControl();
+  specieIdPostControl = new FormControl();
+  @ViewChild('auto') matAutocomplete: MatAutocomplete;
+
+  birdPosts: PostResponse[];
 
   constructor(
       private locationService: LocationService,
@@ -33,6 +39,19 @@ export class SearchPageComponent implements OnInit {
       private autocompleteService : AutocompleteService) { }
 
   ngOnInit(): void {
+    this.filteredSpecies = this.autocompleteControl.valueChanges.pipe(
+      startWith(''),
+      // delay emits
+      debounceTime(300),
+      // use switch map so as to cancel previous subscribed events, before creating new once
+      switchMap(value => {
+        if (value !== '' && value.nameComplete == null) {
+          return this.getSpecies(value);
+        } else {
+          return of([]);
+        }
+      })
+    );
   }
 
   ngAfterViewInit() {
@@ -80,4 +99,41 @@ export class SearchPageComponent implements OnInit {
     });
   }
 
+  selectSpecie(item: AutocompleteResponse){
+    this.autocompleteControl.setValue(item.nameComplete);
+    this.specieIdPostControl.setValue(item.specieId);
+    this.getBirdPosts(item.specieId);
+  }
+
+  optionClicked(event: Event, specie: AutocompleteResponse) {
+    event.stopPropagation();
+    //this.toggleSelection(specie);
+  }
+
+  toggleSelection(user: AutocompleteResponse) {
+    var wop = user;
+    
+  }
+
+  getSpecies(value: any): Observable<PostResponse[]> {
+    if(value != '' && value.length > 2) {
+      return this.autocompleteService.GetSpeciesByKeys(value.toLowerCase(), localStorage.getItem('locale'))
+        .pipe(map(results => results),
+          catchError(_ => {
+            return of(null);
+          }
+        )
+      );
+    }
+
+    return null;
+  }
+
+  getBirdPosts(specieId: string) {
+    this.searchBirdsSerices.GetBirdBySpecie(specieId).subscribe(
+      data =>{ 
+        this.birdPosts = data;
+      } 
+    );
+  }
 }

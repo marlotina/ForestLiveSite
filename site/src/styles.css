@@ -344,3 +344,7 @@ body {
 	border-bottom: 1px solid #ebebeb;
 	margin-left: 5px;
 }
+
+.searchMap {
+	height: 100%;
+}
