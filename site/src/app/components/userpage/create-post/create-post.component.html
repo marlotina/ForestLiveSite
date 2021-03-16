@@ -1,16 +1,4 @@
 
-<div class="nav-scroller bg--body shadow-sm">
-    <nav class="nav nav-underline" aria-label="Secondary navigation">      
-      <a class="nav-link" routerLink="/createPost">Create post</a>
-      <a class="nav-link" routerLink="/uservotes">My votes</a>
-      <a class="nav-link" routerLink="/usercomments">My comments</a>
-      <a class="nav-link" routerLink="/userProfile">My profile</a>
-    </nav>
-  </div>
-
-   
-
-
 <div class="container mt-15">
     
     <div class="row justify-content-center mt-15">
@@ -174,16 +162,13 @@
             </div>
 
         </div>
-        
+
         <div class="col-12 col-sm-9 col-md-4" >
             <div class="list-group">
-                <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
-                  The current link item
-                </a>
-                <a href="#" class="list-group-item list-group-item-action">A second link item</a>
-                <a href="#" class="list-group-item list-group-item-action">A third link item</a>
-                <a href="#" class="list-group-item list-group-item-action">A fourth link item</a>
-                <a href="#" class="list-group-item list-group-item-action disabled" tabindex="-1" aria-disabled="true">A disabled link item</a>
+                <a href="#" class="list-group-item list-group-item-action" routerLink="/userProfile">My profile</a>
+                <a href="#" class="list-group-item list-group-item-action active" routerLink="/createPost">Create postm</a>
+                <a href="#" class="list-group-item list-group-item-action" routerLink="/usercomments">My comments</a>
+                <a href="#" class="list-group-item list-group-item-action" routerLink="/uservotes">My votes</a>
               </div>
         </div>
 

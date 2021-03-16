@@ -68,6 +68,7 @@ export class SearchPageComponent implements OnInit {
               new google.maps.Marker({
                 position: { lat: beach.location.lat, lng: beach.location.lng},
                 map,
+                icon: "../../../../assets/img/core-img/mapMarker.png",
                 title: beach.title
               });
             }
