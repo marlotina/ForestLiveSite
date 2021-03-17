@@ -263,7 +263,6 @@ export class CreatePostComponent implements OnInit {
       this.markers[i].setMap(map);
     }
   }
-  
 
   addMarkerCommon(marker: google.maps.Marker){
     if(this.markers.length > 0){

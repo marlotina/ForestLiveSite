@@ -142,17 +142,6 @@
     
                         <div class="col-12 mt-15">
                             <div #mapWrapper id="map" class="createPostMap"></div>
-                            <!--<div *ngIf="apiLoaded | async" class="map-area mb-100">
-                                <google-map
-                                    [center]="center"
-                                    [options]="mapOptions"
-                                    [ngClass]="{ 'is-invalid': submitted && f.title.errors }"
-                                    (mapClick)="addMarker($event)">
-                                        <map-marker *ngFor="let markerPosition of markerPositions" [position]="markerPosition"
-                                            [options]="markerOptions"></map-marker>
-                                </google-map>
-                            </div>-->
-                            
                         </div>
                         <div class="col-12 mt-15 mb-15">
                             <button type="submit" class="btn btn-lg btn-primary mt-15">{{ 'createPost.createPostBtn' | translate }}</button>

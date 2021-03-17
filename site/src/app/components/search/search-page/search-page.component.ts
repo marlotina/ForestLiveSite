@@ -9,6 +9,7 @@ import { PostResponse } from 'src/app/model/post';
 import { AutocompleteResponse } from 'src/app/model/specie';
 import { AutocompleteService } from 'src/app/services/autocomplete/autocomplete.service';
 import { LocationService } from 'src/app/services/location/location.service';
+import { PostService } from 'src/app/services/post/post.service';
 import { SearchBirdsService } from 'src/app/services/searchs/search-birds.service';
 import { environment } from 'src/environments/environment';
 
@@ -34,10 +35,14 @@ export class SearchPageComponent implements OnInit {
 
   birdPosts: PostResponse[];
 
+    
+  infowindow = new google.maps.InfoWindow();
+  
   constructor(
       private locationService: LocationService,
       private searchBirdsSerices: SearchBirdsService,
-      private autocompleteService : AutocompleteService) { }
+      private autocompleteService : AutocompleteService,
+      private readonly postService: PostService) { }
 
   ngOnInit(): void {
     this.filteredSpecies = this.autocompleteControl.valueChanges.pipe(
@@ -59,6 +64,13 @@ export class SearchPageComponent implements OnInit {
     this.initMap();
   }
 
+  getInfoPost(marker: google.maps.Marker, map: google.maps.Map){
+    var postId = marker.getTitle();
+    this.postService.GetPost(postId).subscribe(data => {
+        this.infowindow.setContent(`titulo${data.title}`);
+        this.infowindow.open(map, marker);
+    })
+  }
 
   initMap() {
 
@@ -115,7 +127,7 @@ export class SearchPageComponent implements OnInit {
                 position: { lat: beach.location.lat, lng: beach.location.lng},
                 map,
                 icon: "../../../../assets/img/core-img/mapMarker.png",
-                title: beach.title
+                title: beach.postId
               });
             }
           } 
@@ -131,17 +143,22 @@ export class SearchPageComponent implements OnInit {
           data => { 
             for (let i = 0; i < data.length; i++) {
               const beach = data[i];
-              new google.maps.Marker({
+              const marker = new google.maps.Marker({
                 position: { lat: beach.location.lat, lng: beach.location.lng},
                 map,
                 icon: "../../../../assets/img/core-img/mapMarker.png",
-                title: beach.title
+                title: beach.postId
+              });
+
+              marker.addListener("click", () => {
+                this.getInfoPost(marker, map);
               });
             }
           } 
-        );        
-
+        ); 
       });
+
+     
 
     });
   }
