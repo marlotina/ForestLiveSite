@@ -348,3 +348,7 @@ body {
 .searchMap {
 	height: 100%;
 }
+
+.inputSearchTop {
+	border-top: .84375em solid transparent;
+}

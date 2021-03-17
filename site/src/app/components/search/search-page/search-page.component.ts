@@ -25,6 +25,7 @@ export class SearchPageComponent implements OnInit {
   markerPositions: MapPoint[] = [];
   postResponse: PostResponse[];
   @ViewChild('mapWrapper') mapElement: ElementRef;
+  zoom: number = 16;
 
   filteredSpecies: Observable<AutocompleteResponse[]>;
   autocompleteControl = new FormControl();
@@ -69,7 +70,7 @@ export class SearchPageComponent implements OnInit {
 
       const mapOptions: google.maps.MapOptions = {
         center: latLng,
-        zoom: 16,
+        zoom: this.zoom,
         fullscreenControl: false,
         mapTypeControl: false,
         streetViewControl: false,
@@ -80,7 +81,6 @@ export class SearchPageComponent implements OnInit {
 
       const input = document.getElementById("pac-input") as HTMLInputElement;
       const searchBox = new google.maps.places.SearchBox(input);
-      map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
     
       searchBox.addListener("places_changed", () => {
         const places = searchBox.getPlaces();
@@ -88,8 +88,7 @@ export class SearchPageComponent implements OnInit {
         if (places.length == 0) {
           return;
         }
-    
-        
+
         const bounds = new google.maps.LatLngBounds();
         places.forEach((place) => {
           if (!place.geometry || !place.geometry.location) {
@@ -105,14 +104,30 @@ export class SearchPageComponent implements OnInit {
           }
         });
         
+        var wop = bounds.getCenter();
         map.fitBounds(bounds);
+
+        this.searchBirdsSerices.GetSearchPoints(wop.lat().toString(), wop.lng().toString(), this.zoom).subscribe(
+          data => { 
+            for (let i = 0; i < data.length; i++) {
+              const beach = data[i];
+              new google.maps.Marker({
+                position: { lat: beach.location.lat, lng: beach.location.lng},
+                map,
+                icon: "../../../../assets/img/core-img/mapMarker.png",
+                title: beach.title
+              });
+            }
+          } 
+        );        
+
       });
 
       google.maps.event.addListener(map, 'idle', () => { 
         var wop = map.getCenter();
-        var zoom = map.getZoom();
+        this.zoom = map.getZoom();
         
-        this.searchBirdsSerices.GetSearchPoints(wop.lat().toString(), wop.lng().toString(), zoom).subscribe(
+        this.searchBirdsSerices.GetSearchPoints(wop.lat().toString(), wop.lng().toString(), this.zoom).subscribe(
           data => { 
             for (let i = 0; i < data.length; i++) {
               const beach = data[i];

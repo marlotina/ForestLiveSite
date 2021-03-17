@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MapInfoWindow, MapMarker } from '@angular/google-maps';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, of } from 'rxjs';
@@ -22,7 +22,13 @@ export class UserMapPageComponent implements OnInit {
   infoContent: string;
 
   center: any;
-  markerOptions: google.maps.MarkerOptions = {
+  markerOptions: google.maps.MarkerOptions = {draggable: false};
+  markerPositions: MapPoint[] = [];
+  @ViewChild('mapWrapper') mapElement: ElementRef;
+  zoom: number = 16;
+
+
+  /*markerOptions: google.maps.MarkerOptions = {
     draggable: false,
     icon: "../../../../assets/img/core-img/mapMarker.png"
   };
@@ -34,7 +40,7 @@ export class UserMapPageComponent implements OnInit {
     fullscreenControl: false,
     clickableIcons: false
  };
- apiLoaded: Observable<boolean>
+ apiLoaded: Observable<boolean>*/
  userId: string;
 
   constructor(private httpClient: HttpClient,
@@ -47,38 +53,45 @@ export class UserMapPageComponent implements OnInit {
       this.userId = params.get("userId");
     });
 
+    this.initMap();
+  }
+
+  initMap() {
+
     this.locationService.getPosition().then(pos => {
       let latLng = {
         lat: pos.lat,
         lng: pos.lng
       };
 
-      this.center = latLng;
-      this.loadMap();
-    });
-
-  }
-
-  getPoints(){
-    this.postService.GetMapPointsPostByUser(this.userId).subscribe(
-      data =>{ 
-        this.setMapMarker(data);
-      } 
-    );
-  }
-
-  loadMap(){
-    if(this.apiLoaded == null){
-      this.apiLoaded = this.httpClient.jsonp(`https://maps.googleapis.com/maps/api/js?key=${environment.googleApiKey}`, 'callback')
-      .pipe(
-        map((data) => {
-          this.getPoints();
-          return true}),
-        catchError((e) => of(false)
-         ),
+      const mapOptions: google.maps.MapOptions = {
+        center: latLng,
+        zoom: this.zoom,
+        fullscreenControl: false,
+        mapTypeControl: false,
+        streetViewControl: false,
+        clickableIcons: false
+      };
+      let map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
+      
+      this.postService.GetMapPointsPostByUser(this.userId).subscribe(
+        data => { 
+          for (let i = 0; i < data.length; i++) {
+            const beach = data[i];
+            new google.maps.Marker({
+              position: { lat: beach.location.lat, lng: beach.location.lng},
+              map,
+              icon: "../../../../assets/img/core-img/mapMarker.png",
+              title: beach.title
+            });
+          }
+        } 
       );
-    }
+
+
+    });
   }
+
 
   openInfo(marker: MapMarker, content: MapPoint) {
     let template = `<div id="iw-container">` +
