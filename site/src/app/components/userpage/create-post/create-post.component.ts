@@ -36,7 +36,7 @@ export class CreatePostComponent implements OnInit {
   postForm: FormGroup;
   submitted = false;
   
-  center: any;
+ /* center: any;
   markerOptions: google.maps.MarkerOptions = {draggable: false};
   markerPositions: google.maps.LatLngLiteral[] = [];
   mapOptions: google.maps.MapOptions = {
@@ -44,7 +44,13 @@ export class CreatePostComponent implements OnInit {
     streetViewControl: false,
     fullscreenControl: false,
     clickableIcons: false
- };
+ };*/
+
+  center: any;
+  markerOptions: google.maps.MarkerOptions = {draggable: false};
+  markers: google.maps.Marker[] = [];
+  @ViewChild('mapWrapper') mapElement: ElementRef;
+  zoom: number = 16;
 
   labelCtrl = new FormControl();
   separatorKeysCodes: number[] = [ENTER, COMMA];
@@ -61,6 +67,7 @@ export class CreatePostComponent implements OnInit {
   altImage = "";
   visibleEditImage = false;
   firstImage = true;
+  map: google.maps.Map;
 
   filteredSpecies: Observable<AutocompleteResponse[]>;
   autocompleteControl = new FormControl();
@@ -117,7 +124,7 @@ export class CreatePostComponent implements OnInit {
         })
       );
 
-      this.setMapMarker(); 
+      this.initMap();
   }
 
   selectSpecie(item: AutocompleteResponse){
@@ -154,9 +161,7 @@ export class CreatePostComponent implements OnInit {
       'labels': this.labels,
       'imageData': this.url,
       'imageName': this.imageName,
-      'altImage': this.altImage,
-      'latitude': this.markerPositions[0].lat.toString(),
-      'longitude': this.markerPositions[0].lng.toString()
+      'altImage': this.altImage
     });
 
     this.postService.AddPost(this.postForm.value)
@@ -215,42 +220,58 @@ export class CreatePostComponent implements OnInit {
   }
   /*Map*/
 
-  loadMap(){
-    if(this.apiLoaded == null){
-      this.apiLoaded = this.httpClient.jsonp('https://maps.googleapis.com/maps/api/js?key=' + environment.googleApiKey, 'callback')
-      .pipe(
-        map(() => true),
-        catchError((e) => of(false)),
-      );
-    }
-  }
+  initMap() {
 
-  setMapMarker() {
     this.locationService.getPosition().then(pos => {
       let latLng = {
         lat: pos.lat,
         lng: pos.lng
       };
-      this.center = latLng;
+
+      const mapOptions: google.maps.MapOptions = {
+        center: latLng,
+        zoom: this.zoom,
+        fullscreenControl: false,
+        mapTypeControl: false,
+        streetViewControl: false,
+        clickableIcons: false
+      };
+      this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
       
-      this.loadMap();
+      google.maps.event.addListener(this.map, "click", (event) => {
+        this.addMarker(event.latLng, this.map);
+      });
+
     });
   }
+  
+  addMarker(location: google.maps.LatLngLiteral, map: google.maps.Map) {
+    const marker = new google.maps.Marker({
+      position: location,
+      map: this.map,
+    });
 
-  addMarker(event: google.maps.MapMouseEvent) {
-    let display = event.latLng.toJSON();
-    
-    this.postForm.controls.latitude.setValue(display.lat);
-    this.postForm.controls.longitude.setValue(display.lng);
-    this.addMarkerCommon(event.latLng.toJSON())
+    var latLng = marker.getPosition();
+    this.postForm.controls.latitude.setValue(latLng.lat());
+    this.postForm.controls.longitude.setValue(latLng.lng());
+
+    this.addMarkerCommon(marker);
   }
 
-  addMarkerCommon(latLng){
-    if(this.markerPositions.length > 0){
-      this.markerPositions[0] = latLng;
-    }else{
-      this.markerPositions.push(latLng);
+  setMapOnAll(map: google.maps.Map | null) {
+    for (let i = 0; i < this.markers.length; i++) {
+      this.markers[i].setMap(map);
     }
+  }
+  
+
+  addMarkerCommon(marker: google.maps.Marker){
+    if(this.markers.length > 0){
+      this.setMapOnAll(null);
+      this.markers = [];
+    }
+    
+      this.markers.push(marker);
   }
 
   onChangeEvent(){
@@ -259,8 +280,13 @@ export class CreatePostComponent implements OnInit {
         lat: Number(this.postForm.controls.latitude.value),
         lng: Number(this.postForm.controls.longitude.value)
       };
-    this.addMarkerCommon(latLng);
-    this.center = latLng;
+
+    const marker = new google.maps.Marker({
+      position: latLng,
+      map: this.map,
+    });
+
+    this.addMarkerCommon(marker);
   }
 
   /*labels*/

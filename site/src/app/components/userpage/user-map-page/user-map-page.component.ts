@@ -1,11 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { MapInfoWindow, MapMarker } from '@angular/google-maps';
 import { ActivatedRoute } from '@angular/router';
-import { Observable, of } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
 import { MapPoint } from 'src/app/model/Map';
-import { PostResponse } from 'src/app/model/post';
 import { LocationService } from 'src/app/services/location/location.service';
 import { PostService } from 'src/app/services/post/post.service';
 import { environment } from 'src/environments/environment';
@@ -18,7 +14,7 @@ import { environment } from 'src/environments/environment';
 export class UserMapPageComponent implements OnInit {
 
 
-  @ViewChild(MapInfoWindow) infoWindow: MapInfoWindow;
+  //@ViewChild(MapInfoWindow) infoWindow: MapInfoWindow;
   infoContent: string;
 
   center: any;
@@ -92,7 +88,7 @@ export class UserMapPageComponent implements OnInit {
     });
   }
 
-
+/*
   openInfo(marker: MapMarker, content: MapPoint) {
     let template = `<div id="iw-container">` +
     `<a target_"blak" href="${content.userId}/post/${content.postId}"><div class="iw-title">${content.title}</div></a>` +
@@ -106,5 +102,5 @@ export class UserMapPageComponent implements OnInit {
 
   setMapMarker(points: MapPoint[]) {
       this.markerPositions = points;
-  }
+  }*/
 }

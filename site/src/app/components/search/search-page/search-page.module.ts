@@ -4,7 +4,6 @@ import { CommonModule } from '@angular/common';
 import { SearchPageRoutingModule } from './search-page-routing.module';
 import { SearchPageComponent } from './search-page.component';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { GoogleMapsModule } from '@angular/google-maps';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
@@ -28,7 +27,6 @@ const materialModules = [
     SharedModule,
     ReactiveFormsModule,
     FormsModule,
-    GoogleMapsModule,
     materialModules
   ]
 })
