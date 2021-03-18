@@ -28,7 +28,7 @@ export class SearchBirdsService {
   }
 
   GetPointsBySpecie(latiude : number, longitude: number, zoom: number, specieId: string){
-    return this.httpClient.get<MapSpeciePoint[]>(`${environment.birdApiUrl}api/v1/SearchMap/GetPointsBySpecie/?latitude=${latiude}&longitude=${longitude}&zoom=${zoom}&=${specieId}`)
+    return this.httpClient.get<MapSpeciePoint[]>(`${environment.birdApiUrl}api/v1/SearchMap/GetPointsBySpecie/?latitude=${latiude}&longitude=${longitude}&zoom=${zoom}&specieId=${specieId}`)
       .pipe(map(data => {
         return data;
       }));

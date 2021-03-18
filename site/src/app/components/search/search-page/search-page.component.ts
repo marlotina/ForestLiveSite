@@ -28,10 +28,8 @@ export class SearchPageComponent implements OnInit {
   specieIdPostControl = new FormControl();
   @ViewChild('auto') matAutocomplete: MatAutocomplete;
   map: google.maps.Map;
-
-  //birdPosts: PostResponse[];
-
-    
+  markers: google.maps.Marker[] = [];
+  specieId: string = null;
   infowindow = new google.maps.InfoWindow();
   
   constructor(
@@ -61,7 +59,9 @@ export class SearchPageComponent implements OnInit {
     var postInfo = marker.getTitle().split(',');
     this.searchBirdsSerices.GetModalBirdPost(postInfo[0], postInfo[1]).subscribe(data => {
         const modal = `<div style='float:left'><img style='width: 100px;' src='${environment.imagesPostUrl}${data.imageUrl}' alt='${data.altImage}'>`+ 
-        `</div><div style='float:right; padding: 10px;'><b><a target='_blank' href='/${data.userId}/post/${data.postId}'>${data.title}</a></b><br/>${data.text}<br/> ${data.birdSpecie}</div>`;
+        `</div><div style='float:right; padding: 10px;'><b><a target='_blank' href='/${data.userId}/post/${data.postId}'>${data.title}</a>`+ 
+        `</b><br/>${data.text}<br/> ${data.birdSpecie}</div>`;
+
         this.infowindow.setContent(modal);
         this.infowindow.open(map, marker);
     })
@@ -114,12 +114,15 @@ export class SearchPageComponent implements OnInit {
 
         this.searchBirdsSerices.GetSearchPoints(latLng.lat(), latLng.lng(), this.zoom).subscribe(
           data => { 
+            this.setMapOnAll(null);
             for (let i = 0; i < data.length; i++) {
               const marker = this.getMarker(data[i], this.map);
               
               marker.addListener("click", () => {
                 this.getInfoPost(marker, this.map);
               });
+
+              this.markers.push(marker);
             }
           } 
         );
@@ -131,12 +134,15 @@ export class SearchPageComponent implements OnInit {
         
         this.searchBirdsSerices.GetSearchPoints(latLng.lat(), latLng.lng(), this.zoom).subscribe(
           data => { 
+            this.setMapOnAll(null);
             for (let i = 0; i < data.length; i++) {
               const marker = this.getMarker(data[i], this.map);
 
               marker.addListener("click", () => {
                 this.getInfoPost(marker, this.map);
               });
+
+              this.markers.push(marker);
             }
           } 
         ); 
@@ -144,6 +150,9 @@ export class SearchPageComponent implements OnInit {
     });
   }
 
+  getBirds(){
+    
+  }
   getMarker(point: MapSpeciePoint, map: google.maps.Map){
     const marker = new google.maps.Marker({
       position: { lat: point.location.lat, lng: point.location.lng},
@@ -188,19 +197,27 @@ export class SearchPageComponent implements OnInit {
   getBirdPosts(specieId: string) {
     var latLng = this.map.getCenter();
 
-
     this.searchBirdsSerices.GetPointsBySpecie(latLng.lat(), latLng.lng(), this.zoom, specieId).subscribe(
       data =>{ 
+        this.setMapOnAll(null);
         for (let i = 0; i < data.length; i++) {
           const marker = this.getMarker(data[i], this.map);
 
           marker.addListener("click", () => {
             this.getInfoPost(marker, this.map);
           });
+
+          this.markers.push(marker);
         }
       } 
     );
   }
 
- 
+  setMapOnAll(map: google.maps.Map | null) {
+    for (let i = 0; i < this.markers.length; i++) {
+      this.markers[i].setMap(map);
+    }
+    
+    this.markers = [];
+  }
 }
