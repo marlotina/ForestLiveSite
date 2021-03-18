@@ -42,6 +42,17 @@ export class DeletePost {
     image: string;
 }
 
+export class ModalPostResponse {
+    postId: string;
+    title: string;
+    text: string;
+    imageUrl: string;
+    altImage: string;
+    userId: string;
+    birdSpecie: string;
+    specieId: string;
+    observationDate: string;
+}
 
 export class ImagePostRequest {
     imageBase64: string;

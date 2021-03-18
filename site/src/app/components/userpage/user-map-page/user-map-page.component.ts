@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { MapPoint } from 'src/app/model/Map';
 import { LocationService } from 'src/app/services/location/location.service';
 import { PostService } from 'src/app/services/post/post.service';
+import { UserPostService } from 'src/app/services/user-post/user-post.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -12,37 +13,18 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./user-map-page.component.css']
 })
 export class UserMapPageComponent implements OnInit {
-
-
-  //@ViewChild(MapInfoWindow) infoWindow: MapInfoWindow;
+  
   infoContent: string;
-
-  center: any;
-  markerOptions: google.maps.MarkerOptions = {draggable: false};
-  markerPositions: MapPoint[] = [];
   @ViewChild('mapWrapper') mapElement: ElementRef;
   zoom: number = 16;
+  infowindow = new google.maps.InfoWindow();
 
-
-  /*markerOptions: google.maps.MarkerOptions = {
-    draggable: false,
-    icon: "../../../../assets/img/core-img/mapMarker.png"
-  };
-  markerPositions: MapPoint[] = [];
-  display: any;
-  mapOptions: google.maps.MapOptions = {
-    zoom:10,
-    streetViewControl: false,
-    fullscreenControl: false,
-    clickableIcons: false
- };
- apiLoaded: Observable<boolean>*/
- userId: string;
+  userId: string;
 
   constructor(private httpClient: HttpClient,
       private locationService: LocationService,
       private route: ActivatedRoute,
-      private postService: PostService) { }
+      private userPostService: UserPostService) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
@@ -70,37 +52,34 @@ export class UserMapPageComponent implements OnInit {
       };
       let map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
       
-      this.postService.GetMapPointsPostByUser(this.userId).subscribe(
+      this.userPostService.GetMapPointsPostByUser(this.userId).subscribe(
         data => { 
           for (let i = 0; i < data.length; i++) {
-            const beach = data[i];
-            new google.maps.Marker({
-              position: { lat: beach.location.lat, lng: beach.location.lng},
+            const post = data[i];
+            const marker = new google.maps.Marker({
+              position: { lat: post.location.lat, lng: post.location.lng},
               map,
               icon: "../../../../assets/img/core-img/mapMarker.png",
-              title: beach.title
+              title: post.postId
+            });
+
+            marker.addListener("click", () => {
+              this.getInfoPost(marker, map);
             });
           }
         } 
       );
-
-
     });
   }
 
-/*
-  openInfo(marker: MapMarker, content: MapPoint) {
-    let template = `<div id="iw-container">` +
-    `<a target_"blak" href="${content.userId}/post/${content.postId}"><div class="iw-title">${content.title}</div></a>` +
-    `<div class="iw-content"><div class="iw-subTitle">${content.birdSpecie}</div>` +
-    `<img src="${environment.imagesPostUrl}${content.imageUrl}" alt="${content.imageUrl}" height="115" width="83">` +
-    `<p>${content.birdSpecie}</p></div></div>`;
-
-    this.infoContent = template;
-    this.infoWindow.open(marker);
-}
-
-  setMapMarker(points: MapPoint[]) {
-      this.markerPositions = points;
-  }*/
+  getInfoPost(marker: google.maps.Marker, map: google.maps.Map){
+    
+    var postId = marker.getTitle();
+    this.userPostService.GetModalBirdPost(postId, this.userId).subscribe(data => {
+        const modal = `<div style='float:left'><img style='width: 100px;' src='${environment.imagesPostUrl}${data.imageUrl}' alt='${data.altImage}'>`+ 
+        `</div><div style='float:right; padding: 10px;'><b><a target='_blank' href='/${data.userId}/post/${data.postId}'>${data.title}</a></b><br/>${data.text}<br/> ${data.birdSpecie}</div>`;
+        this.infowindow.setContent(modal);
+        this.infowindow.open(map, marker);
+    })
+  }
 }
