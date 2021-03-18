@@ -8,6 +8,11 @@ export const environment = {
   birdApiUrl: 'https://birdsapiqa.azurewebsites.net/',
   voteApiUrl: 'https://localhost:44304/',
   googleApiKey: 'AIzaSyAjqE9XcDEwD2SmV9mmf757kYOdwTbJvwQ',
-  whiteListDomains:  ["postapiqa.azurewebsites.net", "userapiqa.azurewebsites.net"],
+  whiteListDomains:  ["localhost:44304", 
+                      "userapiqa.azurewebsites.net",
+                      "birdsapiqa.azurewebsites.net",
+                      "commentsapi.azurewebsites.net",
+                      "userpostapiqa.azurewebsites.net",
+                      "votesapi.azurewebsites.net"],
   blacklistedRoutes: []
 }
