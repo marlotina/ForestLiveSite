@@ -1,218 +1,201 @@
-<div class="breadcrumb-area">
-    <div class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center" style="background-image: url(assets/img/bg-img/24.jpg);">
-        <h2>{{ 'user.profileTitle' | translate }}</h2>
-    </div>
-</div>
-
-<section class="testimonial-area section-padding-0-100">
-
-    <div class="menu-profile">
-        <div class="">
-            <button class="btn" routerLink="/createPost">Create post</button>
-            <button class="btn" data-filter=".design">My votes</button>
-            <button class="btn" data-filter=".garden">My comments</button>
-            <button class="btn active" routerLink="/userProfile">My profile</button>
-        </div>
-    </div>
+<div class="container mt-15">
     
-    <div class="row align-items-center justify-content-center">
-        <div class="col-12 col-lg-5">
-            <div class="section-heading">
-                <h2>{{ 'user.profileTitle' | translate }}</h2>
-                <p>{{ 'user.profileText' | translate }}</p>
+    <div class="row justify-content-center mt-15">
+        
+        <div class="col-12 col-md-8 divPost">   
+            <div class="col-12 col-md-6 mt-15">
+                <button class="buttonTwo" (click)="openImageProfile()">{{'user.imageProfile' | translate}}</button>
             </div>
-        </div>
-    </div>
-    
-
-    <div class="container">
-        <div class="row">
-            <div class="contact-form-area col-12  mb-100 divPost" >
-                <div class="col-12 col-md-6">
-                    <button class="buttonTwo" (click)="openImageProfile()">{{'user.imageProfile' | translate}}</button>
-                </div>
-                <form [formGroup]="userProfileForm" (ngSubmit)="onSubmit()">
-                    <input class="hidden" formControlName="id">
-                    <input type="text" class="hidden" formControlName="photo">
-                    <div class="single-testimonial-slide">
-                        <div class="row align-items-center">
-                            <div class="col-12 col-md-6">
-                                
-                                <div class="testimonial-thumb">
-                                    <img [src]="userImage" alt="" class="img-responsive">
-                                </div>
-                                
+            <form [formGroup]="userProfileForm" (ngSubmit)="onSubmit()">
+                <input class="hidden" formControlName="id">
+                <input type="text" class="hidden" formControlName="photo">
+                <div class="row align-items-center">
+                    <div class="col-12 col-md-6">
+                        
+                        <div class="text-center">
+                            <img [src]="userImage" alt="" class="rounded-circle img-thumbnail">
+                        </div>
+                        
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <div class="col-12 mb-15 mb-15">
+                            <div class="form-group">
+                                <label for="emailProfile">{{ 'user.email' | translate }}*</label>
+                                <input type="email" 
+                                    id="emailProfile"
+                                    class="form-control blockInput"
+                                    [ngClass]="{ 'is-invalid': submitted && f.email.errors }"
+                                    formControlName="email">
                             </div>
-                            <div class="col-12 col-md-6">
-                                <div class="col-12">
-                                    <div class="form-group">
-                                        <label for="emailProfile">{{ 'user.email' | translate }}*</label>
-                                        <input type="email" 
-                                            id="emailProfile"
-                                            class="form-control blockInput"
-                                            [ngClass]="{ 'is-invalid': submitted && f.email.errors }"
-                                            formControlName="email">
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="form-group">
-                                        <label for="usernameProfile">{{ 'user.username' | translate }}*</label>
-                                        <input type="text" 
-                                            id="usernameProfile"
-                                            class="form-control" 
-                                            [ngClass]="{ 'is-invalid': submitted && f.userName.errors }"
-                                            formControlName="userName" disabled>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="form-group">
-                                        <label for="nameProfile">{{ 'user.name' | translate }}*</label>
-                                        <input type="text"
-                                            id="nameProfile" 
-                                            class="form-control"
-                                            [ngClass]="{ 'is-invalid': submitted && f.name.errors }"
-                                            formControlName="name">
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="form-group">
-                                        <label for="surnameProfile">{{ 'user.surname' | translate }}*</label>
-                                        <input type="text" 
-                                            id="surnameProfile"
-                                            class="form-control"
-                                            formControlName="surname">
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="form-group">
-                                        <label for="locationProfile">{{ 'user.location' | translate }}*</label>
-                                        <input type="text" 
-                                            id="locationProfile"
-                                            class="form-control"
-                                            formControlName="location">
-                                    </div>
+                        </div>
+                        <div class="col-12 mb-15 mb-15">
+                            <div class="form-group">
+                                <label for="usernameProfile">{{ 'user.username' | translate }}*</label>
+                                <input type="text" 
+                                    id="usernameProfile"
+                                    class="form-control" 
+                                    [ngClass]="{ 'is-invalid': submitted && f.userName.errors }"
+                                    formControlName="userName" disabled>
+                            </div>
+                        </div>
+                        <div class="col-12 mb-15 mb-15">
+                            <div class="form-group">
+                                <label for="nameProfile">{{ 'user.name' | translate }}*</label>
+                                <input type="text"
+                                    id="nameProfile" 
+                                    class="form-control"
+                                    [ngClass]="{ 'is-invalid': submitted && f.name.errors }"
+                                    formControlName="name">
+                            </div>
+                        </div>
+                        <div class="col-12 mb-15 mb-15">
+                            <div class="form-group">
+                                <label for="surnameProfile">{{ 'user.surname' | translate }}*</label>
+                                <input type="text" 
+                                    id="surnameProfile"
+                                    class="form-control"
+                                    formControlName="surname">
+                            </div>
+                        </div>
+                        <div class="col-12 mb-15 mb-15">
+                            <div class="form-group">
+                                <label for="locationProfile">{{ 'user.location' | translate }}*</label>
+                                <input type="text" 
+                                    id="locationProfile"
+                                    class="form-control"
+                                    formControlName="location">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 col-md-12 mb-15">
+                        <div class="form-group">
+                            <label for="descriptionProfile">{{ 'user.description' | translate }}*</label>
+                            <textarea class="form-control" id="descriptionProfile" formControlName="description" rows="3"></textarea>
+                        </div>
+                    </div>
+                </div>        
+                <div class="row">
+                    <div class="col-12 col-md-6">
+                        <div class="col-12 mb-15">
+                            <div class="form-group">
+                                <label for="urlWebSiteProfile">{{ 'user.urlWebSite' | translate }}*</label>
+                                <input type="text" 
+                                    id="urlWebSiteProfile"
+                                    class="form-control"
+                                    formControlName="urlWebSite">
+                            </div>
+                        </div>
+                        <div class="col-12 mb-15">
+                            <div class="form-group">
+                                <label for="twitterUrlProfile">{{ 'user.twitterUrl' | translate }}*</label>
+                                <input type="text" 
+                                    id="twitterUrlProfile"
+                                    class="form-control"
+                                    formControlName="twitterUrl">
+                            </div>
+                        </div>
+                        <div class="col-12 mb-15">
+                            <div class="form-group">
+                                <label for="facebookUrlProfile">{{ 'user.facebookUrl' | translate }}*</label>
+                                <input type="text" 
+                                    id="facebookUrlProfile"
+                                    class="form-control"
+                                    formControlName="facebookUrl">
+                            </div>
+                        </div>
+                        <div class="col-12 mb-15">
+                            <div class="form-group">
+                                <label>{{ 'user.registrationDate' | translate }}*</label>
+                                <input type="text" 
+                                    class="form-control blockInput"
+                                    formControlName="registrationDate">
+                            </div>
+                        </div>
+                        <div class="col-12 mb-15">
+                            <div class="form-group widget-desc">  
+                                <div class="custom-control custom-checkbox d-flex align-items-center mb-2">
+                                    <input type="checkbox" class="custom-control-input" formControlName="isCompany" id="isCompanyProfile" checked>
+                                    <label for="isCompanyProfile" class="custom-control-label">{{ 'user.isCompany' | translate }}?</label>
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-12 col-md-12">
-                                <div class="col-12">
-                                    <div class="form-group">
-                                        <label for="descriptionProfile">{{ 'user.description' | translate }}*</label>
-                                        <textarea class="form-control" id="descriptionProfile" formControlName="description" rows="3"></textarea>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>        
-                        <div class="row">
-                            <div class="col-12 col-md-6">
-                                <div class="col-12">
-                                    <div class="form-group">
-                                        <label for="urlWebSiteProfile">{{ 'user.urlWebSite' | translate }}*</label>
-                                        <input type="text" 
-                                            id="urlWebSiteProfile"
-                                            class="form-control"
-                                            formControlName="urlWebSite">
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="form-group">
-                                        <label for="twitterUrlProfile">{{ 'user.twitterUrl' | translate }}*</label>
-                                        <input type="text" 
-                                            id="twitterUrlProfile"
-                                            class="form-control"
-                                            formControlName="twitterUrl">
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="form-group">
-                                        <label for="facebookUrlProfile">{{ 'user.facebookUrl' | translate }}*</label>
-                                        <input type="text" 
-                                            id="facebookUrlProfile"
-                                            class="form-control"
-                                            formControlName="facebookUrl">
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="form-group">
-                                        <label>{{ 'user.registrationDate' | translate }}*</label>
-                                        <input type="text" 
-                                            class="form-control blockInput"
-                                            formControlName="registrationDate">
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="form-group widget-desc">  
-                                        <div class="custom-control custom-checkbox d-flex align-items-center mb-2">
-                                            <input type="checkbox" class="custom-control-input" formControlName="isCompany" id="isCompanyProfile" checked>
-                                            <label for="isCompanyProfile" class="custom-control-label">{{ 'user.isCompany' | translate }}?</label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="form-group widget-desc">  
-                                        <div class="shipping-address">
-                                            <button type="button" class="buttonTwo" (click)="recoverPassword()">{{ 'user.resetPassword' | translate }}</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-12 col-md-6">
-                                <div class="col-12">
-                                    <div class="form-group">
-                                        <label for="instagramUrlProfile">{{ 'user.instagramUrl' | translate }}*</label>
-                                        <input type="text" 
-                                            id="instagramUrlProfile"
-                                            class="form-control"
-                                            formControlName="instagramUrl">
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="form-group">
-                                        <label for="linkedlinUrlProfile">{{ 'user.linkedlinUrl' | translate }}*</label>
-                                        <input type="text" 
-                                            id="linkedlinUrlProfile"
-                                            class="form-control"
-                                            formControlName="linkedlinUrl">
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="form-group">
-                                        <label for="languageProfile">{{ 'user.language' | translate }}*</label>
-                                        <select class="form-control" formControlName="languageId">
-                                            <option value="1d134297-b070-4149-a2e0-c2643de48f95">English</option>
-                                            <option value="c7bc511d-562b-4a59-a434-2d754fe40f5c">Catalan</option>  
-                                            <option value="17368404-4355-49c8-b289-08f357a92b9f">Spanish</option>                   
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="form-group">
-                                        <label>{{ 'user.lastModification' | translate }}*</label>
-                                        <input type="text" 
-                                            class="form-control blockInput"
-                                            formControlName="lastModification">
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="form-group widget-desc">  
-                                        <div class="shipping-address">
-                                            <button type="button" class="buttonTwo" (click)="deleteUser()">{{ 'user.deleteUser' | translate }}</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                                
-                            <div class="container">
-                                <div class="row align-items-center justify-content-center">
-                                    <button type="submit" class="btn alazea-btn mt-15">{{ 'user.update' | translate }}</button>
+                        <div class="col-12 mb-15">
+                            <div class="form-group widget-desc">  
+                                <div class="shipping-address">
+                                    <button type="button" class="buttonTwo" (click)="recoverPassword()">{{ 'user.resetPassword' | translate }}</button>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </form> 
+    
+                    <div class="col-12 col-md-6">
+                        <div class="col-12 mb-15">
+                            <div class="form-group">
+                                <label for="instagramUrlProfile">{{ 'user.instagramUrl' | translate }}*</label>
+                                <input type="text" 
+                                    id="instagramUrlProfile"
+                                    class="form-control"
+                                    formControlName="instagramUrl">
+                            </div>
+                        </div>
+                        <div class="col-12 mb-15">
+                            <div class="form-group">
+                                <label for="linkedlinUrlProfile">{{ 'user.linkedlinUrl' | translate }}*</label>
+                                <input type="text" 
+                                    id="linkedlinUrlProfile"
+                                    class="form-control"
+                                    formControlName="linkedlinUrl">
+                            </div>
+                        </div>
+                        <div class="col-12 mb-15">
+                            <div class="form-group">
+                                <label for="languageProfile">{{ 'user.language' | translate }}*</label>
+                                <select class="form-control" formControlName="languageId">
+                                    <option value="1d134297-b070-4149-a2e0-c2643de48f95">English</option>
+                                                        <option value="c7bc511d-562b-4a59-a434-2d754fe40f5c">Catalan</option>  
+                                    <option value="17368404-4355-49c8-b289-08f357a92b9f">Spanish</option>                   
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-12 mb-15">
+                            <div class="form-group">
+                                <label>{{ 'user.lastModification' | translate }}*</label>
+                                <input type="text" 
+                                    class="form-control blockInput"
+                                    formControlName="lastModification">
+                            </div>
+                        </div>
+                        <div class="col-12 mb-15">
+                            <div class="form-group widget-desc">  
+                                <div class="shipping-address">
+                                    <button type="button" class="buttonTwo" (click)="deleteUser()">{{ 'user.deleteUser' | translate }}</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                        
+                    <div class="container mb-15">
+                        <div class="row align-items-center justify-content-center">
+                            <div class="form-group">
+                                <button type="submit" class="btn-lg btn-primary mt-15">{{ 'user.update' | translate }}</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form> 
+        </div>
+
+        <div class="col-12 col-sm-9 col-md-4" >
+            <div class="list-group">
+                <a href="#" class="list-group-item list-group-item-action active" routerLink="/userProfile">My profile</a>
+                <a href="#" class="list-group-item list-group-item-action" routerLink="/createPost">Create postm</a>
+                <a href="#" class="list-group-item list-group-item-action" routerLink="/usercomments">My comments</a>
+                <a href="#" class="list-group-item list-group-item-action" routerLink="/uservotes">My votes</a>
             </div>
         </div>
+
     </div>
-</section>
+</div>
+

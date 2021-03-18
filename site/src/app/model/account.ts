@@ -22,6 +22,7 @@ export class User {
     firstName: string;
     lastName: string;
     token: string;
+    photo: string;
 }
 
 export class UserStorage {

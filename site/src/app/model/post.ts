@@ -1,17 +1,17 @@
 export class PostRequest {
-    ImageData: string;
-    AltImage: string;
-    ImageName: string;
-    Title: string;
-    Text: string;
-    UserId: string;
-    UserName:boolean;
-    Latitude: string;
-    Longitude: string;
-    SpecieName: string;
-    SpecieId: string;
-    Labels: string[];
-    ObservationDate: Date;
+    imageData: string;
+    altImage: string;
+    imageName: string;
+    title: string;
+    text: string;
+    userId: string;
+    userName:boolean;
+    latitude: string;
+    longitude: string;
+    specieName: string;
+    specieId: string;
+    labels: string[];
+    observationDate: Date;
 }
 
 export class PostResponse {
@@ -42,16 +42,29 @@ export class DeletePost {
     image: string;
 }
 
+export class ModalPostResponse {
+    postId: string;
+    title: string;
+    text: string;
+    imageUrl: string;
+    altImage: string;
+    userId: string;
+    birdSpecie: string;
+    specieId: string;
+    observationDate: string;
+}
 
 export class ImagePostRequest {
     imageBase64: string;
     altImage: string;
+    firstImage: boolean;
 }
 
-export class PostPendingResponse {
+export class BirdSpeciePostResponse {
     id:string;
     postId: string;
     title: string;
+    text: string;
     imageUrl: string;
     altImage: string;
     userId: string;
@@ -62,4 +75,5 @@ export class PostPendingResponse {
     userUrl: string;
     observationDate: string;
     creationDate: Date;
+    userPhoto: string
 }

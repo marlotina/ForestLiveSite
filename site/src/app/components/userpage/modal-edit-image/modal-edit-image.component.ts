@@ -11,7 +11,7 @@ import {base64ToFile} from '../../../shared/cropper/blob.utils';
 })
 export class ModalEditImageComponent implements OnInit {
 
-  aspectRatio: number = 4/3;
+  aspectRatio: number = 1/1;
   imageChangedEvent: any = '';
   croppedImage: any = '';
   canvasRotation = 0;
@@ -47,6 +47,7 @@ export class ModalEditImageComponent implements OnInit {
   imageCropped(event: ImageCroppedEvent) {
     this.croppedImage = event.base64;
   }
+
   imageLoaded() {
     this.showCropper = true;
   }
@@ -89,11 +90,18 @@ export class ModalEditImageComponent implements OnInit {
   }
 
   closeModal() {
-    this.dialogRef.close();
+    let imagePost: ImagePostRequest = {
+      firstImage: this.modalData.firstImage == true,
+      imageBase64: this.croppedImage,
+      altImage: this.altImageInput.nativeElement.value
+    };
+
+    this.dialogRef.close(imagePost);
   }
 
   saveImage () {
     let imagePost: ImagePostRequest = {
+      firstImage: false,
       imageBase64: this.croppedImage,
       altImage: this.altImageInput.nativeElement.value
     };

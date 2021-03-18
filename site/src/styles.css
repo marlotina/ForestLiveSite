@@ -9,19 +9,6 @@ html, body { height: 100%; }
 .LabelsSelect {
     display: inline !important;
 }
-  
-.postImage{
-    width: 600px;       
-    height: 400px;
-}
-
-
-.divPost {
-    padding: 20px;
-    background: #f9f9f9;
-    border: 1px solid #ebebeb;
-}
-
 
 .divAuthor {
     padding: 20px;
@@ -71,48 +58,6 @@ html, body { height: 100%; }
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
-}
-
-.gm-style-iw {
-	width: 350px !important;
-	top: 15px !important;
-	left: 0px !important;
-	background-color: #fff;
-	box-shadow: 0 1px 6px rgba(178, 178, 178, 0.6);
-	border: 1px solid #70c745;
-	border-radius: 2px 2px 10px 10px;
-}
-#iw-container {
-	margin-bottom: 10px;
-}
-.iw-title {
-	font-family: 'Open Sans Condensed', sans-serif;
-	font-size: 22px;
-	font-weight: 400;
-	padding: 3px 10px 3px 10px;
-	background-color: #70c745;
-	color: white;
-	margin: 0;
-	border-radius: 2px 2px 0 0;
-}
-.iw-content {
-	font-size: 13px;
-	line-height: 18px;
-	font-weight: 400;
-	margin-right: 1px;
-	padding: 15px 5px 20px 15px;
-	max-height: 140px;
-	overflow-y: auto;
-	overflow-x: hidden;
-}
-.iw-content img {
-	float: right;
-	margin: 0 5px 5px 10px;	
-}
-.iw-subTitle {
-	font-size: 16px;
-	font-weight: 700;
-	padding: 5px 0;
 }
 
 .vote-btn {
@@ -175,31 +120,6 @@ font-weight: 600; }
 	text-align: center;
 }
 
-.menu-profile 
-{
-	position: relative;
-	z-index: 1;
-	text-align: center;
-	margin-bottom: 30px; 
-}
-.menu-profile .btn 
-{
-	-webkit-transition-duration: 300ms;
-	transition-duration: 300ms;
-	padding: 0;
-	font-size: 20px;
-	color: #707070;
-	font-weight: 500;
-	background-color: transparent;
-	padding: 0 20px; 
-}
-
-.menu-profile .active 
-{
-	color: #70c745;
-	box-shadow: none; 
-}
-
 
 @media only screen and (max-width: 767px) 
 {
@@ -210,8 +130,187 @@ font-weight: 600; }
 	} 
 }
 
-.menu-profile .btn:hover, .menu-profile .btn:focus 
-{
-	color: #70c745;
-	box-shadow: none; 
+.is-invalid {
+	border-color: red !important;
+  }
+  
+  .error-text {
+	color: red;
+  }
+  
+  .hidden {
+	display: none !important;
+	visibility: hidden;
+  }
+  
+  .blockInput {
+	pointer-events: none;
+  }
+  
+  .buttonTwo {
+	-webkit-transition-duration: 500ms;
+	transition-duration: 500ms;
+	width: 100%;
+	height: calc(2.25rem + 2px);
+	border: 1px solid #ebebeb;
+	background-color: #cccccc;
+	color: #303030;
+	font-size: 14px;
+	text-transform: uppercase;
+	cursor: pointer;
+	font-weight: 500;
+	margin-bottom: 0;
+  }
+  
+  .buttonTwo:hover {
+	background-color: #70c745;
+	color: #ffffff;
+	border-color: #70c745;
+  }
+  
+  .buttonThree {
+	-webkit-transition-duration: 500ms;
+	transition-duration: 500ms;
+	height: 30px;
+	min-width: 150px;
+	border: 1px solid #ebebeb;
+	background-color: #cccccc;
+	color: #303030;
+	font-size: 14px;
+	text-transform: uppercase;
+	cursor: pointer;
+	font-weight: 500;
+	margin-bottom: 0;
+  }
+  
+  .buttonThree:hover {
+	background-color: #70c745;
+	color: #ffffff;
+	border-color: #70c745;
+  }
+  
+  a:hover {
+	cursor:pointer;
+   }
+  
+  .map-container{
+	  width: 100% !important;
+	  height: 650px !important;
+  }
+  
+  .autocomplete-form {
+	min-width: 150px;
+	max-width: 500px;
+	width: 100%;
+  }
+  
+  .autocomplete-full-width {
+	width: 100%;
+  }
+/*new*/
+body {
+	min-height: 75rem;
+	padding-top: 4.5rem;
+}
+
+.mt-15 {
+	margin-top: 15px !important;
+}
+
+.mb-15 {
+	margin-bottom: 15px !important;
+}
+
+.mb-5 {
+	margin-bottom: 5px !important;
+}
+
+.titlePost {
+	font-size: 1.25rem;
+}
+
+.mat-icon {
+	vertical-align: middle;
+  }
+
+
+.removeLinkLine {
+	text-decoration: none;
+	color: inherit; 
+  }
+
+.imgAuthorPost {
+    flex: 0 0 80px;
+    max-width: 80px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.postImage{  
+    width: 600px;
+}
+
+.divPost {
+    background: #f9f9f9;
+    border: 1px solid #ebebeb;
+	margin-bottom: 5px;
+}
+
+.div-right-line {
+    border-right: 1px solid #ebebeb;
+}
+
+.div-bottom-line {
+	padding-bottom: 10px !important;
+    border-bottom: 1px solid #ebebeb;
+}
+
+.div-top-line {
+	padding-top: 10px !important;
+    border-top: 1px solid #ebebeb;
+}
+
+.divVote {
+	text-align: center;
+	padding-top: 10px;
+}
+
+.container {
+    max-width: 960px;
+}
+
+.commetDate {
+	text-align: right;
+}
+
+.social-image {
+	height: 25px;
+	width: auto;
+	margin-right: 10px;
+}
+
+.cutText {
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+.authorWithoutSpecie {
+	margin-top: 5px;
+	border-bottom: 1px solid #ebebeb;
+	margin-left: 5px;
+}
+
+.searchMap {
+	height: 650px;
+}
+
+.createPostMap {
+	height: 400px;
+}
+
+.inputSearchTop {
+	border-top: .84375em solid transparent;
 }

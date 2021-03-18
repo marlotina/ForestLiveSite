@@ -12,10 +12,10 @@
                             [maintainAspectRatio]="true"
                             [containWithinAspectRatio]="false"
                             [aspectRatio]="aspectRatio"
-                            [resizeToWidth]="1200"
-                            [resizeToHeight]="800"
-                            [cropperMinWidth]="1200"
-                            [cropperMinHeight]="800"
+                            [resizeToWidth]="1920"
+                            [resizeToHeight]="1080"
+                            [cropperMinWidth]="1920"
+                            [cropperMinHeight]="1080"
                             [onlyScaleDown]="true"
                             [roundCropper]="false"
                             [canvasRotation]="canvasRotation"
@@ -57,8 +57,9 @@
         
     </section>
 <footer id="modal-footer">
-    <div class="welcome-btn-group" style="margin-bottom: 30px;">
-        <button mat-raised-button class="btn alazea-btn mr-30" (click)="saveImage()">{{ 'createPost.save' | translate }}</button>
-        <button mat-raised-button class="btn alazea-btn active" (click)="closeModal()">{{ 'createPost.back' | translate }}</button>
+
+    <div class="btn-group" role="group" aria-label="Basic example">
+        <button class="btn btn-primary" (click)="saveImage()">{{ 'createPost.save' | translate }}</button>
+        <button class="btn btn-primary" (click)="closeModal()">{{ 'createPost.back' | translate }}</button>
     </div>
 </footer>

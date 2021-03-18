@@ -1,241 +1,89 @@
-<div class="breadcrumb-area">
-    <div class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center" style="background-image: url(../../../../../assets/img/bg-img/24.jpg);">
-        <h2>{{ 'userPage.userPage' | translate }}</h2>
-    </div>
-</div>
-
-<section class="blog-content-area section-padding-0-100">
-    
-    <div class="container">
-        <div class="row justify-content-center">
-            <!-- Blog Posts Area -->
-            <div class="col-12 col-md-8">
-                <div class="blog-posts-area">                
-                    <div *ngFor="let post of userPosts">
-                        <!-- Post Details Area -->
-                        
-                        <div class="single-post-details-area divPost">
-                            <div class="post-content">
-                                <div class="single-widget-area"> 
-                                    <div class="row">
-                                        <div class="col-11 col-md-1 voteDiv">
-                                            {{post.voteCount}}
-                                            <button type="button" (click)="addVote(post, post.hasVote)" [ngClass]="{'hasVote-btn' : post.hasVote, 'vote-btn' : !post.hasVote}" class="votebtn"><mat-icon>thumb_up</mat-icon></button>
-                                        </div>
-                                        <div class="col-6 col-md-10">
-                                            <div class="single-latest-post d-flex align-items-center">
-                                                <div class="author-thumb">
-                                                    <img src="https://birdpostsqa.blob.core.windows.net/profiles/{{post.userPhoto}}" alt="image of {{post.userId}}" class="imgProfilePost">
-                                                </div>
-                                                <div class="post-content">
-                                                    <a class="post-title" href="/{{post.userId}}/post/{{post.postId}}"><h6>{{post.title}}</h6></a>
-                                                    <a class="post-date" href="/userpage/{{post.userId}}">{{post.userId}}</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-6 col-md-1 text-right">
-                                            <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu" *ngIf="showDeleteOption(post.userId)">
-                                                <mat-icon>more_vert</mat-icon>
-                                            </button>
-                                            <mat-menu #menu="matMenu" >
-                                                <button mat-menu-item type="button" (click)="deleteItem(post)">
-                                                    <mat-icon>delete</mat-icon>
-                                                    <span>{{ 'postPage.delete' | translate }}</span>
-                                                </button>
-                                            </mat-menu>
-                                        </div>
+<div class="container mt-15">
+    <div class="row justify-content-center">
+        
+        <div class="col-12 col-md-8">             
+            <div *ngFor="let post of userPosts">
+                
+                <div class="row divPost divPostColor">  
+                    <div class="col-12 col-md-1 div-right-line">
+                        <div class="divVote">
+                            {{post.voteCount}}
+                            <button type="button" 
+                                (click)="addVote(post, post.hasVote)" 
+                                [ngClass]="{'hasVote-btn' : post.hasVote, 'vote-btn' : !post.hasVote}" 
+                                class="votebtn">
+                                <mat-icon>thumb_up</mat-icon>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-11">
+                        <div class="row mb-15 div-bottom-line">
+                            <div class="col-12 col-md-11">
+                                <div>
+                                    <a class="text-dark titlePost fs-4 removeLinkLine" href="/{{post.userId}}/post/{{post.postId}}">{{post.title}}</a>
+                                    <div>
+                                        <img src="https://birdpostsqa.blob.core.windows.net/profiles/{{post.userPhoto}}" alt="image of {{post.userId}}" class="imgAuthorPost">
+                                        <a class="text-dark btn fs-6 fw-light removeLinkLine" href="/userpage/{{post.userId}}">{{post.userId}}</a>
                                     </div>
-                                    
-
                                 </div>
-                                
-                                
-                                <div class="post-thumbnail mb-30">
-                                    <img src="{{imagesPostUrl}}{{post.imageUrl}}" alt="{{post.altImage}}" class="postImage divPostImgContent">
-                                </div>
-                                <div style="padding-left: 45px;">
-                                    <div>{{ 'userPage.birdSpecie' | translate }}: <i>{{post.birdSpecie}}</i><br/>
-                                    
-                                        {{ 'userPage.observationDate' | translate }}: {{post.observationDate}}</div>
-                                    <div class="post-meta mb-30">
-                                        {{post.text}}
-                                    </div>  
-                                </div>
+                            </div>
+                            <div class="col-12 col-md-1">
+                                <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu" *ngIf="showDeleteOption(post.userId)">
+                                    <mat-icon>more_vert</mat-icon>
+                                </button>
+                                <mat-menu #menu="matMenu" >
+                                    <button mat-menu-item type="button" (click)="deletePost(post)">
+                                        <mat-icon>delete</mat-icon>
+                                        <span>{{ 'postPage.delete' | translate }}</span>
+                                    </button>
+                                </mat-menu>
+                            </div>
+                        </div>
+                        <div class="row mb-15 div-bottom-line">
+                            <a (click)="showImage(post.imageUrl)"><img src="{{imagesPostUrl}}{{post.imageUrl}}" alt="{{post.altImage}}" class="postImage divPostImgContent img-fluid rounded float-end"></a>
+                        </div>
+                        <div class="row mb-5 div-bottom-line">
+                            <div>
+                                <img class="social-image" src="../../../../assets/img/core-img/icons8-topic-48.png" /><span class="aligned-with-icon">&nbsp;{{post.commentCount}}&nbsp;comments</span>
+                            </div>
+                        </div>
+                        <div class="row mb-5">
+                            <div>
+                                {{ 'userPage.birdSpecie' | translate }}: {{post.birdSpecie}}
+                            </div>
+                        </div>
+                        <div class="row mb-5">
+                            <div>
+                                {{ 'userPage.observationDate' | translate }}: {{post.observationDate}} 
+                            </div>
+                        </div>
+                        <div class="row mb-15">
+                            <div>
+                                {{post.text}}
                             </div>
                         </div>
                     </div>
-
-                    
-                    <!-- Post Details Area -->
-                    <div class="single-post-details-area" *ngIf="hasNotPosts">
-                        <div class="leave-comment-area clearfix">
-                            <div class="post-content">
-                                <p>
-                                    {{ 'userPage.userWithoutPost' | translate }}
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                </div>  
             </div>
-
-            <!-- Blog Sidebar Area -->
-            <div class="col-12 col-sm-9 col-md-4">
-                <div class="post-sidebar-area">
-                    <div class="single-widget-area">
-                        <div>
-                            <a routerLink="/createPost" class="btn alazea-btn" style="width: 100%;">{{ 'userPage.addPost' | translate }}</a>
-                        </div>
-                    </div>
-
-                    <!-- ##### Single Widget Area ##### -->
-                    <app-author-details></app-author-details>
-
-                    <!-- ##### Single Widget Area ##### -->
-                    <div class="single-widget-area">
-                        <!-- Title -->
-                        <div class="widget-title">
-                            <h4>Recent post</h4>
-                        </div>
-
-
-                        <!-- Single Latest Posts -->
-                        <div class="single-latest-post d-flex align-items-center">
-                            <div class="post-thumb">
-                                <img src="../../../../../assets/img/bg-img/30.jpg" alt="">
-                            </div>
-                            <div class="post-content">
-                                <a href="#" class="post-title">
-                                    <h6>New Harris Bugg design for Bridgewater</h6>
-                                </a>
-                                <a href="#" class="post-date">20 Jun 2018</a>
-                            </div>
-                        </div>
-
-                        <!-- Single Latest Posts -->
-                        <div class="single-latest-post d-flex align-items-center">
-                            <div class="post-thumb">
-                                <img src="../../../../../assets/img/bg-img/31.jpg" alt="">
-                            </div>
-                            <div class="post-content">
-                                <a href="#" class="post-title">
-                                    <h6>The designers will create a new kitchen garden</h6>
-                                </a>
-                                <a href="#" class="post-date">20 Jun 2018</a>
-                            </div>
-                        </div>
-
-                        <!-- Single Latest Posts -->
-                        <div class="single-latest-post d-flex align-items-center">
-                            <div class="post-thumb">
-                                <img src="../../../../../assets/img/bg-img/32.jpg" alt="">
-                            </div>
-                            <div class="post-content">
-                                <a href="#" class="post-title">
-                                    <h6>SGD Members win Best of Houzz Design Award</h6>
-                                </a>
-                                <a href="#" class="post-date">20 Jun 2018</a>
-                            </div>
-                        </div>
-
-                        <!-- Single Latest Posts -->
-                        <div class="single-latest-post d-flex align-items-center">
-                            <div class="post-thumb">
-                                <img src="../../../../../assets/img/bg-img/33.jpg" alt="">
-                            </div>
-                            <div class="post-content">
-                                <a href="#" class="post-title">
-                                    <h6>Shepherding Vegetables From Roof to Restaurant</h6>
-                                </a>
-                                <a href="#" class="post-date">20 Jun 2018</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- ##### Single Widget Area ##### -->
-                    <div class="single-widget-area">
-                        <!-- Title -->
-                        <div class="widget-title">
-                            <h4>Tag Cloud</h4>
-                        </div>
-                        <!-- Tags -->
-                        <ol class="popular-tags d-flex flex-wrap">
-                            <li><a href="#">PLANTS</a></li>
-                            <li><a href="#">NEW PRODUCTS</a></li>
-                            <li><a href="#">CACTUS</a></li>
-                            <li><a href="#">DESIGN</a></li>
-                            <li><a href="#">NEWS</a></li>
-                            <li><a href="#">TRENDING</a></li>
-                            <li><a href="#">VIDEO</a></li>
-                            <li><a href="#">GARDEN DESIGN</a></li>
-                        </ol>
-                    </div>
-
-                    <!-- ##### Single Widget Area ##### -->
-                    <div class="single-widget-area">
-                        <!-- Title -->
-                        <div class="widget-title">
-                            <h4>BEST SELLER</h4>
-                        </div>
-
-                        <!-- Single Best Seller Products -->
-                        <div class="single-best-seller-product d-flex align-items-center">
-                            <div class="product-thumbnail">
-                                <a href="shop-details.html"><img src="../../../../../assets/img/bg-img/4.jpg" alt=""></a>
-                            </div>
-                            <div class="product-info">
-                                <a href="shop-details.html">Cactus Flower</a>
-                                <p>$10.99</p>
-                                <div class="ratings">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Single Best Seller Products -->
-                        <div class="single-best-seller-product d-flex align-items-center">
-                            <div class="product-thumbnail">
-                                <a href="shop-details.html"><img src="../../../../../assets/img/bg-img/5.jpg" alt=""></a>
-                            </div>
-                            <div class="product-info">
-                                <a href="shop-details.html">Tulip Flower</a>
-                                <p>$11.99</p>
-                                <div class="ratings">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Single Best Seller Products -->
-                        <div class="single-best-seller-product d-flex align-items-center">
-                            <div class="product-thumbnail">
-                                <a href="shop-details.html"><img src="../../../../../assets/img/bg-img/34.jpg" alt=""></a>
-                            </div>
-                            <div class="product-info">
-                                <a href="shop-details.html">Recuerdos Plant</a>
-                                <p>$9.99</p>
-                                <div class="ratings">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                </div>
-                            </div>
-                        </div>
-
+            
+            <div class="single-post-details-area" *ngIf="hasNotPosts">
+                <div class="leave-comment-area clearfix">
+                    <div class="post-content">
+                        <p>
+                            {{ 'userPage.userWithoutPost' | translate }}
+                        </p>
                     </div>
                 </div>
             </div>
         </div>
+
+        <div class="col-12 col-sm-9 col-md-4" >
+            <div class="mb-15" [hidden]="!isLogged">
+                <a routerLink="/createPost" class="btn btn-primary" style="width: 100%;">{{ 'userPage.addPost' | translate }}</a>
+            </div>
+
+            <app-author-details></app-author-details>
+        </div>
     </div>
-</section>
+</div>
 

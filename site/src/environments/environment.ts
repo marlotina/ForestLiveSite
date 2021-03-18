@@ -7,14 +7,18 @@ export const environment = {
   userApiUrl: 'https://userapiqa.azurewebsites.net/',
   imagesProfileUrl: 'https://birdpostsqa.blob.core.windows.net/profiles/',
   imagesPostUrl: 'https://birdpostsqa.blob.core.windows.net/posts/',
-  postApiUrl: 'https://postapiqa.azurewebsites.net/',
-  userPostApiUrl: 'https://userpostapiqa.azurewebsites.net/',
-  pendingApiUrl: 'https://pendingapiqa.azurewebsites.net/',
+  postApiUrl: 'https://localhost:44304/',
+  userPostApiUrl: 'https://localhost:44352/',
   commentApiUrl: 'https://commentsapi.azurewebsites.net/',
   birdApiUrl: 'https://birdsapiqa.azurewebsites.net/',
   googleApiKey: 'AIzaSyAjqE9XcDEwD2SmV9mmf757kYOdwTbJvwQ',
   voteApiUrl: 'https://votesapi.azurewebsites.net/',
-  whiteListDomains:  ["postapiqa.azurewebsites.net", "userapiqa.azurewebsites.net","birdsapiqa.azurewebsites.net","commentsapi.azurewebsites.net", "userpostapiqa.azurewebsites.net","votesapi.azurewebsites.net"],
+  whiteListDomains:  ["localhost:44304", 
+                      "userapiqa.azurewebsites.net",
+                      "birdsapiqa.azurewebsites.net",
+                      "commentsapi.azurewebsites.net",
+                      "localhost:44352",
+                      "votesapi.azurewebsites.net"],
   blacklistedRoutes: []
 }
 /*
@@ -33,7 +37,6 @@ export const environment = {
   birdApiUrl: 'https://localhost:44383/',
   //birdApiUrl: 'https://birdsapiqa.azurewebsites.net/',
   userPostApiUrl: 'https://localhost:44352/',
-  pendingApiUrl: 'https://localhost:44360/',
   googleApiKey: 'AIzaSyAjqE9XcDEwD2SmV9mmf757kYOdwTbJvwQ',
   whiteListDomains:  ["localhost:44374", "localhost:44304"],
   blacklistedRoutes: []
@@ -45,7 +48,6 @@ export const environment = {
   imagesPostUrl: 'https://birdpostsqa.blob.core.windows.net/posts/',
   postApiUrl: 'https://postapiqa.azurewebsites.net/',
   userPostApiUrl: 'https://userpostapiqa.azurewebsites.net/',
-  pendingApiUrl: 'https://pendingapiqa.azurewebsites.net/',
   birdApiUrl: 'https://birdsapiqa.azurewebsites.net/',
   googleApiKey: 'AIzaSyAjqE9XcDEwD2SmV9mmf757kYOdwTbJvwQ',
   whiteListDomains:  ["postapiqa.azurewebsites.net", "userapiqa.azurewebsites.net","birdsapiqa.azurewebsites.net"],

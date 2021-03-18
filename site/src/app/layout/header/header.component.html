@@ -1,55 +1,61 @@
-<!-- ##### Header Area Start ##### -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+  <div class="container-fluid">
+      <a class="navbar-brand" routerLink="index.html">
+          <img src="../assets/img/core-img/leaf.png" alt="logo" width="30" height="24">
+        </a>
+    <a class="navbar-brand"  routerLink="index.html">Observetion birds</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
-    
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" routerLink="searchpage">Search birds</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="birdpage">Birds species</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="withoutspecie">{{ 'general.pendingSpecie' | translate }}</a>
+        </li>
+      </ul>
 
-        <!-- ***** Navbar Area ***** -->
-    <div class="alazea-main-menu">
-        <div class="classy-nav-container breakpoint-off">
-            <div class="container">
-                <!-- Menu -->
-                <nav class="classy-navbar justify-content-between" id="alazeaNav">
+      <div class="btn-group me-2" [hidden]="!isLogged">
+          <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
+            <img class="imgAuthorPost" src="{{userImage}}" alt="image of marlotina"> 
+            {{ userNameMenu }}
+          </button>
+          <ul class="dropdown-menu dropdown-menu-lg-end">
+              <li><a class="dropdown-item" routerLink="createPost" routerLinkActive="active">{{ 'userPage.addPost' | translate }}</a></li>
+              <li><a class="dropdown-item" routerLink="userpage/{{ userNameMenu }}">{{ 'general.myPage' | translate }}</a></li>
+              <li><a class="dropdown-item" routerLink="userProfile" routerLinkActive="active">{{ 'user.profileMenu' | translate }}</a>
+              <li><a class="dropdown-item" routerLink="#" routerLinkActive="active" (click)="logout()">{{ 'account.logOut' | translate }}</a></li>
+          </ul>
+      </div>
+      
+      <div class="btn-group me-2"  [hidden]="isLogged">
+          <a routerLink="login" class="btn btn-outline-secondary" role="button">
+              {{ 'account.login' | translate }}
+          </a>
+      </div>
 
-                    <!-- Nav Brand -->
-                    <a routerLink="index.html" class="nav-brand"><img src="assets/img/core-img/logo.png" alt=""></a>
+      <div class="btn-group me-2"  [hidden]="isLogged">
+          <a routerLink="signup" class="btn btn-secondary" role="button">
+              {{ 'account.signUp' | translate }}
+          </a>
+      </div>
 
-                    <!-- Navbar Toggler -->
-                    <div class="classy-navbar-toggler">
-                        <span class="navbarToggler"><span></span><span></span><span></span></span>
-                    </div>
-
-                    <!-- Menu -->
-                    <div class="classy-menu">
-
-                        <!-- Close Button -->
-                        <div class="classycloseIcon">
-                            <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
-                        </div>
-
-                        <!-- Navbar Start -->
-                        <div class="classynav">
-                            <ul>
-                                <li><a routerLink="searchmap">Map</a></li>
-                                <li><a routerLink="birdpage">Birds species</a></li>
-                                <li><a routerLink="withoutspecie">{{ 'general.pendingSpecie' | translate }}</a></li>
-                            </ul>
-                            <ul [hidden]="isLogged">
-                                <li><a routerLink="signup" routerLinkActive="active">{{ 'account.signUp' | translate }}</a></li>
-                                <li><a routerLink="login">{{ 'account.login' | translate }}</a>
-                            </ul>
-                            <ul [hidden]="!isLogged">
-                                <li><a href="#">{{ userNameMenu }}</a>
-                                    <ul class="dropdown">
-                                        <li><a routerLink="createPost" routerLinkActive="active">{{ 'userPage.addPost' | translate }}</a></li>
-                                        <li><a routerLink="userpage/{{ userNameMenu }}">{{ 'general.myPage' | translate }}</a></li>
-                                        <li><a routerLink="userProfile" routerLinkActive="active">{{ 'user.profileMenu' | translate }}</a>
-                                        <li><a routerLink="#" routerLinkActive="active" (click)="logout()">{{ 'account.logOut' | translate }}</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </div>
-                        <!-- Navbar End -->
-                    </div>
-                </nav>
-            </div>
-        </div>
+      <div class="btn-group me-2">
+          <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
+              Language
+          </button>
+          <ul class="dropdown-menu dropdown-menu-lg-end">
+              <li><a class="dropdown-item" (click)="changeLang('en')"><img class="social-image" src="../../../assets/img/core-img/icons8-great-britain.png" /></a></li>
+              <li><a class="dropdown-item" (click)="changeLang('es')"><img class="social-image" src="../../../assets/img/core-img/icons8-spain.png" /></a></li>
+              <li> <a class="dropdown-item" (click)="changeLang('de')"><img class="social-image" src="../../../assets/img/core-img/icons8-germany.png" /></a></li>
+          </ul>
+      </div>
     </div>
+  </div>
+</nav>

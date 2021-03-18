@@ -1,62 +1,43 @@
-<div class="breadcrumb-area">
-    <div class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center" style="background-image: url(assets/img/bg-img/24.jpg);">
-        <h2>{{ 'account.login' | translate }}</h2>
-    </div>
+<div class="container">
 
-</div>
-
-<section class="contact-area section-padding-0-100">
-    <div class="container">
-        <div class="row align-items-center justify-content-center">
-            <div class="col-12 col-lg-5">
-               
-                <div class="section-heading">
-                    <h2>{{ 'account.login' | translate }}</h2>
-                    <p>{{ 'account.loginText' | translate }}</p>
-                </div>
-              
-                <div class="contact-form-area mb-100">
-                    
-                    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-                        
-                        <label *ngIf="errorResponse" class="error-text">{{ 'account.errorResponseMessage' | translate }}</label>
-                        <label *ngIf="notActivatedAccount" class="error-text">{{ 'account.loginActivatedAccountMessage' | translate }}</label>
-                        <label *ngIf="emailPassWrong" class="error-text">{{ 'account.invalidEmailPasswordMessage' | translate }}</label>
-
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <label for="emialLogin">{{ 'account.email' | translate }}*</label>
-                                    <input type="email" 
-                                        id="emialLogin"
-                                        class="form-control"
-                                        [ngClass]="{ 'is-invalid': submitted && f.email.errors }"
-                                        formControlName="email">
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <label for="passwordLogin">{{ 'account.password' | translate }}*</label>
-                                    <input type="password" 
-                                        id="passwordLogin"
-                                        class="form-control" 
-                                        [ngClass]="{ 'is-invalid': submitted && f.password.errors }"
-                                        formControlName="password">
-                                </div>
-                                <div>
-                                    <label>{{ 'account.forgetPasswordLink' | translate }}</label>&nbsp;<a routerLink="/forgotpassword" routerLinkActive="active">{{ 'account.forgotPassword' | translate }}</a>
-                                </div>
-                                
-                            </div>
-                            <div class="col-12">
-                                <button type="submit" class="btn alazea-btn mt-15">{{ 'account.login' | translate }}</button>
-                            </div>
-                        </div>
-                    </form>
-
-                </div>
-
+    <div class="form-signin">
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+            <img class="mb-4" src="../assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
+    
+            <h1 class="h3 mb-3 fw-normal">{{ 'account.loginText' | translate }}</h1>
+    
+            <label *ngIf="errorResponse" class="error-text">{{ 'account.errorResponseMessage' | translate }}</label>
+            <label *ngIf="notActivatedAccount" class="error-text">{{ 'account.loginActivatedAccountMessage' | translate }}</label>
+            <label *ngIf="emailPassWrong" class="error-text">{{ 'account.invalidEmailPasswordMessage' | translate }}</label>
+    
+            <label for="emialLogin" class="visually-hidden">{{ 'account.email' | translate }}*</label>
+            <input type="email" 
+                id="emialLogin"
+                class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f.email.errors }"
+                formControlName="email"
+                placeholder="{{ 'account.email' | translate }}">
+    
+            <label for="passwordLogin" class="visually-hidden">{{ 'account.password' | translate }}*</label>
+            <input type="password" 
+                id="passwordLogin"
+                class="form-control" 
+                [ngClass]="{ 'is-invalid': submitted && f.password.errors }"
+                formControlName="password"
+                placeholder="{{ 'account.password' | translate }}">
+    
+            <div class="checkbox mb-3">
+                <label>
+                <input type="checkbox" value="remember-me"> Remember me
+                </label>
             </div>
-        </div>
-    </div>
-</section>
+    
+            <div>
+                <label>{{ 'account.forgetPasswordLink' | translate }}</label>&nbsp;<a routerLink="/forgotpassword" routerLinkActive="active">{{ 'account.forgotPassword' | translate }}</a>
+            </div>
+    
+            <button type="submit" class="w-100 btn btn-lg btn-primary">{{ 'account.login' | translate }}</button>
+          
+        </form>
+      </div>
+</div>

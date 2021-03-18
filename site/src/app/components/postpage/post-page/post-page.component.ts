@@ -13,6 +13,7 @@ import { PostService } from 'src/app/services/post/post.service';
 import { VoteService } from 'src/app/services/vote/vote.service';
 import { environment } from 'src/environments/environment';
 import { CommonDialogComponent } from '../../shared/common-dialog/common-dialog.component';
+import { ImageDialogComponent } from '../../shared/image-dialog/image-dialog.component';
 
 @Component({
   selector: 'app-post-page',
@@ -30,6 +31,7 @@ export class PostPageComponent implements OnInit {
   isLogged: boolean;
   userLoggedInfo: User;
   hasPost = false;
+  display = "none";
 
   constructor(private activateRoute: ActivatedRoute,
     private postService: PostService,
@@ -46,8 +48,11 @@ export class PostPageComponent implements OnInit {
       text: ['', [Validators.required]],
       userId: ['', [Validators.required]],
       postId: ['', [Validators.required]],
-      specieId: ['', [Validators.required]]
+      specieId: ['', [Validators.required]],
+      AuthorPostUserId: ['', [Validators.required]],
+      titlePost: ['', [Validators.required]]
     });
+
     this.userLoggedInfo = this.accountService.userValue;
     this.isLogged = this.userLoggedInfo != null;
     
@@ -60,12 +65,17 @@ export class PostPageComponent implements OnInit {
           this.imagePost = environment.imagesPostUrl + data.imageUrl;
           this.showOwnerOptions = this.userLoggedInfo != null && this.post.userId == this.userLoggedInfo.userName;
           this.hasPost = true;
+
           this.commentForm.patchValue({
             'userId': this.userLoggedInfo != null ? this.userLoggedInfo.userName : '',
-            'postId': this.post.id
+            'postId': this.post.id,
+            'specieId': this.post.specieId,
+            'AuthorPostUserId': this.post.userId,
+            'titlePost': this.post.title
             });
         } 
       );
+
       this.commentService.GetCommentsByPost(postId).subscribe(
         data => { 
           this.comments = data 
@@ -100,9 +110,9 @@ export class PostPageComponent implements OnInit {
   addVote(post: PostResponse, hasVote: boolean){
     let request: VoteRequest = {
       postId: post.postId,
-      title: post.title,
+      titlePost: post.title,
       userId: this.userLoggedInfo.userName,
-      ownerUserId: post.userId
+      authorPostUserId: post.userId
     }
 
     if(hasVote){
@@ -137,14 +147,34 @@ export class PostPageComponent implements OnInit {
   }
 
   deleteItem(){
-    this.postService.DeletePost(this.post.postId).subscribe(
-      data => {
-        this.openCommonModal('postdeleted');
-        this.route.navigate(['/userpage/' + this.post.userId]);
-      },
-      error => { 
-        this.openCommonModal('failpostdelete');
-      });
+    const dialogConfig = new MatDialogConfig();
+    
+    dialogConfig.disableClose = false;
+    dialogConfig.id = "modal-component";
+    dialogConfig.width = "600px";
+    dialogConfig.data = {
+      //title: "user.deleteTitlePostModal",
+      description: "user.deleteTextPostModal",
+      acceptButtonText: "general.delete",
+      cancelButtonText:"general.cancel",
+      hideAcceptButton: false,
+      hideCancelButton: false
+    }
+      
+    const dialogRef = this.matDialog.open(CommonDialogComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe(result => {
+      if(result == 'ACCEPT'){
+        this.postService.DeletePost(this.post.postId).subscribe(
+          data => {
+            this.route.navigate(['/userpage/' + this.post.userId]);
+          },
+          error => { 
+            this.openCommonModal('failpostdelete');
+          });
+      }
+    });
+
+    
   }
 
   deleteComment(comment: CommentResponse){
@@ -182,5 +212,17 @@ export class PostPageComponent implements OnInit {
     
     this.matDialog.open(CommonDialogComponent, dialogConfig);
   }
-  
+
+  showImage(imageUrl: string) {
+    const dialogConfig = new MatDialogConfig();
+    
+    dialogConfig.disableClose = false;
+    dialogConfig.id = "modal-component";
+    dialogConfig.width = "100%"; 
+    dialogConfig.data = {
+      image: imageUrl
+    }
+    
+    this.matDialog.open(ImageDialogComponent, dialogConfig);
+  }
 }

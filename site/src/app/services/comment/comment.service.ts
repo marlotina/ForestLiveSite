@@ -25,6 +25,13 @@ export class CommentService {
       }));
   }
 
+  GetCommentsByUser(userId: string){
+    return this.httpClient.get<CommentResponse[]>(`${environment.commentApiUrl}api/v1/Comment/GetCommentsByUser?userId=${userId}`)
+      .pipe(map(data => {
+        return data;
+      }));
+  }
+
   DeleteComment(postId: string, userId: string, specieId: string){
     return this.httpClient.delete(`${environment.commentApiUrl}api/v1/Comment/DeleteComment/?postId=${postId}&commentId=${userId}&specieId=${specieId}`);
   }

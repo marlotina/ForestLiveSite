@@ -1,18 +1,12 @@
-<div id="modal-content-wrapper">
-    <header id="modal-header">
-        <h1 id="modal-title"> {{ modalData.title | translate }}</h1>
-    </header>
-    <section id="modal-body">
-        <p>{{ modalData.description | translate }}</p>
-    </section>
-    <footer id="modal-footer">
-        <button  [hidden]="modalData.hideAcceptButton" mat-raised-button class="btn alazea-btn" (click)="acceptModal()">
-            {{ modalData.acceptButtonText | translate }}
-        </button>
-        &nbsp;&nbsp;
-        <button [hidden]="modalData.hideCancelButton" mat-raised-button class="btn alazea-btn" (click)="cancelModal()">
-            {{ modalData.cancelButtonText | translate }}
-        </button>
-        
-    </footer>
+
+
+<!--<div class="modal-header">
+    <h5 class="modal-title">{{ modalData.title | translate }}</h5>
+</div>-->
+<div class="modal-body">
+    <p>{{ modalData.description | translate }}</p>
 </div>
+<div class="modal-footer">
+    <button type="button" [hidden]="modalData.hideCancelButton" class="btn btn-primary" (click)="cancelModal()">{{ modalData.cancelButtonText | translate }}</button>
+    <button type="button" [hidden]="modalData.hideAcceptButton" class="btn btn-primary" (click)="acceptModal()">{{ modalData.acceptButtonText | translate }}</button>
+</div> 

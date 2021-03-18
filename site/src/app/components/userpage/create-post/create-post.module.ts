@@ -4,8 +4,6 @@ import { CommonModule } from '@angular/common';
 import { HttpClientJsonpModule, HttpClientModule } from '@angular/common/http';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { GoogleMapsModule } from '@angular/google-maps';
-
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -40,7 +38,6 @@ const materialModules = [
   ],
   imports: [
     CommonModule,
-    GoogleMapsModule,
     CreatePostRoutingModule,
     HttpClientModule,
     HttpClientJsonpModule,

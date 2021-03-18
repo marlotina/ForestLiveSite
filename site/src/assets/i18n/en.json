@@ -70,7 +70,8 @@
         "userDeleted": "Your account has been deleted, If you want retrieve it contact with support",
         "titleDeleteModal": "Delete user",
         "userTitleModal": "User save data",
-        "acceptExtensionFormats": "Only accpet jpg and png format images"
+        "acceptExtensionFormats": "Only accpet jpg and png format images",
+        "deleteTextPostModal": "¿Are you sure that you want to remove your post?"
     },
     "createPost": { 
         "createPost": "Create a new post",

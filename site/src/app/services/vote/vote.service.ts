@@ -26,7 +26,7 @@ export class VoteService {
   }
 
   GetVotesByUser(userId: string){
-    return this.httpClient.get<VoteResponse[]>(`${environment.userPostApiUrl}api/v1/VotePost/GetVoteByUser/?userId=${userId}`)
+    return this.httpClient.get<VoteResponse[]>(`${environment.voteApiUrl}api/v1/VoteUser/GetVoteByUser/?userId=${userId}`)
       .pipe(map(data => {
         return data;
       }));

@@ -1,15 +1,15 @@
 export class MapPoint {
     postId: string;
-    title: string;
-    imageUrl: string;
-    altImage: string;
-    userId: string;
     location: Position;
-    birdSpecie: string;
+}
+
+export class MapSpeciePoint {
+    postId: string;
     specieId: string;
+    location: Position;
 }
 
 export class Position {
-    lat: string;
-    lng: string;
-  }
+    lat: number;
+    lng: number;
+}

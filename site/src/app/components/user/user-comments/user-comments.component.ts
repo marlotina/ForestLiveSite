@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { CommentResponse } from 'src/app/model/Comment';
+import { AccountService } from 'src/app/services/account/account.service';
+import { CommentService } from 'src/app/services/comment/comment.service';
 
 @Component({
   selector: 'app-user-comments',
@@ -7,9 +10,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserCommentsComponent implements OnInit {
 
-  constructor() { }
+  userComments: CommentResponse[];
+  hasNotComments = false;
+
+  constructor(private commentService: CommentService,
+    private accountService: AccountService) { }
 
   ngOnInit(): void {
+    this.commentService.GetCommentsByUser(this.accountService.userValue.userName).subscribe(
+      data =>{ 
+        if(data.length > 0){
+          this.hasNotComments = true;
+        }
+        this.userComments = data;
+      } 
+    );
   }
 
 }
