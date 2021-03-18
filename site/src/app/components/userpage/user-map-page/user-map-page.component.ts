@@ -73,7 +73,6 @@ export class UserMapPageComponent implements OnInit {
   }
 
   getInfoPost(marker: google.maps.Marker, map: google.maps.Map){
-    
     var postId = marker.getTitle();
     this.userPostService.GetModalBirdPost(postId, this.userId).subscribe(data => {
         const modal = `<div style='float:left'><img style='width: 100px;' src='${environment.imagesPostUrl}${data.imageUrl}' alt='${data.altImage}'>`+ 
