@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
-import { MapPoint } from 'src/app/model/Map';
+import { MapSpeciePoint } from 'src/app/model/Map';
 import { BirdSpeciePostResponse, PostResponse, ModalPostResponse } from 'src/app/model/post';
 import { environment } from 'src/environments/environment';
 
@@ -20,15 +20,23 @@ export class SearchBirdsService {
       }));
   }
 
-  GetSearchPoints(latiude : string, longitude: string, zoom: number){
-    return this.httpClient.get<MapPoint[]>(`${environment.birdApiUrl}api/v1/SearchMap/GetPoints/?latitude=${latiude}&longitude=${longitude}&zoom=${zoom}`)
+  GetSearchPoints(latiude : number, longitude: number, zoom: number){
+    return this.httpClient.get<MapSpeciePoint[]>(`${environment.birdApiUrl}api/v1/SearchMap/GetPoints/?latitude=${latiude}&longitude=${longitude}&zoom=${zoom}`)
       .pipe(map(data => {
         return data;
       }));
   }
 
+  GetPointsBySpecie(latiude : number, longitude: number, zoom: number, specieId: string){
+    return this.httpClient.get<MapSpeciePoint[]>(`${environment.birdApiUrl}api/v1/SearchMap/GetPointsBySpecie/?latitude=${latiude}&longitude=${longitude}&zoom=${zoom}&=${specieId}`)
+      .pipe(map(data => {
+        return data;
+      }));
+  }
+  
+
   GetModalBirdPost(postId : string, specieId: string){
-    return this.httpClient.get<ModalPostResponse[]>(`${environment.birdApiUrl}api/v1/SearchMap/GetModalInfo/?postId=${postId}&specieId=${specieId}`)
+    return this.httpClient.get<ModalPostResponse>(`${environment.birdApiUrl}api/v1/SearchMap/GetModalInfo/?postId=${postId}&specieId=${specieId}`)
       .pipe(map(data => {
         return data;
       }));
