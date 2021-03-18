@@ -109,49 +109,50 @@ export class SearchPageComponent implements OnInit {
           }
         });
         
-        var latLng = bounds.getCenter();
         this.map.fitBounds(bounds);
-
-        this.searchBirdsSerices.GetSearchPoints(latLng.lat(), latLng.lng(), this.zoom).subscribe(
-          data => { 
-            this.setMapOnAll(null);
-            for (let i = 0; i < data.length; i++) {
-              const marker = this.getMarker(data[i], this.map);
-              
-              marker.addListener("click", () => {
-                this.getInfoPost(marker, this.map);
-              });
-
-              this.markers.push(marker);
-            }
-          } 
-        );
+        this.getBirds(bounds.getCenter());
       });
 
       google.maps.event.addListener(this.map, 'idle', () => { 
-        var latLng = this.map.getCenter();
-        this.zoom = this.map.getZoom();
-        
-        this.searchBirdsSerices.GetSearchPoints(latLng.lat(), latLng.lng(), this.zoom).subscribe(
-          data => { 
-            this.setMapOnAll(null);
-            for (let i = 0; i < data.length; i++) {
-              const marker = this.getMarker(data[i], this.map);
-
-              marker.addListener("click", () => {
-                this.getInfoPost(marker, this.map);
-              });
-
-              this.markers.push(marker);
-            }
-          } 
-        ); 
+        this.getBirds(this.map.getCenter());
       });
     });
   }
 
-  getBirds(){
-    
+  getBirds(latLng: google.maps.LatLng){
+    if(this.specieId == null){
+      this.zoom = this.map.getZoom();
+      
+      this.searchBirdsSerices.GetSearchPoints(latLng.lat(), latLng.lng(), this.zoom).subscribe(
+        data => { 
+          this.setMapOnAll(null);
+          for (let i = 0; i < data.length; i++) {
+            const marker = this.getMarker(data[i], this.map);
+
+            marker.addListener("click", () => {
+              this.getInfoPost(marker, this.map);
+            });
+
+            this.markers.push(marker);
+          }
+        } 
+      ); 
+    } else {
+      this.searchBirdsSerices.GetPointsBySpecie(latLng.lat(), latLng.lng(), this.zoom, this.specieId).subscribe(
+        data =>{ 
+          this.setMapOnAll(null);
+          for (let i = 0; i < data.length; i++) {
+            const marker = this.getMarker(data[i], this.map);
+  
+            marker.addListener("click", () => {
+              this.getInfoPost(marker, this.map);
+            });
+  
+            this.markers.push(marker);
+          }
+        } 
+      );
+    }
   }
   getMarker(point: MapSpeciePoint, map: google.maps.Map){
     const marker = new google.maps.Marker({
@@ -167,7 +168,8 @@ export class SearchPageComponent implements OnInit {
   selectSpecie(item: AutocompleteResponse){
     this.autocompleteControl.setValue(item.nameComplete);
     this.specieIdPostControl.setValue(item.specieId);
-    this.getBirdPosts(item.specieId);
+    this.specieId = item.specieId;
+    this.getBirds(this.map.getCenter());
   }
 
   optionClicked(event: Event, specie: AutocompleteResponse) {
@@ -192,25 +194,6 @@ export class SearchPageComponent implements OnInit {
     }
 
     return null;
-  }
-
-  getBirdPosts(specieId: string) {
-    var latLng = this.map.getCenter();
-
-    this.searchBirdsSerices.GetPointsBySpecie(latLng.lat(), latLng.lng(), this.zoom, specieId).subscribe(
-      data =>{ 
-        this.setMapOnAll(null);
-        for (let i = 0; i < data.length; i++) {
-          const marker = this.getMarker(data[i], this.map);
-
-          marker.addListener("click", () => {
-            this.getInfoPost(marker, this.map);
-          });
-
-          this.markers.push(marker);
-        }
-      } 
-    );
   }
 
   setMapOnAll(map: google.maps.Map | null) {
