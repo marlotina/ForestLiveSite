@@ -2,7 +2,7 @@
 
     <div class="form-signin">
         <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-            <img class="mb-4" src="../assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
+            <img class="mb-4" src="../../../../assets/img/core-img/leaf.png" alt="" width="72" height="57">
     
             <h1 class="h3 mb-3 fw-normal">{{ 'account.loginText' | translate }}</h1>
     
@@ -32,7 +32,7 @@
                 </label>
             </div>
     
-            <div>
+            <div class="mb-15">
                 <label>{{ 'account.forgetPasswordLink' | translate }}</label>&nbsp;<a routerLink="/forgotpassword" routerLinkActive="active">{{ 'account.forgotPassword' | translate }}</a>
             </div>
     
