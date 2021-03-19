@@ -108,6 +108,7 @@ export class LandingPageComponent implements OnInit {
               data => {    
                 post.voteCount--;
                 post.hasVote = false;
+                post.voteId = null;
               },
               error => {   
                 if(error.status == "409"){
@@ -123,6 +124,7 @@ export class LandingPageComponent implements OnInit {
               data => {    
                 post.voteCount++;
                 post.hasVote = true;
+                post.voteId = data.id;
               },
               error => {   
                 if(error.status == "409"){

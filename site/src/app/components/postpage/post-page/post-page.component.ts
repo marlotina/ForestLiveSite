@@ -121,6 +121,8 @@ export class PostPageComponent implements OnInit {
           .subscribe(
               data => {    
                 post.voteCount--;
+                post.hasVote = false;
+                post.voteId = null;
               },
               error => {   
                 if(error.status == "409"){
@@ -135,6 +137,8 @@ export class PostPageComponent implements OnInit {
           .subscribe(
               data => {    
                 post.voteCount++;
+                post.hasVote = true;
+                post.voteId = data.id;
               },
               error => {   
                 if(error.status == "409"){

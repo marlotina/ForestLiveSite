@@ -6,7 +6,7 @@ export class VoteRequest {
 }
 
 export class VoteResponse {
-    Id: string;
+    id: string;
     title: string;
     userId: string;
     vote: number;
