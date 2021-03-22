@@ -1,10 +1,8 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { environment } from '../../../../environments/environment';
 import { FormBuilder, FormControl, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
 import { PostService } from 'src/app/services/post/post.service';
 import { Observable, of } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
 import { catchError, debounceTime, first, map, switchMap } from 'rxjs/operators';
 import { LocationService } from 'src/app/services/location/location.service';
 import { CommonDialogComponent } from '../../shared/common-dialog/common-dialog.component';
@@ -18,6 +16,7 @@ import { ModalEditImageComponent } from '../modal-edit-image/modal-edit-image.co
 import { AutocompleteService } from 'src/app/services/autocomplete/autocomplete.service';
 import { AutocompleteResponse } from 'src/app/model/specie';
 import { Router } from '@angular/router';
+import { UserPostService } from 'src/app/services/user-post/user-post.service';
 
 class ImageSnippet {
   constructor(public src: string, public file: File) {}
@@ -31,21 +30,11 @@ class ImageSnippet {
 
 export class CreatePostComponent implements OnInit {
 
-  apiLoaded: Observable<boolean>
+  //apiLoaded: Observable<boolean>
 
   postForm: FormGroup;
   submitted = false;
   
- /* center: any;
-  markerOptions: google.maps.MarkerOptions = {draggable: false};
-  markerPositions: google.maps.LatLngLiteral[] = [];
-  mapOptions: google.maps.MapOptions = {
-    zoom:15,
-    streetViewControl: false,
-    fullscreenControl: false,
-    clickableIcons: false
- };*/
-
   center: any;
   markerOptions: google.maps.MarkerOptions = {draggable: false};
   markers: google.maps.Marker[] = [];
@@ -54,10 +43,11 @@ export class CreatePostComponent implements OnInit {
 
   labelCtrl = new FormControl();
   separatorKeysCodes: number[] = [ENTER, COMMA];
-  //filteredLabel: Observable<string[]>;
+  filteredLabels: Observable<string[]>;
   labels: string[] = [];
-  allLabels: string[] = ['nature', 'birds', 'free', 'winter', 'river'];
-  
+  allLabels: string[] = [];
+  visible = true;
+
   selectedFile: ImageSnippet;
 
   url: any;
@@ -72,22 +62,34 @@ export class CreatePostComponent implements OnInit {
   filteredSpecies: Observable<AutocompleteResponse[]>;
   autocompleteControl = new FormControl();
   @ViewChild('labelInput') labelInput: ElementRef<HTMLInputElement>;
+
   @ViewChild('file') fileInput: ElementRef<HTMLInputElement>;
+
   @ViewChild('specieNamePost') specieNamePost: ElementRef<HTMLInputElement>;
+
   @ViewChild('auto') matAutocomplete: MatAutocomplete;  
 
-  constructor(private httpClient: HttpClient,
-    private formBuilder: FormBuilder,
+  @ViewChild('autoLabel') matAutoLabelcomplete: MatAutocomplete;  
+  
+
+  
+
+
+  constructor(private formBuilder: FormBuilder,
     private postService: PostService, 
     private matDialog: MatDialog,
     private locationService: LocationService,
     private accountService: AccountService,
     private router: Router,
+    private userPostService: UserPostService,
     private autocompleteService: AutocompleteService) { 
       
-      //this.filteredLabel = this.labelCtrl.valueChanges.pipe(
-      //  //startWith(null),
-      //  map((label: string | null) => label ? this._filter(label) : this.allLabels.slice()));
+      this.filteredLabels = this.labelCtrl.valueChanges.pipe(
+        startWith(null),
+        map((
+          label: string | null) => 
+          label ? this._filter(label) : this.allLabels.slice()
+          ));
   }  
 
   ngOnInit(): void {
@@ -106,25 +108,35 @@ export class CreatePostComponent implements OnInit {
       observationDate: ['', [Validators.required]]
     });
     
+    let userId = this.accountService.userValue.userName;
+    
     this.postForm.patchValue({
-      'userId': this.accountService.userValue.userName
+      'userId': userId
       });
 
-      this.filteredSpecies = this.autocompleteControl.valueChanges.pipe(
-        startWith(''),
-        // delay emits
-        debounceTime(300),
-        // use switch map so as to cancel previous subscribed events, before creating new once
-        switchMap(value => {
-          if (value !== '' && value.nameComplete == null) {
-            return this.getSpecies(value);
-          } else {
-            return of([]);
-          }
-        })
-      );
+    this.userPostService.GetUserLabels(userId)
+      .pipe(first())
+      .subscribe(
+          data => {    
+            this.allLabels = data;
+          },
+          error => { 
 
-      this.initMap();
+           });
+
+    this.filteredSpecies = this.autocompleteControl.valueChanges.pipe(
+      startWith(''),
+      debounceTime(300),
+      switchMap(value => {
+        if (value !== '' && value.nameComplete == null) {
+          return this.getSpecies(value);
+        } else {
+          return of([]);
+        }
+      })
+    );
+
+    this.initMap();
   }
 
   selectSpecie(item: AutocompleteResponse){
@@ -141,7 +153,7 @@ export class CreatePostComponent implements OnInit {
       return this.autocompleteService.GetSpeciesByKeys(value.toLowerCase(), localStorage.getItem('locale'))
         .pipe(map(results => results),
           catchError(_ => {
-            return of(null);
+            return of([]);
           }
         )
       );
@@ -321,7 +333,7 @@ export class CreatePostComponent implements OnInit {
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
 
-    return this.allLabels.filter(fruit => fruit.toLowerCase().indexOf(filterValue) === 0);
+    return this.allLabels.filter(label => label.toLowerCase().indexOf(filterValue) === 0);
   }
 
   /*Modal form*/
