@@ -49,7 +49,7 @@ export class PostPageComponent implements OnInit {
       userId: ['', [Validators.required]],
       postId: ['', [Validators.required]],
       specieId: ['', [Validators.required]],
-      AuthorPostUserId: ['', [Validators.required]],
+      authorPostUserId: ['', [Validators.required]],
       titlePost: ['', [Validators.required]]
     });
 
@@ -70,7 +70,7 @@ export class PostPageComponent implements OnInit {
             'userId': this.userLoggedInfo != null ? this.userLoggedInfo.userName : '',
             'postId': this.post.id,
             'specieId': this.post.specieId,
-            'AuthorPostUserId': this.post.userId,
+            'authorPostUserId': this.post.userId,
             'titlePost': this.post.title
             });
         } 
