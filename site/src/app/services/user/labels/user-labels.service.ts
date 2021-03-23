@@ -12,28 +12,28 @@ export class UserLabelsService {
   constructor(private httpClient: HttpClient) { }
 
   GetUserLabels(userId: string){
-    return this.httpClient.get<string[]>(`${environment.userPostApiUrl}api/v1/BirdLabels/GetUserLabels/?&userId=${userId}`)
+    return this.httpClient.get<string[]>(`${environment.userLabelApiUrl}api/v1/UserLabels/GetLabels?userId=${userId}`)
       .pipe(map(data => {
         return data;
       }));
   }
 
   GetUserLabelsDetails(userId: string){
-    return this.httpClient.get<UserLabelResponse[]>(`${environment.userPostApiUrl}api/v1/BirdLabels/GetUserLabelsDetails/?&userId=${userId}`)
+    return this.httpClient.get<UserLabelResponse[]>(`${environment.userLabelApiUrl}api/v1/UserLabels/GetLabelsDetails?userId=${userId}`)
       .pipe(map(data => {
         return data;
       }));
   }
 
   AddLabel(userLabel: UserLabelRequest){
-    return this.httpClient.post<UserLabelResponse>(`${environment.userPostApiUrl}api/v1/BirdLabels/AddLabel/`, userLabel)
+    return this.httpClient.post<UserLabelResponse>(`${environment.userLabelApiUrl}api/v1/UserLabels/AddLabel/`, userLabel)
       .pipe(map(data => {
         return data;
       }));
   }
 
   DeleteLabel(label: string, userId: string){
-    return this.httpClient.delete<boolean>(`${environment.userPostApiUrl}api/v1/BirdLabels/DeleteUserLabel/?&label=${label}&userId=${userId}`)
+    return this.httpClient.delete<boolean>(`${environment.userLabelApiUrl}api/v1/UserLabels/DeleteLabel/?&label=${label}&userId=${userId}`)
       .pipe(map(data => {
         return data;
       }));

@@ -56,25 +56,13 @@ export class UserLabelsComponent implements OnInit {
         .subscribe(
             data => {    
               this.userLabels.push(data);
-              this.labelForm.controls.text.setValue('');
+              this.labelForm.controls.label.setValue('');
             },
             error => {   
               if(error.status == "409"){} else {
                 this.openCommonModal('user.failUserAction');
               } 
             });
-  }
-
-  addLabel(label: string, userId: string){
-    let userLabel: UserLabelRequest = {
-      userId: userId,
-      label: label
-    };
-
-    this.userLabelsService.AddLabel(userLabel).subscribe(
-      data => {
-        this.userLabels.push(data);
-      });
   }
 
   removeLabel(userLabel: UserLabelResponse){
@@ -86,6 +74,14 @@ export class UserLabelsComponent implements OnInit {
             this.userLabels.splice(index, 1);
           }
         }
+      },
+      error => {   
+        if(error.status == "409"){} else {
+          this.openCommonModal('user.failUserAction');
+        } 
+        if(error.status == "403"){} else {
+          this.openCommonModal('user.failUserAction');
+        } 
       }
     )
   }
