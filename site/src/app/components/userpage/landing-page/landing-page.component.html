@@ -84,9 +84,10 @@
 
             <app-author-details></app-author-details>
             <div class="form-group">
-                <a *ngFor="let label of userLabels" routerLink="{{label}}" class="badge bg-primary mb-5 removeLinkLine" role="button">
-                    {{label.id}} ({{label.postCount}})
-                </a>
+
+                <button *ngFor="let label of userLabels" type="button" routerLink="{{label}}" class="btn btn-primary mb-5 labelUserPage">
+                    {{label.id}} <span class="badge bg-secondary labelUserPage">{{label.postCount}}</span>
+                  </button>
             </div>
         </div>
     </div>

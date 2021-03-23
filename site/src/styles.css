@@ -326,3 +326,7 @@ body {
 .pad-3 {
 	padding: 3px;
 }
+
+.labelUserPage { 
+	padding: 2px 5px 2px 5px !important;
+}
