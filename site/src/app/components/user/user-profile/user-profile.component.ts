@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AccountService } from 'src/app/services/account/account.service';
 import { first } from 'rxjs/operators';
-import { UserService } from 'src/app/services/user/user.service';
+import { UserService } from 'src/app/services/user/profile/user.service';
 import { environment } from '../../../../environments/environment';
 
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';

@@ -5,7 +5,7 @@ import { ImageCroppedEvent } from 'ngx-image-cropper';
 import { Dimensions } from '../../../shared/cropper/Dimensions';
 import { ImageTransform } from '../../../shared/cropper/ImageTransform';
 import { base64ToFile } from '../../../shared/cropper/blob.utils';
-import { UserService } from 'src/app/services/user/user.service';
+import { UserService } from 'src/app/services/user/profile/user.service';
 import { first } from 'rxjs/operators';
 import { AccountService } from 'src/app/services/account/account.service';
 import { ImageProfileRequest } from 'src/app/model/user';
