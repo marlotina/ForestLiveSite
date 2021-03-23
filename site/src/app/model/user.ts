@@ -59,3 +59,14 @@ export class ImageProfileRequest {
     userId: string;
     userName: string;
 }
+
+export class UserLabelRequest {
+    userId: string;
+    label: string;
+}
+
+export class UserLabelResponse {
+    userId: string;
+    label: string;
+    creationDate: string;
+}
