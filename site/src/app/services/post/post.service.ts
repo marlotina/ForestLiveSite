@@ -27,13 +27,6 @@ export class PostService {
       }));
   }
 
-  GetPostsByUser(userId: string){
-    return this.httpClient.get<PostResponse[]>(`${environment.userPostApiUrl}api/v1/BirdUser/GetPosts/?userId=${userId}`)
-      .pipe(map(data => {
-        return data;
-      }));
-  }
-
   DeletePost(postId: string){
     return this.httpClient.delete(`${environment.postApiUrl}api/v1/BirdPost/DeletePost/?postId=${postId}`);
   }

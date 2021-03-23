@@ -85,7 +85,9 @@
             <app-author-details></app-author-details>
             <div class="form-group">
 
-                <button *ngFor="let label of userLabels" type="button" routerLink="{{label}}" class="btn btn-primary mb-5 labelUserPage">
+                <button *ngFor="let label of userLabels" type="button"
+                    [ngClass]="{'btn-primary' : selectedLabel.id == label.id, 'btn-outline-primary' : selectedLabel.id != label.id}" 
+                    (click)="searchWithLabels(label)" class="btn mb-5 labelUserPage">
                     {{label.id}} <span class="badge bg-secondary labelUserPage">{{label.postCount}}</span>
                   </button>
             </div>

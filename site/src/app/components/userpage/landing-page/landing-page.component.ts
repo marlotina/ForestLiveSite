@@ -33,6 +33,10 @@ export class LandingPageComponent implements OnInit {
   hasNotPosts: boolean;
   isLogged: boolean;
   userLabels: UserLabelPageResponse[];
+  selectedLabel: UserLabelPageResponse = {
+    id: null,
+    postCount: 0 
+  };
 
   constructor(
     private postService: PostService,
@@ -49,12 +53,7 @@ export class LandingPageComponent implements OnInit {
 
     this.activateRoute.paramMap.subscribe(params => {
       this.userId = params.get("userId");
-      this.postService.GetPostsByUser(this.userId).subscribe(
-        data =>{ 
-          this.userPosts = data;
-          this.hasNotPosts = this.userPosts.length == 0; 
-        } 
-      );
+      this.searchPosts();   
     });
   }
 
@@ -65,6 +64,36 @@ export class LandingPageComponent implements OnInit {
         this.userLabels = data;
       }
     );;
+  }
+
+  searchWithLabels(label: UserLabelPageResponse) {
+    if(this.selectedLabel != null && label.id == this.selectedLabel.id){
+      this.selectedLabel = {
+        id: null,
+        postCount: 0 
+      };
+    } else {
+      this.selectedLabel = label;
+    }
+
+    this.searchPosts();
+  }
+
+  searchPosts(){
+    if(this.selectedLabel.id != null) {
+      this.userPostService.getPostsByLabel(this.userId, this.selectedLabel.id).subscribe(
+        data => {
+          this.userPosts = data;
+        }
+      )
+    } else {
+      this.userPostService.getPostsByUser(this.userId).subscribe(
+        data =>{ 
+          this.userPosts = data;
+          this.hasNotPosts = this.userPosts.length == 0; 
+        } 
+      );
+    }
   }
 
   showDeleteOption(userId){

@@ -52,7 +52,7 @@ export class UserMapPageComponent implements OnInit {
       };
       let map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
       
-      this.userPostService.GetMapPointsPostByUser(this.userId).subscribe(
+      this.userPostService.getMapPointsPostByUser(this.userId).subscribe(
         data => { 
           for (let i = 0; i < data.length; i++) {
             const post = data[i];
@@ -74,7 +74,7 @@ export class UserMapPageComponent implements OnInit {
 
   getInfoPost(marker: google.maps.Marker, map: google.maps.Map){
     var postId = marker.getTitle();
-    this.userPostService.GetModalBirdPost(postId, this.userId).subscribe(data => {
+    this.userPostService.getModalBirdPost(postId, this.userId).subscribe(data => {
         const modal = `<div style='float:left'><img style='width: 100px;' src='${environment.imagesPostUrl}${data.imageUrl}' alt='${data.altImage}'>`+ 
         `</div><div style='float:right; padding: 10px;'><b><a target='_blank' href='/${data.userId}/post/${data.postId}'>${data.title}</a></b><br/>${data.text}<br/> ${data.birdSpecie}</div>`;
         this.infowindow.setContent(modal);
