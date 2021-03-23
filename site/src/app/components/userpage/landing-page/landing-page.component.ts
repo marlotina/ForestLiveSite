@@ -5,10 +5,12 @@ import { Subscription } from 'rxjs';
 import { first } from 'rxjs/operators';
 import { User } from 'src/app/model/account';
 import { PostResponse } from 'src/app/model/post';
+import { UserLabelPageResponse } from 'src/app/model/user';
 import { VoteRequest } from 'src/app/model/vote';
 import { AccountService } from 'src/app/services/account/account.service';
 import { PostService } from 'src/app/services/post/post.service';
 import { UserPostService } from 'src/app/services/user-post/user-post.service';
+import { UserLabelsService } from 'src/app/services/user/labels/user-labels.service';
 import { VoteService } from 'src/app/services/vote/vote.service';
 import { environment } from 'src/environments/environment';
 import { CommonDialogComponent } from '../../shared/common-dialog/common-dialog.component';
@@ -30,7 +32,7 @@ export class LandingPageComponent implements OnInit {
   imagesPostUrl = environment.imagesPostUrl;
   hasNotPosts: boolean;
   isLogged: boolean;
-  userLabels: string[];
+  userLabels: UserLabelPageResponse[];
 
   constructor(
     private postService: PostService,
@@ -38,6 +40,7 @@ export class LandingPageComponent implements OnInit {
     private accountService: AccountService,
     private voteService: VoteService,
     private userPostService: UserPostService,
+    private userLabelsService: UserLabelsService,
     private matDialog: MatDialog) { 
 
     this.accountService.isLogged.subscribe(
@@ -57,7 +60,7 @@ export class LandingPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.userLoggedInfo = this.accountService.userValue;
-    this.userPostService.GetUserLabels(this.userId).subscribe(
+    this.userLabelsService.GetUserLabels(this.userId).subscribe(
       data => {
         this.userLabels = data;
       }

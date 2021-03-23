@@ -70,3 +70,8 @@ export class UserLabelResponse {
     label: string;
     creationDate: string;
 }
+
+export class UserLabelPageResponse {
+    id: string;
+    postCount: number;
+}

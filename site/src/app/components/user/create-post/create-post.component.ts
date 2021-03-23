@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { FormBuilder, FormControl, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { PostService } from 'src/app/services/post/post.service';
 import { Observable, of } from 'rxjs';
 import { catchError, debounceTime, first, map, switchMap } from 'rxjs/operators';
@@ -16,7 +16,7 @@ import { ModalEditImageComponent } from '../modal-edit-image/modal-edit-image.co
 import { AutocompleteService } from 'src/app/services/autocomplete/autocomplete.service';
 import { AutocompleteResponse } from 'src/app/model/specie';
 import { Router } from '@angular/router';
-import { UserPostService } from 'src/app/services/user-post/user-post.service';
+import { UserLabelsService } from 'src/app/services/user/labels/user-labels.service';
 
 class ImageSnippet {
   constructor(public src: string, public file: File) {}
@@ -81,7 +81,7 @@ export class CreatePostComponent implements OnInit {
     private locationService: LocationService,
     private accountService: AccountService,
     private router: Router,
-    private userPostService: UserPostService,
+    private userLabelsService: UserLabelsService,
     private autocompleteService: AutocompleteService) { 
       
       this.filteredLabels = this.labelCtrl.valueChanges.pipe(
@@ -114,7 +114,7 @@ export class CreatePostComponent implements OnInit {
       'userId': userId
       });
 
-    this.userPostService.GetUserLabels(userId)
+    this.userLabelsService.GetLabelsAutocomplete(userId)
       .pipe(first())
       .subscribe(
           data => {    

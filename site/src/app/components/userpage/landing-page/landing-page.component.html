@@ -85,7 +85,7 @@
             <app-author-details></app-author-details>
             <div class="form-group">
                 <a *ngFor="let label of userLabels" routerLink="{{label}}" class="badge bg-primary mb-5 removeLinkLine" role="button">
-                    {{label}}
+                    {{label.id}} ({{label.postCount}})
                 </a>
             </div>
         </div>

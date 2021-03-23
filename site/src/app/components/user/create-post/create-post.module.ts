@@ -13,7 +13,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
 import {MatSelectModule} from '@angular/material/select';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
-import { CreatePostComponent } from './create-post.component';
+import { CreatePostComponent } from '../create-post/create-post.component';
 import { ModalEditImageComponent } from '../modal-edit-image/modal-edit-image.component';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { CreatePostRoutingModule } from './create-post-routing.module';

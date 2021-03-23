@@ -25,11 +25,4 @@ export class UserPostService {
         return data;
       }));
   }
-
-  GetUserLabels(userId: string){
-    return this.httpClient.get<string[]>(`${environment.userPostApiUrl}api/v1/BirdLabels/GetUserLabels/?&userId=${userId}`)
-      .pipe(map(data => {
-        return data;
-      }));
-  }
 }

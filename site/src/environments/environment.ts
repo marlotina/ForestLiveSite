@@ -9,7 +9,7 @@ export const environment = {
   userApiUrl: 'https://userapiqa.azurewebsites.net/',
   postApiUrl: 'https://postapiqa.azurewebsites.net/',
   userPostApiUrl: 'https://localhost:44352/',
-  userLabelApiUrl: 'https://localhost:44367/',
+  userLabelApiUrl: 'https://userlabelapi.azurewebsites.net/',
   birdApiUrl: 'https://birdsapiqa.azurewebsites.net/',
   voteApiUrl: 'https://votesapi.azurewebsites.net/',
   commentApiUrl: 'https://commentsapi.azurewebsites.net/',
@@ -19,7 +19,7 @@ export const environment = {
                       'birdsapiqa.azurewebsites.net',
                       'commentsapi.azurewebsites.net',
                       'localhost:44352',
-                      'localhost:44367',
+                      'userlabelapi.azurewebsites.net',
                       'votesapi.azurewebsites.net'],
   blacklistedRoutes: []
 }

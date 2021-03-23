@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
-import { UserLabelRequest, UserLabelResponse } from 'src/app/model/user';
+import { UserLabelPageResponse, UserLabelRequest, UserLabelResponse } from 'src/app/model/user';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -12,7 +12,14 @@ export class UserLabelsService {
   constructor(private httpClient: HttpClient) { }
 
   GetUserLabels(userId: string){
-    return this.httpClient.get<string[]>(`${environment.userLabelApiUrl}api/v1/UserLabels/GetLabels?userId=${userId}`)
+    return this.httpClient.get<UserLabelPageResponse[]>(`${environment.userLabelApiUrl}api/v1/UserLabels/GetLabels?userId=${userId}`)
+      .pipe(map(data => {
+        return data;
+      }));
+  }
+
+  GetLabelsAutocomplete(userId: string){
+    return this.httpClient.get<string[]>(`${environment.userLabelApiUrl}api/v1/UserLabels/GetLabelsAutocomplete?userId=${userId}`)
       .pipe(map(data => {
         return data;
       }));
