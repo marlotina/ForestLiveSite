@@ -27,4 +27,17 @@ export class UserVotesComponent implements OnInit {
     );
   }
 
+  deleteVote(vote: VoteResponse){
+    this.votesService.DeleteVote(vote.id, vote.postId).subscribe(
+      data => {
+        if(data){
+          const index = this.userVotes.indexOf(vote, 0);
+          if (index > -1) {
+            this.userVotes.splice(index, 1);
+          }
+        }
+      }
+    )
+  }
+
 }
