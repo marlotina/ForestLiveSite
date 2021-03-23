@@ -318,3 +318,11 @@ body {
 .mb-5{
 	margin-right: 5px;
 }
+
+.addLabelBtn {
+	border: none;
+}
+
+.pad-3 {
+	padding: 3px;
+}

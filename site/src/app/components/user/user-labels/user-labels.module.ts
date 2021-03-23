@@ -3,7 +3,8 @@ import { CommonModule } from '@angular/common';
 
 import { UserLabelsRoutingModule } from './user-labels-routing.module';
 import { UserLabelsComponent } from './user-labels.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatIconModule } from '@angular/material/icon';
 
 
 @NgModule({
@@ -11,7 +12,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     UserLabelsRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatIconModule
   ]
 })
 export class UserLabelsModule { }
