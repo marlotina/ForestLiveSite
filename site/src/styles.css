@@ -231,7 +231,7 @@ body {
 
 .mat-icon {
 	vertical-align: middle;
-  }
+}
 
 
 .removeLinkLine {
@@ -313,4 +313,8 @@ body {
 
 .inputSearchTop {
 	border-top: .84375em solid transparent;
+}
+
+.mb-5{
+	margin-right: 5px;
 }

@@ -8,6 +8,7 @@ import { PostResponse } from 'src/app/model/post';
 import { VoteRequest } from 'src/app/model/vote';
 import { AccountService } from 'src/app/services/account/account.service';
 import { PostService } from 'src/app/services/post/post.service';
+import { UserPostService } from 'src/app/services/user-post/user-post.service';
 import { VoteService } from 'src/app/services/vote/vote.service';
 import { environment } from 'src/environments/environment';
 import { CommonDialogComponent } from '../../shared/common-dialog/common-dialog.component';
@@ -29,12 +30,14 @@ export class LandingPageComponent implements OnInit {
   imagesPostUrl = environment.imagesPostUrl;
   hasNotPosts: boolean;
   isLogged: boolean;
+  userLabels: string[];
 
   constructor(
     private postService: PostService,
     private activateRoute: ActivatedRoute,
     private accountService: AccountService,
     private voteService: VoteService,
+    private userPostService: UserPostService,
     private matDialog: MatDialog) { 
 
     this.accountService.isLogged.subscribe(
@@ -54,6 +57,11 @@ export class LandingPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.userLoggedInfo = this.accountService.userValue;
+    this.userPostService.GetUserLabels(this.userId).subscribe(
+      data => {
+        this.userLabels = data;
+      }
+    );;
   }
 
   showDeleteOption(userId){
