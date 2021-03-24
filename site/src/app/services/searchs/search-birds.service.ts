@@ -20,20 +20,12 @@ export class SearchBirdsService {
       }));
   }
 
-  GetSearchPoints(latiude : number, longitude: number, zoom: number){
-    return this.httpClient.get<MapSpeciePoint[]>(`${environment.birdApiUrl}api/v1/SearchMap/GetPoints/?latitude=${latiude}&longitude=${longitude}&zoom=${zoom}`)
+  GetSearchPoints(latiude : number, longitude: number, zoom: number, specieId: string){
+    return this.httpClient.get<MapSpeciePoint[]>(`${environment.birdApiUrl}api/v1/SearchMap/GetPoints/?latitude=${latiude}&longitude=${longitude}&zoom=${zoom}&specieId=${specieId}`)
       .pipe(map(data => {
         return data;
       }));
-  }
-
-  GetPointsBySpecie(latiude : number, longitude: number, zoom: number, specieId: string){
-    return this.httpClient.get<MapSpeciePoint[]>(`${environment.birdApiUrl}api/v1/SearchMap/GetPointsBySpecie/?latitude=${latiude}&longitude=${longitude}&zoom=${zoom}&specieId=${specieId}`)
-      .pipe(map(data => {
-        return data;
-      }));
-  }
-  
+  }  
 
   GetModalBirdPost(postId : string, specieId: string){
     return this.httpClient.get<ModalPostResponse>(`${environment.birdApiUrl}api/v1/SearchMap/GetModalInfo/?postId=${postId}&specieId=${specieId}`)

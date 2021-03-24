@@ -18,7 +18,6 @@ import { environment } from 'src/environments/environment';
 })
 export class SearchPageComponent implements OnInit {
 
-
   center: any;
   @ViewChild('mapWrapper') mapElement: ElementRef;
   zoom: number = 16;
@@ -31,7 +30,8 @@ export class SearchPageComponent implements OnInit {
   markers: google.maps.Marker[] = [];
   specieId: string = null;
   infowindow = new google.maps.InfoWindow();
-  
+  hideRemoveBtn = true;
+
   constructor(
       private locationService: LocationService,
       private searchBirdsSerices: SearchBirdsService,
@@ -114,31 +114,14 @@ export class SearchPageComponent implements OnInit {
       });
 
       google.maps.event.addListener(this.map, 'idle', () => { 
+        this.zoom = this.map.getZoom();
         this.getBirds(this.map.getCenter());
       });
     });
   }
 
   getBirds(latLng: google.maps.LatLng){
-    if(this.specieId == null){
-      this.zoom = this.map.getZoom();
-      
-      this.searchBirdsSerices.GetSearchPoints(latLng.lat(), latLng.lng(), this.zoom).subscribe(
-        data => { 
-          this.setMapOnAll(null);
-          for (let i = 0; i < data.length; i++) {
-            const marker = this.getMarker(data[i], this.map);
-
-            marker.addListener("click", () => {
-              this.getInfoPost(marker, this.map);
-            });
-
-            this.markers.push(marker);
-          }
-        } 
-      ); 
-    } else {
-      this.searchBirdsSerices.GetPointsBySpecie(latLng.lat(), latLng.lng(), this.zoom, this.specieId).subscribe(
+      this.searchBirdsSerices.GetSearchPoints(latLng.lat(), latLng.lng(), this.zoom, this.specieId).subscribe(
         data =>{ 
           this.setMapOnAll(null);
           for (let i = 0; i < data.length; i++) {
@@ -152,8 +135,8 @@ export class SearchPageComponent implements OnInit {
           }
         } 
       );
-    }
   }
+  
   getMarker(point: MapSpeciePoint, map: google.maps.Map){
     const marker = new google.maps.Marker({
       position: { lat: point.location.lat, lng: point.location.lng},
@@ -169,6 +152,18 @@ export class SearchPageComponent implements OnInit {
     this.autocompleteControl.setValue(item.nameComplete);
     this.specieIdPostControl.setValue(item.specieId);
     this.specieId = item.specieId;
+  }
+
+  addFilterSpecie(){
+    this.hideRemoveBtn = false;
+    this.getBirds(this.map.getCenter());
+  }
+
+  removeFilterSpecie(){
+    this.autocompleteControl.setValue('');
+    this.specieIdPostControl.setValue('');
+    this.specieId = '';
+    this.hideRemoveBtn = true;
     this.getBirds(this.map.getCenter());
   }
 

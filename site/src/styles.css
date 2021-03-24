@@ -330,3 +330,7 @@ body {
 .labelUserPage { 
 	padding: 2px 5px 2px 5px !important;
 }
+
+.pr-5 {
+	padding-right: 5px;
+}

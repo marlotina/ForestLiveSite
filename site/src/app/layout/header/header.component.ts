@@ -40,7 +40,11 @@ export class HeaderComponent implements OnInit {
           {
             this.user = x;
             this.userNameMenu = this.user.userName;
-            this.userImage = `${environment.imagesProfileUrl}${this.user.photo}`;
+            if(this.user.photo != null){
+              this.userImage = `${environment.imagesProfileUrl}${this.user.photo}`;
+            }else{  
+              this.userImage = "../../../../assets/img/bg-img/profile.png";
+            }
           }
         }
       );

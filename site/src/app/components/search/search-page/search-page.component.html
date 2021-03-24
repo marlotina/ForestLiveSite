@@ -4,31 +4,35 @@
     <div class="container mt-15">
         <div class="row justify-content-center">
 
-            <div class="col-12 col-md-6">             
-                <div>
-                    <div class="autocomplete-form autocompleteTop">
-                        <div class="search-form ">
-                            <mat-form-field class="autocomplete-full-width">
-                                <input type="text" class="form-control" aria-label="Number" matInput  [matAutocomplete]="autoBird"
-                                    [formControl]="autocompleteControl"
-                                    id="specieNamePost" placeholder="Introduce especia">
-                                    
-                                    
-                                <input type="hidden" id="specieIdPost" [formControl]="specieIdPostControl" >    
-                                <mat-autocomplete #autoBird="matAutocomplete" (optionSelected)='selectSpecie($event.option.value)'>
-                                    <mat-option *ngFor="let option of filteredSpecies | async" [value]="option" (change)="toggleSelection(option)" (click)="$event.stopPropagation()">
-                                        {{option.nameComplete}}
-                                    </mat-option>
-                                </mat-autocomplete>
-                            </mat-form-field>
-                        </div>
-                        
+            <div class="col-12 col-md-6">  
+                <div class="autocomplete-form autocompleteTop">
+                    <div class="d-flex">
+                        <mat-form-field class="autocomplete-full-width pr-5">
+                            <input type="text" class="form-control" aria-label="Number" matInput  [matAutocomplete]="autoBird"
+                                [formControl]="autocompleteControl"
+                                id="specieNamePost" placeholder="Introduce especia">
+                                
+                            <input type="hidden" id="specieIdPost" [formControl]="specieIdPostControl" >    
+                            <mat-autocomplete #autoBird="matAutocomplete" (optionSelected)='selectSpecie($event.option.value)'>
+                                <mat-option *ngFor="let option of filteredSpecies | async" [value]="option" (change)="toggleSelection(option)" (click)="$event.stopPropagation()">
+                                    {{option.nameComplete}}
+                                </mat-option>
+                            </mat-autocomplete>
+                        </mat-form-field>  
+                        <div class="form-group inputSearchTop ">
+                            
+                            <button type="button" class="btn btn-outline-primary addLabelBtn" (click)="removeFilterSpecie()" [hidden]="hideRemoveBtn"><mat-icon>close</mat-icon></button> 
+                            <button type="button" class="btn btn-outline-primary addLabelBtn" (click)="addFilterSpecie()" [hidden]="!hideRemoveBtn"><mat-icon>search</mat-icon></button> 
+                        </div> 
                     </div>
-    
-                    
-                </div>    
+                </div>  
             </div>
-            <div class="col-12 col-md-6"> 
+            <!--<div class="col-12 col-md-1">  
+                <div class="form-group inputSearchTop">
+                    <button type="button" class="btn btn-outline-primary addLabelBtn"><mat-icon>search</mat-icon></button> 
+                </div>
+            </div> -->  
+            <div class="col-12 col-md-5"> 
                 <div class="form-group inputSearchTop">
                     <input id="pac-input" type="text" placeholder="Search Box" class="form-control" />
                 </div>
