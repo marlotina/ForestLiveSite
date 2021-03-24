@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ActivatedRoute, Router, Routes } from '@angular/router';
 import { first } from 'rxjs/operators';
@@ -30,7 +30,7 @@ export class PostPageComponent implements OnInit {
   imagePost: string;
   isLogged: boolean;
   userLoggedInfo: User;
-  hasPost = false;
+  hasPost = true;
   display = "none";
 
   constructor(private activateRoute: ActivatedRoute,
@@ -46,7 +46,7 @@ export class PostPageComponent implements OnInit {
 
     this.commentForm = this.formBuilder.group({
       text: ['', [Validators.required]],
-      userId: ['', [Validators.required]],
+      userId: [{value: '', disabled: true}, Validators.required],
       postId: ['', [Validators.required]],
       specieId: ['', [Validators.required]],
       authorPostUserId: ['', [Validators.required]],
@@ -73,7 +73,10 @@ export class PostPageComponent implements OnInit {
             'authorPostUserId': this.post.userId,
             'titlePost': this.post.title
             });
-        } 
+        },
+        error => {
+          this.hasPost = false;
+        }
       );
 
       this.commentService.GetCommentsByPost(postId).subscribe(

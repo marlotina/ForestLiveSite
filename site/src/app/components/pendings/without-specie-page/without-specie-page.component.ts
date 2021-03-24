@@ -11,18 +11,15 @@ export class WithoutSpeciePageComponent implements OnInit {
 
   pendingPosts: BirdSpeciePostResponse[];
   imagesPostUrl = environment.imagesPostUrl;
-  hasNotPosts = false;
+  hasNotPosts = true;
 
   constructor(private searchBirdsService: SearchBirdsService) { }
 
   ngOnInit(): void {
     this.searchBirdsService.GetWithoutSpecie().subscribe(
       data =>{ 
-        if(data.length > 0){
-          this.hasNotPosts = true;
-        }
+        this.hasNotPosts = data.length > 0;
         this.pendingPosts = data;
-        
       } 
     );
   }

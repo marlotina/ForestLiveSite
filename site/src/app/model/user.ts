@@ -68,6 +68,7 @@ export class UserLabelRequest {
 export class UserLabelResponse {
     userId: string;
     label: string;
+    postCount: number;
     creationDate: string;
 }
 

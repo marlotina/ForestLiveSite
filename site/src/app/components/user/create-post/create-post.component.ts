@@ -61,19 +61,12 @@ export class CreatePostComponent implements OnInit {
 
   filteredSpecies: Observable<AutocompleteResponse[]>;
   autocompleteControl = new FormControl();
+  
   @ViewChild('labelInput') labelInput: ElementRef<HTMLInputElement>;
-
   @ViewChild('file') fileInput: ElementRef<HTMLInputElement>;
-
   @ViewChild('specieNamePost') specieNamePost: ElementRef<HTMLInputElement>;
-
   @ViewChild('auto') matAutocomplete: MatAutocomplete;  
-
-  @ViewChild('autoLabel') matAutoLabelcomplete: MatAutocomplete;  
-  
-
-  
-
+  @ViewChild('autoLabel') matAutoLabelcomplete: MatAutocomplete;
 
   constructor(private formBuilder: FormBuilder,
     private postService: PostService, 
