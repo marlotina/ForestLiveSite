@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ActivatedRoute, Router, Routes } from '@angular/router';
@@ -21,6 +21,7 @@ import { ImageDialogComponent } from '../../shared/image-dialog/image-dialog.com
 })
 export class PostPageComponent implements OnInit {
  
+  @ViewChild('mapWrapper') mapElement: ElementRef;
   commentForm: FormGroup;
   post = new PostResponse();
   comments: CommentResponse[];
@@ -65,6 +66,8 @@ export class PostPageComponent implements OnInit {
           this.imagePost = environment.imagesPostUrl + data.imageUrl;
           this.showOwnerOptions = this.userLoggedInfo != null && this.post.userId == this.userLoggedInfo.userName;
           this.hasPost = true;
+
+          this.initMap(this.post.latitude, this.post.longitude);
 
           this.commentForm.patchValue({
             'userId': this.userLoggedInfo != null ? this.userLoggedInfo.userName : '',
@@ -232,4 +235,32 @@ export class PostPageComponent implements OnInit {
     
     this.matDialog.open(ImageDialogComponent, dialogConfig);
   }
+
+  initMap(lat: number, lng: number) {
+    
+    let latLng: google.maps.LatLngLiteral = {
+      lat: Number.parseFloat(lat.toString()),
+      lng: Number.parseFloat(lng.toString())
+    };
+
+    const mapOptions: google.maps.MapOptions = {
+      center: latLng,
+      zoom: 16,
+      fullscreenControl: false,
+      mapTypeControl: false,
+      streetViewControl: false,
+      clickableIcons: false
+    };
+    const map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
+    this.getMarker(latLng, map);
+}
+
+getMarker(latLng: google.maps.LatLngLiteral, map: google.maps.Map){
+  const marker = new google.maps.Marker({
+    position: { lat: latLng.lat, lng: latLng.lng},
+    map,
+    icon: "../../../../assets/img/core-img/mapMarker.png",
+  });
+}
+
 }

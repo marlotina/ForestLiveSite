@@ -64,20 +64,29 @@
                                     <span class="label label-default">{{label}}</span></a>
                             </div>
                         </div>
-                        <div class="row">
-                            <div  class="d-flex mb-15 text-right">
-                                <a href="#" target="_blank"><img class="social-image" src="../../../../assets/img/core-img/iconsGreen-facebook.svg" /></a>
-                                <a href="#" target="_blank"><img class="social-image" src="../../../../assets/img/core-img/iconsGreen-twitter.svg" /></a>
-                                <a href="#" target="_blank"><img class="social-image" src="../../../../assets/img/core-img/iconsGreen-instagram.svg" /></a>
-                                <a href="#" target="_blank"><img class="social-image" src="../../../../assets/img/core-img/iconsGreen-linkedin.svg" /></a>
+                        <div class="row mb-15">
+                            <div class="col-12">
+                                <div id="modal-content-wrapper">
+                                    <div class="row justify-content-center">
+                                            
+                                        <div #mapWrapper id="map" class="postMapDetails"></div>
+                                        
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                     
                     <div class="col-12 col-md-12">
                             <div class="row mb-5 div-bottom-line">
-                                <div>
+                                <div class="col-9">
                                     <img class="social-image" src="../../../../assets/img/core-img/icons8-topic-48.png" /><span class="aligned-with-icon">&nbsp;{{post.commentCount}}&nbsp;comments</span>
+                                </div>
+                                <div  class="col-3 d-flex mb-15 text-right">
+                                    <a href="#" target="_blank"><img class="social-image" src="../../../../assets/img/core-img/iconsGreen-facebook.svg" /></a>
+                                    <a href="#" target="_blank"><img class="social-image" src="../../../../assets/img/core-img/iconsGreen-twitter.svg" /></a>
+                                    <a href="#" target="_blank"><img class="social-image" src="../../../../assets/img/core-img/iconsGreen-instagram.svg" /></a>
+                                    <a href="#" target="_blank"><img class="social-image" src="../../../../assets/img/core-img/iconsGreen-linkedin.svg" /></a>
                                 </div>
                             </div>
                             <div *ngFor="let comment of comments">

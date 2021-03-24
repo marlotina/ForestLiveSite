@@ -338,3 +338,7 @@ body {
 .pr-15 {
 	padding-right: 15px;
 }
+
+.postMapDetails {
+	height: 315px;
+}
