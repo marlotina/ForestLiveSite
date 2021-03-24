@@ -28,7 +28,7 @@ export class SearchPageComponent implements OnInit {
   @ViewChild('auto') matAutocomplete: MatAutocomplete;
   map: google.maps.Map;
   markers: google.maps.Marker[] = [];
-  specieId: string = null;
+  specieId: string = '';
   infowindow = new google.maps.InfoWindow();
   hideRemoveBtn = true;
 

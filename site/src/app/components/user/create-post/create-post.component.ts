@@ -169,7 +169,7 @@ export class CreatePostComponent implements OnInit {
       'altImage': this.altImage
     });
 
-    this.postService.AddPost(this.postForm.value)
+    this.postService.addPost(this.postForm.value)
         .pipe(first())
         .subscribe(
             data => {    

@@ -119,7 +119,7 @@ export class LandingPageComponent implements OnInit {
     const dialogRef = this.matDialog.open(CommonDialogComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(result => {
       if(result == 'ACCEPT'){
-        this.postService.DeletePost(post.postId).subscribe(
+        this.postService.deletePost(post.postId).subscribe(
           data => {
             const index = this.userPosts.indexOf(post, 0);
             if (index > -1) {

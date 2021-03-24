@@ -58,7 +58,7 @@ export class PostPageComponent implements OnInit {
     
     this.activateRoute.paramMap.subscribe(params => {
       let postId = params.get("id");
-      this.postService.GetPost(postId).subscribe(
+      this.postService.getPost(postId).subscribe(
         data => { 
           this.post = data;  
           this.postLabels = data.labels;
@@ -171,7 +171,7 @@ export class PostPageComponent implements OnInit {
     const dialogRef = this.matDialog.open(CommonDialogComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(result => {
       if(result == 'ACCEPT'){
-        this.postService.DeletePost(this.post.postId).subscribe(
+        this.postService.deletePost(this.post.postId).subscribe(
           data => {
             this.route.navigate(['/userpage/' + this.post.userId]);
           },

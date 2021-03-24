@@ -6,6 +6,7 @@ import { catchError, debounceTime, map, startWith, switchMap } from 'rxjs/operat
 import { PostResponse } from 'src/app/model/post';
 import { AutocompleteResponse } from 'src/app/model/specie';
 import { AutocompleteService } from 'src/app/services/autocomplete/autocomplete.service';
+import { PostService } from 'src/app/services/post/post.service';
 import { SearchBirdsService } from 'src/app/services/searchs/search-birds.service';
 import { environment } from 'src/environments/environment';
 
@@ -28,6 +29,7 @@ export class BirdLandingPageComponent implements OnInit {
   @ViewChild('auto') matAutocomplete: MatAutocomplete;
 
   constructor(private searchBirdsSerices: SearchBirdsService,
+    private postService: PostService,
     private autocompleteService : AutocompleteService) { }
 
   ngOnInit(): void {
@@ -44,6 +46,8 @@ export class BirdLandingPageComponent implements OnInit {
         }
       })
     );
+
+    this.getBirdPosts('');
   }
 
   selectSpecie(item: AutocompleteResponse){
@@ -63,14 +67,30 @@ export class BirdLandingPageComponent implements OnInit {
   }
 
   getBirdPosts(specieId: string) {
-    this.searchBirdsSerices.GetBirdBySpecie(specieId).subscribe(
-      data =>{ 
-        this.birdPosts = data;
-        if(data.length > 0){
-          this.hasNotPosts = true;
+    if(specieId != '' ){
+      this.searchBirdsSerices.GetBirdBySpecie(specieId).subscribe(
+        data =>{ 
+          this.birdPosts = data;
+          if(data.length > 0){
+            this.hasNotPosts = true;
+          }else{
+            this.hasNotPosts = false;
+          }
+        } 
+      );
+    } else {
+      this.postService.getPosts().subscribe(
+        data => {
+          this.birdPosts = data;
+          if(data.length > 0){
+            this.hasNotPosts = true;
+          }else{
+            this.hasNotPosts = false;
+          }
         }
-      } 
-    );
+      );
+    }
+
   }
 
   getSpecies(value: any): Observable<PostResponse[]> {
@@ -97,6 +117,6 @@ export class BirdLandingPageComponent implements OnInit {
     this.specieIdPostControl.setValue('');
     this.specieId = '';
     this.hideRemoveBtn = true;
-    //this.getBirdPosts(this.specieId);
+    this.getBirdPosts(this.specieId);
   }
 }
