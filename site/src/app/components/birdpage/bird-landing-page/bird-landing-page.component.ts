@@ -19,6 +19,8 @@ export class BirdLandingPageComponent implements OnInit {
   birdPosts: PostResponse[];
   imagesPostUrl = environment.imagesPostUrl;
   hasNotPosts = false;
+  hideRemoveBtn = true;
+  specieId: string = null;
 
   filteredSpecies: Observable<AutocompleteResponse[]>;
   autocompleteControl = new FormControl();
@@ -47,7 +49,7 @@ export class BirdLandingPageComponent implements OnInit {
   selectSpecie(item: AutocompleteResponse){
     this.autocompleteControl.setValue(item.nameComplete);
     this.specieIdPostControl.setValue(item.specieId);
-    this.getBirdPosts(item.specieId);
+    this.specieId = item.specieId;
   }
 
   optionClicked(event: Event, specie: AutocompleteResponse) {
@@ -85,4 +87,16 @@ export class BirdLandingPageComponent implements OnInit {
     return null;
   }
 
+  addFilterSpecie(){
+    this.hideRemoveBtn = false;
+    this.getBirdPosts(this.specieId);
+  }
+
+  removeFilterSpecie(){
+    this.autocompleteControl.setValue('');
+    this.specieIdPostControl.setValue('');
+    this.specieId = '';
+    this.hideRemoveBtn = true;
+    //this.getBirdPosts(this.specieId);
+  }
 }

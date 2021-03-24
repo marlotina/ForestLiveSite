@@ -2,12 +2,11 @@
     <div class="row justify-content-center"> 
         <div>
             <div class="autocomplete-form">
-                <div class="search-form">
-                    <mat-form-field class="autocomplete-full-width">
+                <div class="d-flex">
+                    <mat-form-field class="autocomplete-full-width  pr-15">
                         <input type="text" class="form-control" aria-label="Number" matInput  [matAutocomplete]="autoBird"
                             [formControl]="autocompleteControl" 
                             id="specieNamePost" placeholder="Introduce especia">
-                            
                             
                         <input type="hidden" id="specieIdPost" [formControl]="specieIdPostControl" >    
                         <mat-autocomplete #autoBird="matAutocomplete" (optionSelected)='selectSpecie($event.option.value)'>
@@ -16,18 +15,19 @@
                             </mat-option>
                         </mat-autocomplete>
                     </mat-form-field>
+                    
+                    <div class="form-group inputSearchTop ">
+                        <button type="button" class="btn btn-outline-primary addLabelBtn" (click)="removeFilterSpecie()" [hidden]="hideRemoveBtn"><mat-icon>close</mat-icon></button> 
+                        <button type="button" class="btn btn-outline-primary addLabelBtn" (click)="addFilterSpecie()" [hidden]="!hideRemoveBtn"><mat-icon>search</mat-icon></button> 
+                    </div>
                 </div>
                 
             </div>
         </div>          
         <div class="album py-5 bg-light">
             <div class="container">
-
-                
                 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-
-                    <div class="col" *ngFor="let post of birdPosts">
-                        
+                    <div class="col" *ngFor="let post of birdPosts">                        
                         <div class="card shadow-sm">
                             <div class="authorWithoutSpecie">
                                 <img src="https://birdpostsqa.blob.core.windows.net/profiles/{{post.userPhoto}}" alt="image of {{post.userId}}" class="imgAuthorPost">
@@ -60,8 +60,6 @@
                 </div>
             </div>
         </div>
-            
-        
 
         <div class="col-12 col-sm-9 col-md-4" >
           

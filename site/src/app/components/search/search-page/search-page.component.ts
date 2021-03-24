@@ -174,7 +174,6 @@ export class SearchPageComponent implements OnInit {
 
   toggleSelection(user: AutocompleteResponse) {
     var wop = user;
-    
   }
 
   getSpecies(value: any): Observable<PostResponse[]> {
