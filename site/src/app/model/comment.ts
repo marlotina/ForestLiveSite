@@ -15,4 +15,5 @@ export class CommentResponse {
     postId: string;
     authorPostUserId: string;
     titlePost: string;
+    userImage: string;
 }

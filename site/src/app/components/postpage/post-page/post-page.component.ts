@@ -46,7 +46,7 @@ export class PostPageComponent implements OnInit {
 
     this.commentForm = this.formBuilder.group({
       text: ['', [Validators.required]],
-      userId: [{value: '', disabled: true}, Validators.required],
+      userId: [{ disabled: true}, Validators.required],
       postId: ['', [Validators.required]],
       specieId: ['', [Validators.required]],
       authorPostUserId: ['', [Validators.required]],
