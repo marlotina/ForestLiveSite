@@ -79,7 +79,18 @@
         </div>
 
         <div class="col-12 col-md-4" >
-            <div class="autocomplete-form divFilter">
+            <div class="divFilter">
+                <strong>Filter</strong>
+            </div>
+
+            <div class="autocomplete-form divFilterNoTop">
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="radioFilterSearch" id="radioFilterSearch1" checked>
+                    <label class="form-check-label" for="radioFilterSearch1">
+                        Birds
+                    </label>
+                </div>
+
                 <div class="d-flex">
                     <mat-form-field class="autocomplete-full-width  pr-15">
                         <input type="text" class="form-control" aria-label="Number" matInput  [matAutocomplete]="autoBird"
@@ -99,34 +110,50 @@
                         <button type="button" class="btn btn-outline-primary addLabelBtn" (click)="addFilterSpecie()" [hidden]="!hideRemoveBtn"><mat-icon>search</mat-icon></button> 
                     </div>
                 </div>
-
-               
             </div>
 
-            <div class="autocomplete-form divFilter">
-                <p>Search options:</p>
+            <div class="divFilterNoTop">
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                    <label class="form-check-label" for="flexCheckDefault">
+                    <input class="form-check-input" type="radio" name="radioFilterSearch" id="radioFilterSearch2">
+                    <label class="form-check-label" for="radioFilterSearch2">
                         Posts
                     </label>
                 </div>
+            </div>
+
+            <div class="divFilterNoTop">
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-                    <label class="form-check-label" for="flexCheckChecked">
-                        Birds
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-                    <label class="form-check-label" for="flexCheckChecked">
-                        Pending birds
+                    <input class="form-check-input" type="radio" name="radioFilterSearch" id="radioFilterSearch3" checked>
+                    <label class="form-check-label" for="radioFilterSearch3">
+                        Birds to identify
                     </label>
                 </div>
             </div>
 
+            <div class="divFilterNoTop">
+                <strong>Order</strong>
+            </div>
+            <div class="divFilterNoTop">
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="radioOrderSearch" id="radioOrderSearch1" checked>
+                    <label class="form-check-label" for="radioOrderSearch1">
+                        By date
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="radioOrderSearch" id="radioOrderSearch2">
+                    <label class="form-check-label" for="radioOrderSearch2">
+                        Most votes
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="radioOrderSearch" id="radioOrderSearch3">
+                    <label class="form-check-label" for="radioOrderSearch3">
+                        Most comments
+                    </label>
+                </div>
+            </div>
 
-            
         </div>
     </div>
 </div>
