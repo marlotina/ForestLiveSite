@@ -316,7 +316,7 @@ body {
 }
 
 .mb-5{
-	margin-right: 5px;
+	margin-bottom: 5px;
 }
 
 .addLabelBtn {
@@ -341,4 +341,12 @@ body {
 
 .postMapDetails {
 	height: 315px;
+}
+
+.centerText {
+	text-align: center;
+}
+
+.gray{
+	color: gray;
 }

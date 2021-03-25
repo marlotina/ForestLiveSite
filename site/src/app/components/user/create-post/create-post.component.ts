@@ -59,9 +59,11 @@ export class CreatePostComponent implements OnInit {
   firstImage = true;
   map: google.maps.Map;
 
+  showMap = false;
+  isPost = true;
   filteredSpecies: Observable<AutocompleteResponse[]>;
   autocompleteControl = new FormControl();
-  
+  toolPos = 'after';
   @ViewChild('labelInput') labelInput: ElementRef<HTMLInputElement>;
   @ViewChild('file') fileInput: ElementRef<HTMLInputElement>;
   @ViewChild('specieNamePost') specieNamePost: ElementRef<HTMLInputElement>;
@@ -89,16 +91,17 @@ export class CreatePostComponent implements OnInit {
     this.postForm = this.formBuilder.group({
       title: ['', [Validators.required]],
       text: ['', [Validators.required]],
-      latitude: ['', [Validators.required]],
-      longitude: ['', [Validators.required]],
+      latitude: [''],
+      longitude: [''],
       specieName: [''],
-      specieId: [''],
+      specieId: [null],
       labels: [null],
       userId: ['', [Validators.required]],
       imageData: [''],
       altImage: [''],
       imageName: [''],
-      observationDate: ['', [Validators.required]]
+      observationDate: [null],
+      isPost: ['']
     });
     
     let userId = this.accountService.userValue.userName;
@@ -166,7 +169,8 @@ export class CreatePostComponent implements OnInit {
       'labels': this.labels,
       'imageData': this.url,
       'imageName': this.imageName,
-      'altImage': this.altImage
+      'altImage': this.altImage,
+      'isPost': this.isPost
     });
 
     this.postService.addPost(this.postForm.value)
@@ -221,7 +225,6 @@ export class CreatePostComponent implements OnInit {
     this.fileInput.nativeElement.value = null;
     this.visibleEditImage = false;
     this.firstImage = true;
-
   }
   /*Map*/
 
@@ -254,6 +257,7 @@ export class CreatePostComponent implements OnInit {
     const marker = new google.maps.Marker({
       position: location,
       map: this.map,
+      icon:  "../../../../assets/img/core-img/mapMarker.png"
     });
 
     var latLng = marker.getPosition();
@@ -261,6 +265,17 @@ export class CreatePostComponent implements OnInit {
     this.postForm.controls.longitude.setValue(latLng.lng());
 
     this.addMarkerCommon(marker);
+  }
+
+  showHideMap() {
+    if(!this.showMap){
+      this.postForm.controls.latitude.setValue('');
+      this.postForm.controls.longitude.setValue('');
+      this.setMapOnAll(null);
+      this.markers = [];
+    }
+
+    this.showMap = !this.showMap;
   }
 
   setMapOnAll(map: google.maps.Map | null) {
@@ -321,6 +336,10 @@ export class CreatePostComponent implements OnInit {
     this.labels.push(event.option.viewValue);
     this.labelInput.nativeElement.value = '';
     this.labelCtrl.setValue(null);
+  }
+
+  changeTypePost(e) {
+      this.isPost = e.target.value =="post";
   }
 
   private _filter(value: string): string[] {

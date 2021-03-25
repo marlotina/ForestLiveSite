@@ -12,6 +12,7 @@ export class PostRequest {
     specieId: string;
     labels: string[];
     observationDate: Date;
+    isPost: boolean;
 }
 
 export class PostResponse {
