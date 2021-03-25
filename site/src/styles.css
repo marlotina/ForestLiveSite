@@ -35,7 +35,7 @@ html, body { height: 100%; }
     display: block;
 }
 
-.imgProfilePost{
+.imgProfileAuthor{
     -webkit-box-flex: 0;
     -ms-flex: 0 0 80px;
     flex: 0 0 80px;
@@ -137,22 +137,22 @@ font-weight: 600; }
 
 .is-invalid {
 	border-color: red !important;
-  }
-  
-  .error-text {
+}
+
+.error-text {
 	color: red;
-  }
-  
-  .hidden {
+}
+
+.hidden {
 	display: none !important;
 	visibility: hidden;
-  }
-  
-  .blockInput {
+}
+
+.blockInput {
 	pointer-events: none;
-  }
-  
-  .buttonTwo {
+}
+
+.buttonTwo {
 	-webkit-transition-duration: 500ms;
 	transition-duration: 500ms;
 	width: 100%;
@@ -165,15 +165,15 @@ font-weight: 600; }
 	cursor: pointer;
 	font-weight: 500;
 	margin-bottom: 0;
-  }
-  
-  .buttonTwo:hover {
+}
+
+.buttonTwo:hover {
 	background-color: #70c745;
 	color: #ffffff;
 	border-color: #70c745;
-  }
-  
-  .buttonThree {
+}
+
+.buttonThree {
 	-webkit-transition-duration: 500ms;
 	transition-duration: 500ms;
 	height: 30px;
@@ -186,32 +186,32 @@ font-weight: 600; }
 	cursor: pointer;
 	font-weight: 500;
 	margin-bottom: 0;
-  }
-  
-  .buttonThree:hover {
+}
+
+.buttonThree:hover {
 	background-color: #70c745;
 	color: #ffffff;
 	border-color: #70c745;
-  }
-  
-  a:hover {
+}
+
+a:hover {
 	cursor:pointer;
-   }
-  
-  .map-container{
-	  width: 100% !important;
-	  height: 650px !important;
-  }
-  
-  .autocomplete-form {
+}
+
+.map-container{
+	width: 100% !important;
+	height: 650px !important;
+}
+
+.autocomplete-form {
 	min-width: 150px;
 	max-width: 500px;
 	width: 100%;
-  }
-  
-  .autocomplete-full-width {
+}
+
+.autocomplete-full-width {
 	width: 100%;
-  }
+}
 /*new*/
 body {
 	/*min-height: 75rem;*/
@@ -371,4 +371,8 @@ body {
 
 .ml-5 {
 	margin-left: 5px;
+}
+
+.mr-5 {
+	margin-right: 5px;
 }

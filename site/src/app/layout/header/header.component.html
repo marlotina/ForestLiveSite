@@ -35,28 +35,23 @@
           </button>
             <ul class="dropdown-menu dropdown-menu-lg-end">
               <li><a class="dropdown-item" routerLink="userpage/{{ userNameMenu }}">
-                <img src="../../../assets/img/core-img/icons8page.png" />{{ 'general.myPage' | translate }}</a>
+                <img src="../../../assets/img/core-img/icons8page.png" class="mr-5" />{{ 'general.myPage' | translate }}</a>
               </li>
               <li><a class="dropdown-item" routerLink="createPost" routerLinkActive="active">
-                <img src="../../../assets/img/core-img/icons8add.png" />
+                <img src="../../../assets/img/core-img/icons8add.png" class="mr-5" />
                 {{ 'userPage.addPost' | translate }}</a>
               </li>
               <li><a class="dropdown-item" routerLink="userProfile" routerLinkActive="active">
-                <img src="../../../assets/img/core-img/icons8profile.png" />
+                <img src="../../../assets/img/core-img/icons8profile.png" class="mr-5" />
                 {{ 'user.profileMenu' | translate }}</a>
               </li>
               <li><hr class="dropdown-divider"></li>
               <li><a class="dropdown-item" routerLink="#" routerLinkActive="active" (click)="logout()">
-                <img src="../../../assets/img/core-img/icons8logout.png" />
+                <img src="../../../assets/img/core-img/icons8logout.png" class="mr-5" />
                 {{ 'account.logOut' | translate }}
               </a></li>
           </ul>
         </div>
-
-
-          
-          
-          
       </div>
       
       <div class="btn-group me-2"  [hidden]="isLogged">
