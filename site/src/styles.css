@@ -17,11 +17,16 @@ html, body { height: 100%; }
     margin-bottom: 15px;
 }
 
+.divFilter {
+    padding: 20px;
+    background: #f9f9f9;
+    border: 1px solid #ebebeb;
+}
+
 .mapAuthor {
     border: 1px solid #ebebeb;
     margin-bottom: 15px;
 }
-
 
 .divPostImgContent {
     border-radius: 20px;
@@ -349,4 +354,17 @@ body {
 
 .gray{
 	color: gray;
+}
+
+.divMenuImgUser{
+    border: 1px solid #565e64;
+}
+
+
+.imgProfilePost {
+    max-width: 80px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin: 3px 3px 3px 3px;
 }

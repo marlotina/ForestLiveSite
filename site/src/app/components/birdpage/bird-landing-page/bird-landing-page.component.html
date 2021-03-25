@@ -1,7 +1,85 @@
 <div class="container mt-15">
+    
     <div class="row justify-content-center"> 
-        <div>
-            <div class="autocomplete-form">
+
+        <div class="col-12 col-md-8">             
+            <div *ngFor="let post of birdPosts">
+                
+                <div class="row divPost divPostColor">  
+                    <div class="col-12 col-md-1 div-right-line">
+                        <div class="divVote">
+                            {{post.voteCount}}
+                            <button type="button" 
+                                (click)="addVote(post, post.hasVote)" 
+                                [ngClass]="{'hasVote-btn' : post.hasVote, 'vote-btn' : !post.hasVote}" 
+                                class="votebtn">
+                                <mat-icon>thumb_up</mat-icon>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-11">
+                        <div class="row mb-15 div-bottom-line">
+                            <div class="col-12 col-md-11">
+                                <div>
+                                    <a class="text-dark titlePost fs-4 removeLinkLine" href="/{{post.userId}}/post/{{post.postId}}">{{post.title}}</a>
+                                    <div>
+                                        <img src="https://birdpostsqa.blob.core.windows.net/profiles/{{post.userPhoto}}" alt="image of {{post.userId}}" class="imgAuthorPost">
+                                        <a class="text-dark btn fs-6 fw-light removeLinkLine" href="/userpage/{{post.userId}}">{{post.userId}}</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-1">
+                                <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu" *ngIf="showDeleteOption(post.userId)">
+                                    <mat-icon>more_vert</mat-icon>
+                                </button>
+                                <mat-menu #menu="matMenu" >
+                                    <button mat-menu-item type="button" (click)="deletePost(post)">
+                                        <mat-icon>delete</mat-icon>
+                                        <span>{{ 'postPage.delete' | translate }}</span>
+                                    </button>
+                                </mat-menu>
+                            </div>
+                        </div>
+                        <div class="row mb-15 div-bottom-line">
+                            <a (click)="showImage(post.imageUrl)"><img src="{{imagesPostUrl}}{{post.imageUrl}}" alt="{{post.altImage}}" class="postImage divPostImgContent img-fluid rounded float-end"></a>
+                        </div>
+                        <div class="row mb-5 div-bottom-line">
+                            <div>
+                                <img class="social-image" src="../../../../assets/img/core-img/icons8-topic-48.png" /><span class="aligned-with-icon">&nbsp;{{post.commentCount}}&nbsp;comments</span>
+                            </div>
+                        </div>
+                        <div class="row mb-5">
+                            <div>
+                                {{ 'userPage.birdSpecie' | translate }}: {{post.birdSpecie}}
+                            </div>
+                        </div>
+                        <div class="row mb-5">
+                            <div>
+                                {{ 'userPage.observationDate' | translate }}: {{post.observationDate}} 
+                            </div>
+                        </div>
+                        <div class="row mb-15">
+                            <div>
+                                {{post.text}}
+                            </div>
+                        </div>
+                    </div>
+                </div>  
+            </div>
+            
+            <div class="single-post-details-area" *ngIf="!hasNotPosts">
+                <div class="leave-comment-area clearfix">
+                    <div class="post-content">
+                        <p>
+                            {{ 'userPage.userWithoutPost' | translate }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-md-4" >
+            <div class="autocomplete-form divFilter">
                 <div class="d-flex">
                     <mat-form-field class="autocomplete-full-width  pr-15">
                         <input type="text" class="form-control" aria-label="Number" matInput  [matAutocomplete]="autoBird"
@@ -21,48 +99,34 @@
                         <button type="button" class="btn btn-outline-primary addLabelBtn" (click)="addFilterSpecie()" [hidden]="!hideRemoveBtn"><mat-icon>search</mat-icon></button> 
                     </div>
                 </div>
-                
-            </div>
-        </div>          
-        <div class="album py-5 bg-light">
-            <div class="container">
-                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-                    <div class="col" *ngFor="let post of birdPosts">                        
-                        <div class="card shadow-sm">
-                            <div class="authorWithoutSpecie">
-                                <img src="https://birdpostsqa.blob.core.windows.net/profiles/{{post.userPhoto}}" alt="image of {{post.userId}}" class="imgAuthorPost">
-                                <strong class="d-inline-block mb-2 text-primary"><a class="text-dark btn fs-6 fw-light removeLinkLine" href="/userpage/{{post.userId}}">{{post.userId}}</a></strong>
-                            </div>
-                            <a class="removeLinkLine" href="/{{post.userId}}/post/{{post.postId}}">
-                                <img src="{{imagesPostUrl}}{{post.imageUrl}}" alt="{{post.altImage}}" class="bd-placeholder-img" width="100%">
-                            </a>
-                            <div class="card-body">
-                                <h5 class="mb-0">{{post.title}}</h5>
-                                <p class="card-text cutText"><small>{{post.text}}</small></p>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div class="btn-group">
-                                        <a role="button" href="/{{post.userId}}/post/{{post.postId}}" class="btn btn-sm btn-outline-secondary">Read more...</a>
-                                    </div>
-                                    <small class="text-muted">{{post.observationDate}}</small>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="single-post-details-area" *ngIf="!hasNotPosts">
-                    <div class="leave-comment-area clearfix">
-                        <div class="post-content">
-                            <p>
-                                {{ 'userPage.userWithoutPost' | translate }}
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
 
-        <div class="col-12 col-sm-9 col-md-4" >
-          
+               
+            </div>
+
+            <div class="autocomplete-form divFilter">
+                <p>Search options:</p>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                    <label class="form-check-label" for="flexCheckDefault">
+                        Posts
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+                    <label class="form-check-label" for="flexCheckChecked">
+                        Birds
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+                    <label class="form-check-label" for="flexCheckChecked">
+                        Pending birds
+                    </label>
+                </div>
+            </div>
+
+
+            
         </div>
     </div>
 </div>

@@ -1,14 +1,21 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatAutocomplete } from '@angular/material/autocomplete';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Observable, of } from 'rxjs';
-import { catchError, debounceTime, map, startWith, switchMap } from 'rxjs/operators';
+import { catchError, debounceTime, first, map, startWith, switchMap } from 'rxjs/operators';
+import { User } from 'src/app/model/account';
 import { PostResponse } from 'src/app/model/post';
 import { AutocompleteResponse } from 'src/app/model/specie';
+import { VoteRequest } from 'src/app/model/vote';
+import { AccountService } from 'src/app/services/account/account.service';
 import { AutocompleteService } from 'src/app/services/autocomplete/autocomplete.service';
 import { PostService } from 'src/app/services/post/post.service';
 import { SearchBirdsService } from 'src/app/services/searchs/search-birds.service';
+import { VoteService } from 'src/app/services/vote/vote.service';
 import { environment } from 'src/environments/environment';
+import { CommonDialogComponent } from '../../shared/common-dialog/common-dialog.component';
+import { ImageDialogComponent } from '../../shared/image-dialog/image-dialog.component';
 
 @Component({
   selector: 'app-bird-landing-page',
@@ -22,6 +29,8 @@ export class BirdLandingPageComponent implements OnInit {
   hasNotPosts = false;
   hideRemoveBtn = true;
   specieId: string = null;
+  userLoggedInfo: User;
+
 
   filteredSpecies: Observable<AutocompleteResponse[]>;
   autocompleteControl = new FormControl();
@@ -30,9 +39,14 @@ export class BirdLandingPageComponent implements OnInit {
 
   constructor(private searchBirdsSerices: SearchBirdsService,
     private postService: PostService,
-    private autocompleteService : AutocompleteService) { }
+    private voteService: VoteService,
+    private accountService: AccountService,
+    private autocompleteService : AutocompleteService,
+    private matDialog: MatDialog) { }
 
   ngOnInit(): void {
+    this.userLoggedInfo = this.accountService.userValue;
+
     this.filteredSpecies = this.autocompleteControl.valueChanges.pipe(
       startWith(''),
       // delay emits
@@ -66,6 +80,39 @@ export class BirdLandingPageComponent implements OnInit {
     
   }
 
+  addVote(post: PostResponse, hasVote: boolean){
+    let request: VoteRequest = {
+      postId: post.postId,
+      titlePost: post.title,
+      userId: this.userLoggedInfo.userName,
+      authorPostUserId: post.userId
+    }
+
+    if(hasVote){
+      this.voteService.DeleteVote(post.voteId, post.postId)
+      .pipe(first())
+          .subscribe(
+              data => {    
+                post.voteCount--;
+                post.hasVote = false;
+                post.voteId = null;
+              },
+              error => {   
+                
+              });
+    }else{
+      this.voteService.AddVote(request)
+      .pipe(first())
+          .subscribe(
+              data => {    
+                post.voteCount++;
+                post.hasVote = true;
+                post.voteId = data.id;
+              });
+    }
+    
+  }
+
   getBirdPosts(specieId: string) {
     if(specieId != '' ){
       this.searchBirdsSerices.GetBirdBySpecie(specieId).subscribe(
@@ -90,7 +137,10 @@ export class BirdLandingPageComponent implements OnInit {
         }
       );
     }
+  }
 
+  showDeleteOption(userId){
+    return this.userLoggedInfo != null && userId == this.userLoggedInfo.userName;
   }
 
   getSpecies(value: any): Observable<PostResponse[]> {
@@ -118,5 +168,50 @@ export class BirdLandingPageComponent implements OnInit {
     this.specieId = '';
     this.hideRemoveBtn = true;
     this.getBirdPosts(this.specieId);
+  }
+
+  deletePost(post: PostResponse){
+
+    const dialogConfig = new MatDialogConfig();
+    
+    dialogConfig.disableClose = false;
+    dialogConfig.id = "modal-component";
+    dialogConfig.width = "600px";
+    dialogConfig.data = {
+      //title: "user.deleteTitlePostModal",
+      description: "user.deleteTextPostModal",
+      acceptButtonText: "general.delete",
+      cancelButtonText:"general.cancel",
+      hideAcceptButton: false,
+      hideCancelButton: false
+    }
+      
+    const dialogRef = this.matDialog.open(CommonDialogComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe(result => {
+      if(result == 'ACCEPT'){
+        this.postService.deletePost(post.postId).subscribe(
+          data => {
+            const index = this.birdPosts.indexOf(post, 0);
+            if (index > -1) {
+              this.birdPosts.splice(index, 1);
+            }
+          },
+          error => { 
+          });
+      }
+    });
+  }
+
+  showImage(imageUrl: string) {
+    const dialogConfig = new MatDialogConfig();
+    
+    dialogConfig.disableClose = false;
+    dialogConfig.id = "modal-component";
+    
+    dialogConfig.data = {
+      image: this.imagesPostUrl + imageUrl
+    }
+    
+    this.matDialog.open(ImageDialogComponent, dialogConfig);
   }
 }

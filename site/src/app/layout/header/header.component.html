@@ -22,16 +22,29 @@
       </ul>
 
       <div class="btn-group me-2" [hidden]="!isLogged">
+
+        <div class="btn-group" role="group" aria-label="Basic example">
+           <div class="divMenuImgUser">
+             <div class="text-center">             
+              <img class="imgProfilePost" src="{{userImage}}" alt="image of marlotina"> 
+            </div>
+          </div>
+
           <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
-            <img class="imgAuthorPost" src="{{userImage}}" alt="image of marlotina"> 
             {{ userNameMenu }}
           </button>
-          <ul class="dropdown-menu dropdown-menu-lg-end">
-              <li><a class="dropdown-item" routerLink="createPost" routerLinkActive="active">{{ 'userPage.addPost' | translate }}</a></li>
+            <ul class="dropdown-menu dropdown-menu-lg-end">
               <li><a class="dropdown-item" routerLink="userpage/{{ userNameMenu }}">{{ 'general.myPage' | translate }}</a></li>
+              <li><a class="dropdown-item" routerLink="createPost" routerLinkActive="active">{{ 'userPage.addPost' | translate }}</a></li>
               <li><a class="dropdown-item" routerLink="userProfile" routerLinkActive="active">{{ 'user.profileMenu' | translate }}</a>
-              <li><a class="dropdown-item" routerLink="#" routerLinkActive="active" (click)="logout()">{{ 'account.logOut' | translate }}</a></li>
+              <li><a class="dropdown-item" routerLink="#" routerLinkActive="active" (click)="logout()">X &nbsp;{{ 'account.logOut' | translate }}</a></li>
           </ul>
+        </div>
+
+
+          
+          
+          
       </div>
       
       <div class="btn-group me-2"  [hidden]="isLogged">
