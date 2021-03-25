@@ -58,6 +58,7 @@ export class CreatePostComponent implements OnInit {
   visibleEditImage = false;
   firstImage = true;
   map: google.maps.Map;
+  userId: string;
 
   showMap = false;
   isPost = true;
@@ -104,13 +105,13 @@ export class CreatePostComponent implements OnInit {
       isPost: ['']
     });
     
-    let userId = this.accountService.userValue.userName;
+    this.userId = this.accountService.userValue.userName;
     
     this.postForm.patchValue({
-      'userId': userId
+      'userId': this.userId
       });
 
-    this.userLabelsService.GetLabelsAutocomplete(userId)
+    this.userLabelsService.GetLabelsAutocomplete(this.userId)
       .pipe(first())
       .subscribe(
           data => {    

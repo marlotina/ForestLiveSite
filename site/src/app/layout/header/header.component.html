@@ -34,10 +34,22 @@
             {{ userNameMenu }}
           </button>
             <ul class="dropdown-menu dropdown-menu-lg-end">
-              <li><a class="dropdown-item" routerLink="userpage/{{ userNameMenu }}">{{ 'general.myPage' | translate }}</a></li>
-              <li><a class="dropdown-item" routerLink="createPost" routerLinkActive="active">{{ 'userPage.addPost' | translate }}</a></li>
-              <li><a class="dropdown-item" routerLink="userProfile" routerLinkActive="active">{{ 'user.profileMenu' | translate }}</a>
-              <li><a class="dropdown-item" routerLink="#" routerLinkActive="active" (click)="logout()">X &nbsp;{{ 'account.logOut' | translate }}</a></li>
+              <li><a class="dropdown-item" routerLink="userpage/{{ userNameMenu }}">
+                <img src="../../../assets/img/core-img/icons8page.png" />{{ 'general.myPage' | translate }}</a>
+              </li>
+              <li><a class="dropdown-item" routerLink="createPost" routerLinkActive="active">
+                <img src="../../../assets/img/core-img/icons8add.png" />
+                {{ 'userPage.addPost' | translate }}</a>
+              </li>
+              <li><a class="dropdown-item" routerLink="userProfile" routerLinkActive="active">
+                <img src="../../../assets/img/core-img/icons8profile.png" />
+                {{ 'user.profileMenu' | translate }}</a>
+              </li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" routerLink="#" routerLinkActive="active" (click)="logout()">
+                <img src="../../../assets/img/core-img/icons8logout.png" />
+                {{ 'account.logOut' | translate }}
+              </a></li>
           </ul>
         </div>
 

@@ -89,7 +89,7 @@
 
                 <button *ngFor="let label of userLabels" type="button"
                     [ngClass]="{'btn-primary' : selectedLabel.id == label.id, 'btn-outline-primary' : selectedLabel.id != label.id}" 
-                    (click)="searchWithLabels(label)" class="btn mb-5 labelUserPage">
+                    (click)="searchWithLabels(label)" class="btn ml-5 mb-5 labelUserPage">
                     {{label.id}} <span class="badge bg-secondary labelUserPage">{{label.postCount}}</span>
                   </button>
             </div>
