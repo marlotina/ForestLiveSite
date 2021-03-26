@@ -15,7 +15,7 @@ export class AutocompleteService {
   }
 
   GetSpeciesByKeys(text: string, languageCode: string){
-    return this.httpClient.get<AutocompleteResponse[]>(`${environment.birdApiUrl}api/v1/Autocomplete/GetNames?languageCode=${languageCode}&text=${text}`)
+    return this.httpClient.get<AutocompleteResponse[]>(`${environment.specieApiUrl}api/v1/Autocomplete/GetNames?languageCode=${languageCode}&text=${text}`)
       .pipe(map(data => {
         return data;
       }));
