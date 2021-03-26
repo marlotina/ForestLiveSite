@@ -53,11 +53,9 @@ export class BirdLandingPageComponent implements OnInit {
 
     this.filteredSpecies = this.autocompleteControl.valueChanges.pipe(
       startWith(''),
-      // delay emits
       debounceTime(300),
-      // use switch map so as to cancel previous subscribed events, before creating new once
       switchMap(value => {
-        if (value !== '' && value.nameComplete == null) {
+        if (value.length > 2 && value.nameComplete == null) {
           return this.getSpecies(value);
         } else {
           return of([]);
@@ -196,17 +194,14 @@ export class BirdLandingPageComponent implements OnInit {
   }
 
   getSpecies(value: any): Observable<PostResponse[]> {
-    if(value != '' && value.length > 2) {
-      return this.autocompleteService.GetSpeciesByKeys(value.toLowerCase(), localStorage.getItem('locale'))
-        .pipe(map(results => results),
-          catchError(_ => {
-            return of(null);
-          }
-        )
-      );
-    }
-
-    return null;
+    
+    return this.autocompleteService.GetSpeciesByKeys(value.toLowerCase(), localStorage.getItem('locale'))
+      .pipe(map(results => results),
+        catchError(_ => {
+          return of(null);
+        }
+      )
+    );
   }
 
   deletePost(post: PostResponse){

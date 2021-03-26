@@ -49,7 +49,7 @@ export class PostPageComponent implements OnInit {
       text: ['', [Validators.required]],
       userId: [{ disabled: true}, Validators.required],
       postId: ['', [Validators.required]],
-      specieId: ['', [Validators.required]],
+      specieId: [null],
       authorPostUserId: ['', [Validators.required]],
       titlePost: ['', [Validators.required]]
     });

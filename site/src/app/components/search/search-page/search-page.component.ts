@@ -42,7 +42,7 @@ export class SearchPageComponent implements OnInit {
       startWith(''),
       debounceTime(300),
       switchMap(value => {
-        if (value !== '' && value.nameComplete == null) {
+        if (value.length > 2  && value.nameComplete == null) {
           return this.getSpecies(value);
         } else {
           return of([]);
@@ -177,15 +177,13 @@ export class SearchPageComponent implements OnInit {
   }
 
   getSpecies(value: any): Observable<PostResponse[]> {
-    if(value != '' && value.length > 2) {
-      return this.autocompleteService.GetSpeciesByKeys(value.toLowerCase(), localStorage.getItem('locale'))
-        .pipe(map(results => results),
-          catchError(_ => {
-            return of(null);
-          }
-        )
-      );
-    }
+    return this.autocompleteService.GetSpeciesByKeys(value.toLowerCase(), localStorage.getItem('locale'))
+      .pipe(map(results => results),
+        catchError(_ => {
+          return of(null);
+        }
+      )
+    );
 
     return null;
   }

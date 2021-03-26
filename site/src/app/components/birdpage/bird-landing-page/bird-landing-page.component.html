@@ -53,12 +53,12 @@
                             </div>
                         </div>
                         <div class="row mb-5">
-                            <div>
+                            <div [hidden]="!post.birdSpecie">
                                 {{ 'userPage.birdSpecie' | translate }}: {{post.birdSpecie}}
                             </div>
                         </div>
                         <div class="row mb-5">
-                            <div>
+                            <div [hidden]="!post.observationDate">
                                 {{ 'userPage.observationDate' | translate }}: {{post.observationDate}} 
                             </div>
                         </div>
