@@ -28,7 +28,11 @@ export class BirdLandingPageComponent implements OnInit {
   imagesPostUrl = environment.imagesPostUrl;
   hasNotPosts = false;
   hideRemoveBtn = true;
+
   specieId: string = null;
+  searchOrder: number = 1;
+  searchType: number = 1;
+
   userLoggedInfo: User;
 
 
@@ -61,7 +65,7 @@ export class BirdLandingPageComponent implements OnInit {
       })
     );
 
-    this.getBirdPosts('');
+    this.getBirdPosts();
   }
 
   selectSpecie(item: AutocompleteResponse){
@@ -113,9 +117,56 @@ export class BirdLandingPageComponent implements OnInit {
     
   }
 
-  getBirdPosts(specieId: string) {
-    if(specieId != '' ){
-      this.searchBirdsSerices.GetBirdBySpecie(specieId).subscribe(
+  changeSearchType(e: any){
+    this.searchType = e.target.value;
+    this.getBirdPosts();
+  }
+
+  changeSearchOrder(e: any){
+    this.searchOrder = e.target.value;
+    this.getBirdPosts();
+  }
+
+  addFilterSpecie(){
+    this.hideRemoveBtn = false;
+    if(this.specieId != null){
+      this.getBirdPosts();
+    }
+  }
+
+  removeFilterSpecie(){
+    this.autocompleteControl.setValue('');
+    this.specieIdPostControl.setValue('');
+    this.specieId = null;
+    this.hideRemoveBtn = true;
+    this.getBirdPosts();
+  }
+
+  getBirdPosts() {
+    if (this.searchType == 1){
+      this.postService.getPosts(this.searchOrder).subscribe(
+        data => {
+          this.birdPosts = data;
+          if(data.length > 0){
+            this.hasNotPosts = true;
+          }else{
+            this.hasNotPosts = false;
+          }
+        }
+      );      
+    } else if (this.searchType == 2 && this.specieId == null){
+      this.postService.getAllPosts(this.searchOrder).subscribe(
+        data => {
+          this.birdPosts = data;
+          if(data.length > 0){
+            this.hasNotPosts = true;
+          }else{
+            this.hasNotPosts = false;
+          }
+        }
+      );
+    } else if(this.searchType == 2 && this.specieId !== null){
+      this.searchBirdsSerices.GetBirdBySpecie(this.specieId, this.searchOrder).subscribe(
         data =>{ 
           this.birdPosts = data;
           if(data.length > 0){
@@ -125,8 +176,8 @@ export class BirdLandingPageComponent implements OnInit {
           }
         } 
       );
-    } else {
-      this.postService.getPosts().subscribe(
+    } else if (this.searchType == 3){
+      this.searchBirdsSerices.GetWithoutSpecie(this.searchOrder).subscribe(
         data => {
           this.birdPosts = data;
           if(data.length > 0){
@@ -155,19 +206,6 @@ export class BirdLandingPageComponent implements OnInit {
     }
 
     return null;
-  }
-
-  addFilterSpecie(){
-    this.hideRemoveBtn = false;
-    this.getBirdPosts(this.specieId);
-  }
-
-  removeFilterSpecie(){
-    this.autocompleteControl.setValue('');
-    this.specieIdPostControl.setValue('');
-    this.specieId = '';
-    this.hideRemoveBtn = true;
-    this.getBirdPosts(this.specieId);
   }
 
   deletePost(post: PostResponse){
@@ -214,4 +252,5 @@ export class BirdLandingPageComponent implements OnInit {
     
     this.matDialog.open(ImageDialogComponent, dialogConfig);
   }
+
 }

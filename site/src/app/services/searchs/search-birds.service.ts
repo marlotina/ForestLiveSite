@@ -13,8 +13,8 @@ export class SearchBirdsService {
   constructor(private httpClient: HttpClient) { 
   }
 
-  GetBirdBySpecie(specieId : string){
-    return this.httpClient.get<PostResponse[]>(`${environment.birdApiUrl}api/v1/SpeciesSearch/GetBirds/?birdSpecieId=${specieId}`)
+  GetBirdBySpecie(specieId : string, orderBy: number){
+    return this.httpClient.get<PostResponse[]>(`${environment.birdApiUrl}api/v1/SpeciesSearch/GetBirds/?birdSpecieId=${specieId}&orderby=${orderBy}`)
       .pipe(map(data => {
         return data;
       }));
@@ -34,8 +34,8 @@ export class SearchBirdsService {
       }));
   }
   
-  GetWithoutSpecie(){
-    return this.httpClient.get<BirdSpeciePostResponse[]>(`${environment.birdApiUrl}api/v1/SpeciesSearch/GetPendingBirds/`)
+  GetWithoutSpecie(orderBy: number){
+    return this.httpClient.get<PostResponse[]>(`${environment.birdApiUrl}api/v1/SpeciesSearch/GetPendingBirds?orderby=${orderBy}`)
       .pipe(map(data => {
         return data;
       }));

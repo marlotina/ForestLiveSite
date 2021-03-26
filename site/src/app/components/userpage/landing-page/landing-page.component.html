@@ -33,6 +33,10 @@
                                 </button>
                                 <mat-menu #menu="matMenu" >
                                     <button mat-menu-item type="button" (click)="deletePost(post)">
+                                        <mat-icon>edit</mat-icon>
+                                        <span>edit</span>
+                                    </button>
+                                    <button mat-menu-item type="button" (click)="deletePost(post)">
                                         <mat-icon>delete</mat-icon>
                                         <span>{{ 'postPage.delete' | translate }}</span>
                                     </button>

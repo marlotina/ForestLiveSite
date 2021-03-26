@@ -26,8 +26,15 @@ export class PostService {
       }));
   }
 
-  getPosts(){
-    return this.httpClient.get<PostResponse[]>(`${environment.postApiUrl}api/v1/BirdPost/GetPosts`)
+  getPosts(orderBy: number){
+    return this.httpClient.get<PostResponse[]>(`${environment.postApiUrl}api/v1/BirdPost/GetPosts?orderby=${orderBy}`)
+      .pipe(map(data => {
+        return data;
+      }));
+  }
+
+  getAllPosts(orderBy: number){
+    return this.httpClient.get<PostResponse[]>(`${environment.postApiUrl}api/v1/BirdPost/getAllPosts?orderby=${orderBy}`)
       .pipe(map(data => {
         return data;
       }));
