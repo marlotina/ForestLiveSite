@@ -33,6 +33,7 @@ export class PostPageComponent implements OnInit {
   userLoggedInfo: User;
   hasPost = true;
   hasLocation = false;
+  hasLabels = false;
 
   constructor(private activateRoute: ActivatedRoute,
     private postService: PostService,
@@ -66,6 +67,7 @@ export class PostPageComponent implements OnInit {
           this.imagePost = environment.imagesPostUrl + data.imageUrl;
           this.showOwnerOptions = this.userLoggedInfo != null && this.post.userId == this.userLoggedInfo.userName;
           this.hasPost = true;
+          this.hasLabels = data.labels.length > 0;
           this.initMap(this.post.latitude, this.post.longitude);
 
           this.commentForm.patchValue({

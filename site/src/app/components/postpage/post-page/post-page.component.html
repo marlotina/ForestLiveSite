@@ -61,7 +61,7 @@
                                 {{post.text}}
                             </div>
                         </div>
-                        <div class="row mb-15">
+                        <div class="row mb-15" [hidden]="!hasLabels">
                             <div class="col-12">
                                 <strong>{{ 'postPage.tags' | translate }}:</strong>&nbsp;
                                 <a *ngFor="let label of postLabels" role="button" href="#" class="ml-5">
