@@ -48,7 +48,7 @@
         "profileTitle": "Your profile",
         "profileText": "Edit your profile",
         "update": "Update",
-        "profileMenu": "Your profile",
+        "profileMenu": "Profile",
         "imageProfile": "Manage your image",
         "back": "Go back",
         "save": "Save",
@@ -99,7 +99,7 @@
     "userPage": {
         "userWithoutPost": "The user has not birds.",
         "userPage": "The page user",
-        "addPost": "add post",
+        "addPost": "Create post",
         "cancel": "Cancel",
         "observationDate": "Observation date",
         "birdSpecie": "Bird specie"

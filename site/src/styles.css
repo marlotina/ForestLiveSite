@@ -17,11 +17,24 @@ html, body { height: 100%; }
     margin-bottom: 15px;
 }
 
+.divFilter {
+    padding: 10px;
+    background: #f9f9f9;
+    border: 1px solid #ebebeb;
+}
+
+.divFilterNoTop {
+    padding: 10px;
+    background: #f9f9f9;
+    border-bottom: 1px solid #ebebeb;
+	border-left: 1px solid #ebebeb;
+	border-right: 1px solid #ebebeb;
+}
+
 .mapAuthor {
     border: 1px solid #ebebeb;
     margin-bottom: 15px;
 }
-
 
 .divPostImgContent {
     border-radius: 20px;
@@ -30,7 +43,7 @@ html, body { height: 100%; }
     display: block;
 }
 
-.imgProfilePost{
+.imgProfileAuthor{
     -webkit-box-flex: 0;
     -ms-flex: 0 0 80px;
     flex: 0 0 80px;
@@ -132,22 +145,22 @@ font-weight: 600; }
 
 .is-invalid {
 	border-color: red !important;
-  }
-  
-  .error-text {
+}
+
+.error-text {
 	color: red;
-  }
-  
-  .hidden {
+}
+
+.hidden {
 	display: none !important;
 	visibility: hidden;
-  }
-  
-  .blockInput {
+}
+
+.blockInput {
 	pointer-events: none;
-  }
-  
-  .buttonTwo {
+}
+
+.buttonTwo {
 	-webkit-transition-duration: 500ms;
 	transition-duration: 500ms;
 	width: 100%;
@@ -160,15 +173,15 @@ font-weight: 600; }
 	cursor: pointer;
 	font-weight: 500;
 	margin-bottom: 0;
-  }
-  
-  .buttonTwo:hover {
+}
+
+.buttonTwo:hover {
 	background-color: #70c745;
 	color: #ffffff;
 	border-color: #70c745;
-  }
-  
-  .buttonThree {
+}
+
+.buttonThree {
 	-webkit-transition-duration: 500ms;
 	transition-duration: 500ms;
 	height: 30px;
@@ -181,32 +194,32 @@ font-weight: 600; }
 	cursor: pointer;
 	font-weight: 500;
 	margin-bottom: 0;
-  }
-  
-  .buttonThree:hover {
+}
+
+.buttonThree:hover {
 	background-color: #70c745;
 	color: #ffffff;
 	border-color: #70c745;
-  }
-  
-  a:hover {
+}
+
+a:hover {
 	cursor:pointer;
-   }
-  
-  .map-container{
-	  width: 100% !important;
-	  height: 650px !important;
-  }
-  
-  .autocomplete-form {
+}
+
+.map-container{
+	width: 100% !important;
+	height: 650px !important;
+}
+
+.autocomplete-form {
 	min-width: 150px;
 	max-width: 500px;
 	width: 100%;
-  }
-  
-  .autocomplete-full-width {
+}
+
+.autocomplete-full-width {
 	width: 100%;
-  }
+}
 /*new*/
 body {
 	/*min-height: 75rem;*/
@@ -316,7 +329,7 @@ body {
 }
 
 .mb-5{
-	margin-right: 5px;
+	margin-bottom: 5px;
 }
 
 .addLabelBtn {
@@ -329,4 +342,45 @@ body {
 
 .labelUserPage { 
 	padding: 2px 5px 2px 5px !important;
+}
+
+.pr-5 {
+	padding-right: 5px;
+}
+
+.pr-15 {
+	padding-right: 15px;
+}
+
+.postMapDetails {
+	height: 315px;
+}
+
+.centerText {
+	text-align: center;
+}
+
+.gray{
+	color: gray;
+}
+
+.divMenuImgUser{
+    border: 1px solid #565e64;
+}
+
+
+.imgProfilePost {
+    max-width: 80px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin: 3px 3px 3px 3px;
+}
+
+.ml-5 {
+	margin-left: 5px;
+}
+
+.mr-5 {
+	margin-right: 5px;
 }

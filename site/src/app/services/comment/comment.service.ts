@@ -32,8 +32,8 @@ export class CommentService {
       }));
   }
 
-  DeleteComment(postId: string, userId: string, specieId: string){
-    return this.httpClient.delete(`${environment.commentApiUrl}api/v1/Comment/DeleteComment/?postId=${postId}&commentId=${userId}&specieId=${specieId}`);
+  DeleteComment(postId: string, userId: string){
+    return this.httpClient.delete(`${environment.commentApiUrl}api/v1/Comment/DeleteComment/?postId=${postId}&commentId=${userId}`);
   }
 
 }

@@ -17,6 +17,7 @@ import { CreatePostComponent } from '../create-post/create-post.component';
 import { ModalEditImageComponent } from '../modal-edit-image/modal-edit-image.component';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { CreatePostRoutingModule } from './create-post-routing.module';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 const materialModules = [
   MatDatepickerModule,
@@ -27,9 +28,9 @@ const materialModules = [
   MatChipsModule,
   MatIconModule,
   MatSelectModule,
-  MatAutocompleteModule
+  MatAutocompleteModule,
+  MatTooltipModule
 ];
-
 
 @NgModule({
   declarations: [

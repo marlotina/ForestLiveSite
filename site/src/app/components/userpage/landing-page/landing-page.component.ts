@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { first } from 'rxjs/operators';
 import { User } from 'src/app/model/account';
-import { PostResponse } from 'src/app/model/post';
+import { PostListResponse } from 'src/app/model/post';
 import { UserLabelPageResponse } from 'src/app/model/user';
 import { VoteRequest } from 'src/app/model/vote';
 import { AccountService } from 'src/app/services/account/account.service';
@@ -27,7 +27,7 @@ export class LandingPageComponent implements OnInit {
   
   userLoggedInfo: User;
   subscription: Subscription;
-  userPosts: PostResponse[];
+  userPosts: PostListResponse[];
   userId: string;
   imagesPostUrl = environment.imagesPostUrl;
   hasNotPosts: boolean;
@@ -100,7 +100,7 @@ export class LandingPageComponent implements OnInit {
     return this.userLoggedInfo != null && userId == this.userLoggedInfo.userName;
   }
 
-  deletePost(post: PostResponse){
+  deletePost(post: PostListResponse){
 
     const dialogConfig = new MatDialogConfig();
     
@@ -119,7 +119,7 @@ export class LandingPageComponent implements OnInit {
     const dialogRef = this.matDialog.open(CommonDialogComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(result => {
       if(result == 'ACCEPT'){
-        this.postService.DeletePost(post.postId).subscribe(
+        this.postService.deletePost(post.postId).subscribe(
           data => {
             const index = this.userPosts.indexOf(post, 0);
             if (index > -1) {
@@ -133,12 +133,13 @@ export class LandingPageComponent implements OnInit {
     });
   }
 
-  addVote(post: PostResponse, hasVote: boolean){
+  addVote(post: PostListResponse, hasVote: boolean){
     let request: VoteRequest = {
       postId: post.postId,
       titlePost: post.title,
       userId: this.userLoggedInfo.userName,
-      authorPostUserId: post.userId
+      authorPostUserId: post.userId,
+      specieId: post.specieId
     }
 
     if(hasVote){

@@ -3,11 +3,33 @@
     
     <div class="row justify-content-center mt-15">
         
-        <div class="col-12 col-md-8 divPost">   
+        <div class="col-12 col-md-10 divPost">   
             <div class="">
                 <form [formGroup]="postForm" (ngSubmit)="onSubmit()" class="ng-untouched ng-pristine ng-valid">
                     <div class="row mt-15">
-                        
+                        <div class="col-11 mb-5 centerText">
+                            <div class="form-group">
+                                <div class="form-check form-check-inline">
+                                  <input class="form-check-input" type="radio" checked
+                                      name="inlineRadioOptions" id="inlineRadio2" 
+                                      (change)="changeTypePost($event)" value="post">
+                                  <label class="form-check-label" for="inlineRadio2">Post</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" 
+                                        name="inlineRadioOptions" id="inlineRadio1"
+                                        (change)="changeTypePost($event)"value="observation">
+                                    <label class="form-check-label" for="inlineRadio1">Bird observation</label>
+                                  </div>
+                            </div>
+                        </div>
+                        <div class="col-1 mb-5">
+                            <div class="col-8 col-md-2 commetDate">
+                                <a role="button" class="btn btn-outline-primary addLabelBtn" routerLink="/userpage/{{userId}}" type="button">
+                                    <mat-icon>close</mat-icon>
+                                </a>
+                            </div>
+                        </div>
                         <div class="col-12">
                             <div class="form-group">
                                 <div [innerHtml]='msg' *ngIf="msg" style="color: red;"></div>
@@ -32,14 +54,15 @@
                                 <button type="button" class="buttonThree" *ngIf="visibleEditImage" (click)="openEditProfile()">{{ 'createPost.editImage' | translate }}</button>                                            
                             </div>
                         </div>                    
-                        <div class="row mt-15">
-                        <div class="col-12 col-md-8 mt-15">
-                            <div class="form-group">
+                        <div class="row">
+                        <div class="col-12 col-md-8 mt-15" [hidden]="isPost">
+                            <div class="form-group d-flex">
                                 <div class="autocomplete-form">
                                     <mat-form-field class="autocomplete-full-width">
                                         <input type="text" aria-label="Number" matInput  [matAutocomplete]="autoBird"
                                             [formControl]="autocompleteControl"  formControlName="specieName"   
                                             id="specieNamePost" placeholder="{{ 'createPost.birdSpecie' | translate }}">
+                                            
                                         <mat-autocomplete #autoBird="matAutocomplete" (optionSelected)='selectSpecie($event.option.value)'>
                                             <mat-option *ngFor="let option of filteredSpecies | async" [value]="option" (change)="selectSpecie(option)" (click)="$event.stopPropagation()">
                                                 {{option.nameComplete}}
@@ -48,11 +71,18 @@
                                     </mat-form-field>
                                 </div>
     
+                                <span matTooltip="Si no sabe o no está seguro del nombre de la especie, déjelo en blanco
+                                    y el resto de usuario te ayudaran a través de sus comentarios"
+                                        class="gray"
+                                        [matTooltipPosition]= "toolPos"
+                                        aria-label="Button that displays a tooltip when focused or hovered over">
+                                        <mat-icon>info</mat-icon>
+                                </span>
                                 <input type="hidden" id="specieIdPost" formControlName="specieId" >
+                                
                             </div>
                         </div>
-    
-                        <div class="col-12 col-md-4 mt-15">
+                        <div class="col-12 col-md-4" [hidden]="isPost">
                             <div class="form-group">
                                 <mat-form-field>
                                     <input matInput [matDatepicker]="picker" placeholder="{{ 'createPost.chooseDate' | translate }}" id="observationDatePost" formControlName="observationDate">
@@ -78,7 +108,7 @@
                                     name="message" 
                                     id="textPost" 
                                     cols="30" 
-                                    rows="10" 
+                                    rows="5" 
                                     [ngClass]="{ 'is-invalid': submitted && f.text.errors }"
                                     placeholder="{{ 'createPost.text' | translate }}"
                                     formControlName="text" ></textarea>
@@ -117,7 +147,12 @@
                             </mat-form-field>
                         </div>
     
-                        <div class="col-12 col-md-6 mt-15">
+                        <div class="col-12 col-md-12 mt-15">
+                            <button class="btn btn-outline-primary" type="button" (click)="showHideMap()" [hidden]="showMap"><img src="../../../../assets/img/core-img/mapMarker.png" />Add location</button>
+                            <button class="btn btn-outline-primary" type="button" (click)="showHideMap()" [hidden]="!showMap">remove</button>
+                       
+                        </div>
+                        <div class="col-12 col-md-6 mt-15" [hidden]="!showMap">
                             <div class="form-group">
                                 <input type="text"  
                                     class="form-control" 
@@ -129,7 +164,7 @@
                             </div>
     
                         </div>
-                        <div class="col-12 col-md-6 mt-15">
+                        <div class="col-12 col-md-6 mt-15" [hidden]="!showMap">
                             <div class="form-group">
                                 <input type="text" 
                                     class="form-control" 
@@ -141,7 +176,7 @@
                             </div>
                         </div>
     
-                        <div class="col-12 mt-15">
+                        <div class="col-12 mt-15" [hidden]="!showMap">
                             <div #mapWrapper id="map" class="createPostMap"></div>
                         </div>
                         <div class="col-12 mt-15 mb-15">
@@ -152,16 +187,6 @@
                 </form>
             </div>
 
-        </div>
-
-        <div class="col-12 col-sm-9 col-md-4" >
-            <div class="list-group">
-                <a href="#" class="list-group-item list-group-item-action" routerLink="/userProfile">My profile</a>
-                <a href="#" class="list-group-item list-group-item-action active" routerLink="/createPost">Create post</a>
-                <a href="#" class="list-group-item list-group-item-action" routerLink="/userlabel">My labels</a>
-                <a href="#" class="list-group-item list-group-item-action" routerLink="/usercomments">My comments</a>
-                <a href="#" class="list-group-item list-group-item-action" routerLink="/uservotes">My votes</a>
-              </div>
         </div>
 
     </div>

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { BirdSpeciePostResponse } from 'src/app/model/post';
+import { PostListResponse } from 'src/app/model/post';
 import { SearchBirdsService } from 'src/app/services/searchs/search-birds.service';
 import { environment } from 'src/environments/environment';
 
@@ -9,14 +9,14 @@ import { environment } from 'src/environments/environment';
 })
 export class WithoutSpeciePageComponent implements OnInit {
 
-  pendingPosts: BirdSpeciePostResponse[];
+  pendingPosts: PostListResponse[];
   imagesPostUrl = environment.imagesPostUrl;
   hasNotPosts = true;
 
   constructor(private searchBirdsService: SearchBirdsService) { }
 
   ngOnInit(): void {
-    this.searchBirdsService.GetWithoutSpecie().subscribe(
+    this.searchBirdsService.GetWithoutSpecie(1).subscribe(
       data =>{ 
         this.hasNotPosts = data.length > 0;
         this.pendingPosts = data;

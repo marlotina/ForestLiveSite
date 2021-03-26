@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ActivatedRoute, Router, Routes } from '@angular/router';
@@ -21,6 +21,7 @@ import { ImageDialogComponent } from '../../shared/image-dialog/image-dialog.com
 })
 export class PostPageComponent implements OnInit {
  
+  @ViewChild('mapWrapper') mapElement: ElementRef;
   commentForm: FormGroup;
   post = new PostResponse();
   comments: CommentResponse[];
@@ -31,7 +32,8 @@ export class PostPageComponent implements OnInit {
   isLogged: boolean;
   userLoggedInfo: User;
   hasPost = true;
-  display = "none";
+  hasLocation = false;
+  hasLabels = false;
 
   constructor(private activateRoute: ActivatedRoute,
     private postService: PostService,
@@ -48,7 +50,7 @@ export class PostPageComponent implements OnInit {
       text: ['', [Validators.required]],
       userId: [{ disabled: true}, Validators.required],
       postId: ['', [Validators.required]],
-      specieId: ['', [Validators.required]],
+      specieId: [null],
       authorPostUserId: ['', [Validators.required]],
       titlePost: ['', [Validators.required]]
     });
@@ -58,13 +60,15 @@ export class PostPageComponent implements OnInit {
     
     this.activateRoute.paramMap.subscribe(params => {
       let postId = params.get("id");
-      this.postService.GetPost(postId).subscribe(
+      this.postService.getPost(postId).subscribe(
         data => { 
           this.post = data;  
           this.postLabels = data.labels;
           this.imagePost = environment.imagesPostUrl + data.imageUrl;
           this.showOwnerOptions = this.userLoggedInfo != null && this.post.userId == this.userLoggedInfo.userName;
           this.hasPost = true;
+          this.hasLabels = data.labels.length > 0;
+          this.initMap(this.post.latitude, this.post.longitude);
 
           this.commentForm.patchValue({
             'userId': this.userLoggedInfo != null ? this.userLoggedInfo.userName : '',
@@ -115,7 +119,8 @@ export class PostPageComponent implements OnInit {
       postId: post.postId,
       titlePost: post.title,
       userId: this.userLoggedInfo.userName,
-      authorPostUserId: post.userId
+      authorPostUserId: post.userId,
+      specieId: post.specieId
     }
 
     if(hasVote){
@@ -171,7 +176,7 @@ export class PostPageComponent implements OnInit {
     const dialogRef = this.matDialog.open(CommonDialogComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(result => {
       if(result == 'ACCEPT'){
-        this.postService.DeletePost(this.post.postId).subscribe(
+        this.postService.deletePost(this.post.postId).subscribe(
           data => {
             this.route.navigate(['/userpage/' + this.post.userId]);
           },
@@ -185,7 +190,7 @@ export class PostPageComponent implements OnInit {
   }
 
   deleteComment(comment: CommentResponse){
-    this.commentService.DeleteComment(comment.postId, comment.id, this.post.specieId).subscribe(
+    this.commentService.DeleteComment(comment.postId, comment.id).subscribe(
       data => {
         const index = this.comments.indexOf(comment, 0);
         if (index > -1) {
@@ -232,4 +237,34 @@ export class PostPageComponent implements OnInit {
     
     this.matDialog.open(ImageDialogComponent, dialogConfig);
   }
+
+  initMap(lat: number, lng: number) {
+    if(lat != null || lng != null){
+      this.hasLocation = true;
+      let latLng: google.maps.LatLngLiteral = {
+        lat: Number.parseFloat(lat.toString()),
+        lng: Number.parseFloat(lng.toString())
+      };
+  
+      const mapOptions: google.maps.MapOptions = {
+        center: latLng,
+        zoom: 16,
+        fullscreenControl: false,
+        mapTypeControl: false,
+        streetViewControl: false,
+        clickableIcons: false
+      };
+      const map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
+      this.getMarker(latLng, map);
+    }
+}
+
+getMarker(latLng: google.maps.LatLngLiteral, map: google.maps.Map){
+  const marker = new google.maps.Marker({
+    position: { lat: latLng.lat, lng: latLng.lng},
+    map,
+    icon: "../../../../assets/img/core-img/mapMarker.png",
+  });
+}
+
 }
