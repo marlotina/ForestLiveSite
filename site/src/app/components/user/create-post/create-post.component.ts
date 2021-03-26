@@ -92,8 +92,8 @@ export class CreatePostComponent implements OnInit {
     this.postForm = this.formBuilder.group({
       title: ['', [Validators.required]],
       text: ['', [Validators.required]],
-      latitude: [''],
-      longitude: [''],
+      latitude: [null],
+      longitude: [null],
       specieName: [''],
       specieId: [null],
       labels: [null],
@@ -270,8 +270,8 @@ export class CreatePostComponent implements OnInit {
 
   showHideMap() {
     if(!this.showMap){
-      this.postForm.controls.latitude.setValue('');
-      this.postForm.controls.longitude.setValue('');
+      this.postForm.controls.latitude.setValue(null);
+      this.postForm.controls.longitude.setValue(null);
       this.setMapOnAll(null);
       this.markers = [];
     }

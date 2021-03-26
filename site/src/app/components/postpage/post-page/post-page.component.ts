@@ -32,7 +32,7 @@ export class PostPageComponent implements OnInit {
   isLogged: boolean;
   userLoggedInfo: User;
   hasPost = true;
-  display = "none";
+  hasLocation = false;
 
   constructor(private activateRoute: ActivatedRoute,
     private postService: PostService,
@@ -66,7 +66,6 @@ export class PostPageComponent implements OnInit {
           this.imagePost = environment.imagesPostUrl + data.imageUrl;
           this.showOwnerOptions = this.userLoggedInfo != null && this.post.userId == this.userLoggedInfo.userName;
           this.hasPost = true;
-
           this.initMap(this.post.latitude, this.post.longitude);
 
           this.commentForm.patchValue({
@@ -238,22 +237,24 @@ export class PostPageComponent implements OnInit {
   }
 
   initMap(lat: number, lng: number) {
-    
-    let latLng: google.maps.LatLngLiteral = {
-      lat: Number.parseFloat(lat.toString()),
-      lng: Number.parseFloat(lng.toString())
-    };
-
-    const mapOptions: google.maps.MapOptions = {
-      center: latLng,
-      zoom: 16,
-      fullscreenControl: false,
-      mapTypeControl: false,
-      streetViewControl: false,
-      clickableIcons: false
-    };
-    const map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
-    this.getMarker(latLng, map);
+    if(lat != null || lng != null){
+      this.hasLocation = true;
+      let latLng: google.maps.LatLngLiteral = {
+        lat: Number.parseFloat(lat.toString()),
+        lng: Number.parseFloat(lng.toString())
+      };
+  
+      const mapOptions: google.maps.MapOptions = {
+        center: latLng,
+        zoom: 16,
+        fullscreenControl: false,
+        mapTypeControl: false,
+        streetViewControl: false,
+        clickableIcons: false
+      };
+      const map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
+      this.getMarker(latLng, map);
+    }
 }
 
 getMarker(latLng: google.maps.LatLngLiteral, map: google.maps.Map){
