@@ -5,7 +5,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Observable, of } from 'rxjs';
 import { catchError, debounceTime, first, map, startWith, switchMap } from 'rxjs/operators';
 import { User } from 'src/app/model/account';
-import { PostResponse } from 'src/app/model/post';
+import { PostListResponse } from 'src/app/model/post';
 import { AutocompleteResponse } from 'src/app/model/specie';
 import { VoteRequest } from 'src/app/model/vote';
 import { AccountService } from 'src/app/services/account/account.service';
@@ -24,7 +24,7 @@ import { ImageDialogComponent } from '../../shared/image-dialog/image-dialog.com
 })
 export class BirdLandingPageComponent implements OnInit {
 
-  birdPosts: PostResponse[];
+  birdPosts: PostListResponse[];
   imagesPostUrl = environment.imagesPostUrl;
   hasNotPosts = false;
   hideRemoveBtn = true;
@@ -82,7 +82,7 @@ export class BirdLandingPageComponent implements OnInit {
     
   }
 
-  addVote(post: PostResponse, hasVote: boolean){
+  addVote(post: PostListResponse, hasVote: boolean){
     let request: VoteRequest = {
       postId: post.postId,
       titlePost: post.title,
@@ -193,7 +193,7 @@ export class BirdLandingPageComponent implements OnInit {
     return this.userLoggedInfo != null && userId == this.userLoggedInfo.userName;
   }
 
-  getSpecies(value: any): Observable<PostResponse[]> {
+  getSpecies(value: any): Observable<PostListResponse[]> {
     
     return this.autocompleteService.GetSpeciesByKeys(value.toLowerCase(), localStorage.getItem('locale'))
       .pipe(map(results => results),
@@ -204,7 +204,7 @@ export class BirdLandingPageComponent implements OnInit {
     );
   }
 
-  deletePost(post: PostResponse){
+  deletePost(post: PostListResponse){
 
     const dialogConfig = new MatDialogConfig();
     

@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { MapSpeciePoint } from 'src/app/model/Map';
-import { BirdSpeciePostResponse, PostResponse, ModalPostResponse } from 'src/app/model/post';
+import { PostResponse, ModalPostResponse, PostListResponse } from 'src/app/model/post';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -14,7 +14,7 @@ export class SearchBirdsService {
   }
 
   GetBirdBySpecie(specieId : string, orderBy: number){
-    return this.httpClient.get<PostResponse[]>(`${environment.birdApiUrl}api/v1/SpeciesSearch/GetBirds/?birdSpecieId=${specieId}&orderby=${orderBy}`)
+    return this.httpClient.get<PostListResponse[]>(`${environment.birdApiUrl}api/v1/SpeciesSearch/GetBirds/?birdSpecieId=${specieId}&orderby=${orderBy}`)
       .pipe(map(data => {
         return data;
       }));
@@ -35,7 +35,7 @@ export class SearchBirdsService {
   }
   
   GetWithoutSpecie(orderBy: number){
-    return this.httpClient.get<PostResponse[]>(`${environment.birdApiUrl}api/v1/SpeciesSearch/GetPendingBirds?orderby=${orderBy}`)
+    return this.httpClient.get<PostListResponse[]>(`${environment.birdApiUrl}api/v1/SpeciesSearch/GetPendingBirds?orderby=${orderBy}`)
       .pipe(map(data => {
         return data;
       }));

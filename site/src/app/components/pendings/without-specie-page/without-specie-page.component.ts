@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { BirdSpeciePostResponse, PostResponse } from 'src/app/model/post';
+import { PostListResponse } from 'src/app/model/post';
 import { SearchBirdsService } from 'src/app/services/searchs/search-birds.service';
 import { environment } from 'src/environments/environment';
 
@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environment';
 })
 export class WithoutSpeciePageComponent implements OnInit {
 
-  pendingPosts: PostResponse[];
+  pendingPosts: PostListResponse[];
   imagesPostUrl = environment.imagesPostUrl;
   hasNotPosts = true;
 

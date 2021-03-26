@@ -61,20 +61,19 @@ export class ImagePostRequest {
     firstImage: boolean;
 }
 
-export class BirdSpeciePostResponse {
-    id:string;
+export class PostListResponse {
     postId: string;
     title: string;
     text: string;
     imageUrl: string;
     altImage: string;
     userId: string;
+    voteCount: number;
     commentCount: number;
-    userName: string;
+    labels: string[];
     birdSpecie: string;
     specieId: string;
-    userUrl: string;
-    observationDate: string;
-    creationDate: Date;
-    userPhoto: string
+    userPhoto: string;
+    hasVote:boolean;
+    voteId: string;
 }
