@@ -118,7 +118,8 @@ export class PostPageComponent implements OnInit {
       postId: post.postId,
       titlePost: post.title,
       userId: this.userLoggedInfo.userName,
-      authorPostUserId: post.userId
+      authorPostUserId: post.userId,
+      specieId: post.specieId
     }
 
     if(hasVote){
