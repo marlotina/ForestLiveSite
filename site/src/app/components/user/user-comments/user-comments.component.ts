@@ -27,4 +27,14 @@ export class UserCommentsComponent implements OnInit {
     );
   }
 
+  deleteComment(comment: CommentResponse){
+    this.commentService.DeleteComment(comment.postId, comment.id).subscribe(
+      data => {
+        const index = this.userComments.indexOf(comment, 0);
+        if (index > -1) {
+          this.userComments.splice(index, 1);
+        }
+      });
+  }
+
 }

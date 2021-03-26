@@ -9,8 +9,17 @@
             <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#007bff"></rect><text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text></svg>
             <div class="pb-3 mb-0 small lh-sm border-bottom w-100">
               <div class="d-flex justify-content-between">
-                <a class="removeLinkLine" href="{{comment.userId}}/post/{{comment.postId}}"><strong class="text-gray-dark">{{comment.titlePost}}</strong>&nbsp;<small>{{comment.authorPostUserId}}</small></a>
+
+                <div class="col-12 col-md-1 pad-3">
+                  <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#007bff"></rect><text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text></svg>
+                </div>
+                <div class="col-12 col-md-10">
+                  <a class="removeLinkLine" href="{{comment.userId}}/post/{{comment.postId}}"><strong class="text-gray-dark">{{comment.titlePost}}</strong>&nbsp;<small>{{comment.authorPostUserId}}</small></a>
                 <a href="{{comment.userId}}/post/{{comment.postId}}">Read</a>
+                </div>
+                <div class="col-12 col-md-1">
+                  <button type="button" class="btn btn-outline-danger addLabelBtn" (click)="deleteComment(comment)"><mat-icon>delete_outline</mat-icon></button>
+                </div>
               </div>
               <span class="d-block">{{comment.text}}</span>
             </div>

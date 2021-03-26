@@ -189,7 +189,7 @@ export class PostPageComponent implements OnInit {
   }
 
   deleteComment(comment: CommentResponse){
-    this.commentService.DeleteComment(comment.postId, comment.id, this.post.specieId).subscribe(
+    this.commentService.DeleteComment(comment.postId, comment.id).subscribe(
       data => {
         const index = this.comments.indexOf(comment, 0);
         if (index > -1) {
