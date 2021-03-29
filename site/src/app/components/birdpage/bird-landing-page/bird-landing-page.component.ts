@@ -153,7 +153,7 @@ export class BirdLandingPageComponent implements OnInit {
           }
         }
       )     
-    } else if(this.searchType == 2 && this.specieId !== null){
+    } else if(this.searchType == 2){
       this.searchBirdsSerices.GetBirdBySpecie(this.specieId, this.searchOrder).subscribe(
         data =>{ 
           this.birdPosts = data;

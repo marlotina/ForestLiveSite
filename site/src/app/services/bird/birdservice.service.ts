@@ -15,7 +15,7 @@ export class BirdserviceService {
   }
 
   GetBirdBySpecie(specieId : string, orderBy: number){
-    return this.httpClient.get<PostListResponse[]>(`${environment.birdApiUrl}api/v1/SpeciesSearch/GetBirds/?birdSpecieId=${specieId}&orderby=${orderBy}`)
+    return this.httpClient.get<PostListResponse[]>(`${environment.birdApiUrl}api/v1/SpeciesSearch/GetBirds?specieId=${specieId}&orderby=${orderBy}`)
       .pipe(map(data => {
         return data;
       }));
