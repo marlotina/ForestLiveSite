@@ -97,7 +97,26 @@
                     {{label.id}} <span class="badge bg-secondary labelUserPage">{{label.postCount}}</span>
                   </button>
             </div>
+
+            <div class="divAuthor">
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" (change)="toggleEditable($event)" type="checkbox" value="post" id="flexCheckPost" checked>
+                        <label class="form-check-label" for="flexCheckPost">
+                          Post
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" (change)="toggleEditable($event)" type="checkbox" value="bird" id="flexCheckBird" checked>
+                        <label class="form-check-label" for="flexCheckBird">
+                          Birds
+                        </label>
+                      </div>
+                </div>
+            </div>
         </div>
+        
+
     </div>
 </div>
 

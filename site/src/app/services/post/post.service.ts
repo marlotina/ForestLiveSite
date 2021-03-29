@@ -13,7 +13,7 @@ export class PostService {
   }
 
   addPost(request: PostRequest) {
-    return this.httpClient.post<PostResponse>(`${environment.postApiUrl}api/v1/BirdPost/AddPost/`, request)
+    return this.httpClient.post<PostResponse>(`${environment.postApiUrl}api/v1/ManagePost/AddPost/`, request)
       .pipe(map(data => {
         return data;
       }));
@@ -33,14 +33,7 @@ export class PostService {
       }));
   }
 
-  getAllPosts(orderBy: number){
-    return this.httpClient.get<PostListResponse[]>(`${environment.postApiUrl}api/v1/BirdPost/getAllPosts?orderby=${orderBy}`)
-      .pipe(map(data => {
-        return data;
-      }));
-  }
-
   deletePost(postId: string){
-    return this.httpClient.delete(`${environment.postApiUrl}api/v1/BirdPost/DeletePost/?postId=${postId}`);
+    return this.httpClient.delete(`${environment.postApiUrl}api/v1/ManagePost/DeletePost/?postId=${postId}`);
   }
 }

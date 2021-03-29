@@ -16,6 +16,7 @@ import { ModalEditImageComponent } from '../modal-edit-image/modal-edit-image.co
 import { AutocompleteService } from 'src/app/services/autocomplete/autocomplete.service';
 import { AutocompleteResponse } from 'src/app/model/specie';
 import { Router } from '@angular/router';
+import { BirdserviceService } from 'src/app/services/bird/birdservice.service';
 import { UserLabelsService } from 'src/app/services/user/labels/user-labels.service';
 
 class ImageSnippet {
@@ -77,6 +78,7 @@ export class CreatePostComponent implements OnInit {
     private locationService: LocationService,
     private accountService: AccountService,
     private router: Router,
+    private birdserviceService: BirdserviceService,
     private userLabelsService: UserLabelsService,
     private autocompleteService: AutocompleteService) { 
       
@@ -174,20 +176,38 @@ export class CreatePostComponent implements OnInit {
       'isPost': this.isPost
     });
 
-    this.postService.addPost(this.postForm.value)
-        .pipe(first())
-        .subscribe(
-            data => {    
-              this.router.navigate([`${data.userId}/post/${data.postId}`]);
-            },
-            error => {   
-              if(error.status == "409"){
-                this.openCommonModal('account.conflictNameMessage');
-                this.postForm.controls.userName.setErrors({'incorrect': true});
-              } else {
-                this.openCommonModal('user.failUserAction');
-              } 
-            });
+    if(this.isPost) { 
+      this.postService.addPost(this.postForm.value)
+      .pipe(first())
+      .subscribe(
+          data => {    
+            this.router.navigate([`${data.userId}/post/${data.postId}`]);
+          },
+          error => {   
+            if(error.status == "409"){
+              this.openCommonModal('account.conflictNameMessage');
+              this.postForm.controls.userName.setErrors({'incorrect': true});
+            } else {
+              this.openCommonModal('user.failUserAction');
+            } 
+          });
+    }else{
+      this.birdserviceService.addPost(this.postForm.value)
+      .pipe(first())
+      .subscribe(
+          data => {    
+            this.router.navigate([`${data.userId}/post/${data.postId}`]);
+          },
+          error => {   
+            if(error.status == "409"){
+              this.openCommonModal('account.conflictNameMessage');
+              this.postForm.controls.userName.setErrors({'incorrect': true});
+            } else {
+              this.openCommonModal('user.failUserAction');
+            } 
+          });
+    }
+    
   }
 
   get f() { return this.postForm.controls; }

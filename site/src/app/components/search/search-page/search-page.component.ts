@@ -7,8 +7,8 @@ import { MapSpeciePoint } from 'src/app/model/Map';
 import { PostResponse } from 'src/app/model/post';
 import { AutocompleteResponse } from 'src/app/model/specie';
 import { AutocompleteService } from 'src/app/services/autocomplete/autocomplete.service';
+import { BirdserviceService } from 'src/app/services/bird/birdservice.service';
 import { LocationService } from 'src/app/services/location/location.service';
-import { SearchBirdsService } from 'src/app/services/searchs/search-birds.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -34,7 +34,7 @@ export class SearchPageComponent implements OnInit {
 
   constructor(
       private locationService: LocationService,
-      private searchBirdsSerices: SearchBirdsService,
+      private searchBirdsSerices: BirdserviceService,
       private autocompleteService : AutocompleteService) { }
 
   ngOnInit(): void {

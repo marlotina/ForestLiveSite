@@ -10,8 +10,8 @@ import { AutocompleteResponse } from 'src/app/model/specie';
 import { VoteRequest } from 'src/app/model/vote';
 import { AccountService } from 'src/app/services/account/account.service';
 import { AutocompleteService } from 'src/app/services/autocomplete/autocomplete.service';
+import { BirdserviceService } from 'src/app/services/bird/birdservice.service';
 import { PostService } from 'src/app/services/post/post.service';
-import { SearchBirdsService } from 'src/app/services/searchs/search-birds.service';
 import { VoteService } from 'src/app/services/vote/vote.service';
 import { environment } from 'src/environments/environment';
 import { CommonDialogComponent } from '../../shared/common-dialog/common-dialog.component';
@@ -41,7 +41,7 @@ export class BirdLandingPageComponent implements OnInit {
   specieIdPostControl = new FormControl();
   @ViewChild('auto') matAutocomplete: MatAutocomplete;
 
-  constructor(private searchBirdsSerices: SearchBirdsService,
+  constructor(private searchBirdsSerices: BirdserviceService,
     private postService: PostService,
     private voteService: VoteService,
     private accountService: AccountService,
@@ -152,18 +152,7 @@ export class BirdLandingPageComponent implements OnInit {
             this.hasNotPosts = false;
           }
         }
-      );      
-    } else if (this.searchType == 2 && this.specieId == null){
-      this.postService.getAllPosts(this.searchOrder).subscribe(
-        data => {
-          this.birdPosts = data;
-          if(data.length > 0){
-            this.hasNotPosts = true;
-          }else{
-            this.hasNotPosts = false;
-          }
-        }
-      );
+      )     
     } else if(this.searchType == 2 && this.specieId !== null){
       this.searchBirdsSerices.GetBirdBySpecie(this.specieId, this.searchOrder).subscribe(
         data =>{ 

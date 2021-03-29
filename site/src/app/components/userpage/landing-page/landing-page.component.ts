@@ -38,6 +38,9 @@ export class LandingPageComponent implements OnInit {
     postCount: 0 
   };
 
+  searchPost = true;
+  searchBirds = true;
+
   constructor(
     private postService: PostService,
     private activateRoute: ActivatedRoute,
@@ -50,20 +53,27 @@ export class LandingPageComponent implements OnInit {
     this.accountService.isLogged.subscribe(
       x => this.isLogged = x
       );
+  }
+
+  ngOnInit(): void {
 
     this.activateRoute.paramMap.subscribe(params => {
       this.userId = params.get("userId");
       this.searchPosts();   
     });
-  }
 
-  ngOnInit(): void {
     this.userLoggedInfo = this.accountService.userValue;
     this.userLabelsService.GetUserLabels(this.userId).subscribe(
       data => {
         this.userLabels = data;
       }
     );;
+  }
+
+  toggleEditable(event) {
+    if ( event.target.checked ) {
+      console.log(event);
+    }
   }
 
   searchWithLabels(label: UserLabelPageResponse) {
@@ -80,20 +90,31 @@ export class LandingPageComponent implements OnInit {
   }
 
   searchPosts(){
-    if(this.selectedLabel.id != null) {
-      this.userPostService.getPostsByLabel(this.userId, this.selectedLabel.id).subscribe(
-        data => {
-          this.userPosts = data;
-        }
-      )
-    } else {
+
+    if(  this.searchPost &&  this.searchBirds){
       this.userPostService.getPostsByUser(this.userId).subscribe(
         data =>{ 
           this.userPosts = data;
           this.hasNotPosts = this.userPosts.length == 0; 
         } 
       );
+    } else if(this.searchPost && !this.searchBirds){
+      this.userPostService.getPostsByLabel(this.userId, '').subscribe(
+        data =>{ 
+          this.userPosts = data;
+          this.hasNotPosts = this.userPosts.length == 0; 
+        } 
+      );
+    } else if(!this.searchPost && this.searchBirds){
+      this.userPostService.getBirdsByLabel(this.userId, '').subscribe(
+        data =>{ 
+          this.userPosts = data;
+          this.hasNotPosts = this.userPosts.length == 0; 
+        } 
+      );
     }
+
+
   }
 
   showDeleteOption(userId){
