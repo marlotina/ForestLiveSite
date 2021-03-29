@@ -8,6 +8,7 @@ import { CommentResponse } from 'src/app/model/Comment';
 import { PostResponse } from 'src/app/model/post';
 import { VoteRequest } from 'src/app/model/vote';
 import { AccountService } from 'src/app/services/account/account.service';
+import { BirdserviceService } from 'src/app/services/bird/birdservice.service';
 import { CommentService } from 'src/app/services/comment/comment.service';
 import { PostService } from 'src/app/services/post/post.service';
 import { VoteService } from 'src/app/services/vote/vote.service';
@@ -37,6 +38,7 @@ export class PostPageComponent implements OnInit {
 
   constructor(private activateRoute: ActivatedRoute,
     private postService: PostService,
+    private birsService: BirdserviceService,
     private commentService: CommentService,
     private formBuilder: FormBuilder,
     private accountService: AccountService,
@@ -59,29 +61,59 @@ export class PostPageComponent implements OnInit {
     this.isLogged = this.userLoggedInfo != null;
     
     this.activateRoute.paramMap.subscribe(params => {
-      let postId = params.get("id");
-      this.postService.getPost(postId).subscribe(
-        data => { 
-          this.post = data;  
-          this.postLabels = data.labels;
-          this.imagePost = environment.imagesPostUrl + data.imageUrl;
-          this.showOwnerOptions = this.userLoggedInfo != null && this.post.userId == this.userLoggedInfo.userName;
-          this.hasPost = true;
-          this.hasLabels = data.labels.length > 0;
-          this.initMap(this.post.latitude, this.post.longitude);
+      let postId = params.get("postId");
+      let type = params.get("type");
 
-          this.commentForm.patchValue({
-            'userId': this.userLoggedInfo != null ? this.userLoggedInfo.userName : '',
-            'postId': this.post.id,
-            'specieId': this.post.specieId,
-            'authorPostUserId': this.post.userId,
-            'titlePost': this.post.title
-            });
-        },
-        error => {
-          this.hasPost = false;
-        }
-      );
+      if(type == 'post'){
+        this.postService.getPost(postId).subscribe(
+          data => { 
+            this.post = data;  
+            this.postLabels = data.labels;
+            this.imagePost = environment.imagesPostUrl + data.imageUrl;
+            this.showOwnerOptions = this.userLoggedInfo != null && this.post.userId == this.userLoggedInfo.userName;
+            this.hasPost = true;
+            this.hasLabels = data.labels.length > 0;
+            this.initMap(this.post.latitude, this.post.longitude);
+  
+            this.commentForm.patchValue({
+              'userId': this.userLoggedInfo != null ? this.userLoggedInfo.userName : '',
+              'postId': this.post.id,
+              'specieId': this.post.specieId,
+              'authorPostUserId': this.post.userId,
+              'titlePost': this.post.title
+              });
+          },
+          error => {
+            this.hasPost = false;
+          }
+        );
+      }else{
+        let specieId = params.get("specieId");
+        this.birsService.GetPost(postId, specieId).subscribe(
+          data => { 
+            this.post = data;  
+            this.postLabels = data.labels;
+            this.imagePost = environment.imagesPostUrl + data.imageUrl;
+            this.showOwnerOptions = this.userLoggedInfo != null && this.post.userId == this.userLoggedInfo.userName;
+            this.hasPost = true;
+            this.hasLabels = data.labels.length > 0;
+            this.initMap(this.post.latitude, this.post.longitude);
+  
+            this.commentForm.patchValue({
+              'userId': this.userLoggedInfo != null ? this.userLoggedInfo.userName : '',
+              'postId': this.post.id,
+              'specieId': this.post.specieId,
+              'authorPostUserId': this.post.userId,
+              'titlePost': this.post.title
+              });
+          },
+          error => {
+            this.hasPost = false;
+          }
+        );
+      }
+
+      
 
       this.commentService.GetCommentsByPost(postId).subscribe(
         data => { 

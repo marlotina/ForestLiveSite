@@ -72,8 +72,22 @@ export class LandingPageComponent implements OnInit {
 
   toggleEditable(event) {
     if ( event.target.checked ) {
-      console.log(event);
+      if(event.target.value == 'post'){
+        this.searchPost = true;
+      }
+      if(event.target.value == 'bird'){
+        this.searchBirds = true;
+      }
+    }else{
+      if(event.target.value == 'post'){
+        this.searchPost = false;
+      }
+      if(event.target.value == 'bird'){
+        this.searchBirds = false;
+      }
     }
+    
+    this.searchPosts();  
   }
 
   searchWithLabels(label: UserLabelPageResponse) {
@@ -99,14 +113,14 @@ export class LandingPageComponent implements OnInit {
         } 
       );
     } else if(this.searchPost && !this.searchBirds){
-      this.userPostService.getPostsByLabel(this.userId, '').subscribe(
+      this.userPostService.getPostsByLabel(this.userId, this.selectedLabel.id).subscribe(
         data =>{ 
           this.userPosts = data;
           this.hasNotPosts = this.userPosts.length == 0; 
         } 
       );
     } else if(!this.searchPost && this.searchBirds){
-      this.userPostService.getBirdsByLabel(this.userId, '').subscribe(
+      this.userPostService.getBirdsByLabel(this.userId, this.selectedLabel.id).subscribe(
         data =>{ 
           this.userPosts = data;
           this.hasNotPosts = this.userPosts.length == 0; 

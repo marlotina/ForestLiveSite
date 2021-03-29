@@ -65,6 +65,7 @@ export class PostListResponse {
     postId: string;
     title: string;
     text: string;
+    type: string;
     imageUrl: string;
     altImage: string;
     userId: string;

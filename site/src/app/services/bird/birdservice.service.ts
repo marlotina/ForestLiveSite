@@ -42,6 +42,13 @@ export class BirdserviceService {
       }));
   }
   
+  GetPost(postId : string, specieId: string){
+    return this.httpClient.get<PostResponse>(`${environment.birdApiUrl}api/v1/SpeciesSearch/GetPost?postId=${postId}&specieId=${specieId}`)
+      .pipe(map(data => {
+        return data;
+      }));
+  }
+  
   GetWithoutSpecie(orderBy: number){
     return this.httpClient.get<PostListResponse[]>(`${environment.birdApiUrl}api/v1/SpeciesSearch/GetPendingBirds?orderby=${orderBy}`)
       .pipe(map(data => {

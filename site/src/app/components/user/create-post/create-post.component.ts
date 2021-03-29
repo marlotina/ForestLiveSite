@@ -196,7 +196,7 @@ export class CreatePostComponent implements OnInit {
       .pipe(first())
       .subscribe(
           data => {    
-            this.router.navigate([`${data.userId}/post/${data.postId}`]);
+            this.router.navigate([`${data.userId}/bird/${data.postId}/${data.specieId}`]);
           },
           error => {   
             if(error.status == "409"){
