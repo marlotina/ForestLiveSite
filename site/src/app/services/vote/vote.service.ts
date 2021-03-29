@@ -12,21 +12,21 @@ export class VoteService {
   constructor(private httpClient: HttpClient) { }
 
   AddVote(request: VoteRequest) {
-    return this.httpClient.post<VoteResponse>(`${environment.voteApiUrl}api/v1/VotePost/AddVote/`, request)
+    return this.httpClient.post<VoteResponse>(`${environment.commentApiUrl}api/v1/VotePost/AddVote/`, request)
       .pipe(map(data => {
         return data;
       }));
   }
 
   DeleteVote(voteId: string, postId: string){
-    return this.httpClient.delete(`${environment.voteApiUrl}api/v1/VotePost/DeleteVote?voteId=${voteId}&postId=${postId}`)
+    return this.httpClient.delete(`${environment.commentApiUrl}api/v1/VotePost/DeleteVote?voteId=${voteId}&postId=${postId}`)
       .pipe(map(data => {
         return data;
       }));
   }
 
   GetVotesByUser(userId: string){
-    return this.httpClient.get<VoteResponse[]>(`${environment.voteApiUrl}api/v1/VoteUser/GetVoteByUser/?userId=${userId}`)
+    return this.httpClient.get<VoteResponse[]>(`${environment.commentApiUrl}api/v1/VoteUser/GetVoteByUser/?userId=${userId}`)
       .pipe(map(data => {
         return data;
       }));

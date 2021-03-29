@@ -19,7 +19,7 @@ export class CommentService {
   }
 
   GetCommentsByPost(postId: string){
-    return this.httpClient.get<CommentResponse[]>(`${environment.postApiUrl}api/v1/BirdPost/GetComments/?postId=${postId}`)
+    return this.httpClient.get<CommentResponse[]>(`${environment.commentApiUrl}api/v1/Comment/GetCommentsByPost?postId=${postId}`)
       .pipe(map(data => {
         return data;
       }));
@@ -33,7 +33,7 @@ export class CommentService {
   }
 
   DeleteComment(postId: string, userId: string){
-    return this.httpClient.delete(`${environment.commentApiUrl}api/v1/Comment/DeleteComment/?postId=${postId}&commentId=${userId}`);
+    return this.httpClient.delete(`${environment.commentApiUrl}api/v1/Comment/DeleteComment?postId=${postId}&commentId=${userId}`);
   }
 
 }

@@ -25,7 +25,7 @@ export class PostPageComponent implements OnInit {
   @ViewChild('mapWrapper') mapElement: ElementRef;
   commentForm: FormGroup;
   post = new PostResponse();
-  comments: CommentResponse[];
+  comments: CommentResponse[] = [];
   imagesProfileUrl = environment.imagesProfileUrl;
   showOwnerOptions = false;
   postLabels: string[];
