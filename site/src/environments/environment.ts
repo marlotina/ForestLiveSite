@@ -7,21 +7,21 @@ export const environment = {
   imagesProfileUrl: 'https://birdpostsqa.blob.core.windows.net/profiles/',
   imagesPostUrl: 'https://birdpostsqa.blob.core.windows.net/posts/',
   userApiUrl: 'https://userapiqa.azurewebsites.net/',
-  postApiUrl: 'https://localhost:44304/',
-  userPostApiUrl: 'https://localhost:44352/',
-  userLabelApiUrl: 'https://localhost:44367/',
-  birdApiUrl: 'https://localhost:44383/',
-  voteApiUrl: 'https://votesapi.azurewebsites.net/',
-  commentApiUrl: 'https://commentsapi.azurewebsites.net/',
+  postApiUrl: 'https://postapiqa.azurewebsites.net/',
+  userPostApiUrl: 'https://userpostapiqa.azurewebsites.net/',
+  userLabelApiUrl: 'https://userlabelapiqa.azurewebsites.net/',
+  birdApiUrl: 'https://birdsapiqa.azurewebsites.net/',
+  userInteractionsApi: 'https://userinteractionsapiqa.azurewebsites.net/',
+  postInteractionsApi: 'https://postinteractionsapiqa.azurewebsites.net/',
   specieApiUrl: 'https://specieapiqa.azurewebsites.net/',
   googleApiKey: 'AIzaSyAjqE9XcDEwD2SmV9mmf757kYOdwTbJvwQ',
-  whiteListDomains:  ['localhost:44304', 
+  whiteListDomains:  ['postapiqa.azurewebsites.net', 
                       'userapiqa.azurewebsites.net',
-                      'localhost:44383',
-                      'commentsapi.azurewebsites.net',
-                      'localhost:44352',
-                      'localhost:44367',
-                      'votesapi.azurewebsites.net',
+                      'birdsapiqa.azurewebsites.net',
+                      'postinteractionsapiqa.azurewebsites.net',
+                      'userpostapiqa.azurewebsites.net',
+                      'userlabelapiqa.azurewebsites.net',
+                      'userinteractionsapiqa.azurewebsites.net',
                       'specieapiqa.azurewebsites.net'],
   blacklistedRoutes: []
 }
@@ -32,18 +32,6 @@ export const environment = {
  * This import should be commented out in production mode because it will have a negative impact
  * on performance if an error is thrown.
  * 
-  
-  production: true,
-  userApiUrl: 'https://localhost:44374/',
-  imagesProfileUrl: 'https://birdpostsqa.blob.core.windows.net/profiles/',
-  imagesPostUrl: 'https://birdpostsqa.blob.core.windows.net/posts/',
-  postApiUrl: 'https://localhost:44304/',
-  birdApiUrl: 'https://localhost:44383/',
-  //birdApiUrl: 'https://birdsapiqa.azurewebsites.net/',
-  userPostApiUrl: 'https://localhost:44352/',
-  googleApiKey: 'AIzaSyAjqE9XcDEwD2SmV9mmf757kYOdwTbJvwQ',
-  whiteListDomains:  ["localhost:44374", "localhost:44304"],
-  blacklistedRoutes: []
 
 
   production: true,

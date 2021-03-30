@@ -10,17 +10,20 @@
               <div class="d-flex justify-content-between">
 
                 <div class="col-12 col-md-1 pad-3">
-                  <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#007bff"></rect><text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text></svg>
+                  <mat-icon style="color:green;"> comment</mat-icon>
                 </div>
+
                 <div class="col-12 col-md-10">
-                  <a class="removeLinkLine" href="{{comment.userId}}/post/{{comment.postId}}"><strong class="text-gray-dark">{{comment.titlePost}}</strong>&nbsp;<small>{{comment.authorPostUserId}}</small></a>
-                <a href="{{comment.userId}}/post/{{comment.postId}}">Read</a>
+                  <a class="removeLinkLine" [href]="getUrl(comment)"><strong class="text-gray-dark">{{comment.titlePost}}</strong></a>&nbsp;-&nbsp;<a class="removeLinkLine" href="userpage/{{comment.authorPostUserId}}"><small>{{comment.authorPostUserId}}</small></a>
+                  <span class="d-block"><em>{{comment.text}}</em></span>
+                  <span class="d-block">Creation date:&nbsp;{{comment.creationDate}}</span>
                 </div>
+
                 <div class="col-12 col-md-1">
                   <button type="button" class="btn btn-outline-danger addLabelBtn" (click)="deleteComment(comment)"><mat-icon>delete_outline</mat-icon></button>
                 </div>
               </div>
-              <span class="d-block">{{comment.text}}</span>
+              
             </div>
           </div>
           <small class="d-block text-end mt-3">

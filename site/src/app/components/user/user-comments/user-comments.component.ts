@@ -37,4 +37,12 @@ export class UserCommentsComponent implements OnInit {
       });
   }
 
+  getUrl(comment: CommentResponse) {
+    if(comment.specieId != null){
+        return `${comment.userId}/bird/${comment.postId}/${comment.specieId}`;
+    }else{
+      return `${comment.userId}/post/${comment.postId}`;
+    }
+  }
+
 }
