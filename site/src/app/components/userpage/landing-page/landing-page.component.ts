@@ -8,6 +8,7 @@ import { PostListResponse } from 'src/app/model/post';
 import { UserLabelPageResponse } from 'src/app/model/user';
 import { VoteRequest } from 'src/app/model/vote';
 import { AccountService } from 'src/app/services/account/account.service';
+import { LoaderService } from 'src/app/services/loader/loader.service';
 import { PostService } from 'src/app/services/post/post.service';
 import { UserPostService } from 'src/app/services/user-post/user-post.service';
 import { UserLabelsService } from 'src/app/services/user/labels/user-labels.service';
@@ -43,6 +44,7 @@ export class LandingPageComponent implements OnInit {
 
   constructor(
     private postService: PostService,
+    private loaderService: LoaderService,
     private activateRoute: ActivatedRoute,
     private accountService: AccountService,
     private voteService: VoteService,
@@ -50,6 +52,7 @@ export class LandingPageComponent implements OnInit {
     private userLabelsService: UserLabelsService,
     private matDialog: MatDialog) { 
 
+    this.loaderService.show();
     this.accountService.isLogged.subscribe(
       x => this.isLogged = x
       );
@@ -110,6 +113,7 @@ export class LandingPageComponent implements OnInit {
         data =>{ 
           this.userPosts = data;
           this.hasNotPosts = this.userPosts.length == 0; 
+          this.loaderService.hide();
         } 
       );
     } else if(this.searchPost && !this.searchBirds){
@@ -117,6 +121,7 @@ export class LandingPageComponent implements OnInit {
         data =>{ 
           this.userPosts = data;
           this.hasNotPosts = this.userPosts.length == 0; 
+          this.loaderService.hide();
         } 
       );
     } else if(!this.searchPost && this.searchBirds){
@@ -124,11 +129,10 @@ export class LandingPageComponent implements OnInit {
         data =>{ 
           this.userPosts = data;
           this.hasNotPosts = this.userPosts.length == 0; 
+          this.loaderService.hide();
         } 
       );
     }
-
-
   }
 
   showDeleteOption(userId){
