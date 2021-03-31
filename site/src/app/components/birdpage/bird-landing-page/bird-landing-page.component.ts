@@ -12,6 +12,7 @@ import { AccountService } from 'src/app/services/account/account.service';
 import { AutocompleteService } from 'src/app/services/autocomplete/autocomplete.service';
 import { BirdserviceService } from 'src/app/services/bird/birdservice.service';
 import { LoaderService } from 'src/app/services/loader/loader.service';
+import { PendingBirdService } from 'src/app/services/pendingBird/pending-bird.service';
 import { PostService } from 'src/app/services/post/post.service';
 import { VoteService } from 'src/app/services/vote/vote.service';
 import { environment } from 'src/environments/environment';
@@ -45,6 +46,7 @@ export class BirdLandingPageComponent implements OnInit {
   constructor(private searchBirdsSerices: BirdserviceService,
     private postService: PostService,
     private voteService: VoteService,
+    private pendingBirdService: PendingBirdService,
     private accountService: AccountService,
     private autocompleteService : AutocompleteService,
     private matDialog: MatDialog,
@@ -169,7 +171,7 @@ export class BirdLandingPageComponent implements OnInit {
         } 
       );
     } else if (this.searchType == 3){
-      this.searchBirdsSerices.GetWithoutSpecie(this.searchOrder).subscribe(
+      this.pendingBirdService.GetWithoutSpecie(this.searchOrder).subscribe(
         data => {
           this.birdPosts = data;
           if(data.length > 0){

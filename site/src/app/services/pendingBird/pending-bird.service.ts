@@ -12,13 +12,6 @@ export class PendingBirdService {
   constructor(private httpClient: HttpClient) { 
   }
 
-  GetBirdBySpecie(specieId : string, orderBy: number){
-    return this.httpClient.get<PostListResponse[]>(`${environment.birdPendingApiUrl}api/v1/SpeciesSearch/GetBirds?specieId=${specieId}&orderby=${orderBy}`)
-      .pipe(map(data => {
-        return data;
-      }));
-  }
-
   addPost(request: PostRequest) {
     return this.httpClient.post<PostResponse>(`${environment.birdPendingApiUrl}api/v1/ManagePostPending/AddPost/`, request)
       .pipe(map(data => {
@@ -42,7 +35,7 @@ export class PendingBirdService {
   }
   
   GetWithoutSpecie(orderBy: number){
-    return this.httpClient.get<PostListResponse[]>(`${environment.birdPendingApiUrl}api/v1/PendingSearch/GetPendingBirds?orderby=${orderBy}`)
+    return this.httpClient.get<PostListResponse[]>(`${environment.birdPendingApiUrl}api/v1/PendingSearch/GetPendings?orderby=${orderBy}`)
       .pipe(map(data => {
         return data;
       }));
