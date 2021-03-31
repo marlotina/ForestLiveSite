@@ -11,6 +11,7 @@ import { VoteRequest } from 'src/app/model/vote';
 import { AccountService } from 'src/app/services/account/account.service';
 import { AutocompleteService } from 'src/app/services/autocomplete/autocomplete.service';
 import { BirdserviceService } from 'src/app/services/bird/birdservice.service';
+import { LoaderService } from 'src/app/services/loader/loader.service';
 import { PostService } from 'src/app/services/post/post.service';
 import { VoteService } from 'src/app/services/vote/vote.service';
 import { environment } from 'src/environments/environment';
@@ -46,7 +47,8 @@ export class BirdLandingPageComponent implements OnInit {
     private voteService: VoteService,
     private accountService: AccountService,
     private autocompleteService : AutocompleteService,
-    private matDialog: MatDialog) { }
+    private matDialog: MatDialog,
+    private loaderService: LoaderService) { }
 
   ngOnInit(): void {
     this.userLoggedInfo = this.accountService.userValue;
@@ -62,7 +64,6 @@ export class BirdLandingPageComponent implements OnInit {
         }
       })
     );
-
     this.getBirdPosts();
   }
 
@@ -142,6 +143,7 @@ export class BirdLandingPageComponent implements OnInit {
   }
 
   getBirdPosts() {
+    this.loaderService.show();
     if (this.searchType == 1){
       this.postService.getPosts(this.searchOrder).subscribe(
         data => {
@@ -151,6 +153,7 @@ export class BirdLandingPageComponent implements OnInit {
           }else{
             this.hasNotPosts = false;
           }
+          this.loaderService.hide();
         }
       )     
     } else if(this.searchType == 2){
@@ -162,6 +165,7 @@ export class BirdLandingPageComponent implements OnInit {
           }else{
             this.hasNotPosts = false;
           }
+          this.loaderService.hide();
         } 
       );
     } else if (this.searchType == 3){
@@ -173,6 +177,7 @@ export class BirdLandingPageComponent implements OnInit {
           }else{
             this.hasNotPosts = false;
           }
+          this.loaderService.hide();
         }
       );
     }

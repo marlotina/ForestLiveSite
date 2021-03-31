@@ -8,6 +8,7 @@ import { PostResponse } from 'src/app/model/post';
 import { AutocompleteResponse } from 'src/app/model/specie';
 import { AutocompleteService } from 'src/app/services/autocomplete/autocomplete.service';
 import { BirdserviceService } from 'src/app/services/bird/birdservice.service';
+import { LoaderService } from 'src/app/services/loader/loader.service';
 import { LocationService } from 'src/app/services/location/location.service';
 import { environment } from 'src/environments/environment';
 
@@ -35,7 +36,10 @@ export class SearchPageComponent implements OnInit {
   constructor(
       private locationService: LocationService,
       private searchBirdsSerices: BirdserviceService,
-      private autocompleteService : AutocompleteService) { }
+      private autocompleteService : AutocompleteService,
+      private loaderService: LoaderService) {
+        this.loaderService.show();
+       }
 
   ngOnInit(): void {
     this.filteredSpecies = this.autocompleteControl.valueChanges.pipe(
@@ -116,6 +120,10 @@ export class SearchPageComponent implements OnInit {
       google.maps.event.addListener(this.map, 'idle', () => { 
         this.zoom = this.map.getZoom();
         this.getBirds(this.map.getCenter());
+      });
+
+      google.maps.event.addListenerOnce(map, 'tilesloaded', () => {
+        this.loaderService.hide();
       });
     });
   }

@@ -1,9 +1,7 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { MapPoint } from 'src/app/model/Map';
+import { LoaderService } from 'src/app/services/loader/loader.service';
 import { LocationService } from 'src/app/services/location/location.service';
-import { PostService } from 'src/app/services/post/post.service';
 import { UserPostService } from 'src/app/services/user-post/user-post.service';
 import { environment } from 'src/environments/environment';
 
@@ -21,12 +19,14 @@ export class UserMapPageComponent implements OnInit {
 
   userId: string;
 
-  constructor(private httpClient: HttpClient,
+  constructor(
+      private loaderService: LoaderService,
       private locationService: LocationService,
       private route: ActivatedRoute,
       private userPostService: UserPostService) { }
 
   ngOnInit(): void {
+    this.loaderService.show();
     this.route.paramMap.subscribe(params => {
       this.userId = params.get("userId");
     });
@@ -69,6 +69,10 @@ export class UserMapPageComponent implements OnInit {
           }
         } 
       );
+
+      google.maps.event.addListenerOnce(map, 'tilesloaded', () => {
+        this.loaderService.hide();
+      });
     });
   }
 

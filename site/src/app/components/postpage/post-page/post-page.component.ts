@@ -10,6 +10,7 @@ import { VoteRequest } from 'src/app/model/vote';
 import { AccountService } from 'src/app/services/account/account.service';
 import { BirdserviceService } from 'src/app/services/bird/birdservice.service';
 import { CommentService } from 'src/app/services/comment/comment.service';
+import { LoaderService } from 'src/app/services/loader/loader.service';
 import { PostService } from 'src/app/services/post/post.service';
 import { VoteService } from 'src/app/services/vote/vote.service';
 import { environment } from 'src/environments/environment';
@@ -37,6 +38,7 @@ export class PostPageComponent implements OnInit {
   hasLabels = false;
 
   constructor(private activateRoute: ActivatedRoute,
+    private loaderService: LoaderService,
     private postService: PostService,
     private birsService: BirdserviceService,
     private commentService: CommentService,
@@ -44,10 +46,12 @@ export class PostPageComponent implements OnInit {
     private accountService: AccountService,
     private matDialog: MatDialog,
     private voteService: VoteService,
-    private route: Router) { }
+    private route: Router) { 
+      this.loaderService.show();
+    }
 
   ngOnInit(): void {
-
+    
     this.commentForm = this.formBuilder.group({
       text: ['', [Validators.required]],
       userId: [{ disabled: true}, Validators.required],
@@ -82,6 +86,7 @@ export class PostPageComponent implements OnInit {
               'authorPostUserId': this.post.userId,
               'titlePost': this.post.title
               });
+            this.loaderService.hide();
           },
           error => {
             this.hasPost = false;
@@ -111,9 +116,8 @@ export class PostPageComponent implements OnInit {
             this.hasPost = false;
           }
         );
+        this.loaderService.hide();
       }
-
-      
 
       this.commentService.GetCommentsByPost(postId).subscribe(
         data => { 
