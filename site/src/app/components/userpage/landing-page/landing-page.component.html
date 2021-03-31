@@ -21,8 +21,7 @@
                             <div class="col-12 col-md-11">
                                 <div>
                                     <a [hidden]="post.type != 'post'" class="text-dark titlePost fs-4 removeLinkLine" href="/{{post.userId}}/post/{{post.postId}}">{{post.title}}</a>
-
-                                    
+                                    <a [hidden]="post.type != 'pending'" class="text-dark titlePost fs-4 removeLinkLine" href="/{{post.userId}}/pending/{{post.postId}}">{{post.title}}</a>
                                     <a [hidden]="post.type != 'bird'" class="text-dark titlePost fs-4 removeLinkLine" href="/{{post.userId}}/bird/{{post.postId}}/{{post.specieId}}">{{post.title}}</a>
                                     <div>
                                         <img src="https://birdpostsqa.blob.core.windows.net/profiles/{{post.userPhoto}}" alt="image of {{post.userId}}" class="imgAuthorPost">

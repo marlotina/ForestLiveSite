@@ -28,6 +28,13 @@ export class BirdserviceService {
       }));
   }
 
+  deletePost(postId: string, specieId: string) {
+    return this.httpClient.delete<boolean>(`${environment.birdApiUrl}api/v1/ManagePostSpecie/DeletePost?postId=${postId}&specieId=${specieId}`)
+      .pipe(map(data => {
+        return data;
+      }));
+  }
+
   GetSearchPoints(latiude : number, longitude: number, zoom: number, specieId: string){
     return this.httpClient.get<MapSpeciePoint[]>(`${environment.birdApiUrl}api/v1/SearchMap/GetPoints/?latitude=${latiude}&longitude=${longitude}&zoom=${zoom}&specieId=${specieId}`)
       .pipe(map(data => {

@@ -11,6 +11,7 @@ import { AccountService } from 'src/app/services/account/account.service';
 import { BirdserviceService } from 'src/app/services/bird/birdservice.service';
 import { CommentService } from 'src/app/services/comment/comment.service';
 import { LoaderService } from 'src/app/services/loader/loader.service';
+import { PendingBirdService } from 'src/app/services/pendingBird/pending-bird.service';
 import { PostService } from 'src/app/services/post/post.service';
 import { VoteService } from 'src/app/services/vote/vote.service';
 import { environment } from 'src/environments/environment';
@@ -46,6 +47,7 @@ export class PostPageComponent implements OnInit {
     private accountService: AccountService,
     private matDialog: MatDialog,
     private voteService: VoteService,
+    private pendingBirdService: PendingBirdService,
     private route: Router) { 
       this.loaderService.show();
     }
@@ -92,9 +94,33 @@ export class PostPageComponent implements OnInit {
             this.hasPost = false;
           }
         );
-      }else{
+      } else if (type == 'bird'){
         let specieId = params.get("specieId");
         this.birsService.GetPost(postId, specieId).subscribe(
+          data => { 
+            this.post = data;  
+            this.postLabels = data.labels;
+            this.imagePost = environment.imagesPostUrl + data.imageUrl;
+            this.showOwnerOptions = this.userLoggedInfo != null && this.post.userId == this.userLoggedInfo.userName;
+            this.hasPost = true;
+            this.hasLabels = data.labels.length > 0;
+            this.initMap(this.post.latitude, this.post.longitude);
+  
+            this.commentForm.patchValue({
+              'userId': this.userLoggedInfo != null ? this.userLoggedInfo.userName : '',
+              'postId': this.post.id,
+              'specieId': this.post.specieId,
+              'authorPostUserId': this.post.userId,
+              'titlePost': this.post.title
+              });
+          },
+          error => {
+            this.hasPost = false;
+          }
+        );
+        this.loaderService.hide();
+      } else if (type == 'pending'){
+        this.pendingBirdService.GetPost(postId).subscribe(
           data => { 
             this.post = data;  
             this.postLabels = data.labels;

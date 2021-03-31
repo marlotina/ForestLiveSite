@@ -7,6 +7,7 @@ export const environment = {
   userPostApiUrl: 'https://userpostapiqa.azurewebsites.net/',
   userLabelApiUrl: 'https://userlabelapiqa.azurewebsites.net/',
   birdApiUrl: 'https://birdsapiqa.azurewebsites.net/',
+  birdPendingApiUrl: 'https://birdpendingapiqa.azurewebsites.net/',
   userInteractionsApi: 'https://userinteractionsapiqa.azurewebsites.net/',
   postInteractionsApi: 'https://postinteractionsapiqa.azurewebsites.net/',
   specieApiUrl: 'https://specieapiqa.azurewebsites.net/',
@@ -18,6 +19,7 @@ export const environment = {
                       'userpostapiqa.azurewebsites.net',
                       'userlabelapiqa.azurewebsites.net',
                       'userinteractionsapiqa.azurewebsites.net',
-                      'specieapiqa.azurewebsites.net'],
+                      'specieapiqa.azurewebsites.net',
+                      'birdpendingapiqa.azurewebsites.net'],
   blacklistedRoutes: []
 }

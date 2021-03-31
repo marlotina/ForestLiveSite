@@ -18,6 +18,7 @@ import { AutocompleteResponse } from 'src/app/model/specie';
 import { Router } from '@angular/router';
 import { BirdserviceService } from 'src/app/services/bird/birdservice.service';
 import { UserLabelsService } from 'src/app/services/user/labels/user-labels.service';
+import { PendingBirdService } from 'src/app/services/pendingBird/pending-bird.service';
 
 class ImageSnippet {
   constructor(public src: string, public file: File) {}
@@ -49,6 +50,8 @@ export class CreatePostComponent implements OnInit {
   allLabels: string[] = [];
   visible = true;
 
+
+
   selectedFile: ImageSnippet;
 
   url: any;
@@ -63,6 +66,7 @@ export class CreatePostComponent implements OnInit {
 
   showMap = false;
   isPost = true;
+  type: number = 1;
   filteredSpecies: Observable<AutocompleteResponse[]>;
   autocompleteControl = new FormControl();
   toolPos = 'after';
@@ -78,6 +82,7 @@ export class CreatePostComponent implements OnInit {
     private locationService: LocationService,
     private accountService: AccountService,
     private router: Router,
+    private pendingBirdService: PendingBirdService,
     private birdserviceService: BirdserviceService,
     private userLabelsService: UserLabelsService,
     private autocompleteService: AutocompleteService) { 
@@ -176,7 +181,7 @@ export class CreatePostComponent implements OnInit {
       'isPost': this.isPost
     });
 
-    if(this.isPost) { 
+    if(this.type == 1) { 
       this.postService.addPost(this.postForm.value)
       .pipe(first())
       .subscribe(
@@ -191,12 +196,27 @@ export class CreatePostComponent implements OnInit {
               this.openCommonModal('user.failUserAction');
             } 
           });
-    }else{
+    } else if (this.type == 2) {
       this.birdserviceService.addPost(this.postForm.value)
       .pipe(first())
       .subscribe(
           data => {    
             this.router.navigate([`${data.userId}/bird/${data.postId}/${data.specieId}`]);
+          },
+          error => {   
+            if(error.status == "409"){
+              this.openCommonModal('account.conflictNameMessage');
+              this.postForm.controls.userName.setErrors({'incorrect': true});
+            } else {
+              this.openCommonModal('user.failUserAction');
+            } 
+          });
+    } else if (this.type == 3) {
+      this.pendingBirdService.addPost(this.postForm.value)
+      .pipe(first())
+      .subscribe(
+          data => {    
+            this.router.navigate([`${data.userId}/pending/${data.postId}`]);
           },
           error => {   
             if(error.status == "409"){
@@ -359,8 +379,9 @@ export class CreatePostComponent implements OnInit {
     this.labelCtrl.setValue(null);
   }
 
-  changeTypePost(e) {
-      this.isPost = e.target.value =="post";
+  changeTypePost(type: number) {
+      this.type = type;
+      this.isPost = type == 1;
   }
 
   private _filter(value: string): string[] {

@@ -10,17 +10,23 @@
                         <div class="col-11 mb-5 centerText">
                             <div class="form-group">
                                 <div class="form-check form-check-inline">
-                                  <input class="form-check-input" type="radio" checked
-                                      name="inlineRadioOptions" id="inlineRadio2" 
-                                      (change)="changeTypePost($event)" value="post">
-                                  <label class="form-check-label" for="inlineRadio2">Post</label>
+                                    <input class="form-check-input" type="radio" checked
+                                        name="postTypeRadio" id="postType1" 
+                                        (change)="changeTypePost(1)" value="post">
+                                    <label class="form-check-label" for="postType1">Post</label>
                                 </div>
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input" type="radio" 
-                                        name="inlineRadioOptions" id="inlineRadio1"
-                                        (change)="changeTypePost($event)"value="observation">
-                                    <label class="form-check-label" for="inlineRadio1">Bird observation</label>
-                                  </div>
+                                        name="postTypeRadio" id="postType2"
+                                        (change)="changeTypePost(2)"value="observation">
+                                    <label class="form-check-label" for="postType2">Bird observation</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" 
+                                        name="postTypeRadio" id="postType3"
+                                        (change)="changeTypePost(3)"value="pending">
+                                    <label class="form-check-label" for="postType3">I dont know the specie</label>
+                                </div>
                             </div>
                         </div>
                         <div class="col-1 mb-5">
@@ -55,7 +61,7 @@
                             </div>
                         </div>                    
                         <div class="row">
-                        <div class="col-12 col-md-8 mt-15" [hidden]="isPost">
+                        <div class="col-12 col-md-8 mt-15" [hidden]="isPost || type == 3">
                             <div class="form-group d-flex">
                                 <div class="autocomplete-form">
                                     <mat-form-field class="autocomplete-full-width">
@@ -70,16 +76,13 @@
                                         </mat-autocomplete>
                                     </mat-form-field>
                                 </div>
-    
-                                <span matTooltip="Si no sabe o no está seguro del nombre de la especie, déjelo en blanco
-                                    y el resto de usuario te ayudaran a través de sus comentarios"
-                                        class="gray"
-                                        [matTooltipPosition]= "toolPos"
-                                        aria-label="Button that displays a tooltip when focused or hovered over">
-                                        <mat-icon>info</mat-icon>
-                                </span>
                                 <input type="hidden" id="specieIdPost" formControlName="specieId" >
                                 
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-8 mt-15" [hidden]="type != 3">
+                            <div class="form-group d-flex">
+                                Tu post aparecerá en la sección y el resto te ayudaran y podrás añadir el post.
                             </div>
                         </div>
                         <div class="col-12 col-md-4" [hidden]="isPost">
