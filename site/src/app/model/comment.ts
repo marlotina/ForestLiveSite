@@ -17,4 +17,5 @@ export class CommentResponse {
     titlePost: string;
     userImage: string;
     specieId: string;
+    reply: CommentResponse[]
 }

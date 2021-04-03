@@ -84,68 +84,23 @@
                     </div>
                     
                     <div class="col-12 col-md-12">
-                            <div class="row mb-5 div-bottom-line">
-                                <div class="col-9">
-                                    <img class="social-image" src="../../../../assets/img/core-img/icons8-topic-48.png" /><span class="aligned-with-icon">&nbsp;{{post.commentCount}}&nbsp;comments</span>
-                                </div>
-                                <div  class="col-3 d-flex mb-15 text-right">
-                                    <a href="#" target="_blank"><img class="social-image" src="../../../../assets/img/core-img/iconsGreen-facebook.svg" /></a>
-                                    <a href="#" target="_blank"><img class="social-image" src="../../../../assets/img/core-img/iconsGreen-twitter.svg" /></a>
-                                    <a href="#" target="_blank"><img class="social-image" src="../../../../assets/img/core-img/iconsGreen-instagram.svg" /></a>
-                                    <a href="#" target="_blank"><img class="social-image" src="../../../../assets/img/core-img/iconsGreen-linkedin.svg" /></a>
-                                </div>
+                        <div class="row mb-5 div-bottom-line">
+                            <div class="col-9">
+                                <img class="social-image" src="../../../../assets/img/core-img/icons8-topic-48.png" /><span class="aligned-with-icon">&nbsp;{{post.commentCount}}&nbsp;comments</span>
                             </div>
-                            <div *ngFor="let comment of comments">
-                                
-                                <div class="row">
-                                    <div class="col-12 col-md-1">
-                                        <a href="{{comment.userId}}"><img src="{{imagesProfileUrl}}{{comment.userImage}}" alt="{{ 'postPage.userImage' | translate }}" class="imgAuthorPost"></a>
-                                    </div> 
-                                    <div class="col-12 col-md-7">
-                                        <h5>{{comment.userId}}</h5>
-                                    </div>   
-                                    <div class="col-12 col-md-3 commetDate">
-                                        <small>{{comment.creationDate}}</small>
-                                    </div>  
-                                    
-                                    <div class="col-12 col-md-1 commetDate">
-                                        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="user options" *ngIf="showOwnerCommentOptions(comment.userId)">
-                                            <mat-icon>more_vert</mat-icon>
-                                        </button>
-                                        <mat-menu #menu="matMenu" >
-                                            <button mat-menu-item type="button" (click)="deleteComment(comment)">
-                                                <mat-icon>delete</mat-icon>
-                                                <span>{{ 'postPage.delete' | translate }}</span>
-                                            </button>
-                                        </mat-menu>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <p>{{comment.text}}</p>
-                                </div>
+                            <div  class="col-3 d-flex mb-15 text-right">
+                                <a href="#" target="_blank"><img class="social-image" src="../../../../assets/img/core-img/iconsGreen-facebook.svg" /></a>
+                                <a href="#" target="_blank"><img class="social-image" src="../../../../assets/img/core-img/iconsGreen-twitter.svg" /></a>
+                                <a href="#" target="_blank"><img class="social-image" src="../../../../assets/img/core-img/iconsGreen-instagram.svg" /></a>
+                                <a href="#" target="_blank"><img class="social-image" src="../../../../assets/img/core-img/iconsGreen-linkedin.svg" /></a>
                             </div>
-    
-                        <div *ngIf="isLogged && hasPost">
-                            <h4 class="headline">{{ 'postPage.leaveComment' | translate }}</h4>
-                            
-                            <form [formGroup]="commentForm" (ngSubmit)="onSubmit()">
-                                <div class="row">
-                                    <div class="col-12 col-md-6 mb-15">
-                                        <div class="form-group">
-                                            <input type="text" formControlName="userId" class="form-control" id="contact-name" placeholder="{{ 'postPage.name' | translate }}" disabled>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 mb-15">
-                                        <div class="form-group">
-                                            <textarea class="form-control" formControlName="text" name="text" id="text" cols="30" rows="10" placeholder="{{ 'postPage.comment' | translate }}"></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 mb-15">
-                                        <button type="submit" class="btn btn-primary">{{ 'postPage.postComment' | translate }}</button>
-                                    </div>
-                                </div>
-                            </form>
                         </div>
+
+                        <app-post-comment  
+                            [postId]="post.postId"
+                            [postTitle]="post.title"
+                            [specieId]="post.specieId"
+                            [userId]="post.userId"></app-post-comment>
                     </div>
                 </div>  
             </div>

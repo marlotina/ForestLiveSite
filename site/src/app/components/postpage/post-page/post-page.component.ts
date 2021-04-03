@@ -25,9 +25,7 @@ import { ImageDialogComponent } from '../../shared/image-dialog/image-dialog.com
 export class PostPageComponent implements OnInit {
  
   @ViewChild('mapWrapper') mapElement: ElementRef;
-  commentForm: FormGroup;
   post = new PostResponse();
-  comments: CommentResponse[] = [];
   imagesProfileUrl = environment.imagesProfileUrl;
   showOwnerOptions = false;
   postLabels: string[];
@@ -54,14 +52,6 @@ export class PostPageComponent implements OnInit {
 
   ngOnInit(): void {
     
-    this.commentForm = this.formBuilder.group({
-      text: ['', [Validators.required]],
-      userId: [{ disabled: true}, Validators.required],
-      postId: ['', [Validators.required]],
-      specieId: [null],
-      authorPostUserId: ['', [Validators.required]],
-      titlePost: ['', [Validators.required]]
-    });
 
     this.userLoggedInfo = this.accountService.userValue;
     this.isLogged = this.userLoggedInfo != null;
@@ -81,13 +71,7 @@ export class PostPageComponent implements OnInit {
             this.hasLabels = data.labels.length > 0;
             this.initMap(this.post.latitude, this.post.longitude);
   
-            this.commentForm.patchValue({
-              'userId': this.userLoggedInfo != null ? this.userLoggedInfo.userName : '',
-              'postId': this.post.id,
-              'specieId': this.post.specieId,
-              'authorPostUserId': this.post.userId,
-              'titlePost': this.post.title
-              });
+   
             this.loaderService.hide();
           },
           error => {
@@ -106,13 +90,6 @@ export class PostPageComponent implements OnInit {
             this.hasLabels = data.labels.length > 0;
             this.initMap(this.post.latitude, this.post.longitude);
   
-            this.commentForm.patchValue({
-              'userId': this.userLoggedInfo != null ? this.userLoggedInfo.userName : '',
-              'postId': this.post.id,
-              'specieId': this.post.specieId,
-              'authorPostUserId': this.post.userId,
-              'titlePost': this.post.title
-              });
           },
           error => {
             this.hasPost = false;
@@ -130,13 +107,6 @@ export class PostPageComponent implements OnInit {
             this.hasLabels = data.labels.length > 0;
             this.initMap(this.post.latitude, this.post.longitude);
   
-            this.commentForm.patchValue({
-              'userId': this.userLoggedInfo != null ? this.userLoggedInfo.userName : '',
-              'postId': this.post.id,
-              'specieId': this.post.specieId,
-              'authorPostUserId': this.post.userId,
-              'titlePost': this.post.title
-              });
           },
           error => {
             this.hasPost = false;
@@ -144,36 +114,7 @@ export class PostPageComponent implements OnInit {
         );
         this.loaderService.hide();
       }
-
-      this.commentService.GetCommentsByPost(postId).subscribe(
-        data => { 
-          this.comments = data 
-        }
-      );
     });
-  }
-
-  onSubmit() {
-    if (this.commentForm.invalid) {
-        return;
-    }
-
-    this.commentService.AddComment(this.commentForm.value)
-        .pipe(first())
-        .subscribe(
-            data => {    
-              this.comments.push(data);
-              this.post.commentCount++;
-              this.commentForm.controls.text.setValue('');
-            },
-            error => {   
-              if(error.status == "409"){
-                this.openCommonModal('account.conflictNameMessage');
-                this.commentForm.controls.userName.setErrors({'incorrect': true});
-              } else {
-                this.openCommonModal('user.failUserAction');
-              } 
-            });
   }
 
   addVote(post: PostResponse, hasVote: boolean){
@@ -249,24 +190,6 @@ export class PostPageComponent implements OnInit {
     });
 
     
-  }
-
-  deleteComment(comment: CommentResponse){
-    this.commentService.DeleteComment(comment.postId, comment.id).subscribe(
-      data => {
-        const index = this.comments.indexOf(comment, 0);
-        if (index > -1) {
-          this.comments.splice(index, 1);
-        }
-        this.post.commentCount--;
-      },
-      error => { 
-        this.openCommonModal('failpostdelete');
-      });
-  }
-
-  showOwnerCommentOptions(userId: string){
-    return this.userLoggedInfo != null && userId == this.userLoggedInfo.userName;
   }
 
   openCommonModal(message:string) {
