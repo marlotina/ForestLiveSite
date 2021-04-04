@@ -47,12 +47,12 @@ export class PostPageComponent implements OnInit {
     private voteService: VoteService,
     private pendingBirdService: PendingBirdService,
     private route: Router) { 
-      this.loaderService.show();
     }
 
   ngOnInit(): void {
     
 
+    this.loaderService.show();
     this.userLoggedInfo = this.accountService.userValue;
     this.isLogged = this.userLoggedInfo != null;
     
@@ -70,8 +70,6 @@ export class PostPageComponent implements OnInit {
             this.hasPost = true;
             this.hasLabels = data.labels.length > 0;
             this.initMap(this.post.latitude, this.post.longitude);
-  
-   
             this.loaderService.hide();
           },
           error => {
@@ -89,13 +87,12 @@ export class PostPageComponent implements OnInit {
             this.hasPost = true;
             this.hasLabels = data.labels.length > 0;
             this.initMap(this.post.latitude, this.post.longitude);
-  
+            this.loaderService.hide();
           },
           error => {
             this.hasPost = false;
           }
         );
-        this.loaderService.hide();
       } else if (type == 'pending'){
         this.pendingBirdService.GetPost(postId).subscribe(
           data => { 
@@ -106,7 +103,7 @@ export class PostPageComponent implements OnInit {
             this.hasPost = true;
             this.hasLabels = data.labels.length > 0;
             this.initMap(this.post.latitude, this.post.longitude);
-  
+            this.loaderService.hide();
           },
           error => {
             this.hasPost = false;

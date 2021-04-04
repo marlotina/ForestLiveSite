@@ -1,12 +1,10 @@
 
-import { Component, ElementRef, Inject, Input, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
+import { Component , Input, OnInit, ViewChild } from '@angular/core';
+import { FormArray, FormBuilder, FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { ActivatedRoute, Router, Routes } from '@angular/router';
 import { first } from 'rxjs/operators';
 import { User } from 'src/app/model/account';
 import { CommentRequest, CommentResponse } from 'src/app/model/Comment';
-import { PostResponse } from 'src/app/model/post';
 import { AccountService } from 'src/app/services/account/account.service';
 import { CommentService } from 'src/app/services/comment/comment.service';
 import { LoaderService } from 'src/app/services/loader/loader.service';
@@ -32,8 +30,9 @@ export class PostCommentComponent implements OnInit {
   isLogged: boolean;
   userLoggedInfo: User;
 
+  dynamicForm: FormGroup;
+
   constructor(
-    private activateRoute: ActivatedRoute,
     private loaderService: LoaderService,
     private commentService: CommentService,
     private formBuilder: FormBuilder,
@@ -44,10 +43,33 @@ export class PostCommentComponent implements OnInit {
 
 
   ngOnInit(): void {
-    
+
+    this.commentService.GetCommentsByPost(this.postId).subscribe(
+      data => { 
+        this.comments = data 
+      }
+    );
+
+  
 
     console.log(this.postId) // => 'joining'
 
+
+    this.commentForm = new FormGroup({
+      text: new FormControl({value: ''}, Validators.required),
+      userId: new FormControl(this.userId, Validators.required),
+      postId: new FormControl({value: this.postId}, Validators.required),
+      specieId: new FormControl(this.specieId, Validators.required),
+      authorPostUserId: new FormControl({value: this.userId}, Validators.required),
+      titlePost: new FormControl(this.postTitle, Validators.required)
+    });
+
+    /*
+     this.dynamicForm = this.formBuilder.group({
+      numberOfTickets: ['', Validators.required],
+      tickets: new FormArray([])
+    });
+    
     this.commentForm = this.formBuilder.group({
       text: ['', [Validators.required]],
       userId: [{ disabled: true}, Validators.required],
@@ -55,7 +77,7 @@ export class PostCommentComponent implements OnInit {
       specieId: [null],
       authorPostUserId: ['', [Validators.required]],
       titlePost: ['', [Validators.required]]
-    });
+    });*/
 
     this.userLoggedInfo = this.accountService.userValue;
     this.isLogged = this.userLoggedInfo != null;
@@ -63,21 +85,12 @@ export class PostCommentComponent implements OnInit {
     
       
   }
-  ngAfterContentChecked(){
-    this.commentService.GetCommentsByPost(this.postId).subscribe(
-      data => { 
-        this.comments = data 
-      }
-    );
 
-    this.commentForm.patchValue({
-      'userId': this.userId,
-      'postId': this.postId,
-      'specieId': this.specieId,
-      'authorPostUserId': this.userId,
-      'titlePost': this.postTitle
-      });
-  }
+  get f() { return this.dynamicForm.controls; }
+  get t() { return this.f.tickets as FormArray; }
+  get ticketFormGroups() { return this.t.controls as FormGroup[]; }
+
+ 
 
   addComment(){
     /*let commentRequest: CommentRequest = {

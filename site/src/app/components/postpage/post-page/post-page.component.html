@@ -96,7 +96,7 @@
                             </div>
                         </div>
 
-                        <app-post-comment  
+                        <app-post-comment *ngIf = "post.postId" 
                             [postId]="post.postId"
                             [postTitle]="post.title"
                             [specieId]="post.specieId"
