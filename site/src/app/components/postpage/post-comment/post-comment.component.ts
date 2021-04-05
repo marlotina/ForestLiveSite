@@ -29,7 +29,7 @@ export class PostCommentComponent implements OnInit {
   isLogged: boolean;
   userLoggedInfo: User;
 
-  showForm: boolean[] = [];
+  showFormList = new Map<string, boolean>();;
 
 
   constructor(
@@ -40,8 +40,8 @@ export class PostCommentComponent implements OnInit {
       this.loaderService.show();
     }
 
-  showCommentForm(id: number){
-    this.showForm[id] = true;
+  showCommentForm(id: string){
+    this.showFormList[id] = true;
   }
 
   ngOnInit(): void {
@@ -50,9 +50,9 @@ export class PostCommentComponent implements OnInit {
       data => { 
         this.comments = data 
 
-        for(let i = 0; i < this.commentCount; i++)
+        for(let i = 0; i < this.comments.length-1; i++)
         {
-          this.showForm.push(false);
+          this.showFormList.set(this.comments[i].id, false);
         }
 
       }
@@ -63,14 +63,14 @@ export class PostCommentComponent implements OnInit {
   }
 
 
-  addComment(parentCommentId: string, text: string) {
+  addComment(parentComment: CommentResponse, text: string) {
 
     let commentRequest: CommentRequest = {
       postId: this.postId,
       titlePost: this.postTitle,
       authorPostUserId: this.userId,
       text: text,
-      commentParentId: parentCommentId,
+      commentParentId: parentComment == null ? null : parentComment.id,
       specieId: this.specieId,
       userId: this.userId
     }
@@ -79,7 +79,10 @@ export class PostCommentComponent implements OnInit {
         .pipe(first())
         .subscribe(
             data => {    
-              this.comments.push(data);
+              if(parentComment == null){
+                this.comments.push(data);
+              }
+              parentComment.replies.push(data);
               this.commentCount++;
             },
             error => {   

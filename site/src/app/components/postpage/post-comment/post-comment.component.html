@@ -4,12 +4,28 @@
     </div>
 </div>
 
+<div class="row">
+    <div class="col-12 col-md-6 mb-15">
+        <div class="form-group">
+            <label>{{userId}}</label>
+        </div>
+    </div>
+    <div class="col-12 mb-15">
+        <div class="form-group">
+            <textarea class="form-control" #titleInput  name="text" id="text" cols="30" rows="3" placeholder="{{ 'postPage.comment' | translate }}"></textarea>
+        </div>
+    </div>
+    <div class="col-12 mb-15">
+        <button type="button" (click)="addComment(null, titleInput.value)" class="btn btn-primary">{{ 'postPage.postComment' | translate }}</button>
+    </div>
+</div>
+
 <ng-container
 *ngTemplateOutlet="replyThread; context: { $implicit: comments }"
     ></ng-container>
 
 <ng-template #replyThread let-childReplies>
-        <div class="row" *ngFor="let comment of childReplies;let i = index">
+        <div class="row mt-15" *ngFor="let comment of childReplies;">
             <div class="col-12 col-md-1">
                 <a href="{{comment.userId}}"><img src="{{imagesProfileUrl}}{{comment.userImage}}" alt="{{ 'postPage.userImage' | translate }}" class="mt-15 imgAuthorPost"></a>
             </div> 
@@ -20,13 +36,17 @@
                         <p>{{comment.text}}</p>
 
                         <div *ngIf="isLogged">
-                          <a class="badge bg-secondary" data-bs-toggle="collapse" href="#collapseExample-{{i}}" (click)="showCommentForm(i)" role="button" aria-expanded="false" aria-controls="collapseExample">
+                            <a class="badge bg-secondary"  role="button">
+                                +
+                            </a>
+                              &nbsp;Votes 0&nbsp;
+                          <a class="badge bg-secondary" data-bs-toggle="collapse" href="#collapseExample-{{comment.id}}" (click)="showCommentForm(comment.id)" role="button" aria-expanded="false" aria-controls="collapseExample">
                             Reply
                           </a>
 
                         <div class="row">
-                              <div class="collapse" id="collapseExample-{{i}}">
-                                <ng-container *ngIf="showForm[i]">
+                            <div class="collapse  mt-15" id="collapseExample-{{comment.id}}">
+                                <ng-container *ngIf="showFormList[comment.id]">
                                     <ng-container
                                     *ngTemplateOutlet="
                                     commetForm;
@@ -34,7 +54,7 @@
                                     "
                                     ></ng-container>
                                 </ng-container>
-                              </div>
+                            </div>
                         </div>
 
                         </div>
@@ -42,7 +62,7 @@
 
                     <div class="col-12 col-md-1 commetDate">
                         <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="user options" *ngIf="showOwnerCommentOptions(comment.userId)">
-                            <mat-icon>more_vert</mat-icon>
+                            <mat-icon><mat-icon>more_horiz</mat-icon></mat-icon>
                         </button>
                         <mat-menu #menu="matMenu" >
                             <button mat-menu-item type="button" (click)="deleteComment(comment)">
@@ -66,7 +86,7 @@
 </ng-template>
 
 <ng-template #commetForm let-commentInfo>
-    <div class="card card-body">
+    <div class="card card-body divPost">
         <div class="col-12 col-md-6 mb-15">
             <div class="form-group">
                 <label>{{userId}}</label>
@@ -78,7 +98,7 @@
             </div>
         </div>
         <div class="col-12 mb-15">
-            <button type="button" (click)="addComment(commentInfo.id, titleInput.value)" class="btn btn-primary">{{ 'postPage.postComment' | translate }}</button>
+            <button type="button" (click)="addComment(commentInfo, titleInput.value)" class="btn btn-primary">{{ 'postPage.postComment' | translate }}</button>
         </div>
     </div>
 </ng-template>
