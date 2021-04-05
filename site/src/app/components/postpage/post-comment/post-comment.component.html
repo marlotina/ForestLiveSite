@@ -3,7 +3,6 @@
     ></ng-container>
 
 <ng-template #replyThread let-childReplies>
-    <form [formGroup]="commentForm" (ngSubmit)="onSubmit()">
         <div class="row" *ngFor="let comment of childReplies;let i = index">
             <div class="col-12 col-md-1">
                 <a href="{{comment.userId}}"><img src="{{imagesProfileUrl}}{{comment.userImage}}" alt="{{ 'postPage.userImage' | translate }}" class="mt-15 imgAuthorPost"></a>
@@ -15,16 +14,20 @@
                         <p>{{comment.text}}</p>
 
                         <div *ngIf="isLogged">
-                          <a class="badge bg-secondary" data-bs-toggle="collapse" href="#collapseExample-{{i}}" role="button" aria-expanded="false" aria-controls="collapseExample">
+                          <a class="badge bg-secondary" data-bs-toggle="collapse" href="#collapseExample-{{i}}" (click)="showCommentForm(i)" role="button" aria-expanded="false" aria-controls="collapseExample">
                             Link with href
                           </a>
 
                         <div class="row">
-                            
                               <div class="collapse" id="collapseExample-{{i}}">
-                                <div class="card card-body">
-                                    hola
-                                </div>
+                                <ng-container *ngIf="showForm[i]">
+                                    <ng-container
+                                    *ngTemplateOutlet="
+                                    commetForm;
+                                        context: { $implicit: comment }
+                                    "
+                                    ></ng-container>
+                                </ng-container>
                               </div>
                         </div>
 
@@ -43,21 +46,36 @@
                         </mat-menu>
                     </div>
 
-                    <ng-container *ngIf="comment.reply">
+                    <ng-container *ngIf="comment.replies">
                         <ng-container
                         *ngTemplateOutlet="
                         replyThread;
-                            context: { $implicit: comment.reply }
+                            context: { $implicit: comment.replies}
                         "
                         ></ng-container>
                     </ng-container>
-
                 </div>
             </div>
         </div>
-    </form>
 </ng-template>
 
+<ng-template #commetForm let-commentInfo>
+    <div class="card card-body">
+        <div class="col-12 col-md-6 mb-15">
+            <div class="form-group">
+                <label>{{userId}}</label>
+            </div>
+        </div>
+        <div class="col-12 mb-15">
+            <div class="form-group">
+                <textarea class="form-control" #titleInput  name="text" id="text" cols="30" rows="3" placeholder="{{ 'postPage.comment' | translate }}"></textarea>
+            </div>
+        </div>
+        <div class="col-12 mb-15">
+            <button type="button" (click)="onSubmit(commentInfo.id, titleInput.value)" class="btn btn-primary">{{ 'postPage.postComment' | translate }}</button>
+        </div>
+    </div>
+</ng-template>
 
 
 
@@ -117,7 +135,7 @@
             </div>
         </div>
     </div>
-</div>-->
+</div>
     
 <div *ngIf="isLogged">
     <h4 class="headline">{{ 'postPage.leaveComment' | translate }}</h4>
@@ -139,4 +157,4 @@
             </div>
         </div>
     </form>
-</div>
+</div>-->

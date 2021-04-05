@@ -5,6 +5,7 @@ export class CommentRequest {
     specieId: string;
     authorPostUserId: string;
     titlePost: string;
+    parentCommentId: string;
 }
 
 export class CommentResponse {
@@ -17,5 +18,6 @@ export class CommentResponse {
     titlePost: string;
     userImage: string;
     specieId: string;
-    reply: CommentResponse[]
+    parentCommentId:string;
+    replies: CommentResponse[]
 }

@@ -22,7 +22,7 @@ export class PostCommentComponent implements OnInit {
   @Input() postTitle;
   @Input() specieId;
   @Input() userId;
-
+  @Input() commentCount = 2;
   commentForm: FormGroup;
   comments: CommentResponse[] = [];
   imagesProfileUrl = environment.imagesProfileUrl;
@@ -30,7 +30,8 @@ export class PostCommentComponent implements OnInit {
   isLogged: boolean;
   userLoggedInfo: User;
 
-  dynamicForm: FormGroup;
+  showForm: boolean[] = [];
+
 
   constructor(
     private loaderService: LoaderService,
@@ -42,43 +43,27 @@ export class PostCommentComponent implements OnInit {
     }
 
 
+  showCommentForm(id: number){
+    this.showForm[id] = true;
+  }
+
   ngOnInit(): void {
 
     this.commentService.GetCommentsByPost(this.postId).subscribe(
       data => { 
         this.comments = data 
+
+        for(let i = 0; i < this.commentCount; i++)
+        {
+          this.showForm.push(false);
+        }
+
       }
     );
 
   
 
-    console.log(this.postId) // => 'joining'
-
-
-    this.commentForm = new FormGroup({
-      text: new FormControl({value: ''}, Validators.required),
-      userId: new FormControl(this.userId, Validators.required),
-      postId: new FormControl({value: this.postId}, Validators.required),
-      specieId: new FormControl(this.specieId, Validators.required),
-      authorPostUserId: new FormControl({value: this.userId}, Validators.required),
-      titlePost: new FormControl(this.postTitle, Validators.required)
-    });
-
-    /*
-     this.dynamicForm = this.formBuilder.group({
-      numberOfTickets: ['', Validators.required],
-      tickets: new FormArray([])
-    });
-    
-    this.commentForm = this.formBuilder.group({
-      text: ['', [Validators.required]],
-      userId: [{ disabled: true}, Validators.required],
-      postId: ['', [Validators.required]],
-      specieId: [null],
-      authorPostUserId: ['', [Validators.required]],
-      titlePost: ['', [Validators.required]]
-    });*/
-
+    console.log(this.postId) 
     this.userLoggedInfo = this.accountService.userValue;
     this.isLogged = this.userLoggedInfo != null;
     
@@ -86,51 +71,20 @@ export class PostCommentComponent implements OnInit {
       
   }
 
-  get f() { return this.dynamicForm.controls; }
-  get t() { return this.f.tickets as FormArray; }
-  get ticketFormGroups() { return this.t.controls as FormGroup[]; }
 
- 
+  onSubmit(parentCommentId: string, text: string) {
 
-  addComment(){
-    /*let commentRequest: CommentRequest = {
-      postId = this.postId,
-      titlePost = this.postTitle,
-      authorPostUserId = this.userId,
-      text = 
-      
-          text: string;
-    userId: string;
-    postId: string;
-    specieId: string;
-    authorPostUserId: string;
-    titlePost: string;
-      
-    }*/
-    this.commentService.AddComment(this.commentForm.value)
-        .pipe(first())
-        .subscribe(
-            data => {    
-              this.comments.push(data);
-              //this.post.commentCount++;
-              this.commentForm.controls.text.setValue('');
-            },
-            error => {   
-              if(error.status == "409"){
-                this.openCommonModal('account.conflictNameMessage');
-                this.commentForm.controls.userName.setErrors({'incorrect': true});
-              } else {
-                this.openCommonModal('user.failUserAction');
-              } 
-            });
-  }
-
-  onSubmit() {
-    if (this.commentForm.invalid) {
-        return;
+    let commentRequest: CommentRequest = {
+      postId: this.postId,
+      titlePost: this.postTitle,
+      authorPostUserId: this.userId,
+      text: text,
+      parentCommentId: parentCommentId,
+      specieId: this.specieId,
+      userId: this.userId
     }
 
-    this.commentService.AddComment(this.commentForm.value)
+    this.commentService.AddComment(commentRequest)
         .pipe(first())
         .subscribe(
             data => {    
