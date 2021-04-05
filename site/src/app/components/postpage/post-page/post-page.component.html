@@ -85,9 +85,6 @@
                     
                     <div class="col-12 col-md-12">
                         <div class="row mb-5 div-bottom-line">
-                            <div class="col-9">
-                                <img class="social-image" src="../../../../assets/img/core-img/icons8-topic-48.png" /><span class="aligned-with-icon">&nbsp;{{post.commentCount}}&nbsp;comments</span>
-                            </div>
                             <div  class="col-3 d-flex mb-15 text-right">
                                 <a href="#" target="_blank"><img class="social-image" src="../../../../assets/img/core-img/iconsGreen-facebook.svg" /></a>
                                 <a href="#" target="_blank"><img class="social-image" src="../../../../assets/img/core-img/iconsGreen-twitter.svg" /></a>
@@ -100,6 +97,7 @@
                             [postId]="post.postId"
                             [postTitle]="post.title"
                             [specieId]="post.specieId"
+                            [commentCount]="post.commentCount"
                             [userId]="post.userId"></app-post-comment>
                     </div>
                 </div>  

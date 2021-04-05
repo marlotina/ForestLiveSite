@@ -1,6 +1,5 @@
 
-import { Component , Input, OnInit, ViewChild } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
+import { Component , Input, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { first } from 'rxjs/operators';
 import { User } from 'src/app/model/account';
@@ -18,12 +17,12 @@ import { CommonDialogComponent } from '../../shared/common-dialog/common-dialog.
 })
 export class PostCommentComponent implements OnInit {
 
-  @Input() postId;
-  @Input() postTitle;
-  @Input() specieId;
-  @Input() userId;
+  @Input() postId: string;
+  @Input() postTitle: string;
+  @Input() specieId: string;
+  @Input() userId: string;
   @Input() commentCount = 2;
-  commentForm: FormGroup;
+
   comments: CommentResponse[] = [];
   imagesProfileUrl = environment.imagesProfileUrl;
   showOwnerOptions = false;
@@ -36,12 +35,10 @@ export class PostCommentComponent implements OnInit {
   constructor(
     private loaderService: LoaderService,
     private commentService: CommentService,
-    private formBuilder: FormBuilder,
     private accountService: AccountService,
     private matDialog: MatDialog) { 
       this.loaderService.show();
     }
-
 
   showCommentForm(id: number){
     this.showForm[id] = true;
@@ -61,25 +58,19 @@ export class PostCommentComponent implements OnInit {
       }
     );
 
-  
-
-    console.log(this.postId) 
     this.userLoggedInfo = this.accountService.userValue;
     this.isLogged = this.userLoggedInfo != null;
-    
-    
-      
   }
 
 
-  onSubmit(parentCommentId: string, text: string) {
+  addComment(parentCommentId: string, text: string) {
 
     let commentRequest: CommentRequest = {
       postId: this.postId,
       titlePost: this.postTitle,
       authorPostUserId: this.userId,
       text: text,
-      parentCommentId: parentCommentId,
+      commentParentId: parentCommentId,
       specieId: this.specieId,
       userId: this.userId
     }
@@ -89,13 +80,11 @@ export class PostCommentComponent implements OnInit {
         .subscribe(
             data => {    
               this.comments.push(data);
-              //this.post.commentCount++;
-              this.commentForm.controls.text.setValue('');
+              this.commentCount++;
             },
             error => {   
               if(error.status == "409"){
                 this.openCommonModal('account.conflictNameMessage');
-                this.commentForm.controls.userName.setErrors({'incorrect': true});
               } else {
                 this.openCommonModal('user.failUserAction');
               } 
@@ -109,7 +98,7 @@ export class PostCommentComponent implements OnInit {
         if (index > -1) {
           this.comments.splice(index, 1);
         }
-        //this.post.commentCount--;
+        this.commentCount--;
       },
       error => { 
         this.openCommonModal('failpostdelete');

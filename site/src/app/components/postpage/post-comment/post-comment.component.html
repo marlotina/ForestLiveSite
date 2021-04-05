@@ -1,3 +1,9 @@
+<div class="row mb-5 div-bottom-line">
+    <div class="col-9">
+        <img class="social-image" src="../../../../assets/img/core-img/icons8-topic-48.png" /><span class="aligned-with-icon">&nbsp;{{commentCount}}&nbsp;comments</span>
+    </div>
+</div>
+
 <ng-container
 *ngTemplateOutlet="replyThread; context: { $implicit: comments }"
     ></ng-container>
@@ -15,7 +21,7 @@
 
                         <div *ngIf="isLogged">
                           <a class="badge bg-secondary" data-bs-toggle="collapse" href="#collapseExample-{{i}}" (click)="showCommentForm(i)" role="button" aria-expanded="false" aria-controls="collapseExample">
-                            Link with href
+                            Reply
                           </a>
 
                         <div class="row">
@@ -72,7 +78,7 @@
             </div>
         </div>
         <div class="col-12 mb-15">
-            <button type="button" (click)="onSubmit(commentInfo.id, titleInput.value)" class="btn btn-primary">{{ 'postPage.postComment' | translate }}</button>
+            <button type="button" (click)="addComment(commentInfo.id, titleInput.value)" class="btn btn-primary">{{ 'postPage.postComment' | translate }}</button>
         </div>
     </div>
 </ng-template>
