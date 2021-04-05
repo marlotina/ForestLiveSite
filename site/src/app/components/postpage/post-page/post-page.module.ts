@@ -25,8 +25,6 @@ const materialModules = [
     CommonModule,
     PostCommentModule,
     PostPageRoutingModule,
-    FormsModule,
-    ReactiveFormsModule,
     SharedModule,
     AuthorDetailsModule,
     materialModules

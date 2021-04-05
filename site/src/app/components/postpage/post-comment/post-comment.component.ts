@@ -25,19 +25,13 @@ export class PostCommentComponent implements OnInit {
 
   comments: CommentResponse[] = [];
   imagesProfileUrl = environment.imagesProfileUrl;
-  showOwnerOptions = false;
-  isLogged: boolean;
-  userLoggedInfo: User;
-
   showFormList = new Map<string, boolean>();;
-
+  userNameLogged = null;
 
   constructor(
-    private loaderService: LoaderService,
     private commentService: CommentService,
     private accountService: AccountService,
     private matDialog: MatDialog) { 
-      this.loaderService.show();
     }
 
   showCommentForm(id: string){
@@ -45,6 +39,7 @@ export class PostCommentComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.userNameLogged = this.accountService != null? this.accountService.userValue: null;
 
     this.commentService.GetCommentsByPost(this.postId).subscribe(
       data => { 
@@ -57,9 +52,6 @@ export class PostCommentComponent implements OnInit {
 
       }
     );
-
-    this.userLoggedInfo = this.accountService.userValue;
-    this.isLogged = this.userLoggedInfo != null;
   }
 
 
@@ -109,7 +101,7 @@ export class PostCommentComponent implements OnInit {
   }
 
   showOwnerCommentOptions(userId: string){
-    return this.userLoggedInfo != null && userId == this.userLoggedInfo.userName;
+    return this.userNameLogged == userId;
   }
 
   openCommonModal(message:string) {

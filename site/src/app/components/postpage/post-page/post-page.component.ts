@@ -1,15 +1,12 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { ActivatedRoute, Router, Routes } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { first } from 'rxjs/operators';
 import { User } from 'src/app/model/account';
-import { CommentResponse } from 'src/app/model/Comment';
 import { PostResponse } from 'src/app/model/post';
 import { VoteRequest } from 'src/app/model/vote';
 import { AccountService } from 'src/app/services/account/account.service';
 import { BirdserviceService } from 'src/app/services/bird/birdservice.service';
-import { CommentService } from 'src/app/services/comment/comment.service';
 import { LoaderService } from 'src/app/services/loader/loader.service';
 import { PendingBirdService } from 'src/app/services/pendingBird/pending-bird.service';
 import { PostService } from 'src/app/services/post/post.service';
@@ -40,8 +37,6 @@ export class PostPageComponent implements OnInit {
     private loaderService: LoaderService,
     private postService: PostService,
     private birsService: BirdserviceService,
-    private commentService: CommentService,
-    private formBuilder: FormBuilder,
     private accountService: AccountService,
     private matDialog: MatDialog,
     private voteService: VoteService,

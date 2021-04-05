@@ -4,7 +4,7 @@
     </div>
 </div>
 
-<div class="row">
+<div class="row" *ngIf="userNameLogged != null">
     <div class="col-12 col-md-6 mb-15">
         <div class="form-group">
             <label>{{userId}}</label>
@@ -35,28 +35,27 @@
                         <small>{{comment.userId}}&nbsp;<em>{{comment.creationDate}}</em></small>
                         <p>{{comment.text}}</p>
 
-                        <div *ngIf="isLogged">
+                        <div *ngIf="userNameLogged != null">
                             <a class="badge bg-secondary"  role="button">
                                 +
                             </a>
                               &nbsp;Votes 0&nbsp;
-                          <a class="badge bg-secondary" data-bs-toggle="collapse" href="#collapseExample-{{comment.id}}" (click)="showCommentForm(comment.id)" role="button" aria-expanded="false" aria-controls="collapseExample">
-                            Reply
-                          </a>
+                            <a class="badge bg-secondary" data-bs-toggle="collapse" href="#collapseExample-{{comment.id}}" (click)="showCommentForm(comment.id)" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                Reply
+                            </a>
 
-                        <div class="row">
-                            <div class="collapse  mt-15" id="collapseExample-{{comment.id}}">
-                                <ng-container *ngIf="showFormList[comment.id]">
-                                    <ng-container
-                                    *ngTemplateOutlet="
-                                    commetForm;
-                                        context: { $implicit: comment }
-                                    "
-                                    ></ng-container>
-                                </ng-container>
+                            <div class="row">
+                                <div class="collapse  mt-15" id="collapseExample-{{comment.id}}">
+                                    <ng-container *ngIf="showFormList[comment.id]">
+                                        <ng-container
+                                        *ngTemplateOutlet="
+                                        commetForm;
+                                            context: { $implicit: comment }
+                                        "
+                                        ></ng-container>
+                                    </ng-container>
+                                </div>
                             </div>
-                        </div>
-
                         </div>
                     </div>   
 
@@ -102,85 +101,3 @@
         </div>
     </div>
 </ng-template>
-
-
-
-
-
-<!--
-    
-    <form [formGroup]="commentForm" (ngSubmit)="onSubmit()">
-        <div class="row">
-            <div class="col-12 col-md-6 mb-15">
-                <div class="form-group">
-                    <input type="text" formControlName="userId" class="form-control" id="contact-name" placeholder="{{ 'postPage.name' | translate }}" disabled>
-                </div>
-            </div>
-            <div class="col-12 mb-15">
-                <div class="form-group">
-                    <textarea class="form-control" formControlName="text" name="text" id="text" cols="30" rows="3" placeholder="{{ 'postPage.comment' | translate }}"></textarea>
-                </div>
-            </div>
-            <div class="col-12 mb-15">
-                <button type="submit" class="btn btn-primary">{{ 'postPage.postComment' | translate }}</button>
-            </div>
-        </div>
-    </form>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    <div class="row" *ngFor="let comment of comments">
-    <div class="col-12 col-md-1">
-        <a href="{{comment.userId}}"><img src="{{imagesProfileUrl}}{{comment.userImage}}" alt="{{ 'postPage.userImage' | translate }}" class="mt-15 imgAuthorPost"></a>
-    </div> 
-    <div class="col-12 col-md-11">
-        <div class="row">
-            <div class="col-12 col-md-11">
-                <small>{{comment.userId}}&nbsp;<em>{{comment.creationDate}}</em></small>
-                <p>{{comment.text}}</p>
-            </div>   
-            <div class="col-12 col-md-1 commetDate">
-                <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="user options" *ngIf="showOwnerCommentOptions(comment.userId)">
-                    <mat-icon>more_vert</mat-icon>
-                </button>
-                <mat-menu #menu="matMenu" >
-                    <button mat-menu-item type="button" (click)="deleteComment(comment)">
-                        <mat-icon>delete</mat-icon>
-                        <span>{{ 'postPage.delete' | translate }}</span>
-                    </button>
-                </mat-menu>
-            </div>
-        </div>
-    </div>
-</div>
-    
-<div *ngIf="isLogged">
-    <h4 class="headline">{{ 'postPage.leaveComment' | translate }}</h4>
-    
-    <form [formGroup]="commentForm" (ngSubmit)="onSubmit()">
-        <div class="row">
-            <div class="col-12 col-md-6 mb-15">
-                <div class="form-group">
-                    <input type="text" formControlName="userId" class="form-control" id="contact-name" placeholder="{{ 'postPage.name' | translate }}">
-                </div>
-            </div>
-            <div class="col-12 mb-15">
-                <div class="form-group">
-                    <textarea class="form-control" formControlName="text" name="text" id="text" cols="30" rows="10" placeholder="{{ 'postPage.comment' | translate }}"></textarea>
-                </div>
-            </div>
-            <div class="col-12 mb-15">
-                <button type="submit" class="btn btn-primary">{{ 'postPage.postComment' | translate }}</button>
-            </div>
-        </div>
-    </form>
-</div>-->
