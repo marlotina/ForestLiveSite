@@ -37,6 +37,23 @@ export class PostResponse {
     voteId: string;
 }
 
+export class PostUpdateSpecieRequest {
+    postId: string;
+    specieName: string;
+    specieId: string;
+}
+
+export class PostUpdateSpecieResponse {
+    postId: string;
+    specieName: string;
+    specieId: string;
+}
+
+export class PostUpdateLabelsRequest {
+    postId: string;
+    labels: string[];
+}
+
 export class DeletePost {
     itemId: string;
     userId: string;

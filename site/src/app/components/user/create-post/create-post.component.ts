@@ -19,6 +19,7 @@ import { Router } from '@angular/router';
 import { BirdserviceService } from 'src/app/services/bird/birdservice.service';
 import { UserLabelsService } from 'src/app/services/user/labels/user-labels.service';
 import { PendingBirdService } from 'src/app/services/pendingBird/pending-bird.service';
+import { SelectSpecieDialogComponent } from '../../shared/select-specie-dialog/select-specie-dialog.component';
 
 class ImageSnippet {
   constructor(public src: string, public file: File) {}
@@ -94,7 +95,7 @@ export class CreatePostComponent implements OnInit {
           label ? this._filter(label) : this.allLabels.slice()
           ));
   }  
-
+  
   ngOnInit(): void {
     this.postForm = this.formBuilder.group({
       title: ['', [Validators.required]],
@@ -437,5 +438,23 @@ export class CreatePostComponent implements OnInit {
     }
     
     this.matDialog.open(CommonDialogComponent, dialogConfig);
+  }
+
+  openSpecieModal(message:string) {
+    const dialogConfig = new MatDialogConfig();
+    
+    dialogConfig.disableClose = false;
+    dialogConfig.id = "modal-component";
+    dialogConfig.height = "200px";
+    dialogConfig.width = "600px";
+    dialogConfig.data = {
+      title: "user.userTitleModal",
+      description: message,
+      acceptButtonText: "general.ok",
+      hideAcceptButton: false,
+      hideCancelButton: true
+    }
+    
+    this.matDialog.open(SelectSpecieDialogComponent, dialogConfig);
   }
 }
