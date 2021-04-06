@@ -36,7 +36,7 @@ export class PostPageComponent implements OnInit {
   constructor(private activateRoute: ActivatedRoute,
     private loaderService: LoaderService,
     private postService: PostService,
-    private birsService: BirdserviceService,
+    private birdService: BirdserviceService,
     private accountService: AccountService,
     private matDialog: MatDialog,
     private voteService: VoteService,
@@ -73,7 +73,7 @@ export class PostPageComponent implements OnInit {
         );
       } else if (type == 'bird'){
         let specieId = params.get("specieId");
-        this.birsService.GetPost(postId, specieId).subscribe(
+        this.birdService.GetPost(postId, specieId).subscribe(
           data => { 
             this.post = data;  
             this.postLabels = data.labels;
