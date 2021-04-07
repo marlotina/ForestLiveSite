@@ -31,7 +31,7 @@ export class PostPageComponent implements OnInit {
   hasPost = true;
   hasLocation = false;
   hasLabels = false;
-
+  type: string;
   constructor(private activateRoute: ActivatedRoute,
     private loaderService: LoaderService,
     private getItemService: GetItemsService,
@@ -49,9 +49,9 @@ export class PostPageComponent implements OnInit {
     
     this.activateRoute.paramMap.subscribe(params => {
       let postId = params.get("postId");
-      let type = params.get("type");
+      this.type = params.get("type");
 
-      if(type == 'post'){
+      if(this.type == 'post'){
         this.getItemService.getPost(postId).subscribe(
           data => { 
             this.setValuesPage(data);
@@ -60,7 +60,7 @@ export class PostPageComponent implements OnInit {
             this.hasPost = false;
           }
         );
-      } else if (type == 'bird'){
+      } else if (this.type == 'bird'){
         let specieId = params.get("specieId");
         this.getItemService.GetBird(postId, specieId).subscribe(
           data => { 
@@ -70,7 +70,7 @@ export class PostPageComponent implements OnInit {
             this.hasPost = false;
           }
         );
-      } else if (type == 'pending'){
+      } else if (this.type == 'pending'){
         this.getItemService.GetPending(postId).subscribe(
           data => { 
             this.setValuesPage(data);

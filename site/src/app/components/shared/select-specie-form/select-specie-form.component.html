@@ -14,6 +14,6 @@
     <input type="hidden" id="specieIdPost">
 </div>
 <div >
-    <button type="button" class="btn btn-primary" (click)="changeSpecie()">change specie</button>
-    <button type="button" class="btn btn-primary" (click)="updateSpecie()">update specie</button>
+    <button *ngIf="isPending" type="button" class="btn btn-primary" (click)="assignpecie()">assign specie</button>
+    <button *ngIf="!isPending" type="button" class="btn btn-primary" (click)="updateSpecie()">update specie</button>
 </div> 

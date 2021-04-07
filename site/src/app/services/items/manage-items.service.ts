@@ -31,7 +31,7 @@ export class ManageItemsService {
   }
 
   assignBird(request: PostUpdateSpecieRequest) {
-    return this.httpClient.put<PostUpdateSpecieResponse>(`${environment.birdPendingApiUrl}api/v1/ManagePostSpecie/AssignSpecieId/`, request)
+    return this.httpClient.put<PostUpdateSpecieResponse>(`${environment.birdPendingApiUrl}api/v1/ManagePostPending/AssignSpecieId/`, request)
       .pipe(map(data => {
         return data;
       }));

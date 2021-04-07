@@ -1,4 +1,4 @@
-import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Inject, Input, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatAutocomplete } from '@angular/material/autocomplete';
 import { Observable, of } from 'rxjs';
@@ -20,7 +20,9 @@ export class SelectSpecieFormComponent implements OnInit {
   language: string;
   specieId: string;
   specieName: string;
-  postId: string; 
+  isPending: boolean = false;
+  @Input() postId: string;
+  @Input() type: string;
 
   @ViewChild('auto') matAutocomplete: MatAutocomplete;  
   @ViewChild('autocompleteControl') specieNamePost: ElementRef<HTMLInputElement>;
@@ -34,6 +36,7 @@ export class SelectSpecieFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.isPending = this.type == 'pending'
     this.filteredSpecies = this.autocompleteControl.valueChanges.pipe(
       startWith(''),
       debounceTime(300),
@@ -68,7 +71,7 @@ export class SelectSpecieFormComponent implements OnInit {
     return of([]);
   }
 
-  changeSpecie()
+  assignpecie()
   {
     let request: PostUpdateSpecieRequest = {
       specieId: this.specieId,
