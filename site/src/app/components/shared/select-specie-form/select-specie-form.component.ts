@@ -6,7 +6,7 @@ import { catchError, debounceTime, map, startWith, switchMap } from 'rxjs/operat
 import { AutocompleteService } from 'src/app/services/autocomplete/autocomplete.service';
 import { AutocompleteResponse } from 'src/app/model/specie';
 import { ManageItemsService } from 'src/app/services/items/manage-items.service';
-import { PostUpdateSpecieRequest } from 'src/app/model/post';
+import { PostAssignSpecieRequest, PostUpdateSpecieRequest } from 'src/app/model/post';
 
 @Component({
   selector: 'app-select-specie-form',
@@ -22,6 +22,7 @@ export class SelectSpecieFormComponent implements OnInit {
   specieName: string;
   isPending: boolean = false;
   @Input() postId: string;
+  @Input() oldSpecieId: string;
   @Input() type: string;
 
   @ViewChild('auto') matAutocomplete: MatAutocomplete;  
@@ -73,7 +74,7 @@ export class SelectSpecieFormComponent implements OnInit {
 
   assignpecie()
   {
-    let request: PostUpdateSpecieRequest = {
+    let request: PostAssignSpecieRequest = {
       specieId: this.specieId,
       specieName: this.specieName,
       postId: this.postId
@@ -91,6 +92,20 @@ export class SelectSpecieFormComponent implements OnInit {
 
   updateSpecie()
   {
-
+    let request: PostUpdateSpecieRequest = {
+      specieId: this.specieId,
+      specieName: this.specieName,
+      oldSpecieId: this.oldSpecieId,
+      postId: this.postId
+    };
+      
+    this.manageItemsService.updateBird(request).subscribe(
+      data=> {
+        console.log(data);
+      },
+      error=>{
+        console.log(error);
+      }
+    )
   }
 }

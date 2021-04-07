@@ -37,13 +37,20 @@ export class PostResponse {
     voteId: string;
 }
 
-export class PostUpdateSpecieRequest {
+export class PostAssignSpecieRequest {
     postId: string;
     specieName: string;
     specieId: string;
 }
 
-export class PostUpdateSpecieResponse {
+export class PostUpdateSpecieRequest {
+    postId: string;
+    specieName: string;
+    specieId: string;
+    oldSpecieId: string;
+}
+
+export class PostAssignSpecieResponse {
     postId: string;
     specieName: string;
     specieId: string;

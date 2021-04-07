@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
-import { PostRequest, PostResponse, PostListResponse, PostUpdateSpecieRequest, PostUpdateSpecieResponse } from 'src/app/model/post';
+import { PostRequest, PostResponse, PostUpdateSpecieRequest, PostAssignSpecieRequest, PostAssignSpecieResponse } from 'src/app/model/post';
 import { map } from 'rxjs/operators';
 
 @Injectable({
@@ -30,15 +30,22 @@ export class ManageItemsService {
       }));
   }
 
-  assignBird(request: PostUpdateSpecieRequest) {
-    return this.httpClient.put<PostUpdateSpecieResponse>(`${environment.birdPendingApiUrl}api/v1/ManagePostPending/AssignSpecieId/`, request)
+  assignBird(request: PostAssignSpecieRequest) {
+    return this.httpClient.put<PostAssignSpecieResponse>(`${environment.birdPendingApiUrl}api/v1/ManagePostPending/AssignSpecieId/`, request)
+      .pipe(map(data => {
+        return data;
+      }));
+  }
+
+  updateBird(request: PostUpdateSpecieRequest) {
+    return this.httpClient.put<PostAssignSpecieResponse>(`${environment.birdApiUrl}api/v1/ManagePostSpecie/UpdateSpecieId/`, request)
       .pipe(map(data => {
         return data;
       }));
   }
 
   changeBird(request: PostUpdateSpecieRequest) {
-    return this.httpClient.put<PostUpdateSpecieResponse>(`${environment.birdApiUrl}api/v1/ManagePostSpecie/ChangeSpecieId/`, request)
+    return this.httpClient.put<string>(`${environment.birdApiUrl}api/v1/ManagePostSpecie/ChangeSpecieId/`, request)
       .pipe(map(data => {
         return data;
       }));
