@@ -1,11 +1,15 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
-import { first } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { catchError, debounceTime, first, map, startWith, switchMap } from 'rxjs/operators';
 import { User } from 'src/app/model/account';
 import { PostResponse } from 'src/app/model/post';
+import { AutocompleteResponse } from 'src/app/model/specie';
 import { VoteRequest } from 'src/app/model/vote';
 import { AccountService } from 'src/app/services/account/account.service';
+import { AutocompleteService } from 'src/app/services/autocomplete/autocomplete.service';
 import { BirdserviceService } from 'src/app/services/bird/birdservice.service';
 import { LoaderService } from 'src/app/services/loader/loader.service';
 import { PendingBirdService } from 'src/app/services/pendingBird/pending-bird.service';
@@ -34,7 +38,13 @@ export class PostPageComponent implements OnInit {
   hasLocation = false;
   hasLabels = false;
 
+  filteredSpecies: Observable<AutocompleteResponse[]>;
+  autocompleteControl = new FormControl();
+  specieId: string;
+  specieName: string;
+
   constructor(private activateRoute: ActivatedRoute,
+    private autocompleteService: AutocompleteService,
     private loaderService: LoaderService,
     private postService: PostService,
     private birdService: BirdserviceService,
@@ -45,8 +55,38 @@ export class PostPageComponent implements OnInit {
     private route: Router) { 
     }
 
+    selectSpecie(item: AutocompleteResponse){
+      this.autocompleteControl.setValue(item.nameComplete);
+      this.specieId = item.specieId;
+      this.specieName = item.nameComplete
+    }
+  
+    getSpecies(value: any): Observable<AutocompleteResponse[]> {
+      if(value != '' && value.length > 2) {
+        return this.autocompleteService.GetSpeciesByKeys(value.toLowerCase(), localStorage.getItem('locale'))
+          .pipe(map(results => results),
+            catchError(_ => {
+              return of([]);
+            }
+          )
+        );
+      }
+  
+      return of([]);
+    }
+
   ngOnInit(): void {
-    
+    this.filteredSpecies = this.autocompleteControl.valueChanges.pipe(
+      startWith(''),
+      debounceTime(300),
+      switchMap(value => {
+        if (value !== '' && value.nameComplete == null) {
+          return this.getSpecies(value);
+        } else {
+          return of([]);
+        }
+      })
+    );
 
     this.loaderService.show();
     this.userLoggedInfo = this.accountService.userValue;

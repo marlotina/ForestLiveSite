@@ -49,7 +49,29 @@
                         </div>
 
                         <div class="row mb-5">
-                            <button type="button" (click)="openSpecieModal('fdsfsf')">hola</button>
+                           
+                            <a class="badge bg-secondary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                Reply
+                            </a>
+
+                            <div class="row">
+                                <div class="collapse  mt-15" id="collapseExample">
+                                    Select specie:
+                                    <mat-form-field class="autocomplete-full-width">
+                                        <input type="text" aria-label="Number" matInput  [matAutocomplete]="autoBird"
+                                            [formControl]="autocompleteControl"   
+                                            id="specieNamePost" placeholder="{{ 'createPost.birdSpecie' | translate }}">
+                                            
+                                        <mat-autocomplete #autoBird="matAutocomplete" (optionSelected)='selectSpecie($event.option.value)'>
+                                            <mat-option *ngFor="let option of filteredSpecies | async" [value]="option" (change)="selectSpecie(option)" (click)="$event.stopPropagation()">
+                                                {{option.nameComplete}}
+                                            </mat-option>
+                                        </mat-autocomplete>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+
                         </div>
                         <div class="row mb-5">
                             <div [hidden]="!post.birdSpecie">
