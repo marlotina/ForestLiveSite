@@ -18,8 +18,6 @@ import { ModalEditImageComponent } from '../modal-edit-image/modal-edit-image.co
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { CreatePostRoutingModule } from './create-post-routing.module';
 import {MatTooltipModule} from '@angular/material/tooltip';
-//import { SelectSpecieDialogModule } from '../../shared/select-specie-dialog/select-specie-dialog.module';
-import { SelectSpecieDialogComponent } from '../../shared/select-specie-dialog/select-specie-dialog.component';
 
 const materialModules = [
   MatDatepickerModule,
@@ -37,8 +35,7 @@ const materialModules = [
 @NgModule({
   declarations: [
     CreatePostComponent,
-    ModalEditImageComponent,
-    SelectSpecieDialogComponent
+    ModalEditImageComponent
 
   ],
   imports: [
@@ -52,6 +49,6 @@ const materialModules = [
     ImageCropperModule,
     materialModules
   ],
-  entryComponents: [CreatePostComponent, ModalEditImageComponent, SelectSpecieDialogComponent]
+  entryComponents: [CreatePostComponent, ModalEditImageComponent]
 })
 export class CreatePostModule { }

@@ -14,7 +14,6 @@ import { environment } from 'src/environments/environment';
 import { AppComponent } from './app.component';
 import { CommonDialogComponent } from './components/shared/common-dialog/common-dialog.component';
 import { ImageDialogComponent } from './components/shared/image-dialog/image-dialog.component';
-import { SelectSpecieDialogComponent } from './components/shared/select-specie-dialog/select-specie-dialog.component';
 
 export function jwtTokenGetter() {
   return localStorage.getItem("access_token");

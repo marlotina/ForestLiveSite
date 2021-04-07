@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SelectSpecieDialogComponent } from './select-specie-dialog.component';
+import { SelectSpecieFormComponent } from './select-specie-form.component';
 
-describe('SelectSpecieDialogComponent', () => {
-  let component: SelectSpecieDialogComponent;
-  let fixture: ComponentFixture<SelectSpecieDialogComponent>;
+describe('SelectSpecieFormComponent', () => {
+  let component: SelectSpecieFormComponent;
+  let fixture: ComponentFixture<SelectSpecieFormComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SelectSpecieDialogComponent ]
+      declarations: [ SelectSpecieFormComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SelectSpecieDialogComponent);
+    fixture = TestBed.createComponent(SelectSpecieFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

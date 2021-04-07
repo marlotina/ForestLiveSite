@@ -1,24 +1,18 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { FormControl } from '@angular/forms';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable, of } from 'rxjs';
-import { catchError, debounceTime, first, map, startWith, switchMap } from 'rxjs/operators';
+import { first } from 'rxjs/operators';
 import { User } from 'src/app/model/account';
 import { PostResponse } from 'src/app/model/post';
-import { AutocompleteResponse } from 'src/app/model/specie';
 import { VoteRequest } from 'src/app/model/vote';
 import { AccountService } from 'src/app/services/account/account.service';
-import { AutocompleteService } from 'src/app/services/autocomplete/autocomplete.service';
-import { BirdserviceService } from 'src/app/services/bird/birdservice.service';
+import { GetItemsService } from 'src/app/services/items/get-items.service';
 import { LoaderService } from 'src/app/services/loader/loader.service';
-import { PendingBirdService } from 'src/app/services/pendingBird/pending-bird.service';
 import { PostService } from 'src/app/services/post/post.service';
 import { VoteService } from 'src/app/services/vote/vote.service';
 import { environment } from 'src/environments/environment';
 import { CommonDialogComponent } from '../../shared/common-dialog/common-dialog.component';
 import { ImageDialogComponent } from '../../shared/image-dialog/image-dialog.component';
-import { SelectSpecieDialogComponent } from '../../shared/select-specie-dialog/select-specie-dialog.component';
 
 @Component({
   selector: 'app-post-page',
@@ -38,56 +32,17 @@ export class PostPageComponent implements OnInit {
   hasLocation = false;
   hasLabels = false;
 
-  filteredSpecies: Observable<AutocompleteResponse[]>;
-  autocompleteControl = new FormControl();
-  specieId: string;
-  specieName: string;
-
   constructor(private activateRoute: ActivatedRoute,
-    private autocompleteService: AutocompleteService,
     private loaderService: LoaderService,
+    private getItemService: GetItemsService,
     private postService: PostService,
-    private birdService: BirdserviceService,
     private accountService: AccountService,
     private matDialog: MatDialog,
     private voteService: VoteService,
-    private pendingBirdService: PendingBirdService,
     private route: Router) { 
     }
 
-    selectSpecie(item: AutocompleteResponse){
-      this.autocompleteControl.setValue(item.nameComplete);
-      this.specieId = item.specieId;
-      this.specieName = item.nameComplete
-    }
-  
-    getSpecies(value: any): Observable<AutocompleteResponse[]> {
-      if(value != '' && value.length > 2) {
-        return this.autocompleteService.GetSpeciesByKeys(value.toLowerCase(), localStorage.getItem('locale'))
-          .pipe(map(results => results),
-            catchError(_ => {
-              return of([]);
-            }
-          )
-        );
-      }
-  
-      return of([]);
-    }
-
   ngOnInit(): void {
-    this.filteredSpecies = this.autocompleteControl.valueChanges.pipe(
-      startWith(''),
-      debounceTime(300),
-      switchMap(value => {
-        if (value !== '' && value.nameComplete == null) {
-          return this.getSpecies(value);
-        } else {
-          return of([]);
-        }
-      })
-    );
-
     this.loaderService.show();
     this.userLoggedInfo = this.accountService.userValue;
     this.isLogged = this.userLoggedInfo != null;
@@ -97,16 +52,9 @@ export class PostPageComponent implements OnInit {
       let type = params.get("type");
 
       if(type == 'post'){
-        this.postService.getPost(postId).subscribe(
+        this.getItemService.getPost(postId).subscribe(
           data => { 
-            this.post = data;  
-            this.postLabels = data.labels;
-            this.imagePost = environment.imagesPostUrl + data.imageUrl;
-            this.showOwnerOptions = this.userLoggedInfo != null && this.post.userId == this.userLoggedInfo.userName;
-            this.hasPost = true;
-            this.hasLabels = data.labels.length > 0;
-            this.initMap(this.post.latitude, this.post.longitude);
-            this.loaderService.hide();
+            this.setValuesPage(data);
           },
           error => {
             this.hasPost = false;
@@ -114,32 +62,18 @@ export class PostPageComponent implements OnInit {
         );
       } else if (type == 'bird'){
         let specieId = params.get("specieId");
-        this.birdService.GetPost(postId, specieId).subscribe(
+        this.getItemService.GetBird(postId, specieId).subscribe(
           data => { 
-            this.post = data;  
-            this.postLabels = data.labels;
-            this.imagePost = environment.imagesPostUrl + data.imageUrl;
-            this.showOwnerOptions = this.userLoggedInfo != null && this.post.userId == this.userLoggedInfo.userName;
-            this.hasPost = true;
-            this.hasLabels = data.labels.length > 0;
-            this.initMap(this.post.latitude, this.post.longitude);
-            this.loaderService.hide();
+            this.setValuesPage(data);
           },
           error => {
             this.hasPost = false;
           }
         );
       } else if (type == 'pending'){
-        this.pendingBirdService.GetPost(postId).subscribe(
+        this.getItemService.GetPending(postId).subscribe(
           data => { 
-            this.post = data;  
-            this.postLabels = data.labels;
-            this.imagePost = environment.imagesPostUrl + data.imageUrl;
-            this.showOwnerOptions = this.userLoggedInfo != null && this.post.userId == this.userLoggedInfo.userName;
-            this.hasPost = true;
-            this.hasLabels = data.labels.length > 0;
-            this.initMap(this.post.latitude, this.post.longitude);
-            this.loaderService.hide();
+            this.setValuesPage(data);
           },
           error => {
             this.hasPost = false;
@@ -148,6 +82,17 @@ export class PostPageComponent implements OnInit {
         this.loaderService.hide();
       }
     });
+  }
+
+  setValuesPage(data: PostResponse){
+    this.post = data;  
+    this.postLabels = data.labels;
+    this.imagePost = environment.imagesPostUrl + data.imageUrl;
+    this.showOwnerOptions = this.userLoggedInfo != null && this.post.userId == this.userLoggedInfo.userName;
+    this.hasPost = true;
+    this.hasLabels = data.labels.length > 0;
+    this.initMap(this.post.latitude, this.post.longitude);
+    this.loaderService.hide();
   }
 
   addVote(post: PostResponse, hasVote: boolean){
@@ -221,8 +166,6 @@ export class PostPageComponent implements OnInit {
           });
       }
     });
-
-    
   }
 
   openCommonModal(message:string) {
@@ -275,32 +218,14 @@ export class PostPageComponent implements OnInit {
       const map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
       this.getMarker(latLng, map);
     }
-}
-
-getMarker(latLng: google.maps.LatLngLiteral, map: google.maps.Map){
-  const marker = new google.maps.Marker({
-    position: { lat: latLng.lat, lng: latLng.lng},
-    map,
-    icon: "../../../../assets/img/core-img/mapMarker.png",
-  });
-}
-
-openSpecieModal(message:string) {
-  const dialogConfig = new MatDialogConfig();
-  
-  dialogConfig.disableClose = false;
-  dialogConfig.id = "modal-component";
-  dialogConfig.height = "200px";
-  dialogConfig.width = "600px";
-  dialogConfig.data = {
-    title: "user.userTitleModal",
-    description: message,
-    acceptButtonText: "general.ok",
-    hideAcceptButton: false,
-    hideCancelButton: true
   }
-  
-  this.matDialog.open(SelectSpecieDialogComponent, dialogConfig);
-}
+
+  getMarker(latLng: google.maps.LatLngLiteral, map: google.maps.Map){
+    const marker = new google.maps.Marker({
+      position: { lat: latLng.lat, lng: latLng.lng},
+      map,
+      icon: "../../../../assets/img/core-img/mapMarker.png",
+    });
+  } 
 
 }

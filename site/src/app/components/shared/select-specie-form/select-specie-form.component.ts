@@ -1,20 +1,19 @@
 import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatAutocomplete } from '@angular/material/autocomplete';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Observable, of } from 'rxjs';
-import { catchError, debounceTime, first, map, startWith, switchMap } from 'rxjs/operators';
+import { catchError, debounceTime, map, startWith, switchMap } from 'rxjs/operators';
 import { AutocompleteService } from 'src/app/services/autocomplete/autocomplete.service';
 import { AutocompleteResponse } from 'src/app/model/specie';
 import { ManageItemsService } from 'src/app/services/items/manage-items.service';
 import { PostUpdateSpecieRequest } from 'src/app/model/post';
 
 @Component({
-  selector: 'app-select-specie-dialog',
-  templateUrl: './select-specie-dialog.component.html',
-  styleUrls: ['./select-specie-dialog.component.css']
+  selector: 'app-select-specie-form',
+  templateUrl: './select-specie-form.component.html',
+  styleUrls: ['./select-specie-form.component.css']
 })
-export class SelectSpecieDialogComponent implements OnInit {
+export class SelectSpecieFormComponent implements OnInit {
 
   filteredSpecies: Observable<AutocompleteResponse[]>;
   autocompleteControl = new FormControl();
@@ -28,12 +27,10 @@ export class SelectSpecieDialogComponent implements OnInit {
 
   constructor(
     private manageItemsService: ManageItemsService,
-    private autocompleteService: AutocompleteService,
-    public dialogRef: MatDialogRef<SelectSpecieDialogComponent>,
-      @Inject(MAT_DIALOG_DATA) public modalData: any) {
+    private autocompleteService: AutocompleteService) {
 
         this.language =localStorage.getItem('locale');
-        this.postId = modalData.postId;
+        //this.postId = modalData.postId;
   }
 
   ngOnInit(): void {
@@ -92,9 +89,5 @@ export class SelectSpecieDialogComponent implements OnInit {
   updateSpecie()
   {
 
-  }
-
-  closeModal() {
-    this.dialogRef.close();
   }
 }
