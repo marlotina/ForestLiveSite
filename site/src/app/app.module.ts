@@ -29,7 +29,7 @@ export  function  HttpLoaderFactory(http:  HttpClient) {
   declarations: [
     AppComponent,
     CommonDialogComponent,
-    ImageDialogComponent,
+    ImageDialogComponent
   ],
   imports: [
     BrowserModule,

@@ -11,6 +11,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { AuthorDetailsModule } from '../../shared/author-details/author-details.module';
 import { PostCommentModule } from '../post-comment/post-comment.module';
+import { SelectSpecieDialogComponent } from '../../shared/select-specie-dialog/select-specie-dialog.component';
 
 const materialModules = [
   MatMenuModule, 
@@ -28,6 +29,7 @@ const materialModules = [
     SharedModule,
     AuthorDetailsModule,
     materialModules
-  ]
+  ],
+  entryComponents:[PostPageComponent, SelectSpecieDialogComponent]
 })
 export class PostPageModule { }

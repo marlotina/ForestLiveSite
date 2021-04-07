@@ -47,6 +47,10 @@
                         <div class="row mb-15 div-bottom-line">
                             <a (click)="showImage(imagePost)"><img src="{{imagePost}}" alt="{{post.altImage}}" class="postImage divPostImgContent img-fluid rounded float-end"></a>
                         </div>
+
+                        <div class="row mb-5">
+                            <button type="button" (click)="openSpecieModal('fdsfsf')">hola</button>
+                        </div>
                         <div class="row mb-5">
                             <div [hidden]="!post.birdSpecie">
                                 {{ 'userPage.birdSpecie' | translate }}: {{post.birdSpecie}}

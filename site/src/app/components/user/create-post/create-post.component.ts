@@ -164,7 +164,7 @@ export class CreatePostComponent implements OnInit {
       );
     }
 
-    return null;
+    return of([]);
   }
 
   onSubmit() {

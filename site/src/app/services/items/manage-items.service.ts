@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
-import { PostRequest, PostResponse, PostListResponse } from 'src/app/model/post';
+import { PostRequest, PostResponse, PostListResponse, PostUpdateSpecieRequest, PostUpdateSpecieResponse } from 'src/app/model/post';
 import { map } from 'rxjs/operators';
 
 @Injectable({
@@ -25,6 +25,20 @@ export class ManageItemsService {
 
   addBird(request: PostRequest) {
     return this.httpClient.post<PostResponse>(`${environment.birdApiUrl}api/v1/ManagePostSpecie/AddPost/`, request)
+      .pipe(map(data => {
+        return data;
+      }));
+  }
+
+  assignBird(request: PostUpdateSpecieRequest) {
+    return this.httpClient.put<PostUpdateSpecieResponse>(`${environment.birdPendingApiUrl}api/v1/ManagePostSpecie/AssignSpecieId/`, request)
+      .pipe(map(data => {
+        return data;
+      }));
+  }
+
+  changeBird(request: PostUpdateSpecieRequest) {
+    return this.httpClient.put<PostUpdateSpecieResponse>(`${environment.birdApiUrl}api/v1/ManagePostSpecie/ChangeSpecieId/`, request)
       .pipe(map(data => {
         return data;
       }));

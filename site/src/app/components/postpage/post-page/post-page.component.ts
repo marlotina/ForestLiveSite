@@ -14,6 +14,7 @@ import { VoteService } from 'src/app/services/vote/vote.service';
 import { environment } from 'src/environments/environment';
 import { CommonDialogComponent } from '../../shared/common-dialog/common-dialog.component';
 import { ImageDialogComponent } from '../../shared/image-dialog/image-dialog.component';
+import { SelectSpecieDialogComponent } from '../../shared/select-specie-dialog/select-specie-dialog.component';
 
 @Component({
   selector: 'app-post-page',
@@ -242,6 +243,24 @@ getMarker(latLng: google.maps.LatLngLiteral, map: google.maps.Map){
     map,
     icon: "../../../../assets/img/core-img/mapMarker.png",
   });
+}
+
+openSpecieModal(message:string) {
+  const dialogConfig = new MatDialogConfig();
+  
+  dialogConfig.disableClose = false;
+  dialogConfig.id = "modal-component";
+  dialogConfig.height = "200px";
+  dialogConfig.width = "600px";
+  dialogConfig.data = {
+    title: "user.userTitleModal",
+    description: message,
+    acceptButtonText: "general.ok",
+    hideAcceptButton: false,
+    hideCancelButton: true
+  }
+  
+  this.matDialog.open(SelectSpecieDialogComponent, dialogConfig);
 }
 
 }

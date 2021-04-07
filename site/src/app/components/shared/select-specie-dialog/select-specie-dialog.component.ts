@@ -3,10 +3,11 @@ import { FormControl } from '@angular/forms';
 import { MatAutocomplete } from '@angular/material/autocomplete';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Observable, of } from 'rxjs';
-import { catchError, debounceTime, map, startWith, switchMap } from 'rxjs/operators';
+import { catchError, debounceTime, first, map, startWith, switchMap } from 'rxjs/operators';
 import { AutocompleteService } from 'src/app/services/autocomplete/autocomplete.service';
 import { AutocompleteResponse } from 'src/app/model/specie';
 import { ManageItemsService } from 'src/app/services/items/manage-items.service';
+import { PostUpdateSpecieRequest } from 'src/app/model/post';
 
 @Component({
   selector: 'app-select-specie-dialog',
@@ -19,9 +20,11 @@ export class SelectSpecieDialogComponent implements OnInit {
   autocompleteControl = new FormControl();
   language: string;
   specieId: string;
+  specieName: string;
+  postId: string; 
 
   @ViewChild('auto') matAutocomplete: MatAutocomplete;  
-  @ViewChild('matInput') specieNamePost: ElementRef<HTMLInputElement>;
+  @ViewChild('autocompleteControl') specieNamePost: ElementRef<HTMLInputElement>;
 
   constructor(
     private manageItemsService: ManageItemsService,
@@ -30,6 +33,7 @@ export class SelectSpecieDialogComponent implements OnInit {
       @Inject(MAT_DIALOG_DATA) public modalData: any) {
 
         this.language =localStorage.getItem('locale');
+        this.postId = modalData.postId;
   }
 
   ngOnInit(): void {
@@ -46,16 +50,17 @@ export class SelectSpecieDialogComponent implements OnInit {
     );
   }
 
+
   selectSpecie(item: AutocompleteResponse){
     this.autocompleteControl.setValue(item.nameComplete);
     this.specieId = item.specieId;
+    this.specieName = item.nameComplete
   }
 
   getSpecies(value: any): Observable<AutocompleteResponse[]> {
     if(value != '' && value.length > 2) {
-      return this.autocompleteService.GetSpeciesByKeys(value.toLowerCase(), this.language)
-        .pipe(
-          map(results => results),
+      return this.autocompleteService.GetSpeciesByKeys(value.toLowerCase(), localStorage.getItem('locale'))
+        .pipe(map(results => results),
           catchError(_ => {
             return of([]);
           }
@@ -68,7 +73,20 @@ export class SelectSpecieDialogComponent implements OnInit {
 
   changeSpecie()
   {
-
+    let request: PostUpdateSpecieRequest = {
+      specieId: this.specieId,
+      specieName: this.specieName,
+      postId: this.postId
+    };
+      
+    this.manageItemsService.assignBird(request).subscribe(
+      data=> {
+        console.log(data);
+      },
+      error=>{
+        console.log(error);
+      }
+    )
   }
 
   updateSpecie()

@@ -1,21 +1,17 @@
 <div class="modal-body">
     Select specie:
-    <div class="autocomplete-form">
-        <mat-form-field class="autocomplete-full-width">
-            <input type="text" aria-label="Number" matInput  [matAutocomplete]="autoBird"
-                [formControl]="autocompleteControl"
-                placeholder="{{ 'createPost.birdSpecie' | translate }}">
-                
-            <mat-autocomplete #autoBird="matAutocomplete" (optionSelected)='selectSpecie($event.option.value)'>
-                <mat-option *ngFor="let option of filteredSpecies | async" [value]="option" 
-                    (change)="selectSpecie(option)" 
-                    (click)="$event.stopPropagation()">
-                    {{option.nameComplete}}
-                </mat-option>
-            </mat-autocomplete>
-        </mat-form-field>
-    </div>
-    <input type="hidden" id="specieIdPost"  >
+    <mat-form-field class="autocomplete-full-width">
+        <input type="text" aria-label="Number" matInput  [matAutocomplete]="autoBird"
+            [formControl]="autocompleteControl"  formControlName="specieName"   
+            id="specieNamePost" placeholder="{{ 'createPost.birdSpecie' | translate }}">
+            
+        <mat-autocomplete #autoBird="matAutocomplete" (optionSelected)='selectSpecie($event.option.value)'>
+            <mat-option *ngFor="let option of filteredSpecies | async" [value]="option" (change)="selectSpecie(option)" (click)="$event.stopPropagation()">
+                {{option.nameComplete}}
+            </mat-option>
+        </mat-autocomplete>
+    </mat-form-field>
+    <input type="hidden" id="specieIdPost">
 </div>
 <div >
     <button type="button" class="btn btn-primary" (click)="changeSpecie()">change specie</button>
