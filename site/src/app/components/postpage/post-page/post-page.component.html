@@ -34,10 +34,6 @@
                                 </button>
                                 <mat-menu #menu="matMenu" >
                                     <button mat-menu-item type="button" (click)="deleteItem()">
-                                        <mat-icon>edit</mat-icon>
-                                        <span>edit</span>
-                                    </button>
-                                    <button mat-menu-item type="button" (click)="deleteItem()">
                                         <mat-icon>delete</mat-icon>
                                         <span>{{ 'postPage.delete' | translate }}</span>
                                     </button>
@@ -45,33 +41,32 @@
                             </div>
                         </div>
                         <div class="row mb-15 div-bottom-line">
-                            <a (click)="showImage(imagePost)"><img src="{{imagePost}}" alt="{{post.altImage}}" class="postImage divPostImgContent img-fluid rounded float-end"></a>
+                            <a (click)="showImage(imagesPostUrl + post.imageUrl)"><img src="{{imagesPostUrl}}{{post.imageUrl}}" alt="{{post.altImage}}" class="postImage divPostImgContent img-fluid rounded float-end"></a>
                         </div>
 
                         <div class="row mb-5">
-                           
-                            <a class="badge bg-secondary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-                                Reply
-                            </a>
-
+                            <div *ngIf="type!='post'">
+                                <strong>{{ 'userPage.birdSpecie' | translate }}:</strong>
+                                <label [hidden]="!post.birdSpecie"> {{post.birdSpecie}}</label>
+                                <span class="link-info" *ngIf="!post.birdSpecie">&nbsp; Help the user to identify the bird</span>
+                                &nbsp;
+                                <a class="badge bg-secondary" *ngIf="showOwnerOptions" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                    change specie
+                                </a>
+                            </div>
+                            
                             <div class="row">
-                                <div class="collapse  mt-15" id="collapseExample">
+                                <div class="collapse  div-bottom-line" id="collapseExample">
                                     <app-select-specie-form 
                                         [oldSpecieId]="post.specieId"
                                         [postId]="post.postId"
                                         [type]="type"></app-select-specie-form>
                                 </div>
                             </div>
-
                         </div>
-                        <div class="row mb-5">
-                            <div [hidden]="!post.birdSpecie">
-                                {{ 'userPage.birdSpecie' | translate }}: {{post.birdSpecie}}
-                            </div>
-                        </div>
-                        <div class="row mb-5">
-                            <div [hidden]="!post.observationDate">
-                                {{ 'userPage.observationDate' | translate }}: {{post.observationDate}} 
+                        <div *ngIf="type!='post'" class="row mb-5">
+                            <div>
+                                <strong>{{ 'userPage.observationDate' | translate }}:</strong> {{post.observationDate}} 
                             </div>
                         </div>
                         <div class="row mb-15">
@@ -79,10 +74,10 @@
                                 {{post.text}}
                             </div>
                         </div>
-                        <div class="row mb-15" [hidden]="!hasLabels">
+                        <div class="row mb-15" *ngIf="post.labels.length > 0">
                             <div class="col-12">
                                 <strong>{{ 'postPage.tags' | translate }}:</strong>&nbsp;
-                                <a *ngFor="let label of postLabels" role="button" href="#" class="ml-5">
+                                <a *ngFor="let label of post.labels" role="button" href="#" class="ml-5">
                                     <span class="label label-default">{{label}}</span>
                                 </a>
                             </div>
@@ -126,7 +121,7 @@
         </div>
 
         <div class="col-12 col-sm-9 col-md-4" >
-            <div class="mb-15" [hidden]="!isLogged">
+            <div class="mb-15" *ngIf="userLoggedInfo">
                 <a routerLink="/createPost" class="btn btn-primary" style="width: 100%;">{{ 'userPage.addPost' | translate }}</a>
             </div>
 

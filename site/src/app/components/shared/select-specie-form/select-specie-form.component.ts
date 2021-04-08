@@ -7,6 +7,8 @@ import { AutocompleteService } from 'src/app/services/autocomplete/autocomplete.
 import { AutocompleteResponse } from 'src/app/model/specie';
 import { ManageItemsService } from 'src/app/services/items/manage-items.service';
 import { PostAssignSpecieRequest, PostUpdateSpecieRequest } from 'src/app/model/post';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { CommonDialogComponent } from '../common-dialog/common-dialog.component';
 
 @Component({
   selector: 'app-select-specie-form',
@@ -30,6 +32,7 @@ export class SelectSpecieFormComponent implements OnInit {
 
   constructor(
     private manageItemsService: ManageItemsService,
+    private matDialog: MatDialog,
     private autocompleteService: AutocompleteService) {
 
         this.language =localStorage.getItem('locale');
@@ -74,20 +77,40 @@ export class SelectSpecieFormComponent implements OnInit {
 
   assignpecie()
   {
-    let request: PostAssignSpecieRequest = {
+    let request: PostUpdateSpecieRequest = {
       specieId: this.specieId,
       specieName: this.specieName,
+      oldSpecieId: this.oldSpecieId,
       postId: this.postId
     };
+
+    const dialogConfig = new MatDialogConfig();
+    
+    dialogConfig.disableClose = false;
+    dialogConfig.id = "modal-component";
+    dialogConfig.width = "600px";
+    dialogConfig.data = {
+      //title: "user.deleteTitlePostModal",
+      description: "user.deleteTextPostModal",
+      acceptButtonText: "general.delete",
+      cancelButtonText:"general.cancel",
+      hideAcceptButton: false,
+      hideCancelButton: false
+    }
       
-    this.manageItemsService.assignBird(request).subscribe(
-      data=> {
-        console.log(data);
-      },
-      error=>{
-        console.log(error);
+    const dialogRef = this.matDialog.open(CommonDialogComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe(result => {
+      if(result == 'ACCEPT'){
+        this.manageItemsService.assignBird(request).subscribe(
+          data=> {
+            console.log(data);
+          },
+          error=>{
+            console.log(error);
+          }
+        )
       }
-    )
+    });
   }
 
   updateSpecie()
@@ -98,14 +121,33 @@ export class SelectSpecieFormComponent implements OnInit {
       oldSpecieId: this.oldSpecieId,
       postId: this.postId
     };
+
+    const dialogConfig = new MatDialogConfig();
+    
+    dialogConfig.disableClose = false;
+    dialogConfig.id = "modal-component";
+    dialogConfig.width = "600px";
+    dialogConfig.data = {
+      //title: "user.deleteTitlePostModal",
+      description: "user.deleteTextPostModal",
+      acceptButtonText: "general.delete",
+      cancelButtonText:"general.cancel",
+      hideAcceptButton: false,
+      hideCancelButton: false
+    }
       
-    this.manageItemsService.updateBird(request).subscribe(
-      data=> {
-        console.log(data);
-      },
-      error=>{
-        console.log(error);
+    const dialogRef = this.matDialog.open(CommonDialogComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe(result => {
+      if(result == 'ACCEPT'){
+        this.manageItemsService.updateBird(request).subscribe(
+          data=> {
+            console.log(data);
+          },
+          error=>{
+            console.log(error);
+          }
+        )
       }
-    )
+    });
   }
 }

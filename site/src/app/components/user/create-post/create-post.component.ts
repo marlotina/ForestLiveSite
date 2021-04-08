@@ -1,7 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { PostService } from 'src/app/services/post/post.service';
 import { Observable, of } from 'rxjs';
 import { catchError, debounceTime, first, map, switchMap } from 'rxjs/operators';
 import { LocationService } from 'src/app/services/location/location.service';
@@ -16,9 +15,8 @@ import { ModalEditImageComponent } from '../modal-edit-image/modal-edit-image.co
 import { AutocompleteService } from 'src/app/services/autocomplete/autocomplete.service';
 import { AutocompleteResponse } from 'src/app/model/specie';
 import { Router } from '@angular/router';
-import { BirdserviceService } from 'src/app/services/bird/birdservice.service';
 import { UserLabelsService } from 'src/app/services/user/labels/user-labels.service';
-import { PendingBirdService } from 'src/app/services/pendingBird/pending-bird.service';
+import { ManageItemsService } from 'src/app/services/items/manage-items.service';
 
 class ImageSnippet {
   constructor(public src: string, public file: File) {}
@@ -77,13 +75,11 @@ export class CreatePostComponent implements OnInit {
   @ViewChild('autoLabel') matAutoLabelcomplete: MatAutocomplete;
 
   constructor(private formBuilder: FormBuilder,
-    private postService: PostService, 
     private matDialog: MatDialog,
     private locationService: LocationService,
     private accountService: AccountService,
     private router: Router,
-    private pendingBirdService: PendingBirdService,
-    private birdserviceService: BirdserviceService,
+    private manageItemsService: ManageItemsService,
     private userLabelsService: UserLabelsService,
     private autocompleteService: AutocompleteService) { 
       
@@ -182,56 +178,49 @@ export class CreatePostComponent implements OnInit {
     });
 
     if(this.type == 1) { 
-      this.postService.addPost(this.postForm.value)
+      this.manageItemsService.addPost(this.postForm.value)
       .pipe(first())
       .subscribe(
           data => {    
             this.router.navigate([`${data.userId}/post/${data.postId}`]);
           },
           error => {   
-            if(error.status == "409"){
-              this.openCommonModal('account.conflictNameMessage');
-              this.postForm.controls.userName.setErrors({'incorrect': true});
-            } else {
-              this.openCommonModal('user.failUserAction');
-            } 
+            this.manageError(error.status);
           });
     } else if (this.type == 2) {
-      this.birdserviceService.addPost(this.postForm.value)
+      this.manageItemsService.addBird(this.postForm.value)
       .pipe(first())
       .subscribe(
           data => {    
             this.router.navigate([`${data.userId}/bird/${data.postId}/${data.specieId}`]);
           },
           error => {   
-            if(error.status == "409"){
-              this.openCommonModal('account.conflictNameMessage');
-              this.postForm.controls.userName.setErrors({'incorrect': true});
-            } else {
-              this.openCommonModal('user.failUserAction');
-            } 
+            this.manageError(error.status);
           });
     } else if (this.type == 3) {
-      this.pendingBirdService.addPost(this.postForm.value)
+      this.manageItemsService.addPending(this.postForm.value)
       .pipe(first())
       .subscribe(
           data => {    
             this.router.navigate([`${data.userId}/pending/${data.postId}`]);
           },
           error => {   
-            if(error.status == "409"){
-              this.openCommonModal('account.conflictNameMessage');
-              this.postForm.controls.userName.setErrors({'incorrect': true});
-            } else {
-              this.openCommonModal('user.failUserAction');
-            } 
+            this.manageError(error.status);
           });
     }
     
   }
 
-  get f() { return this.postForm.controls; }
+  manageError(errorStatus: string){
+    if(errorStatus == "409"){
+      this.openCommonModal('account.conflictNameMessage');
+      this.postForm.controls.userName.setErrors({'incorrect': true});
+    } else {
+      this.openCommonModal('user.failUserAction');
+    } 
+  }
 
+  get f() { return this.postForm.controls; }
 
   /*Image*/
   selectFile(event) {
@@ -257,7 +246,7 @@ export class CreatePostComponent implements OnInit {
     this.visibleEditImage =true;
     this.file = event;
 
-    this.openEditProfile();
+    this.openEditImage();
   }
 
   deleteImage(){
@@ -267,8 +256,8 @@ export class CreatePostComponent implements OnInit {
     this.visibleEditImage = false;
     this.firstImage = true;
   }
-  /*Map*/
 
+  /*Map*/
   initMap() {
 
     this.locationService.getPosition().then(pos => {
@@ -391,7 +380,7 @@ export class CreatePostComponent implements OnInit {
   }
 
   /*Modal form*/
-  openEditProfile() {
+  openEditImage() {
     const dialogConfig = new MatDialogConfig();
     let results: string;
     dialogConfig.disableClose = false;

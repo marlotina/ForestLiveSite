@@ -23,15 +23,13 @@ export class PostPageComponent implements OnInit {
   @ViewChild('mapWrapper') mapElement: ElementRef;
   post = new PostResponse();
   imagesProfileUrl = environment.imagesProfileUrl;
+  imagesPostUrl = environment.imagesPostUrl;
   showOwnerOptions = false;
-  postLabels: string[];
-  imagePost: string;
-  isLogged: boolean;
   userLoggedInfo: User;
   hasPost = true;
   hasLocation = false;
-  hasLabels = false;
   type: string;
+
   constructor(private activateRoute: ActivatedRoute,
     private loaderService: LoaderService,
     private getItemService: GetItemsService,
@@ -45,7 +43,6 @@ export class PostPageComponent implements OnInit {
   ngOnInit(): void {
     this.loaderService.show();
     this.userLoggedInfo = this.accountService.userValue;
-    this.isLogged = this.userLoggedInfo != null;
     
     this.activateRoute.paramMap.subscribe(params => {
       let postId = params.get("postId");
@@ -86,11 +83,8 @@ export class PostPageComponent implements OnInit {
 
   setValuesPage(data: PostResponse){
     this.post = data;  
-    this.postLabels = data.labels;
-    this.imagePost = environment.imagesPostUrl + data.imageUrl;
     this.showOwnerOptions = this.userLoggedInfo != null && this.post.userId == this.userLoggedInfo.userName;
     this.hasPost = true;
-    this.hasLabels = data.labels.length > 0;
     this.initMap(this.post.latitude, this.post.longitude);
     this.loaderService.hide();
   }
@@ -114,11 +108,7 @@ export class PostPageComponent implements OnInit {
                 post.voteId = null;
               },
               error => {   
-                if(error.status == "409"){
-                  this.openCommonModal('account.conflictNameMessage');
-                } else {
-                  this.openCommonModal('user.failUserAction');
-                } 
+                this.manageError(error.status);
               });
     }else{
       this.voteService.AddVote(request)
@@ -130,13 +120,17 @@ export class PostPageComponent implements OnInit {
                 post.voteId = data.id;
               },
               error => {   
-                if(error.status == "409"){
-                  this.openCommonModal('account.conflictNameMessage');
-                } else {
-                  this.openCommonModal('user.failUserAction');
-                } 
+                this.manageError(error.status);
               });
     }
+  }
+
+  manageError(errorStatus){
+    if(errorStatus == "409"){
+      this.openCommonModal('account.conflictNameMessage');
+    } else {
+      this.openCommonModal('user.failUserAction');
+    } 
   }
 
   deleteItem(){

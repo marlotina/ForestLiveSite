@@ -34,18 +34,6 @@
                                     <mat-icon>more_vert</mat-icon>
                                 </button>
                                 <mat-menu #menu="matMenu" >
-                                    <a *ngIf="post.type =='pending'" mat-menu-item type="button" href="/confirmBird/{{post.postId}}">
-                                        <mat-icon>filter_tilt_shift</mat-icon>
-                                        <span>confirm</span>
-                                    </a>
-                                    <a  mat-menu-item type="button" *ngIf="post.type =='bird'" href="/editpost/?type={{post.type}}&postId={{post.postId}}&specieId={{post.specieId}}">
-                                        <mat-icon>edit</mat-icon>
-                                        <span>edit bird</span>
-                                    </a>
-                                    <a  mat-menu-item type="button" *ngIf="post.type !='bird'" href="/editpost/?type={{post.type}}&postId={{post.postId}}">
-                                        <mat-icon>edit</mat-icon>
-                                        <span>edit</span>
-                                    </a>
                                     <button mat-menu-item type="button" (click)="deletePost(post)">
                                         <mat-icon>delete</mat-icon>
                                         <span>{{ 'postPage.delete' | translate }}</span>

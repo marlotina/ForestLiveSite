@@ -2,11 +2,9 @@
 import { Component , Input, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { first } from 'rxjs/operators';
-import { User } from 'src/app/model/account';
 import { CommentRequest, CommentResponse } from 'src/app/model/Comment';
 import { AccountService } from 'src/app/services/account/account.service';
 import { CommentService } from 'src/app/services/comment/comment.service';
-import { LoaderService } from 'src/app/services/loader/loader.service';
 import { environment } from 'src/environments/environment';
 import { CommonDialogComponent } from '../../shared/common-dialog/common-dialog.component';
 
@@ -21,7 +19,7 @@ export class PostCommentComponent implements OnInit {
   @Input() postTitle: string;
   @Input() specieId: string;
   @Input() userId: string;
-  @Input() commentCount = 2;
+  @Input() commentCount: number;
 
   comments: CommentResponse[] = [];
   imagesProfileUrl = environment.imagesProfileUrl;
