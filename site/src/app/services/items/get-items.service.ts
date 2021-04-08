@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
-import { PostRequest, PostResponse, PostListResponse } from 'src/app/model/post';
+import { PostResponse } from 'src/app/model/post';
 import { map } from 'rxjs/operators';
 
 @Injectable({

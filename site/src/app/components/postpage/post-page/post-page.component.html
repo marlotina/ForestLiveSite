@@ -46,9 +46,9 @@
 
                         <div class="row mb-5">
                             <div *ngIf="type!='post'">
-                                <strong>{{ 'userPage.birdSpecie' | translate }}:</strong>
+                                <strong>{{ 'userPage.birdSpecie' | translate }}:&nbsp;</strong>
                                 <label [hidden]="!post.birdSpecie"> {{post.birdSpecie}}</label>
-                                <span class="link-info" *ngIf="!post.birdSpecie">&nbsp; Help the user to identify the bird</span>
+                                <span class="link-info" *ngIf="!post.birdSpecie">Help the user to identify the bird</span>
                                 &nbsp;
                                 <a class="badge bg-secondary" *ngIf="showOwnerOptions" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
                                     change specie
@@ -74,9 +74,9 @@
                                 {{post.text}}
                             </div>
                         </div>
-                        <div class="row mb-15" *ngIf="post.labels.length > 0">
+                        <div class="row mb-15" *ngIf="post.labels != null && post.labels.length > 0">
                             <div class="col-12">
-                                <strong>{{ 'postPage.tags' | translate }}:</strong>&nbsp;
+                                <strong>{{ 'postPage.tags' | translate }}:</strong>
                                 <a *ngFor="let label of post.labels" role="button" href="#" class="ml-5">
                                     <span class="label label-default">{{label}}</span>
                                 </a>
@@ -93,18 +93,18 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    
-                    <div class="col-12 col-md-12">
-                        <div class="row mb-5 div-bottom-line">
-                            <div  class="col-3 d-flex mb-15 text-right">
+                        <div class="row">
+                            <div  class="col-12 d-flex">
                                 <a href="#" target="_blank"><img class="social-image" src="../../../../assets/img/core-img/iconsGreen-facebook.svg" /></a>
                                 <a href="#" target="_blank"><img class="social-image" src="../../../../assets/img/core-img/iconsGreen-twitter.svg" /></a>
                                 <a href="#" target="_blank"><img class="social-image" src="../../../../assets/img/core-img/iconsGreen-instagram.svg" /></a>
                                 <a href="#" target="_blank"><img class="social-image" src="../../../../assets/img/core-img/iconsGreen-linkedin.svg" /></a>
                             </div>
                         </div>
-
+                        
+                    </div>
+                    
+                    <div class="col-12 col-md-12">
                         <app-post-comment *ngIf = "post.postId" 
                             [postId]="post.postId"
                             [postTitle]="post.title"

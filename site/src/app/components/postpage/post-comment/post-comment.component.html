@@ -35,7 +35,7 @@
                         <small>{{comment.userId}}&nbsp;<em>{{comment.creationDate}}</em></small>
                         <p>{{comment.text}}</p>
 
-                        <div *ngIf="userNameLogged != null">
+                        <div *ngIf="userNameLogged != null" class="mb-15">
                             <a class="badge bg-secondary"  role="button">
                                 +
                             </a>
@@ -45,7 +45,7 @@
                             </a>
 
                             <div class="row">
-                                <div class="collapse  mt-15" id="collapseExample-{{comment.id}}">
+                                <div class="collapse" id="collapseExample-{{comment.id}}">
                                     <ng-container *ngIf="showFormList[comment.id]">
                                         <ng-container
                                         *ngTemplateOutlet="
