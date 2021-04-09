@@ -11,6 +11,7 @@ import { VoteRequest } from 'src/app/model/vote';
 import { AccountService } from 'src/app/services/account/account.service';
 import { AutocompleteService } from 'src/app/services/autocomplete/autocomplete.service';
 import { BirdserviceService } from 'src/app/services/bird/birdservice.service';
+import { ManageItemsService } from 'src/app/services/items/manage-items.service';
 import { LoaderService } from 'src/app/services/loader/loader.service';
 import { PostService } from 'src/app/services/post/post.service';
 import { VoteService } from 'src/app/services/vote/vote.service';
@@ -47,6 +48,7 @@ export class BirdLandingPageComponent implements OnInit {
     private accountService: AccountService,
     private autocompleteService : AutocompleteService,
     private matDialog: MatDialog,
+    private manageItemService: ManageItemsService,
     private loaderService: LoaderService) { }
 
   ngOnInit(): void {
@@ -186,15 +188,41 @@ export class BirdLandingPageComponent implements OnInit {
     const dialogRef = this.matDialog.open(CommonDialogComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(result => {
       if(result == 'ACCEPT'){
-        this.postService.deletePost(post.postId).subscribe(
-          data => {
-            const index = this.birdPosts.indexOf(post, 0);
+
+        if(post.type == "post"){
+          this.manageItemService.deletePost(post.postId).subscribe(
+            data => {
+              const index = this.birdPosts.indexOf(post, 0);
             if (index > -1) {
               this.birdPosts.splice(index, 1);
             }
-          },
-          error => { 
-          });
+            },
+            error => { 
+              this.openCommonModal('failpostdelete');
+            });
+        } else if(post.type == "bird"){
+          this.manageItemService.deleteBird(post.postId, post.specieId).subscribe(
+            data => {
+              const index = this.birdPosts.indexOf(post, 0);
+            if (index > -1) {
+              this.birdPosts.splice(index, 1);
+            }
+            },
+            error => { 
+              this.openCommonModal('failpostdelete');
+            });
+        } else if (post.type == "pending"){
+          this,this.manageItemService.deletePending(post.postId).subscribe(
+            data => {
+              const index = this.birdPosts.indexOf(post, 0);
+            if (index > -1) {
+              this.birdPosts.splice(index, 1);
+            }
+            },
+            error => { 
+              this.openCommonModal('failpostdelete');
+            });
+        }
       }
     });
   }
@@ -212,4 +240,21 @@ export class BirdLandingPageComponent implements OnInit {
     this.matDialog.open(ImageDialogComponent, dialogConfig);
   }
 
+  openCommonModal(message:string) {
+    const dialogConfig = new MatDialogConfig();
+    
+    dialogConfig.disableClose = false;
+    dialogConfig.id = "modal-component";
+    dialogConfig.height = "200px";
+    dialogConfig.width = "600px";
+    dialogConfig.data = {
+      title: "user.userTitleModal",
+      description: message,
+      acceptButtonText: "general.ok",
+      hideAcceptButton: false,
+      hideCancelButton: true
+    }
+    
+    this.matDialog.open(CommonDialogComponent, dialogConfig);
+  }
 }

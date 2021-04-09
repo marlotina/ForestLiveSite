@@ -7,6 +7,7 @@ import { PostResponse } from 'src/app/model/post';
 import { VoteRequest } from 'src/app/model/vote';
 import { AccountService } from 'src/app/services/account/account.service';
 import { GetItemsService } from 'src/app/services/items/get-items.service';
+import { ManageItemsService } from 'src/app/services/items/manage-items.service';
 import { LoaderService } from 'src/app/services/loader/loader.service';
 import { PostService } from 'src/app/services/post/post.service';
 import { VoteService } from 'src/app/services/vote/vote.service';
@@ -35,6 +36,7 @@ export class PostPageComponent implements OnInit {
     private getItemService: GetItemsService,
     private postService: PostService,
     private accountService: AccountService,
+    private manageItemService: ManageItemsService,
     private matDialog: MatDialog,
     private voteService: VoteService,
     private route: Router) { 
@@ -104,6 +106,56 @@ export class PostPageComponent implements OnInit {
     } else {
       this.openCommonModal('user.failUserAction');
     } 
+  }
+
+
+  deletePost(){
+
+    const dialogConfig = new MatDialogConfig();
+    
+    dialogConfig.disableClose = false;
+    dialogConfig.id = "modal-component";
+    dialogConfig.width = "600px";
+    dialogConfig.data = {
+      //title: "user.deleteTitlePostModal",
+      description: "user.deleteTextPostModal",
+      acceptButtonText: "general.delete",
+      cancelButtonText:"general.cancel",
+      hideAcceptButton: false,
+      hideCancelButton: false
+    }
+      
+    const dialogRef = this.matDialog.open(CommonDialogComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe(result => {
+      if(result == 'ACCEPT'){
+
+        if(this.post.type == "post"){
+          this.manageItemService.deletePost(this.post.postId).subscribe(
+            data => {
+              this.route.navigate(['/userpage/' + this.post.userId]);
+            },
+            error => { 
+              this.openCommonModal('failpostdelete');
+            });
+        } else if(this.post.type == "bird"){
+          this.manageItemService.deleteBird(this.post.postId, this.post.specieId).subscribe(
+            data => {
+              this.route.navigate(['/userpage/' + this.post.userId]);
+            },
+            error => { 
+              this.openCommonModal('failpostdelete');
+            });
+        } else if (this.post.type == "pending"){
+          this,this.manageItemService.deletePending(this.post.postId).subscribe(
+            data => {
+              this.route.navigate(['/userpage/' + this.post.userId]);
+            },
+            error => { 
+              this.openCommonModal('failpostdelete');
+            });
+        }
+      }
+    });
   }
 
   deleteItem(){

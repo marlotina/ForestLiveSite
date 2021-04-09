@@ -6,8 +6,8 @@ import { PostListResponse } from 'src/app/model/post';
 import { UserLabelPageResponse } from 'src/app/model/user';
 import { VoteRequest } from 'src/app/model/vote';
 import { AccountService } from 'src/app/services/account/account.service';
+import { ManageItemsService } from 'src/app/services/items/manage-items.service';
 import { LoaderService } from 'src/app/services/loader/loader.service';
-import { PostService } from 'src/app/services/post/post.service';
 import { UserPostService } from 'src/app/services/user-post/user-post.service';
 import { UserLabelsService } from 'src/app/services/user/labels/user-labels.service';
 import { VoteService } from 'src/app/services/vote/vote.service';
@@ -39,10 +39,10 @@ export class LandingPageComponent implements OnInit {
   searchType:string = 'all';
 
   constructor(
-    private postService: PostService,
     private loaderService: LoaderService,
     private activateRoute: ActivatedRoute,
     private accountService: AccountService,
+    private manageItemService: ManageItemsService,
     private voteService: VoteService,
     private userPostService: UserPostService,
     private userLabelsService: UserLabelsService,
@@ -120,16 +120,41 @@ export class LandingPageComponent implements OnInit {
     const dialogRef = this.matDialog.open(CommonDialogComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(result => {
       if(result == 'ACCEPT'){
-        this.postService.deletePost(post.postId).subscribe(
-          data => {
-            const index = this.userPosts.indexOf(post, 0);
-            if (index > -1) {
-              this.userPosts.splice(index, 1);
-            }
-          },
-          error => { 
-            this.openCommonModal('failpostdelete');
-          });
+
+        if(post.type == "post"){
+          this.manageItemService.deletePost(post.postId).subscribe(
+            data => {
+              const index = this.userPosts.indexOf(post, 0);
+              if (index > -1) {
+                this.userPosts.splice(index, 1);
+              }
+            },
+            error => { 
+              this.openCommonModal('failpostdelete');
+            });
+        } else if(post.type == "bird"){
+          this.manageItemService.deleteBird(post.postId, post.specieId).subscribe(
+            data => {
+              const index = this.userPosts.indexOf(post, 0);
+              if (index > -1) {
+                this.userPosts.splice(index, 1);
+              }
+            },
+            error => { 
+              this.openCommonModal('failpostdelete');
+            });
+        } else if (post.type == "pending"){
+          this,this.manageItemService.deletePending(post.postId).subscribe(
+            data => {
+              const index = this.userPosts.indexOf(post, 0);
+              if (index > -1) {
+                this.userPosts.splice(index, 1);
+              }
+            },
+            error => { 
+              this.openCommonModal('failpostdelete');
+            });
+        }
       }
     });
   }
