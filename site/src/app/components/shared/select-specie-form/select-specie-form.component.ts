@@ -20,6 +20,7 @@ export class SelectSpecieFormComponent implements OnInit {
   filteredSpecies: Observable<AutocompleteResponse[]>;
   autocompleteControl = new FormControl();
   userHelpedIdentification = new FormControl();
+  collapseChange = new FormControl();
   language: string;
   specieId: string;
   specieName: string;
@@ -28,6 +29,10 @@ export class SelectSpecieFormComponent implements OnInit {
   @Input() postId: string;
   @Input() oldSpecieId: string;
   @Input() type: string;
+  @Input() specieOldName: string;
+  @Input() showOptions: boolean;
+
+  
 
   @ViewChild('auto') matAutocomplete: MatAutocomplete;  
   @ViewChild('autocompleteControl') specieNamePost: ElementRef<HTMLInputElement>;
@@ -54,7 +59,6 @@ export class SelectSpecieFormComponent implements OnInit {
       })
     );
   }
-
 
   selectSpecie(item: AutocompleteResponse){
     this.autocompleteControl.setValue(item.nameComplete);
@@ -103,6 +107,8 @@ export class SelectSpecieFormComponent implements OnInit {
 
         this.manageItemsService.assignBird(request).subscribe(
           data=> {
+            this.specieName = request.specieName;
+            this.specieId = request.specieId;
             this.finishChange = true;
             console.log(data);
           },

@@ -45,22 +45,12 @@
 
                         <div class="row mb-5">
                             <div *ngIf="type!='post'">
-                                <strong>{{ 'userPage.birdSpecie' | translate }}:&nbsp;</strong>
-                                <label [hidden]="!post.birdSpecie"> {{post.birdSpecie}}</label>
-                                <span class="link-info" *ngIf="!post.birdSpecie">Help the user to identify the bird</span>
-                                &nbsp;
-                                <a class="badge bg-secondary" *ngIf="showOwnerOptions" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-                                    change specie
-                                </a>
-                            </div>
-                            
-                            <div class="row">
-                                <div class="collapse  div-bottom-line" id="collapseExample">
-                                    <app-select-specie-form 
-                                        [oldSpecieId]="post.specieId"
-                                        [postId]="post.postId"
-                                        [type]="type"></app-select-specie-form>
-                                </div>
+                                <app-select-specie-form 
+                                    [showOptions]="showOwnerOptions"
+                                    [specieOldName]="post.birdSpecie"
+                                    [oldSpecieId]="post.specieId"
+                                    [postId]="post.postId"
+                                    [type]="type"></app-select-specie-form>
                             </div>
                         </div>
                         <div  class="row mb-5">
