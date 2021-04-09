@@ -23,7 +23,7 @@ export class PostPageComponent implements OnInit {
   @ViewChild('mapWrapper') mapElement: ElementRef;
   post = new PostResponse();
   imagesProfileUrl = environment.imagesProfileUrl;
-  imagesPostUrl = environment.imagesPostUrl;
+  imagePostUrl: string;
   showOwnerOptions = false;
   userLoggedInfo: User;
   hasPost = false;
@@ -52,6 +52,7 @@ export class PostPageComponent implements OnInit {
           this.post = data;  
           this.showOwnerOptions = this.userLoggedInfo != null && this.post.userId == this.userLoggedInfo.userName;
           this.hasPost = true;
+          this.imagePostUrl = environment.imagesPostUrl + this.post.imageUrl;
           this.loaderService.hide();
     
           this.initMap(this.post.latitude, this.post.longitude);

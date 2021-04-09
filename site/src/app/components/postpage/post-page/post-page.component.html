@@ -4,8 +4,7 @@
         
         <div class="col-12 col-md-8">
             <app-loader></app-loader>
-            <div *ngIf="hasPost">
-                
+            <div>
                 <div class="row divPost divPostColor">  
                     <div class="col-12 col-md-1 div-right-line div-bottom-line mb-15">
                         <div class="divVote">
@@ -41,7 +40,7 @@
                             </div>
                         </div>
                         <div class="row mb-15 div-bottom-line">
-                            <a (click)="showImage(imagesPostUrl + post.imageUrl)"><img src="{{imagesPostUrl}}{{post.imageUrl}}" alt="{{post.altImage}}" class="postImage divPostImgContent img-fluid rounded float-end"></a>
+                            <a (click)="showImage(imagePostUrl)"><img src="{{imagePostUrl}}" alt="{{post.altImage}}" class="postImage divPostImgContent img-fluid rounded float-end"></a>
                         </div>
 
                         <div class="row mb-5">
@@ -64,7 +63,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div *ngIf="type!='post'" class="row mb-5">
+                        <div  class="row mb-5">
                             <div>
                                 <strong>{{ 'userPage.observationDate' | translate }}:</strong> {{post.observationDate}} 
                             </div>
