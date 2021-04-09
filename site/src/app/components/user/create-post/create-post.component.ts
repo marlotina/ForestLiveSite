@@ -182,7 +182,7 @@ export class CreatePostComponent implements OnInit {
       .pipe(first())
       .subscribe(
           data => {    
-            this.router.navigate([`${data.userId}/post/${data.postId}`]);
+            this.manageSuccess(data.userId, data.postId);
           },
           error => {   
             this.manageError(error.status);
@@ -192,7 +192,7 @@ export class CreatePostComponent implements OnInit {
       .pipe(first())
       .subscribe(
           data => {    
-            this.router.navigate([`${data.userId}/bird/${data.postId}/${data.specieId}`]);
+            this.manageSuccess(data.userId, data.postId);
           },
           error => {   
             this.manageError(error.status);
@@ -202,13 +202,16 @@ export class CreatePostComponent implements OnInit {
       .pipe(first())
       .subscribe(
           data => {    
-            this.router.navigate([`${data.userId}/pending/${data.postId}`]);
+            this.manageSuccess(data.userId, data.postId);
           },
           error => {   
             this.manageError(error.status);
           });
     }
-    
+  }
+
+  manageSuccess(userId: string, postId: string){
+    this.router.navigate([`${userId}/${postId}`]);
   }
 
   manageError(errorStatus: string){

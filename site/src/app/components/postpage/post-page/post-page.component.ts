@@ -46,29 +46,13 @@ export class PostPageComponent implements OnInit {
     
     this.activateRoute.paramMap.subscribe(params => {
       let postId = params.get("postId");
-      this.type = params.get("type");
 
-      if(this.type == 'post'){
-        this.getItemService.getPost(postId).subscribe(
-          data => { 
-            this.setValuesPage(data);
-          }
-        );
-      } else if (this.type == 'bird'){
-        let specieId = params.get("specieId");
-        this.getItemService.GetBird(postId, specieId).subscribe(
-          data => { 
-            this.setValuesPage(data);
-          }
-        );
-      } else if (this.type == 'pending'){
-        this.getItemService.GetPending(postId).subscribe(
-          data => { 
-            this.setValuesPage(data);
-          }
-        );
-        this.loaderService.hide();
-      }
+      this.getItemService.getPost(postId).subscribe(
+        data => { 
+          this.setValuesPage(data);
+        }
+      );
+      
     });
   }
 

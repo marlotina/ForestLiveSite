@@ -12,7 +12,6 @@ import { AccountService } from 'src/app/services/account/account.service';
 import { AutocompleteService } from 'src/app/services/autocomplete/autocomplete.service';
 import { BirdserviceService } from 'src/app/services/bird/birdservice.service';
 import { LoaderService } from 'src/app/services/loader/loader.service';
-import { PendingBirdService } from 'src/app/services/pendingBird/pending-bird.service';
 import { PostService } from 'src/app/services/post/post.service';
 import { VoteService } from 'src/app/services/vote/vote.service';
 import { environment } from 'src/environments/environment';
@@ -30,10 +29,9 @@ export class BirdLandingPageComponent implements OnInit {
   imagesPostUrl = environment.imagesPostUrl;
   hasNotPosts = false;
   hideRemoveBtn = true;
-
+  
   specieId: string = null;
   searchOrder: number = 1;
-  searchType: number = 1;
 
   userLoggedInfo: User;
 
@@ -46,7 +44,6 @@ export class BirdLandingPageComponent implements OnInit {
   constructor(private searchBirdsSerices: BirdserviceService,
     private postService: PostService,
     private voteService: VoteService,
-    private pendingBirdService: PendingBirdService,
     private accountService: AccountService,
     private autocompleteService : AutocompleteService,
     private matDialog: MatDialog,
@@ -119,11 +116,6 @@ export class BirdLandingPageComponent implements OnInit {
     
   }
 
-  changeSearchType(e: any){
-    this.searchType = e.target.value;
-    this.getBirdPosts();
-  }
-
   changeSearchOrder(e: any){
     this.searchOrder = e.target.value;
     this.getBirdPosts();
@@ -146,19 +138,7 @@ export class BirdLandingPageComponent implements OnInit {
 
   getBirdPosts() {
     this.loaderService.show();
-    if (this.searchType == 1){
-      this.postService.getPosts(this.searchOrder).subscribe(
-        data => {
-          this.birdPosts = data;
-          if(data.length > 0){
-            this.hasNotPosts = true;
-          }else{
-            this.hasNotPosts = false;
-          }
-          this.loaderService.hide();
-        }
-      )     
-    } else if(this.searchType == 2){
+    
       this.searchBirdsSerices.GetBirdBySpecie(this.specieId, this.searchOrder).subscribe(
         data =>{ 
           this.birdPosts = data;
@@ -170,19 +150,6 @@ export class BirdLandingPageComponent implements OnInit {
           this.loaderService.hide();
         } 
       );
-    } else if (this.searchType == 3){
-      this.pendingBirdService.GetWithoutSpecie(this.searchOrder).subscribe(
-        data => {
-          this.birdPosts = data;
-          if(data.length > 0){
-            this.hasNotPosts = true;
-          }else{
-            this.hasNotPosts = false;
-          }
-          this.loaderService.hide();
-        }
-      );
-    }
   }
 
   showDeleteOption(userId){
