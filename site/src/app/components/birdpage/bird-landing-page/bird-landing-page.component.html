@@ -57,11 +57,12 @@
                             <a *ngIf="post.type == 'pending'" class="link-info" href="/{{post.userId}}/pending/{{post.postId}}#commentsDiv">Help the user to identify the bird</a>
                              
                         </div>
-                        <div *ngIf="post.type != 'post'" class="row mb-5">
-                            <strong>{{ 'userPage.observationDate' | translate }}: &nbsp;</strong> 
+                        <div *ngIf="post.type != 'post'" class="row mb-5 div-bottom-line">
+                            <div><strong>{{ 'userPage.observationDate' | translate }}: &nbsp;</strong> 
                             <span *ngIf="post.observationDate">{{post.observationDate}}</span>
-                            <span *ngIf="!post.observationDate">--</span>
+                            <span *ngIf="!post.observationDate">--</span></div>
                         </div>
+
                         <div class="row mb-15">
                             <div>
                                 {{post.text}}
@@ -86,10 +87,7 @@
             <div class="divFilter">
                 <strong>Filter</strong>
             </div>
-            
-
             <div class="autocomplete-form divFilterNoTop">
-
                 <div class="d-flex">
                     <mat-form-field class="autocomplete-full-width  pr-15">
                         <input type="text" class="form-control" aria-label="Number" matInput  [matAutocomplete]="autoBird"

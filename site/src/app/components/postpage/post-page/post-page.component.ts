@@ -49,19 +49,16 @@ export class PostPageComponent implements OnInit {
 
       this.getItemService.getPost(postId).subscribe(
         data => { 
-          this.setValuesPage(data);
+          this.post = data;  
+          this.showOwnerOptions = this.userLoggedInfo != null && this.post.userId == this.userLoggedInfo.userName;
+          this.hasPost = true;
+          this.loaderService.hide();
+    
+          this.initMap(this.post.latitude, this.post.longitude);
         }
       );
       
     });
-  }
-
-  setValuesPage(data: PostResponse){
-    this.post = data;  
-    this.showOwnerOptions = this.userLoggedInfo != null && this.post.userId == this.userLoggedInfo.userName;
-    this.hasPost = true;
-    this.initMap(this.post.latitude, this.post.longitude);
-    this.loaderService.hide();
   }
 
   addVote(post: PostResponse, hasVote: boolean){
@@ -100,7 +97,7 @@ export class PostPageComponent implements OnInit {
     }
   }
 
-  manageError(errorStatus){
+  manageError(errorStatus: string){
     if(errorStatus == "409"){
       this.openCommonModal('account.conflictNameMessage');
     } else {
