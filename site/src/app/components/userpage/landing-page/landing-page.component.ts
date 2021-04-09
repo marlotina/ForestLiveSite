@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription } from 'rxjs';
 import { first } from 'rxjs/operators';
-import { User } from 'src/app/model/account';
 import { PostListResponse } from 'src/app/model/post';
 import { UserLabelPageResponse } from 'src/app/model/user';
 import { VoteRequest } from 'src/app/model/vote';
@@ -26,8 +24,7 @@ export class LandingPageComponent implements OnInit {
   
   submitted = false;
   
-  userLoggedInfo: User;
-  subscription: Subscription;
+  userLoggedName: string = null;
   userPosts: PostListResponse[];
   userId: string;
   imagesPostUrl = environment.imagesPostUrl;
@@ -39,8 +36,7 @@ export class LandingPageComponent implements OnInit {
     postCount: 0 
   };
 
-  searchPost = true;
-  searchBirds = true;
+  searchType:string = 'all';
 
   constructor(
     private postService: PostService,
@@ -65,7 +61,7 @@ export class LandingPageComponent implements OnInit {
       this.searchPosts();   
     });
 
-    this.userLoggedInfo = this.accountService.userValue;
+    this.userLoggedName = this.accountService.userValue.userName;
     this.userLabelsService.GetUserLabels(this.userId).subscribe(
       data => {
         this.userLabels = data;
@@ -73,24 +69,9 @@ export class LandingPageComponent implements OnInit {
     );;
   }
 
-  toggleEditable(event) {
-    if ( event.target.checked ) {
-      if(event.target.value == 'post'){
-        this.searchPost = true;
-      }
-      if(event.target.value == 'bird'){
-        this.searchBirds = true;
-      }
-    }else{
-      if(event.target.value == 'post'){
-        this.searchPost = false;
-      }
-      if(event.target.value == 'bird'){
-        this.searchBirds = false;
-      }
-    }
-    
-    this.searchPosts();  
+  changeSearchType(e: any){
+    this.searchType = e.target.value;
+    this.searchPosts();
   }
 
   searchWithLabels(label: UserLabelPageResponse) {
@@ -107,36 +88,17 @@ export class LandingPageComponent implements OnInit {
   }
 
   searchPosts(){
-
-    if(  this.searchPost &&  this.searchBirds){
-      this.userPostService.getPostsByUser(this.userId).subscribe(
-        data =>{ 
-          this.userPosts = data;
-          this.hasNotPosts = this.userPosts.length == 0; 
-          this.loaderService.hide();
-        } 
-      );
-    } else if(this.searchPost && !this.searchBirds){
-      this.userPostService.getPostsByLabel(this.userId, this.selectedLabel.id).subscribe(
-        data =>{ 
-          this.userPosts = data;
-          this.hasNotPosts = this.userPosts.length == 0; 
-          this.loaderService.hide();
-        } 
-      );
-    } else if(!this.searchPost && this.searchBirds){
-      this.userPostService.getBirdsByLabel(this.userId, this.selectedLabel.id).subscribe(
-        data =>{ 
-          this.userPosts = data;
-          this.hasNotPosts = this.userPosts.length == 0; 
-          this.loaderService.hide();
-        } 
-      );
-    }
+    this.userPostService.GetPosts(this.userId, this.selectedLabel.id, this.searchType).subscribe(
+      data =>{ 
+        this.userPosts = data;
+        this.hasNotPosts = this.userPosts.length == 0; 
+        this.loaderService.hide();
+      } 
+    );
   }
 
-  showDeleteOption(userId){
-    return this.userLoggedInfo != null && userId == this.userLoggedInfo.userName;
+  showDeleteOption(userId: string){
+    return this.userLoggedName != null && userId == this.userLoggedName;
   }
 
   deletePost(post: PostListResponse){
@@ -176,7 +138,7 @@ export class LandingPageComponent implements OnInit {
     let request: VoteRequest = {
       postId: post.postId,
       titlePost: post.title,
-      userId: this.userLoggedInfo.userName,
+      userId: this.userLoggedName,
       authorPostUserId: post.userId,
       specieId: post.specieId
     }

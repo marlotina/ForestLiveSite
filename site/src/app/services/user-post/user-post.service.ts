@@ -26,23 +26,15 @@ export class UserPostService {
       }));
   }
 
-  getPostsByLabel(userId: string, label: string){
-    return this.httpClient.get<PostListResponse[]>(`${environment.userPostApiUrl}api/v1/UserPosts/GetPosts?label=${label}&userId=${userId}`)
-      .pipe(map(data => {
-        return data;
-      }));
-  }
-
-  getBirdsByLabel(userId: string, label: string){
-    return this.httpClient.get<PostListResponse[]>(`${environment.userPostApiUrl}api/v1/UserPosts/GetBirds?label=${label}&userId=${userId}`)
-      .pipe(map(data => {
-        return data;
-      }));
-  }
-
-
-  getPostsByUser(userId: string){
-    return this.httpClient.get<PostListResponse[]>(`${environment.userPostApiUrl}api/v1/UserPosts/GetAll?userId=${userId}`)
+  GetPosts(userId: string, label: string, type: string){
+    let params: string;
+    if(label == null){
+      params = `?userId=${userId}&type=${type}&label=none`;
+    } else {
+      params = `?userId=${userId}&type=${type}&label=${label}`;
+    }
+    return this.httpClient.get<PostListResponse[]>
+    (`${environment.userPostApiUrl}api/v1/UserPosts/GetPosts${params}`)
       .pipe(map(data => {
         return data;
       }));

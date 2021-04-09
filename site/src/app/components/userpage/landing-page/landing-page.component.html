@@ -50,7 +50,7 @@
                         <div class="row mb-5">
                             <div>
                                 <strong>{{ 'userPage.birdSpecie' | translate }}:</strong> {{post.birdSpecie}}
-                                <a *ngIf="post.type == 'pending'" class="link-info" href="/{{post.userId}}/pending/{{post.postId}}#commentsDiv">Help the user to identify the bird</a>
+                                <a *ngIf="post.type == 'pending'" class="link-info" href="/{{post.userId}}/{{post.postId}}#commentsDiv">Help the user to identify the bird</a>
                              
                             </div>
                         </div>
@@ -91,18 +91,35 @@
 
             <div class="divAuthor">
                 <div class="form-group">
+
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" (change)="toggleEditable($event)" type="checkbox" value="post" id="flexCheckPost" checked>
-                        <label class="form-check-label" for="flexCheckPost">
-                          Post
+                        <input class="form-check-input" type="radio" name="radioSearch" 
+                        (change)="changeSearchType($event)" id="radioAll" value='all' checked>
+                        <label class="form-check-label" for="radioAll">
+                          All
                         </label>
-                      </div>
-                      <div class="form-check form-check-inline">
-                        <input class="form-check-input" (change)="toggleEditable($event)" type="checkbox" value="bird" id="flexCheckBird" checked>
-                        <label class="form-check-label" for="flexCheckBird">
-                          Birds
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="radioSearch" 
+                        (change)="changeSearchType($event)" id="radioPost" value='post'>
+                        <label class="form-check-label" for="radioPost">
+                          Posts
                         </label>
-                      </div>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="radioSearch" 
+                        (change)="changeSearchType($event)" id="radioBird" value='bird'>
+                        <label class="form-check-label" for="radioBird">
+                          birds
+                        </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="radioSearch" 
+                        (change)="changeSearchType($event)" id="radioPending" value='pending'>
+                        <label class="form-check-label" for="radioPending">
+                          Pending
+                        </label>
+                    </div>  
                 </div>
             </div>
 
