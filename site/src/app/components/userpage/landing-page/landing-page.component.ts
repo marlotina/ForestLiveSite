@@ -1,16 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
-import { first } from 'rxjs/operators';
 import { PostListResponse } from 'src/app/model/post';
 import { UserLabelPageResponse } from 'src/app/model/user';
-import { VoteRequest } from 'src/app/model/vote';
 import { AccountService } from 'src/app/services/account/account.service';
 import { ManageItemsService } from 'src/app/services/items/manage-items.service';
 import { LoaderService } from 'src/app/services/loader/loader.service';
 import { UserPostService } from 'src/app/services/user-post/user-post.service';
 import { UserLabelsService } from 'src/app/services/user/labels/user-labels.service';
-import { VoteService } from 'src/app/services/vote/vote.service';
 import { environment } from 'src/environments/environment';
 import { CommonDialogComponent } from '../../shared/common-dialog/common-dialog.component';
 import { ImageDialogComponent } from '../../shared/image-dialog/image-dialog.component';
@@ -43,7 +40,6 @@ export class LandingPageComponent implements OnInit {
     private activateRoute: ActivatedRoute,
     private accountService: AccountService,
     private manageItemService: ManageItemsService,
-    private voteService: VoteService,
     private userPostService: UserPostService,
     private userLabelsService: UserLabelsService,
     private matDialog: MatDialog) { 
@@ -157,51 +153,6 @@ export class LandingPageComponent implements OnInit {
         }
       }
     });
-  }
-
-  addVote(post: PostListResponse, hasVote: boolean){
-    let request: VoteRequest = {
-      postId: post.postId,
-      titlePost: post.title,
-      userId: this.userLoggedName,
-      authorPostUserId: post.userId,
-      specieId: post.specieId
-    }
-
-    if(hasVote){
-      this.voteService.DeleteVote(post.voteId, post.postId)
-      .pipe(first())
-          .subscribe(
-              data => {    
-                post.voteCount--;
-                post.hasVote = false;
-                post.voteId = null;
-              },
-              error => {   
-                if(error.status == "409"){
-                  this.openCommonModal('account.conflictNameMessage');
-                } else {
-                  this.openCommonModal('user.failUserAction');
-                } 
-              });
-    }else{
-      this.voteService.AddVote(request)
-      .pipe(first())
-          .subscribe(
-              data => {    
-                post.voteCount++;
-                post.hasVote = true;
-                post.voteId = data.id;
-              },
-              error => {   
-                if(error.status == "409"){
-                  this.openCommonModal('account.conflictNameMessage');
-                } else {
-                  this.openCommonModal('user.failUserAction');
-                } 
-              });
-    }
-    
   }
 
   openCommonModal(message:string) {

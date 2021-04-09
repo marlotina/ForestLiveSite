@@ -8,15 +8,15 @@
                 
                 <div class="row divPost divPostColor">  
                     <div class="col-12 col-md-1 div-right-line">
-                        <div class="divVote">
-                            {{post.voteCount}}
-                            <button type="button" 
-                                (click)="addVote(post, post.hasVote)" 
-                                [ngClass]="{'hasVote-btn' : post.hasVote, 'vote-btn' : !post.hasVote}" 
-                                class="votebtn">
-                                <mat-icon>thumb_up</mat-icon>
-                            </button>
-                        </div>
+                        <app-post-votes
+                            [postId]="post.postId"
+                            [titlePost]="post.title"
+                            [authorPostUserId]="post.userId"
+                            [userId]="userLoggedName"
+                            [voteCount]="post.voteCount"
+                            [specieId]="post.specieId"
+                            [voteId]="post.voteId"
+                            [hasVote]="post.hasVote"></app-post-votes>
                     </div>
                     <div class="col-12 col-md-11">
                         <div class="row mb-15 div-bottom-line">

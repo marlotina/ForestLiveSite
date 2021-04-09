@@ -7,14 +7,11 @@ import { catchError, debounceTime, first, map, startWith, switchMap } from 'rxjs
 import { User } from 'src/app/model/account';
 import { PostListResponse } from 'src/app/model/post';
 import { AutocompleteResponse } from 'src/app/model/specie';
-import { VoteRequest } from 'src/app/model/vote';
 import { AccountService } from 'src/app/services/account/account.service';
 import { AutocompleteService } from 'src/app/services/autocomplete/autocomplete.service';
 import { BirdserviceService } from 'src/app/services/bird/birdservice.service';
 import { ManageItemsService } from 'src/app/services/items/manage-items.service';
 import { LoaderService } from 'src/app/services/loader/loader.service';
-import { PostService } from 'src/app/services/post/post.service';
-import { VoteService } from 'src/app/services/vote/vote.service';
 import { environment } from 'src/environments/environment';
 import { CommonDialogComponent } from '../../shared/common-dialog/common-dialog.component';
 import { ImageDialogComponent } from '../../shared/image-dialog/image-dialog.component';
@@ -34,7 +31,7 @@ export class BirdLandingPageComponent implements OnInit {
   specieId: string = null;
   searchOrder: number = 1;
 
-  userLoggedInfo: User;
+  userLoggedName: string;
 
 
   filteredSpecies: Observable<AutocompleteResponse[]>;
@@ -43,8 +40,6 @@ export class BirdLandingPageComponent implements OnInit {
   @ViewChild('auto') matAutocomplete: MatAutocomplete;
 
   constructor(private searchBirdsSerices: BirdserviceService,
-    private postService: PostService,
-    private voteService: VoteService,
     private accountService: AccountService,
     private autocompleteService : AutocompleteService,
     private matDialog: MatDialog,
@@ -52,7 +47,7 @@ export class BirdLandingPageComponent implements OnInit {
     private loaderService: LoaderService) { }
 
   ngOnInit(): void {
-    this.userLoggedInfo = this.accountService.userValue;
+    this.userLoggedName = this.accountService.userValue != null ? this.accountService.userValue.userName : null;
 
     this.filteredSpecies = this.autocompleteControl.valueChanges.pipe(
       startWith(''),
@@ -84,40 +79,6 @@ export class BirdLandingPageComponent implements OnInit {
     
   }
 
-  addVote(post: PostListResponse, hasVote: boolean){
-    let request: VoteRequest = {
-      postId: post.postId,
-      titlePost: post.title,
-      userId: this.userLoggedInfo.userName,
-      authorPostUserId: post.userId,
-      specieId: post.specieId
-    }
-
-    if(hasVote){
-      this.voteService.DeleteVote(post.voteId, post.postId)
-      .pipe(first())
-          .subscribe(
-              data => {    
-                post.voteCount--;
-                post.hasVote = false;
-                post.voteId = null;
-              },
-              error => {   
-                
-              });
-    }else{
-      this.voteService.AddVote(request)
-      .pipe(first())
-          .subscribe(
-              data => {    
-                post.voteCount++;
-                post.hasVote = true;
-                post.voteId = data.id;
-              });
-    }
-    
-  }
-
   changeSearchOrder(e: any){
     this.searchOrder = e.target.value;
     this.getBirdPosts();
@@ -144,7 +105,7 @@ export class BirdLandingPageComponent implements OnInit {
       this.searchBirdsSerices.GetBirdBySpecie(this.specieId, this.searchOrder).subscribe(
         data =>{ 
           this.birdPosts = data;
-          if(data.length > 0){
+          if(data != null && data.length > 0){
             this.hasNotPosts = true;
           }else{
             this.hasNotPosts = false;
@@ -155,7 +116,7 @@ export class BirdLandingPageComponent implements OnInit {
   }
 
   showDeleteOption(userId){
-    return this.userLoggedInfo != null && userId == this.userLoggedInfo.userName;
+    return this.userLoggedName != null && userId == this.userLoggedName;
   }
 
   getSpecies(value: any): Observable<PostListResponse[]> {

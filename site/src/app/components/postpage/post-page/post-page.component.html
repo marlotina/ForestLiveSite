@@ -7,15 +7,15 @@
             <div>
                 <div class="row divPost divPostColor">  
                     <div class="col-12 col-md-1 div-right-line div-bottom-line mb-15">
-                        <div class="divVote">
-                            {{post.voteCount}}
-                            <button type="button" 
-                                (click)="addVote(post, post.hasVote)" 
-                                [ngClass]="{'hasVote-btn' : post.hasVote, 'vote-btn' : !post.hasVote}" 
-                                class="votebtn">
-                                <mat-icon>thumb_up</mat-icon>
-                            </button>
-                        </div>
+                        <app-post-votes
+                            [postId]="post.postId"
+                            [titlePost]="post.title"
+                            [authorPostUserId]="post.userId"
+                            [userId]="userLoggedName"
+                            [voteCount]="post.voteCount"
+                            [specieId]="post.specieId"
+                            [voteId]="post.voteId"
+                            [hasVote]="post.hasVote"></app-post-votes>
                     </div>
                     <div class="col-12 col-md-11 div-bottom-line mb-15">
                         <div class="row mb-15 div-bottom-line">
@@ -106,7 +106,7 @@
         </div>
 
         <div class="col-12 col-sm-9 col-md-4" >
-            <div class="mb-15" *ngIf="userLoggedInfo">
+            <div class="mb-15" *ngIf="userLoggedName">
                 <a routerLink="/createPost" class="btn btn-primary" style="width: 100%;">{{ 'userPage.addPost' | translate }}</a>
             </div>
 

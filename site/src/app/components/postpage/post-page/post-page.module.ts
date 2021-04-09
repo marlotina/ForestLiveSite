@@ -11,6 +11,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { AuthorDetailsModule } from '../../shared/author-details/author-details.module';
 import { PostCommentModule } from '../post-comment/post-comment.module';
 import { SelectSpecieFormModule } from '../../shared/select-specie-form/select-specie-form.module';
+import { PostVotesModule } from '../../shared/post-votes/post-votes.module';
 
 const materialModules = [
   MatMenuModule, 
@@ -28,6 +29,7 @@ const materialModules = [
     SharedModule,
     AuthorDetailsModule,
     SelectSpecieFormModule,
+    PostVotesModule,
     materialModules
   ],
   entryComponents:[PostPageComponent]

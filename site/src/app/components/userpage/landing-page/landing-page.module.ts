@@ -9,6 +9,7 @@ import { AuthorDetailsModule } from '../../shared/author-details/author-details.
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { PostVotesModule } from '../../shared/post-votes/post-votes.module';
 
 
 const materialModules = [
@@ -28,6 +29,7 @@ const materialModules = [
     HttpClientJsonpModule,
     SharedModule,
     AuthorDetailsModule,
+    PostVotesModule,
     materialModules
   ]
 })

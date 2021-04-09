@@ -1,16 +1,12 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
-import { first } from 'rxjs/operators';
-import { User } from 'src/app/model/account';
 import { PostResponse } from 'src/app/model/post';
-import { VoteRequest } from 'src/app/model/vote';
 import { AccountService } from 'src/app/services/account/account.service';
 import { GetItemsService } from 'src/app/services/items/get-items.service';
 import { ManageItemsService } from 'src/app/services/items/manage-items.service';
 import { LoaderService } from 'src/app/services/loader/loader.service';
 import { PostService } from 'src/app/services/post/post.service';
-import { VoteService } from 'src/app/services/vote/vote.service';
 import { environment } from 'src/environments/environment';
 import { CommonDialogComponent } from '../../shared/common-dialog/common-dialog.component';
 import { ImageDialogComponent } from '../../shared/image-dialog/image-dialog.component';
@@ -26,7 +22,7 @@ export class PostPageComponent implements OnInit {
   imagesProfileUrl = environment.imagesProfileUrl;
   imagePostUrl: string;
   showOwnerOptions = false;
-  userLoggedInfo: User;
+  userLoggedName: string;
   hasPost = false;
   hasLocation = true;
   type: string;
@@ -38,13 +34,12 @@ export class PostPageComponent implements OnInit {
     private accountService: AccountService,
     private manageItemService: ManageItemsService,
     private matDialog: MatDialog,
-    private voteService: VoteService,
     private route: Router) { 
     }
 
   ngOnInit(): void {
     this.loaderService.show();
-    this.userLoggedInfo = this.accountService.userValue;
+    this.userLoggedName = this.accountService.userValue != null ? this.accountService.userValue.userName : null;
     
     this.activateRoute.paramMap.subscribe(params => {
       let postId = params.get("postId");
@@ -52,7 +47,7 @@ export class PostPageComponent implements OnInit {
       this.getItemService.getPost(postId).subscribe(
         data => { 
           this.post = data;  
-          this.showOwnerOptions = this.userLoggedInfo != null && this.post.userId == this.userLoggedInfo.userName;
+          this.showOwnerOptions = this.userLoggedName != null && this.post.userId == this.userLoggedName;
           this.hasPost = true;
           this.imagePostUrl = environment.imagesPostUrl + this.post.imageUrl;
           this.loaderService.hide();
@@ -62,42 +57,6 @@ export class PostPageComponent implements OnInit {
       );
       
     });
-  }
-
-  addVote(post: PostResponse, hasVote: boolean){
-    let request: VoteRequest = {
-      postId: post.postId,
-      titlePost: post.title,
-      userId: this.userLoggedInfo.userName,
-      authorPostUserId: post.userId,
-      specieId: post.specieId
-    }
-
-    if(hasVote){
-      this.voteService.DeleteVote(post.voteId, post.postId)
-      .pipe(first())
-          .subscribe(
-              data => {    
-                post.voteCount--;
-                post.hasVote = false;
-                post.voteId = null;
-              },
-              error => {   
-                this.manageError(error.status);
-              });
-    }else{
-      this.voteService.AddVote(request)
-      .pipe(first())
-          .subscribe(
-              data => {    
-                post.voteCount++;
-                post.hasVote = true;
-                post.voteId = data.id;
-              },
-              error => {   
-                this.manageError(error.status);
-              });
-    }
   }
 
   manageError(errorStatus: string){
