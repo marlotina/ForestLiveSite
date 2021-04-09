@@ -83,7 +83,7 @@
                             </div>
                         </div>
                         <div class="row mb-15">
-                            <div class="col-12" [hidden]="!hasLocation">
+                            <div class="col-12" *ngIf="hasLocation">
                                 <div id="modal-content-wrapper">
                                     <div class="row justify-content-center">
                                             
@@ -104,7 +104,7 @@
                         
                     </div>
                     
-                    <div class="col-12 col-md-12">
+                    <div id="commentsDiv" class="col-12 col-md-12">                        
                         <app-post-comment *ngIf = "post.postId" 
                             [postId]="post.postId"
                             [postTitle]="post.title"

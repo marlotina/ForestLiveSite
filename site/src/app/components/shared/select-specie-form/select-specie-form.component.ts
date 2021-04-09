@@ -19,10 +19,12 @@ export class SelectSpecieFormComponent implements OnInit {
 
   filteredSpecies: Observable<AutocompleteResponse[]>;
   autocompleteControl = new FormControl();
+  userHelpedIdentification = new FormControl();
   language: string;
   specieId: string;
   specieName: string;
   isPending: boolean = false;
+  finishChange = false;
   @Input() postId: string;
   @Input() oldSpecieId: string;
   @Input() type: string;
@@ -36,7 +38,6 @@ export class SelectSpecieFormComponent implements OnInit {
     private autocompleteService: AutocompleteService) {
 
         this.language =localStorage.getItem('locale');
-        //this.postId = modalData.postId;
   }
 
   ngOnInit(): void {
@@ -77,22 +78,14 @@ export class SelectSpecieFormComponent implements OnInit {
 
   assignpecie()
   {
-    let request: PostUpdateSpecieRequest = {
-      specieId: this.specieId,
-      specieName: this.specieName,
-      oldSpecieId: this.oldSpecieId,
-      postId: this.postId
-    };
-
     const dialogConfig = new MatDialogConfig();
-    
     dialogConfig.disableClose = false;
     dialogConfig.id = "modal-component";
     dialogConfig.width = "600px";
     dialogConfig.data = {
       //title: "user.deleteTitlePostModal",
       description: "user.deleteTextPostModal",
-      acceptButtonText: "general.delete",
+      acceptButtonText: "general.accept",
       cancelButtonText:"general.cancel",
       hideAcceptButton: false,
       hideCancelButton: false
@@ -101,8 +94,16 @@ export class SelectSpecieFormComponent implements OnInit {
     const dialogRef = this.matDialog.open(CommonDialogComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(result => {
       if(result == 'ACCEPT'){
+        let request: PostAssignSpecieRequest = {
+          specieId: this.specieId,
+          specieName: this.specieName,
+          postId: this.postId,
+          userHelpedIdentification: this.userHelpedIdentification.value
+        };
+
         this.manageItemsService.assignBird(request).subscribe(
           data=> {
+            this.finishChange = true;
             console.log(data);
           },
           error=>{
@@ -115,22 +116,14 @@ export class SelectSpecieFormComponent implements OnInit {
 
   updateSpecie()
   {
-    let request: PostUpdateSpecieRequest = {
-      specieId: this.specieId,
-      specieName: this.specieName,
-      oldSpecieId: this.oldSpecieId,
-      postId: this.postId
-    };
-
     const dialogConfig = new MatDialogConfig();
-    
     dialogConfig.disableClose = false;
     dialogConfig.id = "modal-component";
     dialogConfig.width = "600px";
     dialogConfig.data = {
       //title: "user.deleteTitlePostModal",
       description: "user.deleteTextPostModal",
-      acceptButtonText: "general.delete",
+      acceptButtonText: "general.accept",
       cancelButtonText:"general.cancel",
       hideAcceptButton: false,
       hideCancelButton: false
@@ -139,8 +132,16 @@ export class SelectSpecieFormComponent implements OnInit {
     const dialogRef = this.matDialog.open(CommonDialogComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(result => {
       if(result == 'ACCEPT'){
+        let request: PostUpdateSpecieRequest = {
+          specieId: this.specieId,
+          specieName: this.specieName,
+          oldSpecieId: this.oldSpecieId,
+          postId: this.postId
+        };
+
         this.manageItemsService.updateBird(request).subscribe(
           data=> {
+            this.finishChange = true;
             console.log(data);
           },
           error=>{

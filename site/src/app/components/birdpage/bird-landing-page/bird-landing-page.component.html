@@ -56,11 +56,14 @@
                             <div *ngIf="post.birdSpecie">
                                 <strong>{{ 'userPage.birdSpecie' | translate }}:</strong> {{post.birdSpecie}}
                             </div>
+
+                            <a *ngIf="post.type == 'pending'" class="link-info" href="/{{post.userId}}/pending/{{post.postId}}#commentsDiv">Help the user to identify the bird</a>
+                             
                         </div>
-                        <div class="row mb-5">
-                            <div *ngIf="post.observationDate">
-                                <strong>{{ 'userPage.observationDate' | translate }}:</strong> {{post.observationDate}} 
-                            </div>
+                        <div *ngIf="post.type != 'post'" class="row mb-5">
+                            <strong>{{ 'userPage.observationDate' | translate }}: &nbsp;</strong> 
+                            <span *ngIf="post.observationDate">{{post.observationDate}}</span>
+                            <span *ngIf="!post.observationDate">--</span>
                         </div>
                         <div class="row mb-15">
                             <div>

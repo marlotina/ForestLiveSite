@@ -1,17 +1,24 @@
 <div class="modal-body">
-    Select specie:
-    <mat-form-field class="autocomplete-full-width">
-        <input type="text" aria-label="Number" matInput  [matAutocomplete]="autoBird"
-            [formControl]="autocompleteControl"  
-            id="specieNamePost" placeholder="{{ 'createPost.birdSpecie' | translate }}">
-            
-        <mat-autocomplete #autoBird="matAutocomplete" (optionSelected)='selectSpecie($event.option.value)'>
-            <mat-option *ngFor="let option of filteredSpecies | async" [value]="option" (change)="selectSpecie(option)" (click)="$event.stopPropagation()">
-                {{option.nameComplete}}
-            </mat-option>
-        </mat-autocomplete>
-    </mat-form-field>
-    <input type="hidden" id="specieIdPost">
+    <div *ngIf="!finishChange">
+        Select specie:
+        <mat-form-field class="autocomplete-full-width">
+            <input type="text" aria-label="Number" matInput  [matAutocomplete]="autoBird"
+                [formControl]="autocompleteControl"  
+                id="specieNamePost" placeholder="{{ 'createPost.birdSpecie' | translate }}">
+                
+            <mat-autocomplete #autoBird="matAutocomplete" (optionSelected)='selectSpecie($event.option.value)'>
+                <mat-option *ngFor="let option of filteredSpecies | async" [value]="option" (change)="selectSpecie(option)" (click)="$event.stopPropagation()">
+                    {{option.nameComplete}}
+                </mat-option>
+            </mat-autocomplete>
+        </mat-form-field>
+        
+        <input type="text" [formControl]="userHelpedIdentification"  
+                id="userHelpedIdentification" placeholder="user help you">
+    </div>
+    <div *ngIf="finishChange">
+        The change has been completed
+    </div>
 </div>
 <div >
     <button *ngIf="isPending" type="button" class="btn btn-primary" (click)="assignpecie()">assign specie</button>

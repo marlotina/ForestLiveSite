@@ -26,8 +26,8 @@ export class PostPageComponent implements OnInit {
   imagesPostUrl = environment.imagesPostUrl;
   showOwnerOptions = false;
   userLoggedInfo: User;
-  hasPost = true;
-  hasLocation = false;
+  hasPost = false;
+  hasLocation = true;
   type: string;
 
   constructor(private activateRoute: ActivatedRoute,
@@ -52,9 +52,6 @@ export class PostPageComponent implements OnInit {
         this.getItemService.getPost(postId).subscribe(
           data => { 
             this.setValuesPage(data);
-          },
-          error => {
-            this.hasPost = false;
           }
         );
       } else if (this.type == 'bird'){
@@ -62,18 +59,12 @@ export class PostPageComponent implements OnInit {
         this.getItemService.GetBird(postId, specieId).subscribe(
           data => { 
             this.setValuesPage(data);
-          },
-          error => {
-            this.hasPost = false;
           }
         );
       } else if (this.type == 'pending'){
         this.getItemService.GetPending(postId).subscribe(
           data => { 
             this.setValuesPage(data);
-          },
-          error => {
-            this.hasPost = false;
           }
         );
         this.loaderService.hide();
@@ -200,6 +191,7 @@ export class PostPageComponent implements OnInit {
         lat: Number.parseFloat(lat.toString()),
         lng: Number.parseFloat(lng.toString())
       };
+      
   
       const mapOptions: google.maps.MapOptions = {
         center: latLng,
@@ -211,6 +203,8 @@ export class PostPageComponent implements OnInit {
       };
       const map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
       this.getMarker(latLng, map);
+    }else{
+      this.hasLocation = false;
     }
   }
 

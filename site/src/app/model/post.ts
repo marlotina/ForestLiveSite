@@ -41,6 +41,7 @@ export class PostAssignSpecieRequest {
     postId: string;
     specieName: string;
     specieId: string;
+    userHelpedIdentification: string;
 }
 
 export class PostUpdateSpecieRequest {
