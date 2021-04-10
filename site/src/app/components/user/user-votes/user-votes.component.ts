@@ -27,14 +27,6 @@ export class UserVotesComponent implements OnInit {
     );
   }
 
-  getUrl(vote: VoteResponse) {
-    if(vote.specieId != null){
-        return `${vote.userId}/bird/${vote.postId}/${vote.specieId}`;
-    }else{
-      return `${vote.userId}/post/${vote.postId}`;
-    }
-  }
-
   deleteVote(vote: VoteResponse){
     this.votesService.DeleteVote(vote.id, vote.postId).subscribe(
       data => {

@@ -80,11 +80,11 @@
                             </div>
                         </div>
                         <div class="col-12 col-md-8 mt-15" [hidden]="type != 3">
-                            <div class="form-group d-flex">
+                            <div class="form-group d-flex alert alert-info">
                                 Tu post aparecerá en la sección y el resto te ayudaran y podrás añadir el post.
                             </div>
                         </div>
-                        <div class="col-12 col-md-4" [hidden]="isPost">
+                        <div class="col-12 col-md-4 mt-15" [hidden]="isPost">
                             <div class="form-group">
                                 <mat-form-field>
                                     <input matInput [matDatepicker]="picker" placeholder="{{ 'createPost.chooseDate' | translate }}" id="observationDatePost" formControlName="observationDate">
