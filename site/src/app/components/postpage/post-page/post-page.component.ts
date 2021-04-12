@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { Meta } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PostResponse } from 'src/app/model/post';
 import { AccountService } from 'src/app/services/account/account.service';
@@ -26,8 +27,10 @@ export class PostPageComponent implements OnInit {
   hasPost = false;
   hasLocation = true;
   type: string;
+  urlPage: string;
 
   constructor(private activateRoute: ActivatedRoute,
+    private meta: Meta,
     private loaderService: LoaderService,
     private getItemService: GetItemsService,
     private postService: PostService,
@@ -50,13 +53,23 @@ export class PostPageComponent implements OnInit {
           this.showOwnerOptions = this.userLoggedName != null && this.post.userId == this.userLoggedName;
           this.hasPost = true;
           this.imagePostUrl = environment.imagesPostUrl + this.post.imageUrl;
+          this.urlPage = `${environment.pageDomain}/${this.post.userId}/${this.post.postId}`;
           this.loaderService.hide();
     
+          this.addMetas(this.post, this.imagePostUrl, this.urlPage);
           this.initMap(this.post.latitude, this.post.longitude);
         }
       );
       
     });
+  }
+  
+  addMetas(post: PostResponse, image: string, url: string){
+    this.meta.addTag({ name: 'og:title', content: post.title })
+    //this.meta.addTag({ name: 'og:type', content: url })
+    this.meta.addTag({ name: 'og:image', content: image })
+    this.meta.addTag({ name: 'og:url', content: url })
+    //this.meta.addTag({ name: 'og:description', content: url })
   }
 
   manageError(errorStatus: string){
