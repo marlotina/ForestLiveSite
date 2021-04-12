@@ -65,10 +65,10 @@ export class PostPageComponent implements OnInit {
   }
   
   addMetas(post: PostResponse, image: string, url: string){
-    this.meta.addTag({ name: 'og:title', content: post.title })
+    this.meta.updateTag({ name: 'og:title', content: post.title })
     //this.meta.addTag({ name: 'og:type', content: url })
-    this.meta.addTag({ name: 'og:image', content: image })
-    this.meta.addTag({ name: 'og:url', content: url })
+    this.meta.updateTag({ name: 'og:image', content: image })
+    this.meta.updateTag({ name: 'og:url', content: url })
     //this.meta.addTag({ name: 'og:description', content: url })
   }
 

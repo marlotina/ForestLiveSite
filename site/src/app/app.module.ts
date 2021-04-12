@@ -1,4 +1,4 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, Meta } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -56,7 +56,7 @@ export  function  HttpLoaderFactory(http:  HttpClient) {
   ],
   exports: [TranslateModule],
   entryComponents: [CommonDialogComponent, ImageDialogComponent],
-  providers: [TranslateService],
+  providers: [TranslateService, Meta],
   bootstrap: [AppComponent]
 
 })
