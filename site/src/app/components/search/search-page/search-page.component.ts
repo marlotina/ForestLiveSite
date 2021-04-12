@@ -2,7 +2,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatAutocomplete } from '@angular/material/autocomplete';
 import { Observable, of } from 'rxjs';
-import { catchError, debounceTime, map, startWith, switchMap } from 'rxjs/operators';
+import { catchError, debounceTime, first, map, startWith, switchMap } from 'rxjs/operators';
 import { MapSpeciePoint } from 'src/app/model/Map';
 import { PostResponse } from 'src/app/model/post';
 import { AutocompleteResponse } from 'src/app/model/specie';
@@ -134,12 +134,12 @@ export class SearchPageComponent implements OnInit {
       });
       
       this.map.fitBounds(bounds);
-      this.getBirds(bounds.getCenter());
+      this.getBirds(bounds.getCenter(), false);
     });
 
     google.maps.event.addListener(this.map, 'idle', () => { 
       this.zoom = this.map.getZoom();
-      this.getBirds(this.map.getCenter());
+      this.getBirds(this.map.getCenter(), false);
     });
 
     google.maps.event.addListenerOnce(map, 'tilesloaded', () => {
@@ -148,10 +148,13 @@ export class SearchPageComponent implements OnInit {
     
   }
 
-  getBirds(latLng: google.maps.LatLng){
+  getBirds(latLng: google.maps.LatLng, removePoint: boolean){
       this.searchBirdsSerices.GetSearchPoints(latLng.lat(), latLng.lng(), this.zoom, this.specieId).subscribe(
         data =>{ 
-          this.setMapOnAll(null);
+          if(removePoint) {
+            this.setMapOnAll(null);
+          }
+
           for (let i = 0; i < data.length; i++) {
             const marker = this.getMarker(data[i], this.map);
   
@@ -184,7 +187,7 @@ export class SearchPageComponent implements OnInit {
 
   addFilterSpecie(){
     this.hideRemoveBtn = false;
-    this.getBirds(this.map.getCenter());
+    this.getBirds(this.map.getCenter(), true);
   }
 
   removeFilterSpecie(){
@@ -192,7 +195,7 @@ export class SearchPageComponent implements OnInit {
     this.specieIdPostControl.setValue('');
     this.specieId = '';
     this.hideRemoveBtn = true;
-    this.getBirds(this.map.getCenter());
+    this.getBirds(this.map.getCenter(), true);
   }
 
   optionClicked(event: Event, specie: AutocompleteResponse) {

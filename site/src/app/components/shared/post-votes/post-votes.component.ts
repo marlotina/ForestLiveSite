@@ -22,8 +22,7 @@ export class PostVotesComponent implements OnInit {
   @Input() hasVote: boolean;
   
   constructor(
-    private voteService: VoteService
-  ) { }
+    private voteService: VoteService) { }
 
   ngOnInit(): void {
   }
