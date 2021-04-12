@@ -80,7 +80,7 @@ export class UserMapPageComponent implements OnInit {
     var postId = marker.getTitle();
     this.userPostService.getModalBirdPost(postId, this.userId).subscribe(data => {
         const modal = `<div style='float:left'><img style='width: 100px;' src='${environment.imagesPostUrl}${data.imageUrl}' alt='${data.altImage}'>`+ 
-        `</div><div style='float:right; padding: 10px;'><b><a target='_blank' href='/${data.userId}/post/${data.postId}'>${data.title}</a></b><br/>${data.text}<br/> ${data.birdSpecie}</div>`;
+        `</div><div style='float:right; padding: 10px;'><b><a target='_blank' href='/${data.userId}/${data.postId}'>${data.title}</a></b><br/>${data.text}<br/> ${data.birdSpecie}</div>`;
         this.infowindow.setContent(modal);
         this.infowindow.open(map, marker);
     })

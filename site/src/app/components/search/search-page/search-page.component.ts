@@ -21,7 +21,7 @@ export class SearchPageComponent implements OnInit {
 
   center: any;
   @ViewChild('mapWrapper') mapElement: ElementRef;
-  zoom: number = 16;
+  zoom: number = 13;
 
   filteredSpecies: Observable<AutocompleteResponse[]>;
   autocompleteControl = new FormControl();
@@ -56,14 +56,14 @@ export class SearchPageComponent implements OnInit {
   }
 
   ngAfterViewInit() {
-    this.initMap();
+    this.getLocation();
   }
 
   getInfoPost(marker: google.maps.Marker, map: google.maps.Map){
     var postInfo = marker.getTitle().split(',');
     this.searchBirdsSerices.GetModalBirdPost(postInfo[0], postInfo[1]).subscribe(data => {
         const modal = `<div style='float:left'><img style='width: 100px;' src='${environment.imagesPostUrl}${data.imageUrl}' alt='${data.altImage}'>`+ 
-        `</div><div style='float:right; padding: 10px;'><b><a target='_blank' href='/${data.userId}/post/${data.postId}'>${data.title}</a>`+ 
+        `</div><div style='float:right; padding: 10px;'><b><a target='_blank' href='/${data.userId}/${data.postId}'>${data.title}</a>`+ 
         `</b><br/>${data.text}<br/> ${data.birdSpecie}</div>`;
 
         this.infowindow.setContent(modal);
@@ -71,74 +71,88 @@ export class SearchPageComponent implements OnInit {
     })
   }
 
-  initMap() {
+  getLocation() {
 
-    this.locationService.getPosition().then(pos => {
+    this.locationService.getPosition().then(
+      pos => {
+        let latLng = {
+          lat: pos.lat,
+          lng: pos.lng
+        }; 
+        this.initMap(latLng);
+    },
+    reject=>{
       let latLng = {
-        lat: pos.lat,
-        lng: pos.lng
+        lat: 47.711062647193195,
+        lng: 6.134101681429014
       };
+      this.initMap(latLng);
+    });
+  }
 
-      const mapOptions: google.maps.MapOptions = {
-        center: latLng,
-        zoom: this.zoom,
-        fullscreenControl: false,
-        mapTypeControl: true,
-        streetViewControl: false,
-        clickableIcons: false,
-        mapTypeControlOptions: {
-          style: google.maps.MapTypeControlStyle.INSET,
-          mapTypeIds: [
-              google.maps.MapTypeId.ROADMAP,
-              google.maps.MapTypeId.SATELLITE
-          ]
-      },
-      };
-      this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
+  initMap(latLng: any) {
 
-      const input = document.getElementById("pac-input") as HTMLInputElement;
-      const searchBox = new google.maps.places.SearchBox(input);
-    
-      searchBox.addListener("places_changed", () => {
-        const places = searchBox.getPlaces();
-    
-        if (places.length == 0) {
+    const mapOptions: google.maps.MapOptions = {
+      center: latLng,
+      zoom: this.zoom,
+      fullscreenControl: false,
+      minZoom: 6,
+      mapTypeControl: true,
+      streetViewControl: false,
+      clickableIcons: false,
+      mapTypeControlOptions: {
+        style: google.maps.MapTypeControlStyle.INSET,
+        mapTypeIds: [
+            google.maps.MapTypeId.ROADMAP,
+            google.maps.MapTypeId.SATELLITE
+        ]
+    },
+    };
+    this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
+
+    const input = document.getElementById("pac-input") as HTMLInputElement;
+    const searchBox = new google.maps.places.SearchBox(input);
+  
+    searchBox.addListener("places_changed", () => {
+      const places = searchBox.getPlaces();
+  
+      if (places.length == 0) {
+        return;
+      }
+
+      const bounds = new google.maps.LatLngBounds();
+      places.forEach((place) => {
+        if (!place.geometry || !place.geometry.location) {
+          console.log("Returned place contains no geometry");
           return;
         }
-
-        const bounds = new google.maps.LatLngBounds();
-        places.forEach((place) => {
-          if (!place.geometry || !place.geometry.location) {
-            console.log("Returned place contains no geometry");
-            return;
-          }
-          
-          if (place.geometry.viewport) {
-            bounds.union(place.geometry.viewport);
-          } else {
-            bounds.extend(place.geometry.location);
-          }
-        });
         
-        this.map.fitBounds(bounds);
-        this.getBirds(bounds.getCenter());
+        if (place.geometry.viewport) {
+          bounds.union(place.geometry.viewport);
+        } else {
+          bounds.extend(place.geometry.location);
+        }
       });
-
-      google.maps.event.addListener(this.map, 'idle', () => { 
-        this.zoom = this.map.getZoom();
-        this.getBirds(this.map.getCenter());
-      });
-
-      google.maps.event.addListenerOnce(map, 'tilesloaded', () => {
-        this.loaderService.hide();
-      });
+      
+      this.map.fitBounds(bounds);
+      this.getBirds(bounds.getCenter());
     });
+
+    google.maps.event.addListener(this.map, 'idle', () => { 
+      this.zoom = this.map.getZoom();
+      this.getBirds(this.map.getCenter());
+    });
+
+    google.maps.event.addListenerOnce(map, 'tilesloaded', () => {
+      this.loaderService.hide();
+    });
+    
   }
 
   getBirds(latLng: google.maps.LatLng){
       this.searchBirdsSerices.GetSearchPoints(latLng.lat(), latLng.lng(), this.zoom, this.specieId).subscribe(
         data =>{ 
-          //this.setMapOnAll(null);
+          this.setMapOnAll(null);
           for (let i = 0; i < data.length; i++) {
             const marker = this.getMarker(data[i], this.map);
   
