@@ -138,7 +138,7 @@ export class SearchPageComponent implements OnInit {
   getBirds(latLng: google.maps.LatLng){
       this.searchBirdsSerices.GetSearchPoints(latLng.lat(), latLng.lng(), this.zoom, this.specieId).subscribe(
         data =>{ 
-          this.setMapOnAll(null);
+          //this.setMapOnAll(null);
           for (let i = 0; i < data.length; i++) {
             const marker = this.getMarker(data[i], this.map);
   
@@ -156,7 +156,7 @@ export class SearchPageComponent implements OnInit {
     const marker = new google.maps.Marker({
       position: { lat: point.location.lat, lng: point.location.lng},
       map,
-      icon: "../../../../assets/img/core-img/mapMarker.png",
+      icon: "../../../../assets/img/core-img/marker.svg",
       title: `${point.postId},${point.specieId}`
     });
 

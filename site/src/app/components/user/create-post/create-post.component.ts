@@ -290,7 +290,7 @@ export class CreatePostComponent implements OnInit {
     const marker = new google.maps.Marker({
       position: location,
       map: this.map,
-      icon:  "../../../../assets/img/core-img/mapMarker.png"
+      icon:  "../../../../assets/img/core-img/marker.svg"
     });
 
     var latLng = marker.getPosition();

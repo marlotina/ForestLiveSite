@@ -4,6 +4,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { first } from 'rxjs/operators';
 import { UserLabelRequest, UserLabelResponse } from 'src/app/model/user';
 import { AccountService } from 'src/app/services/account/account.service';
+import { LoaderService } from 'src/app/services/loader/loader.service';
 import { UserLabelsService } from 'src/app/services/user/labels/user-labels.service';
 import { CommonDialogComponent } from '../../shared/common-dialog/common-dialog.component';
 
@@ -20,12 +21,14 @@ export class UserLabelsComponent implements OnInit {
   labelForm: FormGroup;
 
   constructor(
+    private loaderService: LoaderService,
     private userLabelsService: UserLabelsService,
     private matDialog: MatDialog,
     private formBuilder: FormBuilder,
     private accountService: AccountService) { }
 
   ngOnInit(): void {
+    this.loaderService.show();
     let userId = this.accountService.userValue.userName;
     this.userLabelsService.GetUserLabelsDetails(userId).subscribe(
       data =>{ 
@@ -33,6 +36,7 @@ export class UserLabelsComponent implements OnInit {
           this.hasNotLabels = true;
         }
         this.userLabels = data;
+        this.loaderService.hide();
       } 
     );
 

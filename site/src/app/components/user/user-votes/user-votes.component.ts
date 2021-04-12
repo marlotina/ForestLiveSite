@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { VoteResponse } from 'src/app/model/vote';
 import { AccountService } from 'src/app/services/account/account.service';
+import { LoaderService } from 'src/app/services/loader/loader.service';
 import { VoteService } from 'src/app/services/vote/vote.service';
 
 @Component({
@@ -13,16 +14,20 @@ export class UserVotesComponent implements OnInit {
   userVotes: VoteResponse[];
   hasNotVotes = false;
 
-  constructor(private votesService: VoteService,
+  constructor(
+    private loaderService: LoaderService,
+    private votesService: VoteService,
     private accountService: AccountService) { }
 
   ngOnInit(): void {
+    this.loaderService.show();
     this.votesService.GetVotesByUser(this.accountService.userValue.userName).subscribe(
       data =>{ 
         if(data.length > 0){
           this.hasNotVotes = true;
         }
         this.userVotes = data;
+        this.loaderService.hide();
       } 
     );
   }
