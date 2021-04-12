@@ -1,3 +1,36 @@
+<div class="row mt-15">
+    <div class="col-12 col-md-3">
+        <div class="ml-15 autocomplete-form autocompleteTop">
+            <div class="d-flex">
+                <mat-form-field class="autocomplete-full-width pr-5">
+                    <input type="text" class="form-control" aria-label="Number" matInput  [matAutocomplete]="autoBird"
+                        [formControl]="autocompleteControl"
+                        id="specieNamePost" placeholder="Introduce especia">
+                        
+                    <input type="hidden" id="specieIdPost" [formControl]="specieIdPostControl" >    
+                    <mat-autocomplete #autoBird="matAutocomplete" (optionSelected)='selectSpecie($event.option.value)'>
+                        <mat-option *ngFor="let option of filteredSpecies | async" [value]="option" (change)="toggleSelection(option)" (click)="$event.stopPropagation()">
+                            {{option.nameComplete}}
+                        </mat-option>
+                    </mat-autocomplete>
+                </mat-form-field>  
+                <div class="form-group inputSearchTop ">
+                    <button type="button" class="btn btn-outline-primary addLabelBtn" (click)="removeFilterSpecie()" [hidden]="hideRemoveBtn"><mat-icon>close</mat-icon></button> 
+                    <button type="button" class="btn btn-outline-primary addLabelBtn" (click)="addFilterSpecie()" [hidden]="!hideRemoveBtn"><mat-icon>search</mat-icon></button> 
+                </div> 
+            </div>
+        </div>  
+        <div class="ml-15 form-group inputSearchTop">
+            <input id="pac-input" type="text" placeholder="Search Box" class="form-control" />
+        </div>
+    </div>
+    <div class="col-12 col-md-9">
+        <div #mapWrapper id="map" class="map-container">
+            <app-loader></app-loader>
+        </div>
+    </div>
+</div>
+<!--
 <div class="mt-15">
     <div class="container mt-15">
         <div class="row justify-content-center">
@@ -37,4 +70,4 @@
             <app-loader></app-loader>
         </div>
     </div>
-</div> 
+</div> -->

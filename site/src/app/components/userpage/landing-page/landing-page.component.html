@@ -44,10 +44,10 @@
                         </div>
                         <div class="row mb-5 div-bottom-line">
                             <div>
-                                <img class="social-image" src="../../../../assets/img/core-img/icons8-topic-48.png" /><span class="aligned-with-icon">&nbsp;{{post.commentCount}}&nbsp;comments</span>
+                                <img class="social-image" src="../../../../assets/img/core-img/ico-comments.png" /><span class="aligned-with-icon">&nbsp;{{post.commentCount}}&nbsp;comments</span>
                             </div>
                         </div>
-                        <div class="row mb-5">
+                        <div class="row mb-5" *ngIf="post.type != 'post'">
                             <div>
                                 <strong>{{ 'userPage.birdSpecie' | translate }}:</strong> {{post.birdSpecie}}
                                 <a *ngIf="post.type == 'pending'" class="link-info" href="/{{post.userId}}/{{post.postId}}#commentsDiv">Help the user to identify the bird</a>
@@ -66,6 +66,14 @@
                                 {{post.text}}
                             </div>
                         </div>
+                        <div class="row mb-15" *ngIf="post.labels != null && post.labels.length > 0">
+                            <div class="col-12">
+                                <strong>{{ 'postPage.tags' | translate }}:</strong>
+                                <button type="button" *ngFor="let label of post.labels" role="button" (click)="searchWithLabels(label)" class="labelLink link-primary ml-5">
+                                    <span class="label label-default">{{label}}</span>
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>  
             </div>
@@ -76,6 +84,9 @@
                         <p>
                             {{ 'userPage.userWithoutPost' | translate }}
                         </p>
+                        <div class="mb-15" [hidden]="!isLogged">
+                            <a routerLink="/createPost" class="btn btn-primary" style="width: 100%;">Crea tu primer post o obserse </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -125,8 +136,8 @@
 
             <div class="form-group">
                 <button *ngFor="let label of userLabels" type="button"
-                    [ngClass]="{'btn-primary' : selectedLabel.id == label.id, 'btn-outline-primary' : selectedLabel.id != label.id}" 
-                    (click)="searchWithLabels(label)" class="btn ml-5 mb-5 labelUserPage">
+                    [ngClass]="{'btn-primary' : selectedLabel == label.id, 'btn-outline-primary' : selectedLabel != label.id}" 
+                    (click)="searchWithLabels(label.id)" class="btn ml-5 mb-5 labelUserPage">
                     {{label.id}} <span class="badge bg-secondary labelUserPage">{{label.postCount}}</span>
                   </button>
             </div>

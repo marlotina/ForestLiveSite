@@ -50,7 +50,7 @@
                                         {{ 'createPost.upload' | translate }}
                                     </div>
                                 </label>
-                                <input type="file" #file id="uploadImage" (change)="selectFile($event)"/>                    
+                                <input type="file" #file id="uploadImage" accept="image/*" (change)="selectFile($event)"/>                    
                             </div>
                         </div>
     
@@ -182,7 +182,12 @@
                             <div #mapWrapper id="map" class="createPostMap"></div>
                         </div>
                         <div class="col-12 mt-15 mb-15">
-                            <button type="submit" class="btn btn-lg btn-primary mt-15">{{ 'createPost.createPostBtn' | translate }}</button>
+                            <button *ngIf="submitted" class="btn btn-primary" type="button" disabled>
+                                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                Loading...
+                            </button>
+
+                            <button type="submit" *ngIf="!submitted" class="btn btn-primary mt-15">{{ 'createPost.createPostBtn' | translate }}</button>
                         </div>
     
                     </div>

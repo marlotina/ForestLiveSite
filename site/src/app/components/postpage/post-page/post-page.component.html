@@ -44,7 +44,7 @@
                         </div>
 
                         <div class="row mb-5">
-                            <div *ngIf="type!='post'">
+                            <div *ngIf="post.type !='post'">
                                 <app-select-specie-form 
                                     [showOptions]="showOwnerOptions"
                                     [specieOldName]="post.birdSpecie"
@@ -54,7 +54,7 @@
                             </div>
                         </div>
                         <div  class="row mb-5">
-                            <div>
+                            <div  *ngIf="post.type !='post'">
                                 <strong>{{ 'userPage.observationDate' | translate }}:</strong> {{post.observationDate}} 
                             </div>
                         </div>

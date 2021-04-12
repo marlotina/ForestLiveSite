@@ -12,7 +12,7 @@ export class WithoutSpeciePageComponent implements OnInit {
 
   pendingPosts: PostListResponse[];
   imagesPostUrl = environment.imagesPostUrl;
-  hasNotPosts = true;
+  hasNotPosts = false;
 
   constructor(
     private pendingBirdService: PendingBirdService,
@@ -22,7 +22,7 @@ export class WithoutSpeciePageComponent implements OnInit {
     this.pendingBirdService.GetWithoutSpecie(1).subscribe(
       data => {
         this.pendingPosts = data;
-        if(data.length > 0){
+        if(data != null && data.length > 0){
           this.hasNotPosts = true;
         }else{
           this.hasNotPosts = false;

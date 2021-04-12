@@ -28,10 +28,7 @@ export class LandingPageComponent implements OnInit {
   hasNotPosts: boolean;
   isLogged: boolean;
   userLabels: UserLabelPageResponse[];
-  selectedLabel: UserLabelPageResponse = {
-    id: null,
-    postCount: 0 
-  };
+  selectedLabel: string;
 
   searchType:string = 'all';
 
@@ -70,12 +67,9 @@ export class LandingPageComponent implements OnInit {
     this.searchPosts();
   }
 
-  searchWithLabels(label: UserLabelPageResponse) {
-    if(this.selectedLabel != null && label.id == this.selectedLabel.id){
-      this.selectedLabel = {
-        id: null,
-        postCount: 0 
-      };
+  searchWithLabels(label: string) {
+    if(this.selectedLabel != null && label == this.selectedLabel){
+      this.selectedLabel = null;
     } else {
       this.selectedLabel = label;
     }
@@ -84,7 +78,7 @@ export class LandingPageComponent implements OnInit {
   }
 
   searchPosts(){
-    this.userPostService.GetPosts(this.userId, this.selectedLabel.id, this.searchType).subscribe(
+    this.userPostService.GetPosts(this.userId, this.selectedLabel, this.searchType).subscribe(
       data =>{ 
         this.userPosts = data;
         this.hasNotPosts = this.userPosts.length == 0; 

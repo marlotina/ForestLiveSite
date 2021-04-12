@@ -188,7 +188,7 @@ export class PostPageComponent implements OnInit {
   
       const mapOptions: google.maps.MapOptions = {
         center: latLng,
-        zoom: 16,
+        zoom: 11,
         fullscreenControl: false,
         mapTypeControl: false,
         streetViewControl: false,

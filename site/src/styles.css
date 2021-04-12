@@ -316,10 +316,6 @@ body {
 	margin-left: 5px;
 }
 
-.searchMap {
-	height: 650px;
-}
-
 .createPostMap {
 	height: 400px;
 }
@@ -381,6 +377,10 @@ body {
 	margin-left: 5px;
 }
 
+.ml-15 {
+	margin-left: 15px;
+}
+
 .mr-5 {
 	margin-right: 5px;
 }
@@ -388,3 +388,11 @@ body {
 .pt-15 {
 	margin-top: 15px;
 }
+
+.labelLink {
+	background-color: transparent; 
+	border: 0; 
+	padding: 0;
+}
+
+html,body { height: 100vh;  }

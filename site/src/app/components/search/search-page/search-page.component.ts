@@ -83,9 +83,16 @@ export class SearchPageComponent implements OnInit {
         center: latLng,
         zoom: this.zoom,
         fullscreenControl: false,
-        mapTypeControl: false,
+        mapTypeControl: true,
         streetViewControl: false,
-        clickableIcons: false
+        clickableIcons: false,
+        mapTypeControlOptions: {
+          style: google.maps.MapTypeControlStyle.INSET,
+          mapTypeIds: [
+              google.maps.MapTypeId.ROADMAP,
+              google.maps.MapTypeId.SATELLITE
+          ]
+      },
       };
       this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
 
