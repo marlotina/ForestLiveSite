@@ -72,7 +72,6 @@ export class SearchPageComponent implements OnInit {
   }
 
   getLocation() {
-
     this.locationService.getPosition().then(
       pos => {
         let latLng = {

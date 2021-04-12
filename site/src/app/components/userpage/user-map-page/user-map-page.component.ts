@@ -31,16 +31,29 @@ export class UserMapPageComponent implements OnInit {
       this.userId = params.get("userId");
     });
 
-    this.initMap();
+    this.getLocation();
   }
 
-  initMap() {
-
-    this.locationService.getPosition().then(pos => {
+  getLocation() {
+    this.locationService.getPosition().then(
+      pos => {
+        let latLng = {
+          lat: pos.lat,
+          lng: pos.lng
+        }; 
+        this.initMap(latLng);
+    },
+    reject=>{
       let latLng = {
-        lat: pos.lat,
-        lng: pos.lng
+        lat: 47.711062647193195,
+        lng: 6.134101681429014
       };
+      this.initMap(latLng);
+    });
+  }
+
+
+  initMap(latLng: any) {
 
       const mapOptions: google.maps.MapOptions = {
         center: latLng,
@@ -73,7 +86,6 @@ export class UserMapPageComponent implements OnInit {
       google.maps.event.addListenerOnce(map, 'tilesloaded', () => {
         this.loaderService.hide();
       });
-    });
   }
 
   getInfoPost(marker: google.maps.Marker, map: google.maps.Map){

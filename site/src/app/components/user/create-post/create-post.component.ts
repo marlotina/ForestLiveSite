@@ -136,7 +136,7 @@ export class CreatePostComponent implements OnInit {
       })
     );
 
-    this.initMap();
+    this.getLocation();
   }
 
   selectSpecie(item: AutocompleteResponse){
@@ -261,14 +261,27 @@ export class CreatePostComponent implements OnInit {
   }
 
   /*Map*/
-  initMap() {
 
-    this.locationService.getPosition().then(pos => {
+  getLocation() {
+    this.locationService.getPosition().then(
+      pos => {
+        let latLng = {
+          lat: pos.lat,
+          lng: pos.lng
+        }; 
+        this.initMap(latLng);
+    },
+    reject=>{
       let latLng = {
-        lat: pos.lat,
-        lng: pos.lng
+        lat: 47.711062647193195,
+        lng: 6.134101681429014
       };
+      this.initMap(latLng);
+    });
+  }
 
+
+  initMap(latLng: any) {
       const mapOptions: google.maps.MapOptions = {
         center: latLng,
         zoom: this.zoom,
@@ -282,8 +295,6 @@ export class CreatePostComponent implements OnInit {
       google.maps.event.addListener(this.map, "click", (event) => {
         this.addMarker(event.latLng, this.map);
       });
-
-    });
   }
   
   addMarker(location: google.maps.LatLngLiteral, map: google.maps.Map) {
