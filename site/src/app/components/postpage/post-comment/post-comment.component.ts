@@ -72,6 +72,7 @@ export class PostCommentComponent implements OnInit {
                 this.comments.push(data);
               }else{
                 parentComment.replies.push(data);
+                this.showFormList[parentComment.id] = false;
               }
               this.commentCount++;
             },

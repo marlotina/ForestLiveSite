@@ -205,7 +205,7 @@ export class PostPageComponent implements OnInit {
     const marker = new google.maps.Marker({
       position: { lat: latLng.lat, lng: latLng.lng},
       map,
-      icon: "../../../../assets/img/core-img/mapMarker.png",
+      icon: "../../../../assets/img/core-img/marker.svg",
     });
   } 
 
