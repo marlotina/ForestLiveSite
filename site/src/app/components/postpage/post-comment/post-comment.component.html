@@ -12,11 +12,11 @@
     </div>
     <div class="col-12 mb-15">
         <div class="form-group">
-            <textarea class="form-control" #titleInput  name="text" id="text" cols="30" rows="3" placeholder="{{ 'postPage.comment' | translate }}"></textarea>
+            <textarea class="form-control" #textInput  name="text" id="text" cols="30" rows="3" placeholder="{{ 'postPage.comment' | translate }}"></textarea>
         </div>
     </div>
     <div class="col-12 mb-15">
-        <button type="button" (click)="addComment(null, titleInput.value)" class="btn btn-primary">{{ 'postPage.postComment' | translate }}</button>
+        <button type="button" (click)="addComment(null, textInput.value)" class="btn btn-primary">{{ 'postPage.postComment' | translate }}</button>
     </div>
 </div>
 

@@ -1,4 +1,3 @@
-
 import { Component , Input, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { first } from 'rxjs/operators';
@@ -71,8 +70,9 @@ export class PostCommentComponent implements OnInit {
             data => {    
               if(parentComment == null){
                 this.comments.push(data);
+              }else{
+                parentComment.replies.push(data);
               }
-              parentComment.replies.push(data);
               this.commentCount++;
             },
             error => {   
