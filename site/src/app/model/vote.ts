@@ -1,7 +1,7 @@
 export class VoteRequest {
     postId: string;
     userId: string;
-    authorPostUserId: string;
+    authorPostId: string;
     titlePost: string;
     specieId: string;
 }
@@ -13,7 +13,7 @@ export class VoteResponse {
     vote: number;
     postId: string;
     creationDate: string;
-    authorPostUserId: string;
+    authorPostId: string;
     titlePost: string;
     specieId: string
 }

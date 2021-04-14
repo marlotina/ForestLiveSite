@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { first } from 'rxjs/operators';
 import { PostListResponse } from 'src/app/model/post';
 import { VoteRequest } from 'src/app/model/vote';
+import { AccountService } from 'src/app/services/account/account.service';
 import { VoteService } from 'src/app/services/vote/vote.service';
 
 @Component({
@@ -14,7 +15,7 @@ export class PostVotesComponent implements OnInit {
   
   @Input() postId: string;
   @Input() titlePost: string;
-  @Input() authorPostUserId: string;
+  @Input() authorPostId: string;
   @Input() userId: string;
   @Input() voteCount: number;
   @Input() specieId: string;
@@ -28,13 +29,6 @@ export class PostVotesComponent implements OnInit {
   }
 
   addVote(){
-    let request: VoteRequest = {
-      postId: this.postId,
-      titlePost: this.titlePost,
-      userId: this.userId,
-      authorPostUserId: this.userId,
-      specieId: this.specieId
-    }
 
     if(this.hasVote){
       this.voteService.DeleteVote(this.voteId, this.postId)
@@ -49,6 +43,14 @@ export class PostVotesComponent implements OnInit {
                 
               });
     }else{
+      let request: VoteRequest = {
+        postId: this.postId,
+        titlePost: this.titlePost,
+        userId: this.userId,
+        authorPostId: this.authorPostId,
+        specieId: this.specieId
+      };
+
       this.voteService.AddVote(request)
       .pipe(first())
           .subscribe(
