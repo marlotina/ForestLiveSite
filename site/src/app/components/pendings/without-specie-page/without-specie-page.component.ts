@@ -12,7 +12,7 @@ export class WithoutSpeciePageComponent implements OnInit {
 
   pendingPosts: PostListResponse[];
   imagesPostUrl = environment.imagesPostUrl;
-  hasNotPosts = false;
+  hasNotPosts: boolean;
 
   constructor(
     private pendingBirdService: PendingBirdService,

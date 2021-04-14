@@ -18,6 +18,7 @@ export class PostCommentComponent implements OnInit {
   @Input() postTitle: string;
   @Input() specieId: string;
   @Input() userId: string;
+  @Input() imageUrl: string;
   @Input() commentCount: number;
 
   comments: CommentResponse[] = [];
@@ -36,7 +37,7 @@ export class PostCommentComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.userNameLogged = this.accountService != null? this.accountService.userValue: null;
+    this.userNameLogged = this.accountService != null? this.accountService.userValue.userName: null;
 
     this.commentService.GetCommentsByPost(this.postId).subscribe(
       data => { 
@@ -57,11 +58,12 @@ export class PostCommentComponent implements OnInit {
     let commentRequest: CommentRequest = {
       postId: this.postId,
       titlePost: this.postTitle,
-      authorPostUserId: this.userId,
+      AuthorPostId: this.userId,
       text: text,
-      commentParentId: parentComment == null ? null : parentComment.id,
+      parentId: parentComment == null ? null : parentComment.id,
       specieId: this.specieId,
-      userId: this.userId
+      userId: this.userNameLogged,
+      ImagePost: this.imageUrl
     }
 
     this.commentService.AddComment(commentRequest)
@@ -86,7 +88,7 @@ export class PostCommentComponent implements OnInit {
   }
 
   deleteComment(comment: CommentResponse){
-    this.commentService.DeleteComment(comment.postId, comment.id).subscribe(
+    this.commentService.DeleteComment(this.postId, comment.id).subscribe(
       data => {
         const index = this.comments.indexOf(comment, 0);
         if (index > -1) {

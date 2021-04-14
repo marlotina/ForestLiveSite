@@ -38,11 +38,22 @@ export class PostResponse {
     voteId: string;
 }
 
+export class PostHomeResponse {
+    postId: string;
+    title: string;
+    imageUrl: string;
+    altImage: string;
+    userId: string;
+    birdSpecie: string;
+    specieId: string;
+    userPhoto: string;
+    observationDate: string;
+}
+
 export class PostAssignSpecieRequest {
     postId: string;
     specieName: string;
     specieId: string;
-    userHelpedIdentification: string;
 }
 
 export class PostUpdateSpecieRequest {

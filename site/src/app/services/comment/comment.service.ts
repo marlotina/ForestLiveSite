@@ -12,14 +12,14 @@ export class CommentService {
   constructor(private httpClient: HttpClient) { }  
 
   AddComment(request: CommentRequest){
-    return this.httpClient.post<CommentResponse>(`${environment.postInteractionsApi}api/v1/Comment/AddComment/`, request)
+    return this.httpClient.post<CommentResponse>(`${environment.postInteractionsApi}api/v1/CommentPost/AddComment/`, request)
       .pipe(map(data => {
         return data;
       }));
-  }
+  }CommentPost
 
   GetCommentsByPost(postId: string){
-    return this.httpClient.get<CommentResponse[]>(`${environment.postInteractionsApi}api/v1/Comment/GetCommentsByPost?postId=${postId}`)
+    return this.httpClient.get<CommentResponse[]>(`${environment.postInteractionsApi}api/v1/CommentPost/GetCommentsByPost?postId=${postId}`)
       .pipe(map(data => {
         return data;
       }));
@@ -33,7 +33,7 @@ export class CommentService {
   }
 
   DeleteComment(postId: string, userId: string){
-    return this.httpClient.delete(`${environment.postInteractionsApi}api/v1/Comment/DeleteComment?postId=${postId}&commentId=${userId}`);
+    return this.httpClient.delete(`${environment.postInteractionsApi}api/v1/CommentPost/DeleteComment?postId=${postId}&commentId=${userId}`);
   }
 
 }

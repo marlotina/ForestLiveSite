@@ -9,5 +9,8 @@
         "loginText": "Login and enjoy",
         "errorConfirmEmalText": "Something was wrong",
         "successConfimationEmail": "Confirmation email was successfull"
+    },
+    "home": {
+        "observationTitle": ""
     }
 }

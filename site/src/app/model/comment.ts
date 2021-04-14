@@ -3,9 +3,10 @@ export class CommentRequest {
     userId: string;
     postId: string;
     specieId: string;
-    authorPostUserId: string;
+    AuthorPostId: string;
     titlePost: string;
-    commentParentId: string;
+    ImagePost: string;
+    parentId: string;
 }
 
 export class CommentResponse {
@@ -14,7 +15,7 @@ export class CommentResponse {
     creationDate: string;
     userId: string;
     postId: string;
-    authorPostUserId: string;
+    authorPostId: string;
     titlePost: string;
     userImage: string;
     specieId: string;

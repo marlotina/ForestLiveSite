@@ -10,9 +10,9 @@
 
         <div class="container">
           <div class="carousel-caption text-start">
-            <h1>Example headline.</h1>
-            <p>Some representative placeholder content for the first slide of the carousel.</p>
-            <p><a class="btn btn-lg btn-primary" href="#">Sign up today</a></p>
+            <h1>Comparte tus observaciones</h1>
+            <p>Comparte tus observaciones con el resto de los usuarios, comenta y vota</p>
+            <p><a class="btn btn-lg btn-primary" routerLink="login" role="button">Inicia sesión</a></p>
           </div>
         </div>
       </div>
@@ -21,9 +21,9 @@
         <img src="../../../assets/img/bg-img/home2.webp">
         <div class="container">
           <div class="carousel-caption">
-            <h1>Another example headline.</h1>
-            <p>Some representative placeholder content for the second slide of the carousel.</p>
-            <p><a class="btn btn-lg btn-primary" href="#">Learn more</a></p>
+            <h1>Descubre donde los usuario han avistado las aves</h1>
+            <p>Navega por el mapa y podrás ver que aves han sido avistadas cerca de tu localización</p>
+            <p><a class="btn btn-lg btn-primary" routerLink="searchpage" role="button">Mapa</a></p>
           </div>
         </div>
       </div>
@@ -32,20 +32,23 @@
         <img src="../../../assets/img/bg-img/hom3.jpg">
         <div class="container">
           <div class="carousel-caption text-end">
-            <h1>One more for good measure.</h1>
-            <p>Some representative placeholder content for the third slide of this carousel.</p>
-            <p><a class="btn btn-lg btn-primary" href="#">Browse gallery</a></p>
+            <h1>Gestiona tus observaciones</h1>
+            <p>Gestiona tus observaciones y crea tu perfil</p>
+            <p>
+              <a *ngIf="userPageUrl" class="btn btn-lg btn-primary" routerLink="{{ userPageUrl }}" role="button">Mi página</a>
+              <a *ngIf="!userPageUrl" class="btn btn-lg btn-primary" routerLink="login" role="button">Inicia sesión</a>
+            </p>
           </div>
         </div>
       </div>
     </div>
     <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
       <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Previous</span>
+      <span class="visually-hidden">Anterior</span>
     </button>
     <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
       <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Next</span>
+      <span class="visually-hidden">Siguiente</span>
     </button>
   </div>
 
@@ -55,8 +58,37 @@
   <!-- Wrap the rest of the page in another container to center all the content. -->
 
   <div class="container marketing">
+    <div class="row">
+      <div class="album py-5">
+        <div class="container">
+          <h3>Últimas observaciones</h3>
+          <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            <div class="col" *ngFor="let post of lastObservations">
+              <div class="card shadow-sm">
+                <img src="{{urlPostImage}}{{post.imageUrl}}" width="100%" height="225" >
+                <div class="card-body">
+                  <p class="card-text">
+                    {{post.title}}<br/>
+                    <small>{{post.birdSpecie}}</small>
+                  </p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                      <button type="button" routerLink="/{{post.userId}}/{{post.postId}}" class="btn btn-sm btn-outline-secondary">Ver</button>
+                    </div>
+                    <small class="text-muted">{{post.observationDate}}</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <small class="d-block text-end mt-3">
+            <a routerLink="birdpage"  role="button">Ver más...</a>
+          </small>
+        </div>
+      </div>
 
-    <!-- Three columns of text below the carousel -->
+    </div>
+    <!-- Three columns of text below the carousel 
     <div class="row">
       <div class="col-lg-4">
         <img src="../../../assets/img/bg-img/home12.png"  width="140" height="140">
@@ -64,22 +96,22 @@
         <h2>Heading</h2>
         <p>Some representative placeholder content for the three columns of text below the carousel. This is the first column.</p>
         <p><a class="btn btn-secondary" href="#">View details &raquo;</a></p>
-      </div><!-- /.col-lg-4 -->
+      </div>
       <div class="col-lg-4">
         <img src="../../../assets/img/bg-img/home13.png"  width="140" height="140">
 
         <h2>Heading</h2>
         <p>Another exciting bit of representative placeholder content. This time, we've moved on to the second column.</p>
         <p><a class="btn btn-secondary" href="#">View details &raquo;</a></p>
-      </div><!-- /.col-lg-4 -->
+      </div>
       <div class="col-lg-4">
         <img src="../../../assets/img/bg-img/home14.png"  width="140" height="140">
 
         <h2>Heading</h2>
         <p>And lastly this, the third column of representative placeholder content.</p>
         <p><a class="btn btn-secondary" href="#">View details &raquo;</a></p>
-      </div><!-- /.col-lg-4 -->
-    </div><!-- /.row -->
+      </div>
+    </div>-->
 
 
     <!-- START THE FEATURETTES -->

@@ -24,7 +24,7 @@ export class PostPageComponent implements OnInit {
   imagePostUrl: string;
   showOwnerOptions = false;
   userLoggedName: string;
-  hasPost = false;
+  hasPost: boolean;
   hasLocation = true;
   type: string;
   urlPage: string;

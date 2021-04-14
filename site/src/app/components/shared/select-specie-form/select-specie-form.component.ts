@@ -19,7 +19,6 @@ export class SelectSpecieFormComponent implements OnInit {
 
   filteredSpecies: Observable<AutocompleteResponse[]>;
   autocompleteControl = new FormControl();
-  userHelpedIdentification = new FormControl();
   collapseChange = new FormControl();
   language: string;
   specieId: string;
@@ -101,8 +100,7 @@ export class SelectSpecieFormComponent implements OnInit {
         let request: PostAssignSpecieRequest = {
           specieId: this.specieId,
           specieName: this.specieName,
-          postId: this.postId,
-          userHelpedIdentification: this.userHelpedIdentification.value
+          postId: this.postId
         };
 
         this.manageItemsService.assignBird(request).subscribe(

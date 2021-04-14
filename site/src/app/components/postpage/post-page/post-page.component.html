@@ -3,9 +3,9 @@
     <div class="row justify-content-center">
         
         <div class="col-12 col-md-8">
-            <app-loader></app-loader>
-            <div>
+            <div >
                 <div class="row divPost divPostColor">  
+                    <app-loader></app-loader>
                     <div class="col-12 col-md-1 div-right-line div-bottom-line mb-15">
                         <app-post-votes
                             [postId]="post.postId"
@@ -18,6 +18,7 @@
                             [hasVote]="post.hasVote"></app-post-votes>
                     </div>
                     <div class="col-12 col-md-11 div-bottom-line mb-15">
+                    <div *ngIf="hasPost == true">
                         <div class="row mb-15 div-bottom-line">
                             <div class="col-12 col-md-11">
                                 <div>
@@ -71,6 +72,8 @@
                                 </a>
                             </div>
                         </div>
+
+                        </div>
                         <div class="row mb-15">
                             <div class="col-12" *ngIf="hasLocation">
                                 <div class="row justify-content-center">
@@ -95,12 +98,13 @@
                             [postTitle]="post.title"
                             [specieId]="post.specieId"
                             [commentCount]="post.commentCount"
+                            [imageUrl]="post.imageUrl"
                             [userId]="post.userId"></app-post-comment>
                     </div>
                 </div>  
             </div>
             
-            <div *ngIf="!hasPost">
+            <div *ngIf="hasPost == false">
                 POst not FoUnD
             </div>
         </div>

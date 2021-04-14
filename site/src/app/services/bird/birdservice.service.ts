@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { MapSpeciePoint } from 'src/app/model/Map';
-import { PostResponse, ModalPostResponse, PostListResponse, PostRequest } from 'src/app/model/post';
+import { PostResponse, ModalPostResponse, PostListResponse, PostRequest, PostHomeResponse } from 'src/app/model/post';
 import { environment } from 'src/environments/environment';
 
 
@@ -12,6 +12,13 @@ import { environment } from 'src/environments/environment';
 export class BirdserviceService {
 
   constructor(private httpClient: HttpClient) { 
+  }
+
+  GetLastbirds(){
+    return this.httpClient.get<PostHomeResponse[]>(`${environment.birdApiUrl}api/v1/SpeciesSearch/GetLastbirds`)
+      .pipe(map(data => {
+        return data;
+      }));
   }
 
   GetBirdBySpecie(specieId : string, orderBy: number){
