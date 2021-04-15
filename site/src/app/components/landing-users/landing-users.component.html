@@ -13,7 +13,7 @@
                     <img src="https://birdpostsqa.blob.core.windows.net/profiles/{{user.photo}}" alt="image of {{user.userName}}" class="bd-placeholder-img" width="100%">
                   </div>
                   <div class="col-12 col-md-10">
-                    <a class="removeLinkLine" href="userpage{{user.userName}}"><strong class="text-gray-dark">{{user.userName}}</strong></a>
+                    <a class="removeLinkLine" href="/userpage/{{user.userName}}"><strong class="text-gray-dark">{{user.userName}}</strong></a>
                     <span class="d-block">{{user.description}}</span>
                   </div>
                 </div>
@@ -59,79 +59,3 @@
         </div>
     </div>
   </div>
-
-
-
-
-
-<!--
-
-
-<div class="container mt-15">
-   
-    
-    <div class="row justify-content-center">           
-        <div class="album py-5 bg-light">
-            
-            <div class="container">
-                <div class="row"> 
-                          <h6 class="border-bottom pb-2 mb-0">Select specie:</h6>
-            
-                          <mat-form-field class="autocomplete-full-width">
-                            <input type="text" aria-label="Number" matInput  [matAutocomplete]="autoBird"
-                                [formControl]="autocompleteControl"  
-                                id="specieNamePost" placeholder="{{ 'createPost.birdSpecie' | translate }}">
-                                <mat-autocomplete #autoBird="matAutocomplete" (optionSelected)='selectSpecie($event.option.value)'>
-                                    <mat-option *ngFor="let option of filteredSpecies | async" [value]="option" (change)="selectSpecie(option)" (click)="$event.stopPropagation()">
-                                        <div class="d-flex text-muted pt-3">
-                                            <div class="pb-3 mb-0 small lh-sm border-bottom w-100">
-                                              <div class="d-flex justify-content-between">
-                                                <div class="col-12 col-md-1 pad-3">
-                                                  <img src="{{imagesProfileUrl}}{{option.userPhoto}}" alt="{{ option.userName }}" class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32">
-                                                </div>
-                                                <div class="col-12 col-md-10">
-                                                  <a class="removeLinkLine" href="/userpage/{{option.userName}}"><strong class="text-gray-dark">{{option.userName}}</strong></a>
-                                                  &nbsp;-&nbsp;
-                                                  <a class="removeLinkLine" href="/userpage/{{option.userName}}"><small>Visita perfil</small></a>
-                                                </div>
-                                              </div>
-                                            </div>
-                                          </div>
-                                    </mat-option>
-                                </mat-autocomplete>
-                            </mat-form-field>  
-                </div>
-                <app-loader></app-loader>
-                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-                    <div class="col" *ngFor="let user of users">
-                        
-                        <div class="card shadow-sm">
-                            <div class="authorWithoutSpecie">
-                                <strong class="d-inline-block mb-2 text-primary"><a class="text-dark btn fs-6 fw-light removeLinkLine" href="/userpage/{{user.userName}}">{{user.userName}}</a></strong>
-                            </div>
-                            <a class="removeLinkLine" href="/userpage/{{user.userName}}">
-                                <img src="https://birdpostsqa.blob.core.windows.net/profiles/{{user.photo}}" alt="image of {{user.userName}}" class="bd-placeholder-img" width="100%">
-                            </a>
-                            <div class="card-body">
-                                <h5 class="mb-0">{{user.location}}</h5>
-                                <p class="card-text cutText"><small>{{user.description}}</small></p>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div class="btn-group">
-                                        <a role="button" href="/userpage/{{user.userName}}" class="btn btn-sm btn-outline-secondary">Read more...</a>
-                                    </div>
-                                    <small class="text-muted">{{user.registrationDate}}</small>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-        </div>
-
-        <div class="col-12 col-sm-9 col-md-4" >
-          
-        </div>
-    </div>
-</div>
--->

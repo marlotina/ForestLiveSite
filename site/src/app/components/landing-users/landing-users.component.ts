@@ -108,7 +108,4 @@ export class LandingUsersComponent implements OnInit {
 
     return of([]);
   }
-
-  
-
 }
