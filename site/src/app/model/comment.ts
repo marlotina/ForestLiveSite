@@ -20,5 +20,8 @@ export class CommentResponse {
     userImage: string;
     specieId: string;
     parentId:string;
+    voteCount: number;
+    hasVote: boolean;
+    voteId: string;
     replies: CommentResponse[]
 }

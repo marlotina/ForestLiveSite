@@ -37,10 +37,14 @@
 
                         <div *ngIf="userNameLogged != null" class="mb-15">
                             <div class="mb-5">
-                                <a class="badge bg-secondary"  role="button">
-                                    +
-                                </a>
-                                  &nbsp;Votes 0&nbsp;
+
+                                <button type="button" 
+                                (click)="addVote(comment)" 
+                                    [ngClass]="{'hasVote-btn' : comment.hasVote, 'vote-btn' : !comment.hasVote}" 
+                                    class="votebtn">
+                                    <mat-icon>publish</mat-icon>
+                                </button>
+                                  &nbsp;Votes {{comment.voteCount}}&nbsp;
                                 <a class="badge bg-secondary" data-bs-toggle="collapse" href="#collapseExample-{{comment.id}}" (click)="showCommentForm(comment.id)" 
                                     role="button" aria-expanded="false" aria-controls="collapseExample">
                                     Reply

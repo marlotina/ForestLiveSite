@@ -2,6 +2,7 @@ import { Component , Input, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { first } from 'rxjs/operators';
 import { CommentRequest, CommentResponse } from 'src/app/model/Comment';
+import { CommentVoteRequest } from 'src/app/model/vote';
 import { AccountService } from 'src/app/services/account/account.service';
 import { CommentService } from 'src/app/services/comment/comment.service';
 import { environment } from 'src/environments/environment';
@@ -99,6 +100,40 @@ export class PostCommentComponent implements OnInit {
       error => { 
         this.openCommonModal('failpostdelete');
       });
+  }
+
+  addVote(comment: CommentResponse){
+
+    if(comment.hasVote){
+      this.commentService.DeleteVote(comment.voteId, this.postId)
+      .pipe(first())
+          .subscribe(
+              data => {    
+                comment.voteCount--;
+                comment.hasVote = false;
+                comment.voteId = null;
+              },
+              error => {   
+                
+              });
+    }else{
+      let request: CommentVoteRequest = {
+        postId: this.postId,
+        text: comment.text,
+        userId: this.userNameLogged,
+        authorPostId: this.userId,
+        commentId: comment.id
+      };
+
+      this.commentService.AddVote(request)
+      .pipe(first())
+          .subscribe(
+              data => {    
+                comment.voteCount++;
+                comment.hasVote = true;
+                comment.voteId = data.id;
+              });
+    }
   }
 
   showOwnerCommentOptions(userId: string){
