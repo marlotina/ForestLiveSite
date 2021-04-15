@@ -49,6 +49,22 @@ export class UserInfoResponse {
     facebookUrl: string;
 }
 
+export class UserListResponse {
+    userName: string;
+    urlWebSite: string;
+    lastModification: Date;
+    isCompany:boolean;
+    registrationDate: Date;
+    languageId: string;
+    description: string;
+    photo: string;
+    location: string;
+    twitterUrl: string;
+    instagramUrl: string;
+    linkedlinUrl: string;
+    facebookUrl: string;
+}
+
 export class ForgotRequest {
     Email: string;
 }

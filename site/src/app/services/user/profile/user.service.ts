@@ -10,19 +10,11 @@ import { map } from 'rxjs/operators';
 })
 export class UserService {
 
-
   constructor(private httpClient: HttpClient) { 
   }
   
   GetById(id: string) {
-    return this.httpClient.get<UserResponse>(`${environment.userApiUrl}api/v1/user/UserGetById?id=${id}`)
-      .pipe(map(user => {
-        return user;
-      }));
-  }
-
-  GetByUserName(userName: string) {
-    return this.httpClient.get<UserInfoResponse>(`${environment.userApiUrl}api/v1/user/UserGetByUserName?userName=${userName}`)
+    return this.httpClient.get<UserResponse>(`${environment.userApiUrl}api/v1/usermanaged/UserGetById?id=${id}`)
       .pipe(map(user => {
         return user;
       }));
@@ -33,7 +25,7 @@ export class UserService {
   }
 
   UpdateUser(request: UserRequest) {
-      return this.httpClient.put(`${environment.userApiUrl}api/v1/User/`, request);
+      return this.httpClient.put(`${environment.userApiUrl}api/v1/usermanaged/`, request);
   }
 
   UploadImage(request: ImageProfileRequest) {
@@ -45,6 +37,6 @@ export class UserService {
   }
 
   DeleteUser(id: string) {
-    return this.httpClient.delete(`${environment.userApiUrl}api/v1/user/?userId=${id}`);
+    return this.httpClient.delete(`${environment.userApiUrl}api/v1/usermanaged?userId=${id}`);
   }
 }

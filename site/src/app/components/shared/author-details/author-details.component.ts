@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { UserInfoResponse } from 'src/app/model/user';
+import { UserInteractionsService } from 'src/app/services/user-interactions/user-interactions.service';
 import { UserService } from 'src/app/services/user/profile/user.service';
 import { environment } from 'src/environments/environment';
 
@@ -15,14 +16,14 @@ export class AuthorDetailsComponent implements OnInit {
   userImage: string;
 
   constructor(
-    private userService: UserService,
+    private userInteractionService: UserInteractionsService,
     private route: ActivatedRoute) { }
 
   ngOnInit(): void {
 
     this.route.paramMap.subscribe(params => {
       let userId = params.get("userId");
-      this.userService.GetByUserName(userId).subscribe(
+      this.userInteractionService.GetByUserName(userId).subscribe(
         data => { 
           this.userInfo = data; 
         

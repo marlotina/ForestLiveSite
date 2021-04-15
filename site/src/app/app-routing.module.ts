@@ -28,8 +28,9 @@ const routes: Routes = [
     canActivate: [AuthGuard]  },
   { path: 'usercommentvotes', loadChildren: () => import('./components/user/user-comment-votes/user-comment-votes.module').then(m => m.UserCommentVotesModule), 
     canActivate: [AuthGuard]  },
-  { path: '**', loadChildren: () => import('./components/home/home.module').then(m => m.HomeModule) },
-  
+  { path: 'landingusers', loadChildren: () => import('./components/landing-users/landing-users.module').then(m => m.LandingUsersModule), 
+    canActivate: [AuthGuard]  },
+  { path: '**', loadChildren: () => import('./components/home/home.module').then(m => m.HomeModule) }
 ]
 
 @NgModule({
