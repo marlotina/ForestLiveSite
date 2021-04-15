@@ -19,10 +19,15 @@ const routes: Routes = [
   { path: 'birdpage', loadChildren: () => import('./components/birdpage/bird-landing-page/bird-landing-page.module').then(m => m.BirdLandingPageModule) },
   { path: 'usermappage/:userId', loadChildren: () => import('./components/userpage/user-map-page/user-map-page.module').then(m => m.UserMapPageModule) },
   { path: ':userId/:postId', loadChildren: () => import('./components/postpage/post-page/post-page.module').then(m => m.PostPageModule) },
-  { path: 'usercomments', loadChildren: () => import('./components/user/user-comments/user-comments.module').then(m => m.UserCommentsModule) },
-  { path: 'uservotes', loadChildren: () => import('./components/user/user-votes/user-votes.module').then(m => m.UserVotesModule) },
+  { path: 'usercomments', loadChildren: () => import('./components/user/user-comments/user-comments.module').then(m => m.UserCommentsModule), 
+      canActivate: [AuthGuard]  },
+  { path: 'uservotes', loadChildren: () => import('./components/user/user-votes/user-votes.module').then(m => m.UserVotesModule), 
+      canActivate: [AuthGuard]  },
   { path: 'searchpage', loadChildren: () => import('./components/search/search-page/search-page.module').then(m => m.SearchPageModule) },
-  { path: 'userlabel', loadChildren: () => import('./components/user/user-labels/user-labels.module').then(m => m.UserLabelsModule) },
+  { path: 'userlabel', loadChildren: () => import('./components/user/user-labels/user-labels.module').then(m => m.UserLabelsModule), 
+    canActivate: [AuthGuard]  },
+  { path: 'usercommentvotes', loadChildren: () => import('./components/user/user-comment-votes/user-comment-votes.module').then(m => m.UserCommentVotesModule), 
+    canActivate: [AuthGuard]  },
   { path: '**', loadChildren: () => import('./components/home/home.module').then(m => m.HomeModule) },
   
 ]
