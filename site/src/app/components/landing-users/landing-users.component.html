@@ -1,28 +1,106 @@
 <div class="container mt-15">
-    <div class="alert alert-info" role="alert">
-        Lorem fistrum a gramenawer al ataquerl tiene musho peligro. Jarl ese pedazo de sexuarl ese pedazo de torpedo pupita se calle ustée. Se calle ustée qué dise usteer ahorarr jarl condemor. Se calle ustée no puedor ese que llega mamaar te va a hasé pupitaa sexuarl hasta luego Lucas está la cosa muy malar jarl amatomaa.
+    
+    <div class="row justify-content-center">
+        
+        <div class="col-12 col-md-8">   
+          <div class="p-3 divPost rounded shadow-sm">
+            <h6 class="border-bottom pb-2 mb-0">Usuarios</h6>
+            <app-loader></app-loader>
+            <div class="d-flex text-muted pt-3"  *ngFor="let user of users">
+              <div class="pb-3 mb-0 small lh-sm border-bottom w-100">
+                <div class="d-flex justify-content-between">
+                  <div class="col-12 col-md-1 pad-3">
+                    <img src="https://birdpostsqa.blob.core.windows.net/profiles/{{user.photo}}" alt="image of {{user.userName}}" class="bd-placeholder-img" width="100%">
+                  </div>
+                  <div class="col-12 col-md-10">
+                    <a class="removeLinkLine" href="userpage{{user.userName}}"><strong class="text-gray-dark">{{user.userName}}</strong></a>
+                    <span class="d-block">{{user.description}}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+  
+        <div class="col-12 col-sm-9 col-md-4" >
+          <div class="ml-15 autocomplete-form autocompleteTop">
+            <div class="d-flex">
+                <mat-form-field class="autocomplete-full-width pr-5">
+                  <input type="text" class="form-control" #inputUserKey aria-label="Number" matInput  [matAutocomplete]="autoBird"
+                    [formControl]="autocompleteControl"  
+                    id="specieNamePost" placeholder="nombre de usuario">
+                        
+                    <mat-autocomplete #autoBird="matAutocomplete" (optionSelected)='selectSpecie($event.option.value)'>
+                      <mat-option *ngFor="let option of filteredSpecies | async" [value]="option" (change)="selectSpecie(option)" (click)="$event.stopPropagation()">
+                          <div class="d-flex text-muted pt-3">
+                              <div class="pb-3 mb-0 small lh-sm border-bottom w-100">
+                              <div class="d-flex justify-content-between">
+                                  <div class="col-12 col-md-1 pad-3">
+                                      <img src="{{imagesProfileUrl}}{{option.userPhoto}}" alt="{{ option.userName }}" class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32">
+                                  </div>
+                                  <div class="col-12 col-md-10">
+                                      <a class="removeLinkLine" href="/userpage/{{option.userName}}"><strong class="text-gray-dark">{{option.userName}}</strong></a>
+                                      &nbsp;-&nbsp;
+                                      <a class="removeLinkLine" href="/userpage/{{option.userName}}"><small>Visita perfil</small></a>
+                                  </div>
+                              </div>
+                              </div>
+                          </div>
+                        </mat-option>
+                    </mat-autocomplete>
+                </mat-form-field>  
+                <div class="form-group inputSearchTop ">
+                  <button type="button" class="btn btn-outline-primary addLabelBtn" (click)="removeFilterSpecie()" [hidden]="hideRemoveBtn"><mat-icon>close</mat-icon></button> 
+                  <button type="button" class="btn btn-outline-primary addLabelBtn" (click)="addFilterSpecie(inputUserKey.value)" [hidden]="!hideRemoveBtn"><mat-icon>search</mat-icon></button> 
+                </div> 
+            </div>
+        </div>  
+            
+        </div>
     </div>
-    <div class="row">
-        Select specie:
-        <mat-form-field class="autocomplete-full-width">
-            <input type="text" aria-label="Number" matInput  [matAutocomplete]="autoBird"
-                [formControl]="autocompleteControl"  
-                id="specieNamePost" placeholder="{{ 'createPost.birdSpecie' | translate }}">
-                
-            <mat-autocomplete #autoBird="matAutocomplete" (optionSelected)='selectSpecie($event.option.value)'>
-                <mat-option *ngFor="let option of filteredSpecies | async" [value]="option" (change)="selectSpecie(option)" (click)="$event.stopPropagation()">
-                    <img src="{{imagesProfileUrl}}{{option.userPhoto}}" alt="{{ option.userName }}" class="mt-15 imgAuthorPost"> 
-                    {{option.userName}}
-                    <a href="/userpage/{{option.userName}}">Visita perfil</a>
-                </mat-option>
-            </mat-autocomplete>
-        </mat-form-field>
-    </div>
+  </div>
+
+
+
+
+
+<!--
+
+
+<div class="container mt-15">
+   
+    
     <div class="row justify-content-center">           
         <div class="album py-5 bg-light">
             
             <div class="container">
-                
+                <div class="row"> 
+                          <h6 class="border-bottom pb-2 mb-0">Select specie:</h6>
+            
+                          <mat-form-field class="autocomplete-full-width">
+                            <input type="text" aria-label="Number" matInput  [matAutocomplete]="autoBird"
+                                [formControl]="autocompleteControl"  
+                                id="specieNamePost" placeholder="{{ 'createPost.birdSpecie' | translate }}">
+                                <mat-autocomplete #autoBird="matAutocomplete" (optionSelected)='selectSpecie($event.option.value)'>
+                                    <mat-option *ngFor="let option of filteredSpecies | async" [value]="option" (change)="selectSpecie(option)" (click)="$event.stopPropagation()">
+                                        <div class="d-flex text-muted pt-3">
+                                            <div class="pb-3 mb-0 small lh-sm border-bottom w-100">
+                                              <div class="d-flex justify-content-between">
+                                                <div class="col-12 col-md-1 pad-3">
+                                                  <img src="{{imagesProfileUrl}}{{option.userPhoto}}" alt="{{ option.userName }}" class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32">
+                                                </div>
+                                                <div class="col-12 col-md-10">
+                                                  <a class="removeLinkLine" href="/userpage/{{option.userName}}"><strong class="text-gray-dark">{{option.userName}}</strong></a>
+                                                  &nbsp;-&nbsp;
+                                                  <a class="removeLinkLine" href="/userpage/{{option.userName}}"><small>Visita perfil</small></a>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                    </mat-option>
+                                </mat-autocomplete>
+                            </mat-form-field>  
+                </div>
                 <app-loader></app-loader>
                 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
                     <div class="col" *ngFor="let user of users">
@@ -56,4 +134,4 @@
         </div>
     </div>
 </div>
-
+-->

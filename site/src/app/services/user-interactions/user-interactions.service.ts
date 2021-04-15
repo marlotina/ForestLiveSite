@@ -32,4 +32,12 @@ export class UserInteractionsService {
         return user;
       }));
   }
+
+  GetUsersByKey(keys: string) {
+    return this.httpClient.get<UserListResponse[]>(`${environment.userApiUrl}api/v1/userpage/GetUsersByKey?keys=${keys}`)
+      .pipe(map(user => {
+        return user;
+      }));
+  }
+  
 }
