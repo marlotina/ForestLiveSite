@@ -3,8 +3,8 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  pageDomain:"https://wbsite.azurewebsites.net",
   production: true,
+  pageDomain:"https://wbsite.azurewebsites.net",
   imagesProfileUrl: 'https://birdpostsqa.blob.core.windows.net/profiles/',
   imagesPostUrl: 'https://birdpostsqa.blob.core.windows.net/posts/',
   userApiUrl: 'https://userapiqa.azurewebsites.net/',
@@ -13,17 +13,17 @@ export const environment = {
   userLabelApiUrl: 'https://userlabelapiqa.azurewebsites.net/',
   birdApiUrl: 'https://birdsapiqa.azurewebsites.net/',
   birdPendingApiUrl: 'https://birdpendingapiqa.azurewebsites.net/',
-  userInteractionsApi: 'https://localhost:44361/',
-  postInteractionsApi: 'https://localhost:44388/',
+  userInteractionsApi: 'https://userinteractionsapiqa.azurewebsites.net/',
+  postInteractionsApi: 'https://postinteractionsapiqa.azurewebsites.net/',
   specieApiUrl: 'https://specieapiqa.azurewebsites.net/',
   googleApiKey: 'AIzaSyAjqE9XcDEwD2SmV9mmf757kYOdwTbJvwQ',
   whiteListDomains:  ['postapiqa.azurewebsites.net', 
                       'userapiqa.azurewebsites.net',
                       'birdsapiqa.azurewebsites.net',
-                      'localhost:44388',
+                      'postinteractionsapiqa.azurewebsites.net',
                       'userpostapiqa.azurewebsites.net',
                       'userlabelapiqa.azurewebsites.net',
-                      'localhost:44361',
+                      'userinteractionsapiqa.azurewebsites.net',
                       'specieapiqa.azurewebsites.net',
                       'birdpendingapiqa.azurewebsites.net'],
   blacklistedRoutes: []
