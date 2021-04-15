@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PostListResponse } from 'src/app/model/post';
+import { GetItemsService } from 'src/app/services/items/get-items.service';
 import { LoaderService } from 'src/app/services/loader/loader.service';
-import { PendingBirdService } from 'src/app/services/pendingBird/pending-bird.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -15,11 +15,11 @@ export class WithoutSpeciePageComponent implements OnInit {
   hasNotPosts: boolean;
 
   constructor(
-    private pendingBirdService: PendingBirdService,
+    private getItemService: GetItemsService,
     private loaderService: LoaderService) { }
 
   ngOnInit(): void {
-    this.pendingBirdService.GetWithoutSpecie(1).subscribe(
+    this.getItemService.GetWithoutSpecie(1).subscribe(
       data => {
         this.pendingPosts = data;
         if(data != null && data.length > 0){

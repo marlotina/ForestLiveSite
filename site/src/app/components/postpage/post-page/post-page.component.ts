@@ -7,7 +7,6 @@ import { AccountService } from 'src/app/services/account/account.service';
 import { GetItemsService } from 'src/app/services/items/get-items.service';
 import { ManageItemsService } from 'src/app/services/items/manage-items.service';
 import { LoaderService } from 'src/app/services/loader/loader.service';
-import { PostService } from 'src/app/services/post/post.service';
 import { environment } from 'src/environments/environment';
 import { CommonDialogComponent } from '../../shared/common-dialog/common-dialog.component';
 import { ImageDialogComponent } from '../../shared/image-dialog/image-dialog.component';
@@ -33,7 +32,6 @@ export class PostPageComponent implements OnInit {
     private meta: Meta,
     private loaderService: LoaderService,
     private getItemService: GetItemsService,
-    private postService: PostService,
     private accountService: AccountService,
     private manageItemService: ManageItemsService,
     private matDialog: MatDialog,
@@ -126,35 +124,6 @@ export class PostPageComponent implements OnInit {
               this.openCommonModal('failpostdelete');
             });
         }
-      }
-    });
-  }
-
-  deleteItem(){
-    const dialogConfig = new MatDialogConfig();
-    
-    dialogConfig.disableClose = false;
-    dialogConfig.id = "modal-component";
-    dialogConfig.width = "600px";
-    dialogConfig.data = {
-      //title: "user.deleteTitlePostModal",
-      description: "user.deleteTextPostModal",
-      acceptButtonText: "general.delete",
-      cancelButtonText:"general.cancel",
-      hideAcceptButton: false,
-      hideCancelButton: false
-    }
-      
-    const dialogRef = this.matDialog.open(CommonDialogComponent, dialogConfig);
-    dialogRef.afterClosed().subscribe(result => {
-      if(result == 'ACCEPT'){
-        this.postService.deletePost(this.post.postId).subscribe(
-          data => {
-            this.route.navigate(['/userpage/' + this.post.userId]);
-          },
-          error => { 
-            this.openCommonModal('failpostdelete');
-          });
       }
     });
   }
