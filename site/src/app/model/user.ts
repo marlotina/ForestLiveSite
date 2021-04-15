@@ -65,6 +65,11 @@ export class UserListResponse {
     facebookUrl: string;
 }
 
+export class UserAutocompleteResponse {
+    userName: string;
+    userPhoto: string;
+}
+
 export class ForgotRequest {
     Email: string;
 }

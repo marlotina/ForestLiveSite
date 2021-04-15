@@ -14,7 +14,7 @@ export class UserService {
   }
   
   GetById(id: string) {
-    return this.httpClient.get<UserResponse>(`${environment.userApiUrl}api/v1/usermanaged/UserGetById?id=${id}`)
+    return this.httpClient.get<UserResponse>(`${environment.userApiUrl}api/v1/user/UserGetById?id=${id}`)
       .pipe(map(user => {
         return user;
       }));

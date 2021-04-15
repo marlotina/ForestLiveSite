@@ -2,6 +2,22 @@
     <div class="alert alert-info" role="alert">
         Lorem fistrum a gramenawer al ataquerl tiene musho peligro. Jarl ese pedazo de sexuarl ese pedazo de torpedo pupita se calle ustée. Se calle ustée qué dise usteer ahorarr jarl condemor. Se calle ustée no puedor ese que llega mamaar te va a hasé pupitaa sexuarl hasta luego Lucas está la cosa muy malar jarl amatomaa.
     </div>
+    <div class="row">
+        Select specie:
+        <mat-form-field class="autocomplete-full-width">
+            <input type="text" aria-label="Number" matInput  [matAutocomplete]="autoBird"
+                [formControl]="autocompleteControl"  
+                id="specieNamePost" placeholder="{{ 'createPost.birdSpecie' | translate }}">
+                
+            <mat-autocomplete #autoBird="matAutocomplete" (optionSelected)='selectSpecie($event.option.value)'>
+                <mat-option *ngFor="let option of filteredSpecies | async" [value]="option" (change)="selectSpecie(option)" (click)="$event.stopPropagation()">
+                    <img src="{{imagesProfileUrl}}{{option.userPhoto}}" alt="{{ option.userName }}" class="mt-15 imgAuthorPost"> 
+                    {{option.userName}}
+                    <a href="/userpage/{{option.userName}}">Visita perfil</a>
+                </mat-option>
+            </mat-autocomplete>
+        </mat-form-field>
+    </div>
     <div class="row justify-content-center">           
         <div class="album py-5 bg-light">
             
