@@ -3,8 +3,8 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  pageDomain:"https://wbsite.azurewebsites.net",
   production: true,
+  pageDomain:"https://wbsite.azurewebsites.net",
   imagesProfileUrl: 'https://birdpostsqa.blob.core.windows.net/profiles/',
   imagesPostUrl: 'https://birdpostsqa.blob.core.windows.net/posts/',
   userApiUrl: 'https://userapiqa.azurewebsites.net/',

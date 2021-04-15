@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommentResponse } from 'src/app/model/Comment';
+import { CommentVoteRequest } from 'src/app/model/vote';
 import { AccountService } from 'src/app/services/account/account.service';
 import { CommentService } from 'src/app/services/comment/comment.service';
 import { LoaderService } from 'src/app/services/loader/loader.service';
