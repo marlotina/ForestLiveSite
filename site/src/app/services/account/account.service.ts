@@ -64,4 +64,8 @@ export class AccountService {
   ResetPassword(request: ResetPasswordRequest) {
     return this.httpClient.post(`${environment.userApiUrl}api/v1/Account/ResetPassword`, request);
   }
+
+  updateImage(image: string){
+      this.userSubject.value.photo = image;
+  }
 }

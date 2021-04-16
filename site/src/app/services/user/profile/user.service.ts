@@ -14,7 +14,7 @@ export class UserService {
   }
   
   GetById(id: string) {
-    return this.httpClient.get<UserResponse>(`${environment.userApiUrl}api/v1/user/UserGetById?id=${id}`)
+    return this.httpClient.get<UserResponse>(`${environment.userApiUrl}api/v1/user/GetUserProfile?userId=${id}`)
       .pipe(map(user => {
         return user;
       }));
@@ -25,7 +25,7 @@ export class UserService {
   }
 
   UpdateUser(request: UserRequest) {
-      return this.httpClient.put(`${environment.userApiUrl}api/v1/usermanaged/`, request);
+      return this.httpClient.put(`${environment.userApiUrl}api/v1/User/`, request);
   }
 
   UploadImage(request: ImageProfileRequest) {

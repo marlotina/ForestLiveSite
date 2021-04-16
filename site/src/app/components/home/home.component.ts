@@ -27,7 +27,7 @@ export class HomeComponent implements OnInit {
         x => {
           if(x != null)
           {
-            this.userPageUrl = `userpage/${x.userName}`;
+            this.userPageUrl = `userpage/${x.userId}`;
           }
         }
       );

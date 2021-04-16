@@ -108,7 +108,7 @@ export class CreatePostComponent implements OnInit {
       isPost: ['']
     });
     
-    this.userId = this.accountService.userValue.userName;
+    this.userId = this.accountService.userValue.userId;
     
     this.postForm.patchValue({
       'userId': this.userId

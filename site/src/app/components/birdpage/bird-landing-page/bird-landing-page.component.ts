@@ -47,7 +47,7 @@ export class BirdLandingPageComponent implements OnInit {
     private loaderService: LoaderService) { }
 
   ngOnInit(): void {
-    this.userLoggedName = this.accountService.userValue != null ? this.accountService.userValue.userName : null;
+    this.userLoggedName = this.accountService.userValue != null ? this.accountService.userValue.userId : null;
 
     this.filteredSpecies = this.autocompleteControl.valueChanges.pipe(
       startWith(''),

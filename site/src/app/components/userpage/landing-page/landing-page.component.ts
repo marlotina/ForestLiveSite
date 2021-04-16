@@ -54,7 +54,7 @@ export class LandingPageComponent implements OnInit {
       this.searchPosts();   
     });
 
-    this.userLoggedName = this.accountService.userValue.userName;
+    this.userLoggedName = this.accountService.userValue.userId;
     this.userLabelsService.GetUserLabels(this.userId).subscribe(
       data => {
         this.userLabels = data;

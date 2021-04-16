@@ -16,7 +16,7 @@ export class ForgotRequest {
 
 export class User {
     id: string;
-    userName: string;
+    userId: string;
     email: string;
     password: string;
     firstName: string;

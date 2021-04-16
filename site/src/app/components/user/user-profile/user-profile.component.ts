@@ -19,7 +19,9 @@ export class UserProfileComponent implements OnInit {
   userProfileForm: FormGroup;
   submitted = false;
   userImage: string;
-
+  userEmail: string;
+  userProfileUrlImage = environment.imagesProfileUrl;
+  
   constructor(private formBuilder: FormBuilder,
     private userService: UserService,
     private accountService: AccountService,
@@ -28,9 +30,6 @@ export class UserProfileComponent implements OnInit {
   ngOnInit(): void {
     this.userProfileForm = this.formBuilder.group({
       id: ['', [Validators.required]],
-      email: ['', [
-        Validators.required,
-        Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]],
       userName: ['', [Validators.required]],
       name: [''],
       surname: [''],
@@ -48,6 +47,7 @@ export class UserProfileComponent implements OnInit {
       facebookUrl: ['']
     });
 
+    this.userEmail = this.accountService.userValue.email;
     this.userService.GetById(this.accountService.userValue.id).subscribe(
       data => {
           this.userProfileForm.patchValue({
@@ -59,7 +59,6 @@ export class UserProfileComponent implements OnInit {
             'description': data.description,
             'photo': data.photo,
             'location': data.location,
-            'email': data.email,
             'userName':data.userName,
             'id':data.id,
             'lastModification': data.lastModification,
@@ -70,11 +69,7 @@ export class UserProfileComponent implements OnInit {
             'facebookUrl': data.facebookUrl
             });
 
-          if(data.photo == '' || data.photo == null){
-            this.userImage = "../../../../assets/img/bg-img/profile.png";
-          } else {
-            this.userImage = `${environment.imagesProfileUrl}${data.photo}`;
-          }
+          this.userImage = data.photo;
 
         },
         error => {
@@ -95,7 +90,7 @@ export class UserProfileComponent implements OnInit {
         .pipe(first())
         .subscribe(
             data => {    
-              this.openCommonModal('user.successSaveUserData');
+              this.submitted = false; 
             },
             error => {   
               if(error.status == "409"){
@@ -117,12 +112,14 @@ export class UserProfileComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if(result == "REMOVE_IMAGE"){
-        this.userImage = "../../../../assets/img/bg-img/profile.png";
+        this.userImage = "profile.png";
       } else {
         if(result){
-          this.userImage = `${environment.imagesProfileUrl}${result}`;
+          this.userImage = `${result}`;
         }
       }
+      
+      this.accountService.updateImage(this.userImage);
     });
   }
 

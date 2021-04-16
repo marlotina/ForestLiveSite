@@ -105,7 +105,7 @@ export class ModalProfileComponent implements OnInit {
         userId: this.accountService.userValue.id,
         imageBase64: this.croppedImage,
         imageName: this.nameFile,
-        userName: this.accountService.userValue.userName
+        userName: this.accountService.userValue.userId
       };
 
       this.userService.UploadImage(imageProfileRequest)

@@ -38,7 +38,7 @@ export class PostCommentComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.userNameLogged = this.accountService != null? this.accountService.userValue.userName: null;
+    this.userNameLogged = this.accountService != null? this.accountService.userValue.userId: null;
 
     this.commentService.GetCommentsByPost(this.postId).subscribe(
       data => { 

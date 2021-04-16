@@ -21,7 +21,7 @@ export class UserVotesComponent implements OnInit {
 
   ngOnInit(): void {
     this.loaderService.show();
-    this.votesService.GetVotesByUser(this.accountService.userValue.userName).subscribe(
+    this.votesService.GetVotesByUser(this.accountService.userValue.userId).subscribe(
       data =>{ 
         if(data.length > 0){
           this.hasNotVotes = true;

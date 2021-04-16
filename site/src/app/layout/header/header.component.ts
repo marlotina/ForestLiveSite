@@ -16,6 +16,8 @@ export class HeaderComponent implements OnInit {
   isLogged: boolean = false;
   userNameMenu: string;
   userImage: string;
+  imageProfileUrl = environment.imagesProfileUrl;
+
   constructor(private router: Router,
     private route: ActivatedRoute,
     private accountService: AccountService,
@@ -39,12 +41,8 @@ export class HeaderComponent implements OnInit {
           if(x != null)
           {
             this.user = x;
-            this.userNameMenu = this.user.userName;
-            if(this.user.photo != null){
-              this.userImage = `${environment.imagesProfileUrl}${this.user.photo}`;
-            }else{  
-              this.userImage = "../../../../assets/img/bg-img/profile.png";
-            }
+            this.userNameMenu = this.user.userId;
+            this.userImage = this.user.photo;
           }
         }
       );
@@ -53,7 +51,7 @@ export class HeaderComponent implements OnInit {
         x => this.isLogged = x
         );
         
-      this.userNameMenu = this.user != null ? this.user.userName : '';
+      this.userNameMenu = this.user != null ? this.user.userId : '';
     }
   }  
 

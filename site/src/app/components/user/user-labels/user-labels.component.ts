@@ -29,7 +29,7 @@ export class UserLabelsComponent implements OnInit {
 
   ngOnInit(): void {
     this.loaderService.show();
-    let userId = this.accountService.userValue.userName;
+    let userId = this.accountService.userValue.userId;
     this.userLabelsService.GetUserLabelsDetails(userId).subscribe(
       data =>{ 
         if(data.length > 0){

@@ -23,7 +23,7 @@ export class UserCommentVotesComponent implements OnInit {
 
   ngOnInit(): void {
     this.loaderService.show();
-    this.votesService.GetCommentVotesByUser(this.accountService.userValue.userName).subscribe(
+    this.votesService.GetCommentVotesByUser(this.accountService.userValue.userId).subscribe(
       data =>{ 
         if(data.length > 0){
           this.hasNotVotes = true;

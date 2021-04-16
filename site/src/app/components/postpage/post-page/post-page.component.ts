@@ -40,7 +40,7 @@ export class PostPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.loaderService.show();
-    this.userLoggedName = this.accountService.userValue != null ? this.accountService.userValue.userName : null;
+    this.userLoggedName = this.accountService.userValue != null ? this.accountService.userValue.userId : null;
     
     this.activateRoute.paramMap.subscribe(params => {
       let postId = params.get("postId");

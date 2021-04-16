@@ -22,7 +22,7 @@ export class UserCommentsComponent implements OnInit {
 
   ngOnInit(): void {
     this.loaderService.show();
-    this.commentService.GetCommentsByUser(this.accountService.userValue.userName).subscribe(
+    this.commentService.GetCommentsByUser(this.accountService.userValue.userId).subscribe(
       data =>{ 
         if(data.length > 0){
           this.hasNotComments = true;
