@@ -47,15 +47,18 @@ export class PostPageComponent implements OnInit {
 
       this.getItemService.getPost(postId).subscribe(
         data => { 
-          this.post = data;  
-          this.showOwnerOptions = this.userLoggedName != null && this.post.userId == this.userLoggedName;
-          this.hasPost = true;
-          this.imagePostUrl = environment.imagesPostUrl + this.post.imageUrl;
-          this.urlPage = `${environment.pageDomain}/${this.post.userId}/${this.post.postId}`;
-          this.loaderService.hide();
-    
-          this.addMetas(this.post, this.imagePostUrl, this.urlPage);
-          this.initMap(this.post.latitude, this.post.longitude);
+          if(data != null) {
+            this.post = data;  
+            this.showOwnerOptions = this.userLoggedName != null && this.post.userId == this.userLoggedName;
+            this.hasPost = true;
+            this.imagePostUrl = environment.imagesPostUrl + this.post.imageUrl;
+            this.urlPage = `${environment.pageDomain}/${this.post.userId}/${this.post.postId}`;
+            this.loaderService.hide();
+      
+            this.addMetas(this.post, this.imagePostUrl, this.urlPage);
+            this.initMap(this.post.latitude, this.post.longitude);
+          }
+          
         }
       );
       

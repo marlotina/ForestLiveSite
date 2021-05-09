@@ -35,10 +35,10 @@ export class UserInfoResponse {
     id: string;
     userName: string;
     urlWebSite: string;
-    lastModification: Date;
+    //lastModification: Date;
     isCompany:boolean;
     registrationDate: Date;
-    languageId: string;
+    //languageId: string;
     description: string;
     photo: string;
     location: string;
@@ -46,6 +46,9 @@ export class UserInfoResponse {
     instagramUrl: string;
     linkedlinUrl: string;
     facebookUrl: string;
+    countVotes: number;
+    hasFollow: boolean;
+    followId: string;
 }
 
 export class UserListResponse {

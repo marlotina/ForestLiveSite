@@ -24,6 +24,8 @@
 
 <div class="divAuthor">
     <div>
-        <button class="btn btn-primary" type="button"><mat-icon>stars</mat-icon></button>
+        <button class="btn btn-primary" 
+            [ngClass]="{'hasVote-btn' : userInfo.hasFollow, 'vote-btn' : !userInfo.hasFollow}" 
+            (click)="addFollow();" type="button"><mat-icon>stars</mat-icon></button>
     </div>
 </div>

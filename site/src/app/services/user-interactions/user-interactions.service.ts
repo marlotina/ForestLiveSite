@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
+import { DeleteFollowUserResquest, FollowUserRequest, FollowUserResponse } from 'src/app/model/FollowUser';
 import { UserInfoResponse, UserListResponse, UserAutocompleteResponse } from 'src/app/model/user';
 import { environment } from 'src/environments/environment';
 
@@ -39,5 +40,18 @@ export class UserInteractionsService {
         return user;
       }));
   }
-  
+
+  AddFollow(request: FollowUserRequest) {
+    return this.httpClient.post<FollowUserResponse>(`${environment.userInteractionsApi}api/v1/FollowUser/AddFollowUser`, request)
+      .pipe(map(data => {
+        return data;
+      }));
+  }
+
+  DeleteFollow(request: DeleteFollowUserResquest){
+    return this.httpClient.post(`${environment.userInteractionsApi}api/v1/FollowUser/DeleteFollowUser`, request)
+      .pipe(map(data => {
+        return data;
+      }));
+  }
 }
