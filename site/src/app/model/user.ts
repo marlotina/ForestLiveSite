@@ -46,7 +46,7 @@ export class UserInfoResponse {
     instagramUrl: string;
     linkedlinUrl: string;
     facebookUrl: string;
-    countVotes: number;
+    followerCount: number;
     hasFollow: boolean;
     followId: string;
 }

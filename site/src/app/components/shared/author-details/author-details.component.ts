@@ -48,7 +48,7 @@ export class AuthorDetailsComponent implements OnInit {
           .subscribe(
               data => {    
                 this.userInfo.hasFollow = false;
-                this.userInfo.countVotes--;
+                this.userInfo.followerCount--;
                 this.userInfo.followId = null;
               },
               error => {   
@@ -66,7 +66,7 @@ export class AuthorDetailsComponent implements OnInit {
           .subscribe(
               data => {    
                 this.userInfo.hasFollow = true;
-                this.userInfo.countVotes++;
+                this.userInfo.followerCount++;
                 this.userInfo.followId = data.followerId;
               });
     }
