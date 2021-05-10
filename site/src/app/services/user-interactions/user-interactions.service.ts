@@ -49,9 +49,15 @@ export class UserInteractionsService {
   }
 
   DeleteFollow(request: DeleteFollowUserResquest){
-    return this.httpClient.post(`${environment.userInteractionsApi}api/v1/FollowUser/DeleteFollowUser`, request)
+    return this.httpClient.delete(`${environment.userInteractionsApi}api/v1/FollowUser/DeleteFollowUser?followId=${request.followId}&followUserId=${request.followUserId}&userSystemId=${request.userSystemId}`)
       .pipe(map(data => {
         return data;
       }));
   }
 }
+
+/*
+userId: string;
+    followUserId: string;
+    userSystemId: string;
+*/

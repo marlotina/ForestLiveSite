@@ -52,6 +52,7 @@ export class UserInfoResponse {
 }
 
 export class UserListResponse {
+    id: string;
     userName: string;
     urlWebSite: string;
     lastModification: Date;

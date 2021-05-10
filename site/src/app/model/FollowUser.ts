@@ -1,16 +1,16 @@
 export class FollowUserRequest {
-    UserId: string;
-    FollowUserId: string;
+    userId: string;
+    followUserId: string;
+    userSystemId: string;
 }
 
 export class DeleteFollowUserResquest {
-    Id: string;
-    UserId: string;
-    FollowUserId: string;
+    followId: string;
+    followUserId: string;
+    userSystemId: string;
 }
 
 export class FollowUserResponse {
-    UserId: string;
-    FollowUserId: string;
+    followerId: string;
 }
 

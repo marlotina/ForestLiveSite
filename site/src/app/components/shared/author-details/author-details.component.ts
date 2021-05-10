@@ -37,11 +37,11 @@ export class AuthorDetailsComponent implements OnInit {
   }
 
   addFollow(){
-    if(this.hasFollow){
+    if(this.userInfo.hasFollow){
       let request: DeleteFollowUserResquest = {
-        UserId: this.accountService.userValue.userId,
-        FollowUserId: this.userInfo.userName,
-        Id: this.userInfo.followId
+        followId: this.userInfo.followId,
+        followUserId: this.userInfo.userName,
+        userSystemId: this.userInfo.id
       };
       this.userInteractionService.DeleteFollow(request)
       .pipe(first())
@@ -56,8 +56,9 @@ export class AuthorDetailsComponent implements OnInit {
               });
     }else{
       let request: FollowUserRequest = {
-        UserId: this.accountService.userValue.userId,
-        FollowUserId:  this.userInfo.userName
+        userId: this.accountService.userValue.userId,
+        followUserId:  this.userInfo.userName,
+        userSystemId: this.userInfo.id
       };
 
       this.userInteractionService.AddFollow(request)
@@ -66,7 +67,7 @@ export class AuthorDetailsComponent implements OnInit {
               data => {    
                 this.userInfo.hasFollow = true;
                 this.userInfo.countVotes++;
-                this.userInfo.followId = data.FollowUserId;
+                this.userInfo.followId = data.followerId;
               });
     }
   }
