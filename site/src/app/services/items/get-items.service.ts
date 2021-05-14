@@ -34,7 +34,7 @@ export class GetItemsService {
   }
 
   GetWithoutSpecie(orderBy: number){
-    return this.httpClient.get<PostListResponse[]>(`${environment.birdPendingApiUrl}api/v1/PendingSearch/GetPendings?orderby=${orderBy}`)
+    return this.httpClient.get<PostListResponse[]>(`${environment.birdApiUrl}api/v1/SpeciesSearch/GetPendings?orderby=${orderBy}`)
       .pipe(map(data => {
         return data;
       }));

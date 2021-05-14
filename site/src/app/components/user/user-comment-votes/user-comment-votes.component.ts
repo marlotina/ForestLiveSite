@@ -13,7 +13,8 @@ import { VoteService } from 'src/app/services/vote/vote.service';
 export class UserCommentVotesComponent implements OnInit {
 
   userVotes: CommentVoteResponse[];
-  hasNotVotes = false;
+  hasVotes = false;
+  isLoading = true;
 
   constructor(
     private loaderService: LoaderService,
@@ -26,10 +27,11 @@ export class UserCommentVotesComponent implements OnInit {
     this.votesService.GetCommentVotesByUser(this.accountService.userValue.userId).subscribe(
       data =>{ 
         if(data.length > 0){
-          this.hasNotVotes = true;
+          this.hasVotes = true;
         }
         this.userVotes = data;
         this.loaderService.hide();
+        this.isLoading = false;
       } 
     );
   }

@@ -32,24 +32,31 @@
             </div>
 
             <app-loader></app-loader>
-            <div class="d-flex text-muted pt-3"  *ngFor="let label of userLabels">
-              
-              <div class="pb-3 mb-0 small lh-sm border-bottom w-100">
-                <div class="d-flex justify-content-between">
-                  <div class="col-12 col-md-1 pad-3">
-                   
-                  <mat-icon style="color: green;">label</mat-icon>
-                </div>
-                  <div class="col-12 col-md-10">
-                    <strong class="text-gray-dark">{{label.label}}</strong>&nbsp;({{label.postCount}})<br/>
-                    <span class="d-block">Creation date:&nbsp;{{label.creationDate}}</span>
+
+            <div *ngIf="!isLoading && hasLabels">
+              <div class="d-flex text-muted pt-3"  *ngFor="let label of userLabels">
+                <div class="pb-3 mb-0 small lh-sm border-bottom w-100">
+                  <div class="d-flex justify-content-between">
+                    <div class="col-12 col-md-1 pad-3">
+                     
+                    <mat-icon style="color: green;">label</mat-icon>
                   </div>
-                  <div class="col-12 col-md-1">
-                    <button type="button" class="btn btn-outline-danger addLabelBtn" (click)="removeLabel(label)" [disabled]="label.postCount > 0"><mat-icon>delete_outline</mat-icon></button>
+                    <div class="col-12 col-md-10">
+                      <strong class="text-gray-dark">{{label.label}}</strong>&nbsp;({{label.postCount}})<br/>
+                      <span class="d-block">Creation date:&nbsp;{{label.creationDate}}</span>
+                    </div>
+                    <div class="col-12 col-md-1">
+                      <button type="button" class="btn btn-outline-danger addLabelBtn" (click)="removeLabel(label)" [disabled]="label.postCount > 0"><mat-icon>delete_outline</mat-icon></button>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
+            
+            <div *ngIf="!isLoading && !hasLabels" class="d-flex text-muted pt-3">
+              You dont have labels
+            </div>
+
           </div>
         </div>
   

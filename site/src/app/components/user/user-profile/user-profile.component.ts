@@ -21,7 +21,7 @@ export class UserProfileComponent implements OnInit {
   userImage: string;
   userEmail: string;
   userProfileUrlImage = environment.imagesProfileUrl;
-  
+
   constructor(private formBuilder: FormBuilder,
     private userService: UserService,
     private accountService: AccountService,

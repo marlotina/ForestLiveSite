@@ -38,14 +38,7 @@ export class ManageItemsService {
   }
 
   updateBird(request: PostUpdateSpecieRequest) {
-    return this.httpClient.put<PostAssignSpecieResponse>(`${environment.birdApiUrl}api/v1/ManagePostSpecie/UpdateSpecieId/`, request)
-      .pipe(map(data => {
-        return data;
-      }));
-  }
-
-  changeBird(request: PostUpdateSpecieRequest) {
-    return this.httpClient.put<string>(`${environment.birdApiUrl}api/v1/ManagePostSpecie/ChangeSpecieId/`, request)
+    return this.httpClient.put<PostAssignSpecieResponse>(`${environment.postApiUrl}api/v1/ManagePost/UpdateSpecieId/`, request)
       .pipe(map(data => {
         return data;
       }));

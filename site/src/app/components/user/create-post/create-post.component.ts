@@ -105,7 +105,8 @@ export class CreatePostComponent implements OnInit {
       altImage: [''],
       imageName: [''],
       observationDate: [null],
-      isPost: ['']
+      isPost: [''],
+      type: ['']
     });
     
     this.userId = this.accountService.userValue.userId;
@@ -178,36 +179,24 @@ export class CreatePostComponent implements OnInit {
     });
 
     if(this.type == 1) { 
-      this.manageItemsService.addPost(this.postForm.value)
-      .pipe(first())
-      .subscribe(
-          data => {    
-            this.manageSuccess(data.userId, data.postId);
-          },
-          error => {   
-            this.manageError(error.status);
-          });
+      this.postForm.controls['type'].setValue('post');
+      
     } else if (this.type == 2) {
-      this.manageItemsService.addBird(this.postForm.value)
-      .pipe(first())
-      .subscribe(
-          data => {    
-            this.manageSuccess(data.userId, data.postId);
-          },
-          error => {   
-            this.manageError(error.status);
-          });
+      this.postForm.controls['type'].setValue('bird');
     } else if (this.type == 3) {
-      this.manageItemsService.addPending(this.postForm.value)
-      .pipe(first())
-      .subscribe(
-          data => {    
-            this.manageSuccess(data.userId, data.postId);
-          },
-          error => {   
-            this.manageError(error.status);
-          });
+      this.postForm.controls['type'].setValue('pending');
     }
+    
+    this.manageItemsService.addPost(this.postForm.value)
+    .pipe(first())
+    .subscribe(
+        data => {    
+          this.manageSuccess(data.userId, data.postId);
+        },
+        error => {   
+          this.manageError(error.status);
+        });
+    
   }
 
   manageSuccess(userId: string, postId: string){
@@ -221,6 +210,7 @@ export class CreatePostComponent implements OnInit {
     } else {
       this.openCommonModal('user.failUserAction');
     } 
+    this.submitted = true; 
   }
 
   get f() { return this.postForm.controls; }

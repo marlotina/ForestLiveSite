@@ -19,17 +19,15 @@ import { ImageDialogComponent } from '../../shared/image-dialog/image-dialog.com
 
 export class LandingPageComponent implements OnInit {
   
-  submitted = false;
-  
   userLoggedName: string = null;
   userPosts: PostListResponse[];
   userId: string;
   imagesPostUrl = environment.imagesPostUrl;
-  hasNotPosts: boolean;
+  hasPosts = false;
   isLogged: boolean;
   userLabels: UserLabelPageResponse[];
   selectedLabel: string;
-
+  isLoading = true;
   searchType:string = 'all';
 
   constructor(
@@ -81,8 +79,9 @@ export class LandingPageComponent implements OnInit {
     this.userPostService.GetPosts(this.userId, this.selectedLabel, this.searchType).subscribe(
       data =>{ 
         this.userPosts = data;
-        this.hasNotPosts = this.userPosts.length == 0; 
+        this.hasPosts = this.userPosts.length == 0; 
         this.loaderService.hide();
+        this.isLoading = false;
       } 
     );
   }

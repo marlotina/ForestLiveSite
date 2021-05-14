@@ -16,8 +16,8 @@ import { CommonDialogComponent } from '../../shared/common-dialog/common-dialog.
 export class UserLabelsComponent implements OnInit {
 
   userLabels: UserLabelResponse[];
-  hasNotLabels = false;
-  
+  hasLabels = false;
+  isLoading = true;
   labelForm: FormGroup;
 
   constructor(
@@ -32,11 +32,12 @@ export class UserLabelsComponent implements OnInit {
     let userId = this.accountService.userValue.userId;
     this.userLabelsService.GetUserLabelsDetails(userId).subscribe(
       data =>{ 
-        if(data.length > 0){
-          this.hasNotLabels = true;
+        if(data != null && data.length > 0){
+          this.hasLabels = true;
         }
         this.userLabels = data;
         this.loaderService.hide();
+        this.isLoading = false;
       } 
     );
 

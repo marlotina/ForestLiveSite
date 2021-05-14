@@ -12,7 +12,7 @@ export class WithoutSpeciePageComponent implements OnInit {
 
   pendingPosts: PostListResponse[];
   imagesPostUrl = environment.imagesPostUrl;
-  hasNotPosts: boolean;
+  hasPosts = false;
 
   constructor(
     private getItemService: GetItemsService,
@@ -23,9 +23,7 @@ export class WithoutSpeciePageComponent implements OnInit {
       data => {
         this.pendingPosts = data;
         if(data != null && data.length > 0){
-          this.hasNotPosts = true;
-        }else{
-          this.hasNotPosts = false;
+          this.hasPosts = true;
         }
         this.loaderService.hide();
       }

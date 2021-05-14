@@ -13,8 +13,8 @@ import { LoaderService } from 'src/app/services/loader/loader.service';
 export class UserCommentsComponent implements OnInit {
 
   userComments: CommentResponse[];
-  hasNotComments = false;
-
+  hasComments = false;
+  isLoading = true;
   constructor(
     private loaderService: LoaderService,
     private commentService: CommentService,
@@ -25,10 +25,11 @@ export class UserCommentsComponent implements OnInit {
     this.commentService.GetCommentsByUser(this.accountService.userValue.userId).subscribe(
       data =>{ 
         if(data.length > 0){
-          this.hasNotComments = true;
+          this.hasComments = true;
         }
         this.userComments = data;
         this.loaderService.hide();
+        this.isLoading = false;
       } 
     );
   }
