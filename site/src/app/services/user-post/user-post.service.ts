@@ -13,14 +13,14 @@ export class UserPostService {
   constructor(private httpClient: HttpClient) { }
 
   getModalBirdPost(postId : string, userId: string){
-    return this.httpClient.get<ModalPostResponse>(`${environment.userPostApiUrl}api/v1/UserPosts/GetModalInfo/?postId=${postId}&userId=${userId}`)
+    return this.httpClient.get<ModalPostResponse>(`${environment.birdApiUrl}api/v1/post/GetModalInfo/?postId=${postId}&userId=${userId}`)
       .pipe(map(data => {
         return data;
       }));
   }
 
   getMapPointsPostByUser(userId: string){
-    return this.httpClient.get<MapPoint[]>(`${environment.userPostApiUrl}api/v1/UserPosts/GetMapPoints/?userId=${userId}`)
+    return this.httpClient.get<MapPoint[]>(`${environment.birdApiUrl}api/v1/UserPosts/GetMapPoints/?userId=${userId}`)
       .pipe(map(data => {
         return data;
       }));
@@ -34,7 +34,7 @@ export class UserPostService {
       params = `?userId=${userId}&type=${type}&label=${label}`;
     }
     return this.httpClient.get<PostListResponse[]>
-    (`${environment.userPostApiUrl}api/v1/UserPosts/GetPosts${params}`)
+    (`${environment.birdApiUrl}api/v1/UserPosts/GetUserPosts${params}`)
       .pipe(map(data => {
         return data;
       }));

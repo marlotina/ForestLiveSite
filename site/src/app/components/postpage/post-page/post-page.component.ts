@@ -102,31 +102,14 @@ export class PostPageComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if(result == 'ACCEPT'){
 
-        if(this.post.type == "post"){
-          this.manageItemService.deletePost(this.post.postId).subscribe(
-            data => {
-              this.route.navigate(['/userpage/' + this.post.userId]);
-            },
-            error => { 
-              this.openCommonModal('failpostdelete');
-            });
-        } else if(this.post.type == "bird"){
-          this.manageItemService.deleteBird(this.post.postId, this.post.specieId).subscribe(
-            data => {
-              this.route.navigate(['/userpage/' + this.post.userId]);
-            },
-            error => { 
-              this.openCommonModal('failpostdelete');
-            });
-        } else if (this.post.type == "pending"){
-          this,this.manageItemService.deletePending(this.post.postId).subscribe(
-            data => {
-              this.route.navigate(['/userpage/' + this.post.userId]);
-            },
-            error => { 
-              this.openCommonModal('failpostdelete');
-            });
-        }
+      this.manageItemService.deletePost(this.post.postId).subscribe(
+        data => {
+          this.route.navigate(['/userpage/' + this.post.userId]);
+        },
+        error => { 
+          this.openCommonModal('failpostdelete');
+        });
+        
       }
     });
   }

@@ -110,7 +110,6 @@ export class LandingPageComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if(result == 'ACCEPT'){
 
-        if(post.type == "post"){
           this.manageItemService.deletePost(post.postId).subscribe(
             data => {
               const index = this.userPosts.indexOf(post, 0);
@@ -121,29 +120,6 @@ export class LandingPageComponent implements OnInit {
             error => { 
               this.openCommonModal('failpostdelete');
             });
-        } else if(post.type == "bird"){
-          this.manageItemService.deleteBird(post.postId, post.specieId).subscribe(
-            data => {
-              const index = this.userPosts.indexOf(post, 0);
-              if (index > -1) {
-                this.userPosts.splice(index, 1);
-              }
-            },
-            error => { 
-              this.openCommonModal('failpostdelete');
-            });
-        } else if (post.type == "pending"){
-          this,this.manageItemService.deletePending(post.postId).subscribe(
-            data => {
-              const index = this.userPosts.indexOf(post, 0);
-              if (index > -1) {
-                this.userPosts.splice(index, 1);
-              }
-            },
-            error => { 
-              this.openCommonModal('failpostdelete');
-            });
-        }
       }
     });
   }

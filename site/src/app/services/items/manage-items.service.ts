@@ -23,44 +23,8 @@ export class ManageItemsService {
     return this.httpClient.delete(`${environment.postApiUrl}api/v1/ManagePost/DeletePost/?postId=${postId}`);
   }
 
-  addBird(request: PostRequest) {
-    return this.httpClient.post<PostResponse>(`${environment.birdApiUrl}api/v1/ManagePostSpecie/AddPost/`, request)
-      .pipe(map(data => {
-        return data;
-      }));
-  }
-
-  assignBird(request: PostAssignSpecieRequest) {
-    return this.httpClient.put<PostAssignSpecieResponse>(`${environment.birdPendingApiUrl}api/v1/ManagePostPending/AssignSpecieId/`, request)
-      .pipe(map(data => {
-        return data;
-      }));
-  }
-
   updateBird(request: PostUpdateSpecieRequest) {
     return this.httpClient.put<PostAssignSpecieResponse>(`${environment.postApiUrl}api/v1/ManagePost/UpdateSpecieId/`, request)
-      .pipe(map(data => {
-        return data;
-      }));
-  }
-
-  deleteBird(postId: string, specieId: string) {
-    return this.httpClient.delete<boolean>(`${environment.birdApiUrl}api/v1/ManagePostSpecie/DeletePost?postId=${postId}&specieId=${specieId}`)
-      .pipe(map(data => {
-        return data;
-      }));
-  }
-
-  addPending(request: PostRequest) {
-    return this.httpClient.post<PostResponse>(`${environment.birdPendingApiUrl}api/v1/ManagePostPending/AddPost/`, request)
-      .pipe(map(data => {
-        return data;
-      }));
-  }
-  
-
-  deletePending(postId: string) {
-    return this.httpClient.delete<boolean>(`${environment.birdPendingApiUrl}api/v1/ManagePostPending/DeletePost?postId=${postId}`)
       .pipe(map(data => {
         return data;
       }));

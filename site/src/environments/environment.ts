@@ -9,10 +9,8 @@ export const environment = {
   imagesPostUrl: 'https://birdpostsqa.blob.core.windows.net/posts/',
   userApiUrl: 'https://bcuserapi.azurewebsites.net/',
   postApiUrl: 'https://bcpostsapi.azurewebsites.net/',
-  userPostApiUrl: 'https://bcuserpostsapi.azurewebsites.net/',
   userLabelApiUrl: 'https://bcuserlabelsapi.azurewebsites.net/',
   birdApiUrl: 'https://bcbirdsapi.azurewebsites.net/',
-  birdPendingApiUrl: 'https://bcpendingapi.azurewebsites.net/',
   userInteractionsApi: 'https://bcuserinteractionsapi.azurewebsites.net/',
   postInteractionsApi: 'https://bcpostinteractionsapi.azurewebsites.net/',
   specieApiUrl: 'https://bcspeciesapi.azurewebsites.net/',
@@ -21,11 +19,9 @@ export const environment = {
                       'bcuserapi.azurewebsites.net',
                       'bcbirdsapi.azurewebsites.net',
                       'bcpostinteractionsapi.azurewebsites.net',
-                      'bcuserpostsapi.azurewebsites.net',
                       'bcuserlabelsapi.azurewebsites.net',
                       'bcuserinteractionsapi.azurewebsites.net',
-                      'bcspeciesapi.azurewebsites.net',
-                      'bcpendingapi.azurewebsites.net'],
+                      'bcspeciesapi.azurewebsites.net'],
   blacklistedRoutes: []
 }
 /*

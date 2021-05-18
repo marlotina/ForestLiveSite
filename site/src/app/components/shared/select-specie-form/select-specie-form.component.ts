@@ -97,13 +97,14 @@ export class SelectSpecieFormComponent implements OnInit {
     const dialogRef = this.matDialog.open(CommonDialogComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(result => {
       if(result == 'ACCEPT'){
-        let request: PostAssignSpecieRequest = {
+        let request: PostUpdateSpecieRequest = {
           specieId: this.specieId,
           specieName: this.specieName,
-          postId: this.postId
+          postId: this.postId,
+          oldSpecieId: null
         };
 
-        this.manageItemsService.assignBird(request).subscribe(
+        this.manageItemsService.updateBird(request).subscribe(
           data=> {
             this.specieName = request.specieName;
             this.specieId = request.specieId;

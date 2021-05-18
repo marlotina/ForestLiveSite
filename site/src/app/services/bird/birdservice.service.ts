@@ -50,7 +50,7 @@ export class BirdserviceService {
   }  
 
   GetModalBirdPost(postId : string, specieId: string){
-    return this.httpClient.get<ModalPostResponse>(`${environment.birdApiUrl}api/v1/SearchMap/GetModalInfo/?postId=${postId}&specieId=${specieId}`)
+    return this.httpClient.get<ModalPostResponse>(`${environment.birdApiUrl}api/v1/post/GetModalInfo/?postId=${postId}&specieId=${specieId}`)
       .pipe(map(data => {
         return data;
       }));
