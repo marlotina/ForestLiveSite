@@ -1,3 +1,147 @@
+<div class="row">
+    <div class="col-xxl-8">
+        <div class="card">
+            <div class="card-header">
+                <div class="card-actions float-end">
+                    <a href="#" class="me-1">
+                        <i class="align-middle" data-feather="refresh-cw"></i>
+                    </a>
+                    <div class="d-inline-block dropdown show">
+                        <a href="#" data-bs-toggle="dropdown" data-bs-display="static">
+                            <i class="align-middle" data-feather="more-vertical"></i>
+                        </a>
+
+                        <div class="dropdown-menu dropdown-menu-end">
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                        </div>
+                    </div>
+                </div>
+                <h5 class="card-title mb-0">Clients</h5>
+            </div>
+            <div class="card-body">
+                <app-loader></app-loader>
+                <div class="col-12 col-md-1 div-right-line div-bottom-line mb-15">
+                    <app-post-votes
+                        [postId]="post.postId"
+                        [titlePost]="post.title"
+                        [authorPostId]="post.userId"
+                        [userId]="userLoggedName"
+                        [voteCount]="post.voteCount"
+                        [specieId]="post.specieId"
+                        [voteId]="post.voteId"
+                        [hasVote]="post.hasVote"></app-post-votes>
+                </div>
+                <div class="col-12 col-md-11 div-bottom-line mb-15">
+                <div *ngIf="hasPost == true">
+                    <div class="row mb-15 div-bottom-line">
+                        <div class="col-12 col-md-11">
+                            <div>
+                                <a class="text-dark titlePost fs-4 removeLinkLine" href="/{{post.userId}}/post/{{post.postId}}">{{post.title}}</a>
+                                <div>
+                                    <a class="text-dark btn fs-6 fw-light removeLinkLine" href="/userpage/{{post.userId}}">{{post.userId}}</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-1">
+                            <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu" *ngIf="showOwnerOptions">
+                                <mat-icon>more_vert</mat-icon>
+                            </button>
+                            <mat-menu #menu="matMenu" >
+                                <button mat-menu-item type="button" (click)="deletePost()">
+                                    <mat-icon>delete</mat-icon>
+                                    <span>{{ 'postPage.delete' | translate }}</span>
+                                </button>
+                            </mat-menu>
+                        </div>
+                    </div>
+                    <div class="row mb-15 div-bottom-line">
+                        <a (click)="showImage(imagePostUrl)"><img src="{{imagePostUrl}}" alt="{{post.altImage}}" class="postImage divPostImgContent img-fluid rounded float-end"></a>
+                    </div>
+
+                    <div class="row mb-5">
+                        <div *ngIf="post.type !='post'">
+                            <app-select-specie-form 
+                                [showOptions]="showOwnerOptions"
+                                [specieOldName]="post.birdSpecie"
+                                [oldSpecieId]="post.specieId"
+                                [postId]="post.postId"
+                                [type]="type"></app-select-specie-form>
+                        </div>
+                    </div>
+                    <div  class="row mb-5">
+                        <div  *ngIf="post.type !='post'">
+                            <strong>{{ 'userPage.observationDate' | translate }}:</strong> {{post.observationDate}} 
+                        </div>
+                    </div>
+                    <div class="row mb-15">
+                        <div>
+                            {{post.text}}
+                        </div>
+                    </div>
+                    <div class="row mb-15" *ngIf="post.labels != null && post.labels.length > 0">
+                        <div class="col-12">
+                            <strong>{{ 'postPage.tags' | translate }}:</strong>
+                            <a *ngFor="let label of post.labels" role="button" href="#" class="ml-5">
+                                <span class="label label-default">{{label}}</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    </div>
+                    <div class="row mb-15">
+                        <div class="col-12" *ngIf="hasLocation">
+                            <div class="row justify-content-center">
+                                <div #mapWrapper id="map" class="postMapDetails"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div  class="col-12 d-flex">
+                            <a href="http://www.facebook.com/sharer.php?u={{urlPage}}" target="_blank"><img class="social-image" src="../../../../assets/img/core-img/ico-facebook.svg" /></a>
+                            <a href="https://twitter.com/intent/tweet?text={{post.title}}&url={{urlPage}}" target="_blank"><img class="social-image" src="../../../../assets/img/core-img/ico-twitter.svg" /></a>
+                            <a href="https://www.reddit.com/submit?title={{post.title}}&url={{urlPage}}" target="_blank"><img class="social-image" src="../../../../assets/img/core-img/ico-reddit.svg" /></a>
+                            <a href="http://www.linkedin.com/shareArticle?url={{urlPage}}" target="_blank"><img class="social-image" src="../../../../assets/img/core-img/ico-linkedin.svg" /></a>
+                        </div>
+                    </div>
+                    
+                </div>
+                
+                <div id="commentsDiv" class="col-12 col-md-12">                        
+                    <app-post-comment *ngIf = "post.postId" 
+                        [postId]="post.postId"
+                        [postTitle]="post.title"
+                        [specieId]="post.specieId"
+                        [commentCount]="post.commentCount"
+                        [imageUrl]="post.imageUrl"
+                        [userId]="post.userId"></app-post-comment>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xxl-4">
+        <app-author-details></app-author-details>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <div class="container mt-15">
     <div class="row justify-content-center">
@@ -5,102 +149,7 @@
         <div class="col-12 col-md-8">
             <div >
                 <div class="row divPost divPostColor">  
-                    <app-loader></app-loader>
-                    <div class="col-12 col-md-1 div-right-line div-bottom-line mb-15">
-                        <app-post-votes
-                            [postId]="post.postId"
-                            [titlePost]="post.title"
-                            [authorPostId]="post.userId"
-                            [userId]="userLoggedName"
-                            [voteCount]="post.voteCount"
-                            [specieId]="post.specieId"
-                            [voteId]="post.voteId"
-                            [hasVote]="post.hasVote"></app-post-votes>
-                    </div>
-                    <div class="col-12 col-md-11 div-bottom-line mb-15">
-                    <div *ngIf="hasPost == true">
-                        <div class="row mb-15 div-bottom-line">
-                            <div class="col-12 col-md-11">
-                                <div>
-                                    <a class="text-dark titlePost fs-4 removeLinkLine" href="/{{post.userId}}/post/{{post.postId}}">{{post.title}}</a>
-                                    <div>
-                                        <a class="text-dark btn fs-6 fw-light removeLinkLine" href="/userpage/{{post.userId}}">{{post.userId}}</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12 col-md-1">
-                                <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu" *ngIf="showOwnerOptions">
-                                    <mat-icon>more_vert</mat-icon>
-                                </button>
-                                <mat-menu #menu="matMenu" >
-                                    <button mat-menu-item type="button" (click)="deletePost()">
-                                        <mat-icon>delete</mat-icon>
-                                        <span>{{ 'postPage.delete' | translate }}</span>
-                                    </button>
-                                </mat-menu>
-                            </div>
-                        </div>
-                        <div class="row mb-15 div-bottom-line">
-                            <a (click)="showImage(imagePostUrl)"><img src="{{imagePostUrl}}" alt="{{post.altImage}}" class="postImage divPostImgContent img-fluid rounded float-end"></a>
-                        </div>
-
-                        <div class="row mb-5">
-                            <div *ngIf="post.type !='post'">
-                                <app-select-specie-form 
-                                    [showOptions]="showOwnerOptions"
-                                    [specieOldName]="post.birdSpecie"
-                                    [oldSpecieId]="post.specieId"
-                                    [postId]="post.postId"
-                                    [type]="type"></app-select-specie-form>
-                            </div>
-                        </div>
-                        <div  class="row mb-5">
-                            <div  *ngIf="post.type !='post'">
-                                <strong>{{ 'userPage.observationDate' | translate }}:</strong> {{post.observationDate}} 
-                            </div>
-                        </div>
-                        <div class="row mb-15">
-                            <div>
-                                {{post.text}}
-                            </div>
-                        </div>
-                        <div class="row mb-15" *ngIf="post.labels != null && post.labels.length > 0">
-                            <div class="col-12">
-                                <strong>{{ 'postPage.tags' | translate }}:</strong>
-                                <a *ngFor="let label of post.labels" role="button" href="#" class="ml-5">
-                                    <span class="label label-default">{{label}}</span>
-                                </a>
-                            </div>
-                        </div>
-
-                        </div>
-                        <div class="row mb-15">
-                            <div class="col-12" *ngIf="hasLocation">
-                                <div class="row justify-content-center">
-                                    <div #mapWrapper id="map" class="postMapDetails"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div  class="col-12 d-flex">
-                                <a href="http://www.facebook.com/sharer.php?u={{urlPage}}" target="_blank"><img class="social-image" src="../../../../assets/img/core-img/ico-facebook.svg" /></a>
-                                <a href="https://twitter.com/intent/tweet?text={{post.title}}&url={{urlPage}}" target="_blank"><img class="social-image" src="../../../../assets/img/core-img/ico-twitter.svg" /></a>
-                                <a href="https://www.reddit.com/submit?title={{post.title}}&url={{urlPage}}" target="_blank"><img class="social-image" src="../../../../assets/img/core-img/ico-reddit.svg" /></a>
-                                <a href="http://www.linkedin.com/shareArticle?url={{urlPage}}" target="_blank"><img class="social-image" src="../../../../assets/img/core-img/ico-linkedin.svg" /></a>
-                            </div>
-                        </div>
-                        
-                    </div>
                     
-                    <div id="commentsDiv" class="col-12 col-md-12">                        
-                        <app-post-comment *ngIf = "post.postId" 
-                            [postId]="post.postId"
-                            [postTitle]="post.title"
-                            [specieId]="post.specieId"
-                            [commentCount]="post.commentCount"
-                            [imageUrl]="post.imageUrl"
-                            [userId]="post.userId"></app-post-comment>
-                    </div>
                 </div>  
             </div>
             
@@ -109,12 +158,6 @@
             </div>
         </div>
 
-        <div class="col-12 col-sm-9 col-md-4" >
-            <div class="mb-15" *ngIf="userLoggedName">
-                <a routerLink="/createPost" class="btn btn-primary" style="width: 100%;">{{ 'userPage.addPost' | translate }}</a>
-            </div>
-
-            <app-author-details></app-author-details>
-        </div>
+    
     </div>
 </div>

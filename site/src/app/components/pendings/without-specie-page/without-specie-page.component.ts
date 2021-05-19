@@ -6,7 +6,8 @@ import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-without-specie-page',
-  templateUrl: './without-specie-page.component.html'
+  templateUrl: './without-specie-page.component.html',
+  styleUrls: ['./without-specie-page.component.css']
 })
 export class WithoutSpeciePageComponent implements OnInit {
 
