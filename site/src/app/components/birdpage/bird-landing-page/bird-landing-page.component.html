@@ -1,68 +1,67 @@
 
 <div class="row">
-    <div class="col-12">
+    
         <div class="card">
             <div class="card-header">
-                <h5 class="card-title mb-0">Empty card</h5>
+                <h5 class="card-title mb-0">Filter</h5>
             </div>
             <div class="card-body">
-                <div class="col-12 col-md-4" >
-                    <div class="divFilter">
-                        <strong>Filter</strong>
-                    </div>
-                    <div class="autocomplete-form divFilterNoTop">
-                        <div class="d-flex">
-                            <mat-form-field class="autocomplete-full-width  pr-15">
-                                <input type="text" class="form-control" aria-label="Number" matInput  [matAutocomplete]="autoBird"
-                                    [formControl]="autocompleteControl" 
-                                    id="specieNamePost" placeholder="Introduce especia">
-                                    
-                                <input type="hidden" id="specieIdPost" [formControl]="specieIdPostControl" >    
-                                <mat-autocomplete #autoBird="matAutocomplete" (optionSelected)='selectSpecie($event.option.value)'>
-                                    <mat-option *ngFor="let option of filteredSpecies | async" [value]="option" (change)="toggleSelection(option)" (click)="$event.stopPropagation()">
-                                        {{option.nameComplete}}
-                                    </mat-option>
-                                </mat-autocomplete>
-                            </mat-form-field>
-                            
-                            <div class="form-group inputSearchTop ">
-                                <button type="button" class="btn btn-outline-primary addLabelBtn" (click)="removeFilterSpecie()" [hidden]="hideRemoveBtn"><mat-icon>close</mat-icon></button> 
-                                <button type="button" class="btn btn-outline-primary addLabelBtn" (click)="addFilterSpecie()" [hidden]="!hideRemoveBtn"><mat-icon>search</mat-icon></button> 
-                            </div>
+                <div class="form-row">
+                   
+                    <div class="form-group col-md-6">
+                        <div class="input-group">
+                            <input type="text" class="form-control" [matAutocomplete]="autoBird"
+                                [formControl]="autocompleteControl" 
+                                id="specieNamePost" placeholder="Introduce especie">
+                            <span class="input-group-append">
+                                <button type="button" class="btn btn-secondary" (click)="removeFilterSpecie()" [hidden]="hideRemoveBtn">
+                                    <i class="align-middle me-1 fas fa-fw fa-times"></i>
+                                </button> 
+                                <button type="button" class="btn btn-secondary" (click)="addFilterSpecie()" [hidden]="!hideRemoveBtn">
+                                    <i class="align-middle me-1 fas fa-fw fa-search"></i>
+                                </button> 
+                            </span>
+                            <mat-autocomplete #autoBird="matAutocomplete" (optionSelected)='selectSpecie($event.option.value)'>
+                                <mat-option *ngFor="let option of filteredSpecies | async" [value]="option" 
+                                    (change)="toggleSelection(option)" (click)="$event.stopPropagation()">
+                                    {{option.nameComplete}}
+                                </mat-option>
+                            </mat-autocomplete>
                         </div>
                     </div>
-        
-                    <div class="divFilterNoTop">
-                        <strong>Order</strong>
-                    </div>
-                    <div class="divFilterNoTop">
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="radioOrderSearch" id="radioOrderSearch1" 
-                                (change)="changeSearchOrder($event)" value="1" checked>
-                            <label class="form-check-label" for="radioOrderSearch1">
-                                By date
+    
+            
+                    <div class="form-group col-md-6">
+                            <h5 class="card-title mb-0">Filter</h5>
+                        <div>
+                            <label class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="radioOrderSearch" id="radioOrderSearch1" 
+                                    (change)="changeSearchOrder($event)" value="1" checked>
+                                <span class="form-check-label"  for="radioOrderSearch1">
+                                    By date
+                                </span>
+                            </label>
+                            <label class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="radioOrderSearch"
+                                    (change)="changeSearchOrder($event)" value="2" id="radioOrderSearch2">
+                                <span class="form-check-label"  for="radioOrderSearch2">
+                                    Most votes
+                                </span>
+                            </label>
+                            <label class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="radioOrderSearch"
+                                    (change)="changeSearchOrder($event)" value="3"  id="radioOrderSearch3">
+                                <span class="form-check-label"  for="radioOrderSearch3">
+                                    Most comments
+                                </span>
                             </label>
                         </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="radioOrderSearch"
-                                (change)="changeSearchOrder($event)" value="2" id="radioOrderSearch2">
-                            <label class="form-check-label" for="radioOrderSearch2">
-                                Most votes
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="radioOrderSearch"
-                                (change)="changeSearchOrder($event)" value="3"  id="radioOrderSearch3">
-                            <label class="form-check-label" for="radioOrderSearch3">
-                                Most comments
-                            </label>
-                        </div>
+
                     </div>
-        
                 </div>
+        
             </div>
         </div>
-    </div>
 </div>
 
 <div class="row">
