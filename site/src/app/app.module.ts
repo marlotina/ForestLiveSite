@@ -14,6 +14,7 @@ import { environment } from 'src/environments/environment';
 import { AppComponent } from './app.component';
 import { CommonDialogComponent } from './components/shared/common-dialog/common-dialog.component';
 import { ImageDialogComponent } from './components/shared/image-dialog/image-dialog.component';
+import { APP_BASE_HREF } from '@angular/common';
 
 export function jwtTokenGetter() {
   return localStorage.getItem("access_token");
@@ -56,7 +57,7 @@ export  function  HttpLoaderFactory(http:  HttpClient) {
   ],
   exports: [TranslateModule],
   entryComponents: [CommonDialogComponent, ImageDialogComponent],
-  providers: [TranslateService, Meta],
+  providers: [TranslateService, Meta, { provide: APP_BASE_HREF, useValue: '/' }],
   bootstrap: [AppComponent]
 
 })

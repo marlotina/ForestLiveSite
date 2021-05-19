@@ -1,0 +1,53 @@
+.vote-btn {
+	-webkit-transition-duration: 400ms;
+	transition-duration: 400ms;
+	position: relative;
+	z-index: 1;
+	display: inline-block;
+	height: 46px;
+	line-height: 42px;
+	color: black;
+	background: transparent;
+	font-weight: 600; }
+	.vote-btn.active, .vote-btn:hover, .vote-btn:focus {
+	  font-size: 16px;
+	  color: #70c745;
+	  font-weight: 600;
+	  background-color: transparent;
+	  box-shadow: none; }
+
+.hasVote-btn {
+-webkit-transition-duration: 400ms;
+transition-duration: 400ms;
+position: relative;
+z-index: 1;
+display: inline-block;
+height: 46px;
+line-height: 42px;
+color: #70c745;
+background: transparent;
+font-weight: 600; }
+.hasVote-btn.active, .hasVote-btn:hover, .hasVote-btn:focus {
+	font-size: 16px;
+	color: black;
+	font-weight: 600;
+	background-color: transparent;
+	box-shadow: none; }
+	
+.votebtn {
+	display: inline-block;
+	font-weight: 400;
+	text-align: center;
+	white-space: nowrap;
+	vertical-align: middle;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	border: 1px solid transparent;
+	font-size: 1rem;
+	line-height: 1.5;
+	border-radius: .25rem;
+	transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+		transition-duration: 0.15s, 0.15s, 0.15s, 0.15s;
+}

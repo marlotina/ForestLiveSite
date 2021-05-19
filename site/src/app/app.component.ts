@@ -10,7 +10,7 @@ export class AppComponent implements OnInit {
 
   title = 'fl-site';
   ngOnInit() {
-    this.loadScript('../assets/js/active.js');
+    //this.loadScript('../assets/js/active.js');
   }
 
  public loadScript(url: string) {

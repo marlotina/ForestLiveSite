@@ -1,10 +1,4 @@
 /* You can add global styles to this file, and also import other style files */
-html, body {
-    height: 100%;
-}
-
-html, body { height: 100%; }
-
 
 .LabelsSelect {
     display: inline !important;
@@ -134,14 +128,6 @@ font-weight: 600; }
 }
 
 
-@media only screen and (max-width: 767px) 
-{
-	.menu-profile .btn 
-	{
-		font-size: 16px;
-		padding: 0 5px; 
-	} 
-}
 
 .is-invalid {
 	border-color: red !important;
@@ -219,11 +205,6 @@ a:hover {
 
 .autocomplete-full-width {
 	width: 100%;
-}
-/*new*/
-body {
-	/*min-height: 75rem;*/
-	padding-top: 4.5rem;
 }
 
 .mt-15 {
@@ -394,5 +375,3 @@ body {
 	border: 0; 
 	padding: 0;
 }
-
-html,body { height: 100vh;  }

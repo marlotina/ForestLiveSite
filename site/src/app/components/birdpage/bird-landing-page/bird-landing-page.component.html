@@ -1,3 +1,112 @@
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title mb-0">Empty card</h5>
+            </div>
+            <div class="card-body">
+                <div class="col-12 col-md-4" >
+                    <div class="divFilter">
+                        <strong>Filter</strong>
+                    </div>
+                    <div class="autocomplete-form divFilterNoTop">
+                        <div class="d-flex">
+                            <mat-form-field class="autocomplete-full-width  pr-15">
+                                <input type="text" class="form-control" aria-label="Number" matInput  [matAutocomplete]="autoBird"
+                                    [formControl]="autocompleteControl" 
+                                    id="specieNamePost" placeholder="Introduce especia">
+                                    
+                                <input type="hidden" id="specieIdPost" [formControl]="specieIdPostControl" >    
+                                <mat-autocomplete #autoBird="matAutocomplete" (optionSelected)='selectSpecie($event.option.value)'>
+                                    <mat-option *ngFor="let option of filteredSpecies | async" [value]="option" (change)="toggleSelection(option)" (click)="$event.stopPropagation()">
+                                        {{option.nameComplete}}
+                                    </mat-option>
+                                </mat-autocomplete>
+                            </mat-form-field>
+                            
+                            <div class="form-group inputSearchTop ">
+                                <button type="button" class="btn btn-outline-primary addLabelBtn" (click)="removeFilterSpecie()" [hidden]="hideRemoveBtn"><mat-icon>close</mat-icon></button> 
+                                <button type="button" class="btn btn-outline-primary addLabelBtn" (click)="addFilterSpecie()" [hidden]="!hideRemoveBtn"><mat-icon>search</mat-icon></button> 
+                            </div>
+                        </div>
+                    </div>
+        
+                    <div class="divFilterNoTop">
+                        <strong>Order</strong>
+                    </div>
+                    <div class="divFilterNoTop">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="radioOrderSearch" id="radioOrderSearch1" 
+                                (change)="changeSearchOrder($event)" value="1" checked>
+                            <label class="form-check-label" for="radioOrderSearch1">
+                                By date
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="radioOrderSearch"
+                                (change)="changeSearchOrder($event)" value="2" id="radioOrderSearch2">
+                            <label class="form-check-label" for="radioOrderSearch2">
+                                Most votes
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="radioOrderSearch"
+                                (change)="changeSearchOrder($event)" value="3"  id="radioOrderSearch3">
+                            <label class="form-check-label" for="radioOrderSearch3">
+                                Most comments
+                            </label>
+                        </div>
+                    </div>
+        
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+        <app-loader></app-loader>      
+        <div class="col-12 col-md-4 col-lg-4" *ngFor="let post of birdPosts">
+            <div class="card">
+                <div class="card-body">
+                    <app-post-votes
+                        [postId]="post.postId"
+                        [titlePost]="post.title"
+                        [authorPostId]="post.userId"
+                        [userId]="userLoggedName"
+                        [voteCount]="post.voteCount"
+                        [specieId]="post.specieId"
+                        [voteId]="post.voteId"
+                        [hasVote]="post.hasVote"></app-post-votes>
+                        <strong>{{post.title}}</strong>
+                </div>
+                <a (click)="showImage(post.imageUrl)">
+                    <img src="{{imagesPostUrl}}{{post.imageUrl}}" alt="{{post.altImage}}" 
+                        class="card-img-top">
+                </a>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <em *ngIf="post.birdSpecie">{{post.birdSpecie}}</em>
+        
+                        <a *ngIf="post.type == 'pending'" class="link-info" href="/{{post.userId}}/pending/{{post.postId}}#commentsDiv">Help the user to identify the bird</a>
+                        <p class="card-text">{{post.text}}</p> 
+                    </li>
+                    <li class="list-group-item">
+                        <a href="/{{post.userId}}/{{post.postId}}" class="card-link">
+                            <i class="align-middle mr-2 fas fa-fw fa-comment"></i> 
+                            <span class="align-middle">&nbsp;{{post.commentCount}}&nbsp;comments</span>
+                        </a>
+        
+                        <img src="https://birdpostsqa.blob.core.windows.net/profiles/{{post.userPhoto}}" 
+                            alt="image of {{post.userId}}" class="imgAuthorPost">
+                        <a class="card-link" href="/userpage/{{post.userId}}">{{post.userId}}</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+</div>
+<!--
 <div class="container mt-15">
     
     <div class="row justify-content-center"> 
@@ -138,4 +247,4 @@
 
         </div>
     </div>
-</div>
+</div>-->

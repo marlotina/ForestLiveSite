@@ -1,74 +1,61 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-  <div class="container-fluid">
-      <a class="navbar-brand" routerLink="index.html">
-          <img src="../assets/img/core-img/logo.jpg" alt="logo" width="30" height="24">
-        </a>
-    <a class="navbar-brand"  routerLink="index.html">Observetion birds</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+<nav class="navbar navbar-expand navbar-theme">
+  <a style="width: 150px;" class="sidebar-toggle d-flex me-2">
+      <i class="hamburger align-self-center"></i>
+  </a>
 
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link" aria-current="page" routerLink="searchpage" routerLinkActive="active">Map</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="birdpage" routerLinkActive="active">See birds</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="withoutspecie" routerLinkActive="active">{{ 'general.pendingSpecie' | translate }}</a>
-        </li>
-        
-        <li class="nav-item">
-          <a class="nav-link" routerLink="landingusers" routerLinkActive="active">Search users</a>
-        </li>
-      </ul>
+  <a style="width: 150px;" aria-current="page" routerLink="searchpage" routerLinkActive="active">Map</a>
 
-      <div class="btn-group me-2" [hidden]="!isLogged">
+  <a style="width: 150px;" routerLink="birdpage" routerLinkActive="active">See birds</a>
 
-        <div class="btn-group" role="group" aria-label="Basic example">
-           <div class="divMenuImgUser">
-             <div class="text-center">             
-              <img class="imgProfilePost" src="{{imageProfileUrl}}{{userImage}}" alt="image of marlotina"> 
-            </div>
-          </div>
+  <a style="width: 265px;" routerLink="withoutspecie" routerLinkActive="active">{{ 'general.pendingSpecie' | translate }}</a>
 
-          <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
-            {{ userNameMenu }}
-          </button>
-            <ul class="dropdown-menu dropdown-menu-lg-end">
-              <li><a class="dropdown-item" routerLink="userpage/{{ userNameMenu }}">
-                <img src="../../../assets/img/core-img/icons8page.png" class="mr-5" />{{ 'general.myPage' | translate }}</a>
-              </li>
-              <li><a class="dropdown-item" routerLink="createPost" routerLinkActive="active">
-                <img src="../../../assets/img/core-img/icons8add.png" class="mr-5" />
-                {{ 'userPage.addPost' | translate }}</a>
-              </li>
-              <li><a class="dropdown-item" routerLink="userProfile" routerLinkActive="active">
-                <img src="../../../assets/img/core-img/icons8profile.png" class="mr-5" />
-                {{ 'user.profileMenu' | translate }}</a>
-              </li>
-              <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" routerLink="#" routerLinkActive="active" (click)="logout()">
-                <img src="../../../assets/img/core-img/icons8logout.png" class="mr-5" />
-                {{ 'account.logOut' | translate }}
-              </a></li>
-          </ul>
-        </div>
-      </div>
+  <a style="width: 150px;" routerLink="landingusers" routerLinkActive="active">Search users</a>
+
+
+    <a [hidden]="isLogged" routerLink="login" class="btn btn-secondary" role="button">
+        {{ 'account.login' | translate }}
+    </a>&nbsp;
+    <a [hidden]="isLogged" routerLink="signup" class="btn btn-secondary" role="button">
+        {{ 'account.signUp' | translate }}
+    </a>
+
+    
+  <div class="navbar-collapse collapse" [hidden]="!isLogged">
+      <ul class="navbar-nav ms-auto">
       
-      <div class="btn-group me-2"  [hidden]="isLogged">
-          <a routerLink="login" class="btn btn-outline-secondary" role="button">
-              {{ 'account.login' | translate }}
-          </a>
-      </div>
+          <li class="nav-item dropdown ms-lg-2">
+              <a class="nav-link dropdown-toggle position-relative" href="#" id="userDropdown" data-bs-toggle="dropdown">
+                <img style="width: 20px;" src="{{imageProfileUrl}}{{userImage}}" alt="image of marlotina"> 
+                {{ userNameMenu }}
+              </a>
+              <div class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                <a class="dropdown-item" routerLink="userProfile" routerLinkActive="active">
+                  <i class="align-middle me-1 fas fa-fw fa-user"></i>
+                  {{ 'user.profileMenu' | translate }}
+                </a>
 
-      <div class="btn-group me-2"  [hidden]="isLogged">
-          <a routerLink="signup" class="btn btn-secondary" role="button">
-              {{ 'account.signUp' | translate }}
-          </a>
-      </div>
+                <a class="dropdown-item" routerLink="createPost" routerLinkActive="active">
+                  <i class="align-middle me-1 fas fa-fw fa-comments"></i>
+                  {{ 'userPage.addPost' | translate }}
+                </a>
+
+                <a class="dropdown-item" routerLink="userpage/{{ userNameMenu }}">
+                  <i class="align-middle me-1 fas fa-fw fa-chart-pie"></i>
+                  {{ 'general.myPage' | translate }}
+                </a>
+
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" routerLink="#" routerLinkActive="active" (click)="logout()">
+                    <i class="align-middle me-1 fas fa-fw fa-arrow-alt-circle-right"></i>
+                    {{ 'account.logOut' | translate }}
+                  </a>
+              </div>
+          </li>
+      </ul>
+  </div>
+
+</nav>
+<!--
 
       <div class="btn-group me-2">
           <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
@@ -80,6 +67,4 @@
               <li> <a class="dropdown-item" (click)="changeLang('de')"><img class="social-image" src="../../../assets/img/core-img/icons8-germany.png" />Deutsche</a></li>
           </ul>
       </div>
-    </div>
-  </div>
-</nav>
+-->
