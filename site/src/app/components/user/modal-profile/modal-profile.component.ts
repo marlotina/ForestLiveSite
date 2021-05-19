@@ -116,7 +116,7 @@ export class ModalProfileComponent implements OnInit {
                 this.dialogRef.close(`${imageProfileRequest.userName}.jpg`);
               },
               error => {
-                this.dialogRef.close();
+                this.dialogRef.close(`profile.jpg`);
                 //this.loading = false;
               });
     }
