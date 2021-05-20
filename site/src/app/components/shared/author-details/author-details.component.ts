@@ -9,7 +9,8 @@ import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-author-details',
-  templateUrl: './author-details.component.html'
+  templateUrl: './author-details.component.html',
+  styleUrls: ['./author-details.component.css']
 })
 export class AuthorDetailsComponent implements OnInit {
 
