@@ -1,120 +1,73 @@
-<div class="row">
-    <div class="card">
-        <div class="card-header">
-            <h5 class="card-title mb-0">Filter</h5>
+<main class="content">
+    <div class="container-fluid">
+        <div class="header">
+            <h1 class="header-title">
+                Blank Page
+            </h1>
         </div>
-        <div class="card-body">
-            <div class="alert alert-info" role="alert">
-                Lorem fistrum a gramenawer al ataquerl tiene musho peligro. Jarl ese pedazo de sexuarl ese pedazo de torpedo pupita se calle ustée. Se calle ustée qué dise usteer ahorarr jarl condemor. Se calle ustée no puedor ese que llega mamaar te va a hasé pupitaa sexuarl hasta luego Lucas está la cosa muy malar jarl amatomaa.
-            </div>
-    
-        </div>
-    </div>
-</div>
 
-<div class="row">
-    <app-loader></app-loader>      
-    <div class="col-12 col-md-4 col-lg-4" *ngFor="let post of pendingPosts">
-        <div class="card">
-            <div class="card-body">
-                <!--<app-post-votes
-                    [postId]="post.postId"
-                    [titlePost]="post.title"
-                    [authorPostId]="post.userId"
-                    [userId]="userLoggedName"
-                    [voteCount]="post.voteCount"
-                    [specieId]="post.specieId"
-                    [voteId]="post.voteId"
-                    [hasVote]="post.hasVote"></app-post-votes>-->
-                    
-                    <a class="fs-4 removeLinkLine" routerLink="/{{post.userId}}/{{post.postId}}">
-                        <strong>{{post.title}}</strong></a>
-                                
+        <div class="row">
+            <div class="card">
+                <div class="card-body">
+                    Lorem fistrum a gramenawer al ataquerl tiene musho peligro. Jarl ese pedazo de sexuarl ese pedazo de torpedo pupita se calle ustée. Se calle ustée qué dise usteer ahorarr jarl condemor. Se calle ustée no puedor ese que llega mamaar te va a hasé pupitaa sexuarl hasta luego Lucas está la cosa muy malar jarl amatomaa.
+                </div>
             </div>
-            <a href="/{{post.userId}}/{{post.postId}}">
-                <img src="{{imagesPostUrl}}{{post.imageUrl}}" alt="{{post.altImage}}" class="bd-placeholder-img" width="100%">
-            </a>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item">
-                    <em *ngIf="post.birdSpecie">{{post.birdSpecie}}</em>
-    
-                    <a *ngIf="post.type == 'pending'" class="link-info" href="/{{post.userId}}/pending/{{post.postId}}#commentsDiv">Help the user to identify the bird</a>
-                    <p class="card-text">{{post.text}}</p> 
-                </li>
-                <li class="list-group-item">
-                    <a href="/{{post.userId}}/{{post.postId}}" class="card-link">
-                        <i class="align-middle mr-2 fas fa-fw fa-comment"></i> 
-                        <span class="align-middle">&nbsp;{{post.commentCount}}&nbsp;comments</span>
+        </div>
+
+        <div class="row">
+            <app-loader></app-loader>      
+            <div class="col-12 col-md-4 col-lg-4" *ngFor="let post of pendingPosts">
+                <div class="card">
+                    <div class="card-body">
+                        <!--<app-post-votes
+                            [postId]="post.postId"
+                            [titlePost]="post.title"
+                            [authorPostId]="post.userId"
+                            [userId]="userLoggedName"
+                            [voteCount]="post.voteCount"
+                            [specieId]="post.specieId"
+                            [voteId]="post.voteId"
+                            [hasVote]="post.hasVote"></app-post-votes>-->
+                            
+                            <a class="fs-4 removeLinkLine" routerLink="/{{post.userId}}/{{post.postId}}">
+                                <strong>{{post.title}}</strong></a>
+                                        
+                    </div>
+                    <a href="/{{post.userId}}/{{post.postId}}">
+                        <img src="{{imagesPostUrl}}{{post.imageUrl}}" alt="{{post.altImage}}" class="bd-placeholder-img" width="100%">
                     </a>
-    
-                    <img src="https://birdpostsqa.blob.core.windows.net/profiles/{{post.userPhoto}}" 
-                        alt="image of {{post.userId}}" class="imgAuthorPost">
-                    <a class="card-link" href="/userpage/{{post.userId}}">{{post.userId}}</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-    <div class="single-post-details-area" *ngIf="hasPosts == false">
-        <div class="leave-comment-area clearfix">
-            <div class="post-content">
-                <p>
-                    {{ 'userPage.userWithoutPost' | translate }}
-                </p>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<!--
-<div class="container mt-15">
-    <div class="alert alert-info" role="alert">
-        Lorem fistrum a gramenawer al ataquerl tiene musho peligro. Jarl ese pedazo de sexuarl ese pedazo de torpedo pupita se calle ustée. Se calle ustée qué dise usteer ahorarr jarl condemor. Se calle ustée no puedor ese que llega mamaar te va a hasé pupitaa sexuarl hasta luego Lucas está la cosa muy malar jarl amatomaa.
-    </div>
-    <div class="row justify-content-center">           
-        <div class="album py-5 bg-light">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <em *ngIf="post.birdSpecie">{{post.birdSpecie}}</em>
             
-            <div class="container">
-                
-                <app-loader></app-loader>
-                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-                    <div class="col" *ngFor="let post of pendingPosts">
-                        
-                        <div class="card shadow-sm">
-                            <div class="authorWithoutSpecie">
-                                <img src="https://birdpostsqa.blob.core.windows.net/profiles/{{post.userPhoto}}" alt="image of {{post.userId}}" class="imgAuthorPost">
-                                <strong class="d-inline-block mb-2 text-primary"><a class="text-dark btn fs-6 fw-light removeLinkLine" href="/userpage/{{post.userId}}">{{post.userId}}</a></strong>
-                            </div>
-                            <a class="removeLinkLine" href="/{{post.userId}}/{{post.postId}}">
-                                <img src="{{imagesPostUrl}}{{post.imageUrl}}" alt="{{post.altImage}}" class="bd-placeholder-img" width="100%">
+                            <a *ngIf="post.type == 'pending'" class="link-info" href="/{{post.userId}}/pending/{{post.postId}}#commentsDiv">Help the user to identify the bird</a>
+                            <p class="card-text">{{post.text}}</p> 
+                        </li>
+                        <li class="list-group-item">
+                            <a href="/{{post.userId}}/{{post.postId}}" class="card-link">
+                                <i class="align-middle mr-2 fas fa-fw fa-comment"></i> 
+                                <span class="align-middle">&nbsp;{{post.commentCount}}&nbsp;comments</span>
                             </a>
-                            <div class="card-body">
-                                <h5 class="mb-0">{{post.title}}</h5>
-                                <p class="card-text cutText"><small>{{post.text}}</small></p>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div class="btn-group">
-                                        <a role="button" href="/{{post.userId}}/{{post.postId}}" class="btn btn-sm btn-outline-secondary">Read more...</a>
-                                    </div>
-                                    <small class="text-muted">{{post.observationDate}}</small>
-                                </div>
-                            </div>
-                        </div>
+            
+                            <img src="https://birdpostsqa.blob.core.windows.net/profiles/{{post.userPhoto}}" 
+                                alt="image of {{post.userId}}" class="imgAuthorPost">
+                            <a class="card-link" href="/userpage/{{post.userId}}">{{post.userId}}</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="single-post-details-area" *ngIf="hasPosts == false">
+                <div class="leave-comment-area clearfix">
+                    <div class="post-content">
+                        <p>
+                            {{ 'userPage.userWithoutPost' | translate }}
+                        </p>
                     </div>
                 </div>
             </div>
-            
-            
-            
-        </div>
-
-        <div class="col-12 col-sm-9 col-md-4" >
-          
         </div>
     </div>
-</div>
-
-
--->
+</main>
 
 
 
