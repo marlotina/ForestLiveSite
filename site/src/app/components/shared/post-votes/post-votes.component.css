@@ -11,7 +11,7 @@
 	font-weight: 600; }
 	.vote-btn.active, .vote-btn:hover, .vote-btn:focus {
 	  font-size: 16px;
-	  color: #70c745;
+	  color: #2f64b1;
 	  font-weight: 600;
 	  background-color: transparent;
 	  box-shadow: none; }
@@ -24,7 +24,7 @@ z-index: 1;
 display: inline-block;
 height: 46px;
 line-height: 42px;
-color: #70c745;
+color: #2f64b1;
 background: transparent;
 font-weight: 600; }
 .hasVote-btn.active, .hasVote-btn:hover, .hasVote-btn:focus {
