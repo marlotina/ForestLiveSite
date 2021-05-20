@@ -1,21 +1,18 @@
-<div class="row mb-5 div-bottom-line">
+<div class="row div-top-line  mb-15">
     <div class="col-9">
-        <img class="social-image" src="../../../../assets/img/core-img/ico-comments.png" /><span class="aligned-with-icon">&nbsp;{{commentCount}}&nbsp;comments</span>
+        <i class="align-middle mr-2 fas fa-fw fa-comment"></i> 
+        <span class="aligned-with-icon">&nbsp;{{commentCount}}&nbsp;comments</span>
     </div>
 </div>
 
-<div class="row" *ngIf="userNameLogged != null">
-    <div class="col-12 col-md-6 mb-15">
-        <div class="form-group">
-            <label>{{userNameLogged}}</label>
-        </div>
+<div class="row mb-15" *ngIf="userNameLogged != null">
+    <div class="col-12 col-md-1">
+        <img src="{{imagesProfileUrl}}marlotina.jpg" alt="{{ 'postPage.userImage' | translate }}" class="rounded-circle mr-1" alt="Kathie Burton" width="40" height="40">
+    
+        <label>{{userNameLogged}}</label>
     </div>
-    <div class="col-12 mb-15">
-        <div class="form-group">
-            <textarea class="form-control" #textInput  name="text" id="text" cols="30" rows="3" placeholder="{{ 'postPage.comment' | translate }}"></textarea>
-        </div>
-    </div>
-    <div class="col-12 mb-15">
+    <div class="col-12 col-md-11">
+        <textarea class="form-control mb-15" #textInput  name="text" id="text" cols="20" rows="3" placeholder="{{ 'postPage.comment' | translate }}"></textarea>
         <button type="button" (click)="addComment(null, textInput.value)" class="btn btn-primary">{{ 'postPage.postComment' | translate }}</button>
     </div>
 </div>
@@ -27,29 +24,33 @@
 <ng-template #replyThread let-childReplies>
         <div class="row mt-15" *ngFor="let comment of childReplies;">
             <div class="col-12 col-md-1">
-                <a href="{{comment.userId}}"><img src="{{imagesProfileUrl}}{{comment.userImage}}" alt="{{ 'postPage.userImage' | translate }}" class="mt-15 imgAuthorPost"></a>
+                <div>
+                    <a href="{{comment.userId}}">
+                        <img src="{{imagesProfileUrl}}{{comment.userImage}}" alt="{{ 'postPage.userImage' | translate }}" class="rounded-circle mr-1" alt="Kathie Burton" width="40" height="40">
+                    </a>
+                </div>
             </div> 
             <div class="col-12 col-md-11">
                 <div class="row">
                     <div class="col-12 col-md-11">
-                        <small>{{comment.userId}}&nbsp;<em>{{comment.creationDate}}</em></small>
-                        <p>{{comment.text}}</p>
+                        <div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3">
+                            <small>{{comment.userId}}&nbsp;<em>{{comment.creationDate}}</em></small>
+                            <p>{{comment.text}}</p>
+                        </div>
 
-                        <div *ngIf="userNameLogged != null" class="mb-15">
-                            <div class="mb-5">
+                        <div *ngIf="userNameLogged != null">
 
-                                <button type="button" 
-                                (click)="addVote(comment)" 
-                                    [ngClass]="{'hasVote-btn' : comment.hasVote, 'vote-btn' : !comment.hasVote}" 
-                                    class="votebtn">
-                                    <mat-icon>publish</mat-icon>
-                                </button>
-                                  &nbsp;Votes {{comment.voteCount}}&nbsp;
-                                <a class="badge bg-secondary" data-bs-toggle="collapse" href="#collapseExample-{{comment.id}}" (click)="showCommentForm(comment.id)" 
-                                    role="button" aria-expanded="false" aria-controls="collapseExample">
-                                    Reply
-                                </a>
-                            </div>
+                            <button type="button" 
+                            (click)="addVote(comment)" 
+                                [ngClass]="{'hasVote-btn' : comment.hasVote, 'vote-btn' : !comment.hasVote}" 
+                                class="votebtn">
+                                <i class="align-middle mr-2 fas fa-fw fa-arrow-alt-circle-up"></i> 
+                            </button>
+                                &nbsp;Votes {{comment.voteCount}}&nbsp;
+                            <a class="badge bg-primary" data-bs-toggle="collapse" href="#collapseExample-{{comment.id}}" (click)="showCommentForm(comment.id)" 
+                                role="button" aria-expanded="false" aria-controls="collapseExample">
+                                Reply
+                            </a>
                             
                             <div class="row">
                                 <div class="collapse" id="collapseExample-{{comment.id}}">
@@ -68,15 +69,23 @@
                     </div>   
 
                     <div class="col-12 col-md-1 commetDate">
-                        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="user options" *ngIf="showOwnerCommentOptions(comment.userId)">
-                            <mat-icon><mat-icon>more_horiz</mat-icon></mat-icon>
-                        </button>
-                        <mat-menu #menu="matMenu" >
-                            <button mat-menu-item type="button" (click)="deleteComment(comment)">
-                                <mat-icon>delete</mat-icon>
-                                <span>{{ 'postPage.delete' | translate }}</span>
-                            </button>
-                        </mat-menu>
+                        <div class="card-actions float-end" *ngIf="showOwnerCommentOptions(comment.userId)">
+                            <a href="#" class="me-1">
+                                <i class="align-middle" data-feather="refresh-cw"></i>
+                            </a>
+                            <div class="d-inline-block dropdown show">
+                                <a href="#" data-bs-toggle="dropdown" data-bs-display="static">
+                                    <i class="align-middle me-2 fas fa-fw fa-ellipsis-v"></i>
+                                </a>
+        
+                                <div class="dropdown-menu dropdown-menu-end">
+                                    <button mat-menu-item type="button" (click)="deleteComment(comment)">
+                                        <i class="align-middle me-2 fas fa-fw fa-trash-alt"></i>
+                                        <span>{{ 'postPage.delete' | translate }}</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                     <ng-container *ngIf="comment.replies">
@@ -87,6 +96,7 @@
                         "
                         ></ng-container>
                     </ng-container>
+                    
                 </div>
             </div>
         </div>

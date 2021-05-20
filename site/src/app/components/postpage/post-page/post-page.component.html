@@ -7,30 +7,28 @@
         </div>
         
         <div class="row">
-            <div class="col-xxl-8">
-                <div class="card">
+            <div class="col-xxl-9">
+                <app-loader></app-loader>
+                <div class="card" *ngIf="hasPost == true">
                     <div class="card-header">
-                        <div class="card-actions float-end">
+                        <div class="card-actions float-end" >
                             <a href="#" class="me-1">
                                 <i class="align-middle" data-feather="refresh-cw"></i>
                             </a>
                             <div class="d-inline-block dropdown show">
                                 <a href="#" data-bs-toggle="dropdown" data-bs-display="static">
-                                    <i class="align-middle" data-feather="more-vertical"></i>
+                                    <i class="align-middle me-2 fas fa-fw fa-ellipsis-v"></i>
                                 </a>
         
                                 <div class="dropdown-menu dropdown-menu-end">
-                                    <a class="dropdown-item" href="#">Action</a>
-                                    <a class="dropdown-item" href="#">Another action</a>
-                                    <a class="dropdown-item" href="#">Something else here</a>
+                                    <button mat-menu-item type="button" (click)="deletePost()">
+                                        <i class="align-middle me-2 fas fa-fw fa-trash-alt"></i>
+                                        <span>{{ 'postPage.delete' | translate }}</span>
+                                    </button>
                                 </div>
                             </div>
                         </div>
-                        <h5 class="card-title mb-0">Clients</h5>
-                    </div>
-                    <div class="card-body">
-                        <app-loader></app-loader>
-                        <div class="col-12 col-md-1 div-right-line div-bottom-line mb-15">
+                        <div >
                             <app-post-votes
                                 [postId]="post.postId"
                                 [titlePost]="post.title"
@@ -40,30 +38,13 @@
                                 [specieId]="post.specieId"
                                 [voteId]="post.voteId"
                                 [hasVote]="post.hasVote"></app-post-votes>
+                                
+                            <a class="text-dark titlePost fs-4 removeLinkLine" href="/{{post.userId}}/post/{{post.postId}}">{{post.title}}</a>
+                            <a class="text-dark btn fs-6 fw-light removeLinkLine" href="/userpage/{{post.userId}}">{{post.userId}}</a>             
                         </div>
+                    </div>
+                    <div class="card-body">                        
                         <div class="col-12 col-md-11 div-bottom-line mb-15">
-                        <div *ngIf="hasPost == true">
-                            <div class="row mb-15 div-bottom-line">
-                                <div class="col-12 col-md-11">
-                                    <div>
-                                        <a class="text-dark titlePost fs-4 removeLinkLine" href="/{{post.userId}}/post/{{post.postId}}">{{post.title}}</a>
-                                        <div>
-                                            <a class="text-dark btn fs-6 fw-light removeLinkLine" href="/userpage/{{post.userId}}">{{post.userId}}</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-md-1">
-                                    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu" *ngIf="showOwnerOptions">
-                                        <mat-icon>more_vert</mat-icon>
-                                    </button>
-                                    <mat-menu #menu="matMenu" >
-                                        <button mat-menu-item type="button" (click)="deletePost()">
-                                            <mat-icon>delete</mat-icon>
-                                            <span>{{ 'postPage.delete' | translate }}</span>
-                                        </button>
-                                    </mat-menu>
-                                </div>
-                            </div>
                             <div class="row mb-15 div-bottom-line">
                                 <a (click)="showImage(imagePostUrl)"><img src="{{imagePostUrl}}" alt="{{post.altImage}}" class="postImage divPostImgContent img-fluid rounded float-end"></a>
                             </div>
@@ -113,10 +94,8 @@
                                     <a href="http://www.linkedin.com/shareArticle?url={{urlPage}}" target="_blank"><img class="social-image" src="../../../../assets/img/core-img/ico-linkedin.svg" /></a>
                                 </div>
                             </div>
-                            
-                        </div>
                         
-                        <div id="commentsDiv" class="col-12 col-md-12">                        
+                        <div id="commentsDiv" class="row mb-5">                        
                             <app-post-comment *ngIf = "post.postId" 
                                 [postId]="post.postId"
                                 [postTitle]="post.title"
@@ -129,7 +108,7 @@
                 </div>
             </div>
         
-            <div class="col-xxl-4">
+            <div class="col-xxl-3">
                 <app-author-details></app-author-details>
             </div>
         </div>
