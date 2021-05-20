@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { PostListResponse } from 'src/app/model/post';
 import { UserLabelPageResponse } from 'src/app/model/user';
 import { AccountService } from 'src/app/services/account/account.service';
@@ -14,7 +14,8 @@ import { ImageDialogComponent } from '../../shared/image-dialog/image-dialog.com
 
 @Component({
   selector: 'app-landing-page',
-  templateUrl: './landing-page.component.html'
+  templateUrl: './landing-page.component.html',
+  styleUrls: ['./landing-page.component.css']
 })
 
 export class LandingPageComponent implements OnInit {
@@ -24,7 +25,6 @@ export class LandingPageComponent implements OnInit {
   userId: string;
   imagesPostUrl = environment.imagesPostUrl;
   hasPosts = false;
-  isLogged: boolean;
   userLabels: UserLabelPageResponse[];
   selectedLabel: string;
   isLoading = true;
@@ -40,9 +40,6 @@ export class LandingPageComponent implements OnInit {
     private matDialog: MatDialog) { 
 
     this.loaderService.show();
-    this.accountService.isLogged.subscribe(
-      x => this.isLogged = x
-      );
   }
 
   ngOnInit(): void {

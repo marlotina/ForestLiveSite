@@ -1,149 +1,182 @@
-<div class="container mt-15">
-    <div class="row justify-content-center">
-        <div class="col-12 col-md-8">   
-            <app-loader></app-loader>
-            <div *ngFor="let post of userPosts">
-                
-                <div class="row divPost divPostColor">  
-                    <div class="col-12 col-md-1 div-right-line">
-                        <app-post-votes
-                            [postId]="post.postId"
-                            [titlePost]="post.title"
-                            [authorPostId]="post.userId"
-                            [userId]="userLoggedName"
-                            [voteCount]="post.voteCount"
-                            [specieId]="post.specieId"
-                            [voteId]="post.voteId"
-                            [hasVote]="post.hasVote"></app-post-votes>
-                    </div>
-                    <div class="col-12 col-md-11">
-                        <div class="row mb-15 div-bottom-line">
-                            <div class="col-12 col-md-11">
-                                <div>
-                                    <a class="text-dark titlePost fs-4 removeLinkLine" href="/{{post.userId}}/{{post.postId}}">{{post.title}}</a>
-                                    <div>
-                                        <img src="https://birdpostsqa.blob.core.windows.net/profiles/{{post.userPhoto}}" alt="image of {{post.userId}}" class="imgAuthorPost">
-                                        <a class="text-dark btn fs-6 fw-light removeLinkLine" href="/userpage/{{post.userId}}">{{post.userId}}</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12 col-md-1">
-                                <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu" *ngIf="showDeleteOption(post.userId)">
-                                    <mat-icon>more_vert</mat-icon>
-                                </button>
-                                <mat-menu #menu="matMenu" >
-                                    <button mat-menu-item type="button" (click)="deletePost(post)">
-                                        <mat-icon>delete</mat-icon>
-                                        <span>{{ 'postPage.delete' | translate }}</span>
-                                    </button>
-                                </mat-menu>
-                            </div>
-                        </div>
-                        <div class="row mb-15 div-bottom-line">
-                            <a (click)="showImage(post.imageUrl)"><img src="{{imagesPostUrl}}{{post.imageUrl}}" alt="{{post.altImage}}" class="postImage divPostImgContent img-fluid rounded float-end"></a>
-                        </div>
-                        <div class="row mb-5 div-bottom-line">
-                            <div>
-                                <img class="social-image" src="../../../../assets/img/core-img/ico-comments.png" /><span class="aligned-with-icon">&nbsp;{{post.commentCount}}&nbsp;comments</span>
-                            </div>
-                        </div>
-                        <div class="row mb-5" *ngIf="post.type != 'post'">
-                            <div>
-                                <strong>{{ 'userPage.birdSpecie' | translate }}:</strong> {{post.birdSpecie}}
-                                <a *ngIf="post.type == 'pending'" class="link-info" href="/{{post.userId}}/{{post.postId}}#commentsDiv">Help the user to identify the bird</a>
-                             
-                            </div>
-                        </div>
-                        <div class="row mb-5">
-                            <div *ngIf="post.type != 'post'">
-                                <strong>{{ 'userPage.observationDate' | translate }}: &nbsp;</strong> 
-                                <span *ngIf="post.observationDate">{{post.observationDate}}</span>
-                                <span *ngIf="!post.observationDate">--</span>
-                            </div>
-                        </div>
-                        <div class="row mb-15">
-                            <div>
-                                {{post.text}}
-                            </div>
-                        </div>
-                        <div class="row mb-15" *ngIf="post.labels != null && post.labels.length > 0">
-                            <div class="col-12">
-                                <strong>{{ 'postPage.tags' | translate }}:</strong>
-                                <button type="button" *ngFor="let label of post.labels" role="button" (click)="searchWithLabels(label)" class="labelLink link-primary ml-5">
-                                    <span class="label label-default">{{label}}</span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>  
-            </div>
-            
-            <div class="single-post-details-area" *ngIf="!isLoading && !hasPosts">
-                <div class="leave-comment-area clearfix">
-                    <div class="post-content">
-                        <p>
-                            {{ 'userPage.userWithoutPost' | translate }}
-                        </p>
-                        <div class="mb-15" [hidden]="!isLogged">
-                            <a routerLink="/createPost" class="btn btn-primary" style="width: 100%;">Crea tu primer post o obserse </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-12 col-sm-9 col-md-4" >
-            
-            <div class="mb-15" [hidden]="!isLogged">
-                <a routerLink="/createPost" class="btn btn-primary" style="width: 100%;">{{ 'userPage.addPost' | translate }}</a>
-            </div>
-            
-            <app-author-details></app-author-details>
-
-            <div class="divAuthor">
-                <div class="form-group">
-
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="radioSearch" 
-                        (change)="changeSearchType($event)" id="radioAll" value='all' checked>
-                        <label class="form-check-label" for="radioAll">
-                          All
-                        </label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="radioSearch" 
-                        (change)="changeSearchType($event)" id="radioPost" value='post'>
-                        <label class="form-check-label" for="radioPost">
-                          Posts
-                        </label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="radioSearch" 
-                        (change)="changeSearchType($event)" id="radioBird" value='bird'>
-                        <label class="form-check-label" for="radioBird">
-                          birds
-                        </label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="radioSearch" 
-                        (change)="changeSearchType($event)" id="radioPending" value='pending'>
-                        <label class="form-check-label" for="radioPending">
-                          Pending
-                        </label>
-                    </div>  
-                </div>
-            </div>
-
-            <div class="form-group">
-                <button *ngFor="let label of userLabels" type="button"
-                    [ngClass]="{'btn-primary' : selectedLabel == label.id, 'btn-outline-primary' : selectedLabel != label.id}" 
-                    (click)="searchWithLabels(label.id)" class="btn ml-5 mb-5 labelUserPage">
-                    {{label.id}} <span class="badge bg-secondary labelUserPage">{{label.postCount}}</span>
-                  </button>
-            </div>
+<main class="content">
+    <div class="container-fluid">
+        <div class="header">
+            <h1 class="header-title">
+                Blank Page
+            </h1>
         </div>
         
 
+        <div class="row">
+            <div class="col-xxl-9">
+                <div class="row">
+                    <app-loader></app-loader>      
+                    <div class="col-12 col-md-6 col-lg-6" *ngFor="let post of userPosts">
+                        <div class="card">
+                            <div class="card-header">
+                                <app-post-votes
+                                [postId]="post.postId"
+                                [titlePost]="post.title"
+                                [authorPostId]="post.userId"
+                                [userId]="userLoggedName"
+                                [voteCount]="post.voteCount"
+                                [specieId]="post.specieId"
+                                [voteId]="post.voteId"
+                                [hasVote]="post.hasVote"></app-post-votes>
+                                
+                                <a class="fs-4 removeLinkLine" routerLink="/{{post.userId}}/{{post.postId}}">
+                                <strong>{{post.title}}</strong></a>
+
+                                <div class="card-actions float-end">
+                                    <a href="#" class="me-1">
+                                        <i class="align-middle" data-feather="refresh-cw"></i>
+                                    </a>
+                                    <div class="d-inline-block dropdown show">
+                                        <a href="#" data-bs-toggle="dropdown" data-bs-display="static">
+                                            <i class="align-middle me-2 fas fa-fw fa-ellipsis-v"></i>
+                                        </a>
+
+                                        <div class="dropdown-menu dropdown-menu-end">
+                                            <button class="dropdown-item" type="button" (click)="deletePost(post)">
+                                                <i class="align-middle me-2 fas fa-fw fa-trash-alt"></i>
+                                                <span>{{ 'postPage.delete' | translate }}</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <a (click)="showImage(post.imageUrl)" *ngIf="post.imageUrl !=''">
+                                <img src="{{imagesPostUrl}}{{post.imageUrl}}" alt="{{post.altImage}}" 
+                                    class="card-img-top">
+                            </a>
+                                <div class="body-card">
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item">
+                                            <em *ngIf="post.birdSpecie">{{post.birdSpecie}}</em>
+                            
+                                            <a *ngIf="post.type == 'pending'" class="link-info" href="/{{post.userId}}/pending/{{post.postId}}#commentsDiv">Help the user to identify the bird</a>
+                                            <p class="card-text">{{post.text}}</p> 
+                                        </li>
+
+                                        <li class="list-group-item">
+                                            <div class="row mb-15" *ngIf="post.labels != null && post.labels.length > 0">
+                                                <div class="col-12">
+                                                    <strong>{{ 'postPage.tags' | translate }}:</strong>
+                                                    <button type="button" *ngFor="let label of post.labels" role="button" (click)="searchWithLabels(label)" class="btn btn-outline-primary">
+                                                        <span>{{label}}</span>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        
+                                        <li class="list-group-item">
+                                            <a href="/{{post.userId}}/{{post.postId}}" class="card-link">
+                                                <i class="align-middle mr-2 fas fa-fw fa-comment"></i> 
+                                                <span class="align-middle">&nbsp;{{post.commentCount}}&nbsp;comments</span>
+                                            </a>
+                            
+                                            <img src="https://birdpostsqa.blob.core.windows.net/profiles/{{post.userPhoto}}" 
+                                                alt="image of {{post.userId}}" class="imgAuthorPost">
+                                            <a class="card-link" href="/userpage/{{post.userId}}">{{post.userId}}</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            
+                        </div>
+                    </div>
+                    <div class="single-post-details-area" *ngIf="!isLoading && !hasPosts">
+                        <div class="leave-comment-area clearfix">
+                            <div class="post-content">
+                                <p>
+                                    {{ 'userPage.userWithoutPost' | translate }}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+            </div>
+        
+            <div class="col-xxl-3">
+                <app-author-details></app-author-details>
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title mb-0">Filter</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-row"> 
+                                <div class="form-group col-md-6">                           
+        
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="radioSearch" 
+                                            (change)="changeSearchType($event)" id="radioAll" value='all' checked>
+                                            <label class="form-check-label" for="radioAll">
+                                              All
+                                            </label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="radioSearch" 
+                                            (change)="changeSearchType($event)" id="radioPost" value='post'>
+                                            <label class="form-check-label" for="radioPost">
+                                              Posts
+                                            </label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="radioSearch" 
+                                            (change)="changeSearchType($event)" id="radioBird" value='bird'>
+                                            <label class="form-check-label" for="radioBird">
+                                              birds
+                                            </label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="radioSearch" 
+                                            (change)="changeSearchType($event)" id="radioPending" value='pending'>
+                                            <label class="form-check-label" for="radioPending">
+                                              Pending
+                                            </label>
+                                        </div> 
+            
+        
+                                </div>
+                                <div class="form-group">
+                                    <button *ngFor="let label of userLabels" type="button"
+                                        [ngClass]="{'btn-primary' : selectedLabel == label.id, 'btn-outline-primary' : selectedLabel != label.id}" 
+                                        (click)="searchWithLabels(label.id)" class="btn ml-5 mb-5 labelUserPage">
+                                        {{label.id}} <span class="badge bg-secondary labelUserPage">{{label.postCount}}</span>
+                                      </button>
+                                </div>
+                            </div>
+                    
+                        </div>
+                    </div>
+            </div>
+        </div>
+
     </div>
-</div>
+</main>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
