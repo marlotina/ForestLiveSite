@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand navbar-theme">
+<nav class="navbar navbar-expand navbar-theme navBackgroundColor">
   <a style="width: 150px;" class="sidebar-toggle d-flex me-2">
       <i class="hamburger align-self-center"></i>
   </a>
@@ -20,10 +20,10 @@
     </a>
 
     
-  <div class="navbar-collapse collapse" [hidden]="!isLogged">
-      <ul class="navbar-nav ms-auto">
+  <div class="navbar-collapse collapse" >
+      <ul class="navbar-nav ms-auto" >
       
-          <li class="nav-item dropdown ms-lg-2">
+          <li class="nav-item dropdown ms-lg-2" *ngIf="isLogged">
               <a class="nav-link dropdown-toggle position-relative" href="#" id="userDropdown" data-bs-toggle="dropdown">
                 <img style="width: 20px;" src="{{imageProfileUrl}}{{userImage}}" alt="image of marlotina"> 
                 {{ userNameMenu }}

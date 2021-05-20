@@ -4,27 +4,16 @@
 </div>
 
 
-<div class="wrapper">
-
+<div [ngClass]="{'wrapper' : this.navExpand}">
+  
     <app-user-sidebar></app-user-sidebar>
+    
     
     <div class="main">
         <app-header></app-header>
-        
-        <main class="content">
-            <div class="container-fluid">
-                <div class="header">
-                    <h1 class="header-title">
-                        Blank Page
-                    </h1>
-                </div>
                 
-                <router-outlet></router-outlet>
-
-            </div>
-        </main>
+        <router-outlet></router-outlet>
 
         <app-footer></app-footer>
-
     </div>
 </div>

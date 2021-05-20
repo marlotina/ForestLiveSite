@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/model/account';
 import { AccountService } from 'src/app/services/account/account.service';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { environment } from 'src/environments/environment';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-header',
@@ -18,13 +19,14 @@ export class HeaderComponent implements OnInit {
   userNameMenu: string;
   userImage: string;
   imageProfileUrl = environment.imagesProfileUrl;
+  navExpand = false;
 
   constructor(private router: Router,
     private route: ActivatedRoute,
     private accountService: AccountService,
     private translate: TranslateService
-    ) {  
-
+  ) {  
+    
     translate.addLangs(['en', 'es', 'de']);  
 
     if (localStorage.getItem('locale')) {  

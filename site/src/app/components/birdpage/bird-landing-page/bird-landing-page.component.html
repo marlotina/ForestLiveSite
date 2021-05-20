@@ -1,121 +1,133 @@
-
-<div class="row">
-        <div class="card">
-            <div class="card-header">
-                <h5 class="card-title mb-0">Filter</h5>
-            </div>
-            <div class="card-body">
-                <div class="form-row">
-                   
-                    <div class="form-group col-md-6">
-                        <div class="input-group">
-                            <input type="text" class="form-control" [matAutocomplete]="autoBird"
-                                [formControl]="autocompleteControl" 
-                                id="specieNamePost" placeholder="Introduce especie">
-                            <span class="input-group-append">
-                                <button type="button" class="btn btn-secondary" (click)="removeFilterSpecie()" [hidden]="hideRemoveBtn">
-                                    <i class="align-middle me-1 fas fa-fw fa-times"></i>
-                                </button> 
-                                <button type="button" class="btn btn-secondary" (click)="addFilterSpecie()" [hidden]="!hideRemoveBtn">
-                                    <i class="align-middle me-1 fas fa-fw fa-search"></i>
-                                </button> 
-                            </span>
-                            <mat-autocomplete #autoBird="matAutocomplete" (optionSelected)='selectSpecie($event.option.value)'>
-                                <mat-option *ngFor="let option of filteredSpecies | async" [value]="option" 
-                                    (change)="toggleSelection(option)" (click)="$event.stopPropagation()">
-                                    {{option.nameComplete}}
-                                </mat-option>
-                            </mat-autocomplete>
-                        </div>
-                    </div>
-    
-            
-                    <div class="form-group col-md-6">
-                            <h5 class="card-title mb-0">Filter</h5>
-                        <div>
-                            <label class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="radioOrderSearch" id="radioOrderSearch1" 
-                                    (change)="changeSearchOrder($event)" value="1" checked>
-                                <span class="form-check-label"  for="radioOrderSearch1">
-                                    By date
-                                </span>
-                            </label>
-                            <label class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="radioOrderSearch"
-                                    (change)="changeSearchOrder($event)" value="2" id="radioOrderSearch2">
-                                <span class="form-check-label"  for="radioOrderSearch2">
-                                    Most votes
-                                </span>
-                            </label>
-                            <label class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="radioOrderSearch"
-                                    (change)="changeSearchOrder($event)" value="3"  id="radioOrderSearch3">
-                                <span class="form-check-label"  for="radioOrderSearch3">
-                                    Most comments
-                                </span>
-                            </label>
-                        </div>
-
-                    </div>
-                </div>
-        
-            </div>
+<main class="content">
+    <div class="container-fluid">
+        <div class="header">
+            <h1 class="header-title">
+                Blank Page
+            </h1>
         </div>
-</div>
-
-<div class="row">
-        <app-loader></app-loader>      
-        <div class="col-12 col-md-4 col-lg-4" *ngFor="let post of birdPosts">
+        
+        <div class="row">
             <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">Filter</h5>
+                </div>
                 <div class="card-body">
-                    <app-post-votes
-                        [postId]="post.postId"
-                        [titlePost]="post.title"
-                        [authorPostId]="post.userId"
-                        [userId]="userLoggedName"
-                        [voteCount]="post.voteCount"
-                        [specieId]="post.specieId"
-                        [voteId]="post.voteId"
-                        [hasVote]="post.hasVote"></app-post-votes>
-                        
-                        <a class="fs-4 removeLinkLine" routerLink="/{{post.userId}}/{{post.postId}}">
-                            <strong>{{post.title}}</strong></a>
-                                    
-                </div>
-                <a (click)="showImage(post.imageUrl)">
-                    <img src="{{imagesPostUrl}}{{post.imageUrl}}" alt="{{post.altImage}}" 
-                        class="card-img-top">
-                </a>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">
-                        <em *ngIf="post.birdSpecie">{{post.birdSpecie}}</em>
+                    <div class="form-row">
+                       
+                        <div class="form-group col-md-6">
+                            <div class="input-group">
+                                <input type="text" class="form-control" [matAutocomplete]="autoBird"
+                                    [formControl]="autocompleteControl" 
+                                    id="specieNamePost" placeholder="Introduce especie">
+                                <span class="input-group-append">
+                                    <button type="button" class="btn btn-secondary" (click)="removeFilterSpecie()" [hidden]="hideRemoveBtn">
+                                        <i class="align-middle me-1 fas fa-fw fa-times"></i>
+                                    </button> 
+                                    <button type="button" class="btn btn-secondary" (click)="addFilterSpecie()" [hidden]="!hideRemoveBtn">
+                                        <i class="align-middle me-1 fas fa-fw fa-search"></i>
+                                    </button> 
+                                </span>
+                                <mat-autocomplete #autoBird="matAutocomplete" (optionSelected)='selectSpecie($event.option.value)'>
+                                    <mat-option *ngFor="let option of filteredSpecies | async" [value]="option" 
+                                        (change)="toggleSelection(option)" (click)="$event.stopPropagation()">
+                                        {{option.nameComplete}}
+                                    </mat-option>
+                                </mat-autocomplete>
+                            </div>
+                        </div>
         
-                        <a *ngIf="post.type == 'pending'" class="link-info" href="/{{post.userId}}/pending/{{post.postId}}#commentsDiv">Help the user to identify the bird</a>
-                        <p class="card-text">{{post.text}}</p> 
-                    </li>
-                    <li class="list-group-item">
-                        <a href="/{{post.userId}}/{{post.postId}}" class="card-link">
-                            <i class="align-middle mr-2 fas fa-fw fa-comment"></i> 
-                            <span class="align-middle">&nbsp;{{post.commentCount}}&nbsp;comments</span>
-                        </a>
-        
-                        <img src="https://birdpostsqa.blob.core.windows.net/profiles/{{post.userPhoto}}" 
-                            alt="image of {{post.userId}}" class="imgAuthorPost">
-                        <a class="card-link" href="/userpage/{{post.userId}}">{{post.userId}}</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <div class="single-post-details-area" *ngIf="!hasNotPosts">
-            <div class="leave-comment-area clearfix">
-                <div class="post-content">
-                    <p>
-                        {{ 'userPage.userWithoutPost' | translate }}
-                    </p>
+                
+                        <div class="form-group col-md-6">
+                                <h5 class="card-title mb-0">Filter</h5>
+                            <div>
+                                <label class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="radioOrderSearch" id="radioOrderSearch1" 
+                                        (change)="changeSearchOrder($event)" value="1" checked>
+                                    <span class="form-check-label"  for="radioOrderSearch1">
+                                        By date
+                                    </span>
+                                </label>
+                                <label class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="radioOrderSearch"
+                                        (change)="changeSearchOrder($event)" value="2" id="radioOrderSearch2">
+                                    <span class="form-check-label"  for="radioOrderSearch2">
+                                        Most votes
+                                    </span>
+                                </label>
+                                <label class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="radioOrderSearch"
+                                        (change)="changeSearchOrder($event)" value="3"  id="radioOrderSearch3">
+                                    <span class="form-check-label"  for="radioOrderSearch3">
+                                        Most comments
+                                    </span>
+                                </label>
+                            </div>
+    
+                        </div>
+                    </div>
+            
                 </div>
             </div>
-        </div>
-</div>
+    </div>
+    
+    <div class="row">
+            <app-loader></app-loader>      
+            <div class="col-12 col-md-4 col-lg-4" *ngFor="let post of birdPosts">
+                <div class="card">
+                    <div class="card-body">
+                        <app-post-votes
+                            [postId]="post.postId"
+                            [titlePost]="post.title"
+                            [authorPostId]="post.userId"
+                            [userId]="userLoggedName"
+                            [voteCount]="post.voteCount"
+                            [specieId]="post.specieId"
+                            [voteId]="post.voteId"
+                            [hasVote]="post.hasVote"></app-post-votes>
+                            
+                            <a class="fs-4 removeLinkLine" routerLink="/{{post.userId}}/{{post.postId}}">
+                                <strong>{{post.title}}</strong></a>
+                                        
+                    </div>
+                    <a (click)="showImage(post.imageUrl)">
+                        <img src="{{imagesPostUrl}}{{post.imageUrl}}" alt="{{post.altImage}}" 
+                            class="card-img-top">
+                    </a>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <em *ngIf="post.birdSpecie">{{post.birdSpecie}}</em>
+            
+                            <a *ngIf="post.type == 'pending'" class="link-info" href="/{{post.userId}}/pending/{{post.postId}}#commentsDiv">Help the user to identify the bird</a>
+                            <p class="card-text">{{post.text}}</p> 
+                        </li>
+                        <li class="list-group-item">
+                            <a href="/{{post.userId}}/{{post.postId}}" class="card-link">
+                                <i class="align-middle mr-2 fas fa-fw fa-comment"></i> 
+                                <span class="align-middle">&nbsp;{{post.commentCount}}&nbsp;comments</span>
+                            </a>
+            
+                            <img src="https://birdpostsqa.blob.core.windows.net/profiles/{{post.userPhoto}}" 
+                                alt="image of {{post.userId}}" class="imgAuthorPost">
+                            <a class="card-link" href="/userpage/{{post.userId}}">{{post.userId}}</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="single-post-details-area" *ngIf="!hasNotPosts">
+                <div class="leave-comment-area clearfix">
+                    <div class="post-content">
+                        <p>
+                            {{ 'userPage.userWithoutPost' | translate }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+    </div>
+
+    </div>
+</main>
+
+
 <!--
 <div class="container mt-15">
     

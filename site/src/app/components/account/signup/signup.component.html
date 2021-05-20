@@ -1,109 +1,62 @@
-<div class="container">
+<main class="main h-100 w-100">
+    <div class="container h-100">
+        <div class="row h-100">
+            <div class="col-sm-10 col-md-8 col-lg-6 mx-auto d-table h-100">
+                <div class="d-table-cell align-middle">
 
-    <div class="form-signin">
-        <img class="mb-4" src="../../../../assets/img/core-img/leaf.png" alt="" width="72" height="57">
+                    <div class="text-center mt-4">
+                        <h1 class="h2">Get started</h1>
+                        <p class="lead">
+                            {{ 'account.signUpText' | translate }}
+                        </p>
+                    </div>
 
-        <h1 class="h3 mb-3 fw-normal">{{ 'account.signUpText' | translate }}</h1>                            
-        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-            
-            <label *ngIf="errorResponse" class="error-text">{{ 'account.errorResponseMessage' | translate }}</label>
-
-            <div class="form-group">
-                <label for="usernameSignup"  class="visually-hidden">{{ 'account.username' | translate }}*</label>
-                <input type="text" 
-                    id="usernameSignup"
-                    class="form-control"
-                    [ngClass]="{ 'is-invalid': submitted && (f.username.errors || conflictUser) }"
-                    placeholder="{{ 'account.username' | translate }}"
-                    formControlName="username">
-                <label *ngIf="conflictUser" class="error-text">{{ 'account.conflictNameMessage' | translate }}</label> 
-            </div>
-
-            <div class="form-group">
-                <label for="emailSignup"  class="visually-hidden">{{ 'account.email' | translate }}*</label>
-                <input type="email" 
-                    id="emailSignup"
-                    class="form-control"
-                    [ngClass]="{ 'is-invalid': submitted && (f.email.errors || conflictEmail) }" 
-                    placeholder="{{ 'account.email' | translate }}"
-                    formControlName="email">
-                    <label *ngIf="conflictEmail" class="error-text">{{ 'account.conflictEmailMessage' | translate }}</label>    
-            </div>
-
-            <div class="form-group mb-15">
-                <label for="passwordSignup"  class="visually-hidden">{{ 'account.password' | translate }}*</label>
-                <input type="password" 
-                    id="passwordSignup"
-                    class="form-control" 
-                    [ngClass]="{ 'is-invalid': submitted && f.password.errors }"
-                    placeholder="{{ 'account.password' | translate }}"
-                    formControlName="password">
-            </div>
-            
-            <button type="submit" class="w-100 btn btn-lg btn-primary">Sign up</button>
-                    
-        </form>
-    </div>
-</div>
-
-
-
-
-<!--
-<section class="contact-area section-padding-0-100">
-    <div class="container">
-        <div class="row align-items-center justify-content-center">
-            <div class="col-12 col-lg-5">
-                
-                <div class="section-heading">
-                    <h2>{{ 'account.signUp' | translate }}</h2>
-                    <p>{{ 'account.signUpText' | translate }}</p>
-                </div>
-                
-                <div class="contact-form-area mb-100">                 
-                    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-                        <label *ngIf="errorResponse" class="error-text">{{ 'account.errorResponseMessage' | translate }}</label>
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <label for="usernameSignup">{{ 'account.username' | translate }}*</label>
-                                    <input type="text" 
-                                        id="usernameSignup"
-                                        class="form-control"
-                                        [ngClass]="{ 'is-invalid': submitted && (f.username.errors || conflictUser) }"
-                                        formControlName="username">
-                                    <label *ngIf="conflictUser" class="error-text">{{ 'account.conflictNameMessage' | translate }}</label> 
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <label for="emailSignup">{{ 'account.email' | translate }}*</label>
-                                    <input type="email" 
-                                        id="emailSignup"
-                                        class="form-control"
-                                        [ngClass]="{ 'is-invalid': submitted && (f.email.errors || conflictEmail) }" 
-                                        formControlName="email">
-                                        <label *ngIf="conflictEmail" class="error-text">{{ 'account.conflictEmailMessage' | translate }}</label>    
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <label for="passwordSignup">{{ 'account.password' | translate }}*</label>
-                                    <input type="password" 
-                                        id="passwordSignup"
-                                        class="form-control" 
-                                        [ngClass]="{ 'is-invalid': submitted && f.password.errors }"
-                                        formControlName="password">
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <button type="submit" class="btn alazea-btn mt-15">Sign up</button>
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="m-sm-4">
+                                <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+                                    <div class="mb-3">
+                                        <label *ngIf="errorResponse" class="error-text">{{ 'account.errorResponseMessage' | translate }}</label>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label  for="usernameSignup">{{ 'account.username' | translate }}*</label>
+                                        <input type="text" 
+                                            id="usernameSignup"
+                                            class="form-control form-control-lg"
+                                            [ngClass]="{ 'is-invalid': submitted && (f.username.errors || conflictUser) }"
+                                            placeholder="{{ 'account.username' | translate }}"
+                                            formControlName="username">
+                                        <label *ngIf="conflictUser" class="error-text">{{ 'account.conflictNameMessage' | translate }}</label> 
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="emailSignup">{{ 'account.email' | translate }}*</label>
+                                        <input type="email" 
+                                            id="emailSignup"
+                                            class="form-control form-control-lg"
+                                            [ngClass]="{ 'is-invalid': submitted && (f.email.errors || conflictEmail) }" 
+                                            placeholder="{{ 'account.email' | translate }}"
+                                            formControlName="email">
+                                            <label *ngIf="conflictEmail" class="error-text">{{ 'account.conflictEmailMessage' | translate }}</label>   
+                                        <label>Email</label>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="passwordSignup">{{ 'account.password' | translate }}*</label>
+                                        <input type="password" 
+                                            id="passwordSignup"
+                                            class="form-control form-control-lg" 
+                                            [ngClass]="{ 'is-invalid': submitted && f.password.errors }"
+                                            placeholder="{{ 'account.password' | translate }}"
+                                            formControlName="password">
+                                    </div>
+                                    <div class="text-center mt-3">
+                                        <button type="submit" class="btn btn-lg btn-primary">Sign up</button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
-                    </form>
+                    </div>
                 </div>
-
             </div>
         </div>
     </div>
-</section>-->
+</main>
