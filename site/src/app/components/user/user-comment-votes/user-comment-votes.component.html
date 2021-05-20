@@ -1,47 +1,55 @@
-<div class="container mt-15">
+<main class="content">
+  <div class="container-fluid">
+    <div class="header">
+        <h1 class="header-title">
+            Blank Page
+        </h1>
+    </div>
     
-    <div class="row justify-content-center">
-        
-        <div class="col-12 col-md-8">   
-          <div class="p-3 divPost rounded shadow-sm">
-            <h6 class="border-bottom pb-2 mb-0">Your votes</h6>
-            <app-loader></app-loader>
+    <div class="row">
+      
+      <div class="col-xxl-8">
+        <app-loader></app-loader>    
+        <div class="card-body">
 
-            <div *ngIf="!isLoading && hasVotes">
-              <div class="d-flex text-muted pt-3"  *ngFor="let vote of userVotes">
-                <div class="pb-3 mb-0 small lh-sm border-bottom w-100">
-                  <div class="d-flex justify-content-between">
-                    <div class="col-12 col-md-1 pad-3">
-                      <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#007bff"></rect><text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text></svg>
-                    </div>
-                    <div class="col-12 col-md-10">
-                      <a class="removeLinkLine" href="{{vote.userId}}/{{vote.postId}}"><strong class="text-gray-dark">{{vote.text}}</strong></a>&nbsp;-&nbsp;<a class="removeLinkLine" href="userpage/{{vote.authorPostId}}"><small>{{vote.authorPostId}}</small></a>
-                      <span class="d-block">Creation date:&nbsp;{{vote.creationDate}}</span>
-                    </div>
-                    <div class="col-12 col-md-1">
-                      <button type="button" class="btn btn-outline-danger addLabelBtn" (click)="deleteVote(vote)"><mat-icon>delete_outline</mat-icon></button>
-                    </div>
+          <div *ngIf="!isLoading && hasVotes">
+            <div class="card"  *ngFor="let vote of userVotes">
+
+              <div class="card-body">
+                <h5 class="card-title">
+                  <i class="align-middle me-2 fas fa-fw fa-arrow-alt-circle-up"></i>
+                  <a class="removeLinkLine" href="{{vote.userId}}/{{vote.postId}}"><strong class="text-gray-dark">{{vote.text}}</strong></a>&nbsp;-&nbsp;<a class="removeLinkLine" href="userpage/{{vote.authorPostId}}"><small>{{vote.authorPostId}}</small></a>
+                </h5>
+                <div class="d-flex justify-content-between">
+                  <div class="col-12 col-md-10">
+                    <h6 class="card-subtitle text-muted">Creation date:&nbsp;{{vote.creationDate}}</h6>
+                  </div>
+                  <div class="col-12 col-md-1">
+                    <button type="button" class="btn btn-outline-danger addLabelBtn" (click)="deleteVote(vote)"><i class="align-middle me-2 fas fa-fw fa-trash-alt"></i></button>
                   </div>
                 </div>
               </div>
-            </div>
+            </div>  
+          </div>          
+        </div>
+        <div *ngIf="!isLoading && !hasVotes" class="d-flex text-muted pt-3">
+          You dont vote comments
+        </div>
             
-            <div *ngIf="!isLoading && !hasVotes" class="d-flex text-muted pt-3">
-              You dont vote comments
-            </div>
+      </div>
 
-          </div>
+      <div class="col-xxl-4">
+        <div class="list-group">
+          <a href="#" class="list-group-item list-group-item-action" routerLink="/userProfile">My profile</a>
+          <a href="#" class="list-group-item list-group-item-action" routerLink="/userlabel">My labels</a>
+          <a href="#" class="list-group-item list-group-item-action active" routerLink="/usercomments">My comments</a>
+          <a href="#" class="list-group-item list-group-item-action" routerLink="/uservotes">My votes</a>
+          <a href="#" class="list-group-item list-group-item-action" routerLink="/usercommentvotes">My Comment votes</a>
         </div>
-  
-        <div class="col-12 col-sm-9 col-md-4" >
-          <div class="list-group">
-              <a href="#" class="list-group-item list-group-item-action" routerLink="/userProfile">My profile</a>
-              <a href="#" class="list-group-item list-group-item-action" routerLink="/userlabel">My labels</a>
-              <a href="#" class="list-group-item list-group-item-action" routerLink="/usercomments">My comments</a>
-              <a href="#" class="list-group-item list-group-item-action" routerLink="/uservotes">My votes</a>
-              <a href="#" class="list-group-item list-group-item-action active" routerLink="/usercommentvotes">My Comment votes</a>
-          </div>
-        </div>
-  
+      </div>
     </div>
   </div>
+</main>
+
+
+

@@ -1,74 +1,82 @@
-<div class="container mt-15">
-    
-    <div class="row justify-content-center">
-        
-        <div class="col-12 col-md-8">   
-          <div class="p-3 divPost rounded shadow-sm">
-
-            <div class="row mb-15">
-                <div class="col-8 col-md-10"><h6>Your labels</h6></div>
-                <div class="col-8 col-md-2 commetDate">
-                    <button type="button" class="btn btn-outline-primary addLabelBtn" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                      <mat-icon>library_add</mat-icon>
-                    </button>
-                </div>
-            </div>
-            
-            <div class="collapse mt-15" id="collapseExample">
-                <div class="card card-body">
-                    <form [formGroup]="labelForm" (ngSubmit)="onSubmit()">
-                        <div class="row">
-                            <div class="col-12 col-md-6">
-                                <div class="form-group">
-                                    <input type="text" formControlName="label" class="form-control" id="labelName" placeholder="label"/>
-                                </div>
-                            </div>
-                            <div class="col-12 col-md-6">
-                                <button type="submit" class="btn btn-primary">Create</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-
-            <app-loader></app-loader>
-
-            <div *ngIf="!isLoading && hasLabels">
-              <div class="d-flex text-muted pt-3"  *ngFor="let label of userLabels">
-                <div class="pb-3 mb-0 small lh-sm border-bottom w-100">
-                  <div class="d-flex justify-content-between">
-                    <div class="col-12 col-md-1 pad-3">
-                     
-                    <mat-icon style="color: green;">label</mat-icon>
-                  </div>
-                    <div class="col-12 col-md-10">
-                      <strong class="text-gray-dark">{{label.label}}</strong>&nbsp;({{label.postCount}})<br/>
-                      <span class="d-block">Creation date:&nbsp;{{label.creationDate}}</span>
-                    </div>
-                    <div class="col-12 col-md-1">
-                      <button type="button" class="btn btn-outline-danger addLabelBtn" (click)="removeLabel(label)" [disabled]="label.postCount > 0"><mat-icon>delete_outline</mat-icon></button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <div *ngIf="!isLoading && !hasLabels" class="d-flex text-muted pt-3">
-              You dont have labels
-            </div>
-
-          </div>
-        </div>
-  
-        <div class="col-12 col-sm-9 col-md-4" >
-          <div class="list-group">
-              <a href="#" class="list-group-item list-group-item-action" routerLink="/userProfile">My profile</a>
-              <a href="#" class="list-group-item list-group-item-action active" routerLink="/userlabel">My labels</a>
-              <a href="#" class="list-group-item list-group-item-action" routerLink="/usercomments">My comments</a>
-              <a href="#" class="list-group-item list-group-item-action" routerLink="/uservotes">My votes</a>
-              <a href="#" class="list-group-item list-group-item-action" routerLink="/usercommentvotes">My Comment votes</a>
-          </div>
-        </div>
-  
+<main class="content">
+  <div class="container-fluid">
+    <div class="header">
+        <h1 class="header-title">
+            Blank Page
+        </h1>
     </div>
+    
+    <div class="row">
+      
+      <div class="col-xxl-8">
+        
+        <app-loader></app-loader>    
+        <div class="card-body">
+
+          <div *ngIf="!isLoading && hasLabels">
+            <div class="card">
+              <div class="card-header">
+                <h5 class="card-title">Striped Rows</h5>
+                <h6 class="card-subtitle text-muted">Use <code>.table-striped</code> to add zebra-striping to any table row within the
+                  <code>&lt;tbody&gt;</code>.</h6>
+              </div>
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th style="width:40%;">Label</th>
+                    <th style="width:40%;">Post</th>
+                    <th style="width:25%">Creation date</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let label of userLabels">
+                    <td><strong>{{label.label}}</strong></td>
+                    <td class="d-none d-md-table-cell">{{label.postCount}}</td>
+                    <td>{{label.creationDate}}</td>
+                    <td class="table-action">
+                      <button type="button" class="btn btn-outline-danger addLabelBtn" (click)="removeLabel(label)" [disabled]="label.postCount > 0"><i class="align-middle fas fa-fw fa-trash"></i></button>
+                      
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            
+          </div>  
+          <div *ngIf="!isLoading && !hasLabels">
+            You dont have labels
+          </div>      
+        </div>
+            
+      </div>
+
+      <div class="col-xxl-4">
+
+        <div class="card" >
+
+          <div class="card-body">
+              <h6>Your labels</h6>
+            
+              <form [formGroup]="labelForm" (ngSubmit)="onSubmit()">
+                  <div class="row">
+                      <div class="col-12 col-md-6">
+                          <div class="form-group">
+                              <input type="text" formControlName="label" class="form-control" id="labelName" placeholder="label"/>
+                          </div>
+                      </div>
+                      <div class="col-12 col-md-6">
+                          <button type="submit" class="btn btn-primary"><i class="align-middle me-2 fas fa-fw fa-folder-plus"></i>Create</button>
+                      </div>
+                  </div>
+              </form>
+            </div>
+            </div>
+          
+        </div>
+      </div>
   </div>
+</main>
+
+
+

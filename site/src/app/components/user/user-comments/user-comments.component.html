@@ -1,51 +1,54 @@
-<div class="container mt-15">
+<main class="content">
+  <div class="container-fluid">
+    <div class="header">
+        <h1 class="header-title">
+            Blank Page
+        </h1>
+    </div>
     
-  <div class="row justify-content-center">
+    <div class="row">
       
-      <div class="col-12 col-md-8">   
-        <div class="p-3 divPost rounded shadow-sm">
-          <h6 class="border-bottom pb-2 mb-0">Your comments</h6>
-          <app-loader></app-loader>
+      <div class="col-xxl-8">
+        <app-loader></app-loader>    
+        <div class="card-body">
+
           <div *ngIf="!isLoading && hasComments">
-            <div class="d-flex text-muted pt-3" *ngFor="let comment of userComments">
-              <div class="pb-3 mb-0 small lh-sm border-bottom w-100">
-                 <div class="d-flex justify-content-between">
-   
-                   <div class="col-12 col-md-1 pad-3">
-                     <mat-icon style="color:green;"> comment</mat-icon>
-                   </div>
-   
-                   <div class="col-12 col-md-10">
-                     <a class="removeLinkLine" href="{{comment.userId}}/{{comment.postId}}"><strong class="text-gray-dark">{{comment.titlePost}}</strong></a>&nbsp;-&nbsp;<a class="removeLinkLine" href="userpage/{{comment.authorPostId}}"><small>{{comment.authorPostId}}</small></a>
-                     <span class="d-block"><em>{{comment.text}}</em></span>
-                     <span class="d-block">Creation date:&nbsp;{{comment.creationDate}}</span>
-                   </div>
-   
-                   <div class="col-12 col-md-1">
-                     <button type="button" class="btn btn-outline-danger addLabelBtn" (click)="deleteComment(comment)"><mat-icon>delete_outline</mat-icon></button>
-                   </div>
-                 </div>
-                 
-               </div>
-             </div>
-          </div>
+            <div class="card" *ngFor="let comment of userComments">
 
-          <div *ngIf="!isLoading && !hasComments" class="d-flex text-muted pt-3" >
+              <div class="card-body">
+                <h5 class="card-title">
+                  <i class="align-middle me-2 fas fa-fw fa-comment"></i>
+                  <a class="removeLinkLine" href="{{comment.userId}}/{{comment.postId}}"><strong class="text-gray-dark">{{comment.titlePost}}</strong></a>&nbsp;-&nbsp;<a class="removeLinkLine" href="userpage/{{comment.authorPostId}}"><small>{{comment.authorPostId}}</small></a>
+                </h5>
+                <div class="d-flex justify-content-between">
+
+                  <div class="col-12 col-md-10">
+                    <h6 class="card-subtitle text-muted">Creation date:&nbsp;{{comment.creationDate}}</h6>
+                    <p>{{comment.text}}</p>
+                  </div>
+
+                  <div class="col-12 col-md-1">
+                    <button type="button" class="btn btn-outline-danger addLabelBtn" (click)="deleteComment(comment)"><i class="align-middle me-2 fas fa-fw fa-trash-alt"></i></button>
+                  </div>
+                </div>
+              </div>
+            </div>  
+          </div>  
+          <div *ngIf="!isLoading && !hasComments" >
             YOu dont have comments
-          </div>
-          
+          </div>        
         </div>
       </div>
 
-      <div class="col-12 col-sm-9 col-md-4" >
+      <div class="col-xxl-4">
         <div class="list-group">
-            <a href="#" class="list-group-item list-group-item-action" routerLink="/userProfile">My profile</a>
-            <a href="#" class="list-group-item list-group-item-action" routerLink="/userlabel">My labels</a>
-            <a href="#" class="list-group-item list-group-item-action active" routerLink="/usercomments">My comments</a>
-            <a href="#" class="list-group-item list-group-item-action" routerLink="/uservotes">My votes</a>
-            <a href="#" class="list-group-item list-group-item-action" routerLink="/usercommentvotes">My Comment votes</a>
+          <a href="#" class="list-group-item list-group-item-action" routerLink="/userProfile">My profile</a>
+          <a href="#" class="list-group-item list-group-item-action" routerLink="/userlabel">My labels</a>
+          <a href="#" class="list-group-item list-group-item-action active" routerLink="/usercomments">My comments</a>
+          <a href="#" class="list-group-item list-group-item-action" routerLink="/uservotes">My votes</a>
+          <a href="#" class="list-group-item list-group-item-action" routerLink="/usercommentvotes">My Comment votes</a>
         </div>
       </div>
-
+    </div>
   </div>
-</div>
+</main>
