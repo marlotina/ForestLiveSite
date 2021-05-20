@@ -1,0 +1,12 @@
+.mb-15 {
+    margin-bottom: 15px;
+}
+
+.div-top-line {
+	padding-top: 10px !important;
+    border-top: 1px solid #ebebeb;
+}
+
+.postMapDetails {
+	height: 315px;
+}

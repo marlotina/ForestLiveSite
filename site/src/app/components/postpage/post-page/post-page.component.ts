@@ -13,7 +13,8 @@ import { ImageDialogComponent } from '../../shared/image-dialog/image-dialog.com
 
 @Component({
   selector: 'app-post-page',
-  templateUrl: './post-page.component.html'
+  templateUrl: './post-page.component.html',
+  styleUrls: ['./post-page.component.css']
 })
 export class PostPageComponent implements OnInit {
  

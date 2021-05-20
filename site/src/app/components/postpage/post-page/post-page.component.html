@@ -7,7 +7,7 @@
         </div>
         
         <div class="row">
-            <div class="col-xxl-9">
+            <div class="col-xxl-9"> 
                 <app-loader></app-loader>
                 <div class="card" *ngIf="hasPost == true">
                     <div class="card-header">
@@ -49,7 +49,7 @@
                                 <a (click)="showImage(imagePostUrl)"><img src="{{imagePostUrl}}" alt="{{post.altImage}}" class="postImage divPostImgContent img-fluid rounded float-end"></a>
                             </div>
         
-                            <div class="row mb-5">
+                            <div class="row">
                                 <div *ngIf="post.type !='post'">
                                     <app-select-specie-form 
                                         [showOptions]="showOwnerOptions"
@@ -59,7 +59,7 @@
                                         [type]="type"></app-select-specie-form>
                                 </div>
                             </div>
-                            <div  class="row mb-5">
+                            <div  class="row">
                                 <div  *ngIf="post.type !='post'">
                                     <strong>{{ 'userPage.observationDate' | translate }}:</strong> {{post.observationDate}} 
                                 </div>
@@ -73,29 +73,40 @@
                                 <div class="col-12">
                                     <strong>{{ 'postPage.tags' | translate }}:</strong>
                                     <a *ngFor="let label of post.labels" role="button" href="#" class="ml-5">
-                                        <span class="label label-default">{{label}}</span>
+                                        <span class="btn btn-primary btn-sm">{{label}}</span>
                                     </a>
                                 </div>
                             </div>
         
                             </div>
                             <div class="row mb-15">
-                                <div class="col-12" *ngIf="hasLocation">
+                                <div class="col-12" >
                                     <div class="row justify-content-center">
                                         <div #mapWrapper id="map" class="postMapDetails"></div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
+                            <div class="row mb-15">   
                                 <div  class="col-12 d-flex">
-                                    <a href="http://www.facebook.com/sharer.php?u={{urlPage}}" target="_blank"><img class="social-image" src="../../../../assets/img/core-img/ico-facebook.svg" /></a>
-                                    <a href="https://twitter.com/intent/tweet?text={{post.title}}&url={{urlPage}}" target="_blank"><img class="social-image" src="../../../../assets/img/core-img/ico-twitter.svg" /></a>
-                                    <a href="https://www.reddit.com/submit?title={{post.title}}&url={{urlPage}}" target="_blank"><img class="social-image" src="../../../../assets/img/core-img/ico-reddit.svg" /></a>
-                                    <a href="http://www.linkedin.com/shareArticle?url={{urlPage}}" target="_blank"><img class="social-image" src="../../../../assets/img/core-img/ico-linkedin.svg" /></a>
+
+                                    <i class="align-middle mr-2 fas fa-fw fa-share-alt"></i>
+
+                                    <a href="http://www.facebook.com/sharer.php?u={{urlPage}}" target="_blank">
+                                        <i class="align-middle mr-2 fab fa-fw fa-facebook"></i>
+                                    </a>
+                                    <a href="https://twitter.com/intent/tweet?text={{post.title}}&url={{urlPage}}" target="_blank">
+                                        <i class="align-middle mr-2 fab fa-fw fa-twitter"></i> 
+                                    </a>
+                                    <a href="https://www.reddit.com/submit?title={{post.title}}&url={{urlPage}}" target="_blank">
+                                        <i class="align-middle mr-2 fab fa-fw fa-reddit"></i> 
+                                    </a>
+                                    <a href="http://www.linkedin.com/shareArticle?url={{urlPage}}" target="_blank">
+                                        <i class="align-middle mr-2 fab fa-fw fa-linkedin"></i> 
+                                    </a>
                                 </div>
                             </div>
                         
-                        <div id="commentsDiv" class="row mb-5">                        
+                        <div class="row mb-5">                        
                             <app-post-comment *ngIf = "post.postId" 
                                 [postId]="post.postId"
                                 [postTitle]="post.title"
