@@ -14,7 +14,7 @@ import { startWith } from 'rxjs/operators';
 import { ModalEditImageComponent } from '../modal-edit-image/modal-edit-image.component';
 import { AutocompleteService } from 'src/app/services/autocomplete/autocomplete.service';
 import { AutocompleteResponse } from 'src/app/model/specie';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UserLabelsService } from 'src/app/services/user/labels/user-labels.service';
 import { ManageItemsService } from 'src/app/services/items/manage-items.service';
 
@@ -64,7 +64,7 @@ export class CreatePostComponent implements OnInit {
 
   showMap = false;
   isPost = true;
-  type: number = 1;
+  type: string;
   filteredSpecies: Observable<AutocompleteResponse[]>;
   autocompleteControl = new FormControl();
   toolPos = 'after';
@@ -78,6 +78,7 @@ export class CreatePostComponent implements OnInit {
     private matDialog: MatDialog,
     private locationService: LocationService,
     private accountService: AccountService,
+    private activateRoute: ActivatedRoute,
     private router: Router,
     private manageItemsService: ManageItemsService,
     private userLabelsService: UserLabelsService,
@@ -89,9 +90,14 @@ export class CreatePostComponent implements OnInit {
           label: string | null) => 
           label ? this._filter(label) : this.allLabels.slice()
           ));
+
   }  
   
   ngOnInit(): void {
+    this.activateRoute.paramMap.subscribe(params => {
+      this.type = params.get("type");
+        });
+
     this.postForm = this.formBuilder.group({
       title: ['', [Validators.required]],
       text: ['', [Validators.required]],
@@ -178,12 +184,12 @@ export class CreatePostComponent implements OnInit {
       'isPost': this.isPost
     });
 
-    if(this.type == 1) { 
+    if(this.type == "post") { 
       this.postForm.controls['type'].setValue('post');
       
-    } else if (this.type == 2) {
+    } else if (this.type == "soecie") {
       this.postForm.controls['type'].setValue('bird');
-    } else if (this.type == 3) {
+    } else if (this.type == "pending") {
       this.postForm.controls['type'].setValue('pending');
     }
     
@@ -370,11 +376,6 @@ export class CreatePostComponent implements OnInit {
     this.labels.push(event.option.viewValue);
     this.labelInput.nativeElement.value = '';
     this.labelCtrl.setValue(null);
-  }
-
-  changeTypePost(type: number) {
-      this.type = type;
-      this.isPost = type == 1;
   }
 
   private _filter(value: string): string[] {

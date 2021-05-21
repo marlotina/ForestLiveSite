@@ -6,3 +6,22 @@
     position: absolute;
     z-index: -1;
 }
+
+.selectImage{
+	background-color: #fff;
+    border: 2px dashed #ebebeb;
+	text-align: center;
+	padding: 20px;
+}
+
+.selectImageLabel{
+	width: 100%;
+	cursor: pointer;	
+}
+
+
+.selectImageCenter {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}

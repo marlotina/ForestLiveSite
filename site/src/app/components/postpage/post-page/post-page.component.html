@@ -8,10 +8,10 @@
         
         <div class="row">
             <div class="col-xxl-9"> 
-                <app-loader></app-loader>
-                <div class="card" *ngIf="hasPost == true">
+                <div class="card" >
+                    <app-loader></app-loader>
                     <div class="card-header">
-                        <div class="card-actions float-end" >
+                        <div class="card-actions float-end" *ngIf="showOwnerOptions">
                             <a href="#" class="me-1">
                                 <i class="align-middle" data-feather="refresh-cw"></i>
                             </a>
@@ -28,7 +28,6 @@
                                 </div>
                             </div>
                         </div>
-                        <div >
                             <app-post-votes
                                 [postId]="post.postId"
                                 [titlePost]="post.title"
@@ -42,11 +41,10 @@
                                 {{post.title}}
                             <a class="text-dark btn fs-6 fw-light removeLinkLine" href="/userpage/{{post.userId}}">{{post.userId}}</a>             
                         </div>
-                    </div>
                     <div class="card-body">                        
                         <div class="col-12 col-md-11 div-bottom-line mb-15">
                             <div class="row mb-15 div-bottom-line">
-                                <a (click)="showImage(imagePostUrl)"><img src="{{imagePostUrl}}" alt="{{post.altImage}}" class="postImage divPostImgContent img-fluid rounded float-end"></a>
+                                <a (click)="showImage(imagePostUrl)"><img src="{{imagePostUrl}}" alt="{{post.altImage}}" class="img-fluid rounded float-end"></a>
                             </div>
         
                             <div class="row">
