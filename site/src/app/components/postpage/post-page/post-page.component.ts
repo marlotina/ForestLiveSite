@@ -65,7 +65,7 @@ export class PostPageComponent implements OnInit {
       
     });
   }
-  
+
   addMetas(post: PostResponse, image: string, url: string){
     this.meta.updateTag({ name: 'og:title', content: post.title })
     //this.meta.addTag({ name: 'og:type', content: url })

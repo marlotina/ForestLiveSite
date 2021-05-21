@@ -39,7 +39,7 @@
                                 [voteId]="post.voteId"
                                 [hasVote]="post.hasVote"></app-post-votes>
                                 
-                            <a class="text-dark titlePost fs-4 removeLinkLine" href="/{{post.userId}}/post/{{post.postId}}">{{post.title}}</a>
+                                {{post.title}}
                             <a class="text-dark btn fs-6 fw-light removeLinkLine" href="/userpage/{{post.userId}}">{{post.userId}}</a>             
                         </div>
                     </div>
@@ -88,9 +88,7 @@
                             </div>
                             <div class="row mb-15">   
                                 <div  class="col-12 d-flex">
-
                                     <i class="align-middle mr-2 fas fa-fw fa-share-alt"></i>
-
                                     <a href="http://www.facebook.com/sharer.php?u={{urlPage}}" target="_blank">
                                         <i class="align-middle mr-2 fab fa-fw fa-facebook"></i>
                                     </a>
