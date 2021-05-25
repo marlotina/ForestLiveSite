@@ -1,0 +1,93 @@
+<main class="content">
+    <div class="container-fluid">
+        <div class="header">
+            <h1 class="header-title">
+                Blank Page
+            </h1>
+        </div>
+    
+        <div class="row">
+            <app-loader></app-loader>      
+            <div class="col-12 col-md-4 col-lg-4" *ngFor="let post of lastObservations">
+                <div class="card">
+                    <div class="card-body">
+                        <!--<app-post-votes
+                            [postId]="post.postId"
+                            [titlePost]="post.title"
+                            [authorPostId]="post.userId"
+                            [userId]="userLoggedName"
+                            [voteCount]="post.voteCount"
+                            [specieId]="post.specieId"
+                            [voteId]="post.voteId"
+                            [hasVote]="post.hasVote"></app-post-votes>-->
+                            
+                            <a class="fs-4 removeLinkLine" routerLink="/{{post.userId}}/{{post.postId}}">
+                                <strong>{{post.title}}</strong></a>
+                                        
+                    </div>
+                    <a (click)="showImage(post.imageUrl)">
+                        <img src="{{imagesPostUrl}}{{post.imageUrl}}" alt="{{post.altImage}}" 
+                            class="card-img-top">
+                    </a>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <em *ngIf="post.birdSpecie">{{post.birdSpecie}}</em>
+            
+                            <a *ngIf="post.type == 'pending'" class="link-info" href="/{{post.userId}}/pending/{{post.postId}}#commentsDiv">Help the user to identify the bird</a>
+                            <p class="card-text">{{post.text}}</p> 
+                        </li>
+                        <li class="list-group-item">
+                            <a href="/{{post.userId}}/{{post.postId}}" class="card-link">
+                                <i class="align-middle mr-2 fas fa-fw fa-comment"></i> 
+                                <span class="align-middle">&nbsp;{{post.commentCount}}&nbsp;comments</span>
+                            </a>
+            
+                            <img src="https://birdpostsqa.blob.core.windows.net/profiles/{{post.userPhoto}}" 
+                                alt="image of {{post.userId}}" class="imgAuthorPost">
+                            <a class="card-link" href="/userpage/{{post.userId}}">{{post.userId}}</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+        </div>
+
+    </div>
+</main>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--
+
+
+
+<div class="col" *ngFor="let post of lastObservations">
+    <div class="card shadow-sm">
+      <img src="{{urlPostImage}}{{post.imageUrl}}" width="100%" height="225" >
+      <div class="card-body">
+        <p class="card-text">
+          {{post.title}}<br/>
+          <small>{{post.birdSpecie}}</small>
+        </p>
+        <div class="d-flex justify-content-between align-items-center">
+          <div class="btn-group">
+            <button type="button" routerLink="/{{post.userId}}/{{post.postId}}" class="btn btn-sm btn-outline-secondary">Ver</button>
+          </div>
+          <small class="text-muted">{{post.observationDate}}</small>
+        </div>
+      </div>
+    </div>
+  </div>-->

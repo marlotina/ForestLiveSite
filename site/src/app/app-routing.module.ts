@@ -31,6 +31,9 @@ const routes: Routes = [
     canActivate: [AuthGuard]  },
   { path: 'landingusers', loadChildren: () => import('./components/landing-users/landing-users.module').then(m => m.LandingUsersModule), 
     canActivate: [AuthGuard]  },
+  { path: 'lastposts', loadChildren: () => import('./components/lastposts/last-posts/last-posts.module').then(m => m.LastPostsModule) },
+  { path: 'userfollower', loadChildren: () => import('./components/user/follower/follower.module').then(m => m.FollowerModule) },
+  { path: 'userfollow', loadChildren: () => import('./components/user/follow/follow.module').then(m => m.FollowModule) },
   { path: '**', loadChildren: () => import('./components/home/home.module').then(m => m.HomeModule) }
 ]
 
