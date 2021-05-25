@@ -9,3 +9,8 @@
 #map {
     padding-top: 10px;
 }
+
+.map-container{
+	width: 100% !important;
+	height: 650px !important;
+}

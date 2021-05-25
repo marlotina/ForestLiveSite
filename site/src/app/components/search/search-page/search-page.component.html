@@ -1,3 +1,76 @@
+<main class="content">
+    <div class="container-fluid">
+        <div class="header">
+            <h1 class="header-title">
+                Blank Page
+            </h1>
+        </div>
+        
+        <div class="row">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">Filter</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <div class="input-group">
+                                <input type="text" class="form-control" [matAutocomplete]="autoBird"
+                                    [formControl]="autocompleteControl" 
+                                    id="specieNamePost" placeholder="Introduce especie">
+                                <span class="input-group-append">
+                                    <button type="button" class="btn btn-secondary" (click)="removeFilterSpecie()" [hidden]="hideRemoveBtn">
+                                        <i class="align-middle me-1 fas fa-fw fa-times"></i>
+                                    </button> 
+                                    <button type="button" class="btn btn-secondary" (click)="addFilterSpecie()" [hidden]="!hideRemoveBtn">
+                                        <i class="align-middle me-1 fas fa-fw fa-search"></i>
+                                    </button> 
+                                </span>
+                                <mat-autocomplete #autoBird="matAutocomplete" (optionSelected)='selectSpecie($event.option.value)'>
+                                    <mat-option *ngFor="let option of filteredSpecies | async" [value]="option" (change)="toggleSelection(option)" 
+                                        (click)="$event.stopPropagation()">
+                                        {{option.nameComplete}}
+                                    </mat-option>
+                                </mat-autocomplete>
+                            </div>
+                        </div>        
+                
+                        <div class="form-group col-md-6">
+                            <div class="ml-15 form-group inputSearchTop">
+                                <input id="pac-input" type="text" placeholder="Introduce location" class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+            
+                </div>
+            </div>
+        </div>
+    
+        <div class="col-12 col-md-12">
+            <div #mapWrapper id="map" class="map-container">
+                <app-loader></app-loader>
+            </div>
+        </div>
+
+    </div>
+</main>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--
+
 <div class="row mt-15">
     <div class="col-12 col-md-3">
         <div class="ml-15 autocomplete-form autocompleteTop">
@@ -29,4 +102,4 @@
             <app-loader></app-loader>
         </div>
     </div>
-</div>
+</div>-->
