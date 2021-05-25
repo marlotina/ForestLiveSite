@@ -61,7 +61,7 @@ export class CreatePostComponent implements OnInit {
   firstImage = true;
   map: google.maps.Map;
   userId: string;
-
+  specieId: string = null;
   showMap = false;
   isPost = true;
   type: string;
@@ -74,7 +74,8 @@ export class CreatePostComponent implements OnInit {
   @ViewChild('auto') matAutocomplete: MatAutocomplete;  
   @ViewChild('autoLabel') matAutoLabelcomplete: MatAutocomplete;
 
-  constructor(private formBuilder: FormBuilder,
+  constructor(
+    private formBuilder: FormBuilder,
     private matDialog: MatDialog,
     private locationService: LocationService,
     private accountService: AccountService,
@@ -147,8 +148,8 @@ export class CreatePostComponent implements OnInit {
   }
 
   selectSpecie(item: AutocompleteResponse){
-    this.postForm.controls['specieName'].setValue(item.nameComplete);
-    this.postForm.controls['specieId'].setValue(item.specieId);
+    this.autocompleteControl.setValue(item.nameComplete);
+    this.specieId = item.specieId;
   }
 
   optionClicked(event: Event, specie: AutocompleteResponse) {
@@ -181,7 +182,8 @@ export class CreatePostComponent implements OnInit {
       'imageData': this.url,
       'imageName': this.imageName,
       'altImage': this.altImage,
-      'isPost': this.isPost
+      'isPost': this.isPost,
+      'specieId': this.specieId
     });
 
     if(this.type == "post") { 
@@ -380,8 +382,8 @@ export class CreatePostComponent implements OnInit {
 
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
-
-    return this.allLabels.filter(label => label.toLowerCase().indexOf(filterValue) === 0);
+    var result = this.allLabels.filter(label => label.toLowerCase().indexOf(filterValue) === 0);
+    return result;
   }
 
   /*Modal form*/

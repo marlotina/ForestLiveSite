@@ -36,19 +36,19 @@
                 </div>
                 <div class="col-12 col-lg-2">
                     <div class="form-group center">
-                        <button (click)="getFormat()" class="buttonTwo" style="width: 50px"><mat-icon>crop_5_4</mat-icon></button> 
-                        <button (click)="getFormatPanoramic()" class="buttonTwo" style="width: 50px"><mat-icon>crop_16_9</mat-icon></button>
+                        <button (click)="getFormat()" class="btn btn-outline-primary" style="width: 50px"><i class="ion ion-ios-tablet-portrait mr-2"></i></button> 
+                        <button (click)="getFormatPanoramic()" class="btn btn-outline-primary" style="width: 50px"><i class="ion ion-ios-tablet-landscape mr-2"></i></button>
                     </div>
                 </div>
                 <div class="col-12 col-lg-2">
                     <div class="form-group center">
-                        <button (click)="zoomOut()" class="buttonTwo" style="width: 50%;"><mat-icon>remove</mat-icon></button> 
-                        <button (click)="zoomIn()" class="buttonTwo" style="width: 50%;"><mat-icon>add</mat-icon></button>
+                        <button (click)="zoomOut()" class="btn btn-outline-primary" style="width: 50%;"><i class="align-middle mr-2 fas fa-fw fa-minus"></i></button> 
+                        <button (click)="zoomIn()" class="btn btn-outline-primary" style="width: 50%;"><i class="align-middle mr-2 fas fa-fw fa-plus"></i></button>
                     </div>
                 </div>
                 <div class="col-12 col-lg-2">
                     <div class="form-group center">
-                        <button (click)="resetImage()" class="buttonTwo">{{ 'createPost.resetImage' | translate }}</button>
+                        <button (click)="resetImage()" class="btn btn-outline-primary">{{ 'createPost.resetImage' | translate }}</button>
                     </div>
                 </div>
             </div>

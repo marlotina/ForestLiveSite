@@ -25,3 +25,21 @@
 	margin-left: auto;
 	margin-right: auto;
 }
+
+.LabelsSelect {
+    display: inline !important;
+}
+
+.createPostMap {
+	height: 400px;
+}
+
+.autocomplete-form {
+	min-width: 150px;
+	max-width: 500px;
+	width: 100%;
+}
+
+.mb{
+	margin-bottom: 1rem;
+}

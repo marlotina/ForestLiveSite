@@ -1,129 +1,207 @@
 <main class="content">
-    <div class="container-fluid">
-      <div class="header">
-          <h1 class="header-title">
-              Blank Page
-          </h1>
-      </div>
-      
-      <div class="row">
-         
-          <div class="card ng-star-inserted">
-            <form [formGroup]="postForm" (ngSubmit)="onSubmit()" class="ng-untouched ng-pristine ng-valid">
-                <div class="row mt-15">
-                    
-                    <div class="col-12">
-                        <div class="form-group">
-                            <div [innerHtml]='msg' *ngIf="msg" style="color: red;"></div>
-                            <div><img [src]="url" *ngIf="url" class="img-fluid rounded float-end"></div>
-                        </div>
-                    </div>
-                    <div class="col-12">
-                        <div class="form-group">
-                            <label for="uploadImage" class="selectImageLabel" *ngIf="!visibleEditImage">
-                                <div class="selectImage" for="uploadImage">
-                                    <img src="../../../../assets/img/core-img/addImage.png" class="selectImageCenter"/>
-                                    {{ 'createPost.upload' | translate }}
-                                </div>
-                            </label>
-                            <input type="file" #file id="uploadImage" accept="image/*" (change)="selectFile($event)"/>                    
-                        </div>
-                    </div>
 
-                    <div class="col-12 col-md-12 mt-15">
-                        <div class="form-group">
-                            <button type="button" class="buttonThree" *ngIf="visibleEditImage" (click)="deleteImage()">remove</button>
-                            <button type="button" class="buttonThree" *ngIf="visibleEditImage" (click)="openEditImage()">{{ 'createPost.editImage' | translate }}</button>                                            
+    <div class="container-fluid">
+        <div class="header">
+            <h1 class="header-title">
+                Create post
+            </h1>
+        </div>
+        
+
+      <div class="row">
+
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title">Form row</h5>
+                    <h6 class="card-subtitle text-muted">Bootstrap column layout.</h6>
+                </div>
+                <div class="card-body">
+                    <form [formGroup]="postForm" (ngSubmit)="onSubmit()" class="ng-untouched ng-pristine ng-valid">
+                        <div class="row mb">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <div [innerHtml]='msg' *ngIf="msg" style="color: red;"></div>
+                                    <div><img [src]="url" *ngIf="url" class="img-fluid rounded float-end"></div>
+                                </div>
+                            </div>
+                            <div class="col-12 mb">
+                                <div class="form-group">
+                                    <label for="uploadImage" class="selectImageLabel" *ngIf="!visibleEditImage">
+                                        <div class="selectImage" for="uploadImage">
+                                            <img src="../../../../assets/img/core-img/addImage.png" class="selectImageCenter"/>
+                                            {{ 'createPost.upload' | translate }}
+                                        </div>
+                                    </label>
+                                    <input type="file" #file id="uploadImage" accept="image/*" (change)="selectFile($event)"/>                    
+                                </div>
+                            </div>
+        
+                            <div class="col-12 col-md-12 mt-15">
+                                <div class="form-group">
+                                    <button type="button" class="btn btn-outline-primary" *ngIf="visibleEditImage" (click)="deleteImage()">remove</button>
+                                    <button type="button" class="btn btn-outline-primary" *ngIf="visibleEditImage" (click)="openEditImage()">{{ 'createPost.editImage' | translate }}</button>                                            
+                                </div>
+                            </div>   
                         </div>
-                    </div>                    
-                    <div class="row">
-                    <div class="col-12 col-md-8 mt-15" [hidden]="isPost || type == 'pending'">
-                        <div class="form-group d-flex">
-                            <div class="autocomplete-form">
-                                <mat-form-field class="autocomplete-full-width">
-                                    <input type="text" aria-label="Number" matInput  [matAutocomplete]="autoBird"
-                                        [formControl]="autocompleteControl"  formControlName="specieName"   
-                                        id="specieNamePost" placeholder="{{ 'createPost.birdSpecie' | translate }}">
-                                        
-                                    <mat-autocomplete #autoBird="matAutocomplete" (optionSelected)='selectSpecie($event.option.value)'>
-                                        <mat-option *ngFor="let option of filteredSpecies | async" [value]="option" (change)="selectSpecie(option)" (click)="$event.stopPropagation()">
-                                            {{option.nameComplete}}
-                                        </mat-option>
-                                    </mat-autocomplete>
+
+                        <div class="row mb">
+                            <div class="form-group col-md-6">
+                                <label for="titlePost">Specie</label>
+                                <input type="text" class="form-control" [matAutocomplete]="autoBird"
+                                    [formControl]="autocompleteControl" 
+                                    id="specieNamePost" placeholder="Introduce especie">
+                                
+                                <mat-autocomplete #autoBird="matAutocomplete" (optionSelected)='selectSpecie($event.option.value)'>
+                                    <mat-option *ngFor="let option of filteredSpecies | async" [value]="option" (change)="selectSpecie(option)" (click)="$event.stopPropagation()">
+                                        {{option.nameComplete}}
+                                    </mat-option>
+                                </mat-autocomplete>
+                            </div>
+                            <div class="form-group col-md-6">
+
+                                <mat-form-field>
+                                    <input matInput [matDatepicker]="picker" placeholder="{{ 'createPost.chooseDate' | translate }}" 
+                                        id="observationDatePost" formControlName="observationDate">
+                                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                    <mat-datepicker #picker></mat-datepicker>
                                 </mat-form-field>
                             </div>
-                            <input type="hidden" id="specieIdPost" formControlName="specieId" >
                         </div>
-                    </div>
-                    <div class="col-12 col-md-8 mt-15" [hidden]="type != 'pending'">
-                        <div class="form-group d-flex alert alert-info">
-                            Tu post aparecerá en la sección y el resto te ayudaran y podrás añadir el post.
+
+                        
+                        <div class="row mb">
+                            <div class="form-group">
+                                <label for="titlePost">Title</label>
+                                <input type="text" class="form-control" id="titlePost" 
+                                    [ngClass]="{ 'is-invalid': submitted && f.title.errors }"
+                                    placeholder="{{ 'createPost.title' | translate }}" 
+                                    formControlName="title" >
+                            </div>
+
                         </div>
-                    </div>
-                    <div class="col-12 col-md-4 mt-15" [hidden]="isPost">
-                        <div class="form-group">
-                            <mat-form-field>
-                                <input matInput [matDatepicker]="picker" placeholder="{{ 'createPost.chooseDate' | translate }}" id="observationDatePost" formControlName="observationDate">
-                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                                <mat-datepicker #picker></mat-datepicker>
-                            </mat-form-field>
+                        <div class="row mb">
+                            <div class="form-group">
+                                <label for="message">Text</label>
+                                <textarea class="form-control" 
+                                    name="message" 
+                                    id="textPost" 
+                                    cols="30" 
+                                    rows="5" 
+                                    [ngClass]="{ 'is-invalid': submitted && f.text.errors }"
+                                    placeholder="{{ 'createPost.text' | translate }}"
+                                    formControlName="text" ></textarea>
+                            </div>
                         </div>
-                    </div>
+                        <div class="row mb">
+                            <div class="form-row">
+                                <mat-form-field class="example-chip-list LabelsSelect">
+                                    <mat-label>{{ 'createPost.descriptionLabel' | translate }}</mat-label>
+                                    <mat-chip-list #chipList aria-label="Label selection">
+                                    <mat-chip
+                                        *ngFor="let label of labels"
+                                        [selectable]="true"
+                                        [removable]="true"
+                                        (removed)="remove(label)">
+                                        {{label}}
+                                        
+                                        <mat-icon matChipRemove *ngIf="true"><i class="align-middle mr-2 fas fa-fw fa-times"></i></mat-icon>
+                                    </mat-chip>
+                                    <input
+                                        id="labelsPost" 
+                                        placeholder="{{ 'createPost.descriptionLabel' | translate }}" 
+                                        #labelInput
+                                        [formControl]="labelCtrl"
+                                        [matChipInputFor]="chipList"
+                                        [matAutocomplete]="autoLabel"
+                                        [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                                        (matChipInputTokenEnd)="add($event)">
+                                    </mat-chip-list>
+                                    
+                                    <mat-autocomplete #autoLabel="matAutocomplete" (optionSelected)="selected($event)">
+                                        <mat-option *ngFor="let label of filteredLabels | async" [value]="label">
+                                          {{label}}
+                                        </mat-option>
+                                      </mat-autocomplete>
+        
+                                </mat-form-field>
+                            </div>
+                        </div>
+
+                        <div class="row mb">
+                            <div class="form-group">
+                                <button class="btn btn-outline-primary" type="button" (click)="showHideMap()" [hidden]="showMap"><i class="align-middle mr-2 fas fa-fw fa-map-marker-alt"></i>Add location</button>
+                                <button class="btn btn-outline-primary" type="button" (click)="showHideMap()" [hidden]="!showMap">remove</button>
+                            </div>
+                        </div>
+                        
+                        <div [hidden]="!showMap">
+                            <div class="row mb">
+                                <div class="form-group col-md-6">
+                                    <label for="titlePost">Latitude</label>
+                                    <input type="text"  
+                                        class="form-control" 
+                                        id="latitudePost" 
+                                        placeholder="{{ 'createPost.latitude' | translate }}" 
+                                        [ngClass]="{ 'is-invalid': submitted && f.latitude.errors}"
+                                        formControlName="latitude" 
+                                        (change)="onChangeEvent()" />
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="titlePost">Longitude</label>
+                                    <input type="text" 
+                                        class="form-control" 
+                                        placeholder="{{ 'createPost.longitude' | translate }}" 
+                                        id="longitudePost"
+                                        formControlName="longitude" 
+                                        [ngClass]="{ 'is-invalid': submitted && f.longitude.errors}"
+                                        (change)="onChangeEvent()" />
+                                </div>
+                            </div>
+                            <div class="row mb">
+                                <div class="col-12 mt-15">
+                                    <div #mapWrapper id="map" class="createPostMap"></div>
+                                </div>
+                            </div>
+
+                        </div>
+                        
+                        
+                        <button *ngIf="submitted" class="btn btn-primary" type="button" disabled>
+                            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                            Loading...
+                        </button>
+
+                        <button type="submit" *ngIf="!submitted" class="btn btn-primary mt-15">{{ 'createPost.createPostBtn' | translate }}</button>
+                     
+                    </form>
                 </div>
+            </div>
+        </div>
 
-                    <div class="col-12 mt-15">
-                        <div class="form-group">
-                            <input type="text" class="form-control" id="titlePost" 
-                                [ngClass]="{ 'is-invalid': submitted && f.title.errors }"
-                                placeholder="{{ 'createPost.title' | translate }}" 
-                                formControlName="title" >
-                        </div>
-                    </div>
 
-                    <div class="col-12 mt-15">
-                        <div class="form-group ">
-                            <textarea class="form-control" 
-                                name="message" 
-                                id="textPost" 
-                                cols="30" 
-                                rows="5" 
-                                [ngClass]="{ 'is-invalid': submitted && f.text.errors }"
-                                placeholder="{{ 'createPost.text' | translate }}"
-                                formControlName="text" ></textarea>
-                        </div>
-                    </div>
 
-                    <div class="col-12 mt-15">
-                        <mat-form-field class="example-chip-list LabelsSelect">
-                            <mat-label>{{ 'createPost.descriptionLabel' | translate }}</mat-label>
-                            <mat-chip-list #chipList aria-label="Label selection">
-                            <mat-chip
-                                *ngFor="let label of labels"
-                                [selectable]="true"
-                                [removable]="true"
-                                (removed)="remove(label)">
-                                {{label}}
-                                <mat-icon matChipRemove *ngIf="true">cancel</mat-icon>
-                            </mat-chip>
-                            <input
-                                id="labelsPost" 
-                                placeholder="{{ 'createPost.descriptionLabel' | translate }}" 
-                                #labelInput
-                                [formControl]="labelCtrl"
-                                [matChipInputFor]="chipList"
-                                [matAutocomplete]="autoLabel"
-                                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                                (matChipInputTokenEnd)="add($event)">
-                            </mat-chip-list>
-                            
-                            <mat-autocomplete #autoLabel="matAutocomplete" (optionSelected)="selected($event)">
-                                <mat-option *ngFor="let label of filteredLabels | async" [value]="label">
-                                  {{label}}
-                                </mat-option>
-                              </mat-autocomplete>
 
-                        </mat-form-field>
-                    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--
+
+
+
 
                     <div class="col-12 col-md-12 mt-15">
                         <button class="btn btn-outline-primary" type="button" (click)="showHideMap()" [hidden]="showMap"><img src="../../../../assets/img/core-img/marker.svg" />Add location</button>
@@ -172,7 +250,7 @@
   
       </div>
     </div>
-  </main>
+  </main>-->
 
 
 
