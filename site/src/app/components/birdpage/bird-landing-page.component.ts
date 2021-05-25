@@ -13,8 +13,8 @@ import { BirdserviceService } from 'src/app/services/bird/birdservice.service';
 import { ManageItemsService } from 'src/app/services/items/manage-items.service';
 import { LoaderService } from 'src/app/services/loader/loader.service';
 import { environment } from 'src/environments/environment';
-import { CommonDialogComponent } from '../../shared/common-dialog/common-dialog.component';
-import { ImageDialogComponent } from '../../shared/image-dialog/image-dialog.component';
+import { CommonDialogComponent } from '../shared/common-dialog/common-dialog.component';
+import { ImageDialogComponent } from '../shared/image-dialog/image-dialog.component';
 
 @Component({
   selector: 'app-bird-landing-page',
@@ -39,7 +39,8 @@ export class BirdLandingPageComponent implements OnInit {
   specieIdPostControl = new FormControl();
   @ViewChild('auto') matAutocomplete: MatAutocomplete;
 
-  constructor(private searchBirdsSerices: BirdserviceService,
+  constructor(
+    private searchBirdsSerices: BirdserviceService,
     private accountService: AccountService,
     private autocompleteService : AutocompleteService,
     private matDialog: MatDialog,

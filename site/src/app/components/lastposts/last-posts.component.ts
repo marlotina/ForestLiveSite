@@ -4,7 +4,7 @@ import { PostHomeResponse } from 'src/app/model/post';
 import { BirdserviceService } from 'src/app/services/bird/birdservice.service';
 import { LoaderService } from 'src/app/services/loader/loader.service';
 import { environment } from 'src/environments/environment';
-import { ImageDialogComponent } from '../../shared/image-dialog/image-dialog.component';
+import { ImageDialogComponent } from '../shared/image-dialog/image-dialog.component';
 
 @Component({
   selector: 'app-last-posts',
