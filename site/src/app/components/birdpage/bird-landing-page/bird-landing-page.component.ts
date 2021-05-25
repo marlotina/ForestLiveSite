@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatAutocomplete } from '@angular/material/autocomplete';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { ActivatedRoute } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { catchError, debounceTime, map, startWith, switchMap } from 'rxjs/operators';
 import { PostListResponse } from 'src/app/model/post';
@@ -42,10 +43,16 @@ export class BirdLandingPageComponent implements OnInit {
     private accountService: AccountService,
     private autocompleteService : AutocompleteService,
     private matDialog: MatDialog,
+    private activateRoute: ActivatedRoute,
     private manageItemService: ManageItemsService,
     private loaderService: LoaderService) { }
 
   ngOnInit(): void {
+    this.activateRoute.paramMap.subscribe(params => {
+      this.specieId = params.get("specieId");
+      this.getBirdPosts();   
+    });
+
     this.userLoggedName = this.accountService.userValue != null ? this.accountService.userValue.userId : null;
 
     this.filteredSpecies = this.autocompleteControl.valueChanges.pipe(
@@ -59,7 +66,6 @@ export class BirdLandingPageComponent implements OnInit {
         }
       })
     );
-    this.getBirdPosts();
   }
 
   selectSpecie(item: AutocompleteResponse){

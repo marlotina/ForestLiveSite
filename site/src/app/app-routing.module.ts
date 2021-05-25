@@ -16,6 +16,7 @@ const routes: Routes = [
       canActivate: [AuthGuard]  },
   { path: 'userpage/:userId', loadChildren: () => import('./components/userpage/landing-page/landing-page.module').then(m => m.LandingPageModule) },
   { path: 'withoutspecie', loadChildren: () => import('./components/pendings/without-specie-page/without-specie-page.module').then(m => m.WithoutSpeciePageModule) },
+  { path: 'birdpage/:specieId', loadChildren: () => import('./components/birdpage/bird-landing-page/bird-landing-page.module').then(m => m.BirdLandingPageModule) },
   { path: 'birdpage', loadChildren: () => import('./components/birdpage/bird-landing-page/bird-landing-page.module').then(m => m.BirdLandingPageModule) },
   { path: 'usermappage/:userId', loadChildren: () => import('./components/userpage/user-map-page/user-map-page.module').then(m => m.UserMapPageModule) },
   { path: ':userId/:postId', loadChildren: () => import('./components/postpage/post-page/post-page.module').then(m => m.PostPageModule) },
