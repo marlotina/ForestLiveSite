@@ -3,13 +3,13 @@
       <i class="hamburger align-self-center"></i>
   </a>
 
+  <a style="width: 150px;" aria-current="page" routerLink="lastposts" routerLinkActive="active">Last posts</a>
+
   <a style="width: 150px;" aria-current="page" routerLink="searchpage" routerLinkActive="active">Map</a>
 
   <a style="width: 150px;" routerLink="birdpage" routerLinkActive="active">See birds</a>
 
   <a style="width: 265px;" routerLink="withoutspecie" routerLinkActive="active">{{ 'general.pendingSpecie' | translate }}</a>
-
-  <a style="width: 150px;" routerLink="landingusers" routerLinkActive="active">Search users</a>
 
 
     <a [hidden]="isLogged" routerLink="login" class="btn btn-secondary" role="button">
@@ -20,7 +20,7 @@
     </a>
 
     
-  <div class="navbar-collapse collapse" >
+  <!--<div class="navbar-collapse collapse" >
       <ul class="navbar-nav ms-auto" >
       
           <li class="nav-item dropdown ms-lg-2" *ngIf="isLogged">
@@ -52,7 +52,7 @@
               </div>
           </li>
       </ul>
-  </div>
+  </div>-->
 
 </nav>
 <!--
