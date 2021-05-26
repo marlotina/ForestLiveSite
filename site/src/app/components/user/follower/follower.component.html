@@ -1,1 +1,45 @@
-<p>follower works!</p>
+<main class="content">
+    <div class="container-fluid">
+      <div class="header">
+          <h1 class="header-title">
+              Blank Page
+          </h1>
+      </div>
+      
+      <div class="row">
+        
+        <div class="col-xxl-8">
+          <app-loader></app-loader>    
+          <div class="card-body">
+  
+            <div *ngIf="!isLoading && hasFollowers">
+              <div class="card" *ngFor="let follower of followers">
+  
+                <div class="card-body">
+                  <h5 class="card-title">
+                    <i class="align-middle me-2 fas fa-fw fa-comment"></i>
+                    <a class="removeLinkLine" href="userpage/{{follower.followUserId}}"><strong class="text-gray-dark">{{follower.followUserId}}</strong></a>
+                  </h5>
+                  <div class="d-flex justify-content-between">
+  
+                    <div class="col-12 col-md-10">
+                      <h6 class="card-subtitle text-muted">Creation date:&nbsp;{{follower.creationDate}}</h6>
+                      <p>{{follower.userId}}</p>
+                    </div>
+  
+                    <!--<div class="col-12 col-md-1">
+                      <button type="button" class="btn btn-outline-danger addLabelBtn" (click)="deleteComment(comment)"><i class="align-middle me-2 fas fa-fw fa-trash-alt"></i></button>
+                    </div>-->
+                  </div>
+                </div>
+              </div>  
+            </div>  
+            <div *ngIf="!isLoading && !hasFollowers" >
+              YOu dont have followers
+            </div>        
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </main>

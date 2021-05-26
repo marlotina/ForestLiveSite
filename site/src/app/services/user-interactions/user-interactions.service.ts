@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
-import { DeleteFollowUserResquest, FollowUserRequest, FollowUserResponse } from 'src/app/model/FollowUser';
+import { DeleteFollowUserResquest, FollowListResponse, FollowUserRequest, FollowUserResponse } from 'src/app/model/FollowUser';
 import { UserInfoResponse, UserListResponse, UserAutocompleteResponse } from 'src/app/model/user';
 import { environment } from 'src/environments/environment';
 
@@ -54,10 +54,18 @@ export class UserInteractionsService {
         return data;
       }));
   }
-}
 
-/*
-userId: string;
-    followUserId: string;
-    userSystemId: string;
-*/
+  GetFollowerByUserId(userId: string){
+    return this.httpClient.get<FollowListResponse[]>(`${environment.userInteractionsApi}api/v1/FollowerUser/GetFollowerByUserId?userId=${userId}`)
+      .pipe(map(data => {
+        return data;
+      }));
+  }
+
+  GetFollowByUserId(userId: string){
+    return this.httpClient.get<FollowListResponse[]>(`${environment.userInteractionsApi}api/v1/FollowUser/GetFollowByUserId?userId=${userId}`)
+      .pipe(map(data => {
+        return data;
+      }));
+  }
+}
