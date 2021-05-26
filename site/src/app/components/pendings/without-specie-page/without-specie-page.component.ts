@@ -13,6 +13,7 @@ export class WithoutSpeciePageComponent implements OnInit {
 
   pendingPosts: PostListResponse[];
   imagesPostUrl = environment.imagesPostUrl;
+  imagesProfileUrl = environment.imagesProfileUrl;
   hasPosts = false;
 
   constructor(

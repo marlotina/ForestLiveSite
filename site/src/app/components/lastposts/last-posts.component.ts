@@ -14,6 +14,7 @@ import { ImageDialogComponent } from '../shared/image-dialog/image-dialog.compon
 export class LastPostsComponent implements OnInit {
 
   imagesPostUrl = environment.imagesPostUrl;
+  imagesProfileUrl = environment.imagesProfileUrl;
   lastObservations: PostHomeResponse[] = []
 
   constructor(

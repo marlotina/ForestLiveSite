@@ -24,6 +24,7 @@ export class LandingPageComponent implements OnInit {
   userPosts: PostListResponse[];
   userId: string;
   imagesPostUrl = environment.imagesPostUrl;
+  imagesProfileUrl = environment.imagesProfileUrl;
   hasPosts = false;
   userLabels: UserLabelPageResponse[];
   selectedLabel: string;
