@@ -15,7 +15,7 @@ import { CommonDialogComponent } from '../../shared/common-dialog/common-dialog.
 })
 export class UserLabelsComponent implements OnInit {
 
-  userLabels: UserLabelResponse[];
+  userLabels: UserLabelResponse[] = [];
   hasLabels = false;
   isLoading = true;
   labelForm: FormGroup;
