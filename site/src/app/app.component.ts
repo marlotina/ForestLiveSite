@@ -16,10 +16,11 @@ export class AppComponent implements OnInit {
   constructor(
     private router: Router, 
     private route: ActivatedRoute) {
+      //this.loadScript('../assets/js/bctools.js');
 
   }
   ngOnInit() {
-    //this.loadScript('../assets/js/active.js');
+    //this.loadScript('../assets/js/bctools.js');
 
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd)
