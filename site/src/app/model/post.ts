@@ -19,7 +19,7 @@ export class PostResponse {
     id:string;
     postId: string;
     title: string;
-    type: string;
+    isPost: boolean;
     text: string;
     imageUrl: string;
     altImage: string;

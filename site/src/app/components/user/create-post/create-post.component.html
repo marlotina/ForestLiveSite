@@ -45,8 +45,8 @@
                             </div>   
                         </div>
 
-                        <div class="row mb">
-                            <div class="form-group col-md-6">
+                        <div class="row mb" *ngIf="!isPost">
+                            <div class="form-group col-md-5">
                                 <label for="titlePost">Specie</label>
                                 <input type="text" class="form-control" [matAutocomplete]="autoBird"
                                     [formControl]="autocompleteControl" 
@@ -58,7 +58,14 @@
                                     </mat-option>
                                 </mat-autocomplete>
                             </div>
-                            <div class="form-group col-md-6">
+                            <div class="form-group col-md-4">
+                                <div class="alert alert-primary alert-dismissible" role="alert">
+                                    <div class="alert-message">
+                                        If you don't know the specie, you don't need to select an specie.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-3">
 
                                 <mat-form-field>
                                     <input matInput [matDatepicker]="picker" placeholder="{{ 'createPost.chooseDate' | translate }}" 

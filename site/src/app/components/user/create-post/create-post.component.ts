@@ -62,6 +62,7 @@ export class CreatePostComponent implements OnInit {
   map: google.maps.Map;
   userId: string;
   specieId: string = null;
+  specieName: string = null;
   showMap = false;
   isPost = true;
   type: string;
@@ -70,7 +71,6 @@ export class CreatePostComponent implements OnInit {
   toolPos = 'after';
   @ViewChild('labelInput') labelInput: ElementRef<HTMLInputElement>;
   @ViewChild('file') fileInput: ElementRef<HTMLInputElement>;
-  @ViewChild('specieNamePost') specieNamePost: ElementRef<HTMLInputElement>;
   @ViewChild('auto') matAutocomplete: MatAutocomplete;  
   @ViewChild('autoLabel') matAutoLabelcomplete: MatAutocomplete;
 
@@ -96,7 +96,8 @@ export class CreatePostComponent implements OnInit {
   
   ngOnInit(): void {
     this.activateRoute.paramMap.subscribe(params => {
-      this.type = params.get("type");
+      let type = params.get("type");
+      this.isPost = type == 'post'
         });
 
     this.postForm = this.formBuilder.group({
@@ -112,8 +113,7 @@ export class CreatePostComponent implements OnInit {
       altImage: [''],
       imageName: [''],
       observationDate: [null],
-      isPost: [''],
-      type: ['']
+      isPost: ['']
     });
     
     this.userId = this.accountService.userValue.userId;
@@ -150,6 +150,7 @@ export class CreatePostComponent implements OnInit {
   selectSpecie(item: AutocompleteResponse){
     this.autocompleteControl.setValue(item.nameComplete);
     this.specieId = item.specieId;
+    this.specieName = item.nameComplete;
   }
 
   optionClicked(event: Event, specie: AutocompleteResponse) {
@@ -174,6 +175,7 @@ export class CreatePostComponent implements OnInit {
     this.submitted = true; 
     
     if (this.postForm.invalid) {
+        this.submitted = false;
         return;
     }
 
@@ -183,28 +185,21 @@ export class CreatePostComponent implements OnInit {
       'imageName': this.imageName,
       'altImage': this.altImage,
       'isPost': this.isPost,
-      'specieId': this.specieId
+      'specieId': this.specieId,
+      'specieName': this.specieName
     });
-
-    if(this.type == "post") { 
-      this.postForm.controls['type'].setValue('post');
-      
-    } else if (this.type == "soecie") {
-      this.postForm.controls['type'].setValue('bird');
-    } else if (this.type == "pending") {
-      this.postForm.controls['type'].setValue('pending');
-    }
     
     this.manageItemsService.addPost(this.postForm.value)
     .pipe(first())
     .subscribe(
         data => {    
           this.manageSuccess(data.userId, data.postId);
+          this.submitted = false;
         },
         error => {   
           this.manageError(error.status);
+          this.submitted = false;
         });
-    
   }
 
   manageSuccess(userId: string, postId: string){

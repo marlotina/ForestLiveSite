@@ -48,7 +48,7 @@
                             </div>
         
                             <div class="row">
-                                <div *ngIf="post.type !='post'">
+                                <div *ngIf="!post.isPost">
                                     <app-select-specie-form 
                                         [showOptions]="showOwnerOptions"
                                         [specieOldName]="post.birdSpecie"
@@ -58,7 +58,7 @@
                                 </div>
                             </div>
                             <div  class="row">
-                                <div  *ngIf="post.type !='post'">
+                                <div  *ngIf="!post.isPost && post.observationDate">
                                     <strong>{{ 'userPage.observationDate' | translate }}:</strong> {{post.observationDate}} 
                                 </div>
                             </div>
@@ -69,7 +69,7 @@
                             </div>
                             <div class="row mb-15" *ngIf="post.labels != null && post.labels.length > 0">
                                 <div class="col-12">
-                                    <strong>{{ 'postPage.tags' | translate }}:</strong>
+                                    <strong>{{ 'postPage.tags' | translate }}:&nbsp;</strong>
                                     <a *ngFor="let label of post.labels" role="button" href="#" class="ml-5">
                                         <span class="btn btn-primary btn-sm">{{label}}</span>
                                     </a>
@@ -77,7 +77,7 @@
                             </div>
         
                             </div>
-                            <div class="row mb-15">
+                            <div class="row mb-15" *ngIf="!post.isPost && hasLocation">
                                 <div class="col-12" >
                                     <div class="row justify-content-center">
                                         <div #mapWrapper id="map" class="postMapDetails"></div>

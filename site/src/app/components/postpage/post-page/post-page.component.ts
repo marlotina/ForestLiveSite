@@ -57,6 +57,7 @@ export class PostPageComponent implements OnInit {
             this.loaderService.hide();
       
             this.addMetas(this.post, this.imagePostUrl, this.urlPage);
+            
             this.initMap(this.post.latitude, this.post.longitude);
           }
           
@@ -65,6 +66,8 @@ export class PostPageComponent implements OnInit {
       
     });
   }
+
+
 
   addMetas(post: PostResponse, image: string, url: string){
     this.meta.updateTag({ name: 'og:title', content: post.title })
