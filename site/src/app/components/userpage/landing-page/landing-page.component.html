@@ -15,14 +15,14 @@
                         <div class="card">
                             <div class="card-header">
                                 <app-post-votes
-                                [postId]="post.postId"
-                                [titlePost]="post.title"
-                                [authorPostId]="post.userId"
-                                [userId]="userLoggedName"
-                                [voteCount]="post.voteCount"
-                                [specieId]="post.specieId"
-                                [voteId]="post.voteId"
-                                [hasVote]="post.hasVote"></app-post-votes>
+                                    [postId]="post.postId"
+                                    [titlePost]="post.title"
+                                    [authorPostId]="post.userId"
+                                    [userId]="userLoggedName"
+                                    [voteCount]="post.voteCount"
+                                    [specieId]="post.specieId"
+                                    [voteId]="post.voteId"
+                                    [hasVote]="post.hasVote"></app-post-votes>
                                 
                                 <a class="fs-4 removeLinkLine" routerLink="/{{post.userId}}/{{post.postId}}">
                                 <strong>{{post.title}}</strong></a>
@@ -107,48 +107,57 @@
                             <div class="form-row"> 
                                 <div class="form-group col-md-6">                           
         
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="radioSearch" 
-                                            (change)="changeSearchType($event)" id="radioAll" value='all' checked>
-                                            <label class="form-check-label" for="radioAll">
-                                              All
-                                            </label>
-                                        </div>
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="radioSearch" 
-                                            (change)="changeSearchType($event)" id="radioPost" value='post'>
-                                            <label class="form-check-label" for="radioPost">
-                                              Posts
-                                            </label>
-                                        </div>
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="radioSearch" 
-                                            (change)="changeSearchType($event)" id="radioBird" value='bird'>
-                                            <label class="form-check-label" for="radioBird">
-                                              birds
-                                            </label>
-                                        </div>
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="radioSearch" 
-                                            (change)="changeSearchType($event)" id="radioPending" value='pending'>
-                                            <label class="form-check-label" for="radioPending">
-                                              Pending
-                                            </label>
-                                        </div> 
-            
-        
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="radioSearch" 
+                                        (change)="changeSearchType($event)" id="radioAll" value='all' checked>
+                                        <label class="form-check-label" for="radioAll">
+                                            All
+                                        </label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="radioSearch" 
+                                        (change)="changeSearchType($event)" id="radioPost" value='post'>
+                                        <label class="form-check-label" for="radioPost">
+                                            Posts
+                                        </label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="radioSearch" 
+                                        (change)="changeSearchType($event)" id="radioBird" value='bird'>
+                                        <label class="form-check-label" for="radioBird">
+                                            birds
+                                        </label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="radioSearch" 
+                                        (change)="changeSearchType($event)" id="radioPending" value='pending'>
+                                        <label class="form-check-label" for="radioPending">
+                                            Pending
+                                        </label>
+                                    </div> 
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title mb-0">Labels</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-row"> 
+                                <div class="form-group col-md-6">            
                                 <div class="form-group">
                                     <button *ngFor="let label of userLabels" type="button"
                                         [ngClass]="{'btn-primary' : selectedLabel == label.id, 'btn-outline-primary' : selectedLabel != label.id}" 
-                                        (click)="searchWithLabels(label.id)" class="btn ml-5 mb-5 labelUserPage">
-                                        {{label.id}} <span class="badge bg-secondary labelUserPage">{{label.postCount}}</span>
+                                        (click)="searchWithLabels(label.id)" class="btn p-label">
+                                        {{label.id}} <span class="badge bg-secondary">{{label.postCount}}</span>
                                       </button>
                                 </div>
                             </div>
-                    
                         </div>
                     </div>
+                </div>
             </div>
         </div>
 

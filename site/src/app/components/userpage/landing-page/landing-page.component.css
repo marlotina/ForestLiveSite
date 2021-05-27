@@ -7,6 +7,11 @@
     margin-right: 10px;
 }
 
-.mr-3{
+.p-label {
     margin-right: 3px;
+    margin-bottom: 3px;
+}
+
+.labelUserPage { 
+	padding: 2px 5px 2px 5px !important;
 }
