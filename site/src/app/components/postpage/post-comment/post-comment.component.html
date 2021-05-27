@@ -24,8 +24,8 @@
 <ng-template #replyThread let-childReplies>
         <div class="row mt-15" *ngFor="let comment of childReplies;">
             <div class="col-12 col-md-1">
-                <div>
-                    <a href="{{comment.userId}}">
+                <div *ngIf="comment.userId">
+                    <a href="{{comment.userId}}" >
                         <img src="{{imagesProfileUrl}}{{comment.userImage}}" alt="{{ 'postPage.userImage' | translate }}" class="rounded-circle mr-1" alt="Kathie Burton" width="40" height="40">
                     </a>
                 </div>
@@ -33,21 +33,26 @@
             <div class="col-12 col-md-11">
                 <div class="row">
                     <div class="col-12 col-md-11">
-                        <div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3">
-                            <small>{{comment.userId}}&nbsp;<em>{{comment.creationDate}}</em></small>
+
+                        <div *ngIf="comment.userId" class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3" >
+                            <small >{{comment.userId}}&nbsp;<em>{{comment.creationDate}}</em></small>
                             <p>{{comment.text}}</p>
                         </div>
 
-                        <div *ngIf="userNameLogged != null">
+                        <div *ngIf="!comment.userId" class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3 mb-15">
+                            <p>el comentario fue borrado</p>
+                        </div>
 
+                        <div *ngIf="userNameLogged != null && comment.userId">
                             <button type="button" 
-                            (click)="addVote(comment)" 
+                                (click)="addVote(comment)" 
                                 [ngClass]="{'hasVote-btn' : comment.hasVote, 'vote-btn' : !comment.hasVote}" 
                                 class="votebtn">
                                 <i class="align-middle mr-2 fas fa-fw fa-arrow-alt-circle-up"></i> 
                             </button>
-                                &nbsp;Votes {{comment.voteCount}}&nbsp;
-                            <a class="badge bg-primary" data-bs-toggle="collapse" href="#collapseExample-{{comment.id}}" (click)="showCommentForm(comment.id)" 
+                            &nbsp;Votes {{comment.voteCount}}&nbsp;
+                            <a class="badge bg-primary" data-bs-toggle="collapse" 
+                                href="#collapseExample-{{comment.id}}" (click)="showCommentForm(comment.id)" 
                                 role="button" aria-expanded="false" aria-controls="collapseExample">
                                 Reply
                             </a>
@@ -79,7 +84,7 @@
                                 </a>
         
                                 <div class="dropdown-menu dropdown-menu-end">
-                                    <button mat-menu-item type="button" (click)="deleteComment(comment)">
+                                    <button class="dropdown-item" mat-menu-item type="button" (click)="deleteComment(comment)">
                                         <i class="align-middle me-2 fas fa-fw fa-trash-alt"></i>
                                         <span>{{ 'postPage.delete' | translate }}</span>
                                     </button>
