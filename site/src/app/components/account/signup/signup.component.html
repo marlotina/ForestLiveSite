@@ -16,7 +16,7 @@
                             <div class="m-sm-4">
                                 <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
                                     <div class="mb-3">
-                                        <label *ngIf="errorResponse" class="error-text">{{ 'account.errorResponseMessage' | translate }}</label>
+                                        <label *ngIf="errorResponse" class="text-danger">{{ 'account.errorResponseMessage' | translate }}</label>
                                     </div>
                                     <div class="mb-3">
                                         <label  for="usernameSignup">{{ 'account.username' | translate }}*</label>
@@ -26,7 +26,7 @@
                                             [ngClass]="{ 'is-invalid': submitted && (f.username.errors || conflictUser) }"
                                             placeholder="{{ 'account.username' | translate }}"
                                             formControlName="username">
-                                        <label *ngIf="conflictUser" class="error-text">{{ 'account.conflictNameMessage' | translate }}</label> 
+                                        <label *ngIf="conflictUser" class="text-danger">{{ 'account.conflictNameMessage' | translate }}</label> 
                                     </div>
                                     <div class="mb-3">
                                         <label for="emailSignup">{{ 'account.email' | translate }}*</label>
@@ -36,7 +36,7 @@
                                             [ngClass]="{ 'is-invalid': submitted && (f.email.errors || conflictEmail) }" 
                                             placeholder="{{ 'account.email' | translate }}"
                                             formControlName="email">
-                                            <label *ngIf="conflictEmail" class="error-text">{{ 'account.conflictEmailMessage' | translate }}</label>   
+                                            <label *ngIf="conflictEmail" class="text-danger">{{ 'account.conflictEmailMessage' | translate }}</label>   
                                         <label>Email</label>
                                     </div>
                                     <div class="mb-3">

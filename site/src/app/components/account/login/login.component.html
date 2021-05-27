@@ -19,9 +19,9 @@
                                 </div>
                                 <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
                                     <div class="mb-3">
-                                        <label *ngIf="errorResponse" class="error-text">{{ 'account.errorResponseMessage' | translate }}</label>
-                                        <label *ngIf="notActivatedAccount" class="error-text">{{ 'account.loginActivatedAccountMessage' | translate }}</label>
-                                        <label *ngIf="emailPassWrong" class="error-text">{{ 'account.invalidEmailPasswordMessage' | translate }}</label>
+                                        <label *ngIf="errorResponse" class="text-danger">{{ 'account.errorResponseMessage' | translate }}</label>
+                                        <label *ngIf="notActivatedAccount" class="text-danger">{{ 'account.loginActivatedAccountMessage' | translate }}</label>
+                                        <label *ngIf="emailPassWrong" class="text-danger">{{ 'account.invalidEmailPasswordMessage' | translate }}</label>
                                     </div>
                                     
                                     <div class="mb-3">
