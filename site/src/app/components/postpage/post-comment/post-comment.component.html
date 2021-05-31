@@ -12,8 +12,8 @@
         <label>{{userNameLogged}}</label>
     </div>
     <div class="col-12 col-md-11">
-        <textarea class="form-control mb-15" #textInput  name="text" id="text" cols="20" rows="3" placeholder="{{ 'postPage.comment' | translate }}"></textarea>
-        <button type="button" (click)="addComment(null, textInput.value)" class="btn btn-primary">{{ 'postPage.postComment' | translate }}</button>
+        <textarea class="form-control mb-15" #commentInput  name="text" id="text" cols="20" rows="3" placeholder="{{ 'postPage.comment' | translate }}"></textarea>
+        <button type="button" (click)="addComment(null, commentInput.value)" class="btn btn-primary">{{ 'postPage.postComment' | translate }}</button>
     </div>
 </div>
 

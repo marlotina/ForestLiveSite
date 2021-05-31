@@ -1,4 +1,4 @@
-import { Component , Input, OnInit } from '@angular/core';
+import { Component , ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { first } from 'rxjs/operators';
 import { CommentRequest, CommentResponse } from 'src/app/model/Comment';
@@ -26,7 +26,9 @@ export class PostCommentComponent implements OnInit {
   imagesProfileUrl = environment.imagesProfileUrl;
   showFormList = new Map<string, boolean>();;
   userNameLogged = null;
+  @ViewChild('commentInput') commentInput: ElementRef<HTMLInputElement>;
 
+  labelInput
   constructor(
     private commentService: CommentService,
     private accountService: AccountService,
@@ -78,6 +80,7 @@ export class PostCommentComponent implements OnInit {
                 this.showFormList[parentComment.id] = false;
               }
               this.commentCount++;
+              this.commentInput.nativeElement.value = '';
             },
             error => {   
               if(error.status == "409"){

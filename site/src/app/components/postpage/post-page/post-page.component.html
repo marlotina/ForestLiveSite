@@ -61,9 +61,11 @@
                             <a class="text-dark btn fs-6 fw-light removeLinkLine" href="/userpage/{{post.userId}}">{{post.userId}}</a>             
                         </div>
                     <div class="card-body">                        
-                        <div class="col-12 col-md-11 div-bottom-line mb-15">
+                        <div class="col-12 col-md-12 div-bottom-line mb-15">
                             <div class="row mb-15 div-bottom-line">
-                                <a (click)="showImage(imagePostUrl)"><img src="{{imagePostUrl}}" alt="{{post.altImage}}" class="img-fluid rounded float-end"></a>
+                                <a (click)="showImage(imagePostUrl)">
+                                    <img src="{{imagePostUrl}}" alt="{{post.altImage}}" class="img-fluid rounded center">
+                                </a>
                             </div>
         
                             <div class="row">
@@ -88,7 +90,7 @@
                             </div>
                             <div class="row mb-15" *ngIf="post.labels != null && post.labels.length > 0">
                                 <div class="col-12">
-                                    <strong>{{ 'postPage.tags' | translate }}:&nbsp;</strong>
+                                    <strong>{{ 'postPage.tags' | translate }}:</strong>
                                     <a *ngFor="let label of post.labels" role="button" href="#" class="ml-5">
                                         <span class="btn btn-primary btn-sm">{{label}}</span>
                                     </a>
