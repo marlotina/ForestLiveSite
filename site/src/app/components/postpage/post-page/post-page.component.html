@@ -11,7 +11,26 @@
                 <div class="card" >
                     <app-loader></app-loader>
                     <div class="card-header">
+
                         <div class="card-actions float-end" *ngIf="showOwnerOptions">
+                            <a href="#" class="me-1">
+                                <i class="align-middle" data-feather="refresh-cw"></i>
+                            </a>
+                            <div class="d-inline-block dropdown show">
+                                <a href="#" data-bs-toggle="dropdown" data-bs-display="static">
+                                    <i class="align-middle me-2 fas fa-fw fa-ellipsis-v"></i>
+                                </a>
+
+                                <div class="dropdown-menu dropdown-menu-end">
+                                    <button class="dropdown-item" type="button" (click)="deletePost()">
+                                        <i class="align-middle me-2 fas fa-fw fa-trash-alt"></i>
+                                        <span>{{ 'postPage.delete' | translate }}</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--<div class="card-actions float-end" *ngIf="showOwnerOptions">
                             <a href="#" class="me-1">
                                 <i class="align-middle" data-feather="refresh-cw"></i>
                             </a>
@@ -27,7 +46,7 @@
                                     </button>
                                 </div>
                             </div>
-                        </div>
+                        </div>-->
                             <app-post-votes
                                 [postId]="post.postId"
                                 [titlePost]="post.title"

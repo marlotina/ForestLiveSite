@@ -23,6 +23,7 @@ export class LandingPageComponent implements OnInit {
   userLoggedName: string = null;
   userPosts: PostListResponse[];
   userId: string;
+  showOwnerOptions = false;
   imagesPostUrl = environment.imagesPostUrl;
   imagesProfileUrl = environment.imagesProfileUrl;
   hasPosts = false;
@@ -45,12 +46,13 @@ export class LandingPageComponent implements OnInit {
 
   ngOnInit(): void {
 
+    this.userLoggedName = this.accountService.userValue.userId;
     this.activateRoute.paramMap.subscribe(params => {
       this.userId = params.get("userId");
       this.searchPosts();   
+      this.showOwnerOptions = this.userLoggedName != null && this.userId == this.userLoggedName;
     });
 
-    this.userLoggedName = this.accountService.userValue.userId;
     this.userLabelsService.GetUserLabels(this.userId).subscribe(
       data => {
         this.userLabels = data;

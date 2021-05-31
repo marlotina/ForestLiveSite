@@ -1,12 +1,15 @@
-
-
-<!--<div class="modal-header">
-    <h5 class="modal-title">{{ modalData.title | translate }}</h5>
-</div>-->
-<div class="modal-body">
-    <p>{{ modalData.description | translate }}</p>
+<div class="modal-content">
+    <div class="modal-header">
+        <h5 class="modal-title">{{ modalData.title | translate }}</h5>
+    </div>
+    <div class="modal-body m-3">
+        <p class="mb-0">{{ modalData.description | translate }}</p>
+    </div>
+    <div class="modal-footer">
+        <button type="button" [hidden]="modalData.hideCancelButton" class="btn btn-secondary" 
+            (click)="cancelModal()">{{ modalData.cancelButtonText | translate }}</button>
+        <button type="button" [hidden]="modalData.hideAcceptButton" 
+            class="btn btn-primary" (click)="acceptModal()"
+            data-bs-dismiss="modal">{{ modalData.acceptButtonText | translate }}</button>
+    </div>
 </div>
-<div class="modal-footer">
-    <button type="button" [hidden]="modalData.hideCancelButton" class="btn btn-primary" (click)="cancelModal()">{{ modalData.cancelButtonText | translate }}</button>
-    <button type="button" [hidden]="modalData.hideAcceptButton" class="btn btn-primary" (click)="acceptModal()">{{ modalData.acceptButtonText | translate }}</button>
-</div> 

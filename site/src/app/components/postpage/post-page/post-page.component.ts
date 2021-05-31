@@ -141,7 +141,6 @@ export class PostPageComponent implements OnInit {
     
     dialogConfig.disableClose = false;
     dialogConfig.id = "modal-component";
-    dialogConfig.width = "100%"; 
     dialogConfig.data = {
       image: imageUrl
     }

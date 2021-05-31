@@ -1,3 +1,69 @@
+<div class="modal-content">
+    <div class="modal-header">
+        <h5 class="modal-title">Edit your image</h5>
+        <button type="button" class="btn-close" (click)="closeModal()" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <div class="modal-body m-3">
+        <div class="row">
+                
+            <div class="col-12">
+                <div class="form-group">
+                    <image-cropper
+                        class="imgClass"
+                        [imageChangedEvent]="imageChangedEvent"
+                        [maintainAspectRatio]="true"
+                        [containWithinAspectRatio]="false"
+                        [aspectRatio]="aspectRatio"                        
+                        [onlyScaleDown]="true"
+                        [roundCropper]="false"
+                        [canvasRotation]="canvasRotation"
+                        [transform]="transform"
+                        [alignImage]="'center'"
+                        [style.display]="showCropper ? null : 'none'"
+                        format="png"
+                        (imageCropped)="imageCropped($event)"
+                        (cropperReady)="cropperReady($event)"
+                        (loadImageFailed)="loadImageFailed()">
+                    </image-cropper>
+                </div>
+            </div>
+            
+        </div>
+        <div class="row">
+            <div class="col-12 col-lg-5">
+                <div class="form-group">
+                    <input type="text" class="form-control" #altImageInput placeholder="{{ 'createPost.altImage' | translate }}"/>
+                </div>
+            </div>
+            <div class="col-12 col-lg-2">
+                <div class="form-group center">
+                    <button (click)="getFormat()" class="btn btn-outline-primary" style="width: 50px"><i class="ion ion-ios-tablet-portrait mr-2"></i></button> 
+                    <button (click)="getFormatPanoramic()" class="btn btn-outline-primary" style="width: 50px"><i class="ion ion-ios-tablet-landscape mr-2"></i></button>
+                </div>
+            </div>
+            <div class="col-12 col-lg-2">
+                <div class="form-group center">
+                    <button (click)="zoomOut()" class="btn btn-outline-primary" style="width: 50%;"><i class="align-middle mr-2 fas fa-fw fa-minus"></i></button> 
+                    <button (click)="zoomIn()" class="btn btn-outline-primary" style="width: 50%;"><i class="align-middle mr-2 fas fa-fw fa-plus"></i></button>
+                </div>
+            </div>
+            <div class="col-12 col-lg-2">
+                <div class="form-group center">
+                    <button (click)="resetImage()" class="btn btn-outline-primary">{{ 'createPost.resetImage' | translate }}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        
+
+        <button class="btn btn-primary" (click)="saveImage()">{{ 'createPost.save' | translate }}</button>
+        <button class="btn btn-primary" (click)="closeModal()">{{ 'createPost.back' | translate }}</button>
+    
+    </div>
+</div>
+
+<!--
 <div id="modal-content-wrapper">
     
     <section class="contact-area">
@@ -59,4 +125,4 @@
         <button class="btn btn-primary" (click)="saveImage()">{{ 'createPost.save' | translate }}</button>
         <button class="btn btn-primary" (click)="closeModal()">{{ 'createPost.back' | translate }}</button>
     </div>
-</footer>
+</footer>-->
