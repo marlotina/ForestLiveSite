@@ -45,10 +45,14 @@
                                     </div>
                                 </div>
                             </div>
-                            <a (click)="showImage(post.imageUrl)" *ngIf="post.imageUrl !=''">
-                                <img src="{{imagesPostUrl}}{{post.imageUrl}}" alt="{{post.altImage}}" 
-                                    class="card-img-top">
-                            </a>
+                            <div *ngIf="post.imageUrl != ''">
+                                <a (click)="showImage(post.imageUrl)">
+                                    <img src="{{imagesPostUrl}}{{post.imageUrl}}" alt="{{post.altImage}}" 
+                                        class="card-img-top">
+                                </a>
+                            </div>
+
+                            
                                 <div class="body-card">
                                     <ul class="list-group list-group-flush">
                                         <li class="list-group-item">

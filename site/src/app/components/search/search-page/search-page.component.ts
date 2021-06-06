@@ -1,6 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { MatAutocomplete } from '@angular/material/autocomplete';
 import { Observable, of } from 'rxjs';
 import { catchError, debounceTime, first, map, startWith, switchMap } from 'rxjs/operators';
 import { MapSpeciePoint } from 'src/app/model/Map';
@@ -26,7 +25,6 @@ export class SearchPageComponent implements OnInit {
   filteredSpecies: Observable<AutocompleteResponse[]>;
   autocompleteControl = new FormControl();
   specieIdPostControl = new FormControl();
-  @ViewChild('auto') matAutocomplete: MatAutocomplete;
   map: google.maps.Map;
   markers: google.maps.Marker[] = [];
   specieId: string = '';

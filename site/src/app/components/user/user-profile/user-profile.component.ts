@@ -101,13 +101,16 @@ export class UserProfileComponent implements OnInit {
               } 
             });
   }
+  
  
   openImageProfile() {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.id = "modal-component";
-    dialogConfig.height = "600px";
-    dialogConfig.width = "900px";
+    dialogConfig.width = "600px";
+    dialogConfig.data = {
+      hasImage: this.userImage != "profile.png"
+    }
     const dialogRef = this.matDialog.open(ModalProfileComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(result => {
@@ -116,10 +119,10 @@ export class UserProfileComponent implements OnInit {
       } else {
         if(result){
           this.userImage = `${result}`;
+          this.accountService.updateImage(this.userImage);
         }
       }
       
-      this.accountService.updateImage(this.userImage);
     });
   }
 

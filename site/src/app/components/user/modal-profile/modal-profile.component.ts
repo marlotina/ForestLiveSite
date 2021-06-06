@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ImageCroppedEvent } from 'ngx-image-cropper';
 
 import { Dimensions } from '../../../shared/cropper/Dimensions';
@@ -9,6 +9,7 @@ import { UserService } from 'src/app/services/user/profile/user.service';
 import { first } from 'rxjs/operators';
 import { AccountService } from 'src/app/services/account/account.service';
 import { ImageProfileRequest } from 'src/app/model/user';
+import { LoaderService } from 'src/app/services/loader/loader.service';
 
 @Component({
   selector: 'app-modal-profile',
@@ -26,11 +27,19 @@ export class ModalProfileComponent implements OnInit {
   containWithinAspectRatio = false;
   transform: ImageTransform = {};
   nameFile: string;
+  visibleEditImage = false;
   showErrorExtensionImage: boolean;
+  hasImage: false;
+  isLoading = false;
 
-  constructor(public dialogRef: MatDialogRef<ModalProfileComponent>,
+  constructor(
+    public dialogRef: MatDialogRef<ModalProfileComponent>,
     private userService: UserService,
-    private accountService: AccountService) { }
+    private loaderService: LoaderService,
+    @Inject(MAT_DIALOG_DATA) public modalData: any,
+    private accountService: AccountService) {
+      this.hasImage = this.modalData.hasImage;
+     }
 
   ngOnInit() {
   }
@@ -41,6 +50,7 @@ export class ModalProfileComponent implements OnInit {
         this.showErrorExtensionImage = false;
         this.imageChangedEvent = event;
         this.nameFile = event.currentTarget.files[0].name;  
+        this.visibleEditImage = true;
       } else {
         this.showErrorExtensionImage = true;
       }
@@ -100,6 +110,8 @@ export class ModalProfileComponent implements OnInit {
       if (!this.croppedImage) {
         return;
       }
+      this.isLoading = true; 
+      this.loaderService.show();      
 
       let imageProfileRequest: ImageProfileRequest = {
         userId: this.accountService.userValue.id,
@@ -114,23 +126,34 @@ export class ModalProfileComponent implements OnInit {
               data => {
                 //this.loading = false;
                 this.dialogRef.close(`${imageProfileRequest.userName}.jpg`);
+                this.loaderService.hide(); 
+                this.isLoading = false; 
               },
               error => {
                 this.dialogRef.close(`profile.jpg`);
+                this.loaderService.hide(); 
+                this.isLoading = false; 
                 //this.loading = false;
               });
     }
 
     deleteFile(){
+      this.isLoading = true; 
+      this.loaderService.show(); 
+
       this.userService.DeleteImage(this.accountService.userValue.id)
           .pipe(first())
           .subscribe(
               data => {
                 this.dialogRef.close("REMOVE_IMAGE");
+                this.loaderService.hide(); 
+                this.isLoading = false; 
                 //this.loading = false;
               },
               error => {
                 this.dialogRef.close();
+                this.loaderService.hide(); 
+                this.isLoading = false; 
                 //this.loading = false;
       });
     }

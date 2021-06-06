@@ -11,35 +11,42 @@
     </a>
 </div>
 
-<div class="row">
+<div class="row margintop-5">
     <div class="collapse  div-bottom-line" id="collapseExample">
 
-
-        <div class="row bb" *ngIf="!finishChange">
-            <div class="form-group col-md-5">
-                <mat-form-field class="autocomplete-full-width">
-                    <input type="text" aria-label="Number" matInput  [matAutocomplete]="autoBird"
-                        [formControl]="autocompleteControl"  
-                        id="specieNamePost" placeholder="{{ 'createPost.birdSpecie' | translate }}">
-                        
-                    <mat-autocomplete #autoBird="matAutocomplete" (optionSelected)='selectSpecie($event.option.value)'>
-                        <mat-option *ngFor="let option of filteredSpecies | async" [value]="option" (change)="selectSpecie(option)" (click)="$event.stopPropagation()">
-                            {{option.nameComplete}}
-                        </mat-option>
-                    </mat-autocomplete>
-                </mat-form-field>
-            </div>
-            <div class="form-group col-md-4 pt-15">
-                <button *ngIf="!isPending && !finishChange" type="button" class="btn btn-primary" (click)="updateSpecie()">assign specie</button>
-                <button *ngIf="isPending && !finishChange" type="button" class="btn btn-primary" (click)="updateSpecie()">update specie</button>
+        <div class="alert alert-primary alert-outline alert-dismissible" role="alert">
+            <div class="alert-message" *ngIf="!finishChange">
+                <div class="row">
+                    <div class="col-md-3">
+                        <mat-form-field class="autocomplete-full-width">
+                            <input type="text" aria-label="Number" matInput  [matAutocomplete]="autoBird"
+                                [formControl]="autocompleteControl"  
+                                id="specieNamePost" placeholder="{{ 'createPost.birdSpecie' | translate }}">
+                                
+                            <mat-autocomplete #autoBird="matAutocomplete" (optionSelected)='selectSpecie($event.option.value)'>
+                                <mat-option *ngFor="let option of filteredSpecies | async" [value]="option" (change)="selectSpecie(option)" (click)="$event.stopPropagation()">
+                                    {{option.nameComplete}}
+                                </mat-option>
+                            </mat-autocomplete>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-9">
+                        <button *ngIf="!isPending && !finishChange" type="button" class="btn btn-primary" (click)="updateSpecie()">assign specie</button>
+                    <button *ngIf="isPending && !finishChange" type="button" class="btn btn-primary" (click)="updateSpecie()">update specie</button>
+                
+                    </div>
+                </div>
+                
+                
+                    
+             </div>
+             <div class="alert-message" *ngIf="finishChange">
+                <div class="alert alert-success" >
+                    The change has been completed
+                </div>
+    
             </div>
         </div>
-        <div class="row mb" *ngIf="finishChange">
-            <div class="alert alert-success" >
-                The change has been completed
-            </div>
 
-        </div>
     </div>
 </div>
-

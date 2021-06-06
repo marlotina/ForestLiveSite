@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { MatAutocomplete } from '@angular/material/autocomplete';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, of } from 'rxjs';
@@ -37,7 +36,6 @@ export class BirdLandingPageComponent implements OnInit {
   filteredSpecies: Observable<AutocompleteResponse[]>;
   autocompleteControl = new FormControl();
   specieIdPostControl = new FormControl();
-  @ViewChild('auto') matAutocomplete: MatAutocomplete;
 
   constructor(
     private searchBirdsSerices: BirdserviceService,

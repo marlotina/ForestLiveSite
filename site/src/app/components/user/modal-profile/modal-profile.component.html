@@ -1,3 +1,91 @@
+<div class="modal-content">
+    <div class="modal-header">
+        <h5 class="modal-title">{{ 'user.imageProfileText' | translate }}</h5>
+     </div>
+     <div class="modal-body m-3" *ngIf="isLoading">
+        <div class="row">
+            <div class="col-12">
+                <div class="form-group">
+                    <app-loader></app-loader>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-body m-3" *ngIf="!isLoading">
+        <div class="row">
+            <div class="col-12">
+                <div class="form-group">
+                    <image-cropper
+                        class="imageHeight"
+                        [imageChangedEvent]="imageChangedEvent"
+                        [maintainAspectRatio]="true"
+                        [aspectRatio]="1 / 1"
+                        [resizeToWidth]="300"
+                        [resizeToHeight]="25"
+                        [cropperMinWidth]="300"
+                        [cropperMinHeight]="300"
+                        [onlyScaleDown]="true"
+                        [roundCropper]="false"
+                        [canvasRotation]="canvasRotation"
+                        [transform]="transform"
+                        [alignImage]="'center'"
+                        [style.display]="showCropper ? null : 'none'"
+                        format="png,jpg"
+                        (imageCropped)="imageCropped($event)"
+                        (imageLoaded)="imageLoaded()"
+                        (cropperReady)="cropperReady($event)"
+                        (loadImageFailed)="loadImageFailed()">
+                    </image-cropper>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="form-group">
+                    <label class="text-danger" *ngIf="showErrorExtensionImage" >{{ 'user.acceptExtensionFormats' | translate }}</label>                                        
+                </div>
+            </div>
+        </div>        
+        <div class="row">
+            <div class="col-12">
+                <div class="form-group">
+                    <label for="uploadImage" class="selectImageLabel" *ngIf="!visibleEditImage">
+                        <div class="selectImage" for="uploadImage">
+                            <img src="../../../../assets/img/core-img/addImage.png" class="selectImageCenter"/>
+                            {{ 'createPost.upload' | translate }}
+                        </div>
+                    </label>
+                    <input type="file" #file id="uploadImage" accept="image/*" (change)="fileChangeEvent($event)"/>                                   
+                </div>
+            </div>
+        </div>
+        <div class="row">
+           
+            <div class="col-12 col-lg-8">
+                <div class="form-group left" *ngIf="this.nameFile">
+                    <button (click)="zoomOut()" class="btn btn-outline-primary"> - </button> 
+                    <button (click)="zoomIn()" class="btn btn-outline-primary margingLeft"> + </button>
+                </div>
+            </div>
+            <div class="col-12 col-lg-4">
+                <div class="form-group center" *ngIf="this.nameFile">
+                    <button (click)="resetImage()" class="btn btn-primary">{{ 'user.resetImage' | translate }}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" (click)="deleteImage()" *ngIf="hasImage" class="btn btn-danger d-flex">{{ 'user.deleteImage' | translate }}</button>
+       
+        <button type="button" class="btn btn-primary" [disabled]="!visibleEditImage" (click)="updateImage()"><i class="fas fa-upload"></i>&nbsp;{{ 'user.save' | translate }}</button>
+        <button type="button" class="btn btn-primary" (click)="closeModal()">{{ 'user.back' | translate }}</button>
+   </div>
+</div>
+
+
+
+
+<!--
 <div id="modal-content-wrapper">
   
     <section class="contact-area">
@@ -74,4 +162,4 @@
             <button type="button" class="btn btn-primary" (click)="updateImage()">{{ 'user.save' | translate }}</button>
             <button type="button" class="btn btn-primary" (click)="closeModal()">{{ 'user.back' | translate }}</button>
         </div>         
-    </footer>
+    </footer>-->

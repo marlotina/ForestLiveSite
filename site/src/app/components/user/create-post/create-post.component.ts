@@ -8,7 +8,7 @@ import { CommonDialogComponent } from '../../shared/common-dialog/common-dialog.
 import { AccountService } from 'src/app/services/account/account.service';
 
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
-import { MatAutocompleteSelectedEvent, MatAutocomplete } from '@angular/material/autocomplete';
+import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { startWith } from 'rxjs/operators';
 import { ModalEditImageComponent } from '../modal-edit-image/modal-edit-image.component';
@@ -71,8 +71,6 @@ export class CreatePostComponent implements OnInit {
   toolPos = 'after';
   @ViewChild('labelInput') labelInput: ElementRef<HTMLInputElement>;
   @ViewChild('file') fileInput: ElementRef<HTMLInputElement>;
-  @ViewChild('auto') matAutocomplete: MatAutocomplete;  
-  @ViewChild('autoLabel') matAutoLabelcomplete: MatAutocomplete;
 
   constructor(
     private formBuilder: FormBuilder,

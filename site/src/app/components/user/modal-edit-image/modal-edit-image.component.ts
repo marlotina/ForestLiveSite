@@ -23,7 +23,8 @@ export class ModalEditImageComponent implements OnInit {
 
   @ViewChild('altImageInput') altImageInput: ElementRef<HTMLInputElement>;
   
-  constructor(public dialogRef: MatDialogRef<ModalEditImageComponent>,
+  constructor(
+    public dialogRef: MatDialogRef<ModalEditImageComponent>,
     @Inject(MAT_DIALOG_DATA) public modalData: any) { 
   }
   
