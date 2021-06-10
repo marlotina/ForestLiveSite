@@ -75,14 +75,20 @@
                                         </li>
                                         
                                         <li class="list-group-item">
-                                            <a href="/{{post.userId}}/{{post.postId}}" class="card-link">
-                                                <i class="align-middle mr-2 fas fa-fw fa-comment"></i> 
-                                                <span class="align-middle">&nbsp;{{post.commentCount}}&nbsp;comments</span>
-                                            </a>
-                            
-                                            <img src="{{imagesProfileUrl}}{{post.userPhoto}}" 
-                                                alt="image of {{post.userId}}" class="imgAuthorPost">
-                                            <a class="card-link" href="/userpage/{{post.userId}}">{{post.userId}}</a>
+                                            <div class="row">
+                                                <div class="col-md">
+                                                    <a href="/{{post.userId}}/{{post.postId}}" class="card-link">
+                                                        <i class="align-middle mr-2 fas fa-fw fa-comment"></i> 
+                                                        <span class="align-middle">&nbsp;{{post.commentCount}}&nbsp;comments</span>
+                                                    </a>
+                                                </div>
+                                                <div class="col-md alignRight">
+                                                    <a class="card-link" href="/userpage/{{post.userId}}">
+                                                        <img src="{{imagesProfileUrl}}{{post.userPhoto}}" 
+                                                            alt="image of {{post.userId}}" class="imgAuthorPost">
+                                                        {{post.userId}}</a>
+                                                </div>
+                                            </div>
                                         </li>
                                     </ul>
                                 </div>
@@ -98,7 +104,7 @@
                             </div>
                         </div>
                     </div>
-            </div>
+                </div>
             </div>
         
             <div class="col-xxl-3">

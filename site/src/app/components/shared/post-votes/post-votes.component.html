@@ -1,10 +1,9 @@
-
-    <span class="align-middle">{{this.voteCount}}</span>
-    <button type="button" 
-        (click)="addVote()" 
-        [ngClass]="{'hasVote-btn' : this.hasVote, 'vote-btn' : !this.hasVote}" 
-        class="votebtn">
-        <i class="align-middle mr-2 fas fa-fw fa-arrow-alt-circle-up"></i> 
-    </button>
+<span class="align-middle">{{this.voteCount}}</span>
+<button type="button" 
+    (click)="addVote()" 
+    [ngClass]="{'hasVote-btn' : this.hasVote, 'vote-btn' : !this.hasVote}" 
+    class="votebtn">
+    <i class="align-middle mr-2 fas fa-fw fa-arrow-alt-circle-up"></i> 
+</button>
 
 
