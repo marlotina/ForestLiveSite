@@ -82,6 +82,7 @@ export class ImageProfileRequest {
     imageName: string;
     userId: string;
     userName: string;
+    hasImage: boolean;
 }
 
 export class UserLabelRequest {

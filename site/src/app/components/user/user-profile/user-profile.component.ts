@@ -20,8 +20,8 @@ export class UserProfileComponent implements OnInit {
   submitted = false;
   userImage: string;
   userEmail: string;
-  userProfileUrlImage = environment.imagesProfileUrl;
-
+  userProfileUrlImage = null;
+  image: string;
   constructor(private formBuilder: FormBuilder,
     private userService: UserService,
     private accountService: AccountService,
@@ -69,8 +69,8 @@ export class UserProfileComponent implements OnInit {
             'facebookUrl': data.facebookUrl
             });
 
-          this.userImage = data.photo;
-
+          this.userImage = environment.imagesProfileUrl + data.photo;
+          this.image = data.photo;
         },
         error => {
           this.openCommonModal('user.errorRetrieveInfo');
@@ -109,16 +109,17 @@ export class UserProfileComponent implements OnInit {
     dialogConfig.id = "modal-component";
     dialogConfig.width = "600px";
     dialogConfig.data = {
-      hasImage: this.userImage != "profile.png"
+      imageName: this.image
     }
     const dialogRef = this.matDialog.open(ModalProfileComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(result => {
       if(result == "REMOVE_IMAGE"){
-        this.userImage = "profile.png";
+        this.userImage = environment.imagesProfileUrl + "profile.png";
       } else {
         if(result){
-          this.userImage = `${result}`;
+          this.userImage = environment.imagesProfileUrl + result;
+          this.image = result;
           this.accountService.updateImage(this.userImage);
         }
       }
@@ -144,7 +145,6 @@ export class UserProfileComponent implements OnInit {
     
     dialogConfig.disableClose = false;
     dialogConfig.id = "modal-component";
-    dialogConfig.height = "200px";
     dialogConfig.width = "600px";
     dialogConfig.data = {
       title: "user.userTitleModal",

@@ -32,8 +32,8 @@ export class UserService {
       return this.httpClient.post(`${environment.userApiUrl}api/v1/UserImage/UploadFiles`, request);
   }
 
-  DeleteImage(id: string) {
-      return this.httpClient.delete(`${environment.userApiUrl}api/v1/UserImage/DeleteImage?userId=${id}`);
+  DeleteImage(id: string, imageName: string) {
+      return this.httpClient.delete(`${environment.userApiUrl}api/v1/UserImage/DeleteImage?userId=${id}&imageName=${imageName}`);
   }
 
   DeleteUser(id: string) {

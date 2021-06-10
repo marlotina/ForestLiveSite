@@ -69,3 +69,8 @@ font-weight: 600; }
 	padding-top: 10px !important;
     border-top: 1px solid #ebebeb;
 }
+
+
+.rowComment {
+    padding-left: 0 !important;
+}

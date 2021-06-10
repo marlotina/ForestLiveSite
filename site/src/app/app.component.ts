@@ -13,6 +13,7 @@ export class AppComponent implements OnInit {
   title = 'fl-site';
   pages = ["/login", "/signup", "/forgotpassword", "/resetpassword", "/confirmemail"];
   navExpand = false;
+  isHome = false;
   constructor(
     private router: Router, 
     private route: ActivatedRoute) {
@@ -28,7 +29,13 @@ export class AppComponent implements OnInit {
       if (this.pages.includes(this.router.url)) {//forgotpassword signup resetpassword confirmemail
         this.navExpand = false;
       } else {
-        this.navExpand = true;
+        if(this.router.url == "/") {
+          this.isHome = true;
+          this.navExpand = false;
+        }else{
+          this.isHome = false;
+          this.navExpand = true;
+        }
       }
     });
 

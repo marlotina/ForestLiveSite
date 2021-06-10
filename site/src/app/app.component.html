@@ -6,11 +6,11 @@
 
 <div [ngClass]="{'wrapper' : this.navExpand}">
   
-    <app-user-sidebar></app-user-sidebar>
+    <app-user-sidebar *ngIf="!isHome"></app-user-sidebar>
     
     
     <div class="main">
-        <app-header></app-header>
+        <app-header *ngIf="!isHome"></app-header>
                 
         <router-outlet></router-outlet>
 

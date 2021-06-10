@@ -24,7 +24,6 @@ export class BirdLandingPageComponent implements OnInit {
 
   birdPosts: PostListResponse[];
   imagesPostUrl = environment.imagesPostUrl;
-  hasNotPosts = false;
   hideRemoveBtn = true;
   
   specieId: string = null;
@@ -109,11 +108,6 @@ export class BirdLandingPageComponent implements OnInit {
       this.searchBirdsSerices.GetBirdBySpecie(this.specieId, this.searchOrder).subscribe(
         data =>{ 
           this.birdPosts = data;
-          if(data != null && data.length > 0){
-            this.hasNotPosts = true;
-          }else{
-            this.hasNotPosts = false;
-          }
           this.loaderService.hide();
         } 
       );

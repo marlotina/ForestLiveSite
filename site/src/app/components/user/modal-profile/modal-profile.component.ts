@@ -29,8 +29,9 @@ export class ModalProfileComponent implements OnInit {
   nameFile: string;
   visibleEditImage = false;
   showErrorExtensionImage: boolean;
-  hasImage: false;
+  imageName: string;
   isLoading = false;
+  hasImage = false;
 
   constructor(
     public dialogRef: MatDialogRef<ModalProfileComponent>,
@@ -38,7 +39,8 @@ export class ModalProfileComponent implements OnInit {
     private loaderService: LoaderService,
     @Inject(MAT_DIALOG_DATA) public modalData: any,
     private accountService: AccountService) {
-      this.hasImage = this.modalData.hasImage;
+      this.imageName = this.modalData.imageName;
+      this.hasImage = !this.modalData.imageName.includes("profile.png")
      }
 
   ngOnInit() {
@@ -99,7 +101,6 @@ export class ModalProfileComponent implements OnInit {
 
     deleteImage() {
       this.deleteFile();
-      this.dialogRef.close();
     }
 
     closeModal() {
@@ -117,23 +118,22 @@ export class ModalProfileComponent implements OnInit {
         userId: this.accountService.userValue.id,
         imageBase64: this.croppedImage,
         imageName: this.nameFile,
-        userName: this.accountService.userValue.userId
+        userName: this.accountService.userValue.userId,
+        hasImage: this.hasImage
       };
 
       this.userService.UploadImage(imageProfileRequest)
           .pipe(first())
           .subscribe(
               data => {
-                //this.loading = false;
                 this.dialogRef.close(`${imageProfileRequest.userName}.jpg`);
                 this.loaderService.hide(); 
                 this.isLoading = false; 
               },
               error => {
-                this.dialogRef.close(`profile.jpg`);
+                this.dialogRef.close(`profile.png`);
                 this.loaderService.hide(); 
                 this.isLoading = false; 
-                //this.loading = false;
               });
     }
 
@@ -141,20 +141,18 @@ export class ModalProfileComponent implements OnInit {
       this.isLoading = true; 
       this.loaderService.show(); 
 
-      this.userService.DeleteImage(this.accountService.userValue.id)
+      this.userService.DeleteImage(this.accountService.userValue.id, this.imageName)
           .pipe(first())
           .subscribe(
               data => {
                 this.dialogRef.close("REMOVE_IMAGE");
                 this.loaderService.hide(); 
                 this.isLoading = false; 
-                //this.loading = false;
               },
               error => {
                 this.dialogRef.close();
                 this.loaderService.hide(); 
                 this.isLoading = false; 
-                //this.loading = false;
-      });
+              });
     }
 }
