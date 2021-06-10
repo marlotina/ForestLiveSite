@@ -116,11 +116,12 @@ export class UserProfileComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if(result == "REMOVE_IMAGE"){
         this.userImage = environment.imagesProfileUrl + "profile.png";
+        this.accountService.updateImage("profile.png");
       } else {
         if(result){
           this.userImage = environment.imagesProfileUrl + result;
           this.image = result;
-          this.accountService.updateImage(this.userImage);
+          this.accountService.updateImage(result);
         }
       }
       

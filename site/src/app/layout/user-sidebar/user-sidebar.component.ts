@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Observable, ObservedValueOf } from 'rxjs';
 import { User } from 'src/app/model/account';
 import { AccountService } from 'src/app/services/account/account.service';
 import { environment } from 'src/environments/environment';
@@ -15,11 +16,14 @@ export class UserSidebarComponent implements OnInit {
   user: User = null;
   isLogged: boolean = false;
   imageProfileUrl = environment.imagesProfileUrl;
+  userImage : Observable<string>;
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private accountService: AccountService) { }
+    private accountService: AccountService) { 
+      this.userImage = accountService.userImageObservable();
+    }
 
   ngOnInit(): void {
     if(this.accountService.user){

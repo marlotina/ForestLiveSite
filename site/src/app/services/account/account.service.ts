@@ -15,13 +15,15 @@ export class AccountService {
   private userSubject: BehaviorSubject<User>;
   public user: Observable<User>;
 
+  userImageSubject = new BehaviorSubject<string>("");
+
   private loggedSubject: BehaviorSubject<boolean>;
   public isLogged: Observable<boolean>;
 
   constructor(private httpClient: HttpClient) { 
     this.userSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('user')));
     this.user = this.userSubject.asObservable();
-
+    this.userImageSubject.next(this.userSubject.value.photo);
      
     this.loggedSubject = new BehaviorSubject<boolean>(localStorage.getItem('user') != null);
     this.isLogged = this.loggedSubject.asObservable();
@@ -41,6 +43,7 @@ export class AccountService {
         localStorage.setItem('user', JSON.stringify(user));
         localStorage.setItem('access_token', user.token);
         this.userSubject.next(user);
+        this.userImageSubject.next(user.photo);
         this.loggedSubject.next(true);
         return user;
     }));
@@ -51,6 +54,11 @@ export class AccountService {
     localStorage.removeItem('access_token');
     this.userSubject.next(null);
     this.loggedSubject.next(false);
+  }
+
+  
+  userImageObservable() : Observable<string> {
+    return this.userImageSubject.asObservable();
   }
 
   ConfirmEmail(request: ConfirmEmailRequest) {
@@ -66,6 +74,6 @@ export class AccountService {
   }
 
   updateImage(image: string){
-      this.userSubject.value.photo = image;
+      this.userImageSubject.next(image);
   }
 }

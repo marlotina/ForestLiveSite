@@ -36,26 +36,10 @@ export class HeaderComponent implements OnInit {
       localStorage.setItem('locale', 'en');  
       translate.setDefaultLang('en');  
     }  
-
-    if(this.accountService.user){
-      
-      this.accountService.user.subscribe(
-        x => {
-          if(x != null)
-          {
-            this.user = x;
-            this.userNameMenu = this.user.userId;
-            this.userImage = this.user.photo;
-          }
-        }
+    
+    this.accountService.isLogged.subscribe(
+      x => this.isLogged = x
       );
-
-      this.accountService.isLogged.subscribe(
-        x => this.isLogged = x
-        );
-        
-      this.userNameMenu = this.user != null ? this.user.userId : '';
-    }
   }  
 
   changeLang(language: string) {  

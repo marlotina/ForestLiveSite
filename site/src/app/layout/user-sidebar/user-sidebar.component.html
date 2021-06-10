@@ -7,7 +7,7 @@
       </a>
       <div class="sidebar-content">
         <div class="sidebar-user">
-          <img src="{{imageProfileUrl}}{{user.photo}}" alt="image of {{user.userId}}" class="img-fluid rounded-circle mb-2" alt="Linda Miller" />
+          <img src="{{imageProfileUrl}}{{userImage | async}}" alt="image of {{user.userId}}" class="img-fluid rounded-circle mb-2" alt="Linda Miller" />
           <div class="fw-bold">{{user.userId}}</div>
           <small>{{user.firstName}}&nbsp;{{user.lastName}}</small>
         </div>
