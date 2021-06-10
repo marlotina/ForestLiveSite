@@ -22,10 +22,10 @@ export class UserSidebarComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private accountService: AccountService) { 
-      this.userImage = accountService.userImageObservable();
     }
 
   ngOnInit(): void {
+    this.userImage = this.accountService.userImageObservable();
     if(this.accountService.user){
       
       this.accountService.user.subscribe(
