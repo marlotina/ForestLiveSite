@@ -2,6 +2,8 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Meta } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { User } from 'src/app/model/account';
 import { PostResponse } from 'src/app/model/post';
 import { AccountService } from 'src/app/services/account/account.service';
 import { GetItemsService } from 'src/app/services/items/get-items.service';
@@ -23,7 +25,8 @@ export class PostPageComponent implements OnInit {
   imagesProfileUrl = environment.imagesProfileUrl;
   imagePostUrl: string;
   showOwnerOptions = false;
-  userLoggedName: string;
+  userLoggedName: string = null;
+  isLogged: Observable<boolean>;
   hasPost: boolean;
   hasLocation = true;
   type: string;
@@ -37,11 +40,22 @@ export class PostPageComponent implements OnInit {
     private manageItemService: ManageItemsService,
     private matDialog: MatDialog,
     private route: Router) { 
+      this.isLogged = this.accountService.userLoggedObservable();
     }
 
   ngOnInit(): void {
     this.loaderService.show();
-    this.userLoggedName = this.accountService.userValue != null ? this.accountService.userValue.userId : null;
+    
+    if(this.accountService.user){
+      this.accountService.user.subscribe(
+        x => {
+          if(x != null)
+          {
+            this.userLoggedName = x.userId;
+          }
+        }
+      );
+    }
     
     this.activateRoute.paramMap.subscribe(params => {
       let postId = params.get("postId");

@@ -28,7 +28,6 @@ export class UserSidebarComponent implements OnInit {
 
   ngOnInit(): void {
     if(this.accountService.user){
-      
       this.accountService.user.subscribe(
         x => {
           if(x != null)

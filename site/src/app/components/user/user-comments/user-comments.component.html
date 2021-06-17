@@ -18,7 +18,7 @@
               <div class="card-body">
                 <h5 class="card-title">
                   <i class="align-middle me-2 fas fa-fw fa-comment"></i>
-                  <a class="removeLinkLine" href="{{comment.userId}}/{{comment.postId}}"><strong class="text-gray-dark">{{comment.titlePost}}</strong></a>&nbsp;-&nbsp;<a class="removeLinkLine" href="userpage/{{comment.authorPostId}}"><small>{{comment.authorPostId}}</small></a>
+                  <a class="removeLinkLine" href="/{{comment.authorPostId}}/{{comment.postId}}"><strong class="text-gray-dark">{{comment.titlePost}}</strong></a>&nbsp;-&nbsp;<a class="removeLinkLine" href="userpage/{{comment.authorPostId}}"><small>{{comment.authorPostId}}</small></a>
                 </h5>
                 <div class="d-flex justify-content-between">
 
@@ -37,16 +37,6 @@
           <div *ngIf="!isLoading && !hasComments" >
             YOu dont have comments
           </div>        
-        </div>
-      </div>
-
-      <div class="col-xxl-4">
-        <div class="list-group">
-          <a href="#" class="list-group-item list-group-item-action" routerLink="/userProfile">My profile</a>
-          <a href="#" class="list-group-item list-group-item-action" routerLink="/userlabel">My labels</a>
-          <a href="#" class="list-group-item list-group-item-action active" routerLink="/usercomments">My comments</a>
-          <a href="#" class="list-group-item list-group-item-action" routerLink="/uservotes">My votes</a>
-          <a href="#" class="list-group-item list-group-item-action" routerLink="/usercommentvotes">My Comment votes</a>
         </div>
       </div>
     </div>

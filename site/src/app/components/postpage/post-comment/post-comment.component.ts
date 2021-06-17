@@ -1,5 +1,6 @@
 import { Component , ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { Observable } from 'rxjs';
 import { first } from 'rxjs/operators';
 import { CommentRequest, CommentResponse } from 'src/app/model/Comment';
 import { CommentVoteRequest } from 'src/app/model/vote';
@@ -24,6 +25,7 @@ export class PostCommentComponent implements OnInit {
 
   comments: CommentResponse[] = [];
   imagesProfileUrl = environment.imagesProfileUrl;
+  isLogged: Observable<boolean>;
   showFormList = new Map<string, boolean>();;
   userNameLogged = null;
   @ViewChild('commentInput') commentInput: ElementRef<HTMLInputElement>;
@@ -33,6 +35,7 @@ export class PostCommentComponent implements OnInit {
     private commentService: CommentService,
     private accountService: AccountService,
     private matDialog: MatDialog) { 
+      this.isLogged = this.accountService.userLoggedObservable();
     }
 
   showCommentForm(id: string){
@@ -40,7 +43,18 @@ export class PostCommentComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.userNameLogged = this.accountService != null? this.accountService.userValue.userId: null;
+
+    if(this.accountService.user){
+      this.accountService.user.subscribe(
+        x => {
+          if(x != null)
+          {
+            this.userNameLogged = x.userId;
+          }
+        }
+      );
+    }
+    
 
     this.commentService.GetCommentsByPost(this.postId).subscribe(
       data => { 

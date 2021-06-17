@@ -26,7 +26,7 @@ export class LandingPageComponent implements OnInit {
   showOwnerOptions = false;
   imagesPostUrl = environment.imagesPostUrl;
   imagesProfileUrl = environment.imagesProfileUrl;
-  hasPosts = false;
+  hasPosts = true;
   userLabels: UserLabelPageResponse[];
   selectedLabel: string;
   isLoading = true;
@@ -46,7 +46,17 @@ export class LandingPageComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.userLoggedName = this.accountService.userValue.userId;
+    if(this.accountService.user){
+      this.accountService.user.subscribe(
+        x => {
+          if(x != null)
+          {
+            this.userLoggedName = x.userId;
+          }
+        }
+      );
+    }
+
     this.activateRoute.paramMap.subscribe(params => {
       this.userId = params.get("userId");
       this.searchPosts();   
@@ -79,7 +89,7 @@ export class LandingPageComponent implements OnInit {
     this.userPostService.GetPosts(this.userId, this.selectedLabel, this.searchType).subscribe(
       data =>{ 
         this.userPosts = data;
-        this.hasPosts = this.userPosts.length == 0; 
+        this.hasPosts = this.userPosts.length > 0; 
         this.loaderService.hide();
         this.isLoading = false;
       } 

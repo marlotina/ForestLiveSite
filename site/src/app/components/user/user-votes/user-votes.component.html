@@ -17,8 +17,8 @@
 
               <div class="card-body">
                 <h5 class="card-title">
-                  <i class="align-middle me-2 fas fa-fw fa-comment"></i>
-                  <a class="removeLinkLine" href="{{vote.userId}}/{{vote.postId}}"><strong class="text-gray-dark">{{vote.titlePost}}</strong></a>&nbsp;-&nbsp;<a class="removeLinkLine" href="userpage/{{vote.authorPostId}}"><small>{{vote.authorPostId}}</small></a>
+                  <i class="align-middle me-2 fas fa-fw fa-arrow-alt-circle-up"></i>
+                  <a class="removeLinkLine" href="/{{vote.userId}}/{{vote.postId}}"><strong class="text-gray-dark">{{vote.titlePost}}</strong></a>&nbsp;-&nbsp;<a class="removeLinkLine" href="userpage/{{vote.authorPostId}}"><small>{{vote.authorPostId}}</small></a>
                 </h5>
                 <div class="d-flex justify-content-between">
 
@@ -38,16 +38,6 @@
           </div>        
         </div>
             
-      </div>
-
-      <div class="col-xxl-4">
-        <div class="list-group">
-          <a href="#" class="list-group-item list-group-item-action" routerLink="/userProfile">My profile</a>
-          <a href="#" class="list-group-item list-group-item-action" routerLink="/userlabel">My labels</a>
-          <a href="#" class="list-group-item list-group-item-action active" routerLink="/usercomments">My comments</a>
-          <a href="#" class="list-group-item list-group-item-action" routerLink="/uservotes">My votes</a>
-          <a href="#" class="list-group-item list-group-item-action" routerLink="/usercommentvotes">My Comment votes</a>
-        </div>
       </div>
     </div>
   </div>
