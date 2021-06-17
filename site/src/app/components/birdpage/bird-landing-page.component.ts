@@ -30,7 +30,7 @@ export class BirdLandingPageComponent implements OnInit {
   searchOrder: number = 1;
 
   userLoggedName: string;
-
+  imagesProfileUrl = environment.imagesProfileUrl;
 
   filteredSpecies: Observable<AutocompleteResponse[]>;
   autocompleteControl = new FormControl();
