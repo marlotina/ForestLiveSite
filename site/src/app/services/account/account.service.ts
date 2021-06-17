@@ -16,21 +16,25 @@ export class AccountService {
   public user: Observable<User>;
 
   userImageSubject = new BehaviorSubject<string>("");
-
-  private loggedSubject: BehaviorSubject<boolean>;
-  public isLogged: Observable<boolean>;
+  isLoggedSubject = new BehaviorSubject<boolean>(false);
 
   constructor(private httpClient: HttpClient) { 
     this.userSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('user')));
     this.user = this.userSubject.asObservable();
-    this.userImageSubject.next(this.userSubject.value.photo);
+    if(this.userSubject.value != null){
+      this.userImageSubject.next(this.userSubject.value.photo);
+    }else{
+      this.userImageSubject.next(null);
+    }
      
-    this.loggedSubject = new BehaviorSubject<boolean>(localStorage.getItem('user') != null);
-    this.isLogged = this.loggedSubject.asObservable();
+    this.isLoggedSubject .next(localStorage.getItem('user') != null);
   }
   
   public get userValue(): User {
-    return this.userSubject.value;
+    if(this.userSubject.value != null){
+      return this.userSubject.value;
+    }
+    return
   }
 
   SignUp(request) {
@@ -43,7 +47,7 @@ export class AccountService {
         localStorage.setItem('user', JSON.stringify(user));
         localStorage.setItem('access_token', user.token);
         this.userSubject.next(user);
-        this.loggedSubject.next(true);
+        this.isLoggedSubject.next(true);
         this.userImageSubject.next(user.photo);
         return user;
     }));
@@ -54,13 +58,18 @@ export class AccountService {
     localStorage.removeItem('access_token');
     this.userSubject.next(null);
     this.userImageSubject.next("");
-    this.loggedSubject.next(false);
+    this.isLoggedSubject.next(false);
   }
 
   
   userImageObservable() : Observable<string> {
     return this.userImageSubject.asObservable();
   }
+
+  userLoggedObservable() : Observable<boolean> {
+    return this.isLoggedSubject.asObservable();
+  }
+
 
   ConfirmEmail(request: ConfirmEmailRequest) {
     return this.httpClient.post(`${environment.userApiUrl}api/v1/Account/ConfirmEmail`, request);

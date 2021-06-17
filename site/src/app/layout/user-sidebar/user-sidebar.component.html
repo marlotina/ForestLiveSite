@@ -1,5 +1,5 @@
 
-<div class="wrapper" *ngIf="isLogged" >
+<div class="wrapper" *ngIf="isLogged | async" >
   <nav id="sidebar" class="sidebar">
       <a class="sidebar-brand divLogo" href="index.html">
         <img src="../../../assets/img/bclogo.png" style="height: 55px;">
@@ -29,7 +29,7 @@
           </li>
     
           <li class="sidebar-item">
-            <a class="sidebar-link" routerLink="userpage/{{user.userId}}" routerLinkActive="active">
+            <a class="sidebar-link"  routerLink="userpage/{{user.userId}}" routerLinkActive="active">
               <i class="align-middle me-2 far fa-fw fa-list-alt"></i> <span class="align-middle">Page</span>
             </a>
           </li>

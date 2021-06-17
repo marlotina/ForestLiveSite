@@ -12,10 +12,10 @@
   <a style="width: 265px;" routerLink="withoutspecie" routerLinkActive="active">{{ 'general.pendingSpecie' | translate }}</a>
 
 
-    <a [hidden]="isLogged" routerLink="login" class="btn btn-secondary" role="button">
+    <a [hidden]="isLogged | async" routerLink="login" class="btn btn-secondary" role="button">
         {{ 'account.login' | translate }}
     </a>&nbsp;
-    <a [hidden]="isLogged" routerLink="signup" class="btn btn-secondary" role="button">
+    <a [hidden]="isLogged | async" routerLink="signup" class="btn btn-secondary" role="button">
         {{ 'account.signUp' | translate }}
     </a>
 

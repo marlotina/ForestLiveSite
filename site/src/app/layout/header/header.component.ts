@@ -5,6 +5,7 @@ import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { environment } from 'src/environments/environment';
 import { filter } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -15,11 +16,11 @@ import { filter } from 'rxjs/operators';
 export class HeaderComponent implements OnInit {
 
   user: User = null;
-  isLogged: boolean = false;
   userNameMenu: string;
   userImage: string;
   imageProfileUrl = environment.imagesProfileUrl;
   navExpand = false;
+  isLogged: Observable<boolean>;
 
   constructor(private router: Router,
     private route: ActivatedRoute,
@@ -27,6 +28,7 @@ export class HeaderComponent implements OnInit {
     private translate: TranslateService
   ) {  
     
+    this.isLogged = this.accountService.userLoggedObservable();
     translate.addLangs(['en', 'es', 'de']);  
 
     if (localStorage.getItem('locale')) {  
@@ -36,10 +38,6 @@ export class HeaderComponent implements OnInit {
       localStorage.setItem('locale', 'en');  
       translate.setDefaultLang('en');  
     }  
-    
-    this.accountService.isLogged.subscribe(
-      x => this.isLogged = x
-      );
   }  
 
   changeLang(language: string) {  

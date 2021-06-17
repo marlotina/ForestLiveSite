@@ -14,7 +14,7 @@ import { environment } from 'src/environments/environment';
 export class UserSidebarComponent implements OnInit {
 
   user: User = null;
-  isLogged: boolean = false;
+  isLogged: Observable<boolean>;
   imageProfileUrl = environment.imagesProfileUrl;
   userImage : Observable<string>;
 
@@ -22,10 +22,11 @@ export class UserSidebarComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private accountService: AccountService) { 
+      this.userImage = this.accountService.userImageObservable();
+      this.isLogged = this.accountService.userLoggedObservable();
     }
 
   ngOnInit(): void {
-    this.userImage = this.accountService.userImageObservable();
     if(this.accountService.user){
       
       this.accountService.user.subscribe(
@@ -36,10 +37,6 @@ export class UserSidebarComponent implements OnInit {
           }
         }
       );
-
-      this.accountService.isLogged.subscribe(
-        x => this.isLogged = x
-        );
     }
   }  
 
