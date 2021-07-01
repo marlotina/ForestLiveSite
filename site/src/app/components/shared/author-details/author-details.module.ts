@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { MatIconModule } from '@angular/material/icon';
+import { SharedModule } from 'src/app/shared/shared.module';
 import { AuthorDetailsComponent } from '../../shared/author-details/author-details.component';
 
 
@@ -8,7 +8,7 @@ import { AuthorDetailsComponent } from '../../shared/author-details/author-detai
   declarations: [AuthorDetailsComponent],
   imports: [
     CommonModule,
-    MatIconModule
+    SharedModule
   ],
   exports:[AuthorDetailsComponent],
 })

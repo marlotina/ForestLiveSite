@@ -30,7 +30,6 @@ export class SelectSpecieFormComponent implements OnInit {
   @Input() type: string;
   @Input() specieOldName: string;
   @Input() showOptions: boolean;
-
   
 
   @ViewChild('auto') matAutocomplete: MatAutocomplete;  

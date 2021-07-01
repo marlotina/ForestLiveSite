@@ -1,10 +1,6 @@
 <main class="content">
     <div class="container-fluid">
-        <div class="header">
-            <h1 class="header-title">
-                Blank Page
-            </h1>
-        </div>
+      
         
         <div class="row">
             <div class="col-xxl-9"> 
@@ -51,14 +47,14 @@
                                 [postId]="post.postId"
                                 [titlePost]="post.title"
                                 [authorPostId]="post.userId"
-                                [userId]="userLoggedName"
+                                [userId]="userId"
                                 [voteCount]="post.voteCount"
                                 [specieId]="post.specieId"
                                 [voteId]="post.voteId"
                                 [hasVote]="post.hasVote"></app-post-votes>
                                 
                                 {{post.title}}
-                            <a class="text-dark btn fs-6 fw-light removeLinkLine" href="/userpage/{{post.userId}}">{{post.userId}}</a>             
+                                         
                         </div>
                     <div class="card-body">                        
                         <div class="col-12 col-md-12 div-bottom-line mb-15">
@@ -92,7 +88,7 @@
                                 <div class="col-12">
                                     <strong>{{ 'postPage.tags' | translate }}:</strong>
                                     <a *ngFor="let label of post.labels" role="button" href="#" class="ml-5">
-                                        <span class="btn btn-primary btn-sm">{{label}}</span>
+                                        <a routerLink="/userpage/{{userId}}/{{label}}"><span class="btn btn-primary btn-sm">{{label}}</span></a>
                                     </a>
                                 </div>
                             </div>

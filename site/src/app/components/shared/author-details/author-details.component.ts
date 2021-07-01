@@ -4,6 +4,7 @@ import { first } from 'rxjs/operators';
 import { DeleteFollowUserResquest, FollowUserRequest } from 'src/app/model/FollowUser';
 import { UserInfoResponse } from 'src/app/model/user';
 import { AccountService } from 'src/app/services/account/account.service';
+import { LoaderService } from 'src/app/services/loader/loader.service';
 import { UserInteractionsService } from 'src/app/services/user-interactions/user-interactions.service';
 import { environment } from 'src/environments/environment';
 
@@ -18,11 +19,15 @@ export class AuthorDetailsComponent implements OnInit {
   imagesProfileUrl = environment.imagesProfileUrl;
   userImage: string;
   hasFollow = false;
+  isLoading = true;
 
   constructor(
+    private loaderService: LoaderService,
     private userInteractionService: UserInteractionsService,
     private accountService: AccountService,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute) { 
+      this.loaderService.show();
+    }
 
   ngOnInit(): void {
 
@@ -31,7 +36,9 @@ export class AuthorDetailsComponent implements OnInit {
       this.userInteractionService.GetByUserName(userId).subscribe(
         data => { 
           this.userInfo = data; 
-          this.userImage = `${environment.imagesProfileUrl}${data.photo}`;
+          this.userImage = `${environment.imagesProfileUrl}${data.photo}`; 
+          this.loaderService.hide();
+          this.isLoading = false;
         }
       );
     });

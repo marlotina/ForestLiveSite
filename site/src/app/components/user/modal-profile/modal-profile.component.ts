@@ -115,10 +115,9 @@ export class ModalProfileComponent implements OnInit {
       this.loaderService.show();      
 
       let imageProfileRequest: ImageProfileRequest = {
-        userId: this.accountService.userValue.id,
+        userId: this.accountService.userValue.userId,
         imageBase64: this.croppedImage,
         imageName: this.nameFile,
-        userName: this.accountService.userValue.userId,
         hasImage: this.hasImage
       };
 
@@ -126,7 +125,7 @@ export class ModalProfileComponent implements OnInit {
           .pipe(first())
           .subscribe(
               data => {
-                this.dialogRef.close(`${imageProfileRequest.userName}.jpg`);
+                this.dialogRef.close(`${imageProfileRequest.userId}.jpg`);
                 this.loaderService.hide(); 
                 this.isLoading = false; 
               },
@@ -141,7 +140,7 @@ export class ModalProfileComponent implements OnInit {
       this.isLoading = true; 
       this.loaderService.show(); 
 
-      this.userService.DeleteImage(this.accountService.userValue.id, this.imageName)
+      this.userService.DeleteImage(this.accountService.userValue.userId, this.imageName)
           .pipe(first())
           .subscribe(
               data => {

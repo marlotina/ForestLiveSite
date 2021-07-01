@@ -47,8 +47,7 @@ export class CreatePostComponent implements OnInit {
   labels: string[] = [];
   allLabels: string[] = [];
   visible = true;
-
-
+  sizeError = false;
 
   selectedFile: ImageSnippet;
 
@@ -218,8 +217,11 @@ export class CreatePostComponent implements OnInit {
 
   /*Image*/
   selectFile(event) {
-    if(!event.target.files[0] || event.target.files[0].length == 0) {
-      this.msg = 'You must select an image';
+    let sizeImage = event.target.files[0].size;
+    if(sizeImage / 1024 < 3072){
+      this.sizeError = false;
+    }else{
+      this.sizeError = true;
       return;
     }
     
@@ -286,6 +288,10 @@ export class CreatePostComponent implements OnInit {
       google.maps.event.addListener(this.map, "click", (event) => {
         this.addMarker(event.latLng, this.map);
       });
+  }
+
+  getCountry(){
+    const hila = "https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyAjqE9XcDEwD2SmV9mmf757kYOdwTbJvwQ&latlng=40.714224,-73.961452&sensor=true";
   }
   
   addMarker(location: google.maps.LatLngLiteral, map: google.maps.Map) {
@@ -395,16 +401,21 @@ export class CreatePostComponent implements OnInit {
     const dialogRef = this.matDialog.open(ModalEditImageComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(result => {
-      this.firstImage = result.firstImage;
-      if(!this.firstImage){
-        this.url = result.imageBase64;
-        this.altImage = result.altImage;
-        if(result.imageName != null && result.imageName != "") {
-          this.imageName = result.imageName;
+      if(result != null) {
+        this.firstImage = result.firstImage;
+        if(!this.firstImage){
+          this.url = result.imageBase64;
+          this.altImage = result.altImage;
+          if(result.imageName != null && result.imageName != "") {
+            this.imageName = result.imageName;
+          }
+        }else{
+          this.visibleEditImage = false;
         }
-      }else{
+      } else {
         this.visibleEditImage = false;
       }
+      
     });
 
     return results;

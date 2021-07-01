@@ -15,7 +15,7 @@ export class FollowUserResponse {
 }
 
 export class FollowListResponse {
-    Id: string;
+    id: string;
     followUserId: string;
     userId: string;
     creationDate: Date;

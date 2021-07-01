@@ -10,20 +10,10 @@ import { environment } from 'src/environments/environment';
 })
 export class HomeComponent implements OnInit {
 
-  lastObservations: PostHomeResponse[] = []
-  userPageUrl: string = null;
-  urlPostImage: string = environment.imagesPostUrl;
-
-  constructor(
-    private birdService: BirdserviceService
-  ) { }
+  constructor() { }
 
   ngOnInit(): void {
-    this.birdService.GetLastbirds().subscribe(
-      data => {
-        this.lastObservations = data;
-      }
-    )
+    
   }
 
 }

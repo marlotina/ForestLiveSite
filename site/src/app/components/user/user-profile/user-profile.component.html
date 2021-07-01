@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <div class="header">
             <h1 class="header-title">
-                Blank Page
+                Your profile
             </h1>
         </div>
         <div class="row">
@@ -27,7 +27,7 @@
                                                 id="usernameProfile"
                                                 class="form-control" 
                                                 [ngClass]="{ 'is-invalid': submitted && f.userName.errors }"
-                                                formControlName="userName" disabled>
+                                                formControlName="id" disabled>
                                         </div>
                                         <div class="mb-3">    
                                             <label for="descriptionProfile">{{ 'user.description' | translate }}</label>
@@ -40,7 +40,7 @@
                                             <img alt="Chris Wood" src="{{userProfileUrlImage}}{{userImage}}" class="rounded-circle img-responsive mt-2"
                                                 width="128" height="128" />
                                             <div class="mt-2">                                                
-                                                <button class="btn btn-primary" (click)="openImageProfile()">{{'user.imageProfile' | translate}}</button>
+                                                <button class="btn btn-primary" type="button" (click)="openImageProfile()">{{'user.imageProfile' | translate}}</button>
                                             </div>
                                             <small>For best results, use an image at least 128px by 128px in .jpg
                                                 format</small>

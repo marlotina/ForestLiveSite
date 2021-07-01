@@ -13,8 +13,8 @@ export class UserService {
   constructor(private httpClient: HttpClient) { 
   }
   
-  GetById(id: string) {
-    return this.httpClient.get<UserResponse>(`${environment.userApiUrl}api/v1/user/GetUserProfile?userId=${id}`)
+  GetByUserId(id: string) {
+    return this.httpClient.get<UserResponse>(`${environment.userApiUrl}api/v1/manageuser/GetUserProfile?userId=${id}`)
       .pipe(map(user => {
         return user;
       }));
@@ -25,15 +25,15 @@ export class UserService {
   }
 
   UpdateUser(request: UserRequest) {
-      return this.httpClient.put(`${environment.userApiUrl}api/v1/User/`, request);
+      return this.httpClient.put(`${environment.userApiUrl}api/v1/ManageUser/`, request);
   }
 
   UploadImage(request: ImageProfileRequest) {
-      return this.httpClient.post(`${environment.userApiUrl}api/v1/UserImage/UploadFiles`, request);
+      return this.httpClient.post(`${environment.userApiUrl}api/v1/ManageUserImage/UploadFiles`, request);
   }
 
   DeleteImage(id: string, imageName: string) {
-      return this.httpClient.delete(`${environment.userApiUrl}api/v1/UserImage/DeleteImage?userId=${id}&imageName=${imageName}`);
+      return this.httpClient.delete(`${environment.userApiUrl}api/v1/ManageUserImage/DeleteImage?userId=${id}&imageName=${imageName}`);
   }
 
   DeleteUser(id: string) {

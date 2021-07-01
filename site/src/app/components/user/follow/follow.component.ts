@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FollowListResponse } from 'src/app/model/FollowUser';
+import { first } from 'rxjs/operators';
+import { DeleteFollowUserResquest, FollowListResponse } from 'src/app/model/FollowUser';
 import { AccountService } from 'src/app/services/account/account.service';
 import { LoaderService } from 'src/app/services/loader/loader.service';
 import { UserInteractionsService } from 'src/app/services/user-interactions/user-interactions.service';
@@ -22,7 +23,7 @@ export class FollowComponent implements OnInit {
 
   ngOnInit(): void {
     this.loaderService.show();
-    this.userInteractionsService.GetFollowerByUserId(this.accountService.userValue.userId).subscribe(
+    this.userInteractionsService.GetFollowByUserId(this.accountService.userValue.userId).subscribe(
       data =>{ 
         if(data.length > 0){
           this.hasFollows = true;
@@ -32,5 +33,25 @@ export class FollowComponent implements OnInit {
         this.isLoading = false;
       } 
     );
+  }
+
+  removeFollow(follow: FollowListResponse) {
+    let request: DeleteFollowUserResquest = {
+      followId: follow.id,
+      followUserId: follow.followUserId,
+      userSystemId: this.accountService.userValue.id
+    };
+    this.userInteractionsService.DeleteFollow(request)
+    .pipe(first())
+        .subscribe(
+            data => {    
+              const index = this.follows.indexOf(follow, 0);
+              if (index > -1) {
+                this.follows.splice(index, 1);
+              }
+            },
+            error => {   
+              
+            });
   }
 }

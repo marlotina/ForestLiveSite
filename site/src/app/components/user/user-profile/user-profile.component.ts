@@ -30,7 +30,6 @@ export class UserProfileComponent implements OnInit {
   ngOnInit(): void {
     this.userProfileForm = this.formBuilder.group({
       id: ['', [Validators.required]],
-      userName: ['', [Validators.required]],
       name: [''],
       surname: [''],
       urlWebSite: [''],
@@ -48,7 +47,7 @@ export class UserProfileComponent implements OnInit {
     });
 
     this.userEmail = this.accountService.userValue.email;
-    this.userService.GetById(this.accountService.userValue.id).subscribe(
+    this.userService.GetByUserId(this.accountService.userValue.userId).subscribe(
       data => {
           this.userProfileForm.patchValue({
             'name': data.name,

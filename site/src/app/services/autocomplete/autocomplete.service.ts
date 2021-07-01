@@ -20,4 +20,11 @@ export class AutocompleteService {
         return data;
       }));
   }
+
+  GetCountries(text: string, languageCode: string){
+    return this.httpClient.get<AutocompleteResponse[]>(`${environment.specieApiUrl}api/v1/Country/GetCountries?languageCode=${languageCode}`)
+      .pipe(map(data => {
+        return data;
+      }));
+  }
 }

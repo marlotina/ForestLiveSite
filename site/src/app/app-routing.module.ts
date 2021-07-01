@@ -15,6 +15,7 @@ const routes: Routes = [
   { path: 'createPost/:type', loadChildren: () => import('./components/user/create-post/create-post.module').then(m => m.CreatePostModule), 
       canActivate: [AuthGuard]  },
   { path: 'userpage/:userId', loadChildren: () => import('./components/userpage/landing-page/landing-page.module').then(m => m.LandingPageModule) },
+  { path: 'userpage/:userId/:labelId', loadChildren: () => import('./components/userpage/landing-page/landing-page.module').then(m => m.LandingPageModule) },
   { path: 'birdpage/:specieId', loadChildren: () => import('./components/birdpage/bird-landing-page.module').then(m => m.BirdLandingPageModule) },
   { path: 'birdpage', loadChildren: () => import('./components/birdpage/bird-landing-page.module').then(m => m.BirdLandingPageModule) },
   { path: 'usermappage/:userId', loadChildren: () => import('./components/userpage/user-map-page/user-map-page.module').then(m => m.UserMapPageModule) },

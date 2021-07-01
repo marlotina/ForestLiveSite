@@ -2,18 +2,17 @@
   <div class="container-fluid">
       <div class="header">
           <h1 class="header-title">
-              Blank Page
+              Labels
           </h1>
       </div>
       
       <div class="row">
           <div class="card">
               <div class="card-header">
-                  <h5 class="card-title mb-0">Filter</h5>
+                  <h5 class="card-title mb-0">Create new label</h5>
               </div>
               <div class="card-body">
                   <div class="row">
-                    <h6>Your labels</h6>
                     <form [formGroup]="labelForm" (ngSubmit)="onSubmit()">
                         <div class="row">
                             <div class="col-12 col-md-6">
@@ -36,11 +35,6 @@
               <div class="card">
                 <div *ngIf="!isLoading && hasLabels">
                   <div class="card-body">
-                    <div class="card-header">
-                      <h5 class="card-title">Striped Rows</h5>
-                      <h6 class="card-subtitle text-muted">Use <code>.table-striped</code> to add zebra-striping to any table row within the
-                        <code>&lt;tbody&gt;</code>.</h6>
-                    </div>
                     <table class="table table-striped">
                       <thead>
                         <tr>
@@ -52,7 +46,7 @@
                       </thead>
                       <tbody>
                         <tr *ngFor="let label of userLabels">
-                          <td><strong>{{label.label}}</strong></td>
+                          <td><a routerLink="/userpage/{{userId}}/{{label.label}}"><strong>{{label.label}}</strong></a></td>
                           <td class="d-none d-md-table-cell">{{label.postCount}}</td>
                           <td>{{label.creationDate}}</td>
                           <td class="table-action">

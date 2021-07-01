@@ -50,7 +50,7 @@ export class LoginComponent implements OnInit {
       .pipe(first())  
       .subscribe(
         data => {
-          this.router.navigate(['']);
+          this.router.navigate([`userpage/${data.userId}`]);
         },
         error => {
           if(error.status == "409") {

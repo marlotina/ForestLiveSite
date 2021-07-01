@@ -19,6 +19,7 @@ export class UserLabelsComponent implements OnInit {
   hasLabels = false;
   isLoading = true;
   labelForm: FormGroup;
+  userId: string;
 
   constructor(
     private loaderService: LoaderService,
@@ -29,8 +30,8 @@ export class UserLabelsComponent implements OnInit {
 
   ngOnInit(): void {
     this.loaderService.show();
-    let userId = this.accountService.userValue.userId;
-    this.userLabelsService.GetUserLabelsDetails(userId).subscribe(
+    this.userId = this.accountService.userValue.userId;
+    this.userLabelsService.GetUserLabelsDetails(this.userId).subscribe(
       data =>{ 
         if(data != null && data.length > 0){
           this.hasLabels = true;
@@ -47,7 +48,7 @@ export class UserLabelsComponent implements OnInit {
     });
 
     this.labelForm.patchValue({
-      'userId': userId
+      'userId': this.userId
       });
   }
 

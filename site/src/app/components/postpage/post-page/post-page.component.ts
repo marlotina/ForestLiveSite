@@ -25,7 +25,7 @@ export class PostPageComponent implements OnInit {
   imagesProfileUrl = environment.imagesProfileUrl;
   imagePostUrl: string;
   showOwnerOptions = false;
-  userLoggedName: string = null;
+  userId: string = null;
   isLogged: Observable<boolean>;
   hasPost: boolean;
   hasLocation = true;
@@ -51,7 +51,7 @@ export class PostPageComponent implements OnInit {
         x => {
           if(x != null)
           {
-            this.userLoggedName = x.userId;
+            this.userId = x.userId;
           }
         }
       );
@@ -64,7 +64,7 @@ export class PostPageComponent implements OnInit {
         data => { 
           if(data != null) {
             this.post = data;  
-            this.showOwnerOptions = this.userLoggedName != null && this.post.userId == this.userLoggedName;
+            this.showOwnerOptions = this.userId != null && this.post.userId == this.userId;
             this.hasPost = true;
             this.imagePostUrl = environment.imagesPostUrl + this.post.imageUrl;
             this.urlPage = `${environment.pageDomain}/${this.post.userId}/${this.post.postId}`;

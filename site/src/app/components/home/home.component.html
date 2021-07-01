@@ -1,16 +1,5 @@
-<nav class="navbar navbar-expand navbar-dark absolute-top w-100 py-2">
-  <div class="container">
-    <a class="navbar-brand fw-bold" href="#">
-      
-      Community bird
-    </a>
-    <a class="btn btn-success btn-pill my-2 ms-2" routerLink="login">
-      Login
-    </a>
-  </div>
-</nav>
 
-<section class="pt-7 pb-5 landing-bg text-white overflow-hidden">
+<section class="pb-5 landing-bg text-white overflow-hidden">
   <div class="container py-4">
     <div class="row">
       <div class="col-xl-11 mx-auto">
@@ -20,13 +9,37 @@
               <div class="px-4 pt-4">
                 <img src="../../../assets/img/core-img/bclogo.png" alt="Webpack" class="align-middle me-2" width="100">
               </div>
-              <!--<h1 class="display-4 fw-bold mb-3 text-white">Community bird</h1>-->
+              <h1 class="display-4 fw-bold mb-3 text-white">Community bird</h1>
               <p class="lead fw-light mb-3 landing-text">UNa comunidad de observadores de aves, gestiona y controlas tu observaciones 
                 y compartelas con el resto de la comunidad.
               </p>
             </div>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="py-5">
+  <div class="container text-center">
+    <div class="row">
+      <div class="col-lg-6 mx-auto">
+        <h2 class="mb-3">
+          Join over 3,000 developers who are already working with our products
+        </h2>
+        <a routerLink="signup"
+          class="align-middle btn btn-success btn-lg mt-n1 btn-pill">
+          Registrate
+        </a>
+        <p class="">UNa comunidad de observadores de aves, gestiona y controlas tu observaciones 
+          y compartelas con el resto de la comunidad.
+          <a class="my-2 ms-2" routerLink="login">
+            Login
+          </a>
+        </p>
+
+        
       </div>
     </div>
   </div>
@@ -40,6 +53,7 @@
     <a class="btn btn-lg btn-pill btn-link text-dark" routerLink="withoutspecie">{{ 'general.pendingSpecie' | translate }}</a>
   </div>
 </div>
+
 
 <section class="py-6">
   <div class="container">
@@ -104,61 +118,6 @@
   </div>
 </section>
 
-<section class="py-6 bg-white">
-  <div class="container">
-
-    <div class="mb-4 text-center">
-      <h2>Testimonials</h2>
-      <p class="text-muted">Here's what some of our 3,000 customers have to say about working with our products.</p>
-    </div>
 
 
 
-    
-
-    <div class="row">
-      <div class="col-md-6 col-lg-4" *ngFor="let post of lastObservations">
-        <blockquote class="card border">
-          <div class="card-body p-4">
-            <div class="d-flex align-items-center mb-3">
-              <div>
-                <img src="{{urlPostImage}}{{post.imageUrl}}" width="100%" height="225" >
-              </div>
-              <div class="ps-3">
-                <h5 class="mb-1 mt-2">{{post.userId}}</h5><small class="d-block text-muted h5 fw-normal">{{post.observationDate}}</small>
-              </div>
-            </div>
-            <p class="lead mb-2">{{post.title}}</p>
-            <small>{{post.birdSpecie}}</small>
-            <div class="landing-stars">
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-            </div>
-          </div>
-        </blockquote>
-      </div>
-
-      
-      
-    </div>
-  </div>
-</section>
-
-<section class="py-5">
-  <div class="container text-center">
-    <div class="row">
-      <div class="col-lg-6 mx-auto">
-        <h2 class="mb-3">
-          Join over 3,000 developers who are already working with our products
-        </h2>
-        <a href="https://themes.getbootstrap.com/product/spark-responsive-admin-template/" target="_blank"
-          class="align-middle btn btn-success btn-lg mt-n1">
-          Purchase Now
-        </a>
-      </div>
-    </div>
-  </div>
-</section>

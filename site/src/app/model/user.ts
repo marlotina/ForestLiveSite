@@ -81,7 +81,6 @@ export class ImageProfileRequest {
     imageBase64: string;
     imageName: string;
     userId: string;
-    userName: string;
     hasImage: boolean;
 }
 

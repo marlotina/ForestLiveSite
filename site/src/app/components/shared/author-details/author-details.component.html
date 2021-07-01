@@ -1,60 +1,64 @@
 <div class="card">
-    <div class="card-body">
-        <div class="row g-0">
-            <div class="col-sm-3 col-xl-12 col-xxl-4 text-center">
-                <img [src]="userImage"width="64" height="64" class="rounded-circle mt-2" alt="image of {{userInfo.userName}}">
-            </div>
-            <div class="col-sm-9 col-xl-12 col-xxl-8">
-                <h5 class="card-title mb-0">{{userInfo.userName}}</h5>
-                <button class="votebtn" 
-                    [ngClass]="{'hasVote-btn' : userInfo.hasFollow, 'vote-btn' : !userInfo.hasFollow}" 
-                    (click)="addFollow();" type="button">
-                    <i class="align-middle mr-2 fas fa-fw fa-splotch"></i> 
-                </button> {{userInfo.followerCount}}&nbsp;Followers
-                
-             
-            </div>
-        </div>
-    </div>
-
-    <div class="card-body">      
-        <div class="progress mb-3">
-            <div class="progress-bar progress-bar-striped" 
-                role="progressbar" style="width: 50%" aria-valuenow="50" 
-                aria-valuemin="0" aria-valuemax="100">level 1</div>
-        </div>
-        
-        <strong>About me</strong>
-        <p><em>{{userInfo.description}}</em></p>
-        <h6 class="card-subtitle text-muted">Register from:</h6>
-        <h6 class="card-subtitle text-muted">{{userInfo.registrationDate}}</h6>
-    </div>
-
-    <div class="card-body">
-        <div class="row g-0">
-            <div  class="d-flex">
-                <a href="/usermappage/{{userInfo.userName}}"><img class="mapAuthor img-fluid" alt="" src="../../../../../assets/img/bg-img/maplink.jpg"></a>
+    <app-loader></app-loader>  
+    <div  *ngIf="!isLoading">
+        <div class="card-body">
+            <div class="row g-0">
+                <div class="col-sm-3 col-xl-12 col-xxl-4 text-center">
+                    <img [src]="userImage"width="64" height="64" class="rounded-circle mt-2" alt="image of {{userInfo.userName}}">
+                </div>
+                <div class="col-sm-9 col-xl-12 col-xxl-8">
+                    <h5 class="card-title mb-0">{{userInfo.userName}}</h5>
+                    <button class="votebtn" 
+                        [ngClass]="{'hasVote-btn' : userInfo.hasFollow, 'vote-btn' : !userInfo.hasFollow}" 
+                        (click)="addFollow();" type="button">
+                        <i class="align-middle mr-2 fas fa-fw fa-splotch"></i> 
+                    </button> {{userInfo.followerCount}}&nbsp;Followers
+                    
+                 
+                </div>
             </div>
         </div>
-    </div>
-
-    <div class="card-body">
-        <div  class="d-flex mb-15">
-            <a href="https://{{userInfo.urlWebSite}}" *ngIf="userInfo.urlWebSite != '' && userInfo.urlWebSite != null"  target="_blank">
-                <i class="align-middle mr-2 fab fa-fw fa-firefox"></i> 
-            </a>
-            <a href="https://{{userInfo.facebookUrl}}" *ngIf="userInfo.facebookUrl != '' && userInfo.facebookUrl != null"  target="_blank">
-                <i class="align-middle mr-2 fab fa-fw fa-facebook"></i> 
-            </a>
-            <a href="https://{{userInfo.twitterUrl}}" *ngIf="userInfo.twitterUrl != '' && userInfo.twitterUrl != null"  target="_blank">
-                <i class="align-middle mr-2 fab fa-fw fa-twitter"></i> 
-            </a>
-            <a href="https://{{userInfo.instagramUrl}}" *ngIf="userInfo.instagramUrl != '' && userInfo.instagramUrl != null"  target="_blank">
-                <i class="align-middle mr-2 fab fa-fw fa-instagram"></i> 
-            </a>
-            <a href="https://{{userInfo.linkedlinUrl}}" *ngIf="userInfo.linkedlinUrl != '' && userInfo.linkedlinUrl != null"  target="_blank">
-                <i class="align-middle mr-2 fab fa-fw fa-linkedin"></i> 
-            </a>
+    
+        <div class="card-body">      
+            <div class="progress mb-3">
+                <div class="progress-bar progress-bar-striped" 
+                    role="progressbar" style="width: 50%" aria-valuenow="50" 
+                    aria-valuemin="0" aria-valuemax="100">level 1</div>
+            </div>
+            
+            <strong>About me</strong>
+            <p><em>{{userInfo.description}}</em></p>
+            <h6 class="card-subtitle text-muted">Register from:</h6>
+            <h6 class="card-subtitle text-muted">{{userInfo.registrationDate}}</h6>
         </div>
-    </div> 
+    
+        <div class="card-body">
+            <div class="row g-0">
+                <div  class="d-flex">
+                    <a href="/usermappage/{{userInfo.userName}}"><img class="mapAuthor img-fluid" alt="" src="../../../../../assets/img/bg-img/maplink.jpg"></a>
+                </div>
+            </div>
+        </div>
+    
+        <div class="card-body">
+            <div  class="d-flex mb-15">
+                <a href="https://{{userInfo.urlWebSite}}" *ngIf="userInfo.urlWebSite != '' && userInfo.urlWebSite != null"  target="_blank">
+                    <i class="align-middle mr-2 fab fa-fw fa-firefox"></i> 
+                </a>
+                <a href="https://{{userInfo.facebookUrl}}" *ngIf="userInfo.facebookUrl != '' && userInfo.facebookUrl != null"  target="_blank">
+                    <i class="align-middle mr-2 fab fa-fw fa-facebook"></i> 
+                </a>
+                <a href="https://{{userInfo.twitterUrl}}" *ngIf="userInfo.twitterUrl != '' && userInfo.twitterUrl != null"  target="_blank">
+                    <i class="align-middle mr-2 fab fa-fw fa-twitter"></i> 
+                </a>
+                <a href="https://{{userInfo.instagramUrl}}" *ngIf="userInfo.instagramUrl != '' && userInfo.instagramUrl != null"  target="_blank">
+                    <i class="align-middle mr-2 fab fa-fw fa-instagram"></i> 
+                </a>
+                <a href="https://{{userInfo.linkedlinUrl}}" *ngIf="userInfo.linkedlinUrl != '' && userInfo.linkedlinUrl != null"  target="_blank">
+                    <i class="align-middle mr-2 fab fa-fw fa-linkedin"></i> 
+                </a>
+            </div>
+        </div> 
+    </div>
+    
 </div>

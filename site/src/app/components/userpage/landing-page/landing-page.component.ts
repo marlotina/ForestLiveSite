@@ -59,6 +59,7 @@ export class LandingPageComponent implements OnInit {
 
     this.activateRoute.paramMap.subscribe(params => {
       this.userId = params.get("userId");
+      this.selectedLabel = params.get("labelId");
       this.searchPosts();   
       this.showOwnerOptions = this.userLoggedName != null && this.userId == this.userLoggedName;
     });

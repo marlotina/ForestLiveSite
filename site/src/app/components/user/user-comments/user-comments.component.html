@@ -2,7 +2,7 @@
   <div class="container-fluid">
     <div class="header">
         <h1 class="header-title">
-            Blank Page
+            Your comments
         </h1>
     </div>
     
@@ -23,12 +23,12 @@
                 <div class="d-flex justify-content-between">
 
                   <div class="col-12 col-md-10">
-                    <h6 class="card-subtitle text-muted">Creation date:&nbsp;{{comment.creationDate}}</h6>
                     <p>{{comment.text}}</p>
+                    <h6 class="card-subtitle text-muted">Creation date:&nbsp;{{comment.creationDate}}</h6>
                   </div>
 
                   <div class="col-12 col-md-1">
-                    <button type="button" class="btn btn-outline-danger addLabelBtn" (click)="deleteComment(comment)"><i class="align-middle me-2 fas fa-fw fa-trash-alt"></i></button>
+                    <button type="button" class="btn btn-outline-danger addLabelBtn" (click)="deleteComment(comment)"><i class="align-middle fas fa-fw fa-trash"></i></button>
                   </div>
                 </div>
               </div>
