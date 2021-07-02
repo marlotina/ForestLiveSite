@@ -13,14 +13,11 @@ import { MatChipInputEvent } from '@angular/material/chips';
 import { startWith } from 'rxjs/operators';
 import { ModalEditImageComponent } from '../modal-edit-image/modal-edit-image.component';
 import { AutocompleteService } from 'src/app/services/autocomplete/autocomplete.service';
-import { AutocompleteResponse } from 'src/app/model/specie';
+import { AutocompleteResponse, CountryItem } from 'src/app/model/specie';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserLabelsService } from 'src/app/services/user/labels/user-labels.service';
 import { ManageItemsService } from 'src/app/services/items/manage-items.service';
 
-class ImageSnippet {
-  constructor(public src: string, public file: File) {}
-}
 
 @Component({
   selector: 'app-create-post',
@@ -35,24 +32,18 @@ export class CreatePostComponent implements OnInit {
   postForm: FormGroup;
   submitted = false;
   
-  center: any;
-  markerOptions: google.maps.MarkerOptions = {draggable: false};
   markers: google.maps.Marker[] = [];
   @ViewChild('mapWrapper') mapElement: ElementRef;
-  zoom: number = 16;
 
   labelCtrl = new FormControl();
   separatorKeysCodes: number[] = [ENTER, COMMA];
   filteredLabels: Observable<string[]>;
   labels: string[] = [];
   allLabels: string[] = [];
-  visible = true;
   sizeError = false;
 
-  selectedFile: ImageSnippet;
 
   url: any;
-  msg = "";
   imageName="";
   file: any;
   altImage = "";
@@ -64,12 +55,16 @@ export class CreatePostComponent implements OnInit {
   specieName: string = null;
   showMap = false;
   isPost = true;
-  type: string;
   filteredSpecies: Observable<AutocompleteResponse[]>;
-  autocompleteControl = new FormControl();
+  specieAutocompleteControl = new FormControl();
   toolPos = 'after';
   @ViewChild('labelInput') labelInput: ElementRef<HTMLInputElement>;
   @ViewChild('file') fileInput: ElementRef<HTMLInputElement>;
+
+  countries: CountryItem[] = [];
+  filteredCountries: Observable<CountryItem[]>;
+  countryCode: string;
+  countryAutocompleteControl = new FormControl();
 
   constructor(
     private formBuilder: FormBuilder,
@@ -86,9 +81,10 @@ export class CreatePostComponent implements OnInit {
         startWith(null),
         map((
           label: string | null) => 
-          label ? this._filter(label) : this.allLabels.slice()
+          label ? this._filterLabel(label) : this.allLabels.slice()
           ));
-
+      
+      
   }  
   
   ngOnInit(): void {
@@ -102,6 +98,7 @@ export class CreatePostComponent implements OnInit {
       text: ['', [Validators.required]],
       latitude: [null],
       longitude: [null],
+      countryCode: [null],
       specieName: [''],
       specieId: [null],
       labels: [null],
@@ -129,7 +126,17 @@ export class CreatePostComponent implements OnInit {
 
            });
 
-    this.filteredSpecies = this.autocompleteControl.valueChanges.pipe(
+    this.autocompleteService.GetCountries(localStorage.getItem('locale'))
+    .pipe(first())
+    .subscribe(
+        data => {    
+          this.countries = data;
+        },
+        error => { 
+
+        });
+
+    this.filteredSpecies = this.specieAutocompleteControl.valueChanges.pipe(
       startWith(''),
       debounceTime(300),
       switchMap(value => {
@@ -141,11 +148,23 @@ export class CreatePostComponent implements OnInit {
       })
     );
 
+    this.filteredCountries = this.countryAutocompleteControl.valueChanges.pipe(
+      startWith(null),
+      map((
+        country: string | null) => 
+        country ? this._filterCountry(country) : this.countries.slice()
+        ));
+
     this.getLocation();
   }
 
+  selectedCountry(event: MatAutocompleteSelectedEvent): void {
+    this.countryCode = event.option.value.countryId;
+    this.countryAutocompleteControl.setValue(event.option.value.name);
+  }
+
   selectSpecie(item: AutocompleteResponse){
-    this.autocompleteControl.setValue(item.nameComplete);
+    this.specieAutocompleteControl.setValue(item.nameComplete);
     this.specieId = item.specieId;
     this.specieName = item.nameComplete;
   }
@@ -183,7 +202,8 @@ export class CreatePostComponent implements OnInit {
       'altImage': this.altImage,
       'isPost': this.isPost,
       'specieId': this.specieId,
-      'specieName': this.specieName
+      'specieName': this.specieName,
+      'countryCode': this.countryCode
     });
     
     this.manageItemsService.addPost(this.postForm.value)
@@ -229,14 +249,13 @@ export class CreatePostComponent implements OnInit {
     this.imageName = event.target.files[0].name;
 
     if (mimeType.match(/image\/*/) == null) {
-      this.msg = "Only images are supported";
+      //this.msg = "Only images are supported";
       return;
     }
     
     var reader = new FileReader();
     reader.readAsDataURL(event.target.files[0]);
     reader.onload = (_event) => {
-      this.msg = "";
       //this.url = reader.result; 
     }
     this.visibleEditImage =true;
@@ -277,7 +296,7 @@ export class CreatePostComponent implements OnInit {
   initMap(latLng: any) {
       const mapOptions: google.maps.MapOptions = {
         center: latLng,
-        zoom: this.zoom,
+        zoom: 16,
         fullscreenControl: false,
         mapTypeControl: false,
         streetViewControl: false,
@@ -290,10 +309,6 @@ export class CreatePostComponent implements OnInit {
       });
   }
 
-  getCountry(){
-    const hila = "https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyAjqE9XcDEwD2SmV9mmf757kYOdwTbJvwQ&latlng=40.714224,-73.961452&sensor=true";
-  }
-  
   addMarker(location: google.maps.LatLngLiteral, map: google.maps.Map) {
     const marker = new google.maps.Marker({
       position: location,
@@ -379,9 +394,15 @@ export class CreatePostComponent implements OnInit {
     this.labelCtrl.setValue(null);
   }
 
-  private _filter(value: string): string[] {
+  private _filterLabel(value: string): string[] {
     const filterValue = value.toLowerCase();
     var result = this.allLabels.filter(label => label.toLowerCase().indexOf(filterValue) === 0);
+    return result;
+  }
+
+  private _filterCountry(value: string): CountryItem[] {
+    const filterValue = value.toLowerCase();
+    var result = this.countries.filter(country => country.name.toLowerCase().indexOf(filterValue) === 0);
     return result;
   }
 

@@ -12,8 +12,11 @@
         <label>{{userNameLogged}}</label>
     </div>
     <div class="col-12 col-md-11">
-        <textarea class="form-control mb-15" #commentInput  name="text" id="text" cols="20" rows="3" placeholder="{{ 'postPage.comment' | translate }}"></textarea>
-        <button type="button" (click)="addComment(null, commentInput.value)" class="btn btn-primary">{{ 'postPage.postComment' | translate }}</button>
+        <textarea class="form-control mb-15" #commentInput  
+            name="text" id="text" cols="20" rows="3" 
+            placeholder="{{ 'postPage.comment' | translate }}"></textarea>
+        <button type="button" (click)="addComment(null, commentInput.value)" 
+            class="btn btn-primary">{{ 'postPage.postComment' | translate }}</button>
     </div>
 </div>
 
@@ -22,89 +25,89 @@
     ></ng-container>
 
 <ng-template #replyThread let-childReplies>
-        <div class="row mt-15" *ngFor="let comment of childReplies;">
-            <div class="col-12 col-md-1">
-                <div *ngIf="comment.userId">
-                    <a href="{{comment.userId}}" >
-                        <img src="{{imagesProfileUrl}}{{comment.userImage}}" alt="{{ 'postPage.userImage' | translate }}" class="rounded-circle mr-1" alt="Kathie Burton" width="40" height="40">
-                    </a>
-                </div>
-            </div> 
-            <div class="col-12 col-md-11">
-                <div class="row">
-                    <div class="col-12 col-md-11 rowComment">
+    <div class="row mt-15" *ngFor="let comment of childReplies;">
+        <div class="col-12 col-md-1">
+            <div *ngIf="comment.userId">
+                <a href="{{comment.userId}}" >
+                    <img src="{{imagesProfileUrl}}{{comment.userImage}}" alt="{{ 'postPage.userImage' | translate }}" class="rounded-circle mr-1" alt="Kathie Burton" width="40" height="40">
+                </a>
+            </div>
+        </div> 
+        <div class="col-12 col-md-11">
+            <div class="row">
+                <div class="col-12 col-md-11 rowComment">
 
-                        <div *ngIf="comment.userId" class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3" >
-                            <small >{{comment.userId}}&nbsp;<em>{{comment.creationDate}}</em></small>
-                            <p>{{comment.text}}</p>
-                        </div>
+                    <div *ngIf="comment.userId" class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3" >
+                        <small >{{comment.userId}}&nbsp;<em>{{comment.creationDate}}</em></small>
+                        <p>{{comment.text}}</p>
+                    </div>
 
-                        <div *ngIf="!comment.userId" class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3 mb-15">
-                            <p>el comentario fue borrado</p>
-                        </div>
+                    <div *ngIf="!comment.userId" class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3 mb-15">
+                        <p>el comentario fue borrado</p>
+                    </div>
 
-                        <div *ngIf="userNameLogged != null && comment.userId">
-                            <button type="button" 
-                                (click)="addVote(comment)" 
-                                [ngClass]="{'hasVote-btn' : comment.hasVote, 'vote-btn' : !comment.hasVote}" 
-                                class="votebtn">
-                                <i class="align-middle mr-2 fas fa-fw fa-arrow-alt-circle-up"></i> 
-                            </button>
-                            &nbsp;Votes {{comment.voteCount}}&nbsp;
-                            <a class="badge bg-primary" data-bs-toggle="collapse" 
-                                href="#collapseExample-{{comment.id}}" (click)="showCommentForm(comment.id)" 
-                                role="button" aria-expanded="false" aria-controls="collapseExample">
-                                Reply
-                            </a>
-                            
-                            <div class="row">
-                                <div class="collapse" id="collapseExample-{{comment.id}}">
-                                    <ng-container *ngIf="showFormList[comment.id]">
-                                        <ng-container
-                                        *ngTemplateOutlet="
-                                        commetForm;
-                                        context: { $implicit: comment }
-                                        "
-                                        ></ng-container>
+                    <div *ngIf="userNameLogged != null && comment.userId">
+                        <button type="button" 
+                            (click)="addVote(comment)" 
+                            [ngClass]="{'hasVote-btn' : comment.hasVote, 'vote-btn' : !comment.hasVote}" 
+                            class="votebtn">
+                            <i class="align-middle mr-2 fas fa-fw fa-arrow-alt-circle-up"></i> 
+                        </button>
+                        &nbsp;Votes {{comment.voteCount}}&nbsp;
+                        <a class="badge bg-primary" data-bs-toggle="collapse" 
+                            href="#collapseExample-{{comment.id}}" (click)="showCommentForm(comment.id)" 
+                            role="button" aria-expanded="false" aria-controls="collapseExample">
+                            Reply
+                        </a>
+                        
+                        <div class="row">
+                            <div class="collapse" id="collapseExample-{{comment.id}}">
+                                <ng-container *ngIf="showFormList[comment.id]">
+                                    <ng-container
+                                    *ngTemplateOutlet="
+                                    commetForm;
+                                    context: { $implicit: comment }
+                                    "
+                                    ></ng-container>
 
-                                    </ng-container>
-                                </div>
-                            </div>
-                        </div>
-                    </div>   
-
-                    <div class="col-12 col-md-1 commetDate">
-                        <div class="card-actions float-end" *ngIf="showOwnerCommentOptions(comment.userId)">
-                            <a href="#" class="me-1">
-                                <i class="align-middle" data-feather="refresh-cw"></i>
-                            </a>
-                            <div class="d-inline-block dropdown show">
-                                <a href="#" data-bs-toggle="dropdown" data-bs-display="static">
-                                    <i class="align-middle me-2 fas fa-fw fa-ellipsis-v"></i>
-                                </a>
-        
-                                <div class="dropdown-menu dropdown-menu-end">
-                                    <button class="dropdown-item" mat-menu-item type="button" (click)="deleteComment(comment)">
-                                        <i class="align-middle me-2 fas fa-fw fa-trash-alt"></i>
-                                        <span>{{ 'postPage.delete' | translate }}</span>
-                                    </button>
-                                </div>
+                                </ng-container>
                             </div>
                         </div>
                     </div>
+                </div>   
 
-                    <ng-container *ngIf="comment.replies">
-                        <ng-container
-                        *ngTemplateOutlet="
-                        replyThread;
-                            context: { $implicit: comment.replies}
-                        "
-                        ></ng-container>
-                    </ng-container>
-                    
+                <div class="col-12 col-md-1 commetDate">
+                    <div class="card-actions float-end" *ngIf="showOwnerCommentOptions(comment.userId)">
+                        <a href="#" class="me-1">
+                            <i class="align-middle" data-feather="refresh-cw"></i>
+                        </a>
+                        <div class="d-inline-block dropdown show">
+                            <a href="#" data-bs-toggle="dropdown" data-bs-display="static">
+                                <i class="align-middle me-2 fas fa-fw fa-ellipsis-v"></i>
+                            </a>
+    
+                            <div class="dropdown-menu dropdown-menu-end">
+                                <button class="dropdown-item" mat-menu-item type="button" (click)="deleteComment(comment)">
+                                    <i class="align-middle me-2 fas fa-fw fa-trash-alt"></i>
+                                    <span>{{ 'postPage.delete' | translate }}</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+
+                <ng-container *ngIf="comment.replies">
+                    <ng-container
+                    *ngTemplateOutlet="
+                    replyThread;
+                        context: { $implicit: comment.replies}
+                    "
+                    ></ng-container>
+                </ng-container>
+                
             </div>
         </div>
+    </div>
 </ng-template>
 
 <ng-template #commetForm let-commentInfo>

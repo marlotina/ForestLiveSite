@@ -1,4 +1,4 @@
-<main class="content">
+<div class="content">
 
     <div class="container-fluid">
         <div class="header">
@@ -22,6 +22,11 @@
                                             The maximun size of the image is 3 MB.
                                         </div>
                                     </div>
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <div><img [src]="url" *ngIf="url" class="img-fluid rounded center"></div>
+                                        </div>
+                                    </div>
                                     <label for="uploadImage" class="selectImageLabel" *ngIf="!visibleEditImage">
                                         <div class="selectImage" for="uploadImage">
                                             <img src="../../../../assets/img/core-img/addImage.png" class="selectImageCenter"/>
@@ -34,8 +39,8 @@
         
                             <div class="col-12 col-md-12 mt-15">
                                 <div class="form-group">
-                                    <button type="button" class="btn btn-outline-primary" *ngIf="visibleEditImage" (click)="deleteImage()">remove</button>
-                                    <button type="button" class="btn btn-outline-primary" *ngIf="visibleEditImage" (click)="openEditImage()">{{ 'createPost.editImage' | translate }}</button>                                            
+                                    <button type="button" class="btn btn-outline-primary" *ngIf="visibleEditImage" (click)="deleteImage()">remove</button>&nbsp;
+                                    <button type="button" class="btn btn-outline-primary" *ngIf="visibleEditImage" (click)="openEditImage()">{{ 'createPost.editImage' | translate }}</button>                                         
                                 </div>
                             </div>   
                         </div>
@@ -44,7 +49,7 @@
                             <div class="form-group col-md-5">
                                 <label for="titlePost">Specie</label>
                                 <input type="text" class="form-control" [matAutocomplete]="autoBird"
-                                    [formControl]="autocompleteControl" 
+                                    [formControl]="specieAutocompleteControl" 
                                     id="specieNamePost" placeholder="Introduce especie">
                                 
                                 <mat-autocomplete #autoBird="matAutocomplete" (optionSelected)='selectSpecie($event.option.value)'>
@@ -53,12 +58,28 @@
                                     </mat-option>
                                 </mat-autocomplete>
                             </div>
-                            <div class="form-group col-md-4">
+                            <div class="form-group col-md-7">
                                 <div class="alert alert-primary alert-dismissible" role="alert">
                                     <div class="alert-message">
                                         If you don't know the specie, you don't need to select an specie.
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+
+                        <div class="row mb" *ngIf="!isPost">
+                            <div class="form-group col-md-5">
+                                <label for="titlePost">Country</label>
+                                <input type="text" class="form-control" [matAutocomplete]="autoCountry"
+                                    [formControl]="countryAutocompleteControl" 
+                                    id="countryID" placeholder="Select country">
+                                
+                                <mat-autocomplete #autoCountry="matAutocomplete" (optionSelected)="selectedCountry($event)">
+                                    <mat-option *ngFor="let country of filteredCountries | async" [value]="country">
+                                        {{country.name}}
+                                    </mat-option>
+                                </mat-autocomplete>
+                                
                             </div>
                             <div class="form-group col-md-3">
 
@@ -122,9 +143,9 @@
                                     
                                     <mat-autocomplete #autoLabel="matAutocomplete" (optionSelected)="selected($event)">
                                         <mat-option *ngFor="let label of filteredLabels | async" [value]="label">
-                                          {{label}}
+                                            {{label}}
                                         </mat-option>
-                                      </mat-autocomplete>
+                                    </mat-autocomplete>
         
                                 </mat-form-field>
                             </div>
@@ -180,87 +201,8 @@
                 </div>
             </div>
         </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!--
-
-
-
-
-                    <div class="col-12 col-md-12 mt-15">
-                        <button class="btn btn-outline-primary" type="button" (click)="showHideMap()" [hidden]="showMap"><img src="../../../../assets/img/core-img/marker.svg" />Add location</button>
-                        <button class="btn btn-outline-primary" type="button" (click)="showHideMap()" [hidden]="!showMap">remove</button>
-                   
-                    </div>
-                    <div class="col-12 col-md-6 mt-15" [hidden]="!showMap">
-                        <div class="form-group">
-                            <input type="text"  
-                                class="form-control" 
-                                id="latitudePost" 
-                                placeholder="{{ 'createPost.latitude' | translate }}" 
-                                [ngClass]="{ 'is-invalid': submitted && f.latitude.errors}"
-                                formControlName="latitude" 
-                                (change)="onChangeEvent()" />
-                        </div>
-
-                    </div>
-                    <div class="col-12 col-md-6 mt-15" [hidden]="!showMap">
-                        <div class="form-group">
-                            <input type="text" 
-                                class="form-control" 
-                                placeholder="{{ 'createPost.longitude' | translate }}" 
-                                id="longitudePost"
-                                formControlName="longitude" 
-                                [ngClass]="{ 'is-invalid': submitted && f.longitude.errors}"
-                                (change)="onChangeEvent()" />
-                        </div>
-                    </div>
-
-                    <div class="col-12 mt-15" [hidden]="!showMap">
-                        <div #mapWrapper id="map" class="createPostMap"></div>
-                    </div>
-                    <div class="col-12 mt-15 mb-15">
-                        <button *ngIf="submitted" class="btn btn-primary" type="button" disabled>
-                            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                            Loading...
-                        </button>
-
-                        <button type="submit" *ngIf="!submitted" class="btn btn-primary mt-15">{{ 'createPost.createPostBtn' | translate }}</button>
-                    </div>
-
-                </div>
-            </form>
-          </div>
-  
-      </div>
     </div>
-  </main>-->
-
-
-
-
-
-
-
-
+</div>
 
 
 

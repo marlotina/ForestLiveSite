@@ -13,6 +13,7 @@ export class PostRequest {
     labels: string[];
     observationDate: Date;
     isPost: boolean;
+    countryCode: string;
 }
 
 export class PostResponse {

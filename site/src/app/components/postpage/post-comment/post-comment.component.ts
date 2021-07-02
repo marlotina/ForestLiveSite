@@ -71,38 +71,40 @@ export class PostCommentComponent implements OnInit {
 
 
   addComment(parentComment: CommentResponse, text: string) {
-
-    let commentRequest: CommentRequest = {
-      postId: this.postId,
-      titlePost: this.postTitle,
-      AuthorPostId: this.userId,
-      text: text,
-      parentId: parentComment == null ? null : parentComment.id,
-      specieId: this.specieId,
-      userId: this.userNameLogged,
-      ImagePost: this.imageUrl
+    if(text != ""){
+      let commentRequest: CommentRequest = {
+        postId: this.postId,
+        titlePost: this.postTitle,
+        AuthorPostId: this.userId,
+        text: text,
+        parentId: parentComment == null ? null : parentComment.id,
+        specieId: this.specieId,
+        userId: this.userNameLogged,
+        ImagePost: this.imageUrl
+      }
+  
+      this.commentService.AddComment(commentRequest)
+          .pipe(first())
+          .subscribe(
+              data => {    
+                if(parentComment == null){
+                  this.comments.push(data);
+                }else{
+                  parentComment.replies.push(data);
+                  this.showFormList[parentComment.id] = false;
+                }
+                this.commentCount++;
+                this.commentInput.nativeElement.value = '';
+              },
+              error => {   
+                if(error.status == "409"){
+                  this.openCommonModal('account.conflictNameMessage');
+                } else {
+                  this.openCommonModal('user.failUserAction');
+                } 
+              });
     }
-
-    this.commentService.AddComment(commentRequest)
-        .pipe(first())
-        .subscribe(
-            data => {    
-              if(parentComment == null){
-                this.comments.push(data);
-              }else{
-                parentComment.replies.push(data);
-                this.showFormList[parentComment.id] = false;
-              }
-              this.commentCount++;
-              this.commentInput.nativeElement.value = '';
-            },
-            error => {   
-              if(error.status == "409"){
-                this.openCommonModal('account.conflictNameMessage');
-              } else {
-                this.openCommonModal('user.failUserAction');
-              } 
-            });
+    
   }
 
   deleteComment(comment: CommentResponse){

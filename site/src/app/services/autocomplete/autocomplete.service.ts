@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 
 import { environment } from '../../../environments/environment';
 import { map } from 'rxjs/operators';
-import { AutocompleteResponse } from 'src/app/model/specie';
+import { AutocompleteResponse, CountryItem } from 'src/app/model/specie';
 
 
 @Injectable({
@@ -21,8 +21,8 @@ export class AutocompleteService {
       }));
   }
 
-  GetCountries(text: string, languageCode: string){
-    return this.httpClient.get<AutocompleteResponse[]>(`${environment.specieApiUrl}api/v1/Country/GetCountries?languageCode=${languageCode}`)
+  GetCountries(languageCode: string){
+    return this.httpClient.get<CountryItem[]>(`${environment.specieApiUrl}api/v1/Country/GetCountries?languageCode=${languageCode}`)
       .pipe(map(data => {
         return data;
       }));
