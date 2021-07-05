@@ -38,8 +38,7 @@ export class FollowComponent implements OnInit {
   removeFollow(follow: FollowListResponse) {
     let request: DeleteFollowUserResquest = {
       followId: follow.id,
-      followUserId: follow.followUserId,
-      userSystemId: this.accountService.userValue.id
+      followUserId: follow.followUserId
     };
     this.userInteractionsService.DeleteFollow(request)
     .pipe(first())

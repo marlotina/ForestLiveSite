@@ -18,6 +18,7 @@ export class UserInteractionsService {
       .pipe(map(user => {
         return user;
       }));
+      
   }
 
   GetByUserName(userName: string) {
@@ -49,7 +50,7 @@ export class UserInteractionsService {
   }
 
   DeleteFollow(request: DeleteFollowUserResquest){
-    return this.httpClient.delete(`${environment.userInteractionsApi}api/v1/FollowUser/DeleteFollowUser?followId=${request.followId}&followUserId=${request.followUserId}&userSystemId=${request.userSystemId}`)
+    return this.httpClient.delete(`${environment.userInteractionsApi}api/v1/FollowUser/DeleteFollowUser?followId=${request.followId}&followUserId=${request.followUserId}`)
       .pipe(map(data => {
         return data;
       }));

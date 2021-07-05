@@ -48,8 +48,7 @@ export class AuthorDetailsComponent implements OnInit {
     if(this.userInfo.hasFollow){
       let request: DeleteFollowUserResquest = {
         followId: this.userInfo.followId,
-        followUserId: this.userInfo.userName,
-        userSystemId: this.userInfo.id
+        followUserId: this.userInfo.userName
       };
       this.userInteractionService.DeleteFollow(request)
       .pipe(first())
@@ -65,8 +64,7 @@ export class AuthorDetailsComponent implements OnInit {
     }else{
       let request: FollowUserRequest = {
         userId: this.accountService.userValue.userId,
-        followUserId:  this.userInfo.userName,
-        userSystemId: this.userInfo.id
+        followUserId:  this.userInfo.userName
       };
 
       this.userInteractionService.AddFollow(request)

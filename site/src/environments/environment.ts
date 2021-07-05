@@ -10,7 +10,7 @@ export const environment = {
   userApiUrl: 'https://bcuserqa.azurewebsites.net/',
   postApiUrl: 'https://bcpostqa.azurewebsites.net/',
   birdApiUrl: 'https://bcbirdqa.azurewebsites.net/',
-  userInteractionsApi: 'https://bcuserinteractionsapi.azurewebsites.net/',
+  userInteractionsApi: 'https://bcuserinteractionsqa.azurewebsites.net/',
   postInteractionsApi: 'https://bcpostinteractionqa.azurewebsites.net/',
   specieApiUrl: 'https://bcdataqa.azurewebsites.net/',
   googleApiKey: 'AIzaSyAjqE9XcDEwD2SmV9mmf757kYOdwTbJvwQ',
@@ -18,7 +18,7 @@ export const environment = {
                       'bcuserqa.azurewebsites.net',
                       'bcbirdqa.azurewebsites.net',
                       'bcpostinteractionqa.azurewebsites.net',
-                      'bcuserinteractionsapi.azurewebsites.net',
+                      'bcuserinteractionsqa.azurewebsites.net',
                       'bcdataqa.azurewebsites.net'],
   blacklistedRoutes: []
 }
