@@ -26,7 +26,7 @@
                                             <input type="text" 
                                                 id="usernameProfile"
                                                 class="form-control" 
-                                                [ngClass]="{ 'is-invalid': submitted && f.userName.errors }"
+                                                [ngClass]="{ 'is-invalid': submitted && f.id.errors }"
                                                 formControlName="id" disabled>
                                         </div>
                                         <div class="mb-3">    
@@ -186,9 +186,11 @@
 
                         <div class="card">
                             <div class="card-body">
-                                <div class="row">
-                                    <div class="mb-3 col-md-4">
+                                <div class="row row-cols-md-auto align-items-center">
+                                    <div class="mb-12 col-md-4">                                       
                                         <label>Reset your password, you will receibed an email</label>
+                                    </div>
+                                    <div class="mb-12 col-md-8">
                                         <button type="button" class="btn btn-primary" (click)="recoverPassword()">{{ 'user.resetPassword' | translate }}</button>
                                     </div>
                                 </div>
@@ -197,8 +199,8 @@
 
                         <div class="card">
                             <div class="card-body">
-                                <div class="row">
-                                    <div class="mb-3 col-md-4">
+                                <div class="row row-cols-md-auto align-items-center">
+                                    <div class="col-md-8">
                                         <button *ngIf="submitted" class="btn btn-primary" type="button" disabled>
                                             <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                                             Loading...
@@ -207,8 +209,8 @@
 
                                     </div>
 
-                                    <div class="mb-3 col-md-4">
-                                        <button type="button" class="btn btn-danger" (click)="deleteUser()">{{ 'user.deleteUser' | translate }}</button>
+                                    <div class="col-md-4">
+                                        <button type="button" class="btn btn-danger floatRight" (click)="deleteUser()">{{ 'user.deleteUser' | translate }}</button>
                                     </div>
                                 </div>
                             </div>

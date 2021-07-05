@@ -12,7 +12,8 @@ import { CommonDialogComponent } from '../../shared/common-dialog/common-dialog.
 
 @Component({
   selector: 'app-user-profile',
-  templateUrl: './user-profile.component.html'
+  templateUrl: './user-profile.component.html',
+  styleUrls: ['./user-profile.component.css']
 })
 export class UserProfileComponent implements OnInit {
 

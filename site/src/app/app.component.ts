@@ -26,8 +26,9 @@ export class AppComponent implements OnInit {
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd)
     ).subscribe(res => {
-      if (this.pages.includes(this.router.url)) {//forgotpassword signup resetpassword confirmemail
+      if (this.containUrl(this.router.url)) {//forgotpassword signup resetpassword confirmemail
         this.navExpand = false;
+        this.isHome = true;
       } else {
         if(this.router.url == "/") {
           this.isHome = true;
@@ -39,6 +40,17 @@ export class AppComponent implements OnInit {
       }
     });
 
+  }
+
+  
+  containUrl(url: string){
+    let result = false;
+    this.pages.forEach(function(item, index){
+      if(url.indexOf(item) >= 0){
+        result = true;
+      }
+    });
+    return result;
   }
 
  public loadScript(url: string) {
