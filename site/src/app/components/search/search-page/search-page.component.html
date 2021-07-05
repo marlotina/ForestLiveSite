@@ -13,7 +13,7 @@
                 </div>
                 <div class="card-body">
                     <div class="row">
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-4">
                             <div class="input-group">
                                 <input type="text" class="form-control" [matAutocomplete]="autoBird"
                                     [formControl]="autocompleteControl" 
@@ -33,9 +33,26 @@
                                     </mat-option>
                                 </mat-autocomplete>
                             </div>
-                        </div>        
+                        </div>      
+
+                        <div class="form-group col-md-4">
+                            <label class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="radioSpecieTypeSearch" id="radioSpecieTypeSearch1" 
+                                    (change)="changeSearchSpecie($event)" value="1" checked>
+                                <span class="form-check-label"  for="radioSpecieTypeSearch1">
+                                    Coomon name
+                                </span>
+                            </label>
+                            <label class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="radioSpecieTypeSearch"
+                                    (change)="changeSearchSpecie($event)" value="2" id="radioSpecieTypeSearch2">
+                                <span class="form-check-label"  for="radioSpecieTypeSearch2">
+                                    Science name
+                                </span>
+                            </label>
+                        </div>
                 
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-4">
                             <div class="ml-15 form-group inputSearchTop">
                                 <input id="pac-input" type="text" placeholder="Introduce location" class="form-control" />
                             </div>

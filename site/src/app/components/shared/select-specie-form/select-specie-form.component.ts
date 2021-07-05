@@ -66,7 +66,7 @@ export class SelectSpecieFormComponent implements OnInit {
 
   getSpecies(value: any): Observable<AutocompleteResponse[]> {
     if(value != '' && value.length > 2) {
-      return this.autocompleteService.GetSpeciesByKeys(value.toLowerCase(), localStorage.getItem('locale'))
+      return this.autocompleteService.GetSpeciesByName(value.toLowerCase(), localStorage.getItem('locale'))
         .pipe(map(results => results),
           catchError(_ => {
             return of([]);

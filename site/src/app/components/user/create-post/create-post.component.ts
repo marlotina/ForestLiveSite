@@ -66,6 +66,7 @@ export class CreatePostComponent implements OnInit {
   countryCode: string;
   countryAutocompleteControl = new FormControl();
 
+  searchSpecie: number = 1
   constructor(
     private formBuilder: FormBuilder,
     private matDialog: MatDialog,
@@ -78,7 +79,7 @@ export class CreatePostComponent implements OnInit {
     private autocompleteService: AutocompleteService) { 
       
       this.filteredLabels = this.labelCtrl.valueChanges.pipe(
-        startWith(null),
+        startWith(''),
         map((
           label: string | null) => 
           label ? this._filterLabel(label) : this.allLabels.slice()
@@ -173,18 +174,33 @@ export class CreatePostComponent implements OnInit {
     event.stopPropagation();
   }
 
+
   getSpecies(value: any): Observable<AutocompleteResponse[]> {
     if(value != '' && value.length > 2) {
-      return this.autocompleteService.GetSpeciesByKeys(value.toLowerCase(), localStorage.getItem('locale'))
-        .pipe(map(results => results),
-          catchError(_ => {
-            return of([]);
-          }
-        )
-      );
+      if(this.searchSpecie == 1){
+        return this.autocompleteService.GetSpeciesByName(value.toLowerCase(), localStorage.getItem('locale'))
+          .pipe(map(results => results),
+            catchError(_ => {
+              return of(null);
+            }
+          )
+        );
+      }else{
+        return this.autocompleteService.GetSpeciesByScienceName(value.toLowerCase(), localStorage.getItem('locale'))
+          .pipe(map(results => results),
+            catchError(_ => {
+              return of(null);
+            }
+          )
+        );
+      }
     }
 
     return of([]);
+  }
+
+  changeSearchSpecie(e: any){
+    this.searchSpecie = e.target.value;
   }
 
   onSubmit() {

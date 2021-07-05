@@ -33,6 +33,7 @@ export class SearchPageComponent implements OnInit {
   specieId: string = '';
   infowindow = new google.maps.InfoWindow();
   hideRemoveBtn = true;
+  searchSpecie: number = 1
 
   constructor(
       private locationService: LocationService,
@@ -218,16 +219,32 @@ export class SearchPageComponent implements OnInit {
     var wop = user;
   }
 
-  getSpecies(value: any): Observable<PostResponse[]> {
-    return this.autocompleteService.GetSpeciesByKeys(value.toLowerCase(), localStorage.getItem('locale'))
-      .pipe(map(results => results),
-        catchError(_ => {
-          return of(null);
-        }
-      )
-    );
+  getSpecies(value: any): Observable<AutocompleteResponse[]> {
+    if(value != '' && value.length > 2) {
+      if(this.searchSpecie == 1){
+        return this.autocompleteService.GetSpeciesByName(value.toLowerCase(), localStorage.getItem('locale'))
+          .pipe(map(results => results),
+            catchError(_ => {
+              return of(null);
+            }
+          )
+        );
+      }else{
+        return this.autocompleteService.GetSpeciesByScienceName(value.toLowerCase(), localStorage.getItem('locale'))
+          .pipe(map(results => results),
+            catchError(_ => {
+              return of(null);
+            }
+          )
+        );
+      }
+    }
 
-    return null;
+    return of([]);
+  }
+
+  changeSearchSpecie(e: any){
+    this.searchSpecie = e.target.value;
   }
 
   setMapOnAll(map: google.maps.Map | null) {

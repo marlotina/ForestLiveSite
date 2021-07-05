@@ -35,6 +35,7 @@ export class BirdLandingPageComponent implements OnInit {
   filteredSpecies: Observable<AutocompleteResponse[]>;
   autocompleteControl = new FormControl();
   specieIdPostControl = new FormControl();
+  searchSpecie: number = 1
 
   constructor(
     private searchBirdsSerices: BirdserviceService,
@@ -117,15 +118,32 @@ export class BirdLandingPageComponent implements OnInit {
     return this.userLoggedName != null && userId == this.userLoggedName;
   }
 
-  getSpecies(value: any): Observable<PostListResponse[]> {
-    
-    return this.autocompleteService.GetSpeciesByKeys(value.toLowerCase(), localStorage.getItem('locale'))
-      .pipe(map(results => results),
-        catchError(_ => {
-          return of(null);
-        }
-      )
-    );
+  getSpecies(value: any): Observable<AutocompleteResponse[]> {
+    if(value != '' && value.length > 2) {
+      if(this.searchSpecie == 1){
+        return this.autocompleteService.GetSpeciesByName(value.toLowerCase(), localStorage.getItem('locale'))
+          .pipe(map(results => results),
+            catchError(_ => {
+              return of(null);
+            }
+          )
+        );
+      }else{
+        return this.autocompleteService.GetSpeciesByScienceName(value.toLowerCase(), localStorage.getItem('locale'))
+          .pipe(map(results => results),
+            catchError(_ => {
+              return of(null);
+            }
+          )
+        );
+      }
+    }
+
+    return of([]);
+  }
+
+  changeSearchSpecie(e: any){
+    this.searchSpecie = e.target.value;
   }
 
   deletePost(post: PostListResponse){

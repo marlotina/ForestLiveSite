@@ -14,8 +14,15 @@ export class AutocompleteService {
   constructor(private httpClient: HttpClient) { 
   }
 
-  GetSpeciesByKeys(text: string, languageCode: string){
+  GetSpeciesByName(text: string, languageCode: string){
     return this.httpClient.get<AutocompleteResponse[]>(`${environment.specieApiUrl}api/v1/Autocomplete/GetNames?languageCode=${languageCode}&text=${text}`)
+      .pipe(map(data => {
+        return data;
+      }));
+  }
+
+  GetSpeciesByScienceName(text: string, languageCode: string){
+    return this.httpClient.get<AutocompleteResponse[]>(`${environment.specieApiUrl}api/v1/Autocomplete/GetScienceNames?languageCode=${languageCode}&text=${text}`)
       .pipe(map(data => {
         return data;
       }));
