@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Observable, of } from 'rxjs';
-import { catchError, debounceTime, first, map, startWith, switchMap } from 'rxjs/operators';
+import { Observable, of, Subject } from 'rxjs';
+import { catchError, debounceTime, first, map, startWith, switchMap, takeUntil } from 'rxjs/operators';
 import { MapSpeciePoint } from 'src/app/model/Map';
 import { PostResponse } from 'src/app/model/post';
 import { AutocompleteResponse } from 'src/app/model/specie';
@@ -17,6 +17,9 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./search-page.component.css']
 })
 export class SearchPageComponent implements OnInit {
+
+
+  private _filters$ = new Subject<void>();
 
   center: any;
   @ViewChild('mapWrapper') mapElement: ElementRef;
@@ -146,9 +149,20 @@ export class SearchPageComponent implements OnInit {
     
   }
 
+  private destroy$ = new Subject<MapSpeciePoint[]>();
+
+  public ngOnDestroy(): void {
+    this._filters$.next();
+    this._filters$.complete();
+}
+
   getBirds(latLng: google.maps.LatLng, removePoint: boolean){
-      this.searchBirdsSerices.GetSearchPoints(latLng.lat(), latLng.lng(), this.zoom, this.specieId).subscribe(
-        data =>{ 
+
+    this._filters$.pipe(
+        startWith(''),
+        switchMap(() => this.searchBirdsSerices.GetSearchPoints(latLng.lat(), latLng.lng(), this.zoom, this.specieId)), 
+        takeUntil(this.destroy$))
+        .subscribe(data => {
           if(removePoint) {
             this.setMapOnAll(null);
           }
@@ -162,8 +176,7 @@ export class SearchPageComponent implements OnInit {
   
             this.markers.push(marker);
           }
-        } 
-      );
+        });
   }
   
   getMarker(point: MapSpeciePoint, map: google.maps.Map){

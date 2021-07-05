@@ -149,7 +149,7 @@ export class CreatePostComponent implements OnInit {
     );
 
     this.filteredCountries = this.countryAutocompleteControl.valueChanges.pipe(
-      startWith(null),
+      startWith(''),
       map((
         country: string | null) => 
         country ? this._filterCountry(country) : this.countries.slice()
