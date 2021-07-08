@@ -9,7 +9,6 @@
         
 
       <div class="row">
-
         <div class="col-md-12">
             <div class="card">
                 <div class="card-body">
@@ -95,7 +94,6 @@
                                         {{country.name}}
                                     </mat-option>
                                 </mat-autocomplete>
-                                
                             </div>
                             <div class="form-group col-md-3">
 
@@ -107,7 +105,6 @@
                                 </mat-form-field>
                             </div>
                         </div>
-
                         
                         <div class="row mb">
                             <div class="form-group">
@@ -117,7 +114,6 @@
                                     placeholder="{{ 'createPost.title' | translate }}" 
                                     formControlName="title" >
                             </div>
-
                         </div>
                         <div class="row mb">
                             <div class="form-group">
@@ -202,17 +198,16 @@
                                     <div #mapWrapper id="map" class="createPostMap"></div>
                                 </div>
                             </div>
-
                         </div>
-                        
                         
                         <button *ngIf="submitted" class="btn btn-primary" type="button" disabled>
                             <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                             Loading...
                         </button>
 
-                        <button type="submit" *ngIf="!submitted" class="btn btn-primary mt-15">{{ 'createPost.createPostBtn' | translate }}</button>
-                     
+                        <button type="submit" *ngIf="!submitted" class="btn btn-primary mt-15">
+                            {{ 'createPost.createPostBtn' | translate }}
+                        </button>
                     </form>
                 </div>
             </div>

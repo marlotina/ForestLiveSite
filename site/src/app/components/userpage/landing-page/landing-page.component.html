@@ -155,10 +155,10 @@
                         </div>
                         <div class="card-body">
                             <div class="form-row"> 
-                                <div class="form-group col-md-6">            
+                                <div class="form-group">            
                                 <div class="form-group">
                                     <button *ngFor="let label of userLabels" type="button"
-                                        [ngClass]="{'btn-primary' : selectedLabel == label.id, 'btn-outline-primary' : selectedLabel != label.id}" 
+                                        [ngClass]="{'btn-primary btn-sm' : selectedLabel == label.id, 'btn-outline-primary btn-sm' : selectedLabel != label.id}" 
                                         (click)="searchWithLabels(label.id)" class="btn p-label">
                                         {{label.id}} <span class="badge bg-secondary">{{label.postCount}}</span>
                                       </button>

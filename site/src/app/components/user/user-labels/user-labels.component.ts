@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { first } from 'rxjs/operators';
-import { UserLabelRequest, UserLabelResponse } from 'src/app/model/user';
+import { UserLabelResponse } from 'src/app/model/user';
 import { AccountService } from 'src/app/services/account/account.service';
 import { LoaderService } from 'src/app/services/loader/loader.service';
 import { UserLabelsService } from 'src/app/services/user/labels/user-labels.service';
@@ -20,13 +20,16 @@ export class UserLabelsComponent implements OnInit {
   isLoading = true;
   labelForm: FormGroup;
   userId: string;
+  submitted = false;
 
   constructor(
     private loaderService: LoaderService,
     private userLabelsService: UserLabelsService,
     private matDialog: MatDialog,
     private formBuilder: FormBuilder,
-    private accountService: AccountService) { }
+    private accountService: AccountService) {
+      this.userLabels = [];
+     }
 
   ngOnInit(): void {
     this.loaderService.show();
@@ -35,8 +38,8 @@ export class UserLabelsComponent implements OnInit {
       data =>{ 
         if(data != null && data.length > 0){
           this.hasLabels = true;
+          this.userLabels = data;
         }
-        this.userLabels = data;
         this.loaderService.hide();
         this.isLoading = false;
       } 
@@ -57,17 +60,22 @@ export class UserLabelsComponent implements OnInit {
         return;
     }
 
+    this.submitted = true;
+
     this.userLabelsService.AddLabel(this.labelForm.value)
         .pipe(first())
         .subscribe(
             data => {    
               this.userLabels.push(data);
+              this.hasLabels = true;
               this.labelForm.controls.label.setValue('');
+              this.submitted = false;
             },
             error => {   
               if(error.status == "409"){} else {
                 this.openCommonModal('user.failUserAction');
               } 
+              this.submitted = false;
             });
   }
 

@@ -28,6 +28,7 @@ export class PostCommentComponent implements OnInit {
   isLogged: Observable<boolean>;
   showFormList = new Map<string, boolean>();;
   userNameLogged = null;
+  userImage: string;
   @ViewChild('commentInput') commentInput: ElementRef<HTMLInputElement>;
 
   labelInput
@@ -50,6 +51,7 @@ export class PostCommentComponent implements OnInit {
           if(x != null)
           {
             this.userNameLogged = x.userId;
+            this.userImage = x.photo;
           }
         }
       );
@@ -87,7 +89,8 @@ export class PostCommentComponent implements OnInit {
           .pipe(first())
           .subscribe(
               data => {    
-                if(parentComment == null){
+                data.userImage = this.userImage;
+                if(parentComment == null){                  
                   this.comments.push(data);
                 }else{
                   parentComment.replies.push(data);

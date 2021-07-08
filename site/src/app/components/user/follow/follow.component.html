@@ -1,44 +1,56 @@
+
 <main class="content">
-    <div class="container-fluid">
+  <div class="container-fluid">
       <div class="header">
           <h1 class="header-title">
-              Your follows
+            Your follows
           </h1>
       </div>
-      
-      <div class="row">
-        
-        <div class="col-xxl-8">
-          <app-loader></app-loader>    
-          <div class="card-body">
   
-            <div *ngIf="!isLoading && hasFollows">
-              <div class="card" *ngFor="let follow of follows">
-  
-                <div class="card-body">
-                  <h5 class="card-title">
-                    <i class="align-middle me-2 fas fa-fw fa-user"></i>
-                    <a class="removeLinkLine" href="userpage/{{follow.followUserId}}"><strong class="text-gray-dark">{{follow.followUserId}}</strong></a>
-                  </h5>
-                  <div class="d-flex justify-content-between">
-  
-                    <div class="col-12 col-md-10">
-                      <h6 class="card-subtitle text-muted">Creation date:&nbsp;{{follow.creationDate}}</h6>
-                    </div>
-  
-                    <div class="col-12 col-md-1">
-                      <button type="button" class="btn btn-outline-danger addLabelBtn" (click)="removeFollow(follow)"><i class="align-middle fas fa-fw fa-trash"></i></button>
-                    </div>
-                  </div>
-                </div>
-              </div>  
-            </div>  
-            <div *ngIf="!isLoading && !hasFollows" >
-              YOu dont have followers
-            </div>        
-          </div>
-        </div>
-        
+      <div class="row">    
+        <div class="card">
+            <div class="card-body">
+              
+              <table id="datatables-clients" class="table table-striped dataTable no-footer dtr-inline" style="width: 100%;" role="grid" aria-describedby="datatables-clients_info">
+                <thead>
+                  <tr role="row">
+                    <th tabindex="0" aria-controls="datatables-clients" rowspan="1" colspan="1" style="width: 56px;">#</th>
+                    <th tabindex="0" aria-controls="datatables-clients" rowspan="1" colspan="1" style="width: 211px;">Name</th>
+                    <th tabindex="0" aria-controls="datatables-clients" rowspan="1" colspan="1" style="width: 174px;">Following since</th>
+                    <th tabindex="0" aria-controls="datatables-clients" rowspan="1" colspan="1" style="width: 273px;">status</th>
+                  </tr>
+                </thead>
+                <tbody> 
+                  <tr role="row" class="odd" *ngFor="let follow of follows">
+                      <td class="dtr-control"><img src="img/avatars/avatar-3.jpg" class="rounded-circle my-n1" alt="Avatar" width="32" height="32"></td>
+                      <td class="sorting_1">
+                        <a href="userpage/{{follow.followUserId}}">
+                          <strong class="text-gray-dark">{{follow.followUserId}}</strong>
+                        </a>
+                      </td>
+                      <td>{{follow.creationDate}}</td>
+                      <td>
+                        <button type="button" class="btn btn-warning" (click)="removeFollow(follow)">Unfollow</button>
+                      </td>
+                    </tr>
+                  </tbody>
+              </table>
+              
+              <app-loader></app-loader>   
+              <div *ngIf="!isLoading && !hasFollows" >
+                YOu dont have followers
+              </div> 
+          </div>  
+        </div>  
       </div>
-    </div>
-  </main>
+  </div>
+</main>
+
+
+
+
+
+
+
+
+

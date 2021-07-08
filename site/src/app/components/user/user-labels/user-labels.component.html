@@ -21,7 +21,13 @@
                                 </div>
                             </div>
                             <div class="col-12 col-md-6">
-                                <button type="submit" class="btn btn-primary"><i class="align-middle me-2 fas fa-fw fa-folder-plus"></i>Create</button>
+                              
+                                <button *ngIf="submitted" class="btn btn-primary" type="button" disabled>
+                                  <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                  Loading...
+                                </button> 
+                                <button type="submit" *ngIf="!submitted" class="btn btn-primary">
+                                  <i class="align-middle me-2 fas fa-fw fa-folder-plus"></i>Create</button>
                             </div>
                         </div>
                     </form>
@@ -30,41 +36,39 @@
           </div>
       </div>
   
-  <div class="row">
-          <app-loader></app-loader>      
-              <div class="card">
-                <div *ngIf="!isLoading && hasLabels">
-                  <div class="card-body">
-                    <table class="table table-striped">
-                      <thead>
-                        <tr>
-                          <th style="width:40%;">Label</th>
-                          <th style="width:40%;">Post</th>
-                          <th style="width:25%">Creation date</th>
-                          <th>Actions</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr *ngFor="let label of userLabels">
-                          <td><a routerLink="/userpage/{{userId}}/{{label.label}}"><strong>{{label.label}}</strong></a></td>
-                          <td class="d-none d-md-table-cell">{{label.postCount}}</td>
-                          <td>{{label.creationDate}}</td>
-                          <td class="table-action">
-                            <button type="button" class="btn btn-outline-danger addLabelBtn" (click)="removeLabel(label)" [disabled]="label.postCount > 0"><i class="align-middle fas fa-fw fa-trash"></i></button>
-                            
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                  
-                </div>  
-                <div *ngIf="!isLoading && !hasLabels">
-                  You dont have labels
-                </div>   
-                  
-              </div>
-          </div>
+      <div class="row">    
+        <div class="card">
+            <div class="card-body">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th style="width:40%;">Label</th>
+                    <th style="width:40%;">Post</th>
+                    <th style="width:25%">Creation date</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let label of userLabels">
+                    <td><a routerLink="/userpage/{{userId}}/{{label.label}}"><strong>{{label.label}}</strong></a></td>
+                    <td class="d-none d-md-table-cell">{{label.postCount}}</td>
+                    <td>{{label.creationDate}}</td>
+                    <td class="table-action">
+                      <button type="button" class="btn btn-outline-danger addLabelBtn" 
+                        (click)="removeLabel(label)" [disabled]="label.postCount > 0">
+                          <i class="align-middle fas fa-fw fa-trash"></i>
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <app-loader></app-loader>  
+              <div *ngIf="!isLoading && !hasLabels">
+                You dont have labels
+              </div>  
+          </div>  
+        </div>  
+      </div>
   </div>
 </main>
 

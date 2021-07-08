@@ -74,3 +74,7 @@ font-weight: 600; }
 .rowComment {
     padding-left: 0 !important;
 }
+
+.padLRigth {
+	padding-right: 0px;
+}

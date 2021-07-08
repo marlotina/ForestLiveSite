@@ -4,7 +4,7 @@
         
         <div class="row">
             <div class="col-xxl-9"> 
-                <div class="card" >
+                <div class="card">
                     <app-loader></app-loader>
                     <div class="card-header">
 
@@ -44,6 +44,7 @@
                             </div>
                         </div>-->
                             <app-post-votes
+                                *ngIf="this.hasPost"
                                 [postId]="post.postId"
                                 [titlePost]="post.title"
                                 [authorPostId]="post.userId"
@@ -58,13 +59,19 @@
                         </div>
                     <div class="card-body">                        
                         <div class="col-12 col-md-12 div-bottom-line mb-15">
-                            <div class="row mb-15 div-bottom-line">
+                            <div class="row mb-15 div-bottom-line" *ngIf="this.hasPost">
                                 <a (click)="showImage(imagePostUrl)">
                                     <img src="{{imagePostUrl}}" alt="{{post.altImage}}" class="img-fluid rounded center">
                                 </a>
                             </div>
+                            <div class="row mb-15 div-bottom-line" *ngIf="!this.hasPost">
+                                
+                                no hay post, fue borrado o no existe
+                                
+                            </div>
+                            
         
-                            <div class="row">
+                            <div class="row" *ngIf="this.hasPost">
                                 <div *ngIf="!post.isPost">
                                     <app-select-specie-form 
                                         [showOptions]="showOwnerOptions"
@@ -101,7 +108,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row mb-15">   
+                            <div class="row mb-15" *ngIf="this.hasPost">   
                                 <div  class="col-12 d-flex">
                                     <i class="align-middle mr-2 fas fa-fw fa-share-alt"></i>
                                     <a href="http://www.facebook.com/sharer.php?u={{urlPage}}" target="_blank">

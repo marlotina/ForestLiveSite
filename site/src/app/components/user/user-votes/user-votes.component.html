@@ -13,16 +13,24 @@
         <div class="card-body">
 
           <div *ngIf="!isLoading && hasVotes">
+
             <div class="card" *ngFor="let vote of userVotes">
 
               <div class="card-body">
-                <h5 class="card-title">
-                  <i class="align-middle me-2 fas fa-fw fa-arrow-alt-circle-up"></i>
-                  <a class="removeLinkLine" href="/{{vote.userId}}/{{vote.postId}}"><strong class="text-gray-dark">{{vote.titlePost}}</strong></a>&nbsp;-&nbsp;<a class="removeLinkLine" href="userpage/{{vote.authorPostId}}"><small>{{vote.authorPostId}}</small></a>
-                </h5>
+                
                 <div class="d-flex justify-content-between">
 
                   <div class="col-12 col-md-10">
+                    <h5 class="card-title">
+                      <i class="align-middle me-2 fas fa-fw fa-arrow-alt-circle-up"></i>
+                      <a class="removeLinkLine" href="/{{vote.userId}}/{{vote.postId}}">
+                        <strong class="text-gray-dark">{{vote.titlePost}}</strong>
+                      </a>
+                      <br/>
+                      <a class="removeLinkLine" href="userpage/{{vote.authorPostId}}">
+                        <small>{{vote.authorPostId}}</small>
+                      </a>
+                    </h5>
                     <h6 class="card-subtitle text-muted">Creation date:&nbsp;{{vote.creationDate}}</h6>
                   </div>
 
@@ -32,6 +40,9 @@
                 </div>
               </div>
             </div>  
+
+
+
           </div>  
           <div  *ngIf="!isLoading && !hasVotes">
             You dont have votes
