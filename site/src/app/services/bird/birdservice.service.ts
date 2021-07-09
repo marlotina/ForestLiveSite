@@ -22,14 +22,16 @@ export class BirdserviceService {
   }
 
   GetBirdBySpecie(specieId : string, orderBy: number){
-    return this.httpClient.get<PostListResponse[]>(`${environment.birdApiUrl}api/v1/SpeciesSearch/GetBirds?specieId=${specieId}&orderby=${orderBy}`)
+    let languageCode = localStorage.getItem('locale');
+    return this.httpClient.get<PostListResponse[]>(`${environment.birdApiUrl}api/v1/SpeciesSearch/GetBirds?specieId=${specieId}&orderby=${orderBy}&languageCode=${languageCode}`)
       .pipe(map(data => {
         return data;
       }));
   }
 
   GetBirdBySpecieName(specieName : string, orderBy: number){
-    return this.httpClient.get<PostListResponse[]>(`${environment.birdApiUrl}api/v1/SpeciesSearch/GetBirdsByName?specieName=${specieName}&orderby=${orderBy}`)
+    let languageCode = localStorage.getItem('locale');
+    return this.httpClient.get<PostListResponse[]>(`${environment.birdApiUrl}api/v1/SpeciesSearch/GetBirdsByName?specieName=${specieName}&orderby=${orderBy}&languageCode=${languageCode}`)
       .pipe(map(data => {
         return data;
       }));
@@ -56,15 +58,17 @@ export class BirdserviceService {
       }));
   }  
 
-  GetModalBirdPost(postId : string, specieId: string){
-    return this.httpClient.get<ModalPostResponse>(`${environment.birdApiUrl}api/v1/post/GetModalInfo/?postId=${postId}&specieId=${specieId}`)
+  GetModalBirdPost(postId : string){
+    let languageCode = localStorage.getItem('locale');
+    return this.httpClient.get<ModalPostResponse>(`${environment.birdApiUrl}api/v1/post/GetModalInfo/?postId=${postId}&languageCode=${languageCode}`)
       .pipe(map(data => {
         return data;
       }));
   }
   
   GetPost(postId : string, specieId: string){
-    return this.httpClient.get<PostResponse>(`${environment.birdApiUrl}api/v1/SpeciesSearch/GetPost?postId=${postId}&specieId=${specieId}`)
+    let languageCode = localStorage.getItem('locale');
+    return this.httpClient.get<PostResponse>(`${environment.birdApiUrl}api/v1/SpeciesSearch/GetPost?postId=${postId}&specieId=${specieId}&languageCode=${languageCode}`)
       .pipe(map(data => {
         return data;
       }));

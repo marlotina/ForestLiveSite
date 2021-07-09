@@ -63,7 +63,7 @@ export class SearchPageComponent implements OnInit {
 
   getInfoPost(marker: google.maps.Marker, map: google.maps.Map){
     var postInfo = marker.getTitle().split(',');
-    this.searchBirdsSerices.GetModalBirdPost(postInfo[0], postInfo[1]).subscribe(data => {
+    this.searchBirdsSerices.GetModalBirdPost(postInfo[0]).subscribe(data => {
         const modal = `<div class="card modalCard">
                         <div class="card-header">
                           <h5 class="card-title mb-0">

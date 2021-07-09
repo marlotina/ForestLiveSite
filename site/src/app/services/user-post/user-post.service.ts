@@ -27,11 +27,12 @@ export class UserPostService {
   }
 
   GetPosts(userId: string, label: string, type: string){
+    let languageCode = localStorage.getItem('locale');
     let params: string;
     if(label == null){
-      params = `?userId=${userId}&type=${type}&label=none`;
+      params = `?userId=${userId}&type=${type}&label=none&languageCode=${languageCode}`;
     } else {
-      params = `?userId=${userId}&type=${type}&label=${label}`;
+      params = `?userId=${userId}&type=${type}&label=${label}&languageCode=${languageCode}`;
     }
     return this.httpClient.get<PostListResponse[]>
     (`${environment.birdApiUrl}api/v1/UserPosts/GetUserPosts${params}`)
