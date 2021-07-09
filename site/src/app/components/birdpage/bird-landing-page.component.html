@@ -20,11 +20,12 @@
                                     [formControl]="autocompleteControl" 
                                     id="specieNamePost" placeholder="Introduce especie">
                                 <span class="input-group-append">
+                                    <button type="button" class="btn btn-primary" (click)="addFilterSpecie()">
+                                        <i class="align-middle me-1 fas fa-fw fa-search"></i>
+                                    </button> 
+                                    &nbsp;
                                     <button type="button" class="btn btn-primary" (click)="removeFilterSpecie()" [hidden]="hideRemoveBtn">
                                         <i class="align-middle me-1 fas fa-fw fa-times"></i>
-                                    </button> 
-                                    <button type="button" class="btn btn-primary" (click)="addFilterSpecie()" [hidden]="!hideRemoveBtn">
-                                        <i class="align-middle me-1 fas fa-fw fa-search"></i>
                                     </button> 
                                 </span>
                                 <mat-autocomplete #autoBird="matAutocomplete" (optionSelected)='selectSpecie($event.option.value)'>

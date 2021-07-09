@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { DeleteFollowUserResquest, FollowListResponse, FollowUserRequest, FollowUserResponse } from 'src/app/model/FollowUser';
-import { UserInfoResponse, UserListResponse, UserAutocompleteResponse } from 'src/app/model/user';
+import { UserInfoResponse, UserListResponse, UserAutocompleteResponse, UserMapResponse } from 'src/app/model/user';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -19,6 +19,13 @@ export class UserInteractionsService {
         return user;
       }));
       
+  }
+
+  GetUserMapById(id: string) {
+    return this.httpClient.get<UserMapResponse>(`${environment.userApiUrl}api/v1/userpage/GetUsersMap?userId=${id}`)
+      .pipe(map(user => {
+        return user;
+      }));
   }
 
   GetByUserName(userName: string) {

@@ -2,6 +2,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { LoaderService } from 'src/app/services/loader/loader.service';
 import { LocationService } from 'src/app/services/location/location.service';
+import { UserInteractionsService } from 'src/app/services/user-interactions/user-interactions.service';
 import { UserPostService } from 'src/app/services/user-post/user-post.service';
 import { environment } from 'src/environments/environment';
 
@@ -22,6 +23,7 @@ export class UserMapPageComponent implements OnInit {
   constructor(
       private loaderService: LoaderService,
       private locationService: LocationService,
+      private userInteractionsService: UserInteractionsService,
       private route: ActivatedRoute,
       private userPostService: UserPostService) { }
 
@@ -29,29 +31,41 @@ export class UserMapPageComponent implements OnInit {
     this.loaderService.show();
     this.route.paramMap.subscribe(params => {
       this.userId = params.get("userId");
+      this.userInteractionsService.GetUserMapById(this.userId).subscribe(
+        data =>{
+          this.getLocation(data.latitude, data.longitude);
+        }
+      )
     });
 
-    this.getLocation();
   }
 
-  getLocation() {
-    this.locationService.getPosition().then(
-      pos => {
-        let latLng = {
-          lat: pos.lat,
-          lng: pos.lng
-        }; 
-        this.initMap(latLng);
-    },
-    reject=>{
-      let latLng = {
-        lat: 47.711062647193195,
-        lng: 6.134101681429014
+  getLocation(lat:number, lng: number) {
+    if(lat > 0 && lng > 0){
+      let latLng =
+      {
+        lat: lat,
+        lng: lng
       };
       this.initMap(latLng);
-    });
+    }else{
+      this.locationService.getPosition().then(
+        pos => {
+          let latLng = {
+            lat: pos.lat,
+            lng: pos.lng
+          }; 
+          this.initMap(latLng);
+      },
+      reject=>{
+        let latLng = {
+          lat: 47.711062647193195,
+          lng: 6.134101681429014
+        };
+        this.initMap(latLng);
+      });
+    }
   }
-
 
   initMap(latLng: any) {
 

@@ -29,6 +29,13 @@ export class UserResponse {
     instagramUrl: string;
     linkedlinUrl: string;
     facebookUrl: string;
+    latitude: number;
+    longitude: number;
+}
+
+export class UserMapResponse {
+    latitude: number;
+    longitude: number;
 }
 
 export class UserInfoResponse {

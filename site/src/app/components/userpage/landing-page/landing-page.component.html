@@ -23,7 +23,7 @@
                                 <a class="fs-4 removeLinkLine" routerLink="/{{post.userId}}/{{post.postId}}">
                                 <strong>{{post.title}}</strong></a>
 
-                                <div class="card-actions float-end">
+                                <div class="card-actions float-end" *ngIf="showOwnerOptions">
                                     <a href="#" class="me-1">
                                         <i class="align-middle" data-feather="refresh-cw"></i>
                                     </a>

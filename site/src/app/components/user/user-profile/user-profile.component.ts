@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AccountService } from 'src/app/services/account/account.service';
 import { first } from 'rxjs/operators';
@@ -9,6 +9,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ModalProfileComponent } from '../modal-profile/modal-profile.component';
 import { ForgotRequest } from 'src/app/model/account';
 import { CommonDialogComponent } from '../../shared/common-dialog/common-dialog.component';
+import { LocationService } from 'src/app/services/location/location.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -23,7 +24,14 @@ export class UserProfileComponent implements OnInit {
   userEmail: string;
   userProfileUrlImage = null;
   image: string;
-  constructor(private formBuilder: FormBuilder,
+
+  map: google.maps.Map;
+  markers: google.maps.Marker[] = [];
+  @ViewChild('mapWrapper') mapElement: ElementRef;
+
+  constructor(
+    private locationService: LocationService,
+    private formBuilder: FormBuilder,
     private userService: UserService,
     private accountService: AccountService,
     private matDialog: MatDialog) { }
@@ -44,7 +52,9 @@ export class UserProfileComponent implements OnInit {
       twitterUrl: [''],
       instagramUrl: [''],
       linkedlinUrl: [''],
-      facebookUrl: ['']
+      facebookUrl: [''],
+      latitude: [''],
+      longitude: ['']
     });
 
     this.userEmail = this.accountService.userValue.email;
@@ -66,15 +76,20 @@ export class UserProfileComponent implements OnInit {
             'twitterUrl': data.twitterUrl,
             'instagramUrl': data.instagramUrl,
             'linkedlinUrl': data.linkedlinUrl,
-            'facebookUrl': data.facebookUrl
+            'facebookUrl': data.facebookUrl,
+            'latitude': data.latitude,
+            'longitude': data.longitude
             });
 
           this.userImage = environment.imagesProfileUrl + data.photo;
           this.image = data.photo;
+          
+        this.getLocation(data.latitude, data.longitude);
         },
         error => {
           this.openCommonModal('user.errorRetrieveInfo');
         });
+        
   }
 
   get f() { return this.userProfileForm.controls; }
@@ -194,6 +209,97 @@ export class UserProfileComponent implements OnInit {
     });
 
     return results;
+  }
+
+  getLocation(lat:number, lng: number) {
+
+    if(lat > 0 && lng > 0){
+      let latLng: google.maps.LatLngLiteral = {
+        lat: Number.parseFloat(lat.toString()),
+        lng: Number.parseFloat(lng.toString())
+      };
+      
+      this.initMap(latLng);
+    }else{
+      this.locationService.getPosition().then(
+        pos => {
+          let latLng = {
+            lat: pos.lat,
+            lng: pos.lng
+          }; 
+          this.initMap(latLng);
+      },
+      reject=>{
+        let latLng = {
+          lat: 47.711062647193195,
+          lng: 6.134101681429014
+        };
+        this.initMap(latLng);
+      });
+    }   
+  }
+
+
+  initMap(latLng: any) {
+      const mapOptions: google.maps.MapOptions = {
+        center: latLng,
+        zoom: 16,
+        fullscreenControl: false,
+        mapTypeControl: false,
+        streetViewControl: false,
+        clickableIcons: false
+      };
+      this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
+      
+      this.addMarker(latLng, this.map);
+
+      google.maps.event.addListener(this.map, "click", (event) => {
+        this.addMarker(event.latLng, this.map);
+      });
+  }
+
+  addMarker(location: google.maps.LatLngLiteral, map: google.maps.Map) {
+    const marker = new google.maps.Marker({
+      position: location,
+      map: this.map,
+      icon:  "../../../../assets/img/core-img/marker.svg"
+    });
+
+    var latLng = marker.getPosition();
+    this.userProfileForm.controls.latitude.setValue(latLng.lat());
+    this.userProfileForm.controls.longitude.setValue(latLng.lng());
+
+    this.addMarkerCommon(marker);
+  }
+
+  setMapOnAll(map: google.maps.Map | null) {
+    for (let i = 0; i < this.markers.length; i++) {
+      this.markers[i].setMap(map);
+    }
+  }
+
+  addMarkerCommon(marker: google.maps.Marker){
+    if(this.markers.length > 0){
+      this.setMapOnAll(null);
+      this.markers = [];
+    }
+    
+      this.markers.push(marker);
+  }
+
+  onChangeEvent(){
+    let latLng =
+      {
+        lat: Number(this.userProfileForm.controls.latitude.value),
+        lng: Number(this.userProfileForm.controls.longitude.value)
+      };
+
+    const marker = new google.maps.Marker({
+      position: latLng,
+      map: this.map,
+    });
+
+    this.addMarkerCommon(marker);
   }
 }
 
