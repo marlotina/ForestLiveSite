@@ -12,8 +12,9 @@ export class UserPostService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getModalBirdPost(postId : string, userId: string){
-    return this.httpClient.get<ModalPostResponse>(`${environment.birdApiUrl}api/v1/post/GetModalInfo/?postId=${postId}&userId=${userId}`)
+  getModalBirdPost(postId : string){
+    let languageCode = localStorage.getItem('locale');
+    return this.httpClient.get<ModalPostResponse>(`${environment.birdApiUrl}api/v1/post/GetModalInfo/?postId=${postId}&languageCode=${languageCode}`)
       .pipe(map(data => {
         return data;
       }));

@@ -89,11 +89,25 @@ export class UserMapPageComponent implements OnInit {
   }
 
   getInfoPost(marker: google.maps.Marker, map: google.maps.Map){
-    var postId = marker.getTitle();
-    this.userPostService.getModalBirdPost(postId, this.userId).subscribe(data => {
-        const modal = `<div style='float:left'><img style='width: 100px;' src='${environment.imagesPostUrl}${data.imageUrl}' alt='${data.altImage}'>`+ 
-        `</div><div style='float:right; padding: 10px;'><b><a target='_blank' href='/${data.userId}/${data.postId}'>${data.title}</a></b><br/>${data.text}<br/> ${data.birdSpecie}</div>`;
+
+    var postInfo = marker.getTitle().split(',');
+    this.userPostService.getModalBirdPost(postInfo[0]).subscribe(data => {
+        const modal = `<div class="card modalCard">
+                        <div class="card-header">
+                          <h5 class="card-title mb-0">
+                            <a target='_blank' href='/${data.userId}/${data.postId}'>${data.title}</a>
+                          </h5>
+                        </div>
+                        <img class="card-img-top" src="${environment.imagesPostUrl}${data.imageUrl}" alt="${data.altImage}">
+                        <div class="card-body">
+                        <p class="card-text">${data.text}</p>
+                        <a target='_blank' href='/birdpage/${data.specieUrl}'>${data.birdSpecie}</a>
+                          <a href="#" class="card-link">Another link</a>
+                        </div>
+                      </div>`;          
+
         this.infowindow.setContent(modal);
+        this.infowindow.setOptions({maxWidth:250 });
         this.infowindow.open(map, marker);
     })
   }
