@@ -36,7 +36,7 @@ export class BirdLandingPageComponent implements OnInit {
   autocompleteControl = new FormControl();
   specieIdPostControl = new FormControl();
   searchSpecie: number = 1
-
+  
   constructor(
     private searchBirdsSerices: BirdserviceService,
     private accountService: AccountService,
@@ -48,8 +48,12 @@ export class BirdLandingPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.activateRoute.paramMap.subscribe(params => {
-      this.specieId = params.get("specieId");
-      this.getBirdPosts();   
+      let specieName = params.get("specieId");
+      if(specieName != null){
+        this.getBirdPostsByName(specieName);   
+      } else {
+        this.getBirdPosts();   
+      }
     });
 
     this.userLoggedName = this.accountService.userValue != null ? this.accountService.userValue.userId : null;
@@ -105,7 +109,6 @@ export class BirdLandingPageComponent implements OnInit {
 
   getBirdPosts() {
     this.loaderService.show();
-    
       this.searchBirdsSerices.GetBirdBySpecie(this.specieId, this.searchOrder).subscribe(
         data =>{ 
           this.birdPosts = data;
@@ -114,6 +117,16 @@ export class BirdLandingPageComponent implements OnInit {
       );
   }
 
+  getBirdPostsByName(specieName: string) {
+    this.loaderService.show();
+      this.searchBirdsSerices.GetBirdBySpecieName(specieName, this.searchOrder).subscribe(
+        data =>{ 
+          this.birdPosts = data;
+          this.loaderService.hide();
+        } 
+      );
+  }
+  
   showDeleteOption(userId){
     return this.userLoggedName != null && userId == this.userLoggedName;
   }

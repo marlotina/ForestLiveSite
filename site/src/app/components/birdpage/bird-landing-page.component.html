@@ -110,8 +110,7 @@
                     </div>
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">
-                            <em *ngIf="post.birdSpecie">{{post.birdSpecie}}</em>
-            
+                            <a *ngIf="post.birdSpecie" href="/birdpage/{{post.specieUrl}}" ><em >{{post.birdSpecie}}</em></a>
                             <a *ngIf="post.type == 'pending'" class="link-info" href="/{{post.userId}}/pending/{{post.postId}}#commentsDiv">Help the user to identify the bird</a>
                             <p class="card-text">{{post.text}}</p> 
                         </li>

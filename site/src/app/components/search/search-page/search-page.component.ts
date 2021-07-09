@@ -73,7 +73,7 @@ export class SearchPageComponent implements OnInit {
                         <img class="card-img-top" src="${environment.imagesPostUrl}${data.imageUrl}" alt="${data.altImage}">
                         <div class="card-body">
                         <p class="card-text">${data.text}</p>
-                        <a target='_blank' href='/${data.userId}/${data.postId}'>${data.birdSpecie}</a>
+                        <a target='_blank' href='/birdpage/${data.specieUrl}'>${data.birdSpecie}</a>
                           <a href="#" class="card-link">Another link</a>
                         </div>
                       </div>`;          

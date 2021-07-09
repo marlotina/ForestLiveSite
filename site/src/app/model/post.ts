@@ -37,6 +37,7 @@ export class PostResponse {
     observationDate: string;
     hasVote:boolean;
     voteId: string;
+    specieUrl: string;
 }
 
 export class PostHomeResponse {
@@ -91,6 +92,7 @@ export class ModalPostResponse {
     birdSpecie: string;
     specieId: string;
     observationDate: string;
+    specieUrl: string;
 }
 
 export class ImagePostRequest {
@@ -112,6 +114,7 @@ export class PostListResponse {
     labels: string[];
     birdSpecie: string;
     specieId: string;
+    specieUrl: string;
     userPhoto: string;
     hasVote:boolean;
     voteId: string;

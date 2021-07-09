@@ -1,7 +1,7 @@
 <div *ngIf="type!='post'">
     <strong>{{ 'userPage.birdSpecie' | translate }}:&nbsp;</strong>
     
-    <a href="/birdpage/{{oldSpecieId}}" *ngIf="oldSpecieId"><em >{{specieOldName}}</em></a>
+    <a href="/birdpage/{{specieUrl}}" *ngIf="oldSpecieId"><em >{{specieOldName}}</em></a>
     <span class="link-info" *ngIf="!specieOldName">Help the user to identify the bird</span>
     &nbsp;
     <a class="badge bg-primary" *ngIf="showOptions && !specieOldName" 

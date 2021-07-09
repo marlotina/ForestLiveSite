@@ -27,6 +27,7 @@ export class SelectSpecieFormComponent implements OnInit {
   finishChange = false;
   @Input() postId: string;
   @Input() oldSpecieId: string;
+  @Input() specieUrl: string;
   @Input() type: string;
   @Input() specieOldName: string;
   @Input() showOptions: boolean;

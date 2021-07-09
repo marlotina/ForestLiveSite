@@ -28,6 +28,13 @@ export class BirdserviceService {
       }));
   }
 
+  GetBirdBySpecieName(specieName : string, orderBy: number){
+    return this.httpClient.get<PostListResponse[]>(`${environment.birdApiUrl}api/v1/SpeciesSearch/GetBirdsByName?specieName=${specieName}&orderby=${orderBy}`)
+      .pipe(map(data => {
+        return data;
+      }));
+  }
+
   addPost(request: PostRequest) {
     return this.httpClient.post<PostResponse>(`${environment.birdApiUrl}api/v1/ManagePostSpecie/AddPost/`, request)
       .pipe(map(data => {
