@@ -38,11 +38,11 @@ export class AccountService {
   }
 
   SignUp(request) {
-    return this.httpClient.post(`${environment.userApiUrl}api/v1/account/register`, request);
+    return this.httpClient.post(`${environment.accountApiUrl}api/v1/account/register`, request);
   }
 
   Login(request) {
-    return this.httpClient.post<User>(`${environment.userApiUrl}api/v1/account/login`, request)
+    return this.httpClient.post<User>(`${environment.accountApiUrl}api/v1/account/login`, request)
       .pipe(map(user => {
         localStorage.setItem('user', JSON.stringify(user));
         localStorage.setItem('access_token', user.token);
@@ -72,15 +72,15 @@ export class AccountService {
 
 
   ConfirmEmail(request: ConfirmEmailRequest) {
-    return this.httpClient.post(`${environment.userApiUrl}api/v1/Account/ConfirmEmail`, request);
+    return this.httpClient.post(`${environment.accountApiUrl}api/v1/Account/ConfirmEmail`, request);
   }
 
   ForgotPassword(request: ForgotRequest) {
-    return this.httpClient.post(`${environment.userApiUrl}api/v1/Account/ForgotPassword`, request);
+    return this.httpClient.post(`${environment.accountApiUrl}api/v1/Account/ForgotPassword`, request);
   }
   
   ResetPassword(request: ResetPasswordRequest) {
-    return this.httpClient.post(`${environment.userApiUrl}api/v1/Account/ResetPassword`, request);
+    return this.httpClient.post(`${environment.accountApiUrl}api/v1/Account/ResetPassword`, request);
   }
 
   updateImage(image: string){

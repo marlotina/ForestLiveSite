@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { ManageItemsService } from './manage-items.service';
+import { GetpostService } from './getpost.service';
 
-describe('ManageItemsService', () => {
-  let service: ManageItemsService;
+describe('GetpostService', () => {
+  let service: GetpostService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(ManageItemsService);
+    service = TestBed.inject(GetpostService);
   });
 
   it('should be created', () => {

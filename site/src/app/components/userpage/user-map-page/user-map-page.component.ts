@@ -2,8 +2,8 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { LoaderService } from 'src/app/services/loader/loader.service';
 import { LocationService } from 'src/app/services/location/location.service';
+import { GetpostService } from 'src/app/services/posts/getpost.service';
 import { UserInteractionsService } from 'src/app/services/user-interactions/user-interactions.service';
-import { UserPostService } from 'src/app/services/user-post/user-post.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -25,7 +25,7 @@ export class UserMapPageComponent implements OnInit {
       private locationService: LocationService,
       private userInteractionsService: UserInteractionsService,
       private route: ActivatedRoute,
-      private userPostService: UserPostService) { }
+      private userPostService: GetpostService) { }
 
   ngOnInit(): void {
     this.loaderService.show();
@@ -105,7 +105,7 @@ export class UserMapPageComponent implements OnInit {
   getInfoPost(marker: google.maps.Marker, map: google.maps.Map){
 
     var postInfo = marker.getTitle().split(',');
-    this.userPostService.getModalBirdPost(postInfo[0]).subscribe(data => {
+    this.userPostService.getModalBirdPost(postInfo[0], 'marlotina').subscribe(data => {
         const modal = `<div class="card modalCard">
                         <div class="card-header">
                           <h5 class="card-title mb-0">

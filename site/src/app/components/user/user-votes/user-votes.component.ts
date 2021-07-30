@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { VoteResponse } from 'src/app/model/vote';
 import { AccountService } from 'src/app/services/account/account.service';
 import { LoaderService } from 'src/app/services/loader/loader.service';
+import { UserInteractionsService } from 'src/app/services/user-interactions/user-interactions.service';
 import { VoteService } from 'src/app/services/vote/vote.service';
 
 @Component({
@@ -18,11 +19,12 @@ export class UserVotesComponent implements OnInit {
   constructor(
     private loaderService: LoaderService,
     private votesService: VoteService,
+    private userInteractionService: UserInteractionsService,
     private accountService: AccountService) { }
 
   ngOnInit(): void {
     this.loaderService.show();
-    this.votesService.GetVotesByUser(this.accountService.userValue.userId).subscribe(
+    this.userInteractionService.GetVotesByUser(this.accountService.userValue.userId).subscribe(
       data =>{ 
         if(data.length > 0){
           this.hasVotes = true;

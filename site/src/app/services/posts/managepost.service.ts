@@ -7,24 +7,24 @@ import { map } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
-export class ManageItemsService {
+export class ManagepostService {
 
   constructor(private httpClient: HttpClient) { 
   }
 
   addPost(request: PostRequest) {
-    return this.httpClient.post<PostResponse>(`${environment.postApiUrl}api/v1/ManagePost/AddPost/`, request)
+    return this.httpClient.post<PostResponse>(`${environment.postsApiUrl}api/v1/ManagePost/AddPost/`, request)
       .pipe(map(data => {
         return data;
       }));
   }
 
   deletePost(postId: string){
-    return this.httpClient.delete(`${environment.postApiUrl}api/v1/ManagePost/DeletePost/?postId=${postId}`);
+    return this.httpClient.delete(`${environment.postsApiUrl}api/v1/ManagePost/DeletePost/?postId=${postId}`);
   }
 
   updateBird(request: PostUpdateSpecieRequest) {
-    return this.httpClient.put<PostAssignSpecieResponse>(`${environment.postApiUrl}api/v1/ManagePost/UpdateSpecieId/`, request)
+    return this.httpClient.put<PostAssignSpecieResponse>(`${environment.postsApiUrl}api/v1/ManagePost/UpdateSpecieId/`, request)
       .pipe(map(data => {
         return data;
       }));

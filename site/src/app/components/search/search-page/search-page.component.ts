@@ -3,10 +3,9 @@ import { FormControl } from '@angular/forms';
 import { Observable, of, Subject } from 'rxjs';
 import { catchError, debounceTime, first, map, startWith, switchMap, takeUntil } from 'rxjs/operators';
 import { MapSpeciePoint } from 'src/app/model/Map';
-import { PostResponse } from 'src/app/model/post';
 import { AutocompleteResponse } from 'src/app/model/specie';
-import { AutocompleteService } from 'src/app/services/autocomplete/autocomplete.service';
 import { BirdserviceService } from 'src/app/services/bird/birdservice.service';
+import { ExternaldataService } from 'src/app/services/data/externaldata.service';
 import { LoaderService } from 'src/app/services/loader/loader.service';
 import { LocationService } from 'src/app/services/location/location.service';
 import { environment } from 'src/environments/environment';
@@ -38,7 +37,7 @@ export class SearchPageComponent implements OnInit {
   constructor(
       private locationService: LocationService,
       private searchBirdsSerices: BirdserviceService,
-      private autocompleteService : AutocompleteService,
+      private autocompleteService : ExternaldataService,
       private loaderService: LoaderService) {
         this.loaderService.show();
        }
@@ -63,7 +62,7 @@ export class SearchPageComponent implements OnInit {
 
   getInfoPost(marker: google.maps.Marker, map: google.maps.Map){
     var postInfo = marker.getTitle().split(',');
-    this.searchBirdsSerices.GetModalBirdPost(postInfo[0]).subscribe(data => {
+    this.searchBirdsSerices.GetModalBirdPost(postInfo[0], 'marlotina').subscribe(data => {
         const modal = `<div class="card modalCard">
                         <div class="card-header">
                           <h5 class="card-title mb-0">

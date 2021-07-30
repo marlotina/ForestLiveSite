@@ -4,6 +4,7 @@ import { first } from 'rxjs/operators';
 import { DeleteFollowUserResquest, FollowUserRequest } from 'src/app/model/FollowUser';
 import { UserInfoResponse } from 'src/app/model/user';
 import { AccountService } from 'src/app/services/account/account.service';
+import { FollowusersService } from 'src/app/services/follow/followusers.service';
 import { LoaderService } from 'src/app/services/loader/loader.service';
 import { UserInteractionsService } from 'src/app/services/user-interactions/user-interactions.service';
 import { environment } from 'src/environments/environment';
@@ -24,6 +25,7 @@ export class AuthorDetailsComponent implements OnInit {
   constructor(
     private loaderService: LoaderService,
     private userInteractionService: UserInteractionsService,
+    private followuserService: FollowusersService,
     private accountService: AccountService,
     private route: ActivatedRoute) { 
       this.loaderService.show();
@@ -50,7 +52,7 @@ export class AuthorDetailsComponent implements OnInit {
         followId: this.userInfo.followId,
         followUserId: this.userInfo.userName
       };
-      this.userInteractionService.DeleteFollow(request)
+      this.followuserService.DeleteFollow(request)
       .pipe(first())
           .subscribe(
               data => {    
@@ -67,7 +69,7 @@ export class AuthorDetailsComponent implements OnInit {
         followUserId:  this.userInfo.userName
       };
 
-      this.userInteractionService.AddFollow(request)
+      this.followuserService.AddFollow(request)
       .pipe(first())
           .subscribe(
               data => {    

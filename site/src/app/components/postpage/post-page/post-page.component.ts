@@ -3,12 +3,11 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Meta } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { User } from 'src/app/model/account';
 import { PostResponse } from 'src/app/model/post';
 import { AccountService } from 'src/app/services/account/account.service';
-import { GetItemsService } from 'src/app/services/items/get-items.service';
-import { ManageItemsService } from 'src/app/services/items/manage-items.service';
 import { LoaderService } from 'src/app/services/loader/loader.service';
+import { GetpostService } from 'src/app/services/posts/getpost.service';
+import { ManagepostService } from 'src/app/services/posts/managepost.service';
 import { environment } from 'src/environments/environment';
 import { CommonDialogComponent } from '../../shared/common-dialog/common-dialog.component';
 import { ImageDialogComponent } from '../../shared/image-dialog/image-dialog.component';
@@ -35,9 +34,9 @@ export class PostPageComponent implements OnInit {
   constructor(private activateRoute: ActivatedRoute,
     private meta: Meta,
     private loaderService: LoaderService,
-    private getItemService: GetItemsService,
+    private getItemService: GetpostService,
     private accountService: AccountService,
-    private manageItemService: ManageItemsService,
+    private manageItemService: ManagepostService,
     private matDialog: MatDialog,
     private route: Router) { 
       this.isLogged = this.accountService.userLoggedObservable();

@@ -12,11 +12,11 @@ import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { startWith } from 'rxjs/operators';
 import { ModalEditImageComponent } from '../modal-edit-image/modal-edit-image.component';
-import { AutocompleteService } from 'src/app/services/autocomplete/autocomplete.service';
 import { AutocompleteResponse, CountryItem } from 'src/app/model/specie';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserLabelsService } from 'src/app/services/user/labels/user-labels.service';
-import { ManageItemsService } from 'src/app/services/items/manage-items.service';
+import { ExternaldataService } from 'src/app/services/data/externaldata.service';
+import { ManagepostService } from 'src/app/services/posts/managepost.service';
 
 
 @Component({
@@ -74,9 +74,9 @@ export class CreatePostComponent implements OnInit {
     private accountService: AccountService,
     private activateRoute: ActivatedRoute,
     private router: Router,
-    private manageItemsService: ManageItemsService,
+    private manageItemsService: ManagepostService,
     private userLabelsService: UserLabelsService,
-    private autocompleteService: AutocompleteService) { 
+    private autocompleteService: ExternaldataService) { 
       
       this.filteredLabels = this.labelCtrl.valueChanges.pipe(
         startWith(''),

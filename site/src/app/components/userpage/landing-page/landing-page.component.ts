@@ -4,9 +4,9 @@ import { ActivatedRoute } from '@angular/router';
 import { PostListResponse } from 'src/app/model/post';
 import { UserLabelPageResponse } from 'src/app/model/user';
 import { AccountService } from 'src/app/services/account/account.service';
-import { ManageItemsService } from 'src/app/services/items/manage-items.service';
 import { LoaderService } from 'src/app/services/loader/loader.service';
-import { UserPostService } from 'src/app/services/user-post/user-post.service';
+import { GetpostService } from 'src/app/services/posts/getpost.service';
+import { ManagepostService } from 'src/app/services/posts/managepost.service';
 import { UserLabelsService } from 'src/app/services/user/labels/user-labels.service';
 import { environment } from 'src/environments/environment';
 import { CommonDialogComponent } from '../../shared/common-dialog/common-dialog.component';
@@ -36,8 +36,8 @@ export class LandingPageComponent implements OnInit {
     private loaderService: LoaderService,
     private activateRoute: ActivatedRoute,
     private accountService: AccountService,
-    private manageItemService: ManageItemsService,
-    private userPostService: UserPostService,
+    private manageItemService: ManagepostService,
+    private userPostService: GetpostService,
     private userLabelsService: UserLabelsService,
     private matDialog: MatDialog) { 
 

@@ -7,10 +7,10 @@ import { catchError, debounceTime, map, startWith, switchMap } from 'rxjs/operat
 import { PostListResponse } from 'src/app/model/post';
 import { AutocompleteResponse } from 'src/app/model/specie';
 import { AccountService } from 'src/app/services/account/account.service';
-import { AutocompleteService } from 'src/app/services/autocomplete/autocomplete.service';
 import { BirdserviceService } from 'src/app/services/bird/birdservice.service';
-import { ManageItemsService } from 'src/app/services/items/manage-items.service';
+import { ExternaldataService } from 'src/app/services/data/externaldata.service';
 import { LoaderService } from 'src/app/services/loader/loader.service';
+import { ManagepostService } from 'src/app/services/posts/managepost.service';
 import { environment } from 'src/environments/environment';
 import { CommonDialogComponent } from '../shared/common-dialog/common-dialog.component';
 import { ImageDialogComponent } from '../shared/image-dialog/image-dialog.component';
@@ -40,10 +40,10 @@ export class BirdLandingPageComponent implements OnInit {
   constructor(
     private searchBirdsSerices: BirdserviceService,
     private accountService: AccountService,
-    private autocompleteService : AutocompleteService,
+    private autocompleteService : ExternaldataService,
     private matDialog: MatDialog,
     private activateRoute: ActivatedRoute,
-    private manageItemService: ManageItemsService,
+    private manageItemService: ManagepostService,
     private loaderService: LoaderService) { }
 
   ngOnInit(): void {

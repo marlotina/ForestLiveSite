@@ -1,14 +1,14 @@
-import { Component, ElementRef, Inject, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatAutocomplete } from '@angular/material/autocomplete';
 import { Observable, of } from 'rxjs';
 import { catchError, debounceTime, map, startWith, switchMap } from 'rxjs/operators';
-import { AutocompleteService } from 'src/app/services/autocomplete/autocomplete.service';
 import { AutocompleteResponse } from 'src/app/model/specie';
-import { ManageItemsService } from 'src/app/services/items/manage-items.service';
-import { PostAssignSpecieRequest, PostUpdateSpecieRequest } from 'src/app/model/post';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { CommonDialogComponent } from '../common-dialog/common-dialog.component';
+import { ManagepostService } from 'src/app/services/posts/managepost.service';
+import { ExternaldataService } from 'src/app/services/data/externaldata.service';
+import { PostUpdateSpecieRequest } from 'src/app/model/post';
 
 @Component({
   selector: 'app-select-specie-form',
@@ -37,9 +37,9 @@ export class SelectSpecieFormComponent implements OnInit {
   @ViewChild('autocompleteControl') specieNamePost: ElementRef<HTMLInputElement>;
 
   constructor(
-    private manageItemsService: ManageItemsService,
+    private manageItemsService: ManagepostService,
     private matDialog: MatDialog,
-    private autocompleteService: AutocompleteService) {
+    private autocompleteService: ExternaldataService) {
 
         this.language =localStorage.getItem('locale');
   }

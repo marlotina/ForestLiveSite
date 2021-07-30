@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PostListResponse } from 'src/app/model/post';
-import { GetItemsService } from 'src/app/services/items/get-items.service';
 import { LoaderService } from 'src/app/services/loader/loader.service';
+import { GetpostService } from 'src/app/services/posts/getpost.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -17,7 +17,7 @@ export class WithoutSpeciePageComponent implements OnInit {
   hasPosts = false;
 
   constructor(
-    private getItemService: GetItemsService,
+    private getItemService: GetpostService,
     private loaderService: LoaderService) { }
 
   ngOnInit(): void {

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FollowListResponse } from 'src/app/model/FollowUser';
 import { AccountService } from 'src/app/services/account/account.service';
+import { FollowusersService } from 'src/app/services/follow/followusers.service';
 import { LoaderService } from 'src/app/services/loader/loader.service';
 import { UserInteractionsService } from 'src/app/services/user-interactions/user-interactions.service';
 
@@ -17,7 +18,7 @@ export class FollowerComponent implements OnInit {
   isLoading = true;
   constructor(
     private loaderService: LoaderService,
-    private userInteractionsService: UserInteractionsService,
+    private userInteractionsService: FollowusersService,
     private accountService: AccountService) { }
 
   ngOnInit(): void {
