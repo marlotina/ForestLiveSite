@@ -19,40 +19,43 @@
         {{ 'account.signUp' | translate }}
     </a>
 
-    
-  <!--<div class="navbar-collapse collapse" >
-      <ul class="navbar-nav ms-auto" >
-      
-          <li class="nav-item dropdown ms-lg-2" *ngIf="isLogged">
-              <a class="nav-link dropdown-toggle position-relative" href="#" id="userDropdown" data-bs-toggle="dropdown">
-                <img style="width: 20px;" src="{{imageProfileUrl}}{{userImage}}" alt="image of marlotina"> 
-                {{ userNameMenu }}
-              </a>
-              <div class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-                <a class="dropdown-item" routerLink="userProfile" routerLinkActive="active">
-                  <i class="align-middle me-1 fas fa-fw fa-user"></i>
-                  {{ 'user.profileMenu' | translate }}
-                </a>
 
-                <a class="dropdown-item" routerLink="createPost" routerLinkActive="active">
-                  <i class="align-middle me-1 fas fa-fw fa-comments"></i>
-                  {{ 'userPage.addPost' | translate }}
-                </a>
+  <div class="navbar-collapse collapse">
+    <ul class="navbar-nav ms-auto">
+      <li class="nav-item dropdown ms-lg-2">
+        <a class="nav-link dropdown-toggle position-relative" href="#" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+          <img src="{{imageProfileUrl}}{{userImage | async}}" class="rounded-circle my-n1" alt="Avatar" width="32" height="32">
+          
+        </a>
+        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+          <a class="dropdown-item" routerLink="createPost/post" routerLinkActive="active"><i class="align-middle me-2 fas fa-fw fa-file-image"></i>Post</a>
+          <a class="dropdown-item" routerLink="createPost/observation" routerLinkActive="active"><i class="align-middle me-2 fas fa-fw fa-file-image"></i>Observation</a>
+        
+          <a class="sidebar-link"  routerLink="userpage/{{user.userId}}" routerLinkActive="active">
+            <i class="align-middle me-2 far fa-fw fa-list-alt"></i> <span class="align-middle">Page</span>
+          </a>
 
-                <a class="dropdown-item" routerLink="userpage/{{ userNameMenu }}">
-                  <i class="align-middle me-1 fas fa-fw fa-chart-pie"></i>
-                  {{ 'general.myPage' | translate }}
-                </a>
+          <a class="sidebar-link" routerLink="/usermappage/{{user.userId}}" routerLinkActive="active">
+            <i class="align-middle mr-2 fas fa-fw fa-map-marked-alt"></i> <span class="align-middle">Map</span>
+          </a>
 
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" routerLink="#" routerLinkActive="active" (click)="logout()">
-                    <i class="align-middle me-1 fas fa-fw fa-arrow-alt-circle-right"></i>
-                    {{ 'account.logOut' | translate }}
-                  </a>
-              </div>
-          </li>
-      </ul>
-  </div>-->
+          <a class="sidebar-link" routerLink="/userProfile" routerLinkActive="active">
+            <i class="align-middle me-2 fas fa-fw fa-user"></i> <span class="align-middle">Your profile</span>
+          </a>
+
+          <a class="sidebar-link" routerLink="/uservotes" routerLinkActive="active">
+            <i class="align-middle me-2 far fa-fw fa-star"></i> <span class="align-middle">Post votes</span>
+          </a>
+
+          <a class="dropdown-item" href="#"><i class="align-middle me-1 fas fa-fw fa-cogs"></i> Settings</a>
+          <div class="dropdown-divider"></div>
+           <a class="sidebar-link" routerLink="/" (click)="logout()">
+              <i class="align-middle me-2 fas fa-fw fa-sign-in-alt"></i> <span class="align-middle">{{ 'account.logOut' | translate }}</span>
+            </a>
+        </div>
+      </li>
+    </ul>
+  </div>
 
 </nav>
 <!--

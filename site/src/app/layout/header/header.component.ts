@@ -15,21 +15,24 @@ import { Observable } from 'rxjs';
 
 export class HeaderComponent implements OnInit {
 
-  user: User = null;
-  userNameMenu: string;
-  userImage: string;
-  imageProfileUrl = environment.imagesProfileUrl;
-  navExpand = false;
-  isLogged: Observable<boolean>;
 
-  constructor(private router: Router,
+  user: User = null;
+  isLogged: Observable<boolean>;
+  imageProfileUrl = environment.imagesProfileUrl;
+  userImage : Observable<string>;
+  userNameMenu: string;
+  navExpand = false;
+
+  constructor(
+    private router: Router,
     private route: ActivatedRoute,
     private accountService: AccountService,
-    private translate: TranslateService
-  ) {  
+    private translate: TranslateService) { 
+      this.userImage = this.accountService.userImageObservable();
+      this.isLogged = this.accountService.userLoggedObservable();
+      this.isLogged = this.accountService.userLoggedObservable();
     
-    this.isLogged = this.accountService.userLoggedObservable();
-    translate.addLangs(['en', 'es', 'de']);  
+      translate.addLangs(['en', 'es', 'de']);  
 
     if (localStorage.getItem('locale')) {  
       const browserLang = localStorage.getItem('locale');  
@@ -38,18 +41,28 @@ export class HeaderComponent implements OnInit {
       localStorage.setItem('locale', 'en');  
       translate.setDefaultLang('en');  
     }  
-  }  
+    }
 
-  changeLang(language: string) {  
-    localStorage.setItem('locale', language);  
-    this.translate.use(language);  
-  }
+  ngOnInit(): void {
+    if(this.accountService.user){
+      this.accountService.user.subscribe(
+        x => {
+          if(x != null)
+          {
+            this.user = x;
+          }
+        }
+      );
+    }
+  }  
 
   logout() {
     this.accountService.Logout();
     this.router.navigate([''], { relativeTo: this.route });
   }
 
-  ngOnInit(): void {
+  changeLang(language: string) {  
+    localStorage.setItem('locale', language);  
+    this.translate.use(language);  
   }
 }
