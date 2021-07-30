@@ -60,7 +60,7 @@ export class PostCommentComponent implements OnInit {
 
     this.commentService.GetCommentsByPost(this.postId).subscribe(
       data => { 
-        this.comments = data 
+        this.comments = data.comments; 
 
         for(let i = 0; i < this.comments.length-1; i++)
         {

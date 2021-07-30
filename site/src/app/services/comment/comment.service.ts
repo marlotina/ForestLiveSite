@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
-import { CommentRequest, CommentResponse } from 'src/app/model/Comment';
+import { CommentRequest, CommentResponse, PostDataResponse } from 'src/app/model/Comment';
 import { CommentVoteRequest, CommentVoteResponse } from 'src/app/model/vote';
 import { environment } from 'src/environments/environment';
 
@@ -20,7 +20,7 @@ export class CommentService {
   }
 
   GetCommentsByPost(postId: string){
-    return this.httpClient.get<CommentResponse[]>(`${environment.postInteractionsApi}api/v1/CommentPost/GetCommentsByPost?postId=${postId}`)
+    return this.httpClient.get<PostDataResponse>(`${environment.postInteractionsApi}api/v1/CommentPost/GetCommentsByPost?postId=${postId}`)
       .pipe(map(data => {
         return data;
       }));

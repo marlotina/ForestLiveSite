@@ -59,8 +59,9 @@ export class PostPageComponent implements OnInit {
     
     this.activateRoute.paramMap.subscribe(params => {
       let postId = params.get("postId");
+      let authorId = params.get("userId");
 
-      this.getItemService.getPost(postId).subscribe(
+      this.getItemService.getPost(postId, authorId).subscribe(
         data => { 
           if(data != null) {
             this.post = data;  

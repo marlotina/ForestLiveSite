@@ -9,6 +9,12 @@ export class CommentRequest {
     parentId: string;
 }
 
+export class PostDataResponse {
+    votePostId: string;
+    hasPostVote: boolean;
+    comments: CommentResponse[];
+}
+
 export class CommentResponse {
     id: string;
     text: string;

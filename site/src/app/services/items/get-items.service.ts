@@ -12,8 +12,8 @@ export class GetItemsService {
   constructor(private httpClient: HttpClient) { 
   }
 
-  getPost(postId: string){
-    return this.httpClient.get<PostResponse>(`${environment.birdApiUrl}api/v1/Post/GetPost/?postId=${postId}`)
+  getPost(postId: string, authorId:string){
+    return this.httpClient.get<PostResponse>(`${environment.birdApiUrl}api/v1/UserPosts/GetPost/?postId=${postId}&userId=${authorId}`)
       .pipe(map(data => {
         return data;
       }));
