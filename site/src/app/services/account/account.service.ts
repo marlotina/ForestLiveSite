@@ -17,6 +17,7 @@ export class AccountService {
 
   userImageSubject = new BehaviorSubject<string>("");
   isLoggedSubject = new BehaviorSubject<boolean>(false);
+  isNotLoggedSubject = new BehaviorSubject<boolean>(true);
 
   constructor(private httpClient: HttpClient) { 
     this.userSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('user')));
@@ -28,6 +29,7 @@ export class AccountService {
     }
      
     this.isLoggedSubject .next(localStorage.getItem('user') != null);
+    this.isNotLoggedSubject .next(localStorage.getItem('user') == null);
   }
   
   public get userValue(): User {
@@ -70,6 +72,9 @@ export class AccountService {
     return this.isLoggedSubject.asObservable();
   }
 
+  userNotLoggedObservable() : Observable<boolean> {
+    return this.isNotLoggedSubject.asObservable();
+  }
 
   ConfirmEmail(request: ConfirmEmailRequest) {
     return this.httpClient.post(`${environment.accountApiUrl}api/v1/Account/ConfirmEmail`, request);

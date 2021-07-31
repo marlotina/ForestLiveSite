@@ -28,15 +28,19 @@
         <h2 class="mb-3">
           Join over 3,000 developers who are already working with our products
         </h2>
-        <a routerLink="signup"
+        <a *ngIf="userName == null" routerLink="signup"
           class="align-middle btn btn-success btn-lg mt-n1 btn-pill">
           Registrate
         </a>
         <p class="">UNa comunidad de observadores de aves, gestiona y controlas tu observaciones 
           y compartelas con el resto de la comunidad.
-          <a class="my-2 ms-2" routerLink="login">
+          <a *ngIf="userName == null" class="my-2 ms-2" routerLink="login">
             Login
           </a>
+          <a *ngIf="userName != null" class="my-2 ms-2" routerLink="userpage/{{userName}}">
+            go to your page
+          </a>
+          
         </p>
 
         

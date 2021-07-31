@@ -7,35 +7,64 @@
           </h1>
       </div>
   
-      <div class="row">    
+      <div class="row"> 
+        
+        <div class="col-md-3 col-xl-2">
+          <div class="card">
+            <div class="card-header">
+                <h5 class="card-title mb-0">Profile Settings</h5>
+            </div>
+            <div class="list-group list-group-flush" role="tablist">
+                <a class="list-group-item list-group-item-action" data-bs-toggle="list" routerLink="/userProfile" 
+                    routerLinkActive="active" role="tab">
+                    <i class="align-middle me-2 fas fa-fw fa-user"></i> <span class="align-middle">Profile</span>
+                </a>
+                <a class="list-group-item list-group-item-action" data-bs-toggle="list" routerLink="/userlabel" routerLinkActive="active" role="tab">
+                    <i class="align-middle me-2 far fa-fw fa-list-alt"></i> <span class="align-middle">Labels</span>
+                </a>
+                <a class="list-group-item list-group-item-action" data-bs-toggle="list" routerLink="/usercomments" routerLinkActive="active" role="tab">
+                    Comments
+                </a>
+                <a class="list-group-item list-group-item-action" data-bs-toggle="list" routerLink="/userfollow" routerLinkActive="active" role="tab">
+                    Follow
+                </a>
+                <a class="list-group-item list-group-item-action" data-bs-toggle="list" routerLink="/userfollower" routerLinkActive="active" role="tab">
+                    Follower
+                </a>
+            </div>
+        </div>
+      </div>
+      <div class="col-md-9 col-xl-10">
         <div class="card">
-            <div class="card-body">
-              <table id="datatables-clients" class="table table-striped dataTable no-footer dtr-inline" style="width: 100%;" role="grid" aria-describedby="datatables-clients_info">
-                <thead>
-                  <tr role="row">
-                    <th tabindex="0" aria-controls="datatables-clients" rowspan="1" colspan="1" style="width: 56px;">#</th>
-                    <th tabindex="0" aria-controls="datatables-clients" rowspan="1" colspan="1" style="width: 211px;">Name</th>
-                    <th tabindex="0" aria-controls="datatables-clients" rowspan="1" colspan="1" style="width: 174px;">follow you since</th>
+          <div class="card-body">
+            <table id="datatables-clients" class="table table-striped dataTable no-footer dtr-inline" style="width: 100%;" role="grid" aria-describedby="datatables-clients_info">
+              <thead>
+                <tr role="row">
+                  <th tabindex="0" aria-controls="datatables-clients" rowspan="1" colspan="1" style="width: 56px;">#</th>
+                  <th tabindex="0" aria-controls="datatables-clients" rowspan="1" colspan="1" style="width: 211px;">Name</th>
+                  <th tabindex="0" aria-controls="datatables-clients" rowspan="1" colspan="1" style="width: 174px;">follow you since</th>
+                </tr>
+              </thead>
+              <tbody>                     
+                <tr role="row" class="odd" *ngFor="let follower of followers">
+                    <td class="dtr-control"><img src="img/avatars/avatar-3.jpg" class="rounded-circle my-n1" alt="Avatar" width="32" height="32"></td>
+                    <td class="sorting_1">
+                      <a href="userpage/{{follower.followUserId}}">
+                        <strong class="text-gray-dark">{{follower.followUserId}}</strong>
+                      </a>
+                    </td>
+                    <td>{{follower.creationDate}}</td>
                   </tr>
-                </thead>
-                <tbody>                     
-                  <tr role="row" class="odd" *ngFor="let follower of followers">
-                      <td class="dtr-control"><img src="img/avatars/avatar-3.jpg" class="rounded-circle my-n1" alt="Avatar" width="32" height="32"></td>
-                      <td class="sorting_1">
-                        <a href="userpage/{{follower.followUserId}}">
-                          <strong class="text-gray-dark">{{follower.followUserId}}</strong>
-                        </a>
-                      </td>
-                      <td>{{follower.creationDate}}</td>
-                    </tr>
-                  </tbody>
-              </table>
-              <app-loader></app-loader>   
-              <div *ngIf="!isLoading && !hasFollowers" >
-                YOu dont have followers
-              </div> 
-          </div>  
+                </tbody>
+            </table>
+            <app-loader></app-loader>   
+            <div *ngIf="!isLoading && !hasFollowers" >
+              YOu dont have followers
+            </div> 
         </div>  
+      </div>  
+      </div>
+        
       </div>
   </div>
 </main>

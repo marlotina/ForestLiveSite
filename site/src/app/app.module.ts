@@ -15,6 +15,7 @@ import { AppComponent } from './app.component';
 import { CommonDialogComponent } from './components/shared/common-dialog/common-dialog.component';
 import { ImageDialogComponent } from './components/shared/image-dialog/image-dialog.component';
 import { APP_BASE_HREF } from '@angular/common';
+import { SettingsMenuModule } from './components/user/settings-menu/settings-menu.module';
 
 export function jwtTokenGetter() {
   return localStorage.getItem("access_token");

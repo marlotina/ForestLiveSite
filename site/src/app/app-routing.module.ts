@@ -28,8 +28,6 @@ const routes: Routes = [
   { path: 'searchpage', loadChildren: () => import('./components/search/search-page/search-page.module').then(m => m.SearchPageModule) },
   { path: 'userlabel', loadChildren: () => import('./components/user/user-labels/user-labels.module').then(m => m.UserLabelsModule), 
     canActivate: [AuthGuard]  },
-  { path: 'usercommentvotes', loadChildren: () => import('./components/user/user-comment-votes/user-comment-votes.module').then(m => m.UserCommentVotesModule), 
-    canActivate: [AuthGuard]  },
   { path: 'landingusers', loadChildren: () => import('./components/landing-users/landing-users.module').then(m => m.LandingUsersModule), 
     canActivate: [AuthGuard]  },
   { path: 'lastposts', loadChildren: () => import('./components/lastposts/last-posts.module').then(m => m.LastPostsModule) },

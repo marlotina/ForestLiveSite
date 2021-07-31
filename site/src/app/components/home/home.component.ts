@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { PostHomeResponse } from 'src/app/model/post';
-import { BirdserviceService } from 'src/app/services/bird/birdservice.service';
-import { environment } from 'src/environments/environment';
+import { Observable } from 'rxjs';
+import { AccountService } from 'src/app/services/account/account.service';
 
 @Component({
   selector: 'app-home',
@@ -10,10 +9,26 @@ import { environment } from 'src/environments/environment';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  userName: string = null;
+  isLogged: Observable<boolean>;
+  constructor(private accountService: AccountService) {
+    this.isLogged = this.accountService.userLoggedObservable(); }
 
   ngOnInit(): void {
-    
+    if(this.accountService.user){
+      this.accountService.user.subscribe(
+        x => {
+          if(x != null)
+          {
+            this.userName = x.userId;
+          }
+          else
+          {
+            this.userName = null;
+          }
+        }
+      );
+    }
   }
 
 }

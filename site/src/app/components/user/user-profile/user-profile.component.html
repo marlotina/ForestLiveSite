@@ -6,248 +6,273 @@
             </h1>
         </div>
         <div class="row">
-            <div class="tab-content">
-                <div class="tab-pane fade show active" id="account" role="tabpanel">
-            
-                    <form [formGroup]="userProfileForm" (ngSubmit)="onSubmit()">
-                        <input class="hidden" formControlName="id">
-                        <input type="text" class="hidden" formControlName="photo">
-                        <div class="card">
-                            <div class="card-header">
-                                <h5 class="card-title mb-0">Public info</h5>
-                            </div>
-                            <div class="card-body">
-                                
-                                <div class="row">
-                                    <div class="col-md-8">
-                                        <div class="mb-3">
-                                            <label for="usernameProfile">{{ 'user.username' | translate }}</label>
-                                            <input type="text" 
-                                                id="usernameProfile"
-                                                class="form-control" 
-                                                [ngClass]="{ 'is-invalid': submitted && f.id.errors }"
-                                                formControlName="id" disabled>
-                                        </div>
-                                        <div class="mb-3">    
-                                            <label for="descriptionProfile">{{ 'user.description' | translate }}</label>
-                                            <textarea class="form-control" id="descriptionProfile" 
-                                                formControlName="description" rows="3"></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="text-center">
-                                            <img alt="Chris Wood" src="{{userProfileUrlImage}}{{userImage}}" class="rounded-circle img-responsive mt-2"
-                                                width="128" height="128" />
-                                            <div class="mt-2">                                                
-                                                <button class="btn btn-primary" type="button" (click)="openImageProfile()">{{'user.imageProfile' | translate}}</button>
+            <div class="col-md-3 col-xl-2">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0">Profile Settings</h5>
+                    </div>
+                    <div class="list-group list-group-flush" role="tablist">
+                        <a class="list-group-item list-group-item-action" data-bs-toggle="list" routerLink="/userProfile" 
+                            routerLinkActive="active" role="tab">
+                            <i class="align-middle me-2 fas fa-fw fa-user"></i> <span class="align-middle">Profile</span>
+                        </a>
+                        <a class="list-group-item list-group-item-action" data-bs-toggle="list" routerLink="/userlabel" routerLinkActive="active" role="tab">
+                            <i class="align-middle me-2 far fa-fw fa-list-alt"></i> <span class="align-middle">Labels</span>
+                        </a>
+                        <a class="list-group-item list-group-item-action" data-bs-toggle="list" routerLink="/usercomments" routerLinkActive="active" role="tab">
+                            Comments
+                        </a>
+                        <a class="list-group-item list-group-item-action" data-bs-toggle="list" routerLink="/userfollow" routerLinkActive="active" role="tab">
+                            Follow
+                        </a>
+                        <a class="list-group-item list-group-item-action" data-bs-toggle="list" routerLink="/userfollower" routerLinkActive="active" role="tab">
+                            Follower
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-9 col-xl-10">
+                <div class="tab-content">
+                    <div class="tab-pane fade show active" id="account" role="tabpanel">
+                
+                        <form [formGroup]="userProfileForm" (ngSubmit)="onSubmit()">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="card-title mb-0">Public info</h5>
+                                </div>
+                                <div class="card-body">
+                                    
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <div class="mb-3">
+                                                <label for="usernameProfile">{{ 'user.username' | translate }}</label>
+                                                <input type="text" 
+                                                    id="usernameProfile"
+                                                    class="form-control" 
+                                                    [ngClass]="{ 'is-invalid': submitted && f.id.errors }"
+                                                    formControlName="id" disabled>
                                             </div>
-                                            <small>For best results, use an image at least 128px by 128px in .jpg
-                                                format</small>
+                                            <div class="mb-3">    
+                                                <label for="descriptionProfile">{{ 'user.description' | translate }}</label>
+                                                <textarea class="form-control" id="descriptionProfile" 
+                                                    formControlName="description" rows="3"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="text-center">
+                                                <img alt="Chris Wood" src="{{userProfileUrlImage}}{{userImage}}" class="rounded-circle img-responsive mt-2"
+                                                    width="128" height="128" />
+                                                <div class="mt-2">                                                
+                                                    <button class="btn btn-primary" type="button" (click)="openImageProfile()">{{'user.imageProfile' | translate}}</button>
+                                                </div>
+                                                <small>For best results, use an image at least 128px by 128px in .jpg
+                                                    format</small>
+                                            </div>
                                         </div>
                                     </div>
+                    
                                 </div>
-                
                             </div>
-                        </div>
-                        <div class="card">
-                            <div class="card-header">
-                                <div class="card-actions float-end">
-                                    <a href="#" class="me-1">
-                                        <i class="align-middle" data-feather="refresh-cw"></i>
-                                    </a>
-                                    <div class="d-inline-block dropdown show">
-                                        <a href="#" data-bs-toggle="dropdown" data-bs-display="static">
-                                            <i class="align-middle" data-feather="more-vertical"></i>
+                            <div class="card">
+                                <div class="card-header">
+                                    <div class="card-actions float-end">
+                                        <a href="#" class="me-1">
+                                            <i class="align-middle" data-feather="refresh-cw"></i>
                                         </a>
-                
-                                        <div class="dropdown-menu dropdown-menu-end">
-                                            <a class="dropdown-item" href="#">Action</a>
-                                            <a class="dropdown-item" href="#">Another action</a>
-                                            <a class="dropdown-item" href="#">Something else here</a>
+                                        <div class="d-inline-block dropdown show">
+                                            <a href="#" data-bs-toggle="dropdown" data-bs-display="static">
+                                                <i class="align-middle" data-feather="more-vertical"></i>
+                                            </a>
+                    
+                                            <div class="dropdown-menu dropdown-menu-end">
+                                                <a class="dropdown-item" href="#">Action</a>
+                                                <a class="dropdown-item" href="#">Another action</a>
+                                                <a class="dropdown-item" href="#">Something else here</a>
+                                            </div>
                                         </div>
                                     </div>
+                                    <h5 class="card-title mb-0">Private info</h5>
                                 </div>
-                                <h5 class="card-title mb-0">Private info</h5>
-                            </div>
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="mb-3 col-md-6">
-                                        <label for="inputEmail4">Email</label>
-                                        <input type="email" class="form-control" id="inputEmail4" placeholder="Email" value="{{ userEmail }}" disabled>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="mb-3 col-md-6">
+                                            <label for="inputEmail4">Email</label>
+                                            <input type="email" class="form-control" id="inputEmail4" placeholder="Email" value="{{ userEmail }}" disabled>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="mb-3 col-md-6">
-                                        <label for="nameProfile">{{ 'user.name' | translate }}*</label>
-                                        <input type="text"
-                                            id="nameProfile" 
-                                            class="form-control"
-                                            [ngClass]="{ 'is-invalid': submitted && f.name.errors }"
-                                            formControlName="name">
-                                    </div>
-                                    <div class="mb-3 col-md-6">
-                                        <label for="surnameProfile">{{ 'user.surname' | translate }}*</label>
-                                        <input type="text" 
-                                            id="surnameProfile"
-                                            class="form-control"
-                                            formControlName="surname">
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="mb-3 col-md-6">
-                                        <label for="locationProfile">{{ 'user.location' | translate }}*</label>
-                                        <input type="text" 
-                                            id="locationProfile"
-                                            class="form-control"
-                                            formControlName="location">
-                                    </div>
-                                    <div class="mb-3 col-md-6">
-                                        <label for="languageProfile">{{ 'user.language' | translate }}*</label>
-                                        <select id="languageProfile" class="form-control" formControlName="languageId">
-                                            <option value="1d134297-b070-4149-a2e0-c2643de48f95">English</option>
-                                            <option value="c7bc511d-562b-4a59-a434-2d754fe40f5c">Catalan</option>  
-                                            <option value="17368404-4355-49c8-b289-08f357a92b9f">Spanish</option>                   
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="mb-3 col-md-6">
-                                        <label>{{ 'user.registrationDate' | translate }}*</label>
-                                        <input type="text" 
-                                            class="form-control blockInput"
-                                            formControlName="registrationDate">
-                                    </div>
-                                    <div class="mb-3 col-md-6">
-                                        <label>{{ 'user.lastModification' | translate }}*</label>
-                                        <input type="text" 
-                                            class="form-control blockInput"
-                                            formControlName="lastModification">
-                                    </div>
-                                </div>
-                                    
-                                <div class="row">
-                                    <div class="mb-3 col-md-6">
-                                        <label class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" formControlName="isCompany" id="isCompanyProfile" checked="">
-                                            <span for="isCompanyProfile" class="custom-control-label">{{ 'user.isCompany' | translate }}</span>
-                                        </label>                                    
-                                    </div>
-                                    
-                                </div>
-                
-                            </div>
-                        </div>
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="mb-3 col-md-6">
-                                        <label for="urlWebSiteProfile">{{ 'user.urlWebSite' | translate }}*</label>
-                                        <input type="text" 
-                                            id="urlWebSiteProfile"
-                                            class="form-control"
-                                            formControlName="urlWebSite">
-                                    </div>
-                                    <div class="mb-3 col-md-6">
-                                        <label for="twitterUrlProfile">{{ 'user.twitterUrl' | translate }}*</label>
-                                        <input type="text" 
-                                            id="twitterUrlProfile"
-                                            class="form-control"
-                                            formControlName="twitterUrl">
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="mb-3 col-md-6">
-                                        <label for="facebookUrlProfile">{{ 'user.facebookUrl' | translate }}*</label>
-                                        <input type="text" 
-                                            id="facebookUrlProfile"
-                                            class="form-control"
-                                            formControlName="facebookUrl">
-                                    </div>
-                                    <div class="mb-3 col-md-6">
-                                        <label for="linkedlinUrlProfile">{{ 'user.linkedlinUrl' | translate }}*</label>
-                                        <input type="text" 
-                                            id="linkedlinUrlProfile"
-                                            class="form-control"
-                                            formControlName="linkedlinUrl">
-                                    </div>
-                                    <div class="mb-3 col-md-6">
-                                        <label for="instagramUrlProfile">{{ 'user.instagramUrl' | translate }}*</label>
-                                        <input type="text" 
-                                            id="instagramUrlProfile"
-                                            class="form-control"
-                                            formControlName="instagramUrl">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="card">                            
-                            <div class="card-header">
-                               <h5 class="card-title">Default Map</h5>
-                               <h6 class="card-subtitle text-muted">Displays the default road map view.</h6>
-                            </div>
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div #mapWrapper id="map" class="mapProfile"></div>
-                                    </div>
-        
-                                    <div class="col-md-6">
-                                        <p>
-                                            Elige el centro del mapa para cuando se muestre tu mapa y si eres una compañía será también su lugar.
-                                        </p>
-                                        <div class="card-body pt-0">
-                                            <label for="titlePost">Latitude</label>
-                                            <input type="text" 
-                                                id="latitudeProfile"
+                                    <div class="row">
+                                        <div class="mb-3 col-md-6">
+                                            <label for="nameProfile">{{ 'user.name' | translate }}*</label>
+                                            <input type="text"
+                                                id="nameProfile" 
                                                 class="form-control"
-                                                formControlName="latitude">
-                                                <label for="titlePost">Longitude</label>
+                                                [ngClass]="{ 'is-invalid': submitted && f.name.errors }"
+                                                formControlName="name">
+                                        </div>
+                                        <div class="mb-3 col-md-6">
+                                            <label for="surnameProfile">{{ 'user.surname' | translate }}*</label>
                                             <input type="text" 
-                                                id="longitudeProfile"
+                                                id="surnameProfile"
                                                 class="form-control"
-                                                formControlName="longitude">
+                                                formControlName="surname">
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="mb-3 col-md-6">
+                                            <label for="locationProfile">{{ 'user.location' | translate }}*</label>
+                                            <input type="text" 
+                                                id="locationProfile"
+                                                class="form-control"
+                                                formControlName="location">
+                                        </div>
+                                        <div class="mb-3 col-md-6">
+                                            <label for="languageProfile">{{ 'user.language' | translate }}*</label>
+                                            <select id="languageProfile" class="form-control" formControlName="languageId">
+                                                <option value="1d134297-b070-4149-a2e0-c2643de48f95">English</option>
+                                                <option value="c7bc511d-562b-4a59-a434-2d754fe40f5c">Catalan</option>  
+                                                <option value="17368404-4355-49c8-b289-08f357a92b9f">Spanish</option>                   
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="mb-3 col-md-6">
+                                            <label>{{ 'user.registrationDate' | translate }}*</label>
+                                            <input type="text" 
+                                                class="form-control blockInput"
+                                                formControlName="registrationDate">
+                                        </div>
+                                        <div class="mb-3 col-md-6">
+                                            <label>{{ 'user.lastModification' | translate }}*</label>
+                                            <input type="text" 
+                                                class="form-control blockInput"
+                                                formControlName="lastModification">
+                                        </div>
+                                    </div>
+                                        
+                                    <div class="row">
+                                        <div class="mb-3 col-md-6">
+                                            <label class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" formControlName="isCompany" id="isCompanyProfile" checked="">
+                                                <span for="isCompanyProfile" class="custom-control-label">{{ 'user.isCompany' | translate }}</span>
+                                            </label>                                    
+                                        </div>
+                                        
+                                    </div>
+                    
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="mb-3 col-md-6">
+                                            <label for="urlWebSiteProfile">{{ 'user.urlWebSite' | translate }}*</label>
+                                            <input type="text" 
+                                                id="urlWebSiteProfile"
+                                                class="form-control"
+                                                formControlName="urlWebSite">
+                                        </div>
+                                        <div class="mb-3 col-md-6">
+                                            <label for="twitterUrlProfile">{{ 'user.twitterUrl' | translate }}*</label>
+                                            <input type="text" 
+                                                id="twitterUrlProfile"
+                                                class="form-control"
+                                                formControlName="twitterUrl">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="mb-3 col-md-6">
+                                            <label for="facebookUrlProfile">{{ 'user.facebookUrl' | translate }}*</label>
+                                            <input type="text" 
+                                                id="facebookUrlProfile"
+                                                class="form-control"
+                                                formControlName="facebookUrl">
+                                        </div>
+                                        <div class="mb-3 col-md-6">
+                                            <label for="linkedlinUrlProfile">{{ 'user.linkedlinUrl' | translate }}*</label>
+                                            <input type="text" 
+                                                id="linkedlinUrlProfile"
+                                                class="form-control"
+                                                formControlName="linkedlinUrl">
+                                        </div>
+                                        <div class="mb-3 col-md-6">
+                                            <label for="instagramUrlProfile">{{ 'user.instagramUrl' | translate }}*</label>
+                                            <input type="text" 
+                                                id="instagramUrlProfile"
+                                                class="form-control"
+                                                formControlName="instagramUrl">
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            
-                        </div>
 
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="row row-cols-md-auto align-items-center">
-                                    <div class="mb-12 col-md-4">                                       
-                                        <label>Reset your password, you will receibed an email</label>
+                            <div class="card">                            
+                                <div class="card-header">
+                                <h5 class="card-title">Default Map</h5>
+                                <h6 class="card-subtitle text-muted">Displays the default road map view.</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div #mapWrapper id="map" class="mapProfile"></div>
+                                        </div>
+            
+                                        <div class="col-md-6">
+                                            <p>
+                                                Elige el centro del mapa para cuando se muestre tu mapa y si eres una compañía será también su lugar.
+                                            </p>
+                                            <div class="card-body pt-0">
+                                                <label for="titlePost">Latitude</label>
+                                                <input type="text" 
+                                                    id="latitudeProfile"
+                                                    class="form-control"
+                                                    formControlName="latitude">
+                                                    <label for="titlePost">Longitude</label>
+                                                <input type="text" 
+                                                    id="longitudeProfile"
+                                                    class="form-control"
+                                                    formControlName="longitude">
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="mb-12 col-md-8">
-                                        <button type="button" class="btn btn-primary" (click)="recoverPassword()">{{ 'user.resetPassword' | translate }}</button>
+                                </div>
+                                
+                            </div>
+
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="row row-cols-md-auto align-items-center">
+                                        <div class="mb-12 col-md-4">                                       
+                                            <label>Reset your password, you will receibed an email</label>
+                                        </div>
+                                        <div class="mb-12 col-md-8">
+                                            <button type="button" class="btn btn-primary" (click)="recoverPassword()">{{ 'user.resetPassword' | translate }}</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="row row-cols-md-auto align-items-center">
-                                    <div class="col-md-8">
-                                        <button *ngIf="submitted" class="btn btn-primary" type="button" disabled>
-                                            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                                            Loading...
-                                        </button>
-                                        <button *ngIf="!submitted" type="submit" class="btn btn-primary">{{ 'user.update' | translate }}</button>
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="row row-cols-md-auto align-items-center">
+                                        <div class="col-md-8">
+                                            <button *ngIf="submitted" class="btn btn-primary" type="button" disabled>
+                                                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                                Loading...
+                                            </button>
+                                            <button *ngIf="!submitted" type="submit" class="btn btn-primary">{{ 'user.update' | translate }}</button>
 
-                                    </div>
+                                        </div>
 
-                                    <div class="col-md-4">
-                                        <button type="button" class="btn btn-danger floatRight" (click)="deleteUser()">{{ 'user.deleteUser' | translate }}</button>
+                                        <div class="col-md-4">
+                                            <button type="button" class="btn btn-danger floatRight" (click)="deleteUser()">{{ 'user.deleteUser' | translate }}</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </form>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>

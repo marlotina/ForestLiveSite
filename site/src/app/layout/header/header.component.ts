@@ -18,6 +18,7 @@ export class HeaderComponent implements OnInit {
 
   user: User = null;
   isLogged: Observable<boolean>;
+  isNotLogged: Observable<boolean>;
   imageProfileUrl = environment.imagesProfileUrl;
   userImage : Observable<string>;
   userNameMenu: string;
@@ -30,7 +31,7 @@ export class HeaderComponent implements OnInit {
     private translate: TranslateService) { 
       this.userImage = this.accountService.userImageObservable();
       this.isLogged = this.accountService.userLoggedObservable();
-      this.isLogged = this.accountService.userLoggedObservable();
+      this.isNotLogged = this.accountService.userNotLoggedObservable();
     
       translate.addLangs(['en', 'es', 'de']);  
 

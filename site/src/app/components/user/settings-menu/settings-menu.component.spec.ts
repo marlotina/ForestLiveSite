@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { UserCommentVotesComponent } from './user-comment-votes.component';
+import { SettingsMenuComponent } from './settings-menu.component';
 
-describe('UserCommentVotesComponent', () => {
-  let component: UserCommentVotesComponent;
-  let fixture: ComponentFixture<UserCommentVotesComponent>;
+describe('SettingsMenuComponent', () => {
+  let component: SettingsMenuComponent;
+  let fixture: ComponentFixture<SettingsMenuComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ UserCommentVotesComponent ]
+      declarations: [ SettingsMenuComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(UserCommentVotesComponent);
+    fixture = TestBed.createComponent(SettingsMenuComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
