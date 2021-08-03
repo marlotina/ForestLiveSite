@@ -86,12 +86,12 @@ export class UserMapPageComponent implements OnInit {
             const marker = new google.maps.Marker({
               position: { lat: post.location.lat, lng: post.location.lng},
               map,
-              icon: "../../../../assets/img/core-img/marker.svg",
-              title: post.postId
+              icon: "../../../../assets/img/core-img/marker.svg"
+              //title: post.postId
             });
 
             marker.addListener("click", () => {
-              this.getInfoPost(marker, map);
+              this.getInfoPost(marker, map, post.postId, post.userId);
             });
           }
         } 
@@ -102,10 +102,8 @@ export class UserMapPageComponent implements OnInit {
       });
   }
 
-  getInfoPost(marker: google.maps.Marker, map: google.maps.Map){
-
-    var postInfo = marker.getTitle().split(',');
-    this.userPostService.getModalBirdPost(postInfo[0], 'marlotina').subscribe(data => {
+  getInfoPost(marker: google.maps.Marker, map: google.maps.Map, postId: string, userId: string){
+    this.userPostService.getModalBirdPost(postId, userId).subscribe(data => {
         const modal = `<div class="card modalCard">
                         <div class="card-header">
                           <h5 class="card-title mb-0">

@@ -2,7 +2,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Observable, of, Subject } from 'rxjs';
 import { catchError, debounceTime, first, map, startWith, switchMap, takeUntil } from 'rxjs/operators';
-import { MapSpeciePoint } from 'src/app/model/Map';
+import { MapPoint } from 'src/app/model/Map';
 import { AutocompleteResponse } from 'src/app/model/specie';
 import { BirdserviceService } from 'src/app/services/bird/birdservice.service';
 import { ExternaldataService } from 'src/app/services/data/externaldata.service';
@@ -60,9 +60,8 @@ export class SearchPageComponent implements OnInit {
     this.getLocation();
   }
 
-  getInfoPost(marker: google.maps.Marker, map: google.maps.Map){
-    var postInfo = marker.getTitle().split(',');
-    this.searchBirdsSerices.GetModalBirdPost(postInfo[0], 'marlotina').subscribe(data => {
+  getInfoPost(marker: google.maps.Marker, map: google.maps.Map, postId: string, userId: string){
+    this.searchBirdsSerices.GetModalBirdPost(postId, userId).subscribe(data => {
         const modal = `<div class="card modalCard">
                         <div class="card-header">
                           <h5 class="card-title mb-0">
@@ -160,7 +159,7 @@ export class SearchPageComponent implements OnInit {
     
   }
 
-  private destroy$ = new Subject<MapSpeciePoint[]>();
+  private destroy$ = new Subject<MapPoint[]>();
 
   public ngOnDestroy(): void {
     this._filters$.next();
@@ -182,7 +181,7 @@ export class SearchPageComponent implements OnInit {
             const marker = this.getMarker(data[i], this.map);
   
             marker.addListener("click", () => {
-              this.getInfoPost(marker, this.map);
+              this.getInfoPost(marker, this.map, data[i].postId, data[i].userId);
             });
   
             this.markers.push(marker);
@@ -190,13 +189,15 @@ export class SearchPageComponent implements OnInit {
         });
   }
   
-  getMarker(point: MapSpeciePoint, map: google.maps.Map){
+  getMarker(point: MapPoint, map: google.maps.Map){
     const marker = new google.maps.Marker({
       position: { lat: point.location.lat, lng: point.location.lng},
       map,
       icon: "../../../../assets/img/core-img/marker.svg",
-      title: `${point.postId},${point.specieId}`
+      //title: `${point.postId},${point.userId}`
     });
+
+
 
     return marker;
   }

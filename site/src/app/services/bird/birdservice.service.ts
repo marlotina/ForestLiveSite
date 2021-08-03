@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
-import { MapSpeciePoint } from 'src/app/model/Map';
-import { PostResponse, ModalPostResponse, PostListResponse, PostRequest, PostHomeResponse } from 'src/app/model/post';
+import { MapPoint } from 'src/app/model/Map';
+import { ModalPostResponse, PostListResponse, PostHomeResponse } from 'src/app/model/post';
 import { environment } from 'src/environments/environment';
 
 
@@ -39,7 +39,7 @@ export class BirdserviceService {
 
 
   GetSearchPoints(latiude : number, longitude: number, zoom: number, specieId: string){
-    return this.httpClient.get<MapSpeciePoint[]>(`${environment.searchsApiUrl}api/v1/SearchMap/GetPoints/?latitude=${latiude}&longitude=${longitude}&zoom=${zoom}&specieId=${specieId}`)
+    return this.httpClient.get<MapPoint[]>(`${environment.searchsApiUrl}api/v1/SearchMap/GetPoints/?latitude=${latiude}&longitude=${longitude}&zoom=${zoom}&specieId=${specieId}`)
       .pipe(map(data => {
         return data;
       }));
