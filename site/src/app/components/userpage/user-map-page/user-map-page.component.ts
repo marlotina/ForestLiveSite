@@ -86,7 +86,7 @@ export class UserMapPageComponent implements OnInit {
             const marker = new google.maps.Marker({
               position: { lat: post.location.lat, lng: post.location.lng},
               map,
-              icon: "../../../../assets/img/core-img/marker.svg"
+              icon: "../../../../assets/img/core-img/marker.png"
               //title: post.postId
             });
 

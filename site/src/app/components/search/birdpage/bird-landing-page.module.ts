@@ -13,7 +13,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
-import { PostVotesModule } from '../shared/post-votes/post-votes.module';
+import { PostVotesModule } from '../../shared/post-votes/post-votes.module';
 
 const materialModules = [
   MatSelectModule,

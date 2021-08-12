@@ -12,8 +12,8 @@ import { ExternaldataService } from 'src/app/services/data/externaldata.service'
 import { LoaderService } from 'src/app/services/loader/loader.service';
 import { ManagepostService } from 'src/app/services/posts/managepost.service';
 import { environment } from 'src/environments/environment';
-import { CommonDialogComponent } from '../shared/common-dialog/common-dialog.component';
-import { ImageDialogComponent } from '../shared/image-dialog/image-dialog.component';
+import { CommonDialogComponent } from '../../shared/common-dialog/common-dialog.component';
+import { ImageDialogComponent } from '../../shared/image-dialog/image-dialog.component';
 
 @Component({
   selector: 'app-bird-landing-page',

@@ -193,7 +193,7 @@ export class SearchPageComponent implements OnInit {
     const marker = new google.maps.Marker({
       position: { lat: point.location.lat, lng: point.location.lng},
       map,
-      icon: "../../../../assets/img/core-img/marker.svg",
+      icon: "../../../../assets/img/core-img/marker.png",
       //title: `${point.postId},${point.userId}`
     });
 
