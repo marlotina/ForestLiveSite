@@ -3,7 +3,7 @@
     <div class="container-fluid">
         <div class="header">
             <h1 class="header-title">
-                Create post
+                {{ 'createPost.createPostTitle' | translate }}
             </h1>
         </div>
         
@@ -12,14 +12,14 @@
 
         <div class="card">
             <div class="card-header">
-                <h5 class="card-title mb-0">Create post</h5>
+                <h5 class="card-title mb-0">{{ 'createPost.create' | translate }}</h5>
             </div>
             <div class="list-group list-group-flush" role="tablist">
                 <a class="dropdown-item" routerLink="/createPost/post" routerLinkActive="active">
-                    Post
+                    {{ 'createPost.post' | translate }}
                   </a>
                   <a class="dropdown-item" routerLink="/createPost/observation" routerLinkActive="active">
-                    Observation
+                    {{ 'createPost.observation' | translate }}
                   </a>
             </div>
         </div>
@@ -33,7 +33,7 @@
                                 <div class="form-group">
                                     <div class="alert alert-warning alert-dismissible" role="alert" *ngIf="sizeError">
                                         <div class="alert-message">
-                                            The maximun size of the image is 3 MB.
+                                            {{ 'createPost.imageSize' | translate }}
                                         </div>
                                     </div>
                                     <div class="col-12">
@@ -53,7 +53,7 @@
         
                             <div class="col-12 col-md-12 mt-15">
                                 <div class="form-group">
-                                    <button type="button" class="btn btn-outline-primary" *ngIf="visibleEditImage" (click)="deleteImage()">remove</button>&nbsp;
+                                    <button type="button" class="btn btn-outline-primary" *ngIf="visibleEditImage" (click)="deleteImage()">{{ 'createPost.remove' | translate }}</button>&nbsp;
                                     <button type="button" class="btn btn-outline-primary" *ngIf="visibleEditImage" (click)="openEditImage()">{{ 'createPost.editImage' | translate }}</button>                                         
                                 </div>
                             </div>   
@@ -61,7 +61,7 @@
 
                         <div class="row mb" *ngIf="!isPost">
                             <div class="form-group col-md-4">
-                                <label for="titlePost">Specie</label>
+                                <label for="titlePost">{{ 'createPost.specie' | translate }}</label>
                                 <input type="text" class="form-control" [matAutocomplete]="autoBird"
                                     [formControl]="specieAutocompleteControl" 
                                     id="specieNamePost" placeholder="Introduce especie">
@@ -77,21 +77,21 @@
                                     <input class="form-check-input" type="radio" name="radioSpecieTypeSearch" id="radioSpecieTypeSearch1" 
                                         (change)="changeSearchSpecie($event)" value="1" checked>
                                     <span class="form-check-label"  for="radioSpecieTypeSearch1">
-                                        Coomon name
+                                        {{ 'createPost.commonName' | translate }}
                                     </span>
                                 </label>
                                 <label class="form-check form-check-inline">
                                     <input class="form-check-input" type="radio" name="radioSpecieTypeSearch"
                                         (change)="changeSearchSpecie($event)" value="2" id="radioSpecieTypeSearch2">
                                     <span class="form-check-label"  for="radioSpecieTypeSearch2">
-                                        Science name
+                                        {{ 'createPost.scienceName' | translate }}
                                     </span>
                                 </label>
                             </div>
                             <div class="form-group col-md-5">
                                 <div class="alert alert-primary alert-dismissible" role="alert">
                                     <div class="alert-message">
-                                        If you don't know the specie, you don't need to select an specie.
+                                        {{ 'createPost.noSpecieText' | translate }}
                                     </div>
                                 </div>
                             </div>
@@ -99,7 +99,7 @@
 
                         <div class="row mb" *ngIf="!isPost">
                             <div class="form-group col-md-5">
-                                <label for="titlePost">Country</label>
+                                <label for="titlePost">{{ 'createPost.country' | translate }}</label>
                                 <input type="text" class="form-control" [matAutocomplete]="autoCountry"
                                     [formControl]="countryAutocompleteControl" 
                                     id="countryID" placeholder="Select country">
@@ -132,7 +132,7 @@
                         </div>
                         <div class="row mb">
                             <div class="form-group">
-                                <label for="message">Text</label>
+                                <label for="message">{{ 'createPost.text' | translate }}</label>
                                 <textarea class="form-control" 
                                     name="message" 
                                     id="textPost" 
@@ -181,14 +181,14 @@
                         <div class="row mb">
                             <div class="form-group">
                                 <button class="btn btn-outline-primary" type="button" (click)="showHideMap()" [hidden]="showMap"><i class="align-middle mr-2 fas fa-fw fa-map-marker-alt"></i>Add location</button>
-                                <button class="btn btn-outline-primary" type="button" (click)="showHideMap()" [hidden]="!showMap">remove</button>
+                                <button class="btn btn-outline-primary" type="button" (click)="showHideMap()" [hidden]="!showMap">{{ 'createPost.remove' | translate }}</button>
                             </div>
                         </div>
                         
                         <div [hidden]="!showMap">
                             <div class="row mb">
                                 <div class="form-group col-md-6">
-                                    <label for="titlePost">Latitude</label>
+                                    <label for="titlePost">{{ 'createPost.latitude' | translate }}</label>
                                     <input type="text"  
                                         class="form-control" 
                                         id="latitudePost" 
@@ -198,7 +198,7 @@
                                         (change)="onChangeEvent()" />
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label for="titlePost">Longitude</label>
+                                    <label for="titlePost">{{ 'createPost.longitude' | translate }}</label>
                                     <input type="text" 
                                         class="form-control" 
                                         placeholder="{{ 'createPost.longitude' | translate }}" 
@@ -217,7 +217,7 @@
                         
                         <button *ngIf="submitted" class="btn btn-primary" type="button" disabled>
                             <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                            Loading...
+                            {{ 'general.loading' | translate }}
                         </button>
 
                         <button type="submit" *ngIf="!submitted" class="btn btn-primary mt-15">

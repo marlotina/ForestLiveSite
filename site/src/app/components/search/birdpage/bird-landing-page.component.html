@@ -2,14 +2,16 @@
     <div class="container-fluid">
         <div class="header">
             <h1 class="header-title">
-                Blank Page
+                {{ 'searchSpecie.searchSpecieTitle' | translate }}
             </h1>
         </div>
         
         <div class="row">
             <div class="card">
                 <div class="card-header">
-                    <h5 class="card-title mb-0">Filter</h5>
+                    <h5 class="card-title mb-0">
+                        {{ 'searchMap.filters' | translate }}
+                    </h5>
                 </div>
                 <div class="card-body">
                     <div class="row">
@@ -18,7 +20,7 @@
                             <div class="input-group">
                                 <input type="text" class="form-control" [matAutocomplete]="autoBird"
                                     [formControl]="autocompleteControl" 
-                                    id="specieNamePost" placeholder="Introduce especie">
+                                    id="specieNamePost" placeholder="{{ 'searchSpecie.writeSpecie' | translate }}">
                                 <span class="input-group-append">
                                     <button type="button" class="btn btn-primary" (click)="addFilterSpecie()">
                                         <i class="align-middle me-1 fas fa-fw fa-search"></i>
@@ -42,14 +44,14 @@
                                 <input class="form-check-input" type="radio" name="radioSpecieTypeSearch" id="radioSpecieTypeSearch1" 
                                     (change)="changeSearchSpecie($event)" value="1" checked>
                                 <span class="form-check-label"  for="radioSpecieTypeSearch1">
-                                    Coomon name
+                                    {{ 'searchSpecie.commonName' | translate }}
                                 </span>
                             </label>
                             <label class="form-check form-check-inline">
                                 <input class="form-check-input" type="radio" name="radioSpecieTypeSearch"
                                     (change)="changeSearchSpecie($event)" value="2" id="radioSpecieTypeSearch2">
                                 <span class="form-check-label"  for="radioSpecieTypeSearch2">
-                                    Science name
+                                    {{ 'searchSpecie.scienceName' | translate }}
                                 </span>
                             </label>
                         </div>
@@ -59,21 +61,21 @@
                                     <input class="form-check-input" type="radio" name="radioOrderSearch" id="radioOrderSearch1" 
                                         (change)="changeSearchOrder($event)" value="1" checked>
                                     <span class="form-check-label"  for="radioOrderSearch1">
-                                        By date
+                                        {{ 'searchSpecie.byDate' | translate }}
                                     </span>
                                 </label>
                                 <label class="form-check form-check-inline">
                                     <input class="form-check-input" type="radio" name="radioOrderSearch"
                                         (change)="changeSearchOrder($event)" value="2" id="radioOrderSearch2">
                                     <span class="form-check-label"  for="radioOrderSearch2">
-                                        Most votes
+                                        {{ 'searchSpecie.mostVotes' | translate }}
                                     </span>
                                 </label>
                                 <label class="form-check form-check-inline">
                                     <input class="form-check-input" type="radio" name="radioOrderSearch"
                                         (change)="changeSearchOrder($event)" value="3"  id="radioOrderSearch3">
                                     <span class="form-check-label"  for="radioOrderSearch3">
-                                        Most comments
+                                        {{ 'searchSpecie.mostComments' | translate }}
                                     </span>
                                 </label>
     
@@ -121,7 +123,7 @@
                                 <div class="col-md">
                                     <a href="/{{post.userId}}/{{post.postId}}" class="card-link">
                                         <i class="align-middle mr-2 fas fa-fw fa-comment"></i> 
-                                        <span class="align-middle">&nbsp;{{post.commentCount}}&nbsp;comments</span>
+                                        <span class="align-middle">&nbsp;{{post.commentCount}}&nbsp;{{ 'postPage.comments' | translate }}</span>
                                     </a>
                                 </div>
                                 <div class="col-md alignRight">

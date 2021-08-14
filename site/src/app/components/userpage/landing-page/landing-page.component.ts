@@ -22,7 +22,7 @@ export class LandingPageComponent implements OnInit {
   
   userLoggedName: string = null;
   userPosts: PostListResponse[];
-  userId: string;
+  userId: string = null;
   showOwnerOptions = false;
   imagesPostUrl = environment.imagesPostUrl;
   imagesProfileUrl = environment.imagesProfileUrl;

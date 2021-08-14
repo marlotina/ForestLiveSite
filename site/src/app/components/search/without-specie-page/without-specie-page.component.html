@@ -2,14 +2,14 @@
     <div class="container-fluid">
         <div class="header">
             <h1 class="header-title">
-                Blank Page
+                {{ 'pendingSpecie.pendingSpecieTitle' | translate }}
             </h1>
         </div>
 
         <div class="row">
             <div class="card">
                 <div class="card-body">
-                    Lorem fistrum a gramenawer al ataquerl tiene musho peligro. Jarl ese pedazo de sexuarl ese pedazo de torpedo pupita se calle ustée. Se calle ustée qué dise usteer ahorarr jarl condemor. Se calle ustée no puedor ese que llega mamaar te va a hasé pupitaa sexuarl hasta luego Lucas está la cosa muy malar jarl amatomaa.
+                    {{ 'pendingSpecie.pendingSpecieDescription' | translate }}
                 </div>
             </div>
         </div>
@@ -48,7 +48,7 @@
                                 <div class="col-md">
                                     <a href="/{{post.userId}}/{{post.postId}}" class="card-link">
                                         <i class="align-middle mr-2 fas fa-fw fa-comment"></i> 
-                                        <span class="align-middle">&nbsp;{{post.commentCount}}&nbsp;comments</span>
+                                        <span class="align-middle">&nbsp;{{post.commentCount}}&nbsp;{{ 'postPage.comments' | translate }}</span>
                                     </a>
                                 </div>
                                 <div class="col-md alignRight">

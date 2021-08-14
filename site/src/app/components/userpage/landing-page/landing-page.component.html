@@ -1,8 +1,5 @@
 <main class="content">
     <div class="container-fluid">
-   
-        
-
         <div class="row">
             <div class="col-xxl-9">
                 <div class="row">
@@ -47,47 +44,46 @@
                                         class="card-img-top">
                                 </a>
                             </div>
-
                             
-                                <div class="body-card">
-                                    <ul class="list-group list-group-flush">
-                                        <li class="list-group-item">
-                                            <a routerLink="/birdpage/{{post.specieUrl}}" *ngIf="post.birdSpecie"><em >{{post.birdSpecie}}</em></a>
-                                            <a *ngIf="post.type == 'pending'" class="link-info" href="/{{post.userId}}/pending/{{post.postId}}#commentsDiv">Help the user to identify the bird</a>
-                                            <p class="card-text">{{post.text}}</p> 
-                                        </li>
+                            <div class="body-card">
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">
+                                        <a routerLink="/birdpage/{{post.specieUrl}}" *ngIf="post.birdSpecie"><em >{{post.birdSpecie}}</em></a>
+                                        <a *ngIf="post.type == 'pending'" class="link-info" href="/{{post.userId}}/pending/{{post.postId}}#commentsDiv">Help the user to identify the bird</a>
+                                        <p class="card-text">{{post.text}}</p> 
+                                    </li>
 
-                                        <li class="list-group-item" *ngIf="post.labels != null && post.labels.length > 0">
-                                            <div class="row mb-15" >
-                                                <div class="col-12">
-                                                    <strong>{{ 'postPage.tags' | translate }}:</strong>
-                                                    <button type="button" *ngFor="let label of post.labels" role="button" 
-                                                        (click)="searchWithLabels(label)" class="btn btn-outline-primary btn-sm ml-3">
-                                                        <span>{{label}}</span>
-                                                    </button>
-                                                </div>
+                                    <li class="list-group-item" *ngIf="post.labels != null && post.labels.length > 0">
+                                        <div class="row mb-15" >
+                                            <div class="col-12">
+                                                <strong>{{ 'postPage.tags' | translate }}:</strong>
+                                                <button type="button" *ngFor="let label of post.labels" role="button" 
+                                                    (click)="searchWithLabels(label)" class="btn btn-outline-primary btn-sm ml-3">
+                                                    <span>{{label}}</span>
+                                                </button>
                                             </div>
-                                        </li>
-                                        
-                                        <li class="list-group-item">
-                                            <div class="row">
-                                                <div class="col-md">
-                                                    <a href="/{{post.userId}}/{{post.postId}}" class="card-link">
-                                                        <i class="align-middle mr-2 fas fa-fw fa-comment"></i> 
-                                                        <span class="align-middle">&nbsp;{{post.commentCount}}&nbsp;comments</span>
-                                                    </a>
-                                                </div>
-                                                <div class="col-md alignRight">
-                                                    <a class="card-link" href="/userpage/{{post.userId}}">
-                                                        <img src="{{imagesProfileUrl}}{{post.userPhoto}}" 
-                                                            alt="image of {{post.userId}}" class="imgAuthorPost">
-                                                        {{post.userId}}</a>
-                                                </div>
+                                        </div>
+                                    </li>
+                                    
+                                    <li class="list-group-item">
+                                        <div class="row">
+                                            <div class="col-md">
+                                                <a href="/{{post.userId}}/{{post.postId}}" class="card-link">
+                                                    <i class="align-middle mr-2 fas fa-fw fa-comment"></i> 
+                                                    <span class="align-middle">&nbsp;{{post.commentCount}}&nbsp;comments</span>
+                                                </a>
                                             </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            
+                                            <div class="col-md alignRight">
+                                                <a class="card-link" href="/userpage/{{post.userId}}">
+                                                    <img src="{{imagesProfileUrl}}{{post.userPhoto}}" 
+                                                        alt="image of {{post.userId}}" class="imgAuthorPost">
+                                                    {{post.userId}}</a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+
                         </div>
                     </div>
                     <div class="single-post-details-area" style="padding-top: 50px;" *ngIf="!hasPosts">
@@ -97,7 +93,7 @@
                                     <p>
                                         {{ 'userPage.userWithoutPost' | translate }}
                                     </p>
-                                    <a routerLink="/createPost/observation"> create your first post</a>
+                                    <a *ngIf="userId != null" routerLink="/createPost/observation">{{ 'userPage.createPost' | translate }}</a>
                                 </div>
                             </div>
                         </div>
@@ -109,7 +105,9 @@
                 <app-author-details></app-author-details>
                     <div class="card">
                         <div class="card-header">
-                            <h5 class="card-title mb-0">Filter</h5>
+                            <h5 class="card-title mb-0">
+                                {{ 'userPage.filters' | translate }}
+                            </h5>
                         </div>
                         <div class="card-body">
                             <div class="form-row"> 
@@ -119,28 +117,28 @@
                                         <input class="form-check-input" type="radio" name="radioSearch" 
                                         (change)="changeSearchType($event)" id="radioAll" value='all' checked>
                                         <label class="form-check-label" for="radioAll">
-                                            All
+                                            {{ 'userPage.all' | translate }}
                                         </label>
                                     </div>
                                     <div class="form-check form-check-inline">
                                         <input class="form-check-input" type="radio" name="radioSearch" 
                                         (change)="changeSearchType($event)" id="radioPost" value='post'>
                                         <label class="form-check-label" for="radioPost">
-                                            Posts
+                                            {{ 'userPage.posts' | translate }}
                                         </label>
                                     </div>
                                     <div class="form-check form-check-inline">
                                         <input class="form-check-input" type="radio" name="radioSearch" 
                                         (change)="changeSearchType($event)" id="radioBird" value='bird'>
                                         <label class="form-check-label" for="radioBird">
-                                            birds
+                                            {{ 'userPage.birds' | translate }}
                                         </label>
                                     </div>
                                     <div class="form-check form-check-inline">
                                         <input class="form-check-input" type="radio" name="radioSearch" 
                                         (change)="changeSearchType($event)" id="radioPending" value='pending'>
                                         <label class="form-check-label" for="radioPending">
-                                            Pending
+                                            {{ 'userPage.pending' | translate }}
                                         </label>
                                     </div> 
                                 </div>
@@ -150,7 +148,9 @@
 
                     <div class="card" *ngIf="userLabels != null">
                         <div class="card-header">
-                            <h5 class="card-title mb-0">Labels</h5>
+                            <h5 class="card-title mb-0">
+                                {{ 'userPage.labels' | translate }}
+                            </h5>
                         </div>
                         <div class="card-body">
                             <div class="form-row"> 
@@ -168,7 +168,6 @@
                 </div>
             </div>
         </div>
-
     </div>
 </main>
 
