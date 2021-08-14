@@ -14,6 +14,7 @@ export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
   submitted = false;
+  loading = false;
   errorResponse = false;
   notActivatedAccount = false;
   emailPassWrong = false;
@@ -38,11 +39,13 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true;
+    this.loading = true;
     this.errorResponse = false;
     this.notActivatedAccount = false;
     this.emailPassWrong = false;
 
     if (this.loginForm.invalid) {
+        this.loading = false;
         return;
     }
 
@@ -62,6 +65,7 @@ export class LoginComponent implements OnInit {
               this.errorResponse = true;
             }
           }
+          this.loading = false;
         }
       );
   }

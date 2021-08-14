@@ -10,8 +10,8 @@
                 <img src="../../../assets/img/core-img/bclogo.png" alt="Webpack" class="align-middle me-2" width="100">
               </div>
               <h1 class="display-4 fw-bold mb-3 text-white">Community bird</h1>
-              <p class="lead fw-light mb-3 landing-text">UNa comunidad de observadores de aves, gestiona y controlas tu observaciones 
-                y compartelas con el resto de la comunidad.
+              <p class="lead fw-light mb-3 landing-text">
+                {{ 'home.description' | translate }}
               </p>
             </div>
           </div>
@@ -26,24 +26,29 @@
     <div class="row">
       <div class="col-lg-6 mx-auto">
         <h2 class="mb-3">
-          Join over 3,000 developers who are already working with our products
+          {{ 'home.unete' | translate }}
         </h2>
         <a *ngIf="userName == null" routerLink="signup"
           class="align-middle btn btn-success btn-lg mt-n1 btn-pill">
-          Registrate
+          {{ 'home.register' | translate }}
         </a>
-        <p class="">UNa comunidad de observadores de aves, gestiona y controlas tu observaciones 
-          y compartelas con el resto de la comunidad.
-          <a *ngIf="userName == null" class="my-2 ms-2" routerLink="login">
-            Login
-          </a>
-          <a *ngIf="userName != null" class="my-2 ms-2" routerLink="userpage/{{userName}}">
-            go to your page
-          </a>
-          
-        </p>
-
-        
+        <div *ngIf="userName == null">
+          <p>
+            {{ 'home.isNotLoginText' | translate }}
+            <a class="my-2 ms-2" routerLink="login">
+              {{ 'home.login' | translate }}
+            </a>
+          </p>       
+        </div>
+        <div *ngIf="userName != null">
+          <p>
+            {{ 'home.isLoginText' | translate }}
+            <a class="my-2 ms-2" routerLink="userpage/{{userName}}">
+              {{ 'home.goToYourPage' | translate }}
+            </a>
+          </p>       
+        </div>
+         
       </div>
     </div>
   </div>
@@ -51,10 +56,10 @@
 
 <div class="py-3 bg-white landing-nav">
   <div class="container text-center">
-    <a class="btn btn-lg btn-pill btn-link text-dark" routerLink="lastposts">Last posts</a>
-    <a class="btn btn-lg btn-pill btn-link text-dark" routerLink="searchpage">Map</a>
-    <a class="btn btn-lg btn-pill btn-link text-dark" routerLink="birdpage">See birds</a>
-    <a class="btn btn-lg btn-pill btn-link text-dark" routerLink="withoutspecie">{{ 'general.pendingSpecie' | translate }}</a>
+    <a class="btn btn-lg btn-pill btn-link text-dark" routerLink="lastposts">{{ 'home.lastPost' | translate }}</a>
+    <a class="btn btn-lg btn-pill btn-link text-dark" routerLink="searchpage">{{ 'home.map' | translate }}</a>
+    <a class="btn btn-lg btn-pill btn-link text-dark" routerLink="birdpage">{{ 'home.seeBird' | translate }}</a>
+    <a class="btn btn-lg btn-pill btn-link text-dark" routerLink="withoutspecie">{{ 'home.helpWithEspecie' | translate }}</a>
   </div>
 </div>
 
@@ -62,61 +67,64 @@
 <section class="py-6">
   <div class="container">
     <div class="mb-4 text-center">
-      <h2>Multiple demos</h2>
-      <p class="text-muted">Multiple color schemes & dashboard layouts available to make this template your very own.</p>
+      <h2>{{ 'home.whatYouCanDo' | translate }}</h2>
+      <p class="text-muted">{{ 'home.whatYouCanDoDescription' | translate }}</p>
     </div>
 
     <div class="row pb-3">
       <div class="col-md-6 col-lg-4 text-center">
         <a class="mb-3 card overflow-hidden" href="dashboard-default.html?theme=modern" target="_blank">
           <div class="px-4 pt-4">
-            <img src="../../../assets/img/bg-img/home1.jpg" class="img-fluid card-img-hover landing-img" alt="Modern Bootstrap 5 Dashboard Theme" />
+            <img src="../../../assets/img/bg-img/home8.jpg" class="img-fluid card-img-hover landing-img"
+              alt="{{ 'home.createProfile' | translate }}" />
           </div>
         </a>
-        <h4>Modern Theme</h4>
+        <h4>{{ 'home.createProfile' | translate }}</h4>
       </div>
       <div class="col-md-6 col-lg-4 text-center">
         <a class="mb-3 card overflow-hidden" href="dashboard-default.html?theme=light" target="_blank">
-          <!--<div class="px-4 pt-4">
-            <img src="../../../assets/img/bg-img/home2.webp" class="img-fluid card-img-hover landing-img" alt="Light Bootstrap 5 Dashboard Theme" />
-          </div>-->
+          <div class="px-4 pt-4">
+            <img src="../../../assets/img/bg-img/home8.jpg" class="img-fluid card-img-hover landing-img"
+              alt="{{ 'home.managaYourObservations' | translate }}" />
+          </div>
         </a>
-        <h4>Light Theme</h4>
+        <h4>{{ 'home.managaYourObservations' | translate }}</h4>
       </div>
       <div class="col-md-6 col-lg-4 text-center">
         <a class="mb-3 card overflow-hidden" href="dashboard-default.html?theme=dark" target="_blank">
           <div class="px-4 pt-4">
-            <img src="../../../assets/img/bg-img/hom3.jpg" class="img-fluid card-img-hover landing-img" alt="Dark Bootstrap 5 Dashboard Theme" />
+            <img src="../../../assets/img/bg-img/home8.jpg" class="img-fluid card-img-hover landing-img"
+              alt="{{ 'home.upExperience' | translate }}" />
           </div>
         </a>
-        <h4>Dark Theme</h4>
+        <h4>{{ 'home.upExperience' | translate }}</h4>
       </div>
       <div class="col-md-6 col-lg-4 text-center">
         <a class="mb-3 card overflow-hidden" href="dashboard-default.html" target="_blank">
           <div class="px-4 pt-4">
-            <img src="../../../assets/img/bg-img/home4.png" class="img-fluid card-img-hover landing-img"
-              alt="Default Bootstrap 5 Dashboard Theme" />
+            <img src="../../../assets/img/bg-img/home8.jpg" class="img-fluid card-img-hover landing-img"
+              alt="{{ 'home.searchSpecies' | translate }}" />
           </div>
         </a>
-        <h4>Default Dashboard</h4>
+        <h4>{{ 'home.searchSpecies' | translate }}</h4>
       </div>
       <div class="col-md-6 col-lg-4 text-center">
         <a class="mb-3 card overflow-hidden" href="dashboard-analytics.html" target="_blank">
           <div class="px-4 pt-4">
-            <img src="../../../assets/img/bg-img/home7.jpg" class="img-fluid card-img-hover landing-img"
-              alt="Analytics Bootstrap 5 Dashboard Theme" />
+            <img src="../../../assets/img/bg-img/home8.jpg" class="img-fluid card-img-hover landing-img"
+              alt="{{ 'home.searchMap' | translate }}" />
           </div>
         </a>
-        <h4>Analytics Dashboard</h4>
+        <h4>{{ 'home.searchMap' | translate }}</h4>
       </div>
       <div class="col-md-6 col-lg-4 text-center">
         <a class="mb-3 card overflow-hidden" href="dashboard-e-commerce.html" target="_blank">
           <div class="px-4 pt-4">
             <img src="../../../assets/img/bg-img/home8.jpg" class="img-fluid card-img-hover landing-img"
-              alt="E-Commerce Bootstrap 5 Dashboard Theme" />
+              alt="{{ 'home.helpUsers' | translate }}" />
           </div>
         </a>
-        <h4>E-commerce Dashboard</h4>
+        <h4>{{ 'home.helpUsers' | translate }}</h4>
       </div>
     </div>
   </div>

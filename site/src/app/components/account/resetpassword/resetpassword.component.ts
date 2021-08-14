@@ -14,6 +14,7 @@ export class ResetpasswordComponent implements OnInit {
 
   resetPasswordForm: FormGroup;
   submitted = false;
+  loading = false;
   errorResponse = false;
   notSamePassword = false;
   resetPasswordOk = false;
@@ -35,15 +36,18 @@ export class ResetpasswordComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true;
+    this.loading = true;
     this.errorResponse = false;
     this.notSamePassword = false;
 
     if (this.resetPasswordForm.invalid) {
+        this.loading = false;
         return;
     }
 
     if(this.checkPasswordsInvalid(this.resetPasswordForm)){
       this.notSamePassword = true;
+      this.loading = false;
       this.resetPasswordForm.controls.repeatPassword.setErrors({'incorrect': true});
       return;
     }
@@ -64,6 +68,7 @@ export class ResetpasswordComponent implements OnInit {
         },
         error => {
           this.errorResponse = true;
+          this.loading = false;
         });
   }
 

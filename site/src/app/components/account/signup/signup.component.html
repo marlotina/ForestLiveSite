@@ -23,7 +23,7 @@
                                         <input type="text" 
                                             id="usernameSignup"
                                             class="form-control form-control-lg"
-                                            [ngClass]="{ 'is-invalid': submitted && (f.username.errors || conflictUser) }"
+                                            [ngClass]="{ 'is-invalid': (submitted && f.username.errors) || conflictUser }"
                                             placeholder="{{ 'account.username' | translate }}"
                                             formControlName="username">
                                         <label *ngIf="conflictUser" class="text-danger">{{ 'account.conflictNameMessage' | translate }}</label> 
@@ -33,11 +33,10 @@
                                         <input type="email" 
                                             id="emailSignup"
                                             class="form-control form-control-lg"
-                                            [ngClass]="{ 'is-invalid': submitted && (f.email.errors || conflictEmail) }" 
+                                            [ngClass]="{ 'is-invalid': (submitted && f.email.errors) || conflictEmail }" 
                                             placeholder="{{ 'account.email' | translate }}"
                                             formControlName="email">
                                             <label *ngIf="conflictEmail" class="text-danger">{{ 'account.conflictEmailMessage' | translate }}</label>   
-                                        <label>Email</label>
                                     </div>
                                     <div class="mb-3">
                                         <label for="passwordSignup">{{ 'account.password' | translate }}*</label>
@@ -48,8 +47,13 @@
                                             placeholder="{{ 'account.password' | translate }}"
                                             formControlName="password">
                                     </div>
-                                    <div class="text-center mt-3">
-                                        <button type="submit" class="btn btn-lg btn-primary">Sign up</button>
+                                    <div class="text-center mt-3">                                        
+                                        <button *ngIf="loading" class="btn btn-lg btn-primary" type="button" disabled>
+                                            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                            {{ 'account.loading' | translate }}
+                                        </button>
+
+                                        <button type="submit"  *ngIf="!loading" class="btn btn-lg btn-primary">Sign up</button>
                                     </div>
                                 </form>
                             </div>

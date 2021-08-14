@@ -9,7 +9,7 @@ export const environment = {
   usersInteractionsApi: 'https://bcuserinteractions.azurewebsites.net/',
   postsInteractionsApi: 'https://bcpostinteractions.azurewebsites.net/',
   externalDataApiUrl: 'https://bcexternaldata.azurewebsites.net/',
-  accountApiUrl: 'https://bcuser.azurewebsites.net/',
+  accountApiUrl: 'https://https://bcaccount.azurewebsites.net/',
   googleApiKey: 'AIzaSyAjqE9XcDEwD2SmV9mmf757kYOdwTbJvwQ',
   whiteListDomains:  ['bcposts.azurewebsites.net', 
                       'bcuser.azurewebsites.net',
@@ -17,6 +17,7 @@ export const environment = {
                       'bcpostinteractions.azurewebsites.net',
                       'bcuser.azurewebsites.net',
                       'bcuserinteractions.azurewebsites.net',
-                      'bcexternaldata.azurewebsites.net'],
+                      'bcexternaldata.azurewebsites.net',
+                      'bcaccount.azurewebsites.net'],
   blacklistedRoutes: []
 }

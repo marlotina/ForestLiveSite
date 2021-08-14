@@ -24,12 +24,15 @@
         "forgetPasswordLink": "Are you forgot your password?",
         "resetPassword": "Reset your passowrd",
         "resetPasswordText": "You can reset your password",
-        "repeatPassword": "repeatPassword",
+        "repeatPassword": "repeat password",
         "notSamePassword": "The passwords must be equals",
         "reset": "Reset",
         "changePasswordOK": "Your password was change correctly",
         "forgotPasswordOk": "You will receive an email in your account to reset the password",
-        "userNotFound": "Email doesn't exists."
+        "userNotFound": "Email doesn't exists.",
+        "wellcome": "Wellcome",
+        "loading": "Loading...",
+        "recoverPasswordText": "Recover your password"
     },
     "user": {
         "userId":"User id",
@@ -123,5 +126,27 @@
         "ok": "Ok",
         "toConfirm":"Confirm species",
         "pendingSpecie":"Help with the specie"
+    },
+    "home": {
+        "observationTitle": "",
+        "description": "Una comunidad de observadores de aves, gestiona y controlas tu observaciones y compartelas con el resto de la comunidad.",
+        "unete": "Unete a nuestra comunidad, comparte y busca nuesva especies a las que poder onservar y añadir a tu perfil!",
+        "register": "Registrate!",
+        "isLoginText": "Continua ve a tu página",
+        "isNotLoginText": "Si tienes una cuenta logueate y continua!",
+        "lastPost": "últimos posts",
+        "map": "Mapa",
+        "seeBird": "busca especies",
+        "helpWithEspecie": "Ayuda a identificar especies",
+        "whatYouCanDo": "Que podrás hacer",
+        "whatYouCanDoDescription": "Que podrás hacer",
+        "managaYourObservations": "Admintira tus observaciones",
+        "searchMap": "busca por mapa",
+        "helpUsers": "Ayuda a otros usuarios",
+        "createProfile": "Crea un perfil",
+        "searchSpecies": "Busca por especies",
+        "upExperience": "Comenta completa listas y gana experiencia",
+        "login": "Crea un perfil",
+        "goToYourPage": "Crea un perfil"
     }
 }

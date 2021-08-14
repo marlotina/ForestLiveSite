@@ -13,6 +13,7 @@ export class SignupComponent implements OnInit {
 
   registerForm: FormGroup;
   submitted = false;
+  loading = false;
   conflictUser = false;
   conflictEmail = false;
   errorResponse = false;
@@ -31,18 +32,20 @@ export class SignupComponent implements OnInit {
           Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]],
         password: ['', [Validators.required, Validators.minLength(6)]],
         languageCode: ['']
-    });
+    }, { updateOn: 'submit'});
   }
 
   get f() { return this.registerForm.controls; }
 
   onSubmit() {
     this.submitted = true;
+    this.loading = true;
     this.conflictUser = false;
     this.conflictEmail = false;
     this.errorResponse = false;
 
     if (this.registerForm.invalid) {
+        this.loading = false;
         return;
     }
 
@@ -60,6 +63,7 @@ export class SignupComponent implements OnInit {
             } else {
               this.errorResponse = true;
             }
+            this.loading = false;
         });
   }
 }

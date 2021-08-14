@@ -13,6 +13,7 @@ export class ForgotpasswordComponent implements OnInit {
 
   forgotPasswordForm: FormGroup;
   submitted = false;
+  loading = false;
   errorResponse = false;
   emailNotFound = false;
   forgotPasswordOk = false;
@@ -33,10 +34,12 @@ export class ForgotpasswordComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true;
+    this.loading = true;
     this.errorResponse = false;
     this.emailNotFound = false;
 
     if (this.forgotPasswordForm.invalid) {
+        this.loading = false;
         return;
     }
 
@@ -51,7 +54,8 @@ export class ForgotpasswordComponent implements OnInit {
             this.emailNotFound = true;
           } else {
             this.errorResponse = true;
-          }          
+          }   
+          this.loading = false;       
         });
   }
 }

@@ -5,7 +5,7 @@
                 <div class="d-table-cell align-middle">
 
                     <div class="text-center mt-4">
-                        <h1 class="h2">Welcome</h1>
+                        <h1 class="h2">{{ 'account.wellcome' | translate }}</h1>
                         <p class="lead">
                             {{ 'account.loginText' | translate }}
                         </p>
@@ -32,7 +32,7 @@
                                             placeholder="{{ 'account.email' | translate }}">
                                     </div>
                                     <div class="mb-3">
-                                        <label for="passwordLogin" >Password</label>
+                                        <label for="passwordLogin" >{{ 'account.password' | translate }}</label>
                                         <input type="password" 
                                             id="passwordLogin"
                                             class="form-control form-control-lg" 
@@ -45,13 +45,18 @@
                                     </div>
                                     <div>
                                         <div class="form-check align-items-center">
-                                            <input id="customControlInline" type="checkbox" class="form-check-input" value="remember-me" name="remember-me"
+                                            <!--<input id="customControlInline" type="checkbox" class="form-check-input" value="remember-me" name="remember-me"
                                                 checked>
-                                            <label class="form-check-label text-small" for="customControlInline">Remember me next time</label>
+                                            <label class="form-check-label text-small" for="customControlInline">Remember me next time</label>-->
                                         </div>
                                     </div>
                                     <div class="text-center mt-3">
-                                        <button type="submit" class="btn btn-lg btn-primary">{{ 'account.login' | translate }}</button>
+                                        <button *ngIf="loading" class="btn btn-lg btn-primary" type="button" disabled>
+                                            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                            {{ 'account.loading' | translate }}
+                                        </button>
+
+                                        <button type="submit" *ngIf="!loading" class="btn btn-lg btn-primary">{{ 'account.login' | translate }}</button>
                                     </div>
                                 </form>
                             </div>
