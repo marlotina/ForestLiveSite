@@ -3,34 +3,36 @@
   <div class="container-fluid">
       <div class="header">
           <h1 class="header-title">
-            Your followers
+            {{ 'followUser.followerTitle' | translate }}
           </h1>
       </div>
   
-      <div class="row"> 
-        
+      <div class="row">  
         <div class="col-md-3 col-xl-2">
           <div class="card">
             <div class="card-header">
-                <h5 class="card-title mb-0">Profile Settings</h5>
+                <h5 class="card-title mb-0">
+                  {{ 'settingsMenu.profileSetting' | translate }}
+                </h5>
             </div>
             <div class="list-group list-group-flush" role="tablist">
-              <a class="list-group-item list-group-item-action" routerLink="/userProfile" 
-              routerLinkActive="active" role="tab">
-              <i class="align-middle me-2 fas fa-fw fa-user"></i> <span class="align-middle">Profile</span>
-          </a>
-          <a class="list-group-item list-group-item-action" routerLink="/userlabel" routerLinkActive="active" role="tab">
-              <i class="align-middle me-2 far fa-fw fa-list-alt"></i> <span class="align-middle">Labels</span>
-          </a>
-          <a class="list-group-item list-group-item-action" routerLink="/usercomments" routerLinkActive="active" role="tab">
-              Comments
-          </a>
-          <a class="list-group-item list-group-item-action" routerLink="/userfollow" routerLinkActive="active" role="tab">
-              Follow
-          </a>
-          <a class="list-group-item list-group-item-action" routerLink="/userfollower" routerLinkActive="active" role="tab">
-              Follower
-          </a>
+                <a class="list-group-item list-group-item-action" routerLink="/userProfile" 
+                    routerLinkActive="active" role="tab">
+                    <i class="align-middle me-2 fas fa-fw fa-user"></i> <span class="align-middle">{{ 'settingsMenu.profile' | translate }}</span>
+                </a>
+                <a class="list-group-item list-group-item-action" routerLink="/userlabel" routerLinkActive="active" role="tab">
+                    <i class="align-middle me-2 far fa-fw fa-list-alt"></i> 
+                    <span class="align-middle">{{ 'settingsMenu.labels' | translate }}</span>
+                </a>
+                <a class="list-group-item list-group-item-action" routerLink="/usercomments" routerLinkActive="active" role="tab">
+                  {{ 'settingsMenu.comments' | translate }}
+                </a>
+                <a class="list-group-item list-group-item-action" routerLink="/userfollow" routerLinkActive="active" role="tab">
+                  {{ 'settingsMenu.follow' | translate }}
+                </a>
+                <a class="list-group-item list-group-item-action" routerLink="/userfollower" routerLinkActive="active" role="tab">
+                  {{ 'settingsMenu.followers' | translate }}
+                </a>
             </div>
         </div>
       </div>
@@ -41,8 +43,8 @@
               <thead>
                 <tr role="row">
                   <th tabindex="0" aria-controls="datatables-clients" rowspan="1" colspan="1" style="width: 56px;">#</th>
-                  <th tabindex="0" aria-controls="datatables-clients" rowspan="1" colspan="1" style="width: 211px;">Name</th>
-                  <th tabindex="0" aria-controls="datatables-clients" rowspan="1" colspan="1" style="width: 174px;">follow you since</th>
+                  <th tabindex="0" aria-controls="datatables-clients" rowspan="1" colspan="1" style="width: 211px;">{{ 'followUser.name' | translate }}</th>
+                  <th tabindex="0" aria-controls="datatables-clients" rowspan="1" colspan="1" style="width: 174px;">{{ 'followUser.followSince' | translate }}</th>
                 </tr>
               </thead>
               <tbody>                     

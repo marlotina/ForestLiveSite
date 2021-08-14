@@ -2,37 +2,39 @@
   <div class="container-fluid">
     <div class="header">
         <h1 class="header-title">
-            Your comments
+          {{ 'commentsUser.commentTitle' | translate }}
         </h1>
     </div>
     
-    <div class="row">
-
+    <div class="row">  
       <div class="col-md-3 col-xl-2">
         <div class="card">
           <div class="card-header">
-              <h5 class="card-title mb-0">Profile Settings</h5>
+              <h5 class="card-title mb-0">
+                {{ 'settingsMenu.profileSetting' | translate }}
+              </h5>
           </div>
           <div class="list-group list-group-flush" role="tablist">
-            <a class="list-group-item list-group-item-action" routerLink="/userProfile" 
-            routerLinkActive="active" role="tab">
-            <i class="align-middle me-2 fas fa-fw fa-user"></i> <span class="align-middle">Profile</span>
-        </a>
-        <a class="list-group-item list-group-item-action" routerLink="/userlabel" routerLinkActive="active" role="tab">
-            <i class="align-middle me-2 far fa-fw fa-list-alt"></i> <span class="align-middle">Labels</span>
-        </a>
-        <a class="list-group-item list-group-item-action" routerLink="/usercomments" routerLinkActive="active" role="tab">
-            Comments
-        </a>
-        <a class="list-group-item list-group-item-action" routerLink="/userfollow" routerLinkActive="active" role="tab">
-            Follow
-        </a>
-        <a class="list-group-item list-group-item-action" routerLink="/userfollower" routerLinkActive="active" role="tab">
-            Follower
-        </a>
+              <a class="list-group-item list-group-item-action" routerLink="/userProfile" 
+                  routerLinkActive="active" role="tab">
+                  <i class="align-middle me-2 fas fa-fw fa-user"></i> <span class="align-middle">{{ 'settingsMenu.profile' | translate }}</span>
+              </a>
+              <a class="list-group-item list-group-item-action" routerLink="/userlabel" routerLinkActive="active" role="tab">
+                  <i class="align-middle me-2 far fa-fw fa-list-alt"></i> 
+                  <span class="align-middle">{{ 'settingsMenu.labels' | translate }}</span>
+              </a>
+              <a class="list-group-item list-group-item-action" routerLink="/usercomments" routerLinkActive="active" role="tab">
+                {{ 'settingsMenu.comments' | translate }}
+              </a>
+              <a class="list-group-item list-group-item-action" routerLink="/userfollow" routerLinkActive="active" role="tab">
+                {{ 'settingsMenu.follow' | translate }}
+              </a>
+              <a class="list-group-item list-group-item-action" routerLink="/userfollower" routerLinkActive="active" role="tab">
+                {{ 'settingsMenu.followers' | translate }}
+              </a>
           </div>
       </div>
-      </div>
+    </div>
     <div class="col-md-9 col-xl-10">
       <div class="card">
         <div class="card-body">
@@ -41,10 +43,10 @@
             <table class="table table-striped">
               <thead>
                 <tr>
-                  <th style="width:40%;">Post</th>
-                  <th style="width:40%;">Your comment</th>
-                  <th style="width:25%">Creation date</th>
-                  <th>Actions</th>
+                  <th style="width:40%;">{{ 'commentsUser.post' | translate }}</th>
+                  <th style="width:40%;">{{ 'commentsUser.comment' | translate }}</th>
+                  <th style="width:25%">{{ 'commentsUser.creationDate' | translate }}</th>
+                  <th>{{ 'commentsUser.acion' | translate }}</th>
                 </tr>
               </thead>
               <tbody>
@@ -63,7 +65,7 @@
             </table>
             <app-loader></app-loader>
             <div *ngIf="!isLoading && !hasComments">
-              You dont have comments
+              {{ 'commentsUser.noComments' | translate }}
             </div>
           </div>  
       </div>  

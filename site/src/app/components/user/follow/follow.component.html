@@ -3,7 +3,7 @@
   <div class="container-fluid">
       <div class="header">
           <h1 class="header-title">
-            Your follows
+            {{ 'followUser.followTitle' | translate }}
           </h1>
       </div>
   
@@ -11,28 +11,31 @@
         <div class="col-md-3 col-xl-2">
           <div class="card">
             <div class="card-header">
-                <h5 class="card-title mb-0">Profile Settings</h5>
+                <h5 class="card-title mb-0">
+                  {{ 'settingsMenu.profileSetting' | translate }}
+                </h5>
             </div>
             <div class="list-group list-group-flush" role="tablist">
                 <a class="list-group-item list-group-item-action" routerLink="/userProfile" 
                     routerLinkActive="active" role="tab">
-                    <i class="align-middle me-2 fas fa-fw fa-user"></i> <span class="align-middle">Profile</span>
+                    <i class="align-middle me-2 fas fa-fw fa-user"></i> <span class="align-middle">{{ 'settingsMenu.profile' | translate }}</span>
                 </a>
                 <a class="list-group-item list-group-item-action" routerLink="/userlabel" routerLinkActive="active" role="tab">
-                    <i class="align-middle me-2 far fa-fw fa-list-alt"></i> <span class="align-middle">Labels</span>
+                    <i class="align-middle me-2 far fa-fw fa-list-alt"></i> 
+                    <span class="align-middle">{{ 'settingsMenu.labels' | translate }}</span>
                 </a>
                 <a class="list-group-item list-group-item-action" routerLink="/usercomments" routerLinkActive="active" role="tab">
-                    Comments
+                  {{ 'settingsMenu.comments' | translate }}
                 </a>
                 <a class="list-group-item list-group-item-action" routerLink="/userfollow" routerLinkActive="active" role="tab">
-                    Follow
+                  {{ 'settingsMenu.follow' | translate }}
                 </a>
                 <a class="list-group-item list-group-item-action" routerLink="/userfollower" routerLinkActive="active" role="tab">
-                    Follower
+                  {{ 'settingsMenu.followers' | translate }}
                 </a>
             </div>
         </div>
-        </div>
+      </div>
       <div class="col-md-9 col-xl-10">
         <div class="card">
           <div class="card-body">
@@ -41,9 +44,9 @@
               <thead>
                 <tr role="row">
                   <th tabindex="0" aria-controls="datatables-clients" rowspan="1" colspan="1" style="width: 56px;">#</th>
-                  <th tabindex="0" aria-controls="datatables-clients" rowspan="1" colspan="1" style="width: 211px;">Name</th>
-                  <th tabindex="0" aria-controls="datatables-clients" rowspan="1" colspan="1" style="width: 174px;">Following since</th>
-                  <th tabindex="0" aria-controls="datatables-clients" rowspan="1" colspan="1" style="width: 273px;">status</th>
+                  <th tabindex="0" aria-controls="datatables-clients" rowspan="1" colspan="1" style="width: 211px;">{{ 'followUser.name' | translate }}</th>
+                  <th tabindex="0" aria-controls="datatables-clients" rowspan="1" colspan="1" style="width: 174px;">{{ 'followUser.followSince' | translate }}</th>
+                  <th tabindex="0" aria-controls="datatables-clients" rowspan="1" colspan="1" style="width: 273px;">{{ 'followUser.status' | translate }}</th>
                 </tr>
               </thead>
               <tbody> 
@@ -56,7 +59,7 @@
                     </td>
                     <td>{{follow.creationDate}}</td>
                     <td>
-                      <button type="button" class="btn btn-warning" (click)="removeFollow(follow)">Unfollow</button>
+                      <button type="button" class="btn btn-warning" (click)="removeFollow(follow)">{{ 'settingsMenu.unFollow' | translate }}</button>
                     </td>
                   </tr>
                 </tbody>
@@ -64,12 +67,12 @@
             
             <app-loader></app-loader>   
             <div *ngIf="!isLoading && !hasFollows" >
-              YOu dont have followers
+              {{ 'followUser.noFollows' | translate }}
             </div> 
+          </div>  
         </div>  
-      </div>  
-    </div>
-        </div>  
+      </div>
+    </div>  
         
   </div>
 </main>

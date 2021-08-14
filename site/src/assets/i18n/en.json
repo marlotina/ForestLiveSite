@@ -35,6 +35,7 @@
         "recoverPasswordText": "Recover your password"
     },
     "user": {
+        "userTitle": "Your profile",
         "userId":"User id",
         "email":"Email",
         "username":"User name",
@@ -74,7 +75,15 @@
         "titleDeleteModal": "Delete user",
         "userTitleModal": "User save data",
         "acceptExtensionFormats": "Only accpet jpg and png format images",
-        "deleteTextPostModal": "¿Are you sure that you want to remove your post?"
+        "deleteTextPostModal": "¿Are you sure that you want to remove your post?",
+        "publicInfo": "Public info",
+        "imageProfileDescription": "For best results, use an image at least 128px by 128px in .jpg format",
+        "defaultMap": "Default map",
+        "defaultMapDescription": "Define the center of your map",
+        "latitude": "Latitude",
+        "longitude":"Longitude",
+        "resetPasswordText": "Reset your password, you will receibed an email",
+        "privateInfo": "Private info"
     },
     "createPost": { 
         "createPost": "Create a new post",
@@ -108,6 +117,31 @@
         "scienceName":"science name",
         "noSpecieText": "If you don't know the specie, you don't need to select an specie.",
         "country": "Country"
+    },
+    "followUser": {
+        "followTitle": "Your follows",
+        "followerTitle": "Your follows",
+        "name": "User",
+        "followSince": "following since",
+        "status": "Status",
+        "noFollows": "You dont have followers",
+        "unfollow": "Unfollow"
+    },
+    "commentsUser": {
+        "commentTitle": "Your comments",
+        "post": "Post",
+        "comment": "Your comment",
+        "creationDate": "Creation date",
+        "action": "Action",
+        "noComments": "You dont have comments"
+    },
+    "settingsMenu":{
+        "profileSetting": "Profile Settings",
+        "profile": "profile",
+        "labels": "labels",
+        "comments": "comments",
+        "follow": "follows",
+        "followers": "Followers"
     },
     "userPage": {
         "userWithoutPost": "The user has not birds.",
