@@ -24,14 +24,18 @@
         "forgetPasswordLink": "Are you forgot your password?",
         "resetPassword": "Reset your passowrd",
         "resetPasswordText": "You can reset your password",
-        "repeatPassword": "repeatPassword",
+        "repeatPassword": "repeat password",
         "notSamePassword": "The passwords must be equals",
         "reset": "Reset",
         "changePasswordOK": "Your password was change correctly",
         "forgotPasswordOk": "You will receive an email in your account to reset the password",
-        "userNotFound": "Email doesn't exists."
+        "userNotFound": "Email doesn't exists.",
+        "wellcome": "Wellcome",
+        "loading": "Loading...",
+        "recoverPasswordText": "Recover your password"
     },
     "user": {
+        "userTitle": "Your profile",
         "userId":"User id",
         "email":"Email",
         "username":"User name",
@@ -71,9 +75,19 @@
         "titleDeleteModal": "Delete user",
         "userTitleModal": "User save data",
         "acceptExtensionFormats": "Only accpet jpg and png format images",
-        "deleteTextPostModal": "¿Are you sure that you want to remove your post?"
+        "deleteTextPostModal": "¿Are you sure that you want to remove your post?",
+        "publicInfo": "Public info",
+        "imageProfileDescription": "For best results, use an image at least 128px by 128px in .jpg format",
+        "defaultMap": "Default map",
+        "defaultMapDescription": "Define the center of your map",
+        "latitude": "Latitude",
+        "longitude":"Longitude",
+        "resetPasswordText": "Reset your password, you will receibed an email",
+        "privateInfo": "Private info",
+        "editImage": "Edit your image"
     },
     "createPost": { 
+        "createPostTitle": "Create post",
         "createPost": "Create a new post",
         "upload": "upload",
         "editImage": "Edit your image",
@@ -94,7 +108,57 @@
         "showMap": "Show map",
         "hideMap": "Hide map",
         "removeMap": "Remove map point",
-        "save": "Save"
+        "save": "Save",
+        "post": "Post",
+        "observation": "Observation",
+        "create": "Create new post",
+        "imageSize": "The maximun size of the image is 3 MB.",
+        "remove": "remove",
+        "specie": "Specie",
+        "commonName": "common name",
+        "scienceName":"science name",
+        "noSpecieText": "If you don't know the specie, you don't need to select an specie.",
+        "country": "Country"
+    },
+    "followUser": {
+        "followTitle": "Your follows",
+        "followerTitle": "Your follows",
+        "name": "User",
+        "followSince": "following since",
+        "status": "Status",
+        "noFollows": "You dont have followers",
+        "unfollow": "Unfollow"
+    },
+    "commentsUser": {
+        "commentTitle": "Your comments",
+        "post": "Post",
+        "comment": "Your comment",
+        "creationDate": "Creation date",
+        "action": "Action",
+        "noComments": "You dont have comments"
+    },
+    "labelUser":{
+        "lableUserTitlePage": "Manage your labels",
+        "createLabel": "Create lable",
+        "create": "create",
+        "labels": "Label",
+        "postNumber": "Posts",
+        "actions": "Action",
+        "creationDate": "Creation date",
+        "noLabels": "You dont have labels"
+    },
+    "userPostVotes": {
+        "noPostVotes": "You dont have votes",
+        "creationDate":"Creation date",
+        "postVotesTitle": "Post votes"
+    },
+    "settingsMenu":{
+        "profileSetting": "Profile Settings",
+        "profile": "profile",
+        "labels": "labels",
+        "comments": "comments",
+        "follow": "follows",
+        "followers": "Followers"
     },
     "userPage": {
         "userWithoutPost": "The user has not birds.",
@@ -102,7 +166,42 @@
         "addPost": "Create post",
         "cancel": "Cancel",
         "observationDate": "Observation date",
-        "birdSpecie": "Bird specie"
+        "birdSpecie": "Bird specie",
+        "pending": "Pending",
+        "all": "All",
+        "birds": "Birds",
+        "posts": "Posts",
+        "filters": "Filter",
+        "labels": "Labels",
+        "createPost": "Create your first post"
+    },
+    "authorDetails": {
+        "aboutMe": "About me:",
+        "registerFrom": "Register from:",
+        "followers": "Followers",
+        "level": "Level"
+    },
+    "searchMap": {
+        "commonName": "common name",
+        "scienceName": "science name",
+        "writeSpecie": "write specie",
+        "writeLocation": "write location",
+        "filters": "Filter",
+        "searchMapTitle": "Search map"
+    },
+    "searchSpecie": {
+        "commonName": "common name",
+        "scienceName": "science name",
+        "writeSpecie": "write specie",
+        "byDate": "by date",
+        "mostVotes": "most votes",
+        "mostComments": "most comments",
+        "filters": "Filter",
+        "searchSpecieTitle": "Search species"
+    },
+    "pendingSpecie": {
+        "pendingSpecieTitle": "Species without identify",
+        "pendingSpecieDescription": "Lorem fistrum a gramenawer al ataquerl tiene musho peligro. Jarl ese pedazo de sexuarl ese pedazo de torpedo pupita se calle ustée. Se calle ustée qué dise usteer ahorarr jarl condemor. Se calle ustée no puedor ese que llega mamaar te va a hasé pupitaa sexuarl hasta luego Lucas está la cosa muy malar jarl amatomaa. "
     },
     "postPage": {
         "delete": "Delete",
@@ -122,7 +221,8 @@
         "delete": "Delete",
         "ok": "Ok",
         "toConfirm":"Confirm species",
-        "pendingSpecie":"Help with the specie"
+        "pendingSpecie":"Help with the specie",
+        "loading": "Loading..."
     },
     "home": {
         "observationTitle": "",
@@ -144,6 +244,6 @@
         "searchSpecies": "Busca por especies",
         "upExperience": "Comenta completa listas y gana experiencia",
         "login": "Crea un perfil",
-        "goToYourPage": "ve a tu página"
+        "goToYourPage": "Crea un perfil"
     }
 }

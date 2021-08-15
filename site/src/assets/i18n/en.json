@@ -147,6 +147,11 @@
         "creationDate": "Creation date",
         "noLabels": "You dont have labels"
     },
+    "userPostVotes": {
+        "noPostVotes": "You dont have votes",
+        "creationDate":"Creation date",
+        "postVotesTitle": "Post votes"
+    },
     "settingsMenu":{
         "profileSetting": "Profile Settings",
         "profile": "profile",
