@@ -1,8 +1,8 @@
 <main class="content">
-  <div class="container-fluid">
+    <div class="container-fluid">
       <div class="header">
           <h1 class="header-title">
-              Labels
+            {{ 'labelUser.lableUserTitlePage' | translate }}
           </h1>
       </div>
       
@@ -10,96 +10,92 @@
         <div class="col-md-3 col-xl-2">
           <div class="card">
             <div class="card-header">
-                <h5 class="card-title mb-0">Profile Settings</h5>
+                <h5 class="card-title mb-0">
+                  {{ 'settingsMenu.profileSetting' | translate }}
+                </h5>
             </div>
             <div class="list-group list-group-flush" role="tablist">
-              <a class="list-group-item list-group-item-action" routerLink="/userProfile" 
-              routerLinkActive="active" role="tab">
-              <i class="align-middle me-2 fas fa-fw fa-user"></i> <span class="align-middle">Profile</span>
-          </a>
-          <a class="list-group-item list-group-item-action" routerLink="/userlabel" routerLinkActive="active" role="tab">
-              <i class="align-middle me-2 far fa-fw fa-list-alt"></i> <span class="align-middle">Labels</span>
-          </a>
-          <a class="list-group-item list-group-item-action" routerLink="/usercomments" routerLinkActive="active" role="tab">
-              Comments
-          </a>
-          <a class="list-group-item list-group-item-action" routerLink="/userfollow" routerLinkActive="active" role="tab">
-              Follow
-          </a>
-          <a class="list-group-item list-group-item-action" routerLink="/userfollower" routerLinkActive="active" role="tab">
-              Follower
-          </a>
+                <a class="list-group-item list-group-item-action" routerLink="/userProfile" 
+                    routerLinkActive="active" role="tab">
+                    <i class="align-middle me-2 fas fa-fw fa-user"></i> <span class="align-middle">{{ 'settingsMenu.profile' | translate }}</span>
+                </a>
+                <a class="list-group-item list-group-item-action" routerLink="/userlabel" routerLinkActive="active" role="tab">
+                    <i class="align-middle me-2 far fa-fw fa-list-alt"></i> 
+                    <span class="align-middle">{{ 'settingsMenu.labels' | translate }}</span>
+                </a>
+                <a class="list-group-item list-group-item-action" routerLink="/usercomments" routerLinkActive="active" role="tab">
+                  {{ 'settingsMenu.comments' | translate }}
+                </a>
+                <a class="list-group-item list-group-item-action" routerLink="/userfollow" routerLinkActive="active" role="tab">
+                  {{ 'settingsMenu.follow' | translate }}
+                </a>
+                <a class="list-group-item list-group-item-action" routerLink="/userfollower" routerLinkActive="active" role="tab">
+                  {{ 'settingsMenu.followers' | translate }}
+                </a>
+            </div>
+          </div>                                                
+        </div>
+        <div class="col-md-9 col-xl-10">
+          <div class="card">
+            <div class="card-header">
+                <h5 class="card-title mb-0">{{ 'labelUser.createLabel' | translate }}</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                  <form [formGroup]="labelForm" (ngSubmit)="onSubmit()">
+                      <div class="row">
+                          <div class="col-12 col-md-6">
+                              <div class="form-group">
+                                  <input type="text" formControlName="label" class="form-control" id="labelName" placeholder="label"/>
+                              </div>
+                          </div>
+                          <div class="col-12 col-md-6">
+                            
+                              <button *ngIf="submitted" class="btn btn-primary" type="button" disabled>
+                                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                {{ 'general.loading' | translate }}
+                              </button> 
+                              <button type="submit" *ngIf="!submitted" class="btn btn-primary">
+                                <i class="align-middle me-2 fas fa-fw fa-folder-plus"></i>{{ 'labelUser.create' | translate }}</button>
+                          </div>
+                      </div>
+                  </form>
+                </div>
             </div>
         </div>
-      </div>
-      <div class="col-md-9 col-xl-10">
         <div class="card">
-          <div class="card-header">
-              <h5 class="card-title mb-0">Create new label</h5>
-          </div>
           <div class="card-body">
-              <div class="row">
-                <form [formGroup]="labelForm" (ngSubmit)="onSubmit()">
-                    <div class="row">
-                        <div class="col-12 col-md-6">
-                            <div class="form-group">
-                                <input type="text" formControlName="label" class="form-control" id="labelName" placeholder="label"/>
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-6">
-                          
-                            <button *ngIf="submitted" class="btn btn-primary" type="button" disabled>
-                              <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                              Loading...
-                            </button> 
-                            <button type="submit" *ngIf="!submitted" class="btn btn-primary">
-                              <i class="align-middle me-2 fas fa-fw fa-folder-plus"></i>Create</button>
-                        </div>
-                    </div>
-                </form>
-              </div>
-          </div>
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th style="width:40%;">{{ 'labelUser.labels' | translate }}</th>
+                  <th style="width:40%;">{{ 'labelUser.postNumber' | translate }}</th>
+                  <th style="width:25%">{{ 'labelUser.creationDate' | translate }}</th>
+                  <th>{{ 'labelUser.actions' | translate }}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let label of userLabels">
+                  <td><a routerLink="/userpage/{{userId}}/{{label.label}}"><strong>{{label.label}}</strong></a></td>
+                  <td class="d-none d-md-table-cell">{{label.postCount}}</td>
+                  <td>{{label.creationDate}}</td>
+                  <td class="table-action">
+                    <button type="button" class="btn btn-outline-danger addLabelBtn" 
+                      (click)="removeLabel(label)" [disabled]="label.postCount > 0">
+                        <i class="align-middle fas fa-fw fa-trash"></i>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <app-loader></app-loader>  
+            <div *ngIf="!isLoading && !hasLabels">
+              {{ 'labelUser.noLabels' | translate }}
+            </div>  
+        </div>  
       </div>
-      <div class="card">
-        <div class="card-body">
-          <table class="table table-striped">
-            <thead>
-              <tr>
-                <th style="width:40%;">Label</th>
-                <th style="width:40%;">Post</th>
-                <th style="width:25%">Creation date</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let label of userLabels">
-                <td><a routerLink="/userpage/{{userId}}/{{label.label}}"><strong>{{label.label}}</strong></a></td>
-                <td class="d-none d-md-table-cell">{{label.postCount}}</td>
-                <td>{{label.creationDate}}</td>
-                <td class="table-action">
-                  <button type="button" class="btn btn-outline-danger addLabelBtn" 
-                    (click)="removeLabel(label)" [disabled]="label.postCount > 0">
-                      <i class="align-middle fas fa-fw fa-trash"></i>
-                  </button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          <app-loader></app-loader>  
-          <div *ngIf="!isLoading && !hasLabels">
-            You dont have labels
-          </div>  
-      </div>  
+    </div>
   </div>
-  </div>
-  
-    
-
-      </div>
-
-
-
-      
   </div>
 </main>
 

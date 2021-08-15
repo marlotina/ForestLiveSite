@@ -83,9 +83,11 @@
         "latitude": "Latitude",
         "longitude":"Longitude",
         "resetPasswordText": "Reset your password, you will receibed an email",
-        "privateInfo": "Private info"
+        "privateInfo": "Private info",
+        "editImage": "Edit your image"
     },
     "createPost": { 
+        "createPostTitle": "Create post",
         "createPost": "Create a new post",
         "upload": "upload",
         "editImage": "Edit your image",
@@ -134,6 +136,16 @@
         "creationDate": "Creation date",
         "action": "Action",
         "noComments": "You dont have comments"
+    },
+    "labelUser":{
+        "lableUserTitlePage": "Manage your labels",
+        "createLabel": "Create lable",
+        "create": "create",
+        "labels": "Label",
+        "postNumber": "Posts",
+        "actions": "Action",
+        "creationDate": "Creation date",
+        "noLabels": "You dont have labels"
     },
     "settingsMenu":{
         "profileSetting": "Profile Settings",
